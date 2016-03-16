@@ -21,7 +21,8 @@
     label.backgroundColor = [UIColor redColor];
     [self.view addSubview:label];
     //whefaskdf a
-//    label.frame = 
+//    label.frame =
+    //大声疾呼放假开始技术开发上
 }
 
 - (void)didReceiveMemoryWarning {
