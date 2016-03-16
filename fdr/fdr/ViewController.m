@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-
+#import <UIKit/UIKit.h>
 @interface ViewController ()
 
 @end
@@ -17,6 +17,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    UILabel * label = [[UILabel alloc] init];
+    label.backgroundColor = [UIColor redColor];
+    [self.view addSubview:label];
 }
 
 - (void)didReceiveMemoryWarning {
