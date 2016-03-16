@@ -20,7 +20,8 @@
     UILabel * label = [[UILabel alloc] init];
     label.backgroundColor = [UIColor redColor];
     [self.view addSubview:label];
-    //whefaskdf a 
+    //whefaskdf a
+//    label.frame = 
 }
 
 - (void)didReceiveMemoryWarning {
