@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  MineViewController.h
 //  HealthySettle
 //
 //  Created by yrc on 16/3/17.
@@ -7,9 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface ViewController : UIViewController
-
+@class TempView,ThingsView;
+@interface MineViewController : UIViewController
 
 @end
-

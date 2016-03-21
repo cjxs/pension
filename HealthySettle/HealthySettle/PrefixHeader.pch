@@ -1,0 +1,19 @@
+//
+//  PrefixHeader.pch
+//  
+//
+//  Created by yrc on 16/3/21.
+//
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+
+// Include any system framework and library headers here that should be included in all compilation units.
+#import "UtilsMacro.h"
+#import "YTKRequest.h"
+
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#endif /* PrefixHeader_pch */

@@ -5,11 +5,35 @@
 //  Created by yrc on 16/3/17.
 //  Copyright © 2016年 yrc. All rights reserved.
 //
+/**
+ *
+ * 　　┏┓      ┏┓
+ * 　　┏┛   ┻━━━┛  ┻┓
+ * 　　┃            ┃
+ * 　　┃　　　━      ┃
+ * 　　┃　┳┛　  ┗┳   ┃
+ * 　　┃            ┃
+ * 　　┃　　　┻      ┃
+ * 　　┃            ┃
+ * 　　┗━┓　　　   ┏━┛
+ * 　　　　┃　　　 神兽保佑
+ * 　　　　┃　　　┃代码无BUG！
+ * 　　　　┃　　　┗━━━┓
+ * 　　　　┃         ┣┓
+ * 　　　　┃        ┏┛
+ * 　　　　┗┓┓┏━┳┓┏┛
+ * 　　　　 ┃┫┫ ┃┫┫
+ * 　　　　 ┗┻┛ ┗┻┛
+ * ━━━━━━神兽出没━━━━━━
+ */
+
 
 #import "AppDelegate.h"
+#import "TabbarController.h"
+#import "YTKNetworkConfig.h"
 
 @interface AppDelegate ()
-
+@property (nonatomic, strong)TabbarController * tabbarController;
 @end
 
 @implementation AppDelegate
@@ -17,6 +41,17 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    //配置服务器信息
+    YTKNetworkConfig * config = [YTKNetworkConfig sharedInstance];
+    config.baseUrl = @"www.baidu.com";
+    config.cdnUrl = @"www.zhihu.com";
+    
+    
+    
+    
+    self.tabbarController = [[TabbarController alloc] init];
+    self.window.rootViewController = self.tabbarController;
+    
     return YES;
 }
 
