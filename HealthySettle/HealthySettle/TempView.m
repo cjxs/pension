@@ -24,7 +24,6 @@
         _explainTitle.font = [UIFont systemFontOfSize:14];
         _explainTitle.textAlignment = NSTextAlignmentLeft;
         _explainTitle.textColor = [UIColor whiteColor];
-        _explainTitle.text = @"缤纷炸弹";
         [self addSubview:_explainTitle];
         self.layer.cornerRadius = 5;
         

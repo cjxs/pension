@@ -46,6 +46,13 @@
     config.baseUrl = @"www.baidu.com";
     config.cdnUrl = @"www.zhihu.com";
     
+    //百度地图
+//    _mapManager = [[BMKMapManager alloc] init];
+//    BOOL ret = [_mapManager start:APPKEY generalDelegate:nil];
+//    if (!ret) {
+//        NSLog(@"启动失败");
+//    }
+    
     
     
     

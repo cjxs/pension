@@ -18,8 +18,8 @@
     if (_seaPC == nil) {
         _seaPC = [[UIPageControl alloc] init];
         _seaPC.numberOfPages = 4;
-        _seaPC.currentPageIndicatorTintColor = [UIColor grayColor];
-        _seaPC.pageIndicatorTintColor = [UIColor greenColor];
+        _seaPC.currentPageIndicatorTintColor = [UIColor greenColor];
+        _seaPC.pageIndicatorTintColor = [UIColor grayColor];
         [_seaPC addTarget:self action:@selector(changeValue) forControlEvents:UIControlEventValueChanged];
     }
     return _seaPC;

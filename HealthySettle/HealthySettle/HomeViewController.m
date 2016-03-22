@@ -14,16 +14,13 @@
 #import "SeasonMovingViewCell.h"
 #import "CitySkipViewCell.h"
 #import "GDScrollBanner.h"
-
+#import "SearchVController.h"
 
 static NSString * seaIdentifier = @"cellSea";
 
 
 @interface HomeViewController ()<UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate>{
     UITableView * homeTableView;
-    UIScrollView * wheelSV;
-    UIPageControl *pageC;
-//    UIButton *button;
     NSMutableArray * imagesA;
 }
 
@@ -44,15 +41,21 @@ static NSString * seaIdentifier = @"cellSea";
             NSLog(@"网络图片  %ld",index);
         }];
         [_tableHeadView addSubview:net];
-       
-        wheelSV = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, screenWide , screenHeight /4.8)];
-        wheelSV.contentSize = CGSizeMake(screenWide * 2, screenHeight / 4.8);
         
         //轮播图下面的2+4
         TempView * tempViewL = [[TempView alloc] initWithFrame:CGRectMake(kMargin, screenHeight / 4.8 + kMargin/2, screenWide/2 - kMargin*1.5, screenHeight/3.2/4) withMark:[UIImage imageNamed:@"z_02"] andTitle:@"养生度假／装逼广告语"];
+        
         [_tableHeadView addSubview:tempViewL];
+        UITapGestureRecognizer * tapS = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(skipTOSecondS)];
+        [tempViewL addGestureRecognizer:tapS];
+        tapS.numberOfTapsRequired = 1;
+        
         TempView * tempViewR = [[TempView alloc] initWithFrame:CGRectMake(screenWide/2 + kMargin * 0.5, screenHeight / 4.8 + kMargin/2, screenWide/2 - kMargin*1.5, screenHeight/3.2/4) withMark:[UIImage imageNamed:@"z_03"] andTitle:@"找养老院"];
         [_tableHeadView addSubview:tempViewR];
+        
+        UITapGestureRecognizer * tapL = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(skipTOSecondL)];
+        [tempViewR addGestureRecognizer:tapL];
+        tapL.numberOfTouchesRequired = 1;
         
         ThingsView * healthyArea = [[ThingsView alloc] initWithFrame:CGRectMake(0, screenHeight/3.3, screenWide /4, screenHeight/9) withMark:[UIImage imageNamed:@"z_02"] andTitle:@"养生攻略"];
         ThingsView * newsArea = [[ThingsView alloc] initWithFrame:CGRectMake(screenWide /4, screenHeight/3.3, screenWide /4, screenHeight/9) withMark:[UIImage imageNamed:@"z_03"] andTitle:@"新闻动态"];
@@ -66,6 +69,26 @@ static NSString * seaIdentifier = @"cellSea";
     }
     return _tableHeadView;
 }
+- (void)skipTOSecondS{
+    NSLog(@"++++");
+    SearchVController * searchVC = [[SearchVController alloc] init];
+    searchVC.vc_type = @"S";
+    [self.navigationController pushViewController:searchVC animated:YES];
+}
+- (void)skipTOSecondL{
+    SearchVController * searchVC = [[SearchVController alloc] init];
+    searchVC.vc_type = @"L";
+    [self.navigationController pushViewController:searchVC animated:YES];
+}
+//SensibleViewController *senVC = self.sensiNaVC.viewControllers[0];
+//senVC.type = @"SCAN";
+//self.delegate = senVC;
+//if ([self.delegate respondsToSelector:@selector(doSomethings)]) {
+//    [self.delegate doSomethings];
+//}
+//self.sensiNaVC.viewControllers = @[senVC];
+//
+//self.navigationController.tabBarController.selectedViewController = self.sensiNaVC;
 - (UITableView *)bottomTableV {
     if (_bottomTableV == nil) {
         self.bottomTableV = [[UITableView alloc] initWithFrame:CGRectMake(0, 64 + screenHeight /4, screenWide, screenHeight/4*3 -64 ) style:UITableViewStylePlain];

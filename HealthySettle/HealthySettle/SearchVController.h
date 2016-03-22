@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface SearchVController : UIViewController
+@property (nonatomic, strong)NSString * vc_type;
 
 @end

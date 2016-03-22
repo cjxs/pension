@@ -39,11 +39,11 @@
     
      UIView *v = [[UIView alloc]initWithFrame:frame];
     
-     [v setBackgroundColor:[[UIColor alloc]initWithRed:70.0/255.0
+     [v setBackgroundColor:[[UIColor alloc]initWithRed:200.0/255.0
                             
-                              green:65.0/255.0
+                              green:200.0/255.0
                             
-                              blue:62.0/255.0
+                              blue:200.0/255.0
                             
                               alpha:1.0]];
     
