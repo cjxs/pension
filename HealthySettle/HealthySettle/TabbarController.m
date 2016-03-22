@@ -9,7 +9,7 @@
 #import "TabbarController.h"
 #import "HomeViewController.h"
 #import "CustomerViewController.h"
-#import "SearchViewController.h"
+#import "SearchVController.h"
 #import "MineViewController.h"
 @interface TabbarController ()
 
@@ -23,7 +23,7 @@
     HomeViewController *homeVC = [[HomeViewController alloc] init];
     UINavigationController * homeNaVC =[[UINavigationController alloc] initWithRootViewController:homeVC];
     homeNaVC.tabBarItem.title = @"首页";
-    SearchViewController * searchVC = [[SearchViewController alloc] init];
+    SearchVController * searchVC = [[SearchVController alloc] init];
     UINavigationController *searchNaVC = [[UINavigationController alloc] initWithRootViewController:searchVC];
     searchNaVC.tabBarItem.title = @"发现";
     CustomerViewController * customerVC = [[CustomerViewController alloc] init];

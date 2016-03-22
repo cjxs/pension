@@ -1,32 +1,25 @@
 //
-//  SearchViewController.m
+//  SearchVController.m
 //  HealthySettle
 //
-//  Created by yrc on 16/3/17.
+//  Created by yrc on 16/3/22.
 //  Copyright © 2016年 yrc. All rights reserved.
 //
 
-#import "SearchViewController.h"
+#import "SearchVController.h"
 
-@interface SearchViewController (){
-    ;
-    
-}
+@interface SearchVController ()
 
 @end
 
-@implementation SearchViewController
+@implementation SearchVController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    // Do any additional setup after loading the view from its nib.
     [self setBottomPicWithPic:[UIImage imageNamed:@"z_03"] andTitle:@"找。养老院"];
-   
-    
-   
-
 
 }
-
 - (void)setBottomPicWithPic:(UIImage *)imageP andTitle:(NSString *)string {
     self.view.backgroundColor = [UIColor whiteColor];
     [UIApplication sharedApplication].statusBarHidden = YES;
@@ -42,7 +35,7 @@
     textLabel.text = string;
     textLabel.textColor = [UIColor whiteColor];
     [self.view addSubview:textLabel];
-
+    
 }
 
 - (void)didReceiveMemoryWarning {

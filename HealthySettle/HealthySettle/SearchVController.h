@@ -1,13 +1,13 @@
 //
-//  SearchViewController.h
+//  SearchVController.h
 //  HealthySettle
 //
-//  Created by yrc on 16/3/17.
+//  Created by yrc on 16/3/22.
 //  Copyright © 2016年 yrc. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface SearchViewController : UIViewController
+@interface SearchVController : UIViewController
 
 @end

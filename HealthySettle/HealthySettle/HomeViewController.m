@@ -13,6 +13,8 @@
 #import "ThingsView.h"
 #import "SeasonMovingViewCell.h"
 #import "CitySkipViewCell.h"
+#import "GDScrollBanner.h"
+
 
 static NSString * seaIdentifier = @"cellSea";
 
@@ -34,36 +36,18 @@ static NSString * seaIdentifier = @"cellSea";
     if (_tableHeadView == nil ) {
         _tableHeadView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWide, screenHeight / 2.4)];
         //轮播图
-        imagesA = [NSMutableArray arrayWithObjects:[UIImage imageNamed:@"banner"],[UIImage imageNamed:@"z_02"], nil];
+         imagesA = [NSMutableArray arrayWithObjects:@"banner",@"z_02", nil];
+        GDScrollBanner * net = [[GDScrollBanner alloc] initWithFrame:CGRectMake(0, 0, screenWide , screenHeight /4.8) WithLocalImages:imagesA];
+        net.AutoScrollDelay = 2;
+        //占位图  net.placeImage
+        [net setSmartImgdidSelectAtIndex:^(NSInteger index) {
+            NSLog(@"网络图片  %ld",index);
+        }];
+        [_tableHeadView addSubview:net];
+       
         wheelSV = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, screenWide , screenHeight /4.8)];
         wheelSV.contentSize = CGSizeMake(screenWide * 2, screenHeight / 4.8);
-        [_tableHeadView addSubview:wheelSV];
-        //
-        //    //整页滑动
-        wheelSV.pagingEnabled = YES;
-        wheelSV.delegate = self;
-        wheelSV.bounces = NO;
-        wheelSV.directionalLockEnabled = YES;
-        wheelSV.clipsToBounds = YES;
-        wheelSV.showsVerticalScrollIndicator = NO;
-        wheelSV.showsHorizontalScrollIndicator = NO;
-        wheelSV.alwaysBounceVertical = YES;
         
-        UIImageView * imageVa = [[UIImageView alloc]initWithImage:imagesA[0]];
-        UIImageView * imageVb = [[UIImageView alloc] initWithImage:imagesA[1]];
-        imageVa.frame = CGRectMake(0, 0, screenWide, screenHeight / 4.8);
-        imageVb.frame = CGRectMake(screenWide, 0,screenWide, screenHeight /4.8);
-        [wheelSV addSubview:imageVa];
-        [wheelSV addSubview:imageVb];
-        
-        pageC = [[UIPageControl alloc] initWithFrame:CGRectMake(0, screenHeight/4.8 - 20, screenWide, 20)];
-        
-        pageC.numberOfPages = imagesA.count;
-        pageC.currentPageIndicatorTintColor = [UIColor whiteColor];
-        [pageC addTarget:self action:@selector(changeValue) forControlEvents:UIControlEventValueChanged];
-        [_tableHeadView addSubview:pageC];
-        [_tableHeadView bringSubviewToFront:pageC];
-        [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(changeImage) userInfo:nil repeats:1];
         //轮播图下面的2+4
         TempView * tempViewL = [[TempView alloc] initWithFrame:CGRectMake(kMargin, screenHeight / 4.8 + kMargin/2, screenWide/2 - kMargin*1.5, screenHeight/3.2/4) withMark:[UIImage imageNamed:@"z_02"] andTitle:@"养生度假／装逼广告语"];
         [_tableHeadView addSubview:tempViewL];
@@ -136,33 +120,17 @@ static NSString * seaIdentifier = @"cellSea";
     if (indexPath.row == 0) {
         SeasonMovingViewCell * cell = [homeTableView dequeueReusableCellWithIdentifier:seaIdentifier];
         [cell delegateFromController:self];
+        cell.selectionStyle = UITableViewCellSelectionStyleBlue;
         return cell;
     }else {
         CitySkipViewCell * cell = [homeTableView dequeueReusableCellWithIdentifier:@"cellCity"];
+        cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+
         return cell;
     }
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-}
-- (void)changeValue {
-    CGFloat flo = (pageC.currentPage)/1.0;
-    CGPoint size = CGPointMake(flo * screenWide, 0);
-    wheelSV.contentOffset = size;
-    
-}
-- (void)changeImage {
-    static int i = 0;
-    i++;
-    pageC.currentPage = i;
-    
-    [self changeValue];
-    if (i == imagesA.count) {
-        i =-1;
-    }
-}
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    pageC.currentPage = scrollView.contentOffset.x/screenWide;
 }
 
 - (void)didReceiveMemoryWarning {

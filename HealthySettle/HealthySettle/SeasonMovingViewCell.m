@@ -10,13 +10,16 @@
 #import "SeasonPageView.h"
 #import "SeasonView.h"
 
-#define height screenHeight/5
-@implementation SeasonMovingViewCell
+#define heights screenHeight/5
+@implementation SeasonMovingViewCell {
+    NSTimer *_timer;
+}
 - (UIPageControl *)seaPC {
     if (_seaPC == nil) {
-        _seaPC = [[UIPageControl alloc] initWithFrame:CGRectMake(0,  height- 10, screenWide, 10)];
+        _seaPC = [[UIPageControl alloc] init];
         _seaPC.numberOfPages = 4;
         _seaPC.currentPageIndicatorTintColor = [UIColor grayColor];
+        _seaPC.pageIndicatorTintColor = [UIColor greenColor];
         [_seaPC addTarget:self action:@selector(changeValue) forControlEvents:UIControlEventValueChanged];
     }
     return _seaPC;
@@ -24,26 +27,34 @@
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        self.moving_seasonView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, screenWide, height)];
+        self.moving_seasonView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, screenWide, heights)];
         [self addSubview:_moving_seasonView];
-        _moving_seasonView.contentSize = CGSizeMake(screenWide * 4, height);
+        _moving_seasonView.contentSize = CGSizeMake(screenWide * 4, heights);
         _moving_seasonView.showsHorizontalScrollIndicator = NO;
         _moving_seasonView.pagingEnabled = YES;
         [self addSubview:self.seaPC];
         [self bringSubviewToFront:_seaPC];
-        
-        [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(changeImage) userInfo:nil repeats:1];
+        [_seaPC mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.leading.equalTo(_moving_seasonView);
+            make.bottom.equalTo(_moving_seasonView);
+            make.size.mas_equalTo(CGSizeMake(screenWide, 7));
+            
+        }];
 
-        self.seasonPO = [[SeasonPageView alloc] initWithFrame:CGRectMake(0, 0, screenWide, height)];
-        self.seasonPT = [[SeasonPageView alloc] initWithFrame:CGRectMake(screenWide, 0, screenWide, height)];
-        self.seasonPTH = [[SeasonPageView alloc] initWithFrame:CGRectMake(screenWide *2, 0, screenWide, height)];
-        self.seasonPF = [[SeasonPageView alloc] initWithFrame:CGRectMake(screenWide * 3, 0, screenWide, height)];
+        
+        _timer = [NSTimer timerWithTimeInterval:2 target:self selector:@selector(changeImage) userInfo:nil repeats:YES];
+        [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
+
+        self.seasonPO = [[SeasonPageView alloc] initWithFrame:CGRectMake(0, 0, screenWide, heights)];
+        self.seasonPT = [[SeasonPageView alloc] initWithFrame:CGRectMake(screenWide, 0, screenWide, heights)];
+        self.seasonPTH = [[SeasonPageView alloc] initWithFrame:CGRectMake(screenWide *2, 0, screenWide, heights)];
+        self.seasonPF = [[SeasonPageView alloc] initWithFrame:CGRectMake(screenWide * 3, 0, screenWide, heights)];
         [_moving_seasonView addSubview:_seasonPO];
         [_moving_seasonView addSubview:_seasonPT];
         [_moving_seasonView addSubview:_seasonPTH];
         [_moving_seasonView addSubview:_seasonPF];
         [self configContent];
-        
+       
         
     }
     return self;
@@ -72,7 +83,10 @@
 - (void)changeValue {
     CGFloat flo = (_seaPC.currentPage)/1.0;
     CGPoint size = CGPointMake(flo * screenWide, 0);
-    _moving_seasonView.contentOffset = size;
+    [UIView animateWithDuration:1 animations:^{
+        _moving_seasonView.contentOffset = size;
+
+    }];
     
 }
 - (void)changeImage {
@@ -88,9 +102,13 @@
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     _seaPC.currentPage = scrollView.contentOffset.x/screenWide;
 }
-
-- (void)awakeFromNib {
-    // Initialization code
+- (void)removeTimer {
+    if (_timer == nil) return;
+    [_timer invalidate];
+    _timer = nil;
+}
+-(void)dealloc {
+    [self removeTimer];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
