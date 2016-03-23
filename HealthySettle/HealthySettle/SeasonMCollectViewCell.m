@@ -1,18 +1,18 @@
 //
-//  SeasonView.m
+//  SeasonMCollectViewCell.m
 //  HealthySettle
 //
-//  Created by yrc on 16/3/21.
+//  Created by yrc on 16/3/23.
 //  Copyright © 2016年 yrc. All rights reserved.
 //
 
-#import "SeasonView.h"
+#import "SeasonMCollectViewCell.h"
 
-@implementation SeasonView
-
+@implementation SeasonMCollectViewCell
 -(instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
+        self.backgroundColor = [UIColor whiteColor];
         self.image_view = [[UIImageView alloc] initWithFrame:CGRectMake(kMargin/2, kMargin/2, frame.size.width - kMargin, frame.size.height/3*2)];
         self.season_label = [[UILabel alloc] initWithFrame:CGRectMake(kMargin/2, frame.size.height/3*2,frame.size.width - kMargin, frame.size.height/6)];
         self.describe_label = [[UILabel alloc] initWithFrame:CGRectMake(kMargin/2, frame.size.height/9 * 7, frame.size.width - kMargin, frame.size.height/6)];

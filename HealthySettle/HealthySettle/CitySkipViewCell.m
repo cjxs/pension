@@ -75,6 +75,10 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 {
     return 1.0f;
 }
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"%ld",self.type);
+    NSLog(@"++++%ld",indexPath.row);
+}
 
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

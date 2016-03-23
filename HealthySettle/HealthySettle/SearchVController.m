@@ -52,7 +52,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [UIApplication sharedApplication].statusBarHidden = YES;
-//    self.navigationController.navigationBarHidden = YES;
+    self.navigationController.navigationBarHidden = YES;
+    [self.back_btn addTarget:self action:@selector(cancleToRootView) forControlEvents:UIControlEventTouchUpInside];
     self.view.backgroundColor = [UIColor grayColor];
     if ([_vc_type isEqualToString:@"L"]) {
         [self setBottomPicWithPic:[UIImage imageNamed:@"z_03"] andTitle:@"找。养老院"];
@@ -199,7 +200,9 @@
     _topImageV.image = imageP;
     _textLabel.text = string;
 }
-
+-(void)cancleToRootView {
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

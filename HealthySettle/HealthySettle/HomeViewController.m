@@ -11,12 +11,12 @@
 #import "DDTestApiS.h"
 #import "TempView.h"
 #import "ThingsView.h"
-#import "SeasonMovingViewCell.h"
 #import "CitySkipViewCell.h"
 #import "GDScrollBanner.h"
 #import "SearchVController.h"
+#import "SeasonCTViewCell.h"
 
-static NSString * seaIdentifier = @"cellSea";
+
 
 
 @interface HomeViewController ()<UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate>{
@@ -58,9 +58,26 @@ static NSString * seaIdentifier = @"cellSea";
         tapL.numberOfTouchesRequired = 1;
         
         ThingsView * healthyArea = [[ThingsView alloc] initWithFrame:CGRectMake(0, screenHeight/3.3, screenWide /4, screenHeight/9) withMark:[UIImage imageNamed:@"z_02"] andTitle:@"养生攻略"];
+        UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clipOnBtnsWithGes:)];
+        tap1.numberOfTapsRequired = 1;
+        healthyArea.tag = 201;
+        [healthyArea addGestureRecognizer:tap1];
+        
         ThingsView * newsArea = [[ThingsView alloc] initWithFrame:CGRectMake(screenWide /4, screenHeight/3.3, screenWide /4, screenHeight/9) withMark:[UIImage imageNamed:@"z_03"] andTitle:@"新闻动态"];
+        UITapGestureRecognizer *tap2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clipOnBtnsWithGes:)];
+        tap2.numberOfTapsRequired = 1;
+        newsArea.tag = 202;
+        [newsArea addGestureRecognizer:tap2];
         ThingsView * commonArea = [[ThingsView alloc] initWithFrame:CGRectMake(screenWide /2, screenHeight/3.3, screenWide /4, screenHeight/9) withMark:[UIImage imageNamed:@"z_03"] andTitle:@"养老常识"];
+        UITapGestureRecognizer *tap3 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clipOnBtnsWithGes:)];
+        tap3.numberOfTapsRequired = 1;
+        commonArea.tag = 203;
+        [commonArea addGestureRecognizer:tap3];
         ThingsView * assessArea = [[ThingsView alloc] initWithFrame:CGRectMake(screenWide /4*3, screenHeight/3.3, screenWide /4, screenHeight/9) withMark:[UIImage imageNamed:@"z_02"] andTitle:@"健康评估"];
+        UITapGestureRecognizer *tap4 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clipOnBtnsWithGes:)];
+        tap4.numberOfTapsRequired = 1;
+        assessArea.tag = 204;
+        [assessArea addGestureRecognizer:tap4];
         [_tableHeadView addSubview:healthyArea];
         [_tableHeadView addSubview:newsArea];
         [_tableHeadView addSubview:commonArea];
@@ -69,26 +86,22 @@ static NSString * seaIdentifier = @"cellSea";
     }
     return _tableHeadView;
 }
+//四个跳转
+- (void)clipOnBtnsWithGes:(UITapGestureRecognizer *)gesture{
+    NSLog(@"%ld++++",gesture.view.tag);
+    
+}
+
+//两个跳转
 - (void)skipTOSecond:(UITapGestureRecognizer *)gesture{
     SearchVController * searchVC = [[SearchVController alloc] init];
     if (gesture.view.frame.origin.x < 100) {
           searchVC.vc_type = @"S";
     }else {
         searchVC.vc_type = @"L";
-
     }
-  
     [self.navigationController pushViewController:searchVC animated:YES];
 }
-//SensibleViewController *senVC = self.sensiNaVC.viewControllers[0];
-//senVC.type = @"SCAN";
-//self.delegate = senVC;
-//if ([self.delegate respondsToSelector:@selector(doSomethings)]) {
-//    [self.delegate doSomethings];
-//}
-//self.sensiNaVC.viewControllers = @[senVC];
-//
-//self.navigationController.tabBarController.selectedViewController = self.sensiNaVC;
 - (UITableView *)bottomTableV {
     if (_bottomTableV == nil) {
         self.bottomTableV = [[UITableView alloc] initWithFrame:CGRectMake(0, 64 + screenHeight /4, screenWide, screenHeight/4*3 -64 ) style:UITableViewStylePlain];
@@ -96,9 +109,12 @@ static NSString * seaIdentifier = @"cellSea";
     }
     return _bottomTableV;
 }
+-(void)viewWillAppear:(BOOL)animated {
+    self.navigationController.navigationBarHidden = NO;
+
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor whiteColor]};
     self.navigationController.navigationBar.barTintColor = [UIColor redColor];
@@ -124,8 +140,10 @@ static NSString * seaIdentifier = @"cellSea";
     homeTableView.tableHeaderView = self.tableHeadView;
     homeTableView.delegate = self;
     homeTableView.dataSource = self;
-    [homeTableView registerClass:[SeasonMovingViewCell class] forCellReuseIdentifier:seaIdentifier];
+    homeTableView.bounces = NO;
+    
     [homeTableView registerClass:[CitySkipViewCell class] forCellReuseIdentifier:@"cellCity"];
+    [homeTableView registerClass:[SeasonCTViewCell class] forCellReuseIdentifier:@"cellSeason"];
     
 }
 
@@ -141,19 +159,18 @@ static NSString * seaIdentifier = @"cellSea";
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row == 0) {
-        SeasonMovingViewCell * cell = [homeTableView dequeueReusableCellWithIdentifier:seaIdentifier];
-        [cell delegateFromController:self];
-        cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+        SeasonCTViewCell * cell = [homeTableView dequeueReusableCellWithIdentifier:@"cellSeason"];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }else {
         CitySkipViewCell * cell = [homeTableView dequeueReusableCellWithIdentifier:@"cellCity"];
-        cell.selectionStyle = UITableViewCellSelectionStyleBlue;
-
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.type = indexPath.row;
         return cell;
     }
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+    NSLog(@"%ld",indexPath.row);
 }
 
 - (void)didReceiveMemoryWarning {
