@@ -38,7 +38,7 @@ static NSString * seaIdentifier = @"cellSea";
         net.AutoScrollDelay = 2;
         //占位图  net.placeImage
         [net setSmartImgdidSelectAtIndex:^(NSInteger index) {
-            NSLog(@"网络图片  %ld",index);
+            NSLog(@"网络图片  %ld",(long)index);
         }];
         [_tableHeadView addSubview:net];
         
@@ -46,14 +46,14 @@ static NSString * seaIdentifier = @"cellSea";
         TempView * tempViewL = [[TempView alloc] initWithFrame:CGRectMake(kMargin, screenHeight / 4.8 + kMargin/2, screenWide/2 - kMargin*1.5, screenHeight/3.2/4) withMark:[UIImage imageNamed:@"z_02"] andTitle:@"养生度假／装逼广告语"];
         
         [_tableHeadView addSubview:tempViewL];
-        UITapGestureRecognizer * tapS = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(skipTOSecondS)];
+        UITapGestureRecognizer * tapS = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(skipTOSecond:)];
         [tempViewL addGestureRecognizer:tapS];
         tapS.numberOfTapsRequired = 1;
         
         TempView * tempViewR = [[TempView alloc] initWithFrame:CGRectMake(screenWide/2 + kMargin * 0.5, screenHeight / 4.8 + kMargin/2, screenWide/2 - kMargin*1.5, screenHeight/3.2/4) withMark:[UIImage imageNamed:@"z_03"] andTitle:@"找养老院"];
         [_tableHeadView addSubview:tempViewR];
         
-        UITapGestureRecognizer * tapL = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(skipTOSecondL)];
+        UITapGestureRecognizer * tapL = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(skipTOSecond:)];
         [tempViewR addGestureRecognizer:tapL];
         tapL.numberOfTouchesRequired = 1;
         
@@ -69,15 +69,15 @@ static NSString * seaIdentifier = @"cellSea";
     }
     return _tableHeadView;
 }
-- (void)skipTOSecondS{
-    NSLog(@"++++");
+- (void)skipTOSecond:(UITapGestureRecognizer *)gesture{
     SearchVController * searchVC = [[SearchVController alloc] init];
-    searchVC.vc_type = @"S";
-    [self.navigationController pushViewController:searchVC animated:YES];
-}
-- (void)skipTOSecondL{
-    SearchVController * searchVC = [[SearchVController alloc] init];
-    searchVC.vc_type = @"L";
+    if (gesture.view.frame.origin.x < 100) {
+          searchVC.vc_type = @"S";
+    }else {
+        searchVC.vc_type = @"L";
+
+    }
+  
     [self.navigationController pushViewController:searchVC animated:YES];
 }
 //SensibleViewController *senVC = self.sensiNaVC.viewControllers[0];

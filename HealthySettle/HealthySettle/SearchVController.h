@@ -10,5 +10,5 @@
 
 @interface SearchVController : UIViewController
 @property (nonatomic, strong)NSString * vc_type;
-
+@property (nonatomic, strong)UIView * backGP;
 @end
