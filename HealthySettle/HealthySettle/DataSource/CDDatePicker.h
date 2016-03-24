@@ -18,8 +18,6 @@
 @property (assign,nonatomic)NSInteger choose_day_count;
 @property (strong ,nonatomic)NSString * type;
 @property (nonatomic, strong)UIView * titleView;
-@property (strong,nonatomic)UIButton * quxiaobtn;
-@property (strong, nonatomic)UIButton * btn;
 @property (strong,nonatomic)UIPickerView * pick_view;
 @property (strong, nonatomic) NSArray *dataSourceForDayComponent;
 - (void)show ;

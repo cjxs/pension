@@ -12,4 +12,7 @@
 @property (nonatomic, strong)NSString * vc_type;
 @property (weak, nonatomic) IBOutlet UIButton *back_btn;
 @property (nonatomic, strong)NSDate * choosingDate;
+@property (nonatomic, strong)NSString * chosedCity;
+@property (nonatomic, strong)NSArray * chosed_cityArray;
+@property (nonatomic, strong)NSString * chosed_districtStr;
 @end

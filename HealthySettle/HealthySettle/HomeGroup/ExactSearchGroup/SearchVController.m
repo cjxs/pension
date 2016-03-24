@@ -8,8 +8,8 @@
 
 #import "SearchVController.h"
 #import "CDDatePicker.h"
-
-@interface SearchVController ()<HYMDatePickerDelegate> {
+#import "CDCityPicker.h"
+@interface SearchVController ()<HYMDatePickerDelegate,CDCityPickerDelegate> {
     NSDate * end_begain;
     NSDate * end_end;
 }
@@ -34,6 +34,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *position_label;
 @property (weak, nonatomic) IBOutlet UILabel *priceAndCity_label;
 @property (nonatomic, strong)CDDatePicker * datePicker;
+@property (nonatomic, strong)CDCityPicker * city_picker;
 @end
 
 @implementation SearchVController
@@ -58,6 +59,11 @@
         }];
         _sellectOn_label.font = [UIFont systemFontOfSize:16];
         _sellectOn_label.text = @"区／县";
+        _sellectOn_label.tag = 302;
+        _sellectOn_label.userInteractionEnabled = YES;
+        UITapGestureRecognizer * tap_Counties = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(countiesPickerShowWithGesture:)];
+        [_sellectOn_label addGestureRecognizer:tap_Counties];
+        tap_Counties.numberOfTapsRequired = 1;
         _seletOff_label.alpha = 0;
         _nurseChoose_label.text = @"护理等级";
         _nurseTrue_label.text = @"全护";
@@ -73,6 +79,7 @@
         _fivth_markPic.image = [UIImage imageNamed:@"z_03"];
         
         _city_label.text = @"杭州市";
+        
         _seletOff_label.alpha = 1.0;
         [self configDateChooseMachine];
         [_sellectOn_label mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -91,7 +98,11 @@
         _priceAndCity_label.alpha = 0;
 
     }
-    
+    _city_label.userInteractionEnabled = YES;
+    _city_label.tag = 301;
+    UITapGestureRecognizer * tap_City = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cityPickerShowWithGesture:)];
+    [_city_label addGestureRecognizer:tap_City];
+    tap_City.numberOfTapsRequired = 1;
 
 }
 -(void)configDateChooseMachine {
@@ -161,6 +172,7 @@
     _datePicker = datePicker;
 
 }
+
 - (void)datePickerBtnDownCancel {
     _sellectOn_label.userInteractionEnabled = YES;
     _seletOff_label.userInteractionEnabled = YES;
@@ -192,7 +204,56 @@
         end_end = a;
     }
 
-   }
+}
+- (void)countiesPickerShowWithGesture:(UITapGestureRecognizer *)ges {
+    if (_chosed_cityArray) {
+        [self cityPickerShowWithGesture:ges];
+    }else {
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"????????" message:@"请先选择所在城市" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:nil];
+        // optional - add more buttons:
+//        [alert addButtonWithTitle:@"好的"];
+//        UIButton * btn = alert.subviews[0];
+//        NSLog(@"%@",alert.subviews);
+//        [btn addTarget:self action:@selector(pressHaodebtn) forControlEvents:UIControlEventTouchUpInside];
+//        [alert show];
+        
+        [self cityPickerShowWithGesture:nil];
+    }
+}
+
+
+- (void)cityPickerShowWithGesture:(UITapGestureRecognizer *)ges{
+    CDCityPicker * city_picker = [[CDCityPicker alloc] init];
+    if (ges.view.tag == 301) {
+         city_picker.type = @"S";
+    }else if(ges.view.tag == 302){
+        city_picker.districtArray = _chosed_cityArray;
+    }else {
+         city_picker.type = @"S";
+    }
+    city_picker.delegate = self;
+    [city_picker showPickerView];
+    _city_picker = city_picker;
+}
+- (void)currentSelectedName:(NSString *)name Array:(NSArray *)array
+{
+    if ([_city_picker.type isEqualToString:@"S"]) {
+        _chosedCity = name;
+        _chosed_cityArray = [NSArray arrayWithArray:array];
+    }else {
+        _chosed_districtStr = name;
+    }
+}
+
+-(void)cityPickerbtnDown {
+    if ([_city_picker.type isEqualToString:@"S"]) {
+        _city_label.text = _chosedCity;
+        NSLog(@"%@",_chosedCity);
+    }else {
+        _sellectOn_label.text = _chosed_districtStr;
+    }
+    
+}
 //配置上方图片和标题信息
 - (void)setBottomPicWithPic:(UIImage *)imageP andTitle:(NSString *)string {
     _topImageV.image = imageP;

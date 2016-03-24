@@ -55,7 +55,7 @@
     [_titleView addSubview:btn];
     
     [_titleView bringSubviewToFront:btn];
-    _btn = btn;
+    
     
     return _titleView;
 }
@@ -65,6 +65,7 @@
     [window addSubview:self];
     [window addSubview:self.pick_view];
     [window addSubview:self.titleView];
+    
 }
 -(instancetype)init {
     self = [super init];
@@ -142,7 +143,6 @@
         [formatter setLocale:[NSLocale localeWithLocaleIdentifier:@"zh_CN"]];
         [formatter setDateFormat:@"yyyy-MM-dd"];
         NSString *str = [NSString stringWithFormat:@"%@ 00:00:00",[formatter stringFromDate:self.date_start]];
-        NSLog(@"%@+++++++++++++",str);
         [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
         NSDate *baseDate = [formatter dateFromString:str];
         
