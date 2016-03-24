@@ -10,4 +10,5 @@
 @interface HomeViewController : UIViewController
 @property (nonatomic, strong)UITableView * bottomTableV;
 @property (nonatomic, strong)UIView * tableHeadView;
+@property (nonatomic, strong)UISearchBar * searchWhere;
 @end

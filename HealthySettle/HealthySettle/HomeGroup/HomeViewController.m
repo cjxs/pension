@@ -19,7 +19,7 @@
 
 
 
-@interface HomeViewController ()<UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate>{
+@interface HomeViewController ()<UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate,UISearchBarDelegate>{
     UITableView * homeTableView;
     NSMutableArray * imagesA;
 }
@@ -132,8 +132,14 @@
     UISearchBar * searchWhere = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, screenWide - 100,40 )];
     [searchWhere setContentMode:UIViewContentModeLeft];
     searchWhere.placeholder = @"带着老伴儿去旅行";
+    searchWhere.showsCancelButton=NO;
+    searchWhere.delegate = self;
+    searchWhere.barStyle=UIBarStyleDefault;
+    searchWhere.keyboardType=UIKeyboardTypeWebSearch;
     UIBarButtonItem * searchBarWhere = [[UIBarButtonItem alloc] initWithCustomView:searchWhere];
     [self.navigationItem setRightBarButtonItem:searchBarWhere];
+   
+    _searchWhere = searchWhere;
     
     homeTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, screenWide, screenHeight-64) style:UITableViewStyleGrouped];
     [self.view addSubview:homeTableView];
@@ -172,14 +178,48 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     NSLog(@"%ld",indexPath.row);
 }
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
 
-#pragma mark - UITableViewDataSource, UITableViewDelegate
+#pragma mark - UITableViewDataSource, UITableViewDelegate,UISearchBarDelegate
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    NSLog(@"%@",_searchWhere.text);
+    _searchWhere.showsCancelButton = NO;
+    
+    [self searchBarClear];
+}
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    [searchBar setShowsCancelButton:YES animated:YES];
+    
+    // 修改UISearchBar右侧的取消按钮文字颜色及背景图片
+    for (UIView *searchbuttons in [searchBar subviews]){
+        if ([searchbuttons isKindOfClass:[UIButton class]]) {
+            UIButton *cancelButton = (UIButton*)searchbuttons;
+            // 修改文字颜色
+            [cancelButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            [cancelButton setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
+            
+            // 修改按钮背景
+            [cancelButton setBackgroundImage:[UIImage imageNamed:@"z_02"] forState:UIControlStateNormal];
+            [cancelButton setBackgroundImage:nil forState:UIControlStateHighlighted];
+            [cancelButton setTitle:@"取消" forState:UIControlStateNormal];
+        }
+}
+}
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    [self searchBarClear];
+
+}
+- (void)searchBarClear {
+    [_searchWhere resignFirstResponder];
+    _searchWhere.text = nil;
+    _searchWhere.showsCancelButton = NO;
+}
+
 /*
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
