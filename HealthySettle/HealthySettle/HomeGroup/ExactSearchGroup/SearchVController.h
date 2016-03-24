@@ -11,5 +11,5 @@
 @interface SearchVController : UIViewController
 @property (nonatomic, strong)NSString * vc_type;
 @property (weak, nonatomic) IBOutlet UIButton *back_btn;
-@property (nonatomic, strong)UIView * backGP;
+@property (nonatomic, strong)NSDate * choosingDate;
 @end

@@ -33,12 +33,13 @@
     if (self) {
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
         layout.itemSize = CGSizeMake( screenWide/4.1 , screenWide / 4);
-        self.cityCollect_view = [[UICollectionView alloc] initWithFrame:CGRectMake(0, kMargin*3, screenWide, screenHeight/4.4) collectionViewLayout:layout];
-        _cityCollect_view.backgroundColor = [UIColor whiteColor];
-        self.cityCollect_view.delegate = self;
-        self.cityCollect_view.dataSource = self;
+         UICollectionView * cityCollect_view = [[UICollectionView alloc] initWithFrame:CGRectMake(0, kMargin*3, screenWide, screenHeight/4.4) collectionViewLayout:layout];
+        cityCollect_view.backgroundColor = [UIColor whiteColor];
+        cityCollect_view.delegate = self;
+        cityCollect_view.dataSource = self;
         self.clipsToBounds = YES;
-        [self addSubview:_cityCollect_view];
+        [self addSubview:cityCollect_view];
+        _cityCollect_view = cityCollect_view;
         [self addSubview:self.title_label];
         [self addSubview:self.title_icon];
 

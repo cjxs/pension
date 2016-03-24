@@ -20,7 +20,6 @@
 
 
 @interface HomeViewController ()<UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate,UISearchBarDelegate>{
-    UITableView * homeTableView;
     NSMutableArray * imagesA;
 }
 
@@ -120,7 +119,6 @@
     self.navigationController.navigationBar.barTintColor = [UIColor redColor];
     self.navigationController.navigationBar.translucent = NO;
     self.navigationController.tabBarController.tabBar.translucent = NO;
-    self.navigationController.tabBarController.tabBar.translucent = NO;
 
     UIButton * city_Btn = [UIButton buttonWithType:UIButtonTypeCustom] ;
     city_Btn.frame = CGRectMake(0, 0, 50, 30);
@@ -138,10 +136,10 @@
     searchWhere.keyboardType=UIKeyboardTypeWebSearch;
     UIBarButtonItem * searchBarWhere = [[UIBarButtonItem alloc] initWithCustomView:searchWhere];
     [self.navigationItem setRightBarButtonItem:searchBarWhere];
-   
+    
     _searchWhere = searchWhere;
     
-    homeTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, screenWide, screenHeight-64) style:UITableViewStyleGrouped];
+     UITableView * homeTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, screenWide, screenHeight-64) style:UITableViewStyleGrouped];
     [self.view addSubview:homeTableView];
     homeTableView.tableHeaderView = self.tableHeadView;
     homeTableView.delegate = self;
@@ -150,6 +148,8 @@
     
     [homeTableView registerClass:[CitySkipViewCell class] forCellReuseIdentifier:@"cellCity"];
     [homeTableView registerClass:[SeasonCTViewCell class] forCellReuseIdentifier:@"cellSeason"];
+    _homeTableView = homeTableView;
+    
     
 }
 
@@ -165,11 +165,11 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row == 0) {
-        SeasonCTViewCell * cell = [homeTableView dequeueReusableCellWithIdentifier:@"cellSeason"];
+        SeasonCTViewCell * cell = [_homeTableView dequeueReusableCellWithIdentifier:@"cellSeason"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }else {
-        CitySkipViewCell * cell = [homeTableView dequeueReusableCellWithIdentifier:@"cellCity"];
+        CitySkipViewCell * cell = [_homeTableView dequeueReusableCellWithIdentifier:@"cellCity"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.type = indexPath.row;
         return cell;

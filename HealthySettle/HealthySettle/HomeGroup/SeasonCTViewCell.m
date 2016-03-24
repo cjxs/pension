@@ -154,7 +154,10 @@ static NSString * const carouselID = @"TempCarouseView";
     }
     return _carousePageControl;
 }
-
+-(void)dealloc {
+    [_timer invalidate];
+    _timer = nil;
+}
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

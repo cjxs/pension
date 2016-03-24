@@ -54,5 +54,13 @@
 #define LIGHTTEXTCOLOR [UIColor colorWithRed:116.0f/255.0f green:116.0f/255.0f blue:116.0f/255.0f alpha:1.0f]// 淡色文本
 
 #define BACKGROUNDCOLOR [UIColor colorWithRed:231.0f/255.0f green:231.0f/255.0f blue:231.0f/255.0f alpha:1.0f]// 背景色
-
+#define RGB(r, g, b)    [UIColor colorWithRed:(r)/255.f green:(g)/255.f blue:(b)/255.f alpha:1.f]
+#define ALLBLUECOLOR    [UIColor colorWithRed:(0)/255.f green:(171)/255.f blue:(235)/255.f alpha:1.f]
+#define ALLBLACKCOLOR    [UIColor colorWithRed:(50)/255.f green:(45)/255.f blue:(45)/255.f alpha:1.f]
+#define ALLGRAYCOLOR    [UIColor colorWithRed:(165)/255.f green:(164)/255.f blue:(160)/255.f alpha:1.f]
+#define ALLBeiJingCOLOR    [UIColor colorWithRed:(244)/255.f green:(243)/255.f blue:(238)/255.f alpha:1.f]
+#define ALLGreenCOLOR    [UIColor colorWithRed:(193)/255.f green:(217)/255.f blue:(105)/255.f alpha:1.f]
+#define ALLOrangeCOLOR    [UIColor colorWithRed:(240)/255.f green:(131)/255.f blue:(0)/255.f alpha:1.f]
+#define ALLFenSeCOLOR    [UIColor colorWithRed:(215)/255.f green:(0)/255.f blue:(52)/255.f alpha:1.f]
+#define ALLLittleYellowCOLOR    [UIColor colorWithRed:(254)/255.f green:(242)/255.f blue:(210)/255.f alpha:1.f]
 #endif /* UtilsMacro_h */

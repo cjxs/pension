@@ -7,7 +7,7 @@
 //
 
 #import "SearchVController.h"
-#import "HYMDatePicker.h"
+#import "CDDatePicker.h"
 
 @interface SearchVController ()<HYMDatePickerDelegate> {
     NSDate * end_begain;
@@ -33,22 +33,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *nurseTrue_label;
 @property (weak, nonatomic) IBOutlet UILabel *position_label;
 @property (weak, nonatomic) IBOutlet UILabel *priceAndCity_label;
-@property (nonatomic, strong)HYMDatePicker * datePicker;
+@property (nonatomic, strong)CDDatePicker * datePicker;
 @end
 
 @implementation SearchVController
-- (UIView *)backGP {
-    if (!_backGP) {
-        _backGP = [[UIView alloc] initWithFrame:CGRectMake(0, screenHeight/2, screenWide, screenHeight/2)];
-        _backGP.backgroundColor = LIGHTTEXTCOLOR;
-        
-        UITapGestureRecognizer * tapCancle = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pickViewCancle)];
-        tapCancle.numberOfTapsRequired = 1;
-        [_backGP addGestureRecognizer:tapCancle];
-        
-}
-    return _backGP;
-}
 - (void)viewDidLoad {
     [super viewDidLoad];
     [UIApplication sharedApplication].statusBarHidden = YES;
@@ -146,55 +134,65 @@
 }
 //日期选择器出来
 - (void)pickViewAppear:(UITapGestureRecognizer *)tap {
-   
-    [self.view addSubview:self.backGP];
-    _datePicker = [[HYMDatePicker alloc] init];
-    _datePicker.frame = CGRectMake(screenWide/4, 0, screenWide/2, screenHeight/2);
-    if (tap.view.frame.origin.y < 5) {
-      
-        _datePicker.date_start = [self getTimeOfNightFromdate:[NSDate date]];
+     CDDatePicker * datePicker = [[CDDatePicker alloc] init];
+    if (tap.view.frame.origin.y < 5) {//入住按钮
+        datePicker.type = @"Z";
+        datePicker.date_start = [self getTimeOfNightFromdate:[NSDate date]];
         if (end_end) {
-            NSTimeInterval  timeIn =[end_end timeIntervalSinceDate:_datePicker.date_start];
+            NSTimeInterval  timeIn =[end_end timeIntervalSinceDate:datePicker.date_start];
             NSTimeInterval  oneDay = 24*60*60;
             int days = timeIn / oneDay ;
             NSInteger day = days;
-            _datePicker.choose_day_count = day;
+            datePicker.choose_day_count = day;
         }
-        _datePicker.type = @"Z";
         _seletOff_label.userInteractionEnabled = NO;
     }else {
         _sellectOn_label.userInteractionEnabled = NO;
         if (end_begain) {
+            datePicker.type = @"L";
             NSTimeInterval  oneDay = 24*60*60;  //1天的长度
             end_begain = [NSDate dateWithTimeInterval:oneDay sinceDate:end_begain];
-            _datePicker.date_start = end_begain;
+            datePicker.date_start = end_begain;
         }
         
     }
-    _datePicker.delegateDiy = self;
-    [_backGP addSubview:_datePicker];
+    datePicker.delegateDiy = self;
+    [datePicker show];
+    _datePicker = datePicker;
 
-    [self.view bringSubviewToFront:_backGP];
 }
--(void)pickViewCancle {
+- (void)datePickerBtnDownCancel {
     _sellectOn_label.userInteractionEnabled = YES;
     _seletOff_label.userInteractionEnabled = YES;
-    [_datePicker removeFromSuperview];
     _datePicker = nil;
-    [_backGP removeFromSuperview];
-    _backGP = nil;
+}
+-(void)datePickerbtnDown
+{
+    _sellectOn_label.userInteractionEnabled = YES;
+    _seletOff_label.userInteractionEnabled = YES;
+    if ([_datePicker.type isEqualToString:@"Z"]) {
+        _sellectOn_label.text = [NSString stringWithFormat:@"%@      入住",[self tringFromDate:_choosingDate]];
+    }else if ([_datePicker.type isEqualToString:@"L"]){
+        _seletOff_label.text = [NSString stringWithFormat:@"%@      离店",[self tringFromDate:_choosingDate]];
+    }
+
+}
+-(NSDate *)choosingDate {
+    if (!_choosingDate) {
+        _choosingDate = [NSDate date];
+    }
+    return _choosingDate;
 }
 //选择器的代理方法
 - (void)currentSelectedDate:(NSDate *)a{
+    _choosingDate = a;
     if ([_datePicker.type isEqualToString:@"Z"]) {
         end_begain = a;
-        NSLog(@"%@",end_begain);
-        _sellectOn_label.text = [NSString stringWithFormat:@"%@      入住",[self tringFromDate:a]];
-    }else {
+    }else if ([_datePicker.type isEqualToString:@"L"]){
         end_end = a;
-        _seletOff_label.text = [NSString stringWithFormat:@"%@      离店",[self tringFromDate:a]];
     }
-}
+
+   }
 //配置上方图片和标题信息
 - (void)setBottomPicWithPic:(UIImage *)imageP andTitle:(NSString *)string {
     _topImageV.image = imageP;
@@ -217,5 +215,7 @@
     // Pass the selected object to the new view controller.
 }
 */
-
+-(void)dealloc {
+    
+}
 @end
