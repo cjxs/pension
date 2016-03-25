@@ -270,7 +270,7 @@
 					<key>DivisionCode</key>
 					<string>120200</string>
 					<key>DivisionName</key>
-					<string>县</string>
+					<string>天津市（县区）</string>
 					<key>DivisionSub</key>
 					<array>
 						<dict>
@@ -7093,7 +7093,7 @@
 					<key>DivisionCode</key>
 					<string>310200</string>
 					<key>DivisionName</key>
-					<string>县</string>
+					<string>上海市（县区）</string>
 					<key>DivisionSub</key>
 					<array>
 						<dict>
@@ -20163,7 +20163,7 @@
 					<key>DivisionCode</key>
 					<string>500200</string>
 					<key>DivisionName</key>
-					<string>县</string>
+					<string>重庆市（县区）</string>
 					<key>DivisionSub</key>
 					<array>
 						<dict>
@@ -20324,7 +20324,7 @@
 					<key>DivisionCode</key>
 					<string>500300</string>
 					<key>DivisionName</key>
-					<string>市</string>
+					<string>重庆市（下辖市）</string>
 					<key>DivisionSub</key>
 					<array/>
 				</dict>

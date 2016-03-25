@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 @protocol CDCityPickerDelegate <NSObject>
-//-(void)cityPickerBtnDownCancel;
+-(void)cityPickerBtnDownCancel;
 -(void)cityPickerbtnDown;
 - (void)currentSelectedName:(NSString *)name Array:(NSArray *)array;
 @end

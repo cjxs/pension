@@ -187,6 +187,7 @@
     }else if ([_datePicker.type isEqualToString:@"L"]){
         _seletOff_label.text = [NSString stringWithFormat:@"%@      离店",[self tringFromDate:_choosingDate]];
     }
+    _datePicker = nil;
 
 }
 -(NSDate *)choosingDate {
@@ -237,7 +238,9 @@
         _chosed_districtStr = name;
     }
 }
-
+-(void)cityPickerBtnDownCancel {
+    _city_picker = nil;
+}
 -(void)cityPickerbtnDown {
     if ([_city_picker.type isEqualToString:@"S"]) {
         _city_label.text = _chosedCity;
@@ -245,7 +248,7 @@
     }else {
         _sellectOn_label.text = _chosed_districtStr;
     }
-    
+    _city_picker = nil;
 }
 //配置上方图片和标题信息
 - (void)setBottomPicWithPic:(UIImage *)imageP andTitle:(NSString *)string {
@@ -254,6 +257,12 @@
 }
 -(void)cancleToRootView {
     [self.navigationController popToRootViewControllerAnimated:YES];
+    for (UIView * view in self.view.subviews) {
+//        if (!(view.bounds.size.height ==self.view.bounds.size.height)) {
+            [view removeFromSuperview];
+//        }
+    }
+    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

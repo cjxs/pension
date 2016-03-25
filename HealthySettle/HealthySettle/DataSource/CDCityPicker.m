@@ -236,9 +236,9 @@
 
 -(void)cityPickerBtnDownCancel {
     [self dismiss];
-//    if(self.delegate && [self.delegate respondsToSelector:@selector(cityPickerBtnDownCancel)]){
-//        [self.delegate cityPickerBtnDownCancel];
-//    }
+    if(self.delegate && [self.delegate respondsToSelector:@selector(cityPickerBtnDownCancel)]){
+        [self.delegate cityPickerBtnDownCancel];
+    }
     
 }
 -(void)cityPickerbtnDown {

@@ -45,12 +45,7 @@
 
         
         [_cityCollect_view registerClass:[CityCollectionViewCell class] forCellWithReuseIdentifier:@"cellC"];
-        
-        
 
-
-        
-        
     }
     return self;
 }
@@ -77,11 +72,13 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
     return 1.0f;
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"%ld",self.type);
-    NSLog(@"++++%ld",indexPath.row);
+    NSLog(@"%d",(int)self.type);
+    NSLog(@"++++%d",(int)indexPath.row);
 }
 
-
+-(void)dealloc {
+    _cityCollect_view = nil;
+}
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

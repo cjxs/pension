@@ -92,7 +92,7 @@ static NSString * const carouselID = @"TempCarouseView";
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"选择了第%ld个",indexPath.row);
+    NSLog(@"选择了第%d个",(int)indexPath.row);
 }
 
 -(void)pageChanged:(UIPageControl *)page {
@@ -107,7 +107,7 @@ static NSString * const carouselID = @"TempCarouseView";
 }
 
 -(void)startTimer {
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:2.0f target:self selector:@selector(updateTimer) userInfo:nil repeats:YES];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.5f target:self selector:@selector(updateTimer) userInfo:nil repeats:YES];
     [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
     
 }
@@ -156,6 +156,7 @@ static NSString * const carouselID = @"TempCarouseView";
 }
 -(void)dealloc {
     [_timer invalidate];
+    _season_collectionView = nil;
     _timer = nil;
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

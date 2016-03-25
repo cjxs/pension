@@ -34,7 +34,7 @@
         //轮播图
          imagesA = [NSMutableArray arrayWithObjects:@"banner",@"z_02", nil];
         GDScrollBanner * net = [[GDScrollBanner alloc] initWithFrame:CGRectMake(0, 0, screenWide , screenHeight /4.8) WithLocalImages:imagesA];
-        net.AutoScrollDelay = 2;
+        net.AutoScrollDelay = 1.5f;
         //占位图  net.placeImage
         [net setSmartImgdidSelectAtIndex:^(NSInteger index) {
             NSLog(@"网络图片  %ld",(long)index);
@@ -87,7 +87,7 @@
 }
 //四个跳转
 - (void)clipOnBtnsWithGes:(UITapGestureRecognizer *)gesture{
-    NSLog(@"%ld++++",gesture.view.tag);
+    NSLog(@"%d++++",(int)gesture.view.tag);
     
 }
 
@@ -176,7 +176,7 @@
     }
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSLog(@"%ld",indexPath.row);
+    NSLog(@"%d",(int)indexPath.row);
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
