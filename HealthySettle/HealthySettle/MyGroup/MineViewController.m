@@ -9,52 +9,57 @@
 #import "MineViewController.h"
 #import "TempView.h"
 #import "ThingsView.h"
-#import "SetTableViewCell.h"
-
+#import "SetTVCell.h"
 
 static NSString *setCellIdentifier = @"cellS";
 
 @interface MineViewController ()<UITableViewDataSource, UITableViewDelegate>{
-    UITableView * setTableView;
+    
 }
 
 @end
 
 @implementation MineViewController
-
+- (UITableView *)setTableView {
+    if (! _setTableView) {
+        UITableView * setTableView = [[UITableView alloc] initWithFrame:CGRectMake(0,screenHeight/9 *4 + 5, screenWide, 250) style:UITableViewStylePlain];
+        setTableView.delegate = self;
+        setTableView.dataSource = self;
+        [setTableView registerNib:[UINib nibWithNibName:@"SetTVCell" bundle:nil] forCellReuseIdentifier:setCellIdentifier];
+       
+        for (int i = 0; i < 8; i++) {
+            UIView * separator = [[UIView alloc] initWithFrame:CGRectMake(0, (i+1) * 50 /* i乘以高度*/, screenWide, 1)];
+            
+            separator.backgroundColor = [UIColor colorWithRed:0.03 * i green:0.05*i blue:0.1*i alpha:0.3];
+            [setTableView addSubview:separator];
+      
+        }
+        setTableView.tableHeaderView = nil;
+        setTableView.scrollEnabled = NO;
+        _setTableView = setTableView;
+ 
+    }
+    return _setTableView;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
-      // Do any additional setup after loading the view.sel
     [self setBottomPicWithPic:[UIImage imageNamed:@"z_03"] withPerP:[UIImage imageNamed:@"z_02"] andTitle:@"注册／登录"];
+    
     TempView *collectView = [[TempView alloc] initWithFrame:CGRectMake(screenWide /9, screenHeight/12+100, screenWide/3, screenWide/9) withMark:[UIImage imageNamed:@"z_02"] andTitle:@"我的收藏"];
+    UITapGestureRecognizer * tapC = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickTwoViews:)];
+    tapC.numberOfTapsRequired = 1;
+    [collectView addGestureRecognizer:tapC];
     TempView * dataView = [[TempView alloc] initWithFrame:CGRectMake(screenWide/9 * 5, screenHeight/12 + 100, screenWide / 3, screenWide / 9) withMark:[UIImage imageNamed:@"z_03"] andTitle:@"个人资料"];
+    UITapGestureRecognizer * tapD = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickTwoViews:)];
+    tapD.numberOfTapsRequired = 1;
+    [dataView addGestureRecognizer:tapD];
     [self.view addSubview:collectView];
     [self.view addSubview:dataView];
     [self setThingsView];
-    self.automaticallyAdjustsScrollViewInsets = NO;
-    setTableView = [[UITableView alloc] initWithFrame:CGRectMake(0,screenHeight/9 *4 + 5, screenWide, screenHeight/9*2.4) style:UITableViewStylePlain];
-    setTableView.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:setTableView];
-    setTableView.delegate = self;
-    setTableView.dataSource = self;
-    [setTableView registerClass:[SetTableViewCell class] forCellReuseIdentifier:setCellIdentifier];
-    setTableView.tableHeaderView = nil;
-    setTableView.scrollEnabled = NO;
-    
-    UIView * moreV = [[UIView alloc] initWithFrame:CGRectMake(0, screenHeight/9 *6.6, screenWide, screenHeight/9 * 0.6)];
-    moreV.backgroundColor = [UIColor whiteColor];
-    TempView * moreVT = [[TempView alloc] initWithFrame:CGRectMake(10, 5, screenWide/4, 40) withMark:[UIImage imageNamed:@"z_02"] andTitle:@"更多"];
-    moreVT.explainTitle.textColor = [UIColor blackColor];
-    [moreV addSubview:moreVT.markImageV];
-    [moreV addSubview:moreVT.explainTitle];
-    
-    UIImageView * dirToRight = [[UIImageView alloc] initWithFrame:CGRectMake(screenWide-25, 10, 15, 20)];
-    [moreV addSubview:dirToRight];
-    dirToRight.image = [UIImage imageNamed:@"z_02"];//想有的小尖头的图片
-    
-    
-    [self.view addSubview:moreV];
+    [self.view addSubview:self.setTableView];
 
+    self.automaticallyAdjustsScrollViewInsets = NO;
+   
 }
 - (void)setBottomPicWithPic:(UIImage *)imageP withPerP:(UIImage *)personP andTitle:(NSString *)string {
     self.view.backgroundColor = [UIColor grayColor];
@@ -64,25 +69,47 @@ static NSString *setCellIdentifier = @"cellS";
     topImageV.image = imageP;
     topImageV.alpha = 0.85;
     [self.view addSubview:topImageV];
+    UITapGestureRecognizer * tapRL = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(resignOrLoad)];
+    tapRL.numberOfTapsRequired = 1;
     UIImageView * imagePerson = [[UIImageView alloc] initWithFrame:CGRectMake(screenWide/2 -25, screenHeight /12, 50, 50)];
     imagePerson.backgroundColor = [UIColor greenColor];
     imagePerson.clipsToBounds = YES;
     imagePerson.layer.cornerRadius = 25;
-    [self.view addSubview:imagePerson];
+    imagePerson.userInteractionEnabled = YES;
+    [topImageV addGestureRecognizer:tapRL];
+    [topImageV addSubview:imagePerson];
     
     UILabel * textLabel = [[UILabel alloc] initWithFrame:CGRectMake((screenWide - 200)/2, screenHeight / 12 + 50, 200, 40)];
     textLabel.textAlignment = NSTextAlignmentCenter;
     textLabel.font = [UIFont systemFontOfSize:16];
     textLabel.text = string;
     textLabel.textColor = [UIColor whiteColor];
+    textLabel.userInteractionEnabled = YES;
+    [textLabel addGestureRecognizer:tapRL];
     [self.view addSubview:textLabel];
     
 }
 - (void)setThingsView {
     ThingsView * orderTV = [[ThingsView alloc] initWithFrame:CGRectMake(0, screenHeight/3, screenWide /4, screenHeight/9) withMark:[UIImage imageNamed:@"z_02"] andTitle:@"我的订单"];
+    orderTV.tag = 401;
+    UITapGestureRecognizer * tapO = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickFourViews:)];
+    tapO.numberOfTapsRequired = 1;
+    [orderTV addGestureRecognizer:tapO];
     ThingsView * memberTV = [[ThingsView alloc] initWithFrame:CGRectMake(screenWide /4, screenHeight/3, screenWide /4, screenHeight/9) withMark:[UIImage imageNamed:@"z_03"] andTitle:@"会员特权"];
+    memberTV.tag = 402;
+     UITapGestureRecognizer * tapM = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickFourViews:)];
+    tapM.numberOfTapsRequired = 1;
+    [memberTV addGestureRecognizer:tapM];
     ThingsView * refundTV = [[ThingsView alloc] initWithFrame:CGRectMake(screenWide /2, screenHeight/3, screenWide /4, screenHeight/9) withMark:[UIImage imageNamed:@"z_03"] andTitle:@"退款维权"];
+    refundTV.tag = 403;
+     UITapGestureRecognizer * tapR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickFourViews:)];
+    tapR.numberOfTapsRequired = 1;
+    [refundTV addGestureRecognizer:tapR];
     ThingsView * commentTV = [[ThingsView alloc] initWithFrame:CGRectMake(screenWide /4*3, screenHeight/3, screenWide /4, screenHeight/9) withMark:[UIImage imageNamed:@"z_02"] andTitle:@"我的点评"];
+    commentTV.tag = 404;
+     UITapGestureRecognizer * tapC = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickFourViews:)];
+    tapC.numberOfTapsRequired = 1;
+    [commentTV addGestureRecognizer:tapC];
     [self.view addSubview:orderTV];
     [self.view addSubview:memberTV];
     [self.view addSubview:refundTV];
@@ -94,26 +121,28 @@ static NSString *setCellIdentifier = @"cellS";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
    
-        return 4;
+        return 5;
    }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    SetTableViewCell * cell = [setTableView dequeueReusableCellWithIdentifier:setCellIdentifier forIndexPath:indexPath];
+    SetTVCell * cell = [_setTableView dequeueReusableCellWithIdentifier:setCellIdentifier forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
             if (indexPath.row == 0) {
-                cell.tempThingV.explainTitle.text = @"现金账户";
-                cell.informationLabel.text = @"¥ 0.00";
+                [cell setThingsWithName:@"现金账户" Image:[UIImage imageNamed:@"z_02"] number:@"¥ 0.00"];
+                
             }else if (indexPath.row == 1) {
-                cell.tempThingV.explainTitle.text = @"我的积分";
-                cell.informationLabel.text = @"350";
+                [cell setThingsWithName:@"我的积分" Image:[UIImage imageNamed:@"z_03"] number:@"350"];
+            
             }else if (indexPath.row == 2 ) {
-                cell.tempThingV.explainTitle.text = @"优惠券";
-                cell.informationLabel.text = @"1张";
-            }else{
-                cell.tempThingV.explainTitle.text = @"密码修改";
-                [cell.informationLabel removeFromSuperview];
+                [cell setThingsWithName:@"优惠券" Image:[UIImage imageNamed:@"z_02"] number:@"1 张"];
 
-        }
+               
+            }else  if (indexPath.row == 3 ){
+                [cell setThingsWithName:@"密码修改" Image:[UIImage imageNamed:@"z_03"] number:nil];
+
+            }else {
+                [cell setThingsWithName:@"更多" Image:[UIImage imageNamed:@"z_03"] number:nil];
+            }
     
     return cell;
 }
@@ -121,8 +150,42 @@ static NSString *setCellIdentifier = @"cellS";
     NSLog(@"我惦记了地%@hang",indexPath);
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return screenHeight/9 * 0.6;
+    return 50;
 }
+- (void)resignOrLoad {
+    NSLog(@"登录");
+}
+- (void)clickTwoViews:(UITapGestureRecognizer *)gesture {
+   
+    if (gesture.view.frame.origin.x < screenWide / 2) {
+        NSLog(@"前面的哦");
+    }else {
+        NSLog(@"后面的哦");
+    }
+}
+
+- (void)clickFourViews:(UITapGestureRecognizer *)gesture {
+    
+    int number = (int)gesture.view.tag;
+    switch (number) {
+        case 401:
+            NSLog(@"401");
+            break;
+        case 402:
+            NSLog(@"402");
+            break;
+        case 403:
+            NSLog(@"403");
+            break;
+        case 404:
+            NSLog(@"404");
+            break;
+        default:
+            break;
+    }
+}
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

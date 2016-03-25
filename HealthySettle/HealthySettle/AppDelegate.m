@@ -43,8 +43,8 @@
     // Override point for customization after application launch.
     //配置服务器信息
     YTKNetworkConfig * config = [YTKNetworkConfig sharedInstance];
-    config.baseUrl = @"www.baidu.com";
-    config.cdnUrl = @"www.zhihu.com";
+    config.baseUrl = @"http://api.meilijia.com/";
+    config.cdnUrl = @"www.zhihu.com/";
     
     //百度地图
 //    _mapManager = [[BMKMapManager alloc] init];

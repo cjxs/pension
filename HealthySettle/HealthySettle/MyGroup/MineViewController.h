@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 @class TempView,ThingsView;
 @interface MineViewController : UIViewController
-
+@property (nonatomic, strong)UITableView * setTableView;
 @end

@@ -209,13 +209,6 @@
     if (_chosed_cityArray) {
         [self cityPickerShowWithGesture:ges];
     }else {
-//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"????????" message:@"请先选择所在城市" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:nil];
-        // optional - add more buttons:
-//        [alert addButtonWithTitle:@"好的"];
-//        UIButton * btn = alert.subviews[0];
-//        NSLog(@"%@",alert.subviews);
-//        [btn addTarget:self action:@selector(pressHaodebtn) forControlEvents:UIControlEventTouchUpInside];
-//        [alert show];
         
         [self cityPickerShowWithGesture:nil];
     }

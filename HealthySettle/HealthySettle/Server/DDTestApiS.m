@@ -29,4 +29,5 @@
 -(id)requestArgument {
     return @{@"s?wd=":_thingsN};
 }
+
 @end

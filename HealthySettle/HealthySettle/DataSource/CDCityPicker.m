@@ -22,11 +22,8 @@
 @property (nonatomic, strong) NSDictionary *districtDict;
 
 @property (nonatomic, strong) NSArray *ProvinceArray; //省的数组
-@property (nonatomic, strong) NSString *provinceStr;  // 省名字
 @property (nonatomic, strong) NSString *cityStr;      // 市名
-@property (nonatomic, strong) NSString *provinceSubCode;//
 @property (nonatomic, strong) NSString *provinceCode;//  省编码
-@property (nonatomic, strong) NSString *cityCode;//   市编码
 
 @property (nonatomic, strong) NSString *districtStr;//  县区名
 
@@ -52,7 +49,6 @@
         pick_view.clipsToBounds = YES;
         pick_view.layer.cornerRadius = kMargin;
         pick_view.frame = [self getMainViewFrame];
-//        pick_view.frame = CGRectMake(kMargin, screenHeight/3+ 4* kMargin, screenWide - kMargin *2, screenHeight /3 - 4 * kMargin);
         pick_view.clipsToBounds = YES;
         pick_view.dataSource = self;
         pick_view.delegate = self;
@@ -81,7 +77,6 @@
     rect.size.width = screenWide - kMargin *2 ;
     rect.size.height = kMargin * 4;
     _titleView = [[UIView alloc] initWithFrame:rect];
-//    _titleView = [[UIView alloc] initWithFrame:[self getMainViewFrame]];
     _titleView.backgroundColor = RGB(249, 249, 249);
     _titleView.clipsToBounds = YES;
     _titleView.layer.cornerRadius = kMargin;
@@ -106,7 +101,6 @@
     btn.backgroundColor = [UIColor clearColor];
     btn.layer.cornerRadius = 5;
     [_titleView addSubview:btn];
-//    [_titleView addSubview:self.pick_view];
 
     
     return _titleView;
@@ -206,7 +200,6 @@
 {
     if ([_type isEqualToString:@"S"]) {
         NSDictionary *ProvinceDict = self.ProvinceArray[[_pick_view selectedRowInComponent:0]];
-            self.provinceStr = [ProvinceDict objectForKey:Key_DivisionName];
         
             //*****
         
@@ -219,15 +212,15 @@
         self.districtArray = [CityDict objectForKey:Key_DivisionSub];
 
         if (self.delegate && [self.delegate respondsToSelector:@selector(currentSelectedName: Array:)]) {
-            NSLog(@"%@",_districtArray[1]);
+            
             [self.delegate currentSelectedName:self.cityStr Array:self.districtArray];
         }
        
     }else {
 
     self.districtStr = [self.districtArray[[_pick_view selectedRowInComponent:0]] objectForKey:Key_DivisionName];//****
-        NSLog(@"%@",self.districtStr);
-//        self.districtStr = [self.districtDict objectForKey:Key_DivisionName];
+        
+
         if (self.delegate && [self.delegate respondsToSelector:@selector(currentSelectedName: Array:)]) {
             [self.delegate currentSelectedName:self.districtStr Array:nil];
         }
