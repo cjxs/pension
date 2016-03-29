@@ -14,6 +14,8 @@
 #import "UtilsMacro.h"
 #import "YTKRequest.h"
 #import <Masonry.h>
+#import <ReactiveCocoa.h>
+#import <ReactiveCocoa/RACEXTScope.h>
 
 //#import <BMapKit.h>
 //#define APPKEY @"SbMElaayEeXtecIuyGYnGXeI"

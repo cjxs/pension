@@ -14,7 +14,22 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>MTMigration.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Mantle.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Masonry.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>NJKWebViewProgress.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -24,7 +39,22 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>ReactiveCocoa.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>SDWebImage.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>YTKNetwork.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>iVersion.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -37,7 +67,27 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>2DBCBD6EF4371404DEB54ACC62A8470B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>426BC4549A625B5E1E4200D5261A98BF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4789FD4DE592ED7DD01BE4853E09ECC7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>53480ED0BE09FF49E34B1702D485CAAB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9B967037C12B2850F62DA100267569DF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -47,12 +97,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B7D76C8B52DB428335D3361289B6E7A9</key>
+		<key>B4A3E08D49931371F7247521A50EAF79</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F2C85E96EAB1676F5E5B45D888542D43</key>
+		<key>BA65E99381EB368A18C1101B9BF48035</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DC7425C084C3063FB95C5691D392BB73</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FFA75DB126171E817F37659A5FEFCA34</key>
 		<dict>
 			<key>primary</key>
 			<true/>

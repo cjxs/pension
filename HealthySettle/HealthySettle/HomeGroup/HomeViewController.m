@@ -15,13 +15,18 @@
 #import "GDScrollBanner.h"
 #import "SearchVController.h"
 #import "SeasonCTViewCell.h"
+#import <MTMigration.h>
+#import "ProductTipView.h"
+#import "WebViewController.h"
 
 
 
 
-@interface HomeViewController ()<UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate,UISearchBarDelegate>{
+
+@interface HomeViewController ()<UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate,UISearchBarDelegate,UIWebViewDelegate>{
     NSMutableArray * imagesA;
 }
+
 
 
 @end
@@ -88,9 +93,35 @@
 //四个跳转
 - (void)clipOnBtnsWithGes:(UITapGestureRecognizer *)gesture{
     NSLog(@"%d++++",(int)gesture.view.tag);
+    NSURL * url = [NSURL URLWithString:@"http://www.baidu.com"];
+//    UIWebView * webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
+//    [self.view addSubview:webView];
+//    webView.delegate = self;
+//    [webView loadRequest:[NSURLRequest requestWithURL:url]];
+    WebViewController * webVC = [[WebViewController alloc] init];
+    webVC.urlLoad = url;
+//    self.navigationController.navigationBar.hidden = YES;
+    [self.navigationController pushViewController:webVC animated:NO];
+    
+    
+}
+- (void)webViewDidStartLoad:(UIWebView *)webView{
+    
+    NSLog(@"webViewDidStartLoad");
     
 }
 
+- (void)webViewDidFinishLoad:(UIWebView *)web{
+    
+    NSLog(@"webViewDidFinishLoad");
+    
+}
+
+-(void)webView:(UIWebView*)webView  DidFailLoadWithError:(NSError*)error{
+    
+    NSLog(@"DidFailLoadWithError");
+    
+}
 //两个跳转
 - (void)skipTOSecond:(UITapGestureRecognizer *)gesture{
     SearchVController * searchVC = [[SearchVController alloc] init];
@@ -109,7 +140,8 @@
     return _bottomTableV;
 }
 -(void)viewWillAppear:(BOOL)animated {
-    self.navigationController.navigationBarHidden = NO;
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
 
 }
 - (void)viewDidLoad {
@@ -119,6 +151,25 @@
     self.navigationController.navigationBar.barTintColor = [UIColor redColor];
     self.navigationController.navigationBar.translucent = NO;
     self.navigationController.tabBarController.tabBar.translucent = NO;
+    // 版本更新的时候添加提示页面，任性的设计师要求的
+//    [MTMigration applicationUpdateBlock:^{
+//        ProductTipView *tipView = [[ProductTipView alloc] init];
+//        [self.navigationController.view addSubview:tipView];
+//        [tipView mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.edges.equalTo(self.navigationController.view);
+//        }];
+//    }];
+    
+//    [MTMigration migrateToVersion:@"1.1.1" block:^{
+//        [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
+//            [MemberManaged MR_truncateAllInContext:localContext];
+//            [CardManaged MR_truncateAllInContext:localContext];
+//            [NoticeManaged MR_truncateAllInContext:localContext];
+//        } completion:^(BOOL success, NSError *error) {
+//            [LoginManaged sharedInstance].isLogin = NO;
+//        }];
+//    }];
+
 
     UIButton * city_Btn = [UIButton buttonWithType:UIButtonTypeCustom] ;
     city_Btn.frame = CGRectMake(0, 0, 50, 30);

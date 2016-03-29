@@ -10,6 +10,8 @@
 #import "TempView.h"
 #import "ThingsView.h"
 #import "SetTVCell.h"
+#import "PersonVController.h"
+#import "PersonDataTVController.h"
 
 static NSString *setCellIdentifier = @"cellS";
 
@@ -159,8 +161,13 @@ static NSString *setCellIdentifier = @"cellS";
    
     if (gesture.view.frame.origin.x < screenWide / 2) {
         NSLog(@"前面的哦");
+        [self pushToViewPersonWithTitle:@"我的收藏" type:@"collect"];
+        
     }else {
         NSLog(@"后面的哦");
+        PersonDataTVController * personDataVC = [[PersonDataTVController alloc] init];
+        personDataVC.titleName = @"个人资料";
+        [self.navigationController pushViewController:personDataVC animated:YES];
     }
 }
 
@@ -169,15 +176,19 @@ static NSString *setCellIdentifier = @"cellS";
     int number = (int)gesture.view.tag;
     switch (number) {
         case 401:
+            [self pushToViewPersonWithTitle:@"我的订单" type:@"order"];
             NSLog(@"401");
             break;
         case 402:
             NSLog(@"402");
             break;
         case 403:
+            [self pushToViewPersonWithTitle:@"退款维权" type:@"refund"];
             NSLog(@"403");
+            
             break;
         case 404:
+            [self pushToViewPersonWithTitle:@"我的点评" type:@"comment"];
             NSLog(@"404");
             break;
         default:
@@ -185,7 +196,16 @@ static NSString *setCellIdentifier = @"cellS";
     }
 }
 
-
+- (void)pushToViewPersonWithTitle:(NSString *)title type :(NSString *)type {
+    PersonVController * viewC = [[PersonVController alloc] init];
+    if (title) {
+        viewC.titleName = title;
+    }
+    if (type) {
+        viewC.type = type;
+    }
+    [self.navigationController pushViewController:viewC animated:YES];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

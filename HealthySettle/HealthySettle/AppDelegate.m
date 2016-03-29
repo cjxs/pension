@@ -31,12 +31,21 @@
 #import "AppDelegate.h"
 #import "TabbarController.h"
 #import "YTKNetworkConfig.h"
-
+#import <iVersion.h>
 @interface AppDelegate ()
 @property (nonatomic, strong)TabbarController * tabbarController;
 @end
 
 @implementation AppDelegate
++ (void)initialize{
+    
+  //  [iVersion sharedInstance].applicationBundleID = @"com.beik.zhuanla";
+//    [iVersion sharedInstance].appStoreID = 939985150;
+    [iVersion sharedInstance].downloadButtonLabel = @"更新";
+    [iVersion sharedInstance].remindButtonLabel = @"以后提醒";
+    [iVersion sharedInstance].ignoreButtonLabel = @"忽略";
+    [iVersion sharedInstance].updateAvailableTitle = @"有新版本";
+}
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -52,6 +61,8 @@
 //    if (!ret) {
 //        NSLog(@"启动失败");
 //    }
+    
+ 
     
     
     
