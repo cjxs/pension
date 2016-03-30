@@ -1,30 +1,30 @@
 //
-//  PersonVController.m
+//  RefundViewController.m
 //  HealthySettle
 //
-//  Created by yrc on 16/3/29.
+//  Created by yrc on 16/3/30.
 //  Copyright © 2016年 yrc. All rights reserved.
 //
 
-#import "PersonVController.h"
+#import "RefundViewController.h"
 
-@interface PersonVController ()<UITableViewDataSource, UITableViewDelegate>
+@interface RefundViewController ()
 
 @end
 
-@implementation PersonVController
+@implementation RefundViewController
 -(UIView *)tableHeadView {
     if (!_tableHeadView) {
         _tableHeadView = [[UIView alloc] initWithFrame:CGRectMake(0, 1, screenWide, 30)];
-        NSArray * array = @[@"全部", @"待付款", @"待使用", @"待评价"];
-        for (int i = 0; i < 4; i++) {
+        NSArray * array = @[@"全部", @"未处理", @"已退款"];
+        for (int i = 0; i < 3; i++) {
             UIButton * btn = [UIButton buttonWithType:UIButtonTypeCustom];
-            btn.frame = CGRectMake(i *screenWide /4, 0, screenWide /4, 29);
+            btn.frame = CGRectMake(i *screenWide /3, 0, screenWide /3, 29);
             btn.tag = 500 + i;
             [btn setTitle:array[i] forState:UIControlStateNormal];
             [btn addTarget:self action:@selector(changeDataOfbtn:) forControlEvents:UIControlEventTouchUpInside];
             [_tableHeadView addSubview:btn];
-            UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(i *screenWide /4, 29, screenWide /4, 1)];
+            UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(i *screenWide /3, 29, screenWide /3, 1)];
             [_tableHeadView addSubview:label];
             if (i == 0) {
                 [btn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
@@ -75,6 +75,7 @@
         NSLog(@"新建一个数组， 按所对应筛选条件滤出数组， 作为数据源");
     }
 }
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -82,13 +83,8 @@
     self.navigationController.tabBarController.tabBar.translucent = NO;
     self.view.backgroundColor = [UIColor darkGrayColor];
     [self.view addSubview:self.tableView];
-    if ([_type isEqualToString:@"order"]) {
-        [self.view addSubview:self.tableHeadView];
-    }else {
-        _tableView.frame = CGRectMake(0, 1, screenWide, 500);
-    }
-    
-
+    [self.view addSubview:self.tableHeadView];
+  
 }
 -(void)viewWillAppear:(BOOL)animated {
     self.navigationItem.title = _titleName;

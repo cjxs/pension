@@ -43,10 +43,16 @@
 		32F6CD101C9A734C00E97B65 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 32F6CD0F1C9A734C00E97B65 /* Assets.xcassets */; };
 		32F6CD131C9A734C00E97B65 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32F6CD111C9A734C00E97B65 /* LaunchScreen.storyboard */; };
 		32F6CD2F1C9ABDF200E97B65 /* TabbarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32F6CD2E1C9ABDF200E97B65 /* TabbarController.m */; };
+		32FA73361CAB7E4F00379855 /* PersonDataVController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32FA73351CAB7E4F00379855 /* PersonDataVController.m */; };
+		32FA733E1CABA4E600379855 /* CDTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 32FA733D1CABA4E600379855 /* CDTextView.m */; };
+		32FA73421CABC7FC00379855 /* PasswordCVController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32FA73401CABC7FC00379855 /* PasswordCVController.m */; };
+		32FA73431CABC7FC00379855 /* PasswordCVController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32FA73411CABC7FC00379855 /* PasswordCVController.xib */; };
+		32FA73461CABE32500379855 /* RefundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32FA73451CABE32500379855 /* RefundViewController.m */; };
 		32FD72CB1CAA26E4008CB917 /* ProductTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 32FD72CA1CAA26E4008CB917 /* ProductTipView.m */; };
 		32FD72CE1CAA301E008CB917 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32FD72CD1CAA301E008CB917 /* WebViewController.m */; };
 		32FD72D51CAA8263008CB917 /* PersonVController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32FD72D41CAA8263008CB917 /* PersonVController.m */; };
-		32FD72D81CAA9116008CB917 /* PersonDataTVController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32FD72D71CAA9116008CB917 /* PersonDataTVController.m */; };
+		32FD72DC1CAA94F0008CB917 /* PersonTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32FD72DA1CAA94F0008CB917 /* PersonTVCell.m */; };
+		32FD72DD1CAA94F0008CB917 /* PersonTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32FD72DB1CAA94F0008CB917 /* PersonTVCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -113,14 +119,24 @@
 		32F6CD141C9A734C00E97B65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		32F6CD2D1C9ABDF200E97B65 /* TabbarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabbarController.h; sourceTree = "<group>"; };
 		32F6CD2E1C9ABDF200E97B65 /* TabbarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabbarController.m; sourceTree = "<group>"; };
+		32FA73341CAB7E4F00379855 /* PersonDataVController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonDataVController.h; sourceTree = "<group>"; };
+		32FA73351CAB7E4F00379855 /* PersonDataVController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonDataVController.m; sourceTree = "<group>"; };
+		32FA733C1CABA4E600379855 /* CDTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDTextView.h; sourceTree = "<group>"; };
+		32FA733D1CABA4E600379855 /* CDTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDTextView.m; sourceTree = "<group>"; };
+		32FA733F1CABC7FC00379855 /* PasswordCVController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordCVController.h; sourceTree = "<group>"; };
+		32FA73401CABC7FC00379855 /* PasswordCVController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordCVController.m; sourceTree = "<group>"; };
+		32FA73411CABC7FC00379855 /* PasswordCVController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PasswordCVController.xib; sourceTree = "<group>"; };
+		32FA73441CABE32500379855 /* RefundViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefundViewController.h; sourceTree = "<group>"; };
+		32FA73451CABE32500379855 /* RefundViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefundViewController.m; sourceTree = "<group>"; };
 		32FD72C91CAA26E4008CB917 /* ProductTipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductTipView.h; sourceTree = "<group>"; };
 		32FD72CA1CAA26E4008CB917 /* ProductTipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductTipView.m; sourceTree = "<group>"; };
 		32FD72CC1CAA301E008CB917 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
 		32FD72CD1CAA301E008CB917 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		32FD72D31CAA8263008CB917 /* PersonVController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonVController.h; sourceTree = "<group>"; };
 		32FD72D41CAA8263008CB917 /* PersonVController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonVController.m; sourceTree = "<group>"; };
-		32FD72D61CAA9116008CB917 /* PersonDataTVController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonDataTVController.h; sourceTree = "<group>"; };
-		32FD72D71CAA9116008CB917 /* PersonDataTVController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonDataTVController.m; sourceTree = "<group>"; };
+		32FD72D91CAA94F0008CB917 /* PersonTVCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonTVCell.h; sourceTree = "<group>"; };
+		32FD72DA1CAA94F0008CB917 /* PersonTVCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonTVCell.m; sourceTree = "<group>"; };
+		32FD72DB1CAA94F0008CB917 /* PersonTVCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonTVCell.xib; sourceTree = "<group>"; };
 		3B3A723A9107D9206B488077 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		B13104AB7B8F04CDDC48D9DD /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -192,6 +208,8 @@
 				3292A7501CA3DCA4004FEB57 /* districtMGE.plist */,
 				3292A74D1CA3D14E004FEB57 /* CDCityPicker.h */,
 				3292A74E1CA3D14E004FEB57 /* CDCityPicker.m */,
+				32FA733C1CABA4E600379855 /* CDTextView.h */,
+				32FA733D1CABA4E600379855 /* CDTextView.m */,
 			);
 			path = DataSource;
 			sourceTree = "<group>";
@@ -318,8 +336,16 @@
 			children = (
 				32FD72D31CAA8263008CB917 /* PersonVController.h */,
 				32FD72D41CAA8263008CB917 /* PersonVController.m */,
-				32FD72D61CAA9116008CB917 /* PersonDataTVController.h */,
-				32FD72D71CAA9116008CB917 /* PersonDataTVController.m */,
+				32FA73441CABE32500379855 /* RefundViewController.h */,
+				32FA73451CABE32500379855 /* RefundViewController.m */,
+				32FA73341CAB7E4F00379855 /* PersonDataVController.h */,
+				32FA73351CAB7E4F00379855 /* PersonDataVController.m */,
+				32FA733F1CABC7FC00379855 /* PasswordCVController.h */,
+				32FA73401CABC7FC00379855 /* PasswordCVController.m */,
+				32FA73411CABC7FC00379855 /* PasswordCVController.xib */,
+				32FD72D91CAA94F0008CB917 /* PersonTVCell.h */,
+				32FD72DA1CAA94F0008CB917 /* PersonTVCell.m */,
+				32FD72DB1CAA94F0008CB917 /* PersonTVCell.xib */,
 			);
 			path = PersonalGroupn;
 			sourceTree = "<group>";
@@ -402,6 +428,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				32FD72DD1CAA94F0008CB917 /* PersonTVCell.xib in Resources */,
+				32FA73431CABC7FC00379855 /* PasswordCVController.xib in Resources */,
 				32F6CD131C9A734C00E97B65 /* LaunchScreen.storyboard in Resources */,
 				32DD1DCD1CA5082B00E1C229 /* SetTVCell.xib in Resources */,
 				32F6CD101C9A734C00E97B65 /* Assets.xcassets in Resources */,
@@ -471,11 +499,13 @@
 			files = (
 				32CABD8D1CA374020068AE93 /* CustomerViewController.m in Sources */,
 				32CABD691CA373AA0068AE93 /* SeasonCTViewCell.m in Sources */,
-				32FD72D81CAA9116008CB917 /* PersonDataTVController.m in Sources */,
+				32FA733E1CABA4E600379855 /* CDTextView.m in Sources */,
 				32CABD701CA373CC0068AE93 /* GDScrollBanner.m in Sources */,
 				32FD72CB1CAA26E4008CB917 /* ProductTipView.m in Sources */,
+				32FA73421CABC7FC00379855 /* PasswordCVController.m in Sources */,
 				32F6CD081C9A734C00E97B65 /* AppDelegate.m in Sources */,
 				32CABD7E1CA373EF0068AE93 /* DDTestApi.m in Sources */,
+				32FA73461CABE32500379855 /* RefundViewController.m in Sources */,
 				32CABD651CA373AA0068AE93 /* CitySkipViewCell.m in Sources */,
 				32DD1DCC1CA5082B00E1C229 /* SetTVCell.m in Sources */,
 				32CABD911CA374020068AE93 /* ThingsView.m in Sources */,
@@ -490,7 +520,9 @@
 				32F6CD2F1C9ABDF200E97B65 /* TabbarController.m in Sources */,
 				32CABD941CA384F50068AE93 /* SearchTVController.m in Sources */,
 				32CABD971CA39E2E0068AE93 /* CDDatePicker.m in Sources */,
+				32FD72DC1CAA94F0008CB917 /* PersonTVCell.m in Sources */,
 				32CABD8E1CA374020068AE93 /* MineViewController.m in Sources */,
+				32FA73361CAB7E4F00379855 /* PersonDataVController.m in Sources */,
 				32CABD681CA373AA0068AE93 /* HomeViewController.m in Sources */,
 				32CABD641CA373AA0068AE93 /* CityCollectionViewCell.m in Sources */,
 			);
