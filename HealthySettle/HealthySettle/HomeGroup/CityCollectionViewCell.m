@@ -12,7 +12,8 @@
 -(instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        self.image_view = [[UIImageView alloc] initWithFrame:CGRectMake(kMargin/2, kMargin/2, screenWide/4 - kMargin, screenWide/5)];
+        self.backgroundColor = [UIColor whiteColor];
+        self.image_view = [[UIImageView alloc] initWithFrame:CGRectMake(screenWide * 0.01, 0, screenWide * 0.235, screenHeight * 0.165)];
         _image_view.image = [UIImage imageNamed:@"z_03"];
         [self addSubview:_image_view];
         self.describ_label = [[UILabel alloc] initWithFrame:CGRectMake(0, screenWide/8 - kMargin, screenWide/4 - kMargin, 30)];

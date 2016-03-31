@@ -154,8 +154,8 @@
 - (void)createPageControl {
     UIPageControl *page = [[UIPageControl alloc] initWithFrame:CGRectMake(0,GDHeight - pageSize,GDWidth, 7)];
     
-    page.pageIndicatorTintColor = [UIColor lightGrayColor];
-    page.currentPageIndicatorTintColor =  [UIColor redColor];
+    page.pageIndicatorTintColor = [UIColor whiteColor];
+    page.currentPageIndicatorTintColor =  RGB(252, 63, 67);
     page.numberOfPages = _MaxImageCount;
     page.currentPage = 0;
     

@@ -9,6 +9,7 @@
 #import "SearchVController.h"
 #import "CDDatePicker.h"
 #import "CDCityPicker.h"
+#import "SearchResultTVController.h"
 @interface SearchVController ()<HYMDatePickerDelegate,CDCityPickerDelegate> {
     NSDate * end_begain;
     NSDate * end_end;
@@ -38,12 +39,15 @@
 @end
 
 @implementation SearchVController
+-(void)viewWillAppear:(BOOL)animated {
+    [UIApplication sharedApplication].statusBarHidden = YES;
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [UIApplication sharedApplication].statusBarHidden = YES;
-    self.navigationController.navigationBarHidden = YES;
-    [self.back_btn addTarget:self action:@selector(cancleToRootView) forControlEvents:UIControlEventTouchUpInside];
-    self.view.backgroundColor = [UIColor grayColor];
+      [self.back_btn addTarget:self action:@selector(cancleToRootView) forControlEvents:UIControlEventTouchUpInside];
+    [self.serch_messagebtn addTarget:self action:@selector(skipToSearchResultVC) forControlEvents:UIControlEventTouchUpInside];
     if ([_vc_type isEqualToString:@"L"]) {
         [self setBottomPicWithPic:[UIImage imageNamed:@"z_03"] andTitle:@"找。养老院"];
         _third_markPic.image = [UIImage imageNamed:@"z_02"];
@@ -278,6 +282,11 @@
     // Pass the selected object to the new view controller.
 }
 */
+-(void)skipToSearchResultVC {
+    SearchResultTVController * searchResultVC = [[SearchResultTVController alloc] init];
+    searchResultVC.vc_type = self.vc_type;
+    [self.navigationController pushViewController:searchResultVC animated:YES];
+}
 -(void)dealloc {
     
 }

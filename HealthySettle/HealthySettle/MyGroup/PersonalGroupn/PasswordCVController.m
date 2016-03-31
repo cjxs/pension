@@ -24,6 +24,7 @@
 }
 -(void)viewWillAppear:(BOOL)animated {
     self.navigationItem.title = _titleName;
+    self.navigationController.navigationBar.translucent = NO;
     [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 -(void)viewWillDisappear:(BOOL)animated {

@@ -15,12 +15,12 @@ static NSString * const carouselID = @"TempCarouseView";
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        self.backgroundColor = [UIColor grayColor];
+        self.backgroundColor = RGB(242, 242, 242);
         UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc] init];
         layout.minimumLineSpacing = 0;
-        layout.itemSize = CGSizeMake(screenWide/3, screenHeight/5-kMargin);
+        layout.itemSize = CGSizeMake(screenWide /3, screenHeight * 0.253);
         layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-     UICollectionView * season_collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, kMargin/2,screenWide, screenHeight/5 - kMargin) collectionViewLayout:layout];
+     UICollectionView * season_collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, screenHeight * 0.013,screenWide, screenHeight * 0.253) collectionViewLayout:layout];
         
         season_collectionView.dataSource = self;
         season_collectionView.delegate =self;
@@ -51,41 +51,41 @@ static NSString * const carouselID = @"TempCarouseView";
     SeasonMCollectViewCell * cell = [_season_collectionView dequeueReusableCellWithReuseIdentifier:@"cellSea" forIndexPath:indexPath];
     switch (indexPath.row) {
         case 0:
-            [cell configViewWithimage:[UIImage imageNamed:@"z_02"] season:@"1 月" describ:@"新的开始"];
+            [cell configViewWithimage:[UIImage imageNamed:@"p_01"] season:@"1 月" describ:@"新的开始"];
             break;
         case 1:
-            [cell configViewWithimage:[UIImage imageNamed:@"z_03"] season:@"2 月" describ:@"春季旅行"];
+            [cell configViewWithimage:[UIImage imageNamed:@"p_02"] season:@"2 月" describ:@"春季旅行"];
             break;
         case 2:
-            [cell configViewWithimage:[UIImage imageNamed:@"z_02"] season:@"3 月" describ:@"春节没玩够"];            
+            [cell configViewWithimage:[UIImage imageNamed:@"p_03"] season:@"3 月" describ:@"春节没玩够"];
             break;
         case 3:
-            [cell configViewWithimage:[UIImage imageNamed:@"z_02"] season:@"4 月" describ:@"新的开始"];
+            [cell configViewWithimage:[UIImage imageNamed:@"p_01"] season:@"4 月" describ:@"新的开始"];
             break;
         case 4:
-            [cell configViewWithimage:[UIImage imageNamed:@"z_02"] season:@"5 月" describ:@"新的开始"];
+            [cell configViewWithimage:[UIImage imageNamed:@"p_02"] season:@"5 月" describ:@"新的开始"];
             break;
         case 5:
-            [cell configViewWithimage:[UIImage imageNamed:@"z_02"] season:@"6 月" describ:@"新的开始"];
+            [cell configViewWithimage:[UIImage imageNamed:@"p_03"] season:@"6 月" describ:@"新的开始"];
             break;
         case 6:
-            [cell configViewWithimage:[UIImage imageNamed:@"z_02"] season:@"7 月" describ:@"新的开始"];
+            [cell configViewWithimage:[UIImage imageNamed:@"p_01"] season:@"7 月" describ:@"新的开始"];
             break;
         case 7:
-            [cell configViewWithimage:[UIImage imageNamed:@"z_03"] season:@"8月" describ:@"新的开始"];
+            [cell configViewWithimage:[UIImage imageNamed:@"p_02"] season:@"8月" describ:@"新的开始"];
             break;
         case 8:
-            [cell configViewWithimage:[UIImage imageNamed:@"z_02"] season:@"9 月" describ:@"新的开始"];
+            [cell configViewWithimage:[UIImage imageNamed:@"p_03"] season:@"9 月" describ:@"新的开始"];
             break;
         case 9:
-            [cell configViewWithimage:[UIImage imageNamed:@"z_02"] season:@"10 月" describ:@"新的开始"];
+            [cell configViewWithimage:[UIImage imageNamed:@"p_01"] season:@"10 月" describ:@"新的开始"];
             break;
         case 10:
-            [cell configViewWithimage:[UIImage imageNamed:@"z_02"] season:@"11月" describ:@"新的开始"];
+            [cell configViewWithimage:[UIImage imageNamed:@"p_02"] season:@"11月" describ:@"新的开始"];
             break;
             
         default:
-            [cell configViewWithimage:[UIImage imageNamed:@"z_02"] season:@"12月" describ:@"新的开始"];
+            [cell configViewWithimage:[UIImage imageNamed:@"p_03"] season:@"12月" describ:@"新的开始"];
             break;
     }
     return cell;
@@ -107,7 +107,7 @@ static NSString * const carouselID = @"TempCarouseView";
 }
 
 -(void)startTimer {
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.5f target:self selector:@selector(updateTimer) userInfo:nil repeats:YES];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:2.5f target:self selector:@selector(updateTimer) userInfo:nil repeats:YES];
     [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
     
 }
@@ -142,11 +142,9 @@ static NSString * const carouselID = @"TempCarouseView";
         UIPageControl * carousePageControl = [[UIPageControl alloc] init];
         carousePageControl.numberOfPages = 4;
         CGFloat wide = self.bounds.size.width;
-        carousePageControl.frame = CGRectMake(0, screenHeight/5 - 1.5 * kMargin, wide, kMargin);
-        
-        carousePageControl.pageIndicatorTintColor = [UIColor redColor];
-        carousePageControl.currentPageIndicatorTintColor = [UIColor blackColor];
-        
+        carousePageControl.frame = CGRectMake(wide /4 , screenHeight * 0.253 - kMargin/2, wide /2, kMargin);
+        carousePageControl.pageIndicatorTintColor = RGB(246, 246, 246);
+        carousePageControl.currentPageIndicatorTintColor = RGB(247, 55, 72);
         [carousePageControl addTarget:self action:@selector(pageChanged:) forControlEvents:UIControlEventValueChanged];
         _carousePageControl = carousePageControl;
         [self startTimer];

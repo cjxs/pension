@@ -35,11 +35,11 @@
 - (UIView *)tableHeadView {
     
     if (_tableHeadView == nil ) {
-        _tableHeadView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWide, screenHeight / 2.4)];
+        _tableHeadView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWide, screenHeight * 0.477)];
         //轮播图
          imagesA = [NSMutableArray arrayWithObjects:@"banner",@"z_02", nil];
-        GDScrollBanner * net = [[GDScrollBanner alloc] initWithFrame:CGRectMake(0, 0, screenWide , screenHeight /4.8) WithLocalImages:imagesA];
-        net.AutoScrollDelay = 1.5f;
+        GDScrollBanner * net = [[GDScrollBanner alloc] initWithFrame:CGRectMake(0, 0, screenWide , screenHeight * 0.222) WithLocalImages:imagesA];
+        net.AutoScrollDelay = 2.0f;
         //占位图  net.placeImage
         [net setSmartImgdidSelectAtIndex:^(NSInteger index) {
             NSLog(@"网络图片  %ld",(long)index);
@@ -47,53 +47,54 @@
         [_tableHeadView addSubview:net];
         
         //轮播图下面的2+4
-        TempView * tempViewL = [[TempView alloc] initWithFrame:CGRectMake(kMargin, screenHeight / 4.8 + kMargin/2, screenWide/2 - kMargin*1.5, screenHeight/3.2/4) withMark:[UIImage imageNamed:@"z_02"] andTitle:@"养生度假／装逼广告语"];
+        UIButton * regimenFind_btn = [UIButton buttonWithType:UIButtonTypeSystem];
+        regimenFind_btn.frame = CGRectMake(screenWide * 0.015, screenHeight * 0.227, screenWide * 0.48 , screenHeight * 0.12 );
+        [regimenFind_btn addTarget:self action:@selector(skipTOSecond:) forControlEvents:UIControlEventTouchUpInside];
+        [regimenFind_btn setBackgroundImage:[UIImage imageNamed:@"regimenFind_btn"] forState:UIControlStateNormal];
+        regimenFind_btn.clipsToBounds = YES;
+        regimenFind_btn.layer.cornerRadius = 5;
+        [_tableHeadView addSubview:regimenFind_btn];
         
-        [_tableHeadView addSubview:tempViewL];
-        UITapGestureRecognizer * tapS = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(skipTOSecond:)];
-        [tempViewL addGestureRecognizer:tapS];
-        tapS.numberOfTapsRequired = 1;
+        UIButton * pensionFind_btn = [UIButton buttonWithType:UIButtonTypeSystem];
+        pensionFind_btn.frame = CGRectMake(screenWide *0.505 , screenHeight * 0.227, screenWide * 0.48, screenHeight *0.12 );
+        [pensionFind_btn addTarget:self action:@selector(skipTOSecond:) forControlEvents:UIControlEventTouchUpInside];
+        [pensionFind_btn setBackgroundImage:[UIImage imageNamed:@"pensionFind_btn"] forState:UIControlStateNormal];
+        pensionFind_btn.clipsToBounds = YES;
+        pensionFind_btn.layer.cornerRadius = 5;
+        [_tableHeadView addSubview:pensionFind_btn];
         
-        TempView * tempViewR = [[TempView alloc] initWithFrame:CGRectMake(screenWide/2 + kMargin * 0.5, screenHeight / 4.8 + kMargin/2, screenWide/2 - kMargin*1.5, screenHeight/3.2/4) withMark:[UIImage imageNamed:@"z_03"] andTitle:@"找养老院"];
-        [_tableHeadView addSubview:tempViewR];
-        
-        UITapGestureRecognizer * tapL = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(skipTOSecond:)];
-        [tempViewR addGestureRecognizer:tapL];
-        tapL.numberOfTouchesRequired = 1;
-        
-        ThingsView * healthyArea = [[ThingsView alloc] initWithFrame:CGRectMake(0, screenHeight/3.3, screenWide /4, screenHeight/9) withMark:[UIImage imageNamed:@"z_02"] andTitle:@"养生攻略"];
-        UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clipOnBtnsWithGes:)];
-        tap1.numberOfTapsRequired = 1;
-        healthyArea.tag = 201;
-        [healthyArea addGestureRecognizer:tap1];
-        
-        ThingsView * newsArea = [[ThingsView alloc] initWithFrame:CGRectMake(screenWide /4, screenHeight/3.3, screenWide /4, screenHeight/9) withMark:[UIImage imageNamed:@"z_03"] andTitle:@"新闻动态"];
-        UITapGestureRecognizer *tap2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clipOnBtnsWithGes:)];
-        tap2.numberOfTapsRequired = 1;
-        newsArea.tag = 202;
-        [newsArea addGestureRecognizer:tap2];
-        ThingsView * commonArea = [[ThingsView alloc] initWithFrame:CGRectMake(screenWide /2, screenHeight/3.3, screenWide /4, screenHeight/9) withMark:[UIImage imageNamed:@"z_03"] andTitle:@"养老常识"];
-        UITapGestureRecognizer *tap3 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clipOnBtnsWithGes:)];
-        tap3.numberOfTapsRequired = 1;
-        commonArea.tag = 203;
-        [commonArea addGestureRecognizer:tap3];
-        ThingsView * assessArea = [[ThingsView alloc] initWithFrame:CGRectMake(screenWide /4*3, screenHeight/3.3, screenWide /4, screenHeight/9) withMark:[UIImage imageNamed:@"z_02"] andTitle:@"健康评估"];
-        UITapGestureRecognizer *tap4 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clipOnBtnsWithGes:)];
-        tap4.numberOfTapsRequired = 1;
-        assessArea.tag = 204;
-        [assessArea addGestureRecognizer:tap4];
-        [_tableHeadView addSubview:healthyArea];
-        [_tableHeadView addSubview:newsArea];
-        [_tableHeadView addSubview:commonArea];
-        [_tableHeadView addSubview:assessArea];
-
+      
+        NSArray * btn_array = @[@"regimenstrategy_btn",@"newsdynamic_btn",@"pensionCommon_btn",@"healthassess_btn"];
+        for (int i = 0; i < 4; i++) {
+            UIButton * regimenstrategy_btn = [UIButton buttonWithType:UIButtonTypeSystem];
+            regimenstrategy_btn.frame = CGRectMake(i * screenWide /4, screenHeight * 0.352, screenWide /4, screenHeight * 0.125);
+            [regimenstrategy_btn setBackgroundImage:[UIImage imageNamed:btn_array[i]] forState:UIControlStateNormal];
+            [regimenstrategy_btn addTarget:self action:@selector(clipOnBtnsWithbtn:) forControlEvents:UIControlEventTouchUpInside];
+            [_tableHeadView addSubview:regimenstrategy_btn];
+        }
     }
     return _tableHeadView;
 }
 //四个跳转
-- (void)clipOnBtnsWithGes:(UITapGestureRecognizer *)gesture{
-    NSLog(@"%d++++",(int)gesture.view.tag);
-    NSURL * url = [NSURL URLWithString:@"http://www.baidu.com"];
+- (void)clipOnBtnsWithbtn:(UIButton *)btn{
+    int btn_number = btn.frame.origin.x /(screenWide/4);
+    switch (btn_number) {
+        case 0:
+            NSLog(@"++++++++++++%d",btn_number);
+            break;
+        case 1:
+            NSLog(@"++++++++++++%d",btn_number);
+            break;
+        case 2:
+            NSLog(@"++++++++++++%d",btn_number);
+            break;
+        case 3:
+            NSLog(@"++++++++++++%d",btn_number);
+            break;
+        default:
+            break;
+    }
+        NSURL * url = [NSURL URLWithString:@"http://www.baidu.com"];
 //    UIWebView * webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
 //    [self.view addSubview:webView];
 //    webView.delegate = self;
@@ -123,9 +124,9 @@
     
 }
 //两个跳转
-- (void)skipTOSecond:(UITapGestureRecognizer *)gesture{
+- (void)skipTOSecond:(UIButton *)button{
     SearchVController * searchVC = [[SearchVController alloc] init];
-    if (gesture.view.frame.origin.x < 100) {
+    if (button.frame.origin.x < 100) {
           searchVC.vc_type = @"S";
     }else {
         searchVC.vc_type = @"L";
@@ -142,16 +143,17 @@
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor whiteColor]};
+    self.navigationController.navigationBar.barTintColor = RGB(205, 8, 20);
+    self.navigationController.navigationBar.translucent = NO;
+    self.navigationController.tabBarController.tabBar.translucent = NO;
+
 
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor whiteColor]};
-    self.navigationController.navigationBar.barTintColor = [UIColor redColor];
-    self.navigationController.navigationBar.translucent = NO;
-    self.navigationController.tabBarController.tabBar.translucent = NO;
-    // 版本更新的时候添加提示页面，任性的设计师要求的
+       // 版本更新的时候添加提示页面，任性的设计师要求的
 //    [MTMigration applicationUpdateBlock:^{
 //        ProductTipView *tipView = [[ProductTipView alloc] init];
 //        [self.navigationController.view addSubview:tipView];
@@ -172,13 +174,13 @@
 
 
     UIButton * city_Btn = [UIButton buttonWithType:UIButtonTypeCustom] ;
-    city_Btn.frame = CGRectMake(0, 0, 50, 30);
-    [city_Btn setTitle:@"杭州" forState:UIControlStateNormal];
+    city_Btn.frame = CGRectMake(0, 0, 60, 30);
+    [city_Btn setTitle:@"杭州 v" forState:UIControlStateNormal];
     UIBarButtonItem * city_barBItem = [[UIBarButtonItem alloc] initWithCustomView:city_Btn];
     [self.navigationItem setLeftBarButtonItem:city_barBItem];
 
     
-    UISearchBar * searchWhere = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, screenWide - 100,40 )];
+    UISearchBar * searchWhere = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, screenWide - 100,0 )];
     [searchWhere setContentMode:UIViewContentModeLeft];
     searchWhere.placeholder = @"带着老伴儿去旅行";
     searchWhere.showsCancelButton=NO;
@@ -206,9 +208,9 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0) {
-        return screenHeight/5;
+        return screenHeight * 0.269;
     }else {
-        return screenHeight/5.8;
+        return screenHeight * 0.247;
     }
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

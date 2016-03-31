@@ -13,8 +13,8 @@
 @implementation CitySkipViewCell
 - (UILabel *)title_label {
     if (_title_label== nil) {
-        _title_label = [[UILabel alloc] initWithFrame:CGRectMake(kMargin * 4, 0, screenWide - kMargin * 5 , kMargin * 3)];
-        _title_label.textColor = [UIColor blackColor];
+        _title_label = [[UILabel alloc] initWithFrame:CGRectMake(kMargin * 4, kMargin /2, screenWide - kMargin * 5 , screenHeight * 0.06)];
+        _title_label.textColor = RGB(25, 25, 25);
         _title_label.textAlignment = NSTextAlignmentLeft;
         _title_label.text = @"缤纷花海";
        
@@ -23,7 +23,7 @@
 }
 - (UIImageView *)title_icon {
     if (_title_icon == nil) {
-        _title_icon = [[UIImageView alloc] initWithFrame:CGRectMake(kMargin, kMargin/2, kMargin *2, kMargin*2)];
+        _title_icon = [[UIImageView alloc] initWithFrame:CGRectMake(kMargin, kMargin * 2, kMargin *2, kMargin*2)];
         _title_icon.image = [UIImage imageNamed:@"z_02"];
     }
     return _title_icon;
@@ -31,17 +31,21 @@
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        self.backgroundColor = RGB(242, 242, 242);
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-        layout.itemSize = CGSizeMake( screenWide/4.1 , screenWide / 4);
-         UICollectionView * cityCollect_view = [[UICollectionView alloc] initWithFrame:CGRectMake(0, kMargin*3, screenWide, screenHeight/4.4) collectionViewLayout:layout];
+        layout.itemSize = CGSizeMake( screenWide * 0.25 , screenHeight * 0.187);
+         UICollectionView * cityCollect_view = [[UICollectionView alloc] initWithFrame:CGRectMake(0, screenHeight * 0.073, screenWide, screenHeight * 0.187) collectionViewLayout:layout];
         cityCollect_view.backgroundColor = [UIColor whiteColor];
         cityCollect_view.delegate = self;
         cityCollect_view.dataSource = self;
         self.clipsToBounds = YES;
         [self addSubview:cityCollect_view];
         _cityCollect_view = cityCollect_view;
-        [self addSubview:self.title_label];
-        [self addSubview:self.title_icon];
+        UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, screenHeight * 0.013, screenWide, screenHeight * 0.06)];
+        [view addSubview:self.title_label];
+        [view addSubview:self.title_icon];
+        view.backgroundColor = [UIColor whiteColor];
+        [self addSubview:view];
 
         
         [_cityCollect_view registerClass:[CityCollectionViewCell class] forCellWithReuseIdentifier:@"cellC"];
@@ -69,7 +73,7 @@
                     layout:(UICollectionViewLayout *)collectionViewLayout
 minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 {
-    return 1.0f;
+    return 0;
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"%d",(int)self.type);

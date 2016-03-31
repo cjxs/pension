@@ -13,12 +13,13 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor whiteColor];
-        self.image_view = [[UIImageView alloc] initWithFrame:CGRectMake(kMargin/2, kMargin/2, frame.size.width - kMargin, frame.size.height/3*2)];
-        self.season_label = [[UILabel alloc] initWithFrame:CGRectMake(kMargin/2, frame.size.height/3*2,frame.size.width - kMargin, frame.size.height/6)];
-        self.describe_label = [[UILabel alloc] initWithFrame:CGRectMake(kMargin/2, frame.size.height/9 * 7, frame.size.width - kMargin, frame.size.height/6)];
+        self.image_view = [[UIImageView alloc] initWithFrame:CGRectMake(screenWide * 0.015, screenHeight * 0.017, screenWide * 0.303, screenHeight * 0.175)];
+        self.season_label = [[UILabel alloc] initWithFrame:CGRectMake(kMargin/2, CGRectGetMaxY(self.image_view.frame),frame.size.width - kMargin, frame.size.height/12)];
+        self.describe_label = [[UILabel alloc] initWithFrame:CGRectMake(kMargin/2, CGRectGetMaxY(self.season_label.frame), frame.size.width - kMargin, frame.size.height/12)];
         [self addSubview:_image_view];
         [self addSubview:_season_label];
         [self addSubview:_describe_label];
+        _describe_label.textColor = RGB(173, 173, 173);
         _season_label.textAlignment = NSTextAlignmentCenter;
         _season_label.font = [UIFont systemFontOfSize:12];
         _describe_label.textAlignment = NSTextAlignmentCenter;

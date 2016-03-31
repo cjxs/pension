@@ -11,7 +11,7 @@
 
 #define screenWide [UIScreen mainScreen].bounds.size.width
 #define screenHeight [UIScreen mainScreen].bounds.size.height
-#define kMargin [UIScreen mainScreen].bounds.size.width / 40
+#define kMargin [UIScreen mainScreen].bounds.size.width / 50
 
 #define IS_Pad ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? !((NSInteger)[[UIScreen mainScreen] currentMode].size.width % 768) || !((NSInteger)[[UIScreen mainScreen] currentMode].size.width % 1024) : NO)
 

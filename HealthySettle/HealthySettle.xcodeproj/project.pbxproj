@@ -7,6 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		324075B61CACCE5D00BAF253 /* newsdynamic_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 324075B01CACCE5D00BAF253 /* newsdynamic_btn.png */; };
+		324075B71CACCE5D00BAF253 /* pensionCommon_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 324075B11CACCE5D00BAF253 /* pensionCommon_btn.png */; };
+		324075BA1CACCE5D00BAF253 /* pensionFind_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 324075B41CACCE5D00BAF253 /* pensionFind_btn.png */; };
+		324075BB1CACCE5D00BAF253 /* regimenFind_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 324075B51CACCE5D00BAF253 /* regimenFind_btn.png */; };
+		324075BD1CACE3F900BAF253 /* regimenstrategy_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 324075BC1CACE3F900BAF253 /* regimenstrategy_btn.png */; };
+		324075BF1CACE48F00BAF253 /* healthassess_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 324075BE1CACE48F00BAF253 /* healthassess_btn.png */; };
+		324075C11CACEC5F00BAF253 /* p_01.png in Resources */ = {isa = PBXBuildFile; fileRef = 324075C01CACEC5F00BAF253 /* p_01.png */; };
+		324075C41CACEC6800BAF253 /* p_03.png in Resources */ = {isa = PBXBuildFile; fileRef = 324075C21CACEC6800BAF253 /* p_03.png */; };
+		324075C51CACEC6800BAF253 /* p_02.png in Resources */ = {isa = PBXBuildFile; fileRef = 324075C31CACEC6800BAF253 /* p_02.png */; };
+		324075C81CAD071300BAF253 /* SearchResultTVController.m in Sources */ = {isa = PBXBuildFile; fileRef = 324075C71CAD071300BAF253 /* SearchResultTVController.m */; };
+		324075CC1CAD213600BAF253 /* PensionSRTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 324075CA1CAD213600BAF253 /* PensionSRTVCell.m */; };
+		324075CD1CAD213600BAF253 /* PensionSRTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 324075CB1CAD213600BAF253 /* PensionSRTVCell.xib */; };
+		324075D11CAD218800BAF253 /* RegimenRTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 324075CF1CAD218800BAF253 /* RegimenRTVCell.m */; };
+		324075D21CAD218800BAF253 /* RegimenRTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 324075D01CAD218800BAF253 /* RegimenRTVCell.xib */; };
+		324075D41CAD2D9300BAF253 /* pension.png in Resources */ = {isa = PBXBuildFile; fileRef = 324075D31CAD2D9300BAF253 /* pension.png */; };
+		324075D61CAD2DB200BAF253 /* regimen.png in Resources */ = {isa = PBXBuildFile; fileRef = 324075D51CAD2DB200BAF253 /* regimen.png */; };
 		3292A74F1CA3D14E004FEB57 /* CDCityPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 3292A74E1CA3D14E004FEB57 /* CDCityPicker.m */; };
 		3292A7511CA3DCA4004FEB57 /* districtMGE.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3292A7501CA3DCA4004FEB57 /* districtMGE.plist */; };
 		32CABD641CA373AA0068AE93 /* CityCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CABD571CA373AA0068AE93 /* CityCollectionViewCell.m */; };
@@ -57,6 +73,25 @@
 
 /* Begin PBXFileReference section */
 		19C0DD8F63F6611305C1DF8C /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		324075B01CACCE5D00BAF253 /* newsdynamic_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newsdynamic_btn.png; sourceTree = "<group>"; };
+		324075B11CACCE5D00BAF253 /* pensionCommon_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pensionCommon_btn.png; sourceTree = "<group>"; };
+		324075B41CACCE5D00BAF253 /* pensionFind_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pensionFind_btn.png; sourceTree = "<group>"; };
+		324075B51CACCE5D00BAF253 /* regimenFind_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = regimenFind_btn.png; sourceTree = "<group>"; };
+		324075BC1CACE3F900BAF253 /* regimenstrategy_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = regimenstrategy_btn.png; sourceTree = "<group>"; };
+		324075BE1CACE48F00BAF253 /* healthassess_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = healthassess_btn.png; sourceTree = "<group>"; };
+		324075C01CACEC5F00BAF253 /* p_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = p_01.png; sourceTree = "<group>"; };
+		324075C21CACEC6800BAF253 /* p_03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = p_03.png; sourceTree = "<group>"; };
+		324075C31CACEC6800BAF253 /* p_02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = p_02.png; sourceTree = "<group>"; };
+		324075C61CAD071300BAF253 /* SearchResultTVController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultTVController.h; sourceTree = "<group>"; };
+		324075C71CAD071300BAF253 /* SearchResultTVController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultTVController.m; sourceTree = "<group>"; };
+		324075C91CAD213600BAF253 /* PensionSRTVCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PensionSRTVCell.h; sourceTree = "<group>"; };
+		324075CA1CAD213600BAF253 /* PensionSRTVCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PensionSRTVCell.m; sourceTree = "<group>"; };
+		324075CB1CAD213600BAF253 /* PensionSRTVCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PensionSRTVCell.xib; sourceTree = "<group>"; };
+		324075CE1CAD218800BAF253 /* RegimenRTVCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegimenRTVCell.h; sourceTree = "<group>"; };
+		324075CF1CAD218800BAF253 /* RegimenRTVCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegimenRTVCell.m; sourceTree = "<group>"; };
+		324075D01CAD218800BAF253 /* RegimenRTVCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegimenRTVCell.xib; sourceTree = "<group>"; };
+		324075D31CAD2D9300BAF253 /* pension.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pension.png; sourceTree = "<group>"; };
+		324075D51CAD2DB200BAF253 /* regimen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = regimen.png; sourceTree = "<group>"; };
 		325F84C61C9F88E4009E9770 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		325F84C71C9F89D2009E9770 /* UtilsMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UtilsMacro.h; sourceTree = "<group>"; };
 		3292A74D1CA3D14E004FEB57 /* CDCityPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDCityPicker.h; sourceTree = "<group>"; };
@@ -194,6 +229,14 @@
 				32CABD5B1CA373AA0068AE93 /* SearchVController.h */,
 				32CABD5C1CA373AA0068AE93 /* SearchVController.m */,
 				32CABD5D1CA373AA0068AE93 /* SearchVController.xib */,
+				324075C61CAD071300BAF253 /* SearchResultTVController.h */,
+				324075C71CAD071300BAF253 /* SearchResultTVController.m */,
+				324075C91CAD213600BAF253 /* PensionSRTVCell.h */,
+				324075CA1CAD213600BAF253 /* PensionSRTVCell.m */,
+				324075CB1CAD213600BAF253 /* PensionSRTVCell.xib */,
+				324075CE1CAD218800BAF253 /* RegimenRTVCell.h */,
+				324075CF1CAD218800BAF253 /* RegimenRTVCell.m */,
+				324075D01CAD218800BAF253 /* RegimenRTVCell.xib */,
 			);
 			path = ExactSearchGroup;
 			sourceTree = "<group>";
@@ -217,6 +260,17 @@
 		32CABD721CA373DD0068AE93 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				324075D51CAD2DB200BAF253 /* regimen.png */,
+				324075D31CAD2D9300BAF253 /* pension.png */,
+				324075C21CACEC6800BAF253 /* p_03.png */,
+				324075C31CACEC6800BAF253 /* p_02.png */,
+				324075C01CACEC5F00BAF253 /* p_01.png */,
+				324075B01CACCE5D00BAF253 /* newsdynamic_btn.png */,
+				324075B11CACCE5D00BAF253 /* pensionCommon_btn.png */,
+				324075BE1CACE48F00BAF253 /* healthassess_btn.png */,
+				324075BC1CACE3F900BAF253 /* regimenstrategy_btn.png */,
+				324075B41CACCE5D00BAF253 /* pensionFind_btn.png */,
+				324075B51CACCE5D00BAF253 /* regimenFind_btn.png */,
 				32CABD731CA373DD0068AE93 /* banner.png */,
 				32CABD741CA373DD0068AE93 /* z_02.png */,
 				32CABD751CA373DD0068AE93 /* z_03.png */,
@@ -432,13 +486,26 @@
 				32FA73431CABC7FC00379855 /* PasswordCVController.xib in Resources */,
 				32F6CD131C9A734C00E97B65 /* LaunchScreen.storyboard in Resources */,
 				32DD1DCD1CA5082B00E1C229 /* SetTVCell.xib in Resources */,
+				324075D21CAD218800BAF253 /* RegimenRTVCell.xib in Resources */,
+				324075D61CAD2DB200BAF253 /* regimen.png in Resources */,
+				324075BF1CACE48F00BAF253 /* healthassess_btn.png in Resources */,
+				324075CD1CAD213600BAF253 /* PensionSRTVCell.xib in Resources */,
 				32F6CD101C9A734C00E97B65 /* Assets.xcassets in Resources */,
+				324075BD1CACE3F900BAF253 /* regimenstrategy_btn.png in Resources */,
+				324075BA1CACCE5D00BAF253 /* pensionFind_btn.png in Resources */,
+				324075B71CACCE5D00BAF253 /* pensionCommon_btn.png in Resources */,
 				3292A7511CA3DCA4004FEB57 /* districtMGE.plist in Resources */,
 				32CABD771CA373DD0068AE93 /* z_02.png in Resources */,
+				324075D41CAD2D9300BAF253 /* pension.png in Resources */,
+				324075C11CACEC5F00BAF253 /* p_01.png in Resources */,
+				324075C41CACEC6800BAF253 /* p_03.png in Resources */,
 				32CABD671CA373AA0068AE93 /* SearchVController.xib in Resources */,
 				32CABD781CA373DD0068AE93 /* z_03.png in Resources */,
 				32F6CD0E1C9A734C00E97B65 /* Main.storyboard in Resources */,
+				324075C51CACEC6800BAF253 /* p_02.png in Resources */,
 				32CABD761CA373DD0068AE93 /* banner.png in Resources */,
+				324075BB1CACCE5D00BAF253 /* regimenFind_btn.png in Resources */,
+				324075B61CACCE5D00BAF253 /* newsdynamic_btn.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -499,6 +566,7 @@
 			files = (
 				32CABD8D1CA374020068AE93 /* CustomerViewController.m in Sources */,
 				32CABD691CA373AA0068AE93 /* SeasonCTViewCell.m in Sources */,
+				324075C81CAD071300BAF253 /* SearchResultTVController.m in Sources */,
 				32FA733E1CABA4E600379855 /* CDTextView.m in Sources */,
 				32CABD701CA373CC0068AE93 /* GDScrollBanner.m in Sources */,
 				32FD72CB1CAA26E4008CB917 /* ProductTipView.m in Sources */,
@@ -509,7 +577,9 @@
 				32CABD651CA373AA0068AE93 /* CitySkipViewCell.m in Sources */,
 				32DD1DCC1CA5082B00E1C229 /* SetTVCell.m in Sources */,
 				32CABD911CA374020068AE93 /* ThingsView.m in Sources */,
+				324075CC1CAD213600BAF253 /* PensionSRTVCell.m in Sources */,
 				3292A74F1CA3D14E004FEB57 /* CDCityPicker.m in Sources */,
+				324075D11CAD218800BAF253 /* RegimenRTVCell.m in Sources */,
 				32CABD901CA374020068AE93 /* TempView.m in Sources */,
 				32CABD661CA373AA0068AE93 /* SearchVController.m in Sources */,
 				32CABD7F1CA373EF0068AE93 /* DDTestApiS.m in Sources */,
