@@ -283,7 +283,7 @@
 }
 */
 -(void)skipToSearchResultVC {
-    SearchResultTVController * searchResultVC = [[SearchResultTVController alloc] init];
+    SearchResultTVController * searchResultVC = [[SearchResultTVController alloc] initWithStyle:UITableViewStyleGrouped];
     searchResultVC.vc_type = self.vc_type;
     [self.navigationController pushViewController:searchResultVC animated:YES];
 }

@@ -64,7 +64,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="V4a-sH-wOz">
-                        <rect key="frame" x="18" y="13" width="78" height="103"/>
+                        <rect key="frame" x="13" y="8" width="78" height="113"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="78" id="Gc2-mp-epn"/>
                         </constraints>
@@ -75,18 +75,18 @@
                     <constraint firstItem="JbI-4x-C1l" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="98" id="2kB-Cs-8Ie"/>
                     <constraint firstItem="Bhv-uA-hch" firstAttribute="leading" secondItem="JbI-4x-C1l" secondAttribute="leading" id="922-Fl-RCa"/>
                     <constraint firstAttribute="trailingMargin" secondItem="5Yy-kd-96t" secondAttribute="trailing" constant="10" id="959-80-uzw"/>
-                    <constraint firstItem="V4a-sH-wOz" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="5" id="FQb-gf-Zog"/>
+                    <constraint firstItem="V4a-sH-wOz" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="FQb-gf-Zog"/>
                     <constraint firstItem="Bhv-uA-hch" firstAttribute="top" secondItem="9ap-gO-BzL" secondAttribute="bottom" id="GBC-Q6-ahS"/>
                     <constraint firstAttribute="bottomMargin" secondItem="Dgv-NV-VNK" secondAttribute="bottom" constant="30" id="HIG-AW-E4r"/>
                     <constraint firstItem="9ap-gO-BzL" firstAttribute="leading" secondItem="JbI-4x-C1l" secondAttribute="leading" id="MAd-uU-TSk"/>
-                    <constraint firstItem="V4a-sH-wOz" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="MwH-Of-4dI"/>
+                    <constraint firstItem="V4a-sH-wOz" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="5" id="MwH-Of-4dI"/>
                     <constraint firstItem="9ap-gO-BzL" firstAttribute="top" secondItem="JbI-4x-C1l" secondAttribute="bottom" id="Nro-sy-EA6"/>
                     <constraint firstItem="JbI-4x-C1l" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="5" id="Rz6-Fb-4tj"/>
                     <constraint firstAttribute="bottomMargin" secondItem="5Yy-kd-96t" secondAttribute="bottom" constant="40" id="VxJ-xt-eyX"/>
                     <constraint firstAttribute="trailingMargin" secondItem="5Yy-kd-96t" secondAttribute="trailing" id="nkT-NQ-ZEQ"/>
                     <constraint firstItem="5Yy-kd-96t" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="40" id="op4-vY-Gem"/>
                     <constraint firstItem="5Yy-kd-96t" firstAttribute="leading" secondItem="Dgv-NV-VNK" secondAttribute="trailing" constant="3" id="yUV-r9-eek"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="V4a-sH-wOz" secondAttribute="bottom" constant="5" id="zKv-J2-MNB"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="V4a-sH-wOz" secondAttribute="bottom" id="zKv-J2-MNB"/>
                 </constraints>
                 <variation key="default">
                     <mask key="constraints">

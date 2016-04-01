@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="88" id="KGk-i7-Jjw" customClass="ManageTimeTVCell">
+            <rect key="frame" x="0.0" y="0.0" width="436" height="88"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="436" height="87"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="旺季时间" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C8N-hP-wHl">
+                        <rect key="frame" x="28" y="8" width="50" height="71"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="50" id="CYA-Ly-hg1"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="11月 － 03月" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C0U-oU-Fvk">
+                        <rect key="frame" x="88" y="8" width="80" height="71"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="80" id="VIt-eg-MQD"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" red="0.76862745098039209" green="0.76862745098039209" blue="0.76862745098039209" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="淡季时间" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TKF-EE-sB8">
+                        <rect key="frame" x="188" y="8" width="50" height="71"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="50" id="nVu-Dl-U1b"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="04月 － 10月" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RVc-3d-NKN">
+                        <rect key="frame" x="256" y="13" width="80" height="61"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="80" id="8tK-BQ-SeH"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" red="0.76862745098039209" green="0.76862745098039209" blue="0.76862745098039209" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottomMargin" secondItem="RVc-3d-NKN" secondAttribute="bottom" id="5Ne-og-E6D"/>
+                    <constraint firstItem="RVc-3d-NKN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="8I9-6N-lRQ"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="C0U-oU-Fvk" secondAttribute="bottom" id="EAZ-zR-bMU"/>
+                    <constraint firstItem="TKF-EE-sB8" firstAttribute="leading" secondItem="C0U-oU-Fvk" secondAttribute="trailing" constant="20" id="GbS-v9-iew"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="TKF-EE-sB8" secondAttribute="bottom" id="PSI-ih-IBs"/>
+                    <constraint firstItem="TKF-EE-sB8" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="Pfu-Af-jWg"/>
+                    <constraint firstItem="C0U-oU-Fvk" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="VA4-N4-zcG"/>
+                    <constraint firstItem="C8N-hP-wHl" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="a8H-jX-Qc1"/>
+                    <constraint firstItem="RVc-3d-NKN" firstAttribute="leading" secondItem="TKF-EE-sB8" secondAttribute="trailing" constant="10" id="bm7-9L-Kxz"/>
+                    <constraint firstItem="C8N-hP-wHl" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="20" id="gOF-UH-tY6"/>
+                    <constraint firstItem="C0U-oU-Fvk" firstAttribute="leading" secondItem="C8N-hP-wHl" secondAttribute="trailing" constant="10" id="hcX-gf-naA"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="C8N-hP-wHl" secondAttribute="bottom" id="mNB-yz-yhd"/>
+                </constraints>
+            </tableViewCellContentView>
+            <point key="canvasLocation" x="454" y="233"/>
+        </tableViewCell>
+    </objects>
+</document>

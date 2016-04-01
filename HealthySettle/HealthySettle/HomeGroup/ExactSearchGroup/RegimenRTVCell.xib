@@ -15,12 +15,6 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="127"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Fh4-Z0-71E">
-                        <rect key="frame" x="3" y="13" width="78" height="101"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="78" id="A9c-Ll-8s4"/>
-                        </constraints>
-                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vgi-pc-lMb">
                         <rect key="frame" x="100" y="13" width="182" height="30"/>
                         <constraints>
@@ -70,6 +64,12 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Fh4-Z0-71E">
+                        <rect key="frame" x="13" y="13" width="78" height="101"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="78" id="A9c-Ll-8s4"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailingMargin" secondItem="Vgi-pc-lMb" secondAttribute="trailing" constant="30" id="E2e-aS-ShE"/>
@@ -80,7 +80,7 @@
                     <constraint firstItem="AJc-0Q-awe" firstAttribute="top" secondItem="x4h-Bf-lal" secondAttribute="top" id="Slq-rY-SOe"/>
                     <constraint firstItem="AJc-0Q-awe" firstAttribute="height" secondItem="x4h-Bf-lal" secondAttribute="height" id="VVH-RA-mNR"/>
                     <constraint firstItem="Fh4-Z0-71E" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="5" id="aTe-42-KrQ"/>
-                    <constraint firstAttribute="leadingMargin" secondItem="Fh4-Z0-71E" secondAttribute="leading" constant="5" id="eRt-id-zb2"/>
+                    <constraint firstAttribute="leadingMargin" secondItem="Fh4-Z0-71E" secondAttribute="leading" constant="-5" id="eRt-id-zb2"/>
                     <constraint firstItem="AJc-0Q-awe" firstAttribute="top" secondItem="Vgi-pc-lMb" secondAttribute="bottom" id="jOf-Z3-z7n"/>
                     <constraint firstItem="Vgi-pc-lMb" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="5" id="ojd-9T-NRx"/>
                     <constraint firstItem="wNm-tJ-BgS" firstAttribute="bottom" secondItem="Fh4-Z0-71E" secondAttribute="bottom" id="tEv-Dg-rik"/>
