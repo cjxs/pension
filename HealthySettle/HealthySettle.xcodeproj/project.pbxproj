@@ -33,6 +33,11 @@
 		324CD4BA1CAE70F000276B57 /* HomeTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 324CD4B81CAE70F000276B57 /* HomeTVCell.m */; };
 		324CD4BB1CAE70F000276B57 /* HomeTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 324CD4B91CAE70F000276B57 /* HomeTVCell.xib */; };
 		324CD4BD1CAE783800276B57 /* home_pic.png in Resources */ = {isa = PBXBuildFile; fileRef = 324CD4BC1CAE783800276B57 /* home_pic.png */; };
+		3278CCDF1CAF8E9800038B9D /* TestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3278CCDE1CAF8E9800038B9D /* TestModel.m */; };
+		3278CCE31CAFBB4500038B9D /* CommentTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3278CCE11CAFBB4500038B9D /* CommentTVCell.m */; };
+		3278CCE41CAFBB4500038B9D /* CommentTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3278CCE21CAFBB4500038B9D /* CommentTVCell.xib */; };
+		3278CCE61CAFC17400038B9D /* shareCompany.png in Resources */ = {isa = PBXBuildFile; fileRef = 3278CCE51CAFC17400038B9D /* shareCompany.png */; };
+		3278CCE91CAFDDC100038B9D /* SelectTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3278CCE81CAFDDC100038B9D /* SelectTVCell.m */; };
 		3292A74F1CA3D14E004FEB57 /* CDCityPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 3292A74E1CA3D14E004FEB57 /* CDCityPicker.m */; };
 		3292A7511CA3DCA4004FEB57 /* districtMGE.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3292A7501CA3DCA4004FEB57 /* districtMGE.plist */; };
 		32CABD641CA373AA0068AE93 /* CityCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CABD571CA373AA0068AE93 /* CityCollectionViewCell.m */; };
@@ -118,6 +123,14 @@
 		324CD4BC1CAE783800276B57 /* home_pic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_pic.png; sourceTree = "<group>"; };
 		325F84C61C9F88E4009E9770 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		325F84C71C9F89D2009E9770 /* UtilsMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UtilsMacro.h; sourceTree = "<group>"; };
+		3278CCDD1CAF8E9800038B9D /* TestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestModel.h; sourceTree = "<group>"; };
+		3278CCDE1CAF8E9800038B9D /* TestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestModel.m; sourceTree = "<group>"; };
+		3278CCE01CAFBB4500038B9D /* CommentTVCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentTVCell.h; sourceTree = "<group>"; };
+		3278CCE11CAFBB4500038B9D /* CommentTVCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentTVCell.m; sourceTree = "<group>"; };
+		3278CCE21CAFBB4500038B9D /* CommentTVCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentTVCell.xib; sourceTree = "<group>"; };
+		3278CCE51CAFC17400038B9D /* shareCompany.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shareCompany.png; sourceTree = "<group>"; };
+		3278CCE71CAFDDC100038B9D /* SelectTVCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectTVCell.h; sourceTree = "<group>"; };
+		3278CCE81CAFDDC100038B9D /* SelectTVCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectTVCell.m; sourceTree = "<group>"; };
 		3292A74D1CA3D14E004FEB57 /* CDCityPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDCityPicker.h; sourceTree = "<group>"; };
 		3292A74E1CA3D14E004FEB57 /* CDCityPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDCityPicker.m; sourceTree = "<group>"; };
 		3292A7501CA3DCA4004FEB57 /* districtMGE.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = districtMGE.plist; sourceTree = "<group>"; };
@@ -239,6 +252,11 @@
 				324CD4B71CAE70F000276B57 /* HomeTVCell.h */,
 				324CD4B81CAE70F000276B57 /* HomeTVCell.m */,
 				324CD4B91CAE70F000276B57 /* HomeTVCell.xib */,
+				3278CCE01CAFBB4500038B9D /* CommentTVCell.h */,
+				3278CCE11CAFBB4500038B9D /* CommentTVCell.m */,
+				3278CCE21CAFBB4500038B9D /* CommentTVCell.xib */,
+				3278CCE71CAFDDC100038B9D /* SelectTVCell.h */,
+				3278CCE81CAFDDC100038B9D /* SelectTVCell.m */,
 			);
 			path = ResultCellGroup;
 			sourceTree = "<group>";
@@ -273,6 +291,8 @@
 				324075C71CAD071300BAF253 /* SearchResultTVController.m */,
 				324CD4A51CAE172000276B57 /* ResultDetailTVController.h */,
 				324CD4A61CAE172000276B57 /* ResultDetailTVController.m */,
+				3278CCDD1CAF8E9800038B9D /* TestModel.h */,
+				3278CCDE1CAF8E9800038B9D /* TestModel.m */,
 				324CD4AC1CAE629300276B57 /* ResultCellGroup */,
 				324075C91CAD213600BAF253 /* PensionSRTVCell.h */,
 				324075CA1CAD213600BAF253 /* PensionSRTVCell.m */,
@@ -308,6 +328,7 @@
 				324075C21CACEC6800BAF253 /* p_03.png */,
 				324075C31CACEC6800BAF253 /* p_02.png */,
 				324075C01CACEC5F00BAF253 /* p_01.png */,
+				3278CCE51CAFC17400038B9D /* shareCompany.png */,
 				324CD4A81CAE1E9700276B57 /* regimen_organ.png */,
 				324CD4A91CAE1E9700276B57 /* pension_organ.png */,
 				324075B01CACCE5D00BAF253 /* newsdynamic_btn.png */,
@@ -541,8 +562,10 @@
 				324075BD1CACE3F900BAF253 /* regimenstrategy_btn.png in Resources */,
 				324075BA1CACCE5D00BAF253 /* pensionFind_btn.png in Resources */,
 				324075B71CACCE5D00BAF253 /* pensionCommon_btn.png in Resources */,
+				3278CCE61CAFC17400038B9D /* shareCompany.png in Resources */,
 				324CD4B11CAE630700276B57 /* LivingTimeTVCell.xib in Resources */,
 				3292A7511CA3DCA4004FEB57 /* districtMGE.plist in Resources */,
+				3278CCE41CAFBB4500038B9D /* CommentTVCell.xib in Resources */,
 				32CABD771CA373DD0068AE93 /* z_02.png in Resources */,
 				324075D41CAD2D9300BAF253 /* pension.png in Resources */,
 				324CD4AA1CAE1E9700276B57 /* regimen_organ.png in Resources */,
@@ -631,6 +654,7 @@
 				32DD1DCC1CA5082B00E1C229 /* SetTVCell.m in Sources */,
 				324CD4B01CAE630700276B57 /* LivingTimeTVCell.m in Sources */,
 				32CABD911CA374020068AE93 /* ThingsView.m in Sources */,
+				3278CCDF1CAF8E9800038B9D /* TestModel.m in Sources */,
 				324075CC1CAD213600BAF253 /* PensionSRTVCell.m in Sources */,
 				3292A74F1CA3D14E004FEB57 /* CDCityPicker.m in Sources */,
 				324075D11CAD218800BAF253 /* RegimenRTVCell.m in Sources */,
@@ -647,10 +671,12 @@
 				32CABD971CA39E2E0068AE93 /* CDDatePicker.m in Sources */,
 				32FD72DC1CAA94F0008CB917 /* PersonTVCell.m in Sources */,
 				32CABD8E1CA374020068AE93 /* MineViewController.m in Sources */,
+				3278CCE31CAFBB4500038B9D /* CommentTVCell.m in Sources */,
 				32FA73361CAB7E4F00379855 /* PersonDataVController.m in Sources */,
 				324CD4B51CAE65A600276B57 /* ManageTimeTVCell.m in Sources */,
 				32CABD681CA373AA0068AE93 /* HomeViewController.m in Sources */,
 				32CABD641CA373AA0068AE93 /* CityCollectionViewCell.m in Sources */,
+				3278CCE91CAFDDC100038B9D /* SelectTVCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

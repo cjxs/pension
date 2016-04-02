@@ -12,10 +12,9 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-//    [self.organization_image mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.width.mas_equalTo(@(screenWide * 0.21));
-//    }];
+
     self.organization_title.adjustsFontSizeToFitWidth  = YES;
+    self.price_label.adjustsFontSizeToFitWidth = YES;
 
     
 }

@@ -30,21 +30,6 @@
                             </mask>
                         </variation>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wNm-tJ-BgS">
-                        <rect key="frame" x="100" y="89" width="182" height="25"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="101" id="9hc-th-99L"/>
-                            <constraint firstAttribute="height" constant="25" id="FCq-Iu-JWs"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <color key="textColor" red="0.76470588235294112" green="0.76470588235294112" blue="0.76470588235294112" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="9hc-th-99L"/>
-                            </mask>
-                        </variation>
-                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x4h-Bf-lal">
                         <rect key="frame" x="227" y="43" width="50" height="25"/>
                         <constraints>
@@ -70,6 +55,21 @@
                             <constraint firstAttribute="width" constant="78" id="A9c-Ll-8s4"/>
                         </constraints>
                     </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wNm-tJ-BgS">
+                        <rect key="frame" x="100" y="89" width="182" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="101" id="9hc-th-99L"/>
+                            <constraint firstAttribute="height" constant="25" id="FCq-Iu-JWs"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.76470588235294112" green="0.76470588235294112" blue="0.76470588235294112" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="9hc-th-99L"/>
+                            </mask>
+                        </variation>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailingMargin" secondItem="Vgi-pc-lMb" secondAttribute="trailing" constant="30" id="E2e-aS-ShE"/>

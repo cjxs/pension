@@ -16,16 +16,16 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="旺季时间" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C8N-hP-wHl">
-                        <rect key="frame" x="28" y="8" width="50" height="71"/>
+                        <rect key="frame" x="28" y="8" width="40" height="71"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="50" id="CYA-Ly-hg1"/>
+                            <constraint firstAttribute="width" constant="40" id="CYA-Ly-hg1"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="11月 － 03月" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C0U-oU-Fvk">
-                        <rect key="frame" x="88" y="8" width="80" height="71"/>
+                        <rect key="frame" x="78" y="8" width="80" height="71"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="80" id="VIt-eg-MQD"/>
                         </constraints>
@@ -34,16 +34,16 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="淡季时间" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TKF-EE-sB8">
-                        <rect key="frame" x="188" y="8" width="50" height="71"/>
+                        <rect key="frame" x="168" y="8" width="40" height="71"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="50" id="nVu-Dl-U1b"/>
+                            <constraint firstAttribute="width" constant="40" id="nVu-Dl-U1b"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="04月 － 10月" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RVc-3d-NKN">
-                        <rect key="frame" x="256" y="13" width="80" height="61"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="04月 － 10月" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RVc-3d-NKN">
+                        <rect key="frame" x="218" y="8" width="80" height="71"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="80" id="8tK-BQ-SeH"/>
                         </constraints>
@@ -56,7 +56,7 @@
                     <constraint firstAttribute="bottomMargin" secondItem="RVc-3d-NKN" secondAttribute="bottom" id="5Ne-og-E6D"/>
                     <constraint firstItem="RVc-3d-NKN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="8I9-6N-lRQ"/>
                     <constraint firstAttribute="bottomMargin" secondItem="C0U-oU-Fvk" secondAttribute="bottom" id="EAZ-zR-bMU"/>
-                    <constraint firstItem="TKF-EE-sB8" firstAttribute="leading" secondItem="C0U-oU-Fvk" secondAttribute="trailing" constant="20" id="GbS-v9-iew"/>
+                    <constraint firstItem="TKF-EE-sB8" firstAttribute="leading" secondItem="C0U-oU-Fvk" secondAttribute="trailing" constant="10" id="GbS-v9-iew"/>
                     <constraint firstAttribute="bottomMargin" secondItem="TKF-EE-sB8" secondAttribute="bottom" id="PSI-ih-IBs"/>
                     <constraint firstItem="TKF-EE-sB8" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="Pfu-Af-jWg"/>
                     <constraint firstItem="C0U-oU-Fvk" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="VA4-N4-zcG"/>

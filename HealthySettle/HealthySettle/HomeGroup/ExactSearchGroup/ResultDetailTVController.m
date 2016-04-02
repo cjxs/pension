@@ -10,6 +10,10 @@
 #import "LivingTimeTVCell.h"
 #import "ManageTimeTVCell.h"
 #import "HomeTVCell.h"
+#import "TestModel.h"
+#import "CommentTVCell.h"
+
+
 @interface ResultDetailTVController () {
     UIImageView * organization_imageView;
     UILabel *     organization_titleLabel;
@@ -19,6 +23,7 @@
     UILabel *     organDetail_label;
     UILabel *     commentNumber_label;
     UILabel *     commentRatio_label;
+    NSArray * showArray;
 }
 
 @end
@@ -141,6 +146,13 @@
         commentRatio_label.textColor = [UIColor redColor];
         commentRatio_label.text = @"97%好评";
         [_tableHeadView addSubview:commentRatio_label];
+        for (UIView *view in _tableHeadView.subviews) {
+            if ([view isKindOfClass:[UILabel class]]) {
+                UILabel * label =(UILabel *) view;
+                label.adjustsFontSizeToFitWidth = YES;
+            }
+        }
+
 
 
     }
@@ -172,17 +184,24 @@
         [self.tableView registerNib:[UINib nibWithNibName:@"LivingTimeTVCell" bundle:nil] forCellReuseIdentifier:@"cellLiving"];
         [self.tableView registerNib:[UINib nibWithNibName:@"ManageTimeTVCell" bundle:nil] forCellReuseIdentifier:@"cellManager"];
         [self.tableView registerNib:[UINib nibWithNibName:@"HomeTVCell" bundle:nil] forCellReuseIdentifier:@"cellHome"];
+        [self.tableView registerNib:[UINib nibWithNibName:@"CommentTVCell" bundle:nil] forCellReuseIdentifier:@"cellComment"];
+        TestModel * model1 = [[TestModel alloc] init];
+        TestModel * model2 = [[TestModel alloc] init];
+        TestModel * model3 = [[TestModel alloc] init];
+
+        showArray = @[model1,model2,model3,model1];
+
     }else {
         
     }
     
 }
 -(void)viewWillAppear:(BOOL)animated {
-    [UIApplication sharedApplication].statusBarHidden = YES;
+//    [UIApplication sharedApplication].statusBarHidden = YES;
     [self.navigationController setNavigationBarHidden:YES animated: NO];
 }
 -(void)viewWillDisappear:(BOOL)animated {
-    [UIApplication sharedApplication].statusBarHidden = NO;
+//    [UIApplication sharedApplication].statusBarHidden = NO;
     [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 - (void)didReceiveMemoryWarning {
@@ -202,7 +221,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     if ([self.vc_type isEqualToString:@"S"]) {
-        return 4;
+        return 5;
     }else if ([self.vc_type isEqualToString:@"L"]) {
         return 12;
     }else {
@@ -216,35 +235,69 @@
       return 1;
 }
 
-
+- (void)cellShowPriceDetail:(UIButton *)btn {
+    NSInteger number = btn.tag - 500;
+    TestModel * model = showArray[number];
+    NSIndexSet *indexSet=[[NSIndexSet alloc]initWithIndex:number];
+    
+    if ([model.show isEqualToString:@"y"]) {
+        model.show = @"n";
+        [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
+    }else {
+        model.show = @"y";
+        [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+    
+}
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell;
+   
     if ([self.vc_type isEqualToString:@"S"]) {
         if (indexPath.section == 0) {
-            cell  =  (LivingTimeTVCell *)[tableView dequeueReusableCellWithIdentifier:@"cellLiving" forIndexPath:indexPath];
+          LivingTimeTVCell *  cell  =  [tableView dequeueReusableCellWithIdentifier:@"cellLiving" forIndexPath:indexPath];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            return cell;
+
         }else if (indexPath.section == 1) {
-            cell = (ManageTimeTVCell *) [tableView dequeueReusableCellWithIdentifier:@"cellManager" forIndexPath:indexPath];
+           ManageTimeTVCell * cell =  [tableView dequeueReusableCellWithIdentifier:@"cellManager" forIndexPath:indexPath];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            return cell;
+
         }else if (indexPath.section == 2 || indexPath.section == 3)
         {
-            cell = (HomeTVCell *)[tableView dequeueReusableCellWithIdentifier:@"cellHome" forIndexPath:indexPath];
+         HomeTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cellHome" forIndexPath:indexPath];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.priceDetail_btn.tag = 500 + indexPath.section;
+            [cell.priceDetail_btn addTarget:self action:@selector(cellShowPriceDetail:) forControlEvents:UIControlEventTouchUpInside];
+
+            TestModel * model = showArray[indexPath.section];
+            [cell configWithImage:nil price:nil show: model.show];
+            return cell;
+        }else {
+           CommentTVCell *  cell  = [tableView dequeueReusableCellWithIdentifier:@"cellComment" forIndexPath:indexPath];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            return cell;
         }
         
-    }else if ([self.vc_type isEqualToString:@"L"]) {
+    }else  {
+        UITableViewCell * cell;
+        return cell;
        
     }
-
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    return cell;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([self.vc_type isEqualToString:@"S"]) {
         if (indexPath.section < 2) {
             return 0.0449 * screenHeight;
-        }else if (indexPath.section == 2) {
+        }else if (indexPath.section == 2 || indexPath.section == 3) {
+            TestModel * model = showArray[indexPath.section];
+            if ([model.show isEqualToString:@"y"]) {
+                return 215;
+            }else {
             return 143;
+            }
         }else {
-            return 0;
+            return 288;
         }
 
     }else if ([self.vc_type isEqualToString:@"L"]) {

@@ -13,6 +13,13 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    for (UIView *view in self.subviews) {
+        if ([view isKindOfClass:[UILabel class]]) {
+            UILabel * label =(UILabel *) view;
+            label.adjustsFontSizeToFitWidth = YES;
+        }
+    }
+
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

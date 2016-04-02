@@ -164,6 +164,9 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if ([[UIScreen mainScreen] bounds].size.width == 321) {
+        return 105;
+    }
     return screenHeight * 0.158;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
