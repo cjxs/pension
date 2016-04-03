@@ -33,6 +33,13 @@
 		324CD4BA1CAE70F000276B57 /* HomeTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 324CD4B81CAE70F000276B57 /* HomeTVCell.m */; };
 		324CD4BB1CAE70F000276B57 /* HomeTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 324CD4B91CAE70F000276B57 /* HomeTVCell.xib */; };
 		324CD4BD1CAE783800276B57 /* home_pic.png in Resources */ = {isa = PBXBuildFile; fileRef = 324CD4BC1CAE783800276B57 /* home_pic.png */; };
+		325C82411CB0E7530004EA0C /* OrgIntroTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 325C823F1CB0E7530004EA0C /* OrgIntroTVCell.m */; };
+		325C82421CB0E7530004EA0C /* OrgIntroTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 325C82401CB0E7530004EA0C /* OrgIntroTVCell.xib */; };
+		325C82451CB0EF7B0004EA0C /* ServeTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 325C82441CB0EF7B0004EA0C /* ServeTVCell.m */; };
+		325C82481CB1034C0004EA0C /* ChargeTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 325C82471CB1034C0004EA0C /* ChargeTVCell.m */; };
+		325C824C1CB122480004EA0C /* ShowTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 325C824A1CB122480004EA0C /* ShowTVCell.m */; };
+		325C824D1CB122480004EA0C /* ShowTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 325C824B1CB122480004EA0C /* ShowTVCell.xib */; };
+		325C82501CB12BB70004EA0C /* ShouldKnowTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 325C824F1CB12BB70004EA0C /* ShouldKnowTVCell.m */; };
 		3278CCDF1CAF8E9800038B9D /* TestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3278CCDE1CAF8E9800038B9D /* TestModel.m */; };
 		3278CCE31CAFBB4500038B9D /* CommentTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3278CCE11CAFBB4500038B9D /* CommentTVCell.m */; };
 		3278CCE41CAFBB4500038B9D /* CommentTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3278CCE21CAFBB4500038B9D /* CommentTVCell.xib */; };
@@ -121,6 +128,18 @@
 		324CD4B81CAE70F000276B57 /* HomeTVCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeTVCell.m; sourceTree = "<group>"; };
 		324CD4B91CAE70F000276B57 /* HomeTVCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeTVCell.xib; sourceTree = "<group>"; };
 		324CD4BC1CAE783800276B57 /* home_pic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_pic.png; sourceTree = "<group>"; };
+		325C823E1CB0E7530004EA0C /* OrgIntroTVCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrgIntroTVCell.h; sourceTree = "<group>"; };
+		325C823F1CB0E7530004EA0C /* OrgIntroTVCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrgIntroTVCell.m; sourceTree = "<group>"; };
+		325C82401CB0E7530004EA0C /* OrgIntroTVCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrgIntroTVCell.xib; sourceTree = "<group>"; };
+		325C82431CB0EF7B0004EA0C /* ServeTVCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServeTVCell.h; sourceTree = "<group>"; };
+		325C82441CB0EF7B0004EA0C /* ServeTVCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServeTVCell.m; sourceTree = "<group>"; };
+		325C82461CB1034C0004EA0C /* ChargeTVCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChargeTVCell.h; sourceTree = "<group>"; };
+		325C82471CB1034C0004EA0C /* ChargeTVCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChargeTVCell.m; sourceTree = "<group>"; };
+		325C82491CB122480004EA0C /* ShowTVCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowTVCell.h; sourceTree = "<group>"; };
+		325C824A1CB122480004EA0C /* ShowTVCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowTVCell.m; sourceTree = "<group>"; };
+		325C824B1CB122480004EA0C /* ShowTVCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShowTVCell.xib; sourceTree = "<group>"; };
+		325C824E1CB12BB70004EA0C /* ShouldKnowTVCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShouldKnowTVCell.h; sourceTree = "<group>"; };
+		325C824F1CB12BB70004EA0C /* ShouldKnowTVCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShouldKnowTVCell.m; sourceTree = "<group>"; };
 		325F84C61C9F88E4009E9770 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		325F84C71C9F89D2009E9770 /* UtilsMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UtilsMacro.h; sourceTree = "<group>"; };
 		3278CCDD1CAF8E9800038B9D /* TestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestModel.h; sourceTree = "<group>"; };
@@ -257,6 +276,18 @@
 				3278CCE21CAFBB4500038B9D /* CommentTVCell.xib */,
 				3278CCE71CAFDDC100038B9D /* SelectTVCell.h */,
 				3278CCE81CAFDDC100038B9D /* SelectTVCell.m */,
+				325C823E1CB0E7530004EA0C /* OrgIntroTVCell.h */,
+				325C823F1CB0E7530004EA0C /* OrgIntroTVCell.m */,
+				325C82401CB0E7530004EA0C /* OrgIntroTVCell.xib */,
+				325C82431CB0EF7B0004EA0C /* ServeTVCell.h */,
+				325C82441CB0EF7B0004EA0C /* ServeTVCell.m */,
+				325C82461CB1034C0004EA0C /* ChargeTVCell.h */,
+				325C82471CB1034C0004EA0C /* ChargeTVCell.m */,
+				325C82491CB122480004EA0C /* ShowTVCell.h */,
+				325C824A1CB122480004EA0C /* ShowTVCell.m */,
+				325C824B1CB122480004EA0C /* ShowTVCell.xib */,
+				325C824E1CB12BB70004EA0C /* ShouldKnowTVCell.h */,
+				325C824F1CB12BB70004EA0C /* ShouldKnowTVCell.m */,
 			);
 			path = ResultCellGroup;
 			sourceTree = "<group>";
@@ -553,6 +584,7 @@
 				32FA73431CABC7FC00379855 /* PasswordCVController.xib in Resources */,
 				32F6CD131C9A734C00E97B65 /* LaunchScreen.storyboard in Resources */,
 				32DD1DCD1CA5082B00E1C229 /* SetTVCell.xib in Resources */,
+				325C824D1CB122480004EA0C /* ShowTVCell.xib in Resources */,
 				324075D21CAD218800BAF253 /* RegimenRTVCell.xib in Resources */,
 				324075D61CAD2DB200BAF253 /* regimen.png in Resources */,
 				324075BF1CACE48F00BAF253 /* healthassess_btn.png in Resources */,
@@ -570,6 +602,7 @@
 				324075D41CAD2D9300BAF253 /* pension.png in Resources */,
 				324CD4AA1CAE1E9700276B57 /* regimen_organ.png in Resources */,
 				324075C11CACEC5F00BAF253 /* p_01.png in Resources */,
+				325C82421CB0E7530004EA0C /* OrgIntroTVCell.xib in Resources */,
 				324075C41CACEC6800BAF253 /* p_03.png in Resources */,
 				324CD4B61CAE65A600276B57 /* ManageTimeTVCell.xib in Resources */,
 				324CD4AB1CAE1E9700276B57 /* pension_organ.png in Resources */,
@@ -639,10 +672,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				325C824C1CB122480004EA0C /* ShowTVCell.m in Sources */,
 				32CABD8D1CA374020068AE93 /* CustomerViewController.m in Sources */,
 				324CD4BA1CAE70F000276B57 /* HomeTVCell.m in Sources */,
 				32CABD691CA373AA0068AE93 /* SeasonCTViewCell.m in Sources */,
 				324075C81CAD071300BAF253 /* SearchResultTVController.m in Sources */,
+				325C82501CB12BB70004EA0C /* ShouldKnowTVCell.m in Sources */,
 				32FA733E1CABA4E600379855 /* CDTextView.m in Sources */,
 				32CABD701CA373CC0068AE93 /* GDScrollBanner.m in Sources */,
 				32FD72CB1CAA26E4008CB917 /* ProductTipView.m in Sources */,
@@ -658,6 +693,7 @@
 				324075CC1CAD213600BAF253 /* PensionSRTVCell.m in Sources */,
 				3292A74F1CA3D14E004FEB57 /* CDCityPicker.m in Sources */,
 				324075D11CAD218800BAF253 /* RegimenRTVCell.m in Sources */,
+				325C82411CB0E7530004EA0C /* OrgIntroTVCell.m in Sources */,
 				32CABD901CA374020068AE93 /* TempView.m in Sources */,
 				32CABD661CA373AA0068AE93 /* SearchVController.m in Sources */,
 				32CABD7F1CA373EF0068AE93 /* DDTestApiS.m in Sources */,
@@ -669,6 +705,8 @@
 				32F6CD2F1C9ABDF200E97B65 /* TabbarController.m in Sources */,
 				32CABD941CA384F50068AE93 /* SearchTVController.m in Sources */,
 				32CABD971CA39E2E0068AE93 /* CDDatePicker.m in Sources */,
+				325C82451CB0EF7B0004EA0C /* ServeTVCell.m in Sources */,
+				325C82481CB1034C0004EA0C /* ChargeTVCell.m in Sources */,
 				32FD72DC1CAA94F0008CB917 /* PersonTVCell.m in Sources */,
 				32CABD8E1CA374020068AE93 /* MineViewController.m in Sources */,
 				3278CCE31CAFBB4500038B9D /* CommentTVCell.m in Sources */,

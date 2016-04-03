@@ -12,6 +12,12 @@
 #import "HomeTVCell.h"
 #import "TestModel.h"
 #import "CommentTVCell.h"
+#import "SelectTVCell.h"
+#import "OrgIntroTVCell.h"
+#import "ServeTVCell.h"
+#import "ChargeTVCell.h"
+#import "ShowTVCell.h"
+#import "ShouldKnowTVCell.h"
 
 
 @interface ResultDetailTVController () {
@@ -192,6 +198,27 @@
         showArray = @[model1,model2,model3,model1];
 
     }else {
+        [self.tableView registerClass:[SelectTVCell class] forCellReuseIdentifier:@"cellSelect"];
+        [self.tableView registerNib:[UINib nibWithNibName:@"OrgIntroTVCell" bundle:nil] forCellReuseIdentifier:@"cellIntro"];
+        [self.tableView registerClass:[ServeTVCell class] forCellReuseIdentifier:@"cellServe"];
+        [self.tableView registerClass:[ChargeTVCell class] forCellReuseIdentifier:@"cellCharge"];
+        [self.tableView registerNib:[UINib nibWithNibName:@"ShowTVCell" bundle:nil] forCellReuseIdentifier:@"cellShow"];
+        [self.tableView registerClass:[ShouldKnowTVCell class] forCellReuseIdentifier:@"cellKnow"];
+        [self.tableView registerNib:[UINib nibWithNibName:@"CommentTVCell" bundle:nil] forCellReuseIdentifier:@"cellComment"];
+        UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWide, 44)];
+        UIButton * predeter_btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        predeter_btn.frame = CGRectMake(0, 0, screenWide/2, 44);
+        [predeter_btn setTitle:@"立即预定" forState:UIControlStateNormal];
+        predeter_btn.backgroundColor = RGB(229, 12, 24);
+        [view addSubview:predeter_btn];
+        UIButton * try_btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        try_btn.frame = CGRectMake(screenWide /2, 0, screenWide/2, 44);
+        [try_btn setTitle:@"一元试住" forState:UIControlStateNormal];
+        try_btn.backgroundColor = [UIColor whiteColor];
+        [try_btn setTitleColor:RGB(60, 61, 63) forState:UIControlStateNormal];
+        [view addSubview:try_btn];
+        self.tableView.tableFooterView = view;
+
         
     }
     
@@ -223,7 +250,7 @@
     if ([self.vc_type isEqualToString:@"S"]) {
         return 5;
     }else if ([self.vc_type isEqualToString:@"L"]) {
-        return 12;
+        return 8;
     }else {
         return 0;
     }
@@ -279,8 +306,46 @@
         }
         
     }else  {
-        UITableViewCell * cell;
-        return cell;
+        if (indexPath.section == 0) {
+            SelectTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cellSelect" forIndexPath:indexPath];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            return cell;
+        }else  if (indexPath.section == 1){
+            OrgIntroTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cellIntro" forIndexPath:indexPath];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            return cell;
+        }else if (indexPath.section == 2){
+            ServeTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cellServe" forIndexPath:indexPath];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            return cell;
+ 
+        }else  if (indexPath.section == 3){
+            ChargeTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cellCharge" forIndexPath:indexPath];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            return cell;
+        }else  if (indexPath.section == 4 || indexPath.section == 5){
+            ShowTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cellShow" forIndexPath:indexPath];
+            NSString * string;
+            if (indexPath.section == 4) {
+                string = @"    黄精声讨时代感和解放军三大发感慨合适的高富帅对方感受到结婚高峰   电视剧发噶时间会发生的阿萨德和规范哈健身房大世界一个五言绝句 ";
+            }else {
+                string = @"    阿萨德和规范哈公司的发送到官方的那首风格哈枫叶如图俄企业听日 u 全额退；也咖啡公司的人哈 u 俄国也让其他育儿课堂人跟同事打好几个发生开发高的水果变成美女不为所动简单啊  啊社区家风格的活动放大个人过五个人啊 test发的话题任何事 ";
+            }
+            NSArray * image_array = @[[UIImage imageNamed:@"p_01"],[UIImage imageNamed:@"p_02"],[UIImage imageNamed:@"p_03"]];
+            [cell configWithTitle:@"文化活动" imageArray:image_array text:string];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            return cell;
+        }else if (indexPath.section == 6) {
+            ShouldKnowTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cellKnow" forIndexPath:indexPath];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            [cell configWithStr:@"吧啦吧啦吧啦吧啦吧啦吧啦吧啦吧啦吧啦吧吧啦吧啦吧啦吧吧啦吧啦吧啦吧啦吧啦吧吧啦吧啦吧啦吧啦吧吧啦吧啦吧啦吧啊啦吧啦"];
+            return cell;
+        }else {
+            CommentTVCell *  cell  = [tableView dequeueReusableCellWithIdentifier:@"cellComment" forIndexPath:indexPath];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            return cell;
+        }
+
        
     }
 }
@@ -301,17 +366,56 @@
         }
 
     }else if ([self.vc_type isEqualToString:@"L"]) {
-        return 120;
+        if (indexPath.section == 0) {
+            return screenHeight * 0.3688;
+
+        }else if (indexPath.section == 1) {
+            return 173;
+        }
+        else if (indexPath.section == 2) {
+            return 110;
+        }else if (indexPath.section == 3) {
+            return 176;
+        }else if (indexPath.section == 4 || indexPath.section ==5) {
+            NSString * string;
+            if (indexPath.section == 4) {
+                string = @"    黄精声讨时代感和解放军三大发感慨合适的高富帅对方感受到结婚高峰   电视剧发噶时间会发生的阿萨德和规范哈健身房大世界一个五言绝句 ";
+            }else {
+               string = @"    阿萨德和规范哈公司的发送到官方的那首风格哈枫叶如图俄企业听日 u 全额退；也咖啡公司的人哈 u 俄国也让其他育儿课堂人跟同事打好几个发生开发高的水果变成美女不为所动简单啊  啊社区家风格的活动放大个人过五个人啊 test发的话题任何事 ";
+            }
+            return  [self backheightWith:string];
+        }else if (indexPath.section == 6) {
+            return [self backheightWith:@"吧啦吧啦吧啦吧啦吧啦吧啦吧啦吧啦吧啦吧吧啦吧啦吧啦吧吧啦吧啦吧啦吧啦吧啦吧吧啦吧啦吧啦吧啦吧吧啦吧啦吧啦吧啊啦吧啦"] - 90;
+        }else {
+            return 288;
+        }
+
     }else {
         return 0;
     }
 
 }
+- (CGFloat)backheightWith:(NSString *)str {
+    if (str) {
+        UILabel * label = [[UILabel alloc] init];
+        label.font = [UIFont systemFontOfSize:10];
+        label.text = str;
+        CGFloat  height =[str boundingRectWithSize:
+                          CGSizeMake(screenWide - 20, CGFLOAT_MAX)
+                                           options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading
+                                        attributes:[NSDictionary dictionaryWithObjectsAndKeys:label.font,NSFontAttributeName, nil] context:nil].size.height;
+        return height + 130;
+        
+    }else {
+        return 120;
+    }
+}
+
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     if ([self.vc_type isEqualToString:@"S"]) {
                return screenHeight * 0.02;
     }else if ([self.vc_type isEqualToString:@"L"]) {
-        return 10;
+        return screenHeight * 0.02;
     }else  {
         return 0;
     }
