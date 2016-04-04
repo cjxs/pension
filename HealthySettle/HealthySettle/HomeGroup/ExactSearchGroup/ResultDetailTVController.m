@@ -18,6 +18,7 @@
 #import "ChargeTVCell.h"
 #import "ShowTVCell.h"
 #import "ShouldKnowTVCell.h"
+#import "OrderTVController.h"
 
 
 @interface ResultDetailTVController () {
@@ -209,6 +210,7 @@
         UIButton * predeter_btn = [UIButton buttonWithType:UIButtonTypeCustom];
         predeter_btn.frame = CGRectMake(0, 0, screenWide/2, 44);
         [predeter_btn setTitle:@"立即预定" forState:UIControlStateNormal];
+        [predeter_btn addTarget:self action:@selector(fillInOrderController) forControlEvents:UIControlEventTouchUpInside];
         predeter_btn.backgroundColor = RGB(229, 12, 24);
         [view addSubview:predeter_btn];
         UIButton * try_btn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -221,6 +223,13 @@
 
         
     }
+    
+}
+- (void)fillInOrderController {
+    OrderTVController * orderVC = [[OrderTVController alloc] initWithStyle:UITableViewStylePlain];
+    [self.navigationController pushViewController:orderVC animated:NO];
+}
+- (void)pushToOrderController {
     
 }
 -(void)viewWillAppear:(BOOL)animated {
@@ -295,7 +304,7 @@
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.priceDetail_btn.tag = 500 + indexPath.section;
             [cell.priceDetail_btn addTarget:self action:@selector(cellShowPriceDetail:) forControlEvents:UIControlEventTouchUpInside];
-
+            [cell.reserve_btn addTarget:self action:@selector(fillInOrderController) forControlEvents:UIControlEventTouchUpInside];
             TestModel * model = showArray[indexPath.section];
             [cell configWithImage:nil price:nil show: model.show];
             return cell;

@@ -95,32 +95,10 @@
             break;
     }
         NSURL * url = [NSURL URLWithString:@"http://www.baidu.com"];
-//    UIWebView * webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
-//    [self.view addSubview:webView];
-//    webView.delegate = self;
-//    [webView loadRequest:[NSURLRequest requestWithURL:url]];
     WebViewController * webVC = [[WebViewController alloc] init];
     webVC.urlLoad = url;
-//    self.navigationController.navigationBar.hidden = YES;
     [self.navigationController pushViewController:webVC animated:NO];
     
-    
-}
-- (void)webViewDidStartLoad:(UIWebView *)webView{
-    
-    NSLog(@"webViewDidStartLoad");
-    
-}
-
-- (void)webViewDidFinishLoad:(UIWebView *)web{
-    
-    NSLog(@"webViewDidFinishLoad");
-    
-}
-
--(void)webView:(UIWebView*)webView  DidFailLoadWithError:(NSError*)error{
-    
-    NSLog(@"DidFailLoadWithError");
     
 }
 //两个跳转
@@ -150,6 +128,9 @@
     self.navigationController.tabBarController.tabBar.translucent = NO;
 
 
+}
+-(void)viewWillDisappear:(BOOL)animated {
+    
 }
 - (void)viewDidLoad {
     [super viewDidLoad];

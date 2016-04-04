@@ -14,7 +14,11 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        self.backgroundColor = [UIColor grayColor];
+        UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
+        view.backgroundColor = [UIColor blackColor];
+        view.alpha = 0.4;
+        [self addSubview:view];
+
         self.markImageV = [[UIImageView alloc] initWithFrame:CGRectMake(kMargin , kMargin , frame.size.width/5.5    , frame.size.width/5.5)];
         _markImageV.image = mark;
         [self addSubview:_markImageV];
@@ -25,7 +29,8 @@
         _explainTitle.textAlignment = NSTextAlignmentLeft;
         _explainTitle.textColor = [UIColor whiteColor];
         [self addSubview:_explainTitle];
-        self.layer.cornerRadius = 5;
+        
+
         
     }
     return self;

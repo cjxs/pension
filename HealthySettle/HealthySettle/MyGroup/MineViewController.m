@@ -47,7 +47,7 @@ static NSString *setCellIdentifier = @"cellS";
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setBottomPicWithPic:[UIImage imageNamed:@"z_03"] withPerP:[UIImage imageNamed:@"z_02"] andTitle:@"注册／登录"];
+    [self setBottomPicWithPic:[UIImage imageNamed:@"p_01"] withPerP:[UIImage imageNamed:@"z_02"] andTitle:@"注册／登录"];
     
     TempView *collectView = [[TempView alloc] initWithFrame:CGRectMake(screenWide /9, screenHeight/12+100, screenWide/3, screenWide/9) withMark:[UIImage imageNamed:@"z_02"] andTitle:@"我的收藏"];
     UITapGestureRecognizer * tapC = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickTwoViews:)];
@@ -57,6 +57,7 @@ static NSString *setCellIdentifier = @"cellS";
     UITapGestureRecognizer * tapD = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickTwoViews:)];
     tapD.numberOfTapsRequired = 1;
     [dataView addGestureRecognizer:tapD];
+    
     [self.view addSubview:collectView];
     [self.view addSubview:dataView];
     [self setThingsView];
@@ -66,7 +67,7 @@ static NSString *setCellIdentifier = @"cellS";
    
 }
 - (void)setBottomPicWithPic:(UIImage *)imageP withPerP:(UIImage *)personP andTitle:(NSString *)string {
-    self.view.backgroundColor = [UIColor grayColor];
+    self.view.backgroundColor = RGB(244,244, 244);
     [UIApplication sharedApplication].statusBarHidden = YES;
     self.navigationController.navigationBarHidden = YES;
     UIImageView * topImageV =[[UIImageView alloc] initWithFrame:CGRectMake(0, 0,screenWide , screenHeight /3)];
