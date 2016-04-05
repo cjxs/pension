@@ -12,8 +12,7 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-
-    self.organization_title.adjustsFontSizeToFitWidth  = YES;
+    self.organization_title.adjustsFontSizeToFitWidth = YES;
     self.price_label.adjustsFontSizeToFitWidth = YES;
 
     

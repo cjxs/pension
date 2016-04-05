@@ -44,6 +44,7 @@
         organization_titleLabel.backgroundColor = [UIColor clearColor];
         organization_titleLabel.textColor = [UIColor whiteColor];
         organization_titleLabel.text = [NSString stringWithFormat:@"   杭州上城区维康老人文化公寓%@",_vc_type];
+        organization_titleLabel.font = [UIFont systemFontOfSize:11];
         UIView * view = [[UIView alloc] initWithFrame:organization_titleLabel.frame];
         view.backgroundColor = [UIColor blackColor];
         view.alpha = 0.5;
@@ -64,36 +65,46 @@
                 lineView.backgroundColor = RGB(241, 241, 241);
                 [_tableHeadView addSubview:lineView];
             }
-            NSArray * icon_array = @[@"p_01",@"p_02",@"p_03"];
+            NSArray * icon_array = @[@"position_2",@"detail",@"comment"];
             for (int i = 0; i < 3; i++) {
-                UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(screenWide * 0.03,CGRectGetMaxY(organization_imageView.frame)+screenHeight * 0.015 + screenHeight * 0.059 * i, screenWide * 0.06, screenHeight * 0.034)];
+                UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(screenWide * 0.03,CGRectGetMaxY(organization_imageView.frame)+screenHeight * 0.023 + screenHeight * 0.059 * i, screenWide * 0.038, screenHeight * 0.028)];
                 imageView.image = [UIImage imageNamed:icon_array[i]];
                 [_tableHeadView addSubview:imageView];
-                UIImageView * imageView2 = [[UIImageView alloc] initWithFrame:CGRectMake(screenWide * 0.92,CGRectGetMaxY(organization_imageView.frame)+screenHeight * 0.012 + screenHeight * 0.059 * i, screenWide * 0.05, screenHeight * 0.04)];
-                imageView2.image = [UIImage imageNamed:@"z_02"];
+                UIImageView * imageView2 = [[UIImageView alloc] initWithFrame:CGRectMake(screenWide * 0.96,CGRectGetMaxY(organization_imageView.frame)+screenHeight * 0.026 + screenHeight * 0.059 * i, screenWide * 0.022, screenHeight * 0.017)];
+                imageView2.image = [UIImage imageNamed:@"next_02"];
                 [_tableHeadView addSubview:imageView2];
             }
             
-            address_label = [[UILabel alloc] initWithFrame:CGRectMake(screenWide * 0.12, CGRectGetMaxY(organization_imageView.frame)+screenHeight * 0.01 , screenWide * 0.6, screenHeight * 0.035)];
-            organDetail_label = [[UILabel alloc] initWithFrame:CGRectMake(screenWide * 0.12, CGRectGetMaxY(organization_imageView.frame)+screenHeight * 0.069 , screenWide * 0.6, screenHeight * 0.035)];
+            address_label = [[UILabel alloc] initWithFrame:CGRectMake(screenWide * 0.08, CGRectGetMaxY(organization_imageView.frame)+screenHeight * 0.018 , screenWide * 0.72, screenHeight * 0.035)];
+            address_label.text = @"浙江省杭州市上城区近江南路20号（富春江路近江小区）";
+            address_label.adjustsFontSizeToFitWidth = YES;
+            
+            organDetail_label = [[UILabel alloc] initWithFrame:CGRectMake(screenWide * 0.08, CGRectGetMaxY(organization_imageView.frame)+screenHeight * 0.077 , screenWide * 0.72, screenHeight * 0.035)];
+            organDetail_label.text = @"祥阳老年公寓是无锡市南长区民政局下属的福利企业受到环境";
            
             NSArray * label_array = @[address_label,organDetail_label];
             for (UILabel * label in label_array) {
-                label.text = @"为人民服务";
-                label.font = [UIFont systemFontOfSize:14];
+                label.font = [UIFont systemFontOfSize:10];
                 label.textColor = RGB(196, 196, 196);
                 [_tableHeadView addSubview:label];
             }
-            UILabel * label1 = [[UILabel alloc] initWithFrame:CGRectMake(screenWide * 0.7, CGRectGetMaxY(organization_imageView.frame)+screenHeight * 0.01  , screenWide * 0.2, screenHeight * 0.035)];
+            UILabel * label1 = [[UILabel alloc] initWithFrame:CGRectMake(screenWide * 0.8, CGRectGetMaxY(organization_imageView.frame)+screenHeight * 0.018  , screenWide * 0.15, screenHeight * 0.035)];
             label1.text = @"查看地图";
+            label1.font = [UIFont systemFontOfSize:10];
+            label1.textAlignment = NSTextAlignmentRight;
             label1.textColor = [UIColor redColor];
             [_tableHeadView addSubview:label1];
 
-            UILabel * label2 = [[UILabel alloc] initWithFrame:CGRectMake(screenWide * 0.7, CGRectGetMaxY(organization_imageView.frame)+screenHeight * 0.069  , screenWide * 0.2, screenHeight * 0.035)];
+            UILabel * label2 = [[UILabel alloc] initWithFrame:CGRectMake(screenWide * 0.8, CGRectGetMaxY(organization_imageView.frame)+screenHeight * 0.077  , screenWide * 0.15, screenHeight * 0.035)];
             label2.text = @"机构详情";
+            label2.font = [UIFont systemFontOfSize:10];
             label2.textColor = [UIColor redColor];
+            label2.textAlignment = NSTextAlignmentRight;
+
             [_tableHeadView addSubview:label2];
-            
+            UIView * lineView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_tableHeadView.frame)-1, screenWide, 1)];
+            lineView.backgroundColor = RGB(241, 241, 241);
+            [_tableHeadView addSubview:lineView];
                     }else
                         if ([_vc_type isEqualToString:@"L"] ) {
                             
@@ -109,56 +120,66 @@
                 lineView.backgroundColor = RGB(241, 241, 241);
                 [_tableHeadView addSubview:lineView];
             }
-            priceNow_label = [[UILabel alloc] initWithFrame:CGRectMake(screenWide * 0.03, CGRectGetMaxY(organization_imageView.frame) + screenHeight * 0.01, screenWide * 0.15, screenHeight *0.0285 )];
-            priceNow_label.font = [UIFont systemFontOfSize:19];
+                            UILabel * label_y = [[UILabel alloc] initWithFrame:CGRectMake(screenWide * 0.03, CGRectGetMaxY(organization_imageView.frame) + screenHeight * 0.019, screenWide * 0.03, screenHeight *0.0285 )];
+                            label_y.text = @"¥";
+                            label_y.font = [UIFont systemFontOfSize:12];
+                            label_y.textColor = RGB(230, 11, 24);
+                            [_tableHeadView addSubview:label_y];
+
+            priceNow_label = [[UILabel alloc] initWithFrame:CGRectMake(screenWide * 0.06, CGRectGetMaxY(organization_imageView.frame) + screenHeight * 0.015, screenWide * 0.12, screenHeight *0.0285 )];
+            priceNow_label.font = [UIFont systemFontOfSize:22];
             priceNow_label.textColor = [UIColor redColor];
             [_tableHeadView addSubview:priceNow_label];
-            priceNow_label.text = @"¥868";
-            UILabel * label_q = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(priceNow_label.frame),CGRectGetMaxY(organization_imageView.frame) + screenHeight * 0.01, screenWide * 0.05, screenHeight *0.0285 )];
+            priceNow_label.text = @"999";
+            UILabel * label_q = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(priceNow_label.frame),CGRectGetMaxY(organization_imageView.frame) + screenHeight * 0.017, screenWide * 0.05, screenHeight *0.0285 )];
             label_q.text = @"起";
             label_q.font = [UIFont systemFontOfSize:12];
             label_q.textColor = RGB(196, 196, 196);
             [_tableHeadView addSubview:label_q];
             UILabel * label_gg = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(label_q.frame),CGRectGetMaxY(organization_imageView.frame) + screenHeight * 0.0185, screenWide * 0.3, screenHeight *0.02 )];
             label_gg.textColor = [UIColor whiteColor];
-            label_gg.backgroundColor = RGB(229, 12, 24);
+            label_gg.backgroundColor = RGB(230, 11, 24);
             label_gg.text = @"去哪养老网 保证全网最低价";
             label_gg.font = [UIFont systemFontOfSize:9];
             [_tableHeadView addSubview:label_gg];
-            [self dealLinesWithString:@"门市价 ¥323"];
-                            NSArray * icon_array = @[@"p_02",@"p_03"];
+            [self dealLinesWithString:@"门市价 ¥10888"];
+                            NSArray * icon_array = @[@"position_3",@"comment_2"];
                 for (int i = 0; i < 2; i++) {
-                    UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(screenWide * 0.03,CGRectGetMaxY(organization_imageView.frame)+screenHeight * 0.102 + screenHeight * 0.059 * i, screenWide * 0.06, screenHeight * 0.034)];
+                    UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(screenWide * 0.03,CGRectGetMaxY(organization_imageView.frame)+screenHeight * 0.102 + screenHeight * 0.059 * i, screenWide * 0.03, screenHeight * 0.028)];
                         imageView.image = [UIImage imageNamed:icon_array[i]];
                     [_tableHeadView addSubview:imageView];
-                    UIImageView * imageView2 = [[UIImageView alloc] initWithFrame:CGRectMake(screenWide * 0.92,CGRectGetMaxY(organization_imageView.frame)+screenHeight * 0.102 + screenHeight * 0.059 * i, screenWide * 0.05, screenHeight * 0.04)];
-                    imageView2.image = [UIImage imageNamed:@"z_02"];
+                    UIImageView * imageView2 = [[UIImageView alloc] initWithFrame:CGRectMake(screenWide * 0.96,CGRectGetMaxY(organization_imageView.frame)+screenHeight * 0.11 + screenHeight * 0.059 * i, screenWide * 0.022, screenHeight * 0.017)];
+                    imageView2.image = [UIImage imageNamed:@"next_03"];
                     [_tableHeadView addSubview:imageView2];
                 }
                             
-                            address_label = [[UILabel alloc] initWithFrame:CGRectMake(screenWide * 0.12, CGRectGetMaxY(organization_imageView.frame)+screenHeight * 0.102, screenWide * 0.6, screenHeight * 0.03)];
-                            address_label.text = @"为人民服务";
-                            address_label.font = [UIFont systemFontOfSize:14];
+                            address_label = [[UILabel alloc] initWithFrame:CGRectMake(screenWide * 0.08, CGRectGetMaxY(organization_imageView.frame)+screenHeight * 0.102, screenWide * 0.72, screenHeight * 0.03)];
+                            address_label.text = @"浙江省杭州市上城区近江南路2号（富春江路近江小区）";
+                            address_label.font = [UIFont systemFontOfSize:12];
+                            address_label.adjustsFontSizeToFitWidth = YES;
                             address_label.textColor = RGB(196, 196, 196);
                             [_tableHeadView addSubview:address_label];
+                            UILabel * map_label = [[UILabel alloc] initWithFrame:CGRectMake(screenWide * 0.8, CGRectGetMaxY(_tableHeadView.frame)- screenHeight * 0.104  , screenWide * 0.15, screenHeight * 0.03)];
+                            map_label.textColor = [UIColor redColor];
+                            map_label.text = @"查看地图";
+                            map_label.textAlignment = NSTextAlignmentRight;
+                            map_label.font = [UIFont systemFontOfSize:10];
+                            [_tableHeadView addSubview:map_label];
+
               
 
         }
-         commentNumber_label = [[UILabel alloc] initWithFrame:CGRectMake(screenWide * 0.12, CGRectGetMaxY(_tableHeadView.frame)-screenHeight * 0.045 , screenWide * 0.6, screenHeight * 0.03)];
-        commentNumber_label.text = @"为人民服务";
-        commentNumber_label.font = [UIFont systemFontOfSize:14];
+         commentNumber_label = [[UILabel alloc] initWithFrame:CGRectMake(screenWide * 0.08, CGRectGetMaxY(_tableHeadView.frame)-screenHeight * 0.045 , screenWide * 0.72, screenHeight * 0.03)];
+        commentNumber_label.text = @"点评：2458条";
+        commentNumber_label.font = [UIFont systemFontOfSize:10];
         commentNumber_label.textColor = RGB(196, 196, 196);
         [_tableHeadView addSubview:commentNumber_label];
-        commentRatio_label = [[UILabel alloc] initWithFrame:CGRectMake(screenWide * 0.7, CGRectGetMaxY(_tableHeadView.frame)- screenHeight * 0.045  , screenWide * 0.2, screenHeight * 0.03)];
+        commentRatio_label = [[UILabel alloc] initWithFrame:CGRectMake(screenWide * 0.8, CGRectGetMaxY(_tableHeadView.frame)- screenHeight * 0.045  , screenWide * 0.15, screenHeight * 0.03)];
         commentRatio_label.textColor = [UIColor redColor];
-        commentRatio_label.text = @"97%好评";
+        commentRatio_label.text = @"200%好评";
+        commentRatio_label.textAlignment = NSTextAlignmentRight;
+        commentRatio_label.font = [UIFont systemFontOfSize:10];
         [_tableHeadView addSubview:commentRatio_label];
-        for (UIView *view in _tableHeadView.subviews) {
-            if ([view isKindOfClass:[UILabel class]]) {
-                UILabel * label =(UILabel *) view;
-                label.adjustsFontSizeToFitWidth = YES;
-            }
-        }
 
 
 

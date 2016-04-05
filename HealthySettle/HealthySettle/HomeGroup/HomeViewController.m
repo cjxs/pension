@@ -94,7 +94,7 @@
         default:
             break;
     }
-        NSURL * url = [NSURL URLWithString:@"http://www.baidu.com"];
+        NSURL * url = [NSURL URLWithString:@"http://www.cjxs.github.io/"];
     WebViewController * webVC = [[WebViewController alloc] init];
     webVC.urlLoad = url;
     [self.navigationController pushViewController:webVC animated:NO];
@@ -130,7 +130,7 @@
 
 }
 -(void)viewWillDisappear:(BOOL)animated {
-    
+
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -206,6 +206,12 @@
         CitySkipViewCell * cell = [_homeTableView dequeueReusableCellWithIdentifier:@"cellCity"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.type = indexPath.row;
+        if (indexPath.row == 0) {
+            [cell configWithicon:[UIImage imageNamed:@"home_city"] title:@"浪漫海滨" data:nil];
+        }else {
+            [cell configWithicon:[UIImage imageNamed:@"home_city"] title:@"缤纷花海" data:nil];
+
+        }
         return cell;
     }
 }

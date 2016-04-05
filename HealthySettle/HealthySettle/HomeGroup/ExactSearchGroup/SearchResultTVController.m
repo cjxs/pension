@@ -13,7 +13,9 @@
 
 
 @interface SearchResultTVController () {
-    NSArray * array;
+    NSArray * array1;
+    NSArray * array2;
+    NSArray * array3;
 }
 
 @end
@@ -27,7 +29,8 @@
         textField.backgroundColor = [UIColor whiteColor];
         textField.clipsToBounds = YES;
         textField.layer.cornerRadius = 5;
-        textField.placeholder = @"机构名称／位置等";
+        textField.placeholder = @"  机构名称／位置等";
+        textField.font = [UIFont systemFontOfSize:14];
         _textField = textField;
         [view addSubview:_textField];
         
@@ -38,8 +41,8 @@
             checkIn_label.layer.cornerRadius = 5;
             checkIn_label.backgroundColor = [UIColor whiteColor];
             _checkIn_label = checkIn_label;
-            checkIn_label.text = @" 入2-15";
-            checkIn_label.font = [UIFont systemFontOfSize:13];
+            checkIn_label.text = @"   入2-15";
+            checkIn_label.font = [UIFont systemFontOfSize:14];
             [view addSubview:_checkIn_label];
           
             
@@ -50,12 +53,14 @@
             label_view.backgroundColor = [UIColor whiteColor];
             
             UILabel * checkIn_label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, screenWide * 0.21, screenHeight * 0.03)];
-            checkIn_label.text = @" 2-15";
+            checkIn_label.text = @"   入 2-15";
+            checkIn_label.font = [UIFont systemFontOfSize:12];
             checkIn_label.textColor = RGB(135, 135,135);
             _checkIn_label = checkIn_label;
             [label_view addSubview:_checkIn_label];
             UILabel * leave_label = [[UILabel alloc] initWithFrame:CGRectMake(0, screenHeight * 0.03, screenWide * 0.21, screenHeight * 0.03)];
-            leave_label.text = @" 2-16";
+            leave_label.text = @"   离 2-16";
+            leave_label.font = [UIFont systemFontOfSize:12];
             leave_label.textColor = RGB(135, 135,135);
             _leave_label = leave_label;
             [label_view addSubview:_leave_label];
@@ -79,7 +84,10 @@
     }else if ([_vc_type isEqualToString:@"L"]) {
         [self.tableView registerNib:[UINib nibWithNibName:@"PensionSRTVCell" bundle:nil] forCellReuseIdentifier:@"cellPension"];
     }
-    array = @[@"z_02,",@"z_03",@"p_01",@"p_02"];
+    array1 = @[@"wifi_is",@"tv_is",@"wifi_is",@"p_is"];
+    array3 = @[@"p_is",@"wifi_is",@"p_is",@"wifi_is"];
+    array2 = @[@"wifi_is",@"p_is",@"tv_is",@"p_is",@"wifi_is",@"wifi_is",@"p_is"];
+
   
     }
 -(void)viewDidLayoutSubviews {
@@ -142,7 +150,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 5;
+    return 7;
 }
 
 
@@ -150,13 +158,44 @@
     if ([_vc_type isEqualToString:@"L"]) {
         PensionSRTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cellPension" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        [cell configWithimage:[UIImage imageNamed:@"pension"] title:@"杭州上城区维康老人" address:@"上城区近江南路2号"number:@"999" price:@"666"];
+        switch (indexPath.row) {
+            case 0:
+                [cell configWithimage:[UIImage imageNamed:@"pension"] title:@"浙江省杭州市上城区维康老人" address:@"上城区近江南路4号"number:@"888" price:@"199"];
+                break;
+            case 1:
+                [cell configWithimage:[UIImage imageNamed:@"pension"] title:@"杭州滨江区维康疗养院" address:@"下城区近江南路2号"number:@"799" price:@"299"];
+                break;
+            case 2:
+                [cell configWithimage:[UIImage imageNamed:@"pension"] title:@"杭州上城区维康老人" address:@"左城区近江南路2号"number:@"999" price:@"399"];
+                break;
+            default:
+                  [cell configWithimage:[UIImage imageNamed:@"pension"] title:@"杭州上城区维康老人" address:@"上城区近江南路2号"number:@"999" price:@"588"];
+                break;
+        }
+        
         return cell;
         
     }else if ([_vc_type isEqualToString:@"S"]) {
         RegimenRTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cellRegimen" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        [cell configWithImage:[UIImage imageNamed:@"regimen"] title:@"杭州上城区维康老人上城区维康老人" address:@"上城区近江南路2号， 锦江南路哦" price:@"888" supportArray:array];
+        switch (indexPath.row) {
+            case 0:
+                [cell configWithImage:[UIImage imageNamed:@"regimen"] title:@"杭州上城区维康老人上城区维康老人" address:@"上城区近江南路2号， 锦江南路哦" price:@"888" supportArray:array1];
+                break;
+            case 1:
+                [cell configWithImage:[UIImage imageNamed:@"regimen"] title:@"杭州上城区维康保健中心" address:@"上城区近江南路8号， 锦江南路哦" price:@"1088" supportArray:array2 ];
+                break;
+            case 2:
+                [cell configWithImage:[UIImage imageNamed:@"regimen"] title:@"杭州滨江老人院" address:@"滨江区近江南路2号， 锦江南路哦" price:@"699" supportArray:array3];
+                break;
+            case 3:
+                [cell configWithImage:[UIImage imageNamed:@"regimen"] title:@"杭州上城区老人上城区" address:@"下城区近江路2号， 锦江南路哦" price:@"599" supportArray:array1];
+                break;
+                
+            default:
+                [cell configWithImage:[UIImage imageNamed:@"regimen"] title:@"杭州上城区维康老人上城区维康老人" address:@"上城区近江南路20号， 锦江南路哦" price:@"299" supportArray:array1];
+                break;
+        }
         return cell;
     }else {
         return nil;

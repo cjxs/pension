@@ -34,7 +34,7 @@ static NSString *setCellIdentifier = @"cellS";
         for (int i = 0; i < 8; i++) {
             UIView * separator = [[UIView alloc] initWithFrame:CGRectMake(0, (i+1) * 50 /* i乘以高度*/, screenWide, 1)];
             
-            separator.backgroundColor = [UIColor colorWithRed:0.03 * i green:0.05*i blue:0.1*i alpha:0.3];
+            separator.backgroundColor = RGB(201, 201, 201);
             [setTableView addSubview:separator];
       
         }

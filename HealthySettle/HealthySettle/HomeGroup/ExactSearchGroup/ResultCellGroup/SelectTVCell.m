@@ -41,7 +41,7 @@
         [btn setTitle:array[i] forState:UIControlStateNormal];
         btn.backgroundColor = RGB(244,245, 246);
         [btn setTitleColor:RGB(127, 128, 129) forState:UIControlStateNormal];
-        btn.titleLabel.font = [UIFont systemFontOfSize:10];
+        btn.titleLabel.font = [UIFont systemFontOfSize:11];
         btn.clipsToBounds = YES;
         btn.layer.cornerRadius = 5;
         [btn addTarget:self action:@selector(selectNurseBtn:) forControlEvents:UIControlEventTouchUpInside];
@@ -52,7 +52,7 @@
   
     for (UIView * view in self.subviews) {
         if ([view isKindOfClass:[UIButton class]] && view.frame.origin.y == button.frame.origin.y ) {
-            UIButton * btn = view;
+            UIButton * btn = (UIButton *)view;
             btn.backgroundColor = RGB(244,245, 246);
             [btn setTitleColor:RGB(127, 128, 129) forState:UIControlStateNormal];
         }

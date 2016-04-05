@@ -15,7 +15,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="618" height="73"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="p_01.png" translatesAutoresizingMaskIntoConstraints="NO" id="kNP-H0-5d2">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="date.png" translatesAutoresizingMaskIntoConstraints="NO" id="kNP-H0-5d2">
                         <rect key="frame" x="13" y="8" width="20" height="57"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="20" id="3PJ-GN-0fO"/>
@@ -54,7 +54,9 @@
                             <constraint firstAttribute="width" constant="30" id="nbk-XO-Tdz"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                        <state key="normal" title="修改"/>
+                        <state key="normal" title="修改">
+                            <color key="titleColor" red="0.78431372549019607" green="0.78431372549019607" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2016-04－25" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nIc-bQ-IoL">
                         <rect key="frame" x="213" y="8" width="80" height="57"/>
@@ -66,6 +68,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <color key="backgroundColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
                     <constraint firstAttribute="bottomMargin" secondItem="nIc-bQ-IoL" secondAttribute="bottom" id="1kP-6j-OIo"/>
                     <constraint firstItem="nIc-bQ-IoL" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="8kw-Ru-z5f"/>
@@ -97,6 +100,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="p_01.png" width="188" height="188"/>
+        <image name="date.png" width="88" height="82"/>
     </resources>
 </document>

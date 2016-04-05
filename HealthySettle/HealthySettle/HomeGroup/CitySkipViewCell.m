@@ -17,7 +17,6 @@
         _title_label.textColor = RGB(25, 25, 25);
         _title_label.textAlignment = NSTextAlignmentLeft;
         _title_label.text = @"缤纷花海";
-       
     }
     return _title_label;
 }
@@ -49,9 +48,21 @@
 
         
         [_cityCollect_view registerClass:[CityCollectionViewCell class] forCellWithReuseIdentifier:@"cellC"];
+        data_array = @[@"city_01",@"city_02",@"city_03",@"city_04"];
 
     }
     return self;
+}
+-(void)configWithicon:(UIImage *)icon title:(NSString *)title data:(NSArray *)data_array {
+    if (icon) {
+        self.title_icon.image = icon;
+    }
+    if (title) {
+        self.title_label.text = title;
+    }
+    if (data_array) {
+        
+    }
 }
 #pragma mark - UICollectionViewDataSource
 
@@ -66,7 +77,7 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     CityCollectionViewCell * cell = [_cityCollect_view dequeueReusableCellWithReuseIdentifier:@"cellC" forIndexPath:indexPath];
-    [cell configWithImage:[UIImage imageNamed:@"z_02"] name:@" 三亚"];
+    [cell configWithImage:[UIImage imageNamed:data_array[indexPath.row]] name:nil];
     return cell;
 }
 - (CGFloat) collectionView:(UICollectionView *)collectionView

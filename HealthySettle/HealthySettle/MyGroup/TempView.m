@@ -16,7 +16,7 @@
         
         UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
         view.backgroundColor = [UIColor blackColor];
-        view.alpha = 0.4;
+        view.alpha = 0.35;
         [self addSubview:view];
 
         self.markImageV = [[UIImageView alloc] initWithFrame:CGRectMake(kMargin , kMargin , frame.size.width/5.5    , frame.size.width/5.5)];

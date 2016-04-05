@@ -49,14 +49,14 @@
       [self.back_btn addTarget:self action:@selector(cancleToRootView) forControlEvents:UIControlEventTouchUpInside];
     [self.serch_messagebtn addTarget:self action:@selector(skipToSearchResultVC) forControlEvents:UIControlEventTouchUpInside];
     if ([_vc_type isEqualToString:@"L"]) {
-        [self setBottomPicWithPic:[UIImage imageNamed:@"z_03"] andTitle:@"找。养老院"];
-        _third_markPic.image = [UIImage imageNamed:@"z_02"];
-        _four_markPic.image = [UIImage imageNamed:@"z_02"];
-        _fivth_markPic.image = [UIImage imageNamed:@"z_02"];
+        [self setBottomPicWithPic:[UIImage imageNamed:@"pension_preview"] andTitle:nil];
+        _third_markPic.image = [UIImage imageNamed:@"nurse_icon"];
+        _four_markPic.image = [UIImage imageNamed:@"position_icon"];
+        _fivth_markPic.image = [UIImage imageNamed:@"price_icon"];
         _city_label.text = @"杭州市";
         
         [_sellectOn_label mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.height.mas_equalTo(45);
+                make.height.mas_equalTo(69);
         }];
         [_seletOff_label mas_makeConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(1);
@@ -76,21 +76,21 @@
         _priceAndCity_label.text = @"价格";
         
     }else {
-         [self setBottomPicWithPic:[UIImage imageNamed:@"z_02"] andTitle:@"养生。度假"];
+         [self setBottomPicWithPic:[UIImage imageNamed:@"regimen_preview"] andTitle:nil];
         
-        _third_markPic.image = [UIImage imageNamed:@"z_03"];
-        _four_markPic.image = [UIImage imageNamed:@"z_03"];
-        _fivth_markPic.image = [UIImage imageNamed:@"z_03"];
+        _third_markPic.image = [UIImage imageNamed:@"position_icon"];
+        _four_markPic.image = [UIImage imageNamed:@"price_icon"];
+        _fivth_markPic.image = [UIImage imageNamed:@"beautiful_icon"];
         
         _city_label.text = @"杭州市";
         
         _seletOff_label.alpha = 1.0;
         [self configDateChooseMachine];
         [_sellectOn_label mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(23);
+            make.height.mas_equalTo(35);
         }];
         [_seletOff_label mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(23);
+            make.height.mas_equalTo(35);
         }];
         
                 [_nurseChoose_label mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -107,6 +107,8 @@
     UITapGestureRecognizer * tap_City = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cityPickerShowWithGesture:)];
     [_city_label addGestureRecognizer:tap_City];
     tap_City.numberOfTapsRequired = 1;
+    self.serch_messagebtn.clipsToBounds = YES;
+    self.serch_messagebtn.layer.cornerRadius = 5;
 
 }
 -(void)configDateChooseMachine {
@@ -257,7 +259,9 @@
 //配置上方图片和标题信息
 - (void)setBottomPicWithPic:(UIImage *)imageP andTitle:(NSString *)string {
     _topImageV.image = imageP;
-    _textLabel.text = string;
+    if (string) {
+        _textLabel.text = string;
+    }
 }
 -(void)cancleToRootView {
     [self.navigationController popToRootViewControllerAnimated:YES];

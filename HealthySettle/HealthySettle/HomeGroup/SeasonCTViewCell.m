@@ -22,6 +22,7 @@ static NSString * const carouselID = @"TempCarouseView";
         layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
      UICollectionView * season_collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, screenHeight * 0.013,screenWide, screenHeight * 0.253) collectionViewLayout:layout];
         
+        
         season_collectionView.dataSource = self;
         season_collectionView.delegate =self;
         [self addSubview:season_collectionView];

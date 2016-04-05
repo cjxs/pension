@@ -17,6 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    self.navigationItem.title = @"客服";
 //    DDTestApi * ddTestApi = [[DDTestApi alloc] init];
 //    [ddTestApi startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
 //        NSLog(@"%@正常",request.responseData);
@@ -62,10 +63,14 @@
 //    id obj=[dic valueForKeyPath:@"k4.@sum.floatValue"];
 //    
 //    NSLog(@"%@",[obj description]);//==14
+    NSArray * dataArray = @[@"custom_online",@"custom_number"];
+    for (int i = 0; i< dataArray.count; i++) {
+        UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(1, screenHeight * 0.338 *i + 65, screenWide, screenHeight * 0.333)];
+        imageView.image = [UIImage imageNamed:dataArray[i]];
+        [self.view addSubview:imageView];
+    }
     
-    
-    
-
+   
     
     
 }

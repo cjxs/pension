@@ -13,7 +13,8 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-       
+    self.organization_title.adjustsFontSizeToFitWidth = YES;
+    self.price_label.adjustsFontSizeToFitWidth = YES;
     
 }
 

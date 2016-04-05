@@ -26,8 +26,12 @@
 }
 -(void)configWithImage:(UIImage *)image name:(NSString *)name {
     if (self) {
-        _image_view.image = image;
-        _describ_label.text = name;
+        if (image) {
+            _image_view.image = image;
+        }
+        if (name) {
+            _describ_label.text = name;
+        }
     }
 }
 @end
