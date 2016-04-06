@@ -87,10 +87,12 @@
   
 }
 -(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     self.navigationItem.title = _titleName;
     [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 -(void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 - (void)didReceiveMemoryWarning {

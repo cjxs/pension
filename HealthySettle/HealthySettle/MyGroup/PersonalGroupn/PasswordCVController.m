@@ -23,11 +23,13 @@
     [self.changePass_btn addTarget:self action:@selector(changePasswordRightNow) forControlEvents:UIControlEventTouchUpInside];
 }
 -(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     self.navigationItem.title = _titleName;
     self.navigationController.navigationBar.translucent = NO;
     [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 -(void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
     if (_type_from) {
     }else {
         [self.navigationController setNavigationBarHidden:YES animated:YES];

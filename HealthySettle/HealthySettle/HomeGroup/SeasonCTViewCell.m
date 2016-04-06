@@ -18,18 +18,24 @@ static NSString * const carouselID = @"TempCarouseView";
         self.backgroundColor = RGB(242, 242, 242);
         UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc] init];
         layout.minimumLineSpacing = 0;
-        layout.itemSize = CGSizeMake(screenWide /3, screenHeight * 0.253);
+        layout.itemSize = CGSizeMake(screenWide / 3.005, screenHeight * 0.253);
         layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
      UICollectionView * season_collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, screenHeight * 0.013,screenWide, screenHeight * 0.253) collectionViewLayout:layout];
         
         
         season_collectionView.dataSource = self;
         season_collectionView.delegate =self;
+        [season_collectionView registerClass:[SeasonMCollectViewCell class] forCellWithReuseIdentifier:@"cellSea"];
         [self addSubview:season_collectionView];
         _season_collectionView = season_collectionView;
-        [season_collectionView registerClass:[SeasonMCollectViewCell class] forCellWithReuseIdentifier:@"cellSea"];
-        [self addSubview:self.carousePageControl];
-        
+        UIPageControl * carousePageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(screenWide /4 , screenHeight * 0.253 - kMargin/2, screenWide /2, kMargin)];
+        carousePageControl.numberOfPages = 4;
+        carousePageControl.pageIndicatorTintColor = RGB(246, 246, 246);
+        carousePageControl.currentPageIndicatorTintColor = RGB(247, 55, 72);
+        [carousePageControl addTarget:self action:@selector(pageChanged:) forControlEvents:UIControlEventValueChanged];
+        [self addSubview:carousePageControl];
+        _carousePageControl = carousePageControl;
+
     }
     return self;
 }
@@ -96,39 +102,25 @@ static NSString * const carouselID = @"TempCarouseView";
     NSLog(@"选择了第%d个",(int)indexPath.row);
 }
 
+
 -(void)pageChanged:(UIPageControl *)page {
-    [self.timer invalidate];
     CGFloat x = page.currentPage * self.bounds.size.width;
     if (self.season_collectionView.contentOffset.x /screenWide >= 3) {
          [_season_collectionView setContentOffset:CGPointMake(x, 0) animated:NO];
     }else {
         [_season_collectionView setContentOffset:CGPointMake(x, 0) animated:YES];
     }
-    [self startTimer];
 }
 
--(void)startTimer {
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:2.5f target:self selector:@selector(updateTimer) userInfo:nil repeats:YES];
-    [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
-    
-}
--(void)updateTimer{
-    
-    NSUInteger count = 4;
-    if (count == 0) {
-        NSLog(@"图片个数是0");
-        return;
-    }
-    int page = (self.carousePageControl.currentPage + 1 ) % (int)count;
-    self.carousePageControl.currentPage = page;
-    [self pageChanged:self.carousePageControl];
-    
+- (CGFloat) collectionView:(UICollectionView *)collectionView
+                    layout:(UICollectionViewLayout *)collectionViewLayout
+minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
+{
+    return 0;
 }
 -(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-    [self.timer invalidate];//停止时钟
 }
 -(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-    [self startTimer];
 
 }
 
@@ -138,25 +130,8 @@ static NSString * const carouselID = @"TempCarouseView";
     self.carousePageControl.currentPage = page;
     
 }
-- (UIPageControl *)carousePageControl {
-    if (!_carousePageControl) {
-        UIPageControl * carousePageControl = [[UIPageControl alloc] init];
-        carousePageControl.numberOfPages = 4;
-        CGFloat wide = self.bounds.size.width;
-        carousePageControl.frame = CGRectMake(wide /4 , screenHeight * 0.253 - kMargin/2, wide /2, kMargin);
-        carousePageControl.pageIndicatorTintColor = RGB(246, 246, 246);
-        carousePageControl.currentPageIndicatorTintColor = RGB(247, 55, 72);
-        [carousePageControl addTarget:self action:@selector(pageChanged:) forControlEvents:UIControlEventValueChanged];
-        _carousePageControl = carousePageControl;
-        [self startTimer];
-
-    }
-    return _carousePageControl;
-}
 -(void)dealloc {
-    [_timer invalidate];
     _season_collectionView = nil;
-    _timer = nil;
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

@@ -94,6 +94,7 @@
     [super viewDidLayoutSubviews];
 }
 -(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.tintColor = [UIColor redColor];
@@ -103,6 +104,7 @@
     
 }
 - (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
     [self showTabBar];
     [self.navigationController setNavigationBarHidden:YES animated:YES];
 

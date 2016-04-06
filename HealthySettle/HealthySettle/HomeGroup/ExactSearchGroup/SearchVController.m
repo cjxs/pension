@@ -40,6 +40,7 @@
 
 @implementation SearchVController
 -(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [UIApplication sharedApplication].statusBarHidden = YES;
     [self.navigationController setNavigationBarHidden:YES animated:YES];
 

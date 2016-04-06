@@ -11,7 +11,5 @@
 @interface SeasonCTViewCell : UITableViewCell
 @property (nonatomic, strong)UICollectionView * season_collectionView;
 @property(nonatomic, weak)UIPageControl * carousePageControl;
-@property (nonatomic, strong)NSTimer * timer;
--(void)startTimer;
--(void)updateTimer;
+
 @end

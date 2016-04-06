@@ -29,6 +29,7 @@
 
 
 #import "AppDelegate.h"
+#import "GuideVController.h"
 #import "TabbarController.h"
 #import "YTKNetworkConfig.h"
 #import <iVersion.h>
@@ -61,18 +62,26 @@
 //    if (!ret) {
 //        NSLog(@"启动失败");
 //    }
-    
- 
-    
-    
-    
-    
-    self.tabbarController = [[TabbarController alloc] init];
-    self.window.rootViewController = self.tabbarController;
+    if (![[NSUserDefaults standardUserDefaults]boolForKey:@"firstLaunch"]) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunch"];
+        NSArray * array = @[@"Guide_01",@"Guide_02",@"Guide_03"];
+        GuideVController * guideVC = [[GuideVController alloc] init];
+        self.window.rootViewController = guideVC;
+        [guideVC initGuideWithArray:array];
+        [guideVC.enter_btn addTarget:self action:@selector(firstPressed) forControlEvents:UIControlEventTouchUpInside];
+    }else {
+        self.tabbarController = [[TabbarController alloc] init];
+        self.window.rootViewController = self.tabbarController;
+
+    }
     
     return YES;
 }
+- (void)firstPressed {
+    self.tabbarController = [[TabbarController alloc] init];
+    self.window.rootViewController = self.tabbarController;
 
+}
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.

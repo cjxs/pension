@@ -77,6 +77,14 @@
 		3278CCE41CAFBB4500038B9D /* CommentTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3278CCE21CAFBB4500038B9D /* CommentTVCell.xib */; };
 		3278CCE61CAFC17400038B9D /* shareCompany.png in Resources */ = {isa = PBXBuildFile; fileRef = 3278CCE51CAFC17400038B9D /* shareCompany.png */; };
 		3278CCE91CAFDDC100038B9D /* SelectTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3278CCE81CAFDDC100038B9D /* SelectTVCell.m */; };
+		327DC7CE1CB4F8FD005617D2 /* GDScrollBanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 327DC7CD1CB4F8FD005617D2 /* GDScrollBanner.m */; };
+		327DC7D11CB4F935005617D2 /* GuideVController.m in Sources */ = {isa = PBXBuildFile; fileRef = 327DC7D01CB4F935005617D2 /* GuideVController.m */; };
+		327DC7D51CB4FFE5005617D2 /* Guide_01.png in Resources */ = {isa = PBXBuildFile; fileRef = 327DC7D21CB4FFE5005617D2 /* Guide_01.png */; };
+		327DC7D61CB4FFE5005617D2 /* Guide_02.png in Resources */ = {isa = PBXBuildFile; fileRef = 327DC7D31CB4FFE5005617D2 /* Guide_02.png */; };
+		327DC7D71CB4FFE5005617D2 /* Guide_03.png in Resources */ = {isa = PBXBuildFile; fileRef = 327DC7D41CB4FFE5005617D2 /* Guide_03.png */; };
+		327DC7D91CB50119005617D2 /* Guide_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 327DC7D81CB50119005617D2 /* Guide_btn.png */; };
+		327DC7DB1CB5011F005617D2 /* Loading.png in Resources */ = {isa = PBXBuildFile; fileRef = 327DC7DA1CB5011F005617D2 /* Loading.png */; };
+		327DC7DD1CB50BF4005617D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 327DC7DC1CB50BF4005617D2 /* Assets.xcassets */; };
 		3292A74F1CA3D14E004FEB57 /* CDCityPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 3292A74E1CA3D14E004FEB57 /* CDCityPicker.m */; };
 		3292A7511CA3DCA4004FEB57 /* districtMGE.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3292A7501CA3DCA4004FEB57 /* districtMGE.plist */; };
 		32CABD641CA373AA0068AE93 /* CityCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CABD571CA373AA0068AE93 /* CityCollectionViewCell.m */; };
@@ -86,7 +94,6 @@
 		32CABD681CA373AA0068AE93 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CABD5F1CA373AA0068AE93 /* HomeViewController.m */; };
 		32CABD691CA373AA0068AE93 /* SeasonCTViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CABD611CA373AA0068AE93 /* SeasonCTViewCell.m */; };
 		32CABD6A1CA373AA0068AE93 /* SeasonMCollectViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CABD631CA373AA0068AE93 /* SeasonMCollectViewCell.m */; };
-		32CABD701CA373CC0068AE93 /* GDScrollBanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CABD6D1CA373CC0068AE93 /* GDScrollBanner.m */; };
 		32CABD761CA373DD0068AE93 /* banner.png in Resources */ = {isa = PBXBuildFile; fileRef = 32CABD731CA373DD0068AE93 /* banner.png */; };
 		32CABD771CA373DD0068AE93 /* z_02.png in Resources */ = {isa = PBXBuildFile; fileRef = 32CABD741CA373DD0068AE93 /* z_02.png */; };
 		32CABD781CA373DD0068AE93 /* z_03.png in Resources */ = {isa = PBXBuildFile; fileRef = 32CABD751CA373DD0068AE93 /* z_03.png */; };
@@ -114,7 +121,6 @@
 		32F6CD051C9A734C00E97B65 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 32F6CD041C9A734C00E97B65 /* main.m */; };
 		32F6CD081C9A734C00E97B65 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 32F6CD071C9A734C00E97B65 /* AppDelegate.m */; };
 		32F6CD0E1C9A734C00E97B65 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32F6CD0C1C9A734C00E97B65 /* Main.storyboard */; };
-		32F6CD101C9A734C00E97B65 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 32F6CD0F1C9A734C00E97B65 /* Assets.xcassets */; };
 		32F6CD131C9A734C00E97B65 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32F6CD111C9A734C00E97B65 /* LaunchScreen.storyboard */; };
 		32F6CD2F1C9ABDF200E97B65 /* TabbarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32F6CD2E1C9ABDF200E97B65 /* TabbarController.m */; };
 		32FA73361CAB7E4F00379855 /* PersonDataVController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32FA73351CAB7E4F00379855 /* PersonDataVController.m */; };
@@ -219,6 +225,16 @@
 		3278CCE51CAFC17400038B9D /* shareCompany.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shareCompany.png; sourceTree = "<group>"; };
 		3278CCE71CAFDDC100038B9D /* SelectTVCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectTVCell.h; sourceTree = "<group>"; };
 		3278CCE81CAFDDC100038B9D /* SelectTVCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectTVCell.m; sourceTree = "<group>"; };
+		327DC7CC1CB4F8FD005617D2 /* GDScrollBanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDScrollBanner.h; sourceTree = "<group>"; };
+		327DC7CD1CB4F8FD005617D2 /* GDScrollBanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDScrollBanner.m; sourceTree = "<group>"; };
+		327DC7CF1CB4F935005617D2 /* GuideVController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuideVController.h; sourceTree = "<group>"; };
+		327DC7D01CB4F935005617D2 /* GuideVController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuideVController.m; sourceTree = "<group>"; };
+		327DC7D21CB4FFE5005617D2 /* Guide_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Guide_01.png; sourceTree = "<group>"; };
+		327DC7D31CB4FFE5005617D2 /* Guide_02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Guide_02.png; sourceTree = "<group>"; };
+		327DC7D41CB4FFE5005617D2 /* Guide_03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Guide_03.png; sourceTree = "<group>"; };
+		327DC7D81CB50119005617D2 /* Guide_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Guide_btn.png; sourceTree = "<group>"; };
+		327DC7DA1CB5011F005617D2 /* Loading.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Loading.png; sourceTree = "<group>"; };
+		327DC7DC1CB50BF4005617D2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3292A74D1CA3D14E004FEB57 /* CDCityPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDCityPicker.h; sourceTree = "<group>"; };
 		3292A74E1CA3D14E004FEB57 /* CDCityPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDCityPicker.m; sourceTree = "<group>"; };
 		3292A7501CA3DCA4004FEB57 /* districtMGE.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = districtMGE.plist; sourceTree = "<group>"; };
@@ -235,8 +251,6 @@
 		32CABD611CA373AA0068AE93 /* SeasonCTViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeasonCTViewCell.m; sourceTree = "<group>"; };
 		32CABD621CA373AA0068AE93 /* SeasonMCollectViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeasonMCollectViewCell.h; sourceTree = "<group>"; };
 		32CABD631CA373AA0068AE93 /* SeasonMCollectViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeasonMCollectViewCell.m; sourceTree = "<group>"; };
-		32CABD6C1CA373CC0068AE93 /* GDScrollBanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDScrollBanner.h; sourceTree = "<group>"; };
-		32CABD6D1CA373CC0068AE93 /* GDScrollBanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDScrollBanner.m; sourceTree = "<group>"; };
 		32CABD731CA373DD0068AE93 /* banner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = banner.png; sourceTree = "<group>"; };
 		32CABD741CA373DD0068AE93 /* z_02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = z_02.png; sourceTree = "<group>"; };
 		32CABD751CA373DD0068AE93 /* z_03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = z_03.png; sourceTree = "<group>"; };
@@ -282,7 +296,6 @@
 		32F6CD061C9A734C00E97B65 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		32F6CD071C9A734C00E97B65 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		32F6CD0D1C9A734C00E97B65 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		32F6CD0F1C9A734C00E97B65 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		32F6CD121C9A734C00E97B65 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		32F6CD141C9A734C00E97B65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		32F6CD2D1C9ABDF200E97B65 /* TabbarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabbarController.h; sourceTree = "<group>"; };
@@ -423,8 +436,8 @@
 		32CABD6B1CA373CC0068AE93 /* DataSource */ = {
 			isa = PBXGroup;
 			children = (
-				32CABD6C1CA373CC0068AE93 /* GDScrollBanner.h */,
-				32CABD6D1CA373CC0068AE93 /* GDScrollBanner.m */,
+				327DC7CC1CB4F8FD005617D2 /* GDScrollBanner.h */,
+				327DC7CD1CB4F8FD005617D2 /* GDScrollBanner.m */,
 				32CABD951CA39E2E0068AE93 /* CDDatePicker.h */,
 				32CABD961CA39E2E0068AE93 /* CDDatePicker.m */,
 				3292A7501CA3DCA4004FEB57 /* districtMGE.plist */,
@@ -439,6 +452,11 @@
 		32CABD721CA373DD0068AE93 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				327DC7DA1CB5011F005617D2 /* Loading.png */,
+				327DC7D81CB50119005617D2 /* Guide_btn.png */,
+				327DC7D21CB4FFE5005617D2 /* Guide_01.png */,
+				327DC7D31CB4FFE5005617D2 /* Guide_02.png */,
+				327DC7D41CB4FFE5005617D2 /* Guide_03.png */,
 				32518DFB1CB3C29800CEAE35 /* position_3.png */,
 				32518DFC1CB3C29800CEAE35 /* comment_2.png */,
 				32518DFD1CB3C29800CEAE35 /* next_03.png */,
@@ -582,9 +600,9 @@
 			isa = PBXGroup;
 			children = (
 				325F84C61C9F88E4009E9770 /* PrefixHeader.pch */,
+				327DC7DC1CB50BF4005617D2 /* Assets.xcassets */,
 				325F84C71C9F89D2009E9770 /* UtilsMacro.h */,
 				32F6CD0C1C9A734C00E97B65 /* Main.storyboard */,
-				32F6CD0F1C9A734C00E97B65 /* Assets.xcassets */,
 				32F6CD111C9A734C00E97B65 /* LaunchScreen.storyboard */,
 				32F6CD141C9A734C00E97B65 /* Info.plist */,
 				32F6CD041C9A734C00E97B65 /* main.m */,
@@ -597,6 +615,8 @@
 			children = (
 				32FD72C91CAA26E4008CB917 /* ProductTipView.h */,
 				32FD72CA1CAA26E4008CB917 /* ProductTipView.m */,
+				327DC7CF1CB4F935005617D2 /* GuideVController.h */,
+				327DC7D01CB4F935005617D2 /* GuideVController.m */,
 			);
 			path = Version;
 			sourceTree = "<group>";
@@ -702,6 +722,7 @@
 				32FA73431CABC7FC00379855 /* PasswordCVController.xib in Resources */,
 				32518DDD1CB399A400CEAE35 /* local_icon.png in Resources */,
 				32F6CD131C9A734C00E97B65 /* LaunchScreen.storyboard in Resources */,
+				327DC7DD1CB50BF4005617D2 /* Assets.xcassets in Resources */,
 				32518DFF1CB3C29800CEAE35 /* comment_2.png in Resources */,
 				32518DBA1CB38CA500CEAE35 /* city_02.png in Resources */,
 				32DD1DCD1CA5082B00E1C229 /* SetTVCell.xib in Resources */,
@@ -720,9 +741,9 @@
 				32518DE11CB399A400CEAE35 /* beautiful_icon.png in Resources */,
 				324075CD1CAD213600BAF253 /* PensionSRTVCell.xib in Resources */,
 				32518DB41CB34EFC00CEAE35 /* custom_number.png in Resources */,
-				32F6CD101C9A734C00E97B65 /* Assets.xcassets in Resources */,
 				32518DF21CB3AD4600CEAE35 /* organ_rate.png in Resources */,
 				32518DFA1CB3B06E00CEAE35 /* next_02.png in Resources */,
+				327DC7D51CB4FFE5005617D2 /* Guide_01.png in Resources */,
 				324CD4BB1CAE70F000276B57 /* HomeTVCell.xib in Resources */,
 				32518DBB1CB38CA500CEAE35 /* city_03.png in Resources */,
 				324075BD1CACE3F900BAF253 /* regimenstrategy_btn.png in Resources */,
@@ -744,8 +765,10 @@
 				325C82421CB0E7530004EA0C /* OrgIntroTVCell.xib in Resources */,
 				32518DD61CB397EE00CEAE35 /* next_01.png in Resources */,
 				32518DFE1CB3C29800CEAE35 /* position_3.png in Resources */,
+				327DC7D71CB4FFE5005617D2 /* Guide_03.png in Resources */,
 				324075C41CACEC6800BAF253 /* p_03.png in Resources */,
 				324CD4B61CAE65A600276B57 /* ManageTimeTVCell.xib in Resources */,
+				327DC7DB1CB5011F005617D2 /* Loading.png in Resources */,
 				32518DDF1CB399A400CEAE35 /* position_icon.png in Resources */,
 				324CD4AB1CAE1E9700276B57 /* pension_organ.png in Resources */,
 				32CABD671CA373AA0068AE93 /* SearchVController.xib in Resources */,
@@ -758,9 +781,11 @@
 				32518DBE1CB38F5C00CEAE35 /* home_city.png in Resources */,
 				32518DAB1CB3493E00CEAE35 /* search_01.png in Resources */,
 				324075C51CACEC6800BAF253 /* p_02.png in Resources */,
+				327DC7D91CB50119005617D2 /* Guide_btn.png in Resources */,
 				32518DF41CB3AD4600CEAE35 /* detail.png in Resources */,
 				32CABD761CA373DD0068AE93 /* banner.png in Resources */,
 				324075BB1CACCE5D00BAF253 /* regimenFind_btn.png in Resources */,
+				327DC7D61CB4FFE5005617D2 /* Guide_02.png in Resources */,
 				32518DAA1CB3493E00CEAE35 /* search_02.png in Resources */,
 				324075B61CACCE5D00BAF253 /* newsdynamic_btn.png in Resources */,
 			);
@@ -829,9 +854,9 @@
 				324075C81CAD071300BAF253 /* SearchResultTVController.m in Sources */,
 				325C82501CB12BB70004EA0C /* ShouldKnowTVCell.m in Sources */,
 				32FA733E1CABA4E600379855 /* CDTextView.m in Sources */,
-				32CABD701CA373CC0068AE93 /* GDScrollBanner.m in Sources */,
 				32FD72CB1CAA26E4008CB917 /* ProductTipView.m in Sources */,
 				32FA73421CABC7FC00379855 /* PasswordCVController.m in Sources */,
+				327DC7CE1CB4F8FD005617D2 /* GDScrollBanner.m in Sources */,
 				32F6CD081C9A734C00E97B65 /* AppDelegate.m in Sources */,
 				32CABD7E1CA373EF0068AE93 /* DDTestApi.m in Sources */,
 				32FA73461CABE32500379855 /* RefundViewController.m in Sources */,
@@ -864,6 +889,7 @@
 				32CABD8E1CA374020068AE93 /* MineViewController.m in Sources */,
 				3278CCE31CAFBB4500038B9D /* CommentTVCell.m in Sources */,
 				32FA73361CAB7E4F00379855 /* PersonDataVController.m in Sources */,
+				327DC7D11CB4F935005617D2 /* GuideVController.m in Sources */,
 				324CD4B51CAE65A600276B57 /* ManageTimeTVCell.m in Sources */,
 				32E71C9D1CB23DD00079CD73 /* OrderTVController.m in Sources */,
 				32CABD681CA373AA0068AE93 /* HomeViewController.m in Sources */,
@@ -979,8 +1005,9 @@
 			baseConfigurationReference = B13104AB7B8F04CDDC48D9DD /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_WARN_NULLABLE_TO_NONNULL_CONVERSION = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: chen dongdong (JXF5ZF9W67)";
 				GCC_INPUT_FILETYPE = sourcecode.c.objc;
 				GCC_PREFIX_HEADER = HealthySettle/PrefixHeader.pch;
 				INFOPLIST_FILE = HealthySettle/Info.plist;
@@ -1013,8 +1040,9 @@
 					"-framework",
 					"\"UIKit\"",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = cdd.HealthySettle;
+				PRODUCT_BUNDLE_IDENTIFIER = www.HealthySettle.yrc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "00b7cc69-9413-498f-9e63-38359a85914f";
 			};
 			name = Debug;
 		};
@@ -1023,8 +1051,9 @@
 			baseConfigurationReference = 3B3A723A9107D9206B488077 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_WARN_NULLABLE_TO_NONNULL_CONVERSION = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: chen dongdong (JXF5ZF9W67)";
 				GCC_INPUT_FILETYPE = sourcecode.c.objc;
 				GCC_PREFIX_HEADER = HealthySettle/PrefixHeader.pch;
 				INFOPLIST_FILE = HealthySettle/Info.plist;
@@ -1057,8 +1086,9 @@
 					"-framework",
 					"\"UIKit\"",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = cdd.HealthySettle;
+				PRODUCT_BUNDLE_IDENTIFIER = www.HealthySettle.yrc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "00b7cc69-9413-498f-9e63-38359a85914f";
 			};
 			name = Release;
 		};

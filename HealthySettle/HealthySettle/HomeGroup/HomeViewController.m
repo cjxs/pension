@@ -129,9 +129,7 @@
 
 
 }
--(void)viewWillDisappear:(BOOL)animated {
 
-}
 - (void)viewDidLoad {
     [super viewDidLoad];
        // 版本更新的时候添加提示页面，任性的设计师要求的
