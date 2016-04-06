@@ -45,7 +45,7 @@
 - (UIPickerView *)pick_view {
     if (!_pick_view) {
         UIPickerView * pick_view = [[UIPickerView alloc] init];
-        pick_view.backgroundColor = [UIColor whiteColor];
+        pick_view.backgroundColor = RGB(252, 252, 252);
         pick_view.clipsToBounds = YES;
         pick_view.layer.cornerRadius = kMargin;
         pick_view.frame = [self getMainViewFrame];
@@ -81,7 +81,7 @@
     _titleView.clipsToBounds = YES;
     _titleView.layer.cornerRadius = kMargin;
     UIButton * quxiaobtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    quxiaobtn.frame = CGRectMake(5, 9, 55, 24);
+    quxiaobtn.frame = CGRectMake(5, rect.size.height * 0.2, 55, rect.size.height * 0.6);
     quxiaobtn.titleLabel.font = [UIFont boldSystemFontOfSize:18];
     [quxiaobtn setTitle:@"取消" forState:UIControlStateNormal];
     [quxiaobtn addTarget:self action:@selector(cityPickerBtnDownCancel) forControlEvents:UIControlEventTouchUpInside];
@@ -93,7 +93,7 @@
     
     
     UIButton * btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn.frame = CGRectMake(screenWide - 2 * kMargin-60, 9, 55, 24);
+    btn.frame = CGRectMake(screenWide - 2 * kMargin-60, rect.size.height * 0.2, 55, rect.size.height * 0.6);
     btn.titleLabel.font = [UIFont boldSystemFontOfSize:18];
     [btn setTitle:@"确定" forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(cityPickerbtnDown) forControlEvents:UIControlEventTouchUpInside];
@@ -229,8 +229,9 @@
 }
 - (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component
 {
-    return 60.0;
+    return screenHeight * 0.08;
 }
+
 
 
 

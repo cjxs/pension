@@ -127,7 +127,7 @@
                             [_tableHeadView addSubview:label_y];
 
             priceNow_label = [[UILabel alloc] initWithFrame:CGRectMake(screenWide * 0.06, CGRectGetMaxY(organization_imageView.frame) + screenHeight * 0.015, screenWide * 0.12, screenHeight *0.0285 )];
-            priceNow_label.font = [UIFont systemFontOfSize:22];
+            priceNow_label.font = [UIFont systemFontOfSize:20];
             priceNow_label.textColor = [UIColor redColor];
             [_tableHeadView addSubview:priceNow_label];
             priceNow_label.text = @"999";
@@ -209,6 +209,7 @@
     [super viewDidLoad];
     self.tableView.tableHeaderView = self.tableHeadView;
     if ([self.vc_type isEqualToString:@"S"]) {
+        self.tableView.backgroundColor = RGB(250, 250, 250);
         [self.tableView registerNib:[UINib nibWithNibName:@"LivingTimeTVCell" bundle:nil] forCellReuseIdentifier:@"cellLiving"];
         [self.tableView registerNib:[UINib nibWithNibName:@"ManageTimeTVCell" bundle:nil] forCellReuseIdentifier:@"cellManager"];
         [self.tableView registerNib:[UINib nibWithNibName:@"HomeTVCell" bundle:nil] forCellReuseIdentifier:@"cellHome"];
@@ -415,7 +416,7 @@
             }
             return  [self backheightWith:string];
         }else if (indexPath.section == 6) {
-            return [self backheightWith:@"吧啦吧啦吧啦吧啦吧啦吧啦吧啦吧啦吧啦吧吧啦吧啦吧啦吧吧啦吧啦吧啦吧啦吧啦吧吧啦吧啦吧啦吧啦吧吧啦吧啦吧啦吧啊啦吧啦"] - 90;
+            return [self backheightWith:@"吧啦吧啦吧啦吧啦吧啦吧啦吧啦吧啦吧啦吧吧啦吧啦吧啦吧吧啦吧啦吧啦吧啦吧啦吧吧啦吧啦吧啦吧啦吧吧啦吧啦吧啦吧啊啦吧啦"] - 80;
         }else {
             return 288;
         }

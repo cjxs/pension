@@ -24,7 +24,7 @@
         
         _next_btn = [UIButton buttonWithType:UIButtonTypeCustom];
         _next_btn.frame = CGRectMake(screenWide - 28, screenHeight * 0.01,20, screenHeight * 0.04);
-        [_next_btn setBackgroundImage:[UIImage imageNamed:@"z_02"] forState:UIControlStateNormal];
+        [_next_btn setBackgroundImage:[UIImage imageNamed:@"next_01"] forState:UIControlStateNormal];
         [self addSubview:_next_btn];
         
     }
