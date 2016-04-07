@@ -7,8 +7,10 @@
 //
 
 #import "RefundViewController.h"
+#import "OrdAndRefundTVCell.h"
 
-@interface RefundViewController ()
+
+@interface RefundViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @end
 
@@ -53,7 +55,10 @@
 - (UITableView *)tableView {
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 31, screenWide, 500)];
-        
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+        _tableView.tableFooterView = [UIView new];
     }
     return _tableView;
 }
@@ -83,8 +88,14 @@
     self.navigationController.tabBarController.tabBar.translucent = NO;
     self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.tableView];
-    [self.view addSubview:self.tableHeadView];
-  
+    
+      
+        [self.tableView registerNib:[UINib nibWithNibName:@"OrdAndRefundTVCell" bundle:nil] forCellReuseIdentifier:@"cellRefund"];
+        
+        [self.view addSubview:self.tableHeadView];
+    
+
+
 }
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -99,6 +110,20 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+   
+        return 5;
+   }
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+        OrdAndRefundTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cellRefund" forIndexPath:indexPath];
+        [cell configRefundWithtitle:@"杭州滨江区" image:[UIImage imageNamed:@"order_image"] type:1 price:@"999.00"];
+        return cell;
+    
+        }
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+        return screenHeight * 0.2544;
+  }
 
 /*
 #pragma mark - Navigation

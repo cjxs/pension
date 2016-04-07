@@ -8,12 +8,12 @@
 
 #import "MineViewController.h"
 #import "TempView.h"
-#import "ThingsView.h"
 #import "SetTVCell.h"
 #import "PersonVController.h"
 #import "PersonDataVController.h"
 #import "PasswordCVController.h"
 #import "RefundViewController.h"
+#import "ComAndCollVC.h"
 
 static NSString *setCellIdentifier = @"cellS";
 
@@ -26,19 +26,19 @@ static NSString *setCellIdentifier = @"cellS";
 @implementation MineViewController
 - (UITableView *)setTableView {
     if (! _setTableView) {
-        UITableView * setTableView = [[UITableView alloc] initWithFrame:CGRectMake(0,screenHeight/9 *4 + 5, screenWide, 250) style:UITableViewStylePlain];
+        UITableView * setTableView = [[UITableView alloc] initWithFrame:CGRectMake(0,screenHeight * 0.465 , screenWide, screenHeight * 0.064 * 5 + screenHeight * 0.015) style:UITableViewStylePlain];
         setTableView.delegate = self;
         setTableView.dataSource = self;
+        setTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [setTableView registerNib:[UINib nibWithNibName:@"SetTVCell" bundle:nil] forCellReuseIdentifier:setCellIdentifier];
        
-        for (int i = 0; i < 8; i++) {
-            UIView * separator = [[UIView alloc] initWithFrame:CGRectMake(0, (i+1) * 50 /* i乘以高度*/, screenWide, 1)];
-            
+        for (int i = 0; i < 4; i++) {
+            UIView * separator = [[UIView alloc] initWithFrame:CGRectMake(0, (i+1) * screenHeight * 0.064 /* i乘以高度*/, screenWide, 1)];
             separator.backgroundColor = RGB(201, 201, 201);
             [setTableView addSubview:separator];
       
         }
-        setTableView.tableHeaderView = nil;
+        setTableView.tableFooterView = nil;
         setTableView.scrollEnabled = NO;
         _setTableView = setTableView;
  
@@ -47,13 +47,14 @@ static NSString *setCellIdentifier = @"cellS";
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setBottomPicWithPic:[UIImage imageNamed:@"p_01"] withPerP:[UIImage imageNamed:@"z_02"] andTitle:@"注册／登录"];
+    self.view.backgroundColor = RGB(243, 244, 245);
+    [self setBottomPicWithPic:[UIImage imageNamed:@"person_back"] withPerP:[UIImage imageNamed:@"boy_head"] andTitle:@"登录/注册"];
     
-    TempView *collectView = [[TempView alloc] initWithFrame:CGRectMake(screenWide /9, screenHeight/12+100, screenWide/3, screenWide/9) withMark:[UIImage imageNamed:@"z_02"] andTitle:@"我的收藏"];
+    TempView *collectView = [[TempView alloc] initWithFrame:CGRectMake(screenWide /9, screenHeight * 0.255, screenWide/3, screenHeight * 0.05) withMark:[UIImage imageNamed:@"z_02"] andTitle:@"我的收藏"];
     UITapGestureRecognizer * tapC = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickTwoViews:)];
     tapC.numberOfTapsRequired = 1;
     [collectView addGestureRecognizer:tapC];
-    TempView * dataView = [[TempView alloc] initWithFrame:CGRectMake(screenWide/9 * 5, screenHeight/12 + 100, screenWide / 3, screenWide / 9) withMark:[UIImage imageNamed:@"z_03"] andTitle:@"个人资料"];
+    TempView * dataView = [[TempView alloc] initWithFrame:CGRectMake(screenWide/9 * 5, screenHeight * 0.255, screenWide / 3, screenHeight * 0.05) withMark:[UIImage imageNamed:@"z_03"] andTitle:@"个人资料"];
     UITapGestureRecognizer * tapD = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickTwoViews:)];
     tapD.numberOfTapsRequired = 1;
     [dataView addGestureRecognizer:tapD];
@@ -70,21 +71,21 @@ static NSString *setCellIdentifier = @"cellS";
     self.view.backgroundColor = RGB(244,244, 244);
     [UIApplication sharedApplication].statusBarHidden = YES;
     self.navigationController.navigationBarHidden = YES;
-    UIImageView * topImageV =[[UIImageView alloc] initWithFrame:CGRectMake(0, 0,screenWide , screenHeight /3)];
+    UIImageView * topImageV =[[UIImageView alloc] initWithFrame:CGRectMake(0, 0,screenWide , screenHeight * 0.33)];
     topImageV.image = imageP;
     topImageV.alpha = 0.85;
     [self.view addSubview:topImageV];
     UITapGestureRecognizer * tapRL = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(resignOrLoad)];
     tapRL.numberOfTapsRequired = 1;
-    UIImageView * imagePerson = [[UIImageView alloc] initWithFrame:CGRectMake(screenWide/2 -25, screenHeight /12, 50, 50)];
-    imagePerson.backgroundColor = [UIColor greenColor];
+    UIImageView * imagePerson = [[UIImageView alloc] initWithFrame:CGRectMake(screenWide/2 -30, screenHeight * 0.075, 60, 60)];
+    imagePerson.image = personP;
     imagePerson.clipsToBounds = YES;
-    imagePerson.layer.cornerRadius = 25;
+    imagePerson.layer.cornerRadius = 30;
     imagePerson.userInteractionEnabled = YES;
     [topImageV addGestureRecognizer:tapRL];
     [topImageV addSubview:imagePerson];
     
-    UILabel * textLabel = [[UILabel alloc] initWithFrame:CGRectMake((screenWide - 200)/2, screenHeight / 12 + 50, 200, 40)];
+    UILabel * textLabel = [[UILabel alloc] initWithFrame:CGRectMake((screenWide - 200)/2, CGRectGetMaxY(imagePerson.frame) + screenHeight * 0.02, 200, 40)];
     textLabel.textAlignment = NSTextAlignmentCenter;
     textLabel.font = [UIFont systemFontOfSize:16];
     textLabel.text = string;
@@ -95,59 +96,53 @@ static NSString *setCellIdentifier = @"cellS";
     
 }
 - (void)setThingsView {
-    ThingsView * orderTV = [[ThingsView alloc] initWithFrame:CGRectMake(0, screenHeight/3, screenWide /4, screenHeight/9) withMark:[UIImage imageNamed:@"z_02"] andTitle:@"我的订单"];
-    orderTV.tag = 401;
-    UITapGestureRecognizer * tapO = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickFourViews:)];
-    tapO.numberOfTapsRequired = 1;
-    [orderTV addGestureRecognizer:tapO];
-    ThingsView * memberTV = [[ThingsView alloc] initWithFrame:CGRectMake(screenWide /4, screenHeight/3, screenWide /4, screenHeight/9) withMark:[UIImage imageNamed:@"z_03"] andTitle:@"会员特权"];
-    memberTV.tag = 402;
-     UITapGestureRecognizer * tapM = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickFourViews:)];
-    tapM.numberOfTapsRequired = 1;
-    [memberTV addGestureRecognizer:tapM];
-    ThingsView * refundTV = [[ThingsView alloc] initWithFrame:CGRectMake(screenWide /2, screenHeight/3, screenWide /4, screenHeight/9) withMark:[UIImage imageNamed:@"z_03"] andTitle:@"退款维权"];
-    refundTV.tag = 403;
-     UITapGestureRecognizer * tapR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickFourViews:)];
-    tapR.numberOfTapsRequired = 1;
-    [refundTV addGestureRecognizer:tapR];
-    ThingsView * commentTV = [[ThingsView alloc] initWithFrame:CGRectMake(screenWide /4*3, screenHeight/3, screenWide /4, screenHeight/9) withMark:[UIImage imageNamed:@"z_02"] andTitle:@"我的点评"];
-    commentTV.tag = 404;
-     UITapGestureRecognizer * tapC = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickFourViews:)];
-    tapC.numberOfTapsRequired = 1;
-    [commentTV addGestureRecognizer:tapC];
-    [self.view addSubview:orderTV];
-    [self.view addSubview:memberTV];
-    [self.view addSubview:refundTV];
-    [self.view addSubview:commentTV];
+    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, screenHeight * 0.33, screenWide, screenHeight * 0.119)];
+    view.backgroundColor = RGB(255, 255, 255);
+    NSArray * dataArray = @[@"order_btn",@"member_btn",@"refund_btn",@"comment_btn"];
+    for (int i = 0; i <dataArray.count; i++) {
+        UIButton * btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        btn.frame = CGRectMake(screenWide /4.0 * i,0, screenWide /4.0, screenHeight * 0.119);
+        [btn setBackgroundImage:[UIImage imageNamed:dataArray[i]] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:dataArray[i]] forState:UIControlStateHighlighted];
+        [btn addTarget:self action:@selector(clickFourViews:) forControlEvents:UIControlEventTouchUpInside];
+        btn.tag = 401 + i;
+         [view addSubview:btn];
+    }
+    [self.view addSubview:view];
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-   
-        return 5;
+    if (section == 0) {
+        return 4;
+    }else {
+        return 1;
+    }
    }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     SetTVCell * cell = [_setTableView dequeueReusableCellWithIdentifier:setCellIdentifier forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
-            if (indexPath.row == 0) {
-                [cell setThingsWithName:@"现金账户" Image:[UIImage imageNamed:@"z_02"] number:@"¥ 0.00"];
-                
-            }else if (indexPath.row == 1) {
-                [cell setThingsWithName:@"我的积分" Image:[UIImage imageNamed:@"z_03"] number:@"350"];
+    if (indexPath.section == 0) {
+        if (indexPath.row == 0) {
+            [cell setThingsWithName:@"现金账户" Image:[UIImage imageNamed:@"z_02"] number:@"¥ 0.00"];
             
-            }else if (indexPath.row == 2 ) {
-                [cell setThingsWithName:@"优惠券" Image:[UIImage imageNamed:@"z_02"] number:@"1 张"];
+        }else if (indexPath.row == 1) {
+            [cell setThingsWithName:@"我的积分" Image:[UIImage imageNamed:@"z_03"] number:@"350"];
+            
+        }else if (indexPath.row == 2 ) {
+            [cell setThingsWithName:@"优惠券" Image:[UIImage imageNamed:@"z_02"] number:@"1 张"];
+            
+            
+        }else{
+            [cell setThingsWithName:@"密码修改" Image:[UIImage imageNamed:@"z_03"] number:nil];
+            
+        }
+    }else {
+        [cell setThingsWithName:@"更多" Image:[UIImage imageNamed:@"z_03"] number:nil];
 
-               
-            }else  if (indexPath.row == 3 ){
-                [cell setThingsWithName:@"密码修改" Image:[UIImage imageNamed:@"z_03"] number:nil];
-
-            }else {
-                [cell setThingsWithName:@"更多" Image:[UIImage imageNamed:@"z_03"] number:nil];
-            }
+    }
     
     return cell;
 }
@@ -180,15 +175,27 @@ static NSString *setCellIdentifier = @"cellS";
     [self.navigationController pushViewController:passwordVC animated:YES];
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 50;
+    if (indexPath.section == 0) {
+        return screenHeight * 0.064;
+    }else {
+        return screenHeight * 0.064;
+    }
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    if (section == 0) {
+        return 0;
+    }else {
+        return screenHeight * 0.015;
+    }
+
 }
 - (void)resignOrLoad {
     NSLog(@"登录");
 }
 - (void)clickTwoViews:(UITapGestureRecognizer *)gesture {
-   
-    if (gesture.view.frame.origin.x < screenWide / 2) {
-        [self pushToViewPersonWithTitle:@"我的收藏" type:@"collect"];
+       if (gesture.view.frame.origin.x < screenWide / 2) {
+        [self pushToComAndCollVCWithTitle:@"我的收藏" type:@"collect"];
         
     }else {
         PersonDataVController * personDataVC = [[PersonDataVController alloc] init];
@@ -197,29 +204,46 @@ static NSString *setCellIdentifier = @"cellS";
     }
 }
 
-- (void)clickFourViews:(UITapGestureRecognizer *)gesture {
+- (void)clickFourViews:(UIButton *)btn {
     
-    int number = (int)gesture.view.tag;
+    int number = (int)btn.tag;
     switch (number) {
         case 401:
             [self pushToViewPersonWithTitle:@"我的订单" type:@"order"];
             break;
         case 402:
-            [self pushToRefundVC];
+            [self pushToViewPersonWithTitle:@"会员特权" type:@"member"];
             break;
         case 403:
-            [self pushToViewPersonWithTitle:@"退款维权" type:@"refund"];
+            [self pushToRefundVCWithTitle:@"退款维权" type:@"refund"];
             break;
         case 404:
-            [self pushToViewPersonWithTitle:@"我的点评" type:@"comment"];
+            [self pushToComAndCollVCWithTitle:@"我的点评" type:@"comment"];
             break;
         default:
             break;
     }
 }
--(void)pushToRefundVC {
+-(void)pushToComAndCollVCWithTitle:(NSString *)title type :(NSString *)type {
+    ComAndCollVC * cVC = [[ComAndCollVC alloc] init];
+    if (title) {
+        cVC.titleName = title;
+    }
+    if (type) {
+        cVC.type = type;
+    }
+    [self.navigationController pushViewController:cVC animated:YES];
+
+}
+-(void)pushToRefundVCWithTitle:(NSString *)title type :(NSString *)type {
      RefundViewController * refundVC = [[RefundViewController alloc] init];
-    refundVC.titleName = @"退款维权";
+    if (title) {
+        refundVC.titleName = title;
+    }
+    if (type) {
+        refundVC.type = type;
+    }
+
     [self.navigationController pushViewController:refundVC animated:YES];
 }
 - (void)pushToViewPersonWithTitle:(NSString *)title type :(NSString *)type {

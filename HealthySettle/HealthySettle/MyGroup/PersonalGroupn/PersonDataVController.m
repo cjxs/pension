@@ -17,17 +17,12 @@
 -(UITableView *)tableView {
     if (!_tableView) {
         CGRect rect = CGRectMake(0,0, screenWide, screenHeight);
-        UITableView * tableView = [[UITableView alloc] initWithFrame:rect style:UITableViewStyleGrouped];
+        UITableView * tableView = [[UITableView alloc] initWithFrame:rect style:UITableViewStylePlain];
         tableView.dataSource = self;
         tableView.delegate = self;
-        for (int i = 0; i < 5; i++) {
-            UIView * separator = [[UIView alloc] initWithFrame:CGRectMake(0, (i+1) * 50+10 /* i乘以高度*/, screenWide, 1)];
-            
-            separator.backgroundColor = [UIColor colorWithRed:0.03 * i green:0.05*i blue:0.1*i alpha:0.3];
-            [tableView addSubview:separator];
-        }
         [tableView registerNib:[UINib nibWithNibName:@"PersonTVCell" bundle:nil] forCellReuseIdentifier:@"personCell"];
         tableView.scrollEnabled = NO;
+        tableView.tableFooterView = [UIView new];
         _tableView = tableView;
     }
     return _tableView;
@@ -45,7 +40,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.view.backgroundColor = RGB(242, 242, 242);
+    self.tableView.backgroundColor = RGB(242, 242, 242);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -112,10 +107,10 @@
     return cell;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 50;
+    return screenHeight * 0.064;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 10;
+    return screenHeight * 0.015 ;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 1) {

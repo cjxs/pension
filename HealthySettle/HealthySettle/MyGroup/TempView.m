@@ -16,6 +16,8 @@
         
         UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
         view.backgroundColor = [UIColor blackColor];
+        view.clipsToBounds = YES;
+        view.layer.cornerRadius = 3;
         view.alpha = 0.35;
         [self addSubview:view];
 

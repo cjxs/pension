@@ -9,8 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface PersonVController : UIViewController
+@property (nonatomic,assign)NSInteger order_type;
 @property (nonatomic, strong)NSString * titleName;
 @property (nonatomic, strong)NSString * type;
 @property (nonatomic, strong)UIView * tableHeadView;
 @property (nonatomic, strong)UITableView * tableView;
+
 @end

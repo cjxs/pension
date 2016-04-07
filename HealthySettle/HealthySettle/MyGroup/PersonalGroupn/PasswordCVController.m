@@ -17,6 +17,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.changePass_btn.clipsToBounds = YES;
+    self.changePass_btn.layer.cornerRadius = 5;
    RAC(self.changePass_btn,enabled) = [RACSignal combineLatest:@[self.used_passInput.rac_textSignal,self.fresh_passInput.rac_textSignal,self.refresh_passInput.rac_textSignal] reduce:^id{
         return @([self.used_passInput.text isEqualToString:@"123456"] && self.fresh_passInput.text.length > 0 && [self.refresh_passInput.text isEqualToString:self.fresh_passInput.text]);
     }];

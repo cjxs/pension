@@ -10,7 +10,6 @@
 #import "DDTestApi.h"
 #import "DDTestApiS.h"
 #import "TempView.h"
-#import "ThingsView.h"
 #import "CitySkipViewCell.h"
 #import "GDScrollBanner.h"
 #import "SearchVController.h"

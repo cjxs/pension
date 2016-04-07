@@ -28,7 +28,10 @@ static NSString * const carouselID = @"TempCarouseView";
         [season_collectionView registerClass:[SeasonMCollectViewCell class] forCellWithReuseIdentifier:@"cellSea"];
         [self addSubview:season_collectionView];
         _season_collectionView = season_collectionView;
-        UIPageControl * carousePageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(screenWide /4 , screenHeight * 0.253 - kMargin/2, screenWide /2, kMargin)];
+        _season_collectionView.backgroundColor = RGB(255, 255, 255);
+        
+        CGFloat wides = self.bounds.size.width;
+        UIPageControl * carousePageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(wides /4.0 , screenHeight * 0.253 - kMargin/2, wides /2.0, kMargin)];
         carousePageControl.numberOfPages = 4;
         carousePageControl.pageIndicatorTintColor = RGB(246, 246, 246);
         carousePageControl.currentPageIndicatorTintColor = RGB(247, 55, 72);

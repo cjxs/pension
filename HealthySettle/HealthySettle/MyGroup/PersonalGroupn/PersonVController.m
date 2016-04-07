@@ -7,7 +7,7 @@
 //
 
 #import "PersonVController.h"
-
+#import "OrdAndRefundTVCell.h"
 @interface PersonVController ()<UITableViewDataSource, UITableViewDelegate>
 
 @end
@@ -53,6 +53,10 @@
 - (UITableView *)tableView {
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 31, screenWide, 500)];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+        _tableView.tableFooterView = [UIView new];
         
     }
     return _tableView;
@@ -71,9 +75,16 @@
 -(void)changeDataWithWave:(int)wave {
     if (wave == 0) {
         NSLog(@"数组来自数据源, 数据库数组");
+        
     }else if (wave == 1){
         NSLog(@"新建一个数组， 按所对应筛选条件滤出数组， 作为数据源");
+        _order_type =1;
+    }else if (wave == 2) {
+        _order_type = 2;
+    }else {
+        _order_type = 3;
     }
+    [self.tableView reloadData];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -82,13 +93,11 @@
     self.navigationController.tabBarController.tabBar.translucent = NO;
     self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.tableView];
-    if ([_type isEqualToString:@"order"]) {
-        [self.view addSubview:self.tableHeadView];
-    }else {
-        _tableView.frame = CGRectMake(0, 1, screenWide, 500);
-    }
     
-
+        [self.view addSubview:self.tableHeadView];
+        [self.tableView registerNib:[UINib nibWithNibName:@"OrdAndRefundTVCell" bundle:nil] forCellReuseIdentifier:@"cellOrder"];
+        
+    
 }
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -103,15 +112,21 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+         if ([_type isEqualToString:@"order"]) {
+    return 1;
+    }else if ([_type isEqualToString:@"collect"]){
+        return 1;
+    }else {
+        return 0;
+    }
 }
-*/
-
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+          OrdAndRefundTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cellOrder" forIndexPath:indexPath];
+        [cell configOrderWithtitle:@"杭州滨江区养老院" image:[UIImage imageNamed:@"order_image"] type:self.order_type price:@"999.00"];
+        return cell;
+ }
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return screenHeight * 0.2544;
+  }
 @end
