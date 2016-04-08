@@ -47,13 +47,17 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    UIBarButtonItem * returnBarButtonItem = [[UIBarButtonItem alloc] init];
+    returnBarButtonItem.title = @"";
+    [returnBarButtonItem setBackgroundImage:[UIImage imageNamed:@"leftop_r"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    self.navigationItem.backBarButtonItem = returnBarButtonItem;
       [self.back_btn addTarget:self action:@selector(cancleToRootView) forControlEvents:UIControlEventTouchUpInside];
     [self.serch_messagebtn addTarget:self action:@selector(skipToSearchResultVC) forControlEvents:UIControlEventTouchUpInside];
     if ([_vc_type isEqualToString:@"L"]) {
         [self setBottomPicWithPic:[UIImage imageNamed:@"pension_preview"] andTitle:nil];
-        _third_markPic.image = [UIImage imageNamed:@"nurse_icon"];
-        _four_markPic.image = [UIImage imageNamed:@"position_icon"];
-        _fivth_markPic.image = [UIImage imageNamed:@"price_icon"];
+        _third_markPic.image = [UIImage imageNamed:@"search_6_"];
+        _four_markPic.image = [UIImage imageNamed:@"search_3_"];
+        _fivth_markPic.image = [UIImage imageNamed:@"search_4_"];
         _city_label.text = @"杭州市";
         
         [_sellectOn_label mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -79,9 +83,9 @@
     }else {
          [self setBottomPicWithPic:[UIImage imageNamed:@"regimen_preview"] andTitle:nil];
         
-        _third_markPic.image = [UIImage imageNamed:@"position_icon"];
-        _four_markPic.image = [UIImage imageNamed:@"price_icon"];
-        _fivth_markPic.image = [UIImage imageNamed:@"beautiful_icon"];
+        _third_markPic.image = [UIImage imageNamed:@"search_3_"];
+        _four_markPic.image = [UIImage imageNamed:@"search_4_"];
+        _fivth_markPic.image = [UIImage imageNamed:@"search_5_"];
         
         _city_label.text = @"杭州市";
         

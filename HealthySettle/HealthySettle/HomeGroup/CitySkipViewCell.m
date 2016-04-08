@@ -16,13 +16,12 @@
         _title_label = [[UILabel alloc] initWithFrame:CGRectMake(kMargin * 4, kMargin /2, screenWide - kMargin * 5 , screenHeight * 0.06)];
         _title_label.textColor = RGB(25, 25, 25);
         _title_label.textAlignment = NSTextAlignmentLeft;
-        _title_label.text = @"缤纷花海";
     }
     return _title_label;
 }
 - (UIImageView *)title_icon {
     if (_title_icon == nil) {
-        _title_icon = [[UIImageView alloc] initWithFrame:CGRectMake(kMargin, kMargin * 2, kMargin *2, kMargin*2)];
+        _title_icon = [[UIImageView alloc] initWithFrame:CGRectMake(kMargin, kMargin * 1.7, kMargin *1.7, kMargin*1.7/26*38)];
         _title_icon.image = [UIImage imageNamed:@"z_02"];
     }
     return _title_icon;

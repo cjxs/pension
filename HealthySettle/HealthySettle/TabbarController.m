@@ -23,15 +23,19 @@
     HomeViewController *homeVC = [[HomeViewController alloc] init];
     UINavigationController * homeNaVC =[[UINavigationController alloc] initWithRootViewController:homeVC];
     homeNaVC.tabBarItem.title = @"首页";
+    homeNaVC.tabBarItem.image = [UIImage imageNamed:@"home_g"];
     SearchTVController * searchVC = [[SearchTVController alloc] init];
     UINavigationController *searchNaVC = [[UINavigationController alloc] initWithRootViewController:searchVC];
     searchNaVC.tabBarItem.title = @"发现";
+    searchNaVC.tabBarItem.image = [UIImage imageNamed:@"found_g"];
     CustomerViewController * customerVC = [[CustomerViewController alloc] init];
     UINavigationController *customerNaVC = [[UINavigationController alloc] initWithRootViewController:customerVC];
     customerNaVC.tabBarItem.title = @"客服";
+    customerNaVC.tabBarItem.image = [UIImage imageNamed:@"call_g"];
     MineViewController * mineVC = [[MineViewController alloc] init];
     UINavigationController * mineNaVC = [[UINavigationController alloc] initWithRootViewController:mineVC];
-    mineNaVC.tabBarItem.title = @"我";
+    mineNaVC.tabBarItem.title = @"我的";
+    mineNaVC.tabBarItem.image = [UIImage imageNamed:@"my_g"];
     
     
     
@@ -39,16 +43,10 @@
     
      UIView *v = [[UIView alloc]initWithFrame:frame];
     
-     [v setBackgroundColor:[[UIColor alloc]initWithRed:200.0/255.0
-                            
-                              green:200.0/255.0
-                            
-                              blue:200.0/255.0
-                            
-                              alpha:1.0]];
+     [v setBackgroundColor:RGB(255, 255, 255)];
     
     [self.tabBar insertSubview:v atIndex:0];
-    
+    self.tabBar.tintColor = RGB(229, 0, 0);
     
      
     self.viewControllers = @[homeNaVC, searchNaVC,customerNaVC, mineNaVC];

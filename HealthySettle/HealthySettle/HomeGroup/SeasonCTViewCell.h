@@ -11,5 +11,4 @@
 @interface SeasonCTViewCell : UITableViewCell
 @property (nonatomic, strong)UICollectionView * season_collectionView;
 @property(nonatomic, weak)UIPageControl * carousePageControl;
-
 @end

@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
@@ -15,10 +16,11 @@
                 <rect key="frame" x="0.0" y="0.0" width="452" height="62"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fVX-OZ-AC3">
-                        <rect key="frame" x="28" y="18" width="20" height="38"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fVX-OZ-AC3">
+                        <rect key="frame" x="18" y="24" width="15" height="15"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="20" id="uvb-d5-rMA"/>
+                            <constraint firstAttribute="width" secondItem="fVX-OZ-AC3" secondAttribute="height" multiplier="1:1" id="3no-X1-yaC"/>
+                            <constraint firstAttribute="width" constant="15" id="uvb-d5-rMA"/>
                             <constraint firstAttribute="height" constant="20" id="xd1-rx-GV2"/>
                         </constraints>
                         <variation key="default">
@@ -27,50 +29,61 @@
                             </mask>
                         </variation>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="z_02.png" translatesAutoresizingMaskIntoConstraints="NO" id="zlE-Nm-4LR">
-                        <rect key="frame" x="404" y="8" width="20" height="46"/>
+                    <imageView userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="right_.png" translatesAutoresizingMaskIntoConstraints="NO" id="zlE-Nm-4LR">
+                        <rect key="frame" x="428" y="23" width="8" height="16"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="20" id="UaF-Tz-yfT"/>
+                            <constraint firstAttribute="width" secondItem="zlE-Nm-4LR" secondAttribute="height" multiplier="1:2" id="T4g-dL-Czp"/>
+                            <constraint firstAttribute="width" constant="8" id="UaF-Tz-yfT"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Fp-vt-fW4">
-                        <rect key="frame" x="289" y="13" width="100" height="36"/>
+                        <rect key="frame" x="318" y="13" width="100" height="36"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="100" id="qFe-78-bgl"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                        <color key="textColor" red="0.58823529411764708" green="0.59215686274509804" blue="0.59607843137254901" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EFJ-jK-r6a">
-                        <rect key="frame" x="68" y="13" width="100" height="36"/>
+                        <rect key="frame" x="43" y="13" width="100" height="36"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="100" id="OLB-8G-DL5"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.2196078431372549" green="0.2196078431372549" blue="0.2196078431372549" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <color key="backgroundColor" red="0.99607843137254903" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
+                    <constraint firstItem="zlE-Nm-4LR" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="height" multiplier="1:1" constant="1" id="1Et-mV-PJe"/>
+                    <constraint firstItem="EFJ-jK-r6a" firstAttribute="centerY" secondItem="fVX-OZ-AC3" secondAttribute="centerY" id="1ed-Zq-Zvb"/>
                     <constraint firstAttribute="trailingMargin" secondItem="6Fp-vt-fW4" secondAttribute="trailing" constant="90" id="1qB-0Y-Qes"/>
                     <constraint firstItem="EFJ-jK-r6a" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="5" id="2RR-Qp-a6J"/>
                     <constraint firstItem="fVX-OZ-AC3" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="5" id="2l5-LI-UIp"/>
+                    <constraint firstItem="zlE-Nm-4LR" firstAttribute="centerY" secondItem="EFJ-jK-r6a" secondAttribute="centerY" id="GF4-UO-9m7"/>
                     <constraint firstAttribute="bottomMargin" secondItem="6Fp-vt-fW4" secondAttribute="bottom" constant="5" id="N2N-VW-NL2"/>
                     <constraint firstAttribute="bottomMargin" secondItem="fVX-OZ-AC3" secondAttribute="bottom" constant="5" id="Nfc-6E-WJX"/>
                     <constraint firstItem="6Fp-vt-fW4" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="5" id="Q2V-SX-Mmt"/>
-                    <constraint firstItem="zlE-Nm-4LR" firstAttribute="leading" secondItem="6Fp-vt-fW4" secondAttribute="trailing" constant="15" id="RpC-Pr-BBK"/>
-                    <constraint firstItem="EFJ-jK-r6a" firstAttribute="leading" secondItem="fVX-OZ-AC3" secondAttribute="trailing" constant="20" id="TQs-DN-N5b"/>
-                    <constraint firstItem="fVX-OZ-AC3" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="20" id="ZUG-ga-1el"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="zlE-Nm-4LR" secondAttribute="bottom" id="g7V-bQ-vZ7"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="zlE-Nm-4LR" secondAttribute="trailing" constant="20" id="mj9-rV-Dkp"/>
+                    <constraint firstItem="zlE-Nm-4LR" firstAttribute="leading" secondItem="6Fp-vt-fW4" secondAttribute="trailing" constant="10" id="RpC-Pr-BBK"/>
+                    <constraint firstItem="EFJ-jK-r6a" firstAttribute="leading" secondItem="fVX-OZ-AC3" secondAttribute="trailing" constant="10" id="TQs-DN-N5b"/>
+                    <constraint firstItem="fVX-OZ-AC3" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="ZUG-ga-1el"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="zlE-Nm-4LR" secondAttribute="bottom" constant="6" id="g7V-bQ-vZ7"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="zlE-Nm-4LR" secondAttribute="trailing" constant="8" id="mj9-rV-Dkp"/>
+                    <constraint firstItem="zlE-Nm-4LR" firstAttribute="centerY" secondItem="6Fp-vt-fW4" secondAttribute="centerY" id="p6q-Sb-hYE"/>
                     <constraint firstAttribute="bottomMargin" secondItem="EFJ-jK-r6a" secondAttribute="bottom" constant="5" id="pbr-To-3QU"/>
-                    <constraint firstItem="zlE-Nm-4LR" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="tG9-mG-hcJ"/>
+                    <constraint firstItem="zlE-Nm-4LR" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="6" id="tG9-mG-hcJ"/>
                 </constraints>
                 <variation key="default">
                     <mask key="constraints">
+                        <exclude reference="2l5-LI-UIp"/>
+                        <exclude reference="Nfc-6E-WJX"/>
                         <exclude reference="1qB-0Y-Qes"/>
+                        <exclude reference="1Et-mV-PJe"/>
+                        <exclude reference="g7V-bQ-vZ7"/>
+                        <exclude reference="p6q-Sb-hYE"/>
+                        <exclude reference="tG9-mG-hcJ"/>
                     </mask>
                 </variation>
             </tableViewCellContentView>
@@ -82,10 +95,10 @@
                 <outlet property="mark_View" destination="fVX-OZ-AC3" id="d04-hd-hpF"/>
                 <outlet property="mark_label" destination="EFJ-jK-r6a" id="0iA-OT-oww"/>
             </connections>
-            <point key="canvasLocation" x="344" y="232.5"/>
+            <point key="canvasLocation" x="120" y="222.5"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="z_02.png" width="866" height="333"/>
+        <image name="right_.png" width="5" height="10"/>
     </resources>
 </document>

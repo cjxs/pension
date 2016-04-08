@@ -40,12 +40,12 @@
     if (!_tableHeadView) {
         
         organization_imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, -20, screenWide, screenHeight * 0.319)];
-        organization_titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(organization_imageView.frame) - screenHeight * 0.045,screenWide , screenHeight * 0.045)];
+        organization_titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(screenHeight * 0.035, CGRectGetMaxY(organization_imageView.frame) - screenHeight * 0.045,screenWide , screenHeight * 0.045)];
         organization_titleLabel.backgroundColor = [UIColor clearColor];
         organization_titleLabel.textColor = [UIColor whiteColor];
         organization_titleLabel.text = [NSString stringWithFormat:@"   杭州上城区维康老人文化公寓%@",_vc_type];
-        organization_titleLabel.font = [UIFont systemFontOfSize:11];
-        UIView * view = [[UIView alloc] initWithFrame:organization_titleLabel.frame];
+        organization_titleLabel.font = [UIFont systemFontOfSize:12];
+        UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(organization_imageView.frame) - screenHeight * 0.045,screenWide , screenHeight * 0.045)];
         view.backgroundColor = [UIColor blackColor];
         view.alpha = 0.5;
        
@@ -58,6 +58,9 @@
             _tableHeadView.backgroundColor = RGB(249, 249, 249);
             [_tableHeadView addSubview:organization_imageView];
             [_tableHeadView addSubview:view];
+            
+         
+            
             [_tableHeadView addSubview:organization_titleLabel];
             [_tableHeadView addSubview:back_btn];
             for (int i = 1; i < 4; i++) {
@@ -65,13 +68,13 @@
                 lineView.backgroundColor = RGB(241, 241, 241);
                 [_tableHeadView addSubview:lineView];
             }
-            NSArray * icon_array = @[@"position_2",@"detail",@"comment"];
+            NSArray * icon_array = @[@"list1_show_1_",@"list1_show_2_",@"list1_show_3_"];
             for (int i = 0; i < 3; i++) {
-                UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(screenWide * 0.03,CGRectGetMaxY(organization_imageView.frame)+screenHeight * 0.023 + screenHeight * 0.059 * i, screenWide * 0.038, screenHeight * 0.028)];
+                UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(screenWide * 0.03,CGRectGetMaxY(organization_imageView.frame)+screenHeight * 0.023 + screenHeight * 0.059 * i, screenHeight * 0.02, screenHeight * 0.02)];
                 imageView.image = [UIImage imageNamed:icon_array[i]];
                 [_tableHeadView addSubview:imageView];
-                UIImageView * imageView2 = [[UIImageView alloc] initWithFrame:CGRectMake(screenWide * 0.96,CGRectGetMaxY(organization_imageView.frame)+screenHeight * 0.026 + screenHeight * 0.059 * i, screenWide * 0.022, screenHeight * 0.017)];
-                imageView2.image = [UIImage imageNamed:@"next_02"];
+                UIImageView * imageView2 = [[UIImageView alloc] initWithFrame:CGRectMake(screenWide * 0.965,CGRectGetMaxY(organization_imageView.frame)+screenHeight * 0.027 + screenHeight * 0.059 * i, screenWide * 0.022, screenHeight * 0.017)];
+                imageView2.image = [UIImage imageNamed:@"right_"];
                 [_tableHeadView addSubview:imageView2];
             }
             
@@ -143,13 +146,13 @@
             label_gg.font = [UIFont systemFontOfSize:9];
             [_tableHeadView addSubview:label_gg];
             [self dealLinesWithString:@"门市价 ¥10888"];
-                            NSArray * icon_array = @[@"position_3",@"comment_2"];
+                            NSArray * icon_array = @[@"list1_show_1_",@"list1_show_3_"];
                 for (int i = 0; i < 2; i++) {
-                    UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(screenWide * 0.03,CGRectGetMaxY(organization_imageView.frame)+screenHeight * 0.102 + screenHeight * 0.059 * i, screenWide * 0.03, screenHeight * 0.028)];
+                    UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(screenWide * 0.03,CGRectGetMaxY(organization_imageView.frame)+screenHeight * 0.108 + screenHeight * 0.059 * i, screenHeight * 0.02, screenHeight * 0.02)];
                         imageView.image = [UIImage imageNamed:icon_array[i]];
                     [_tableHeadView addSubview:imageView];
-                    UIImageView * imageView2 = [[UIImageView alloc] initWithFrame:CGRectMake(screenWide * 0.96,CGRectGetMaxY(organization_imageView.frame)+screenHeight * 0.11 + screenHeight * 0.059 * i, screenWide * 0.022, screenHeight * 0.017)];
-                    imageView2.image = [UIImage imageNamed:@"next_03"];
+                    UIImageView * imageView2 = [[UIImageView alloc] initWithFrame:CGRectMake(screenWide * 0.965,CGRectGetMaxY(organization_imageView.frame)+screenHeight * 0.11 + screenHeight * 0.059 * i, screenWide * 0.022, screenHeight * 0.017)];
+                    imageView2.image = [UIImage imageNamed:@"right_"];
                     [_tableHeadView addSubview:imageView2];
                 }
                             
@@ -181,6 +184,9 @@
         commentRatio_label.font = [UIFont systemFontOfSize:10];
         [_tableHeadView addSubview:commentRatio_label];
 
+        UIImageView * honourView = [[UIImageView alloc] initWithFrame:CGRectMake(screenHeight * 0.025, CGRectGetMaxY(organization_imageView.frame) - screenHeight * 0.033,screenHeight * 0.02/32*21 , screenHeight * 0.02)];
+        honourView.image = [UIImage imageNamed:@"list1_show_0_"];
+        [_tableHeadView addSubview:honourView];
 
 
     }
@@ -207,6 +213,10 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    UIBarButtonItem * returnBarButtonItem = [[UIBarButtonItem alloc] init];
+    returnBarButtonItem.title = @"";
+    [returnBarButtonItem setBackgroundImage:[UIImage imageNamed:@"leftop_r"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    self.navigationItem.backBarButtonItem = returnBarButtonItem;
     self.tableView.tableHeaderView = self.tableHeadView;
     if ([self.vc_type isEqualToString:@"S"]) {
         self.tableView.backgroundColor = RGB(250, 250, 250);

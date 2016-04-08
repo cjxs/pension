@@ -41,6 +41,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.tableView.backgroundColor = RGB(242, 242, 242);
+    UIBarButtonItem * returnBarButtonItem = [[UIBarButtonItem alloc] init];
+    returnBarButtonItem.title = @"";
+    self.navigationController.navigationBar.tintColor=[UIColor redColor];
+    [returnBarButtonItem setBackgroundImage:[UIImage imageNamed:@"leftop_r"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    self.navigationItem.backBarButtonItem = returnBarButtonItem;
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -77,7 +83,7 @@
                 break;
             case 1:
                 [cell.resultField removeFromSuperview];
-                [cell configClassName:@"性别" Andresult:@"--" with:@"L"];
+                [cell configClassName:@"性别" Andresult:@"男" with:@"L"];
                 
                 break;
             case 2:

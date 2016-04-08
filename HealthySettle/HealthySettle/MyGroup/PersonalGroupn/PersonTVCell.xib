@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
@@ -39,10 +40,11 @@
                             </mask>
                         </variation>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="z_02.png" translatesAutoresizingMaskIntoConstraints="NO" id="SX2-jg-mcL">
-                        <rect key="frame" x="297" y="13" width="20" height="51"/>
+                    <imageView userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="right_" translatesAutoresizingMaskIntoConstraints="NO" id="SX2-jg-mcL">
+                        <rect key="frame" x="309" y="31" width="8" height="16"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="20" id="1Rp-XI-bP5"/>
+                            <constraint firstAttribute="width" constant="8" id="1Rp-XI-bP5"/>
+                            <constraint firstAttribute="width" secondItem="SX2-jg-mcL" secondAttribute="height" multiplier="1:2" id="w4o-M3-fON"/>
                         </constraints>
                     </imageView>
                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="t04-oh-7bk">
@@ -59,6 +61,7 @@
                 <constraints>
                     <constraint firstItem="3Ia-xz-Cco" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="5" id="Cer-Qd-bAF"/>
                     <constraint firstItem="1pe-vG-EN9" firstAttribute="top" secondItem="t04-oh-7bk" secondAttribute="bottom" id="KLZ-WF-CKS"/>
+                    <constraint firstItem="SX2-jg-mcL" firstAttribute="centerY" secondItem="3Ia-xz-Cco" secondAttribute="centerY" id="MMe-FG-bBe"/>
                     <constraint firstAttribute="bottomMargin" secondItem="3Ia-xz-Cco" secondAttribute="bottom" constant="5" id="OVG-Cr-nEw"/>
                     <constraint firstAttribute="bottomMargin" secondItem="SX2-jg-mcL" secondAttribute="bottom" constant="5" id="Ssl-BS-87q"/>
                     <constraint firstItem="t04-oh-7bk" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="4" id="c72-ZQ-pJE"/>
@@ -69,6 +72,12 @@
                     <constraint firstAttribute="trailingMargin" secondItem="t04-oh-7bk" secondAttribute="trailing" constant="40" id="q2s-EE-UvI"/>
                     <constraint firstItem="3Ia-xz-Cco" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="qlK-ai-hVd"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="Ssl-BS-87q"/>
+                        <exclude reference="jE6-Gg-rbo"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="NextImage" destination="SX2-jg-mcL" id="Y9u-WD-BQd"/>
@@ -80,6 +89,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="z_02.png" width="866" height="333"/>
+        <image name="right_" width="866" height="333"/>
     </resources>
 </document>

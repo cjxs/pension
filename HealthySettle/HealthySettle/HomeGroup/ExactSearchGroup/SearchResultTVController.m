@@ -71,6 +71,7 @@
     }
     return _tableHeadView;
 }
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     _searchPlace_name = @"杭州";
@@ -100,6 +101,7 @@
     self.navigationController.navigationBar.tintColor = [UIColor redColor];
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor blackColor]};
     [self hideTabBar];
+  
 
     
 }

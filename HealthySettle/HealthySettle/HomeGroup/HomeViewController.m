@@ -17,12 +17,12 @@
 #import <MTMigration.h>
 #import "ProductTipView.h"
 #import "WebViewController.h"
+#import "KnowledgeTVController.h"
+#import "SeasonMCollectViewCell.h"
+#import "MonthViewController.h"
 
 
-
-
-
-@interface HomeViewController ()<UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate,UISearchBarDelegate,UIWebViewDelegate>{
+@interface HomeViewController ()<UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate,UISearchBarDelegate,UIWebViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource>{
     NSMutableArray * imagesA;
 }
 
@@ -36,7 +36,7 @@
     if (_tableHeadView == nil ) {
         _tableHeadView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWide, screenHeight * 0.477)];
         //轮播图
-         imagesA = [NSMutableArray arrayWithObjects:@"banner",@"z_02", nil];
+         imagesA = [NSMutableArray arrayWithObjects:@"z_03",@"z_02", nil];
         GDScrollBanner * net = [[GDScrollBanner alloc] initWithFrame:CGRectMake(0, 0, screenWide , screenHeight * 0.222) WithLocalImages:imagesA];
         net.AutoScrollDelay = 2.0f;
         //占位图  net.placeImage
@@ -77,26 +77,26 @@
 //四个跳转
 - (void)clipOnBtnsWithbtn:(UIButton *)btn{
     int btn_number = btn.frame.origin.x /(screenWide/4);
-    switch (btn_number) {
-        case 0:
-            NSLog(@"++++++++++++%d",btn_number);
-            break;
-        case 1:
-            NSLog(@"++++++++++++%d",btn_number);
-            break;
-        case 2:
-            NSLog(@"++++++++++++%d",btn_number);
-            break;
-        case 3:
-            NSLog(@"++++++++++++%d",btn_number);
-            break;
-        default:
-            break;
-    }
+    if (btn_number == 0) {
         NSURL * url = [NSURL URLWithString:@"http://www.cjxs.github.io/"];
-    WebViewController * webVC = [[WebViewController alloc] init];
-    webVC.urlLoad = url;
-    [self.navigationController pushViewController:webVC animated:NO];
+        WebViewController * webVC = [[WebViewController alloc] init];
+        webVC.urlLoad = url;
+        [self.navigationController pushViewController:webVC animated:NO];
+    }else if (btn_number == 1) {
+        NSURL * url = [NSURL URLWithString:@"http://www.cjxs.github.io/"];
+        WebViewController * webVC = [[WebViewController alloc] init];
+        webVC.urlLoad = url;
+        [self.navigationController pushViewController:webVC animated:NO];
+    }else if (btn_number == 2) {
+        KnowledgeTVController * vc = [[KnowledgeTVController alloc] init];
+        [self.navigationController pushViewController:vc animated:NO];
+    }else {
+        NSURL * url = [NSURL URLWithString:@"http://www.cjxs.github.io/"];
+        WebViewController * webVC = [[WebViewController alloc] init];
+        webVC.urlLoad = url;
+        [self.navigationController pushViewController:webVC animated:NO];
+    }
+   
     
     
 }
@@ -125,7 +125,6 @@
     self.navigationController.navigationBar.barTintColor = RGB(205, 8, 20);
     self.navigationController.navigationBar.translucent = NO;
     self.navigationController.tabBarController.tabBar.translucent = NO;
-
 
 }
 
@@ -182,6 +181,12 @@
     _homeTableView = homeTableView;
     
     
+    UIBarButtonItem * returnBarButtonItem = [[UIBarButtonItem alloc] init];
+    returnBarButtonItem.title = @"";
+    self.navigationController.navigationBar.tintColor=[UIColor redColor];
+    [returnBarButtonItem setBackgroundImage:[UIImage imageNamed:@"leftop_r"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    self.navigationItem.backBarButtonItem = returnBarButtonItem;
+    
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -197,23 +202,24 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row == 0) {
         SeasonCTViewCell * cell = [_homeTableView dequeueReusableCellWithIdentifier:@"cellSeason"];
+        cell.season_collectionView.delegate = self;
+        cell.season_collectionView.dataSource = self;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }else {
         CitySkipViewCell * cell = [_homeTableView dequeueReusableCellWithIdentifier:@"cellCity"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.type = indexPath.row;
-        if (indexPath.row == 0) {
-            [cell configWithicon:[UIImage imageNamed:@"home_city"] title:@"浪漫海滨" data:nil];
+        if (indexPath.row == 1) {
+            [cell configWithicon:[UIImage imageNamed:@"fir_"] title:@"浪漫海滨" data:nil];
         }else {
-            [cell configWithicon:[UIImage imageNamed:@"home_city"] title:@"缤纷花海" data:nil];
+            [cell configWithicon:[UIImage imageNamed:@"fir_"] title:@"缤纷花海" data:nil];
 
         }
         return cell;
     }
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSLog(@"%d",(int)indexPath.row);
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -222,6 +228,72 @@
 
 
 #pragma mark - UITableViewDataSource, UITableViewDelegate,UISearchBarDelegate
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    return 12;
+    
+}
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
+    return 1;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    SeasonMCollectViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cellSea" forIndexPath:indexPath];
+    switch (indexPath.row) {
+        case 0:
+            [cell configViewWithimage:[UIImage imageNamed:@"p_01"] season:@"1 月" describ:@"新的开始"];
+            break;
+        case 1:
+            [cell configViewWithimage:[UIImage imageNamed:@"p_02"] season:@"2 月" describ:@"春季旅行"];
+            break;
+        case 2:
+            [cell configViewWithimage:[UIImage imageNamed:@"p_03"] season:@"3 月" describ:@"春节没玩够"];
+            break;
+        case 3:
+            [cell configViewWithimage:[UIImage imageNamed:@"p_01"] season:@"4 月" describ:@"新的开始"];
+            break;
+        case 4:
+            [cell configViewWithimage:[UIImage imageNamed:@"p_02"] season:@"5 月" describ:@"新的开始"];
+            break;
+        case 5:
+            [cell configViewWithimage:[UIImage imageNamed:@"p_03"] season:@"6 月" describ:@"新的开始"];
+            break;
+        case 6:
+            [cell configViewWithimage:[UIImage imageNamed:@"p_01"] season:@"7 月" describ:@"新的开始"];
+            break;
+        case 7:
+            [cell configViewWithimage:[UIImage imageNamed:@"p_02"] season:@"8月" describ:@"新的开始"];
+            break;
+        case 8:
+            [cell configViewWithimage:[UIImage imageNamed:@"p_03"] season:@"9 月" describ:@"新的开始"];
+            break;
+        case 9:
+            [cell configViewWithimage:[UIImage imageNamed:@"p_01"] season:@"10 月" describ:@"新的开始"];
+            break;
+        case 10:
+            [cell configViewWithimage:[UIImage imageNamed:@"p_02"] season:@"11月" describ:@"新的开始"];
+            break;
+            
+        default:
+            [cell configViewWithimage:[UIImage imageNamed:@"p_03"] season:@"12月" describ:@"新的开始"];
+            break;
+    }
+    return cell;
+}
+- (CGFloat) collectionView:(UICollectionView *)collectionView
+                    layout:(UICollectionViewLayout *)collectionViewLayout
+minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
+{
+    return 0;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    MonthViewController * monVC = [[MonthViewController alloc] initWithNibName:@"MonthViewController" bundle:nil];
+       [self.navigationController pushViewController:monVC animated:NO];
+    
+}
+
+
+
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     NSLog(@"%@",_searchWhere.text);
     _searchWhere.showsCancelButton = NO;

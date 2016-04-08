@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
@@ -15,14 +16,20 @@
                 <rect key="frame" x="0.0" y="0.0" width="618" height="73"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="date.png" translatesAutoresizingMaskIntoConstraints="NO" id="kNP-H0-5d2">
-                        <rect key="frame" x="13" y="8" width="20" height="57"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="list1_show_4_" translatesAutoresizingMaskIntoConstraints="NO" id="kNP-H0-5d2">
+                        <rect key="frame" x="13" y="8" width="57" height="57"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="20" id="3PJ-GN-0fO"/>
+                            <constraint firstAttribute="width" secondItem="kNP-H0-5d2" secondAttribute="height" multiplier="1:1" id="sYb-tE-yd5"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="3PJ-GN-0fO"/>
+                            </mask>
+                        </variation>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="入住" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2cx-xZ-6pj">
-                        <rect key="frame" x="43" y="8" width="30" height="57"/>
+                        <rect key="frame" x="80" y="8" width="30" height="57"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="30" id="Aku-xq-jTD"/>
                         </constraints>
@@ -31,7 +38,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2016-04-23" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O1n-sd-ZJz">
-                        <rect key="frame" x="83" y="8" width="80" height="57"/>
+                        <rect key="frame" x="120" y="8" width="80" height="57"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="80" id="8Rk-lV-Bz7"/>
                         </constraints>
@@ -49,17 +56,17 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d1x-Jy-wga">
-                        <rect key="frame" x="580" y="8" width="30" height="57"/>
+                        <rect key="frame" x="574" y="8" width="40" height="57"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="30" id="nbk-XO-Tdz"/>
+                            <constraint firstAttribute="width" constant="40" id="nbk-XO-Tdz"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                        <state key="normal" title="修改">
+                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                        <state key="normal" title="修改  &gt;">
                             <color key="titleColor" red="0.78431372549019607" green="0.78431372549019607" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2016-04－25" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nIc-bQ-IoL">
-                        <rect key="frame" x="213" y="8" width="80" height="57"/>
+                        <rect key="frame" x="250" y="8" width="80" height="57"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="80" id="Q2J-24-OR4"/>
                         </constraints>
@@ -80,7 +87,7 @@
                     <constraint firstAttribute="trailingMargin" secondItem="nIc-bQ-IoL" secondAttribute="trailing" constant="10" id="LnP-nq-zNc"/>
                     <constraint firstItem="nIc-bQ-IoL" firstAttribute="leading" secondItem="igv-gJ-Mvi" secondAttribute="trailing" constant="10" id="OsE-lI-jTj"/>
                     <constraint firstAttribute="bottomMargin" secondItem="igv-gJ-Mvi" secondAttribute="bottom" id="dg5-pC-oAm"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="d1x-Jy-wga" secondAttribute="trailing" id="iT5-5j-3g7"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="d1x-Jy-wga" secondAttribute="trailing" constant="-4" id="iT5-5j-3g7"/>
                     <constraint firstAttribute="bottomMargin" secondItem="d1x-Jy-wga" secondAttribute="bottom" id="mBt-bw-UoN"/>
                     <constraint firstItem="O1n-sd-ZJz" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="qQf-WZ-Zcz"/>
                     <constraint firstItem="kNP-H0-5d2" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="5" id="rHN-GV-lcT"/>
@@ -100,6 +107,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="date.png" width="88" height="82"/>
+        <image name="list1_show_4_" width="866" height="333"/>
     </resources>
 </document>

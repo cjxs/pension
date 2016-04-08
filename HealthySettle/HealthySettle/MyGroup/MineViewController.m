@@ -47,14 +47,19 @@ static NSString *setCellIdentifier = @"cellS";
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    UIBarButtonItem * returnBarButtonItem = [[UIBarButtonItem alloc] init];
+    returnBarButtonItem.title = @"";
+    self.navigationController.navigationBar.tintColor=[UIColor redColor];
+    [returnBarButtonItem setBackgroundImage:[UIImage imageNamed:@"leftop_r"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    self.navigationItem.backBarButtonItem = returnBarButtonItem;
     self.view.backgroundColor = RGB(243, 244, 245);
     [self setBottomPicWithPic:[UIImage imageNamed:@"person_back"] withPerP:[UIImage imageNamed:@"boy_head"] andTitle:@"登录/注册"];
     
-    TempView *collectView = [[TempView alloc] initWithFrame:CGRectMake(screenWide /9, screenHeight * 0.255, screenWide/3, screenHeight * 0.05) withMark:[UIImage imageNamed:@"z_02"] andTitle:@"我的收藏"];
+    TempView *collectView = [[TempView alloc] initWithFrame:CGRectMake(screenWide /9, screenHeight * 0.255, screenWide/3, screenHeight * 0.05) withMark:[UIImage imageNamed:@"star_"] andTitle:@"我的收藏"];
     UITapGestureRecognizer * tapC = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickTwoViews:)];
     tapC.numberOfTapsRequired = 1;
     [collectView addGestureRecognizer:tapC];
-    TempView * dataView = [[TempView alloc] initWithFrame:CGRectMake(screenWide/9 * 5, screenHeight * 0.255, screenWide / 3, screenHeight * 0.05) withMark:[UIImage imageNamed:@"z_03"] andTitle:@"个人资料"];
+    TempView * dataView = [[TempView alloc] initWithFrame:CGRectMake(screenWide/9 * 5, screenHeight * 0.255, screenWide / 3, screenHeight * 0.05) withMark:[UIImage imageNamed:@"user_"] andTitle:@"个人资料"];
     UITapGestureRecognizer * tapD = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickTwoViews:)];
     tapD.numberOfTapsRequired = 1;
     [dataView addGestureRecognizer:tapD];
@@ -126,21 +131,21 @@ static NSString *setCellIdentifier = @"cellS";
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            [cell setThingsWithName:@"现金账户" Image:[UIImage imageNamed:@"z_02"] number:@"¥ 0.00"];
+            [cell setThingsWithName:@"现金账户" Image:[UIImage imageNamed:@"system_1_"] number:@"¥ 0.00"];
             
         }else if (indexPath.row == 1) {
-            [cell setThingsWithName:@"我的积分" Image:[UIImage imageNamed:@"z_03"] number:@"350"];
+            [cell setThingsWithName:@"我的积分" Image:[UIImage imageNamed:@"system_2_"] number:@"350"];
             
         }else if (indexPath.row == 2 ) {
-            [cell setThingsWithName:@"优惠券" Image:[UIImage imageNamed:@"z_02"] number:@"1 张"];
+            [cell setThingsWithName:@"优惠券" Image:[UIImage imageNamed:@"system_3_"] number:@"1 张"];
             
             
         }else{
-            [cell setThingsWithName:@"密码修改" Image:[UIImage imageNamed:@"z_03"] number:nil];
+            [cell setThingsWithName:@"密码修改" Image:[UIImage imageNamed:@"system_4_"] number:nil];
             
         }
     }else {
-        [cell setThingsWithName:@"更多" Image:[UIImage imageNamed:@"z_03"] number:nil];
+        [cell setThingsWithName:@"更多" Image:[UIImage imageNamed:@"system_5_"] number:nil];
 
     }
     
