@@ -9,7 +9,7 @@
 #import "SearchVController.h"
 #import "CDDatePicker.h"
 #import "CDCityPicker.h"
-#import "SearchResultTVController.h"
+#import "ResultListVController.h"
 @interface SearchVController ()<HYMDatePickerDelegate,CDCityPickerDelegate> {
     NSDate * end_begain;
     NSDate * end_end;
@@ -292,9 +292,9 @@
 }
 */
 -(void)skipToSearchResultVC {
-    SearchResultTVController * searchResultVC = [[SearchResultTVController alloc] initWithStyle:UITableViewStyleGrouped];
-    searchResultVC.vc_type = self.vc_type;
-    [self.navigationController pushViewController:searchResultVC animated:YES];
+    ResultListVController * ResultLVC = [[ResultListVController alloc] init];
+    ResultLVC.vc_type = self.vc_type;
+    [self.navigationController pushViewController:ResultLVC animated:YES];
 }
 -(void)dealloc {
     

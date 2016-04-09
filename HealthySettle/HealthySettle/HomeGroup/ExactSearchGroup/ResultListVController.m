@@ -1,26 +1,90 @@
 //
-//  SearchResultTVController.m
+//  ResultListVController.m
 //  HealthySettle
 //
-//  Created by yrc on 16/3/31.
+//  Created by yrc on 16/4/9.
 //  Copyright © 2016年 yrc. All rights reserved.
 //
 
-#import "SearchResultTVController.h"
+#import "ResultListVController.h"
 #import "PensionSRTVCell.h"
 #import "RegimenRTVCell.h"
 #import "ResultDetailTVController.h"
-
-
-@interface SearchResultTVController () {
+#import "PriSeleView.h"
+@interface ResultListVController ()<UITableViewDataSource ,UITableViewDelegate> {
     NSArray * array1;
     NSArray * array2;
     NSArray * array3;
+    BOOL hide;
+    BOOL isScroll;
 }
 
 @end
 
-@implementation SearchResultTVController
+@implementation ResultListVController
+-(UITableView *)tableView {
+    if (!_tableView) {
+        UITableView * tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, screenWide, screenHeight -64) style:UITableViewStylePlain];
+        tableView.showsVerticalScrollIndicator = NO;
+        tableView.bounces = NO;
+        tableView.delegate = self;
+        tableView.dataSource = self;
+        _tableView = tableView;
+    }
+    return _tableView;
+}
+-(UIView *)filter_view {
+    if (!_filter_view) {
+        NSArray * image_array = @[@"list2_1_",@"list2_2_",@"list2_3_",@"list2_4_"];
+        NSArray * title_array = @[@"所在区域",@"价格区间",@"筛选",@"排序"];
+        UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, screenHeight - 49-64, screenWide, 49)];
+        
+        view.backgroundColor = RGB(249, 249, 249);
+        for (int i = 0; i < 4 ;i++ ) {
+            UIButton * btn = [UIButton buttonWithType:UIButtonTypeCustom];
+            btn.frame = CGRectMake(screenWide /4 * i, 0, screenWide /4, 49);
+            [btn addTarget:self action:@selector(showfilterWithButton:) forControlEvents:UIControlEventTouchUpInside];
+            [view addSubview:btn];
+            UIImageView * image_view;
+            switch (i) {
+                case 0:
+                    image_view  = [[UIImageView alloc] initWithFrame:CGRectMake((screenWide/4 -screenWide * 0.05)/2 + screenWide /4 * i, screenHeight * 0.01, screenWide * 0.04, screenWide * 0.04 /3 * 4)];
+                    break;
+                case 1:
+                    image_view  = [[UIImageView alloc] initWithFrame:CGRectMake((screenWide/4 -screenWide * 0.05)/2 + screenWide /4 * i, screenHeight * 0.01, screenWide * 0.05, screenWide * 0.05 )];
+                    break;
+                default:
+                    image_view  = [[UIImageView alloc] initWithFrame:CGRectMake((screenWide/4 -screenWide * 0.05)/2 + screenWide /4 * i, screenHeight * 0.01, screenWide * 0.04, screenWide * 0.04 /15* 16)];
+                    break;
+                }
+         
+            image_view.image = [UIImage imageNamed:image_array[i]];
+            [view addSubview:image_view];
+            UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(screenWide/4 * i, CGRectGetMaxY(image_view.frame), screenWide /4,49 -  CGRectGetMaxY(image_view.frame))];
+            label.text = title_array[i];
+            label.textColor = RGB(199, 199, 199);
+            label.font = [UIFont systemFontOfSize:10];
+            label.textAlignment = NSTextAlignmentCenter;
+            [view addSubview:label];
+        }
+        _filter_view = view;
+    }
+    return _filter_view;
+}
+- (void)showfilterWithButton:(UIButton *)btn {
+    int number = btn.frame.origin.x / screenWide * 4;
+    if ( number ==0) {
+        NSLog(@" 所在区域");
+    }else if (number == 1) {
+        NSLog(@" 价格区间");
+        PriSeleView * pri_view = [[PriSeleView alloc] init];
+        [[UIApplication sharedApplication].keyWindow addSubview:pri_view];
+    }else if (number == 2) {
+        NSLog(@"筛选");
+    }else {
+        NSLog(@"排序");
+    }
+}
 -(UIView *)tableHeadView {
     if (!_tableHeadView) {
         UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWide, screenHeight * 0.08)];
@@ -44,7 +108,7 @@
             checkIn_label.text = @"   入2-15";
             checkIn_label.font = [UIFont systemFontOfSize:14];
             [view addSubview:_checkIn_label];
-          
+            
             
         }else if ([self.vc_type isEqualToString:@"S"]) {
             UIView * label_view = [[UIView alloc] initWithFrame:CGRectMake(screenWide * 0.02, screenHeight * 0.01, screenWide * 0.21, screenHeight * 0.06)];
@@ -66,7 +130,7 @@
             [label_view addSubview:_leave_label];
             [view addSubview:label_view];
         }
-
+        
         _tableHeadView = view;
     }
     return _tableHeadView;
@@ -74,6 +138,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    // Do any additional setup after loading the view.
+    [self.view addSubview:self.tableView];
+    [self.view addSubview:self.filter_view];
     _searchPlace_name = @"杭州";
     if (_searchPlace_name) {
         self.navigationItem.title = _searchPlace_name;
@@ -88,11 +155,8 @@
     array1 = @[@"wifi_is",@"tv_is",@"wifi_is",@"p_is"];
     array3 = @[@"p_is",@"wifi_is",@"p_is",@"wifi_is"];
     array2 = @[@"wifi_is",@"p_is",@"tv_is",@"p_is",@"wifi_is",@"wifi_is",@"p_is"];
+    
 
-  
-    }
--(void)viewDidLayoutSubviews {
-    [super viewDidLayoutSubviews];
 }
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -101,15 +165,13 @@
     self.navigationController.navigationBar.tintColor = [UIColor redColor];
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor blackColor]};
     [self hideTabBar];
-  
-
     
 }
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [self showTabBar];
     [self.navigationController setNavigationBarHidden:YES animated:YES];
-
+    
 }
 - (void)hideTabBar {
     if (self.tabBarController.tabBar.hidden == YES) {
@@ -142,13 +204,6 @@
     self.tabBarController.tabBar.hidden = NO;
     
 }
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-#pragma mark - Table view data source
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
@@ -173,7 +228,7 @@
                 [cell configWithimage:[UIImage imageNamed:@"pension"] title:@"杭州上城区维康老人" address:@"左城区近江南路2号"number:@"999" price:@"399"];
                 break;
             default:
-                  [cell configWithimage:[UIImage imageNamed:@"pension"] title:@"杭州上城区维康老人" address:@"上城区近江南路2号"number:@"999" price:@"588"];
+                [cell configWithimage:[UIImage imageNamed:@"pension"] title:@"杭州上城区维康老人" address:@"上城区近江南路2号"number:@"999" price:@"588"];
                 break;
         }
         
@@ -217,4 +272,53 @@
     resultDTVC.vc_type = self.vc_type;
     [self.navigationController pushViewController:resultDTVC animated:NO];
 }
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+- (void)showFilter_view {
+    self.filter_view.frame = CGRectMake(0, screenHeight - 49-64, screenWide, 49);
+}
+- (void)hideFilter_view {
+    self.filter_view.frame = CGRectMake(0, screenHeight-64, screenWide, 49);
+}
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView {
+        static float newy = 0;
+        static float oldy = 0;
+        newy = scrollView.contentOffset.y ;
+    if (isScroll == NO) {
+        isScroll = YES;
+        if (newy != oldy ) {
+            if (newy > oldy && hide == NO) {
+                
+                [UIView animateWithDuration:0.5 animations:^{
+                    [self hideFilter_view];
+                }];
+                hide = YES;
+            }else if(newy < oldy&& hide == YES){
+                [UIView animateWithDuration:0.5 animations:^{
+                    [self showFilter_view];
+                }];
+                hide = NO;
+            }
+            oldy = newy;
+        }
+        isScroll = NO;
+
+    }
+    
+}
+    
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
 @end

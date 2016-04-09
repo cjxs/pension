@@ -175,6 +175,7 @@
     homeTableView.delegate = self;
     homeTableView.dataSource = self;
     homeTableView.bounces = NO;
+    homeTableView.showsVerticalScrollIndicator = NO;
     
     [homeTableView registerClass:[CitySkipViewCell class] forCellReuseIdentifier:@"cellCity"];
     [homeTableView registerClass:[SeasonCTViewCell class] forCellReuseIdentifier:@"cellSeason"];

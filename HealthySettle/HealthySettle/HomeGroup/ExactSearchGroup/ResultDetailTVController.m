@@ -19,6 +19,7 @@
 #import "ShowTVCell.h"
 #import "ShouldKnowTVCell.h"
 #import "OrderTVController.h"
+#import "CommentViewController.h"
 
 
 @interface ResultDetailTVController () {
@@ -213,6 +214,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.tableView.showsVerticalScrollIndicator = NO;
     UIBarButtonItem * returnBarButtonItem = [[UIBarButtonItem alloc] init];
     returnBarButtonItem.title = @"";
     [returnBarButtonItem setBackgroundImage:[UIImage imageNamed:@"leftop_r"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
@@ -261,9 +263,7 @@
     OrderTVController * orderVC = [[OrderTVController alloc] initWithStyle:UITableViewStylePlain];
     [self.navigationController pushViewController:orderVC animated:NO];
 }
-- (void)pushToOrderController {
-    
-}
+
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 //    [UIApplication sharedApplication].statusBarHidden = YES;
@@ -345,6 +345,7 @@
         }else {
            CommentTVCell *  cell  = [tableView dequeueReusableCellWithIdentifier:@"cellComment" forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            [cell.commentNow_btn addTarget:self action:@selector(submitCommentNow) forControlEvents:UIControlEventTouchUpInside];
             return cell;
         }
         
@@ -386,11 +387,16 @@
         }else {
             CommentTVCell *  cell  = [tableView dequeueReusableCellWithIdentifier:@"cellComment" forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            [cell.commentNow_btn addTarget:self action:@selector(submitCommentNow) forControlEvents:UIControlEventTouchUpInside];
             return cell;
         }
 
        
     }
+}
+- (void)submitCommentNow {
+    CommentViewController * commentVC = [[CommentViewController alloc] init];
+    [self.navigationController pushViewController:commentVC animated:YES];
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
