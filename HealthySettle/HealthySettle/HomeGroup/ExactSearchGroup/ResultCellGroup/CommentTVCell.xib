@@ -61,7 +61,7 @@
                         <constraints>
                             <constraint firstAttribute="height" constant="40" id="OCz-07-koY"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <state key="normal" title="我要点评"/>
                     </button>

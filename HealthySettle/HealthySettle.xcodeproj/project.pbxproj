@@ -71,6 +71,13 @@
 		3278CCE41CAFBB4500038B9D /* CommentTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3278CCE21CAFBB4500038B9D /* CommentTVCell.xib */; };
 		3278CCE61CAFC17400038B9D /* shareCompany.png in Resources */ = {isa = PBXBuildFile; fileRef = 3278CCE51CAFC17400038B9D /* shareCompany.png */; };
 		3278CCE91CAFDDC100038B9D /* SelectTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3278CCE81CAFDDC100038B9D /* SelectTVCell.m */; };
+		327CA9681CBB692000FC4F8E /* GraceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 327CA9671CBB692000FC4F8E /* GraceVC.m */; };
+		327CA96B1CBB712000FC4F8E /* GraceTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 327CA96A1CBB712000FC4F8E /* GraceTVCell.m */; };
+		327CA96F1CBB79C100FC4F8E /* weishiyong_@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 327CA96C1CBB79C100FC4F8E /* weishiyong_@2x.png */; };
+		327CA9701CBB79C100FC4F8E /* weishiyong_@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 327CA96D1CBB79C100FC4F8E /* weishiyong_@3x.png */; };
+		327CA9711CBB79C100FC4F8E /* system_08.png in Resources */ = {isa = PBXBuildFile; fileRef = 327CA96E1CBB79C100FC4F8E /* system_08.png */; };
+		327CA9731CBBA28A00FC4F8E /* add_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 327CA9721CBBA28A00FC4F8E /* add_btn.png */; };
+		327CA9761CBBB78E00FC4F8E /* AccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 327CA9751CBBB78E00FC4F8E /* AccountViewController.m */; };
 		327DC7CE1CB4F8FD005617D2 /* GDScrollBanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 327DC7CD1CB4F8FD005617D2 /* GDScrollBanner.m */; };
 		327DC7D11CB4F935005617D2 /* GuideVController.m in Sources */ = {isa = PBXBuildFile; fileRef = 327DC7D01CB4F935005617D2 /* GuideVController.m */; };
 		327DC7D51CB4FFE5005617D2 /* Guide_01.png in Resources */ = {isa = PBXBuildFile; fileRef = 327DC7D21CB4FFE5005617D2 /* Guide_01.png */; };
@@ -116,6 +123,7 @@
 		32D859771CB90B100074D5C3 /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D859761CB90B100074D5C3 /* CommentViewController.m */; };
 		32D8597A1CB90F4E0074D5C3 /* choose_@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 32D859781CB90F4E0074D5C3 /* choose_@2x.png */; };
 		32D8597B1CB90F4E0074D5C3 /* choose_@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 32D859791CB90F4E0074D5C3 /* choose_@3x.png */; };
+		32D8597D1CB912DF0074D5C3 /* content.png in Resources */ = {isa = PBXBuildFile; fileRef = 32D8597C1CB912DF0074D5C3 /* content.png */; };
 		32DD1DCC1CA5082B00E1C229 /* SetTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32DD1DCA1CA5082B00E1C229 /* SetTVCell.m */; };
 		32DD1DCD1CA5082B00E1C229 /* SetTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32DD1DCB1CA5082B00E1C229 /* SetTVCell.xib */; };
 		32DDD31C1CA1406A00EFACF9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 32DDD31B1CA1406A00EFACF9 /* libPods.a */; };
@@ -295,6 +303,16 @@
 		3278CCE51CAFC17400038B9D /* shareCompany.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shareCompany.png; sourceTree = "<group>"; };
 		3278CCE71CAFDDC100038B9D /* SelectTVCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectTVCell.h; sourceTree = "<group>"; };
 		3278CCE81CAFDDC100038B9D /* SelectTVCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectTVCell.m; sourceTree = "<group>"; };
+		327CA9661CBB692000FC4F8E /* GraceVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraceVC.h; sourceTree = "<group>"; };
+		327CA9671CBB692000FC4F8E /* GraceVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraceVC.m; sourceTree = "<group>"; };
+		327CA9691CBB712000FC4F8E /* GraceTVCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraceTVCell.h; sourceTree = "<group>"; };
+		327CA96A1CBB712000FC4F8E /* GraceTVCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraceTVCell.m; sourceTree = "<group>"; };
+		327CA96C1CBB79C100FC4F8E /* weishiyong_@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "weishiyong_@2x.png"; sourceTree = "<group>"; };
+		327CA96D1CBB79C100FC4F8E /* weishiyong_@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "weishiyong_@3x.png"; sourceTree = "<group>"; };
+		327CA96E1CBB79C100FC4F8E /* system_08.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = system_08.png; sourceTree = "<group>"; };
+		327CA9721CBBA28A00FC4F8E /* add_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add_btn.png; sourceTree = "<group>"; };
+		327CA9741CBBB78E00FC4F8E /* AccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountViewController.h; sourceTree = "<group>"; };
+		327CA9751CBBB78E00FC4F8E /* AccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountViewController.m; sourceTree = "<group>"; };
 		327DC7CC1CB4F8FD005617D2 /* GDScrollBanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDScrollBanner.h; sourceTree = "<group>"; };
 		327DC7CD1CB4F8FD005617D2 /* GDScrollBanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDScrollBanner.m; sourceTree = "<group>"; };
 		327DC7CF1CB4F935005617D2 /* GuideVController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuideVController.h; sourceTree = "<group>"; };
@@ -360,6 +378,7 @@
 		32D859761CB90B100074D5C3 /* CommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentViewController.m; sourceTree = "<group>"; };
 		32D859781CB90F4E0074D5C3 /* choose_@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "choose_@2x.png"; sourceTree = "<group>"; };
 		32D859791CB90F4E0074D5C3 /* choose_@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "choose_@3x.png"; sourceTree = "<group>"; };
+		32D8597C1CB912DF0074D5C3 /* content.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = content.png; sourceTree = "<group>"; };
 		32DD1DC91CA5082B00E1C229 /* SetTVCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetTVCell.h; sourceTree = "<group>"; };
 		32DD1DCA1CA5082B00E1C229 /* SetTVCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetTVCell.m; sourceTree = "<group>"; };
 		32DD1DCB1CA5082B00E1C229 /* SetTVCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SetTVCell.xib; sourceTree = "<group>"; };
@@ -618,6 +637,11 @@
 		32CABD721CA373DD0068AE93 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				327CA9721CBBA28A00FC4F8E /* add_btn.png */,
+				327CA96C1CBB79C100FC4F8E /* weishiyong_@2x.png */,
+				327CA96D1CBB79C100FC4F8E /* weishiyong_@3x.png */,
+				327CA96E1CBB79C100FC4F8E /* system_08.png */,
+				32D8597C1CB912DF0074D5C3 /* content.png */,
 				32E588C71CB7B5C0002AED1A /* image_left.png */,
 				32E588C81CB7B5C0002AED1A /* month_imagedemo.png */,
 				32E588C91CB7B5C0002AED1A /* image_right.png */,
@@ -879,6 +903,12 @@
 				32FA733F1CABC7FC00379855 /* PasswordCVController.h */,
 				32FA73401CABC7FC00379855 /* PasswordCVController.m */,
 				32FA73411CABC7FC00379855 /* PasswordCVController.xib */,
+				327CA9661CBB692000FC4F8E /* GraceVC.h */,
+				327CA9671CBB692000FC4F8E /* GraceVC.m */,
+				327CA9741CBBB78E00FC4F8E /* AccountViewController.h */,
+				327CA9751CBBB78E00FC4F8E /* AccountViewController.m */,
+				327CA9691CBB712000FC4F8E /* GraceTVCell.h */,
+				327CA96A1CBB712000FC4F8E /* GraceTVCell.m */,
 				32FD72D91CAA94F0008CB917 /* PersonTVCell.h */,
 				32FD72DA1CAA94F0008CB917 /* PersonTVCell.m */,
 				32FD72DB1CAA94F0008CB917 /* PersonTVCell.xib */,
@@ -999,6 +1029,7 @@
 				32E5886F1CB74A87002AED1A /* system_1_@3x.png in Resources */,
 				325051FD1CB66C0500D431F5 /* ComOrCollTVCell.xib in Resources */,
 				32E5885C1CB741ED002AED1A /* back_@2x.png in Resources */,
+				327CA9711CBB79C100FC4F8E /* system_08.png in Resources */,
 				32518DBC1CB38CA500CEAE35 /* city_04.png in Resources */,
 				32518DE61CB3A2D500CEAE35 /* regimen_preview.png in Resources */,
 				324075D61CAD2DB200BAF253 /* regimen.png in Resources */,
@@ -1043,6 +1074,7 @@
 				3292A7511CA3DCA4004FEB57 /* districtMGE.plist in Resources */,
 				32E5887A1CB74EA0002AED1A /* star_@2x.png in Resources */,
 				3278CCE41CAFBB4500038B9D /* CommentTVCell.xib in Resources */,
+				327CA9731CBBA28A00FC4F8E /* add_btn.png in Resources */,
 				32CABD771CA373DD0068AE93 /* z_02.png in Resources */,
 				32518DEB1CB3A4E100CEAE35 /* p_is.png in Resources */,
 				32E5883E1CB73A72002AED1A /* call_g@2x.png in Resources */,
@@ -1055,6 +1087,7 @@
 				32D859441CB89E420074D5C3 /* list2_3_@2x.png in Resources */,
 				32D859471CB89E420074D5C3 /* list2_4_@3x.png in Resources */,
 				325051DA1CB5F6DC00D431F5 /* refund_btn.png in Resources */,
+				327CA9701CBB79C100FC4F8E /* weishiyong_@3x.png in Resources */,
 				324075C11CACEC5F00BAF253 /* p_01.png in Resources */,
 				325C82421CB0E7530004EA0C /* OrgIntroTVCell.xib in Resources */,
 				327DC7D71CB4FFE5005617D2 /* Guide_03.png in Resources */,
@@ -1074,6 +1107,7 @@
 				32E588751CB74A87002AED1A /* system_5_@3x.png in Resources */,
 				32E5887B1CB74EA0002AED1A /* star_@3x.png in Resources */,
 				32E588CE1CB7B5C0002AED1A /* image_mid.png in Resources */,
+				327CA96F1CBB79C100FC4F8E /* weishiyong_@2x.png in Resources */,
 				32E588A61CB75DE3002AED1A /* list1_show_3_@2x.png in Resources */,
 				325051DB1CB5F6DC00D431F5 /* comment_btn.png in Resources */,
 				32D859671CB8D4400074D5C3 /* slider-default_trackBackground@2x.png in Resources */,
@@ -1081,6 +1115,7 @@
 				32E5888D1CB7594A002AED1A /* search_2_@3x.png in Resources */,
 				32F6CD0E1C9A734C00E97B65 /* Main.storyboard in Resources */,
 				32518DB31CB34EFC00CEAE35 /* custom_online.png in Resources */,
+				32D8597D1CB912DF0074D5C3 /* content.png in Resources */,
 				32E5884B1CB73CFE002AED1A /* system_2_@3x.png in Resources */,
 				32D859461CB89E420074D5C3 /* list2_4_@2x.png in Resources */,
 				32E588A31CB75DE3002AED1A /* list1_show_1_@3x.png in Resources */,
@@ -1179,6 +1214,7 @@
 				327DC7CE1CB4F8FD005617D2 /* GDScrollBanner.m in Sources */,
 				32F6CD081C9A734C00E97B65 /* AppDelegate.m in Sources */,
 				32CABD7E1CA373EF0068AE93 /* DDTestApi.m in Sources */,
+				327CA9761CBBB78E00FC4F8E /* AccountViewController.m in Sources */,
 				32FA73461CABE32500379855 /* RefundViewController.m in Sources */,
 				32CABD651CA373AA0068AE93 /* CitySkipViewCell.m in Sources */,
 				32DD1DCC1CA5082B00E1C229 /* SetTVCell.m in Sources */,
@@ -1197,6 +1233,7 @@
 				32D8594A1CB8B2420074D5C3 /* PriSeleView.m in Sources */,
 				32F6CD051C9A734C00E97B65 /* main.m in Sources */,
 				32FD72D51CAA8263008CB917 /* PersonVController.m in Sources */,
+				327CA96B1CBB712000FC4F8E /* GraceTVCell.m in Sources */,
 				324CD4A71CAE172000276B57 /* ResultDetailTVController.m in Sources */,
 				32E588B21CB78825002AED1A /* KnowledgeTVController.m in Sources */,
 				32FD72CE1CAA301E008CB917 /* WebViewController.m in Sources */,
@@ -1211,6 +1248,7 @@
 				32D8593B1CB896530074D5C3 /* ResultListVController.m in Sources */,
 				32D859771CB90B100074D5C3 /* CommentViewController.m in Sources */,
 				32E71CA61CB256920079CD73 /* OrderBtnTVCell.m in Sources */,
+				327CA9681CBB692000FC4F8E /* GraceVC.m in Sources */,
 				32FD72DC1CAA94F0008CB917 /* PersonTVCell.m in Sources */,
 				32CABD8E1CA374020068AE93 /* MineViewController.m in Sources */,
 				3278CCE31CAFBB4500038B9D /* CommentTVCell.m in Sources */,
@@ -1368,7 +1406,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = www.HealthySettle.yrc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "00b7cc69-9413-498f-9e63-38359a85914f";
+				PROVISIONING_PROFILE = "33139869-48f6-41bd-a7c1-b56945fc4f5c";
 			};
 			name = Debug;
 		};
@@ -1414,7 +1452,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = www.HealthySettle.yrc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "00b7cc69-9413-498f-9e63-38359a85914f";
+				PROVISIONING_PROFILE = "33139869-48f6-41bd-a7c1-b56945fc4f5c";
 			};
 			name = Release;
 		};

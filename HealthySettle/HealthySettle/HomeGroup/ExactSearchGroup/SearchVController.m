@@ -45,8 +45,18 @@
     [self.navigationController setNavigationBarHidden:YES animated:YES];
 
 }
+-(void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+//    [self.navigationController.view bringSubviewToFront:self.navigationController.navigationBar];
+    [self.navigationController setNavigationBarHidden:NO animated:animated];
+
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+    self.navigationController.interactivePopGestureRecognizer.delegate = self;
+    [self.navigationController.view sendSubviewToBack:self.navigationController.navigationBar];
     UIBarButtonItem * returnBarButtonItem = [[UIBarButtonItem alloc] init];
     returnBarButtonItem.title = @"";
     [returnBarButtonItem setBackgroundImage:[UIImage imageNamed:@"leftop_r"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];

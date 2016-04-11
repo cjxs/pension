@@ -17,6 +17,9 @@ static NSString * const carouselID = @"TempCarouseView";
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.backgroundColor = RGB(242, 242, 242);
+        UIView * line_view = [[UIView alloc] initWithFrame:CGRectMake(0, screenHeight * 0.012, screenWide, screenHeight * 0.001)];
+        line_view.backgroundColor = RGB(229, 229, 229);
+        [self addSubview:line_view];
         UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc] init];
         layout.minimumLineSpacing = 0;
         layout.itemSize = CGSizeMake(screenWide / 3.005, screenHeight * 0.253);

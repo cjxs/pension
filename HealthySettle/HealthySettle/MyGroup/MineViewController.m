@@ -14,6 +14,8 @@
 #import "PasswordCVController.h"
 #import "RefundViewController.h"
 #import "ComAndCollVC.h"
+#import "GraceVC.h"
+#import "AccountViewController.h"
 
 static NSString *setCellIdentifier = @"cellS";
 
@@ -34,7 +36,7 @@ static NSString *setCellIdentifier = @"cellS";
        
         for (int i = 0; i < 4; i++) {
             UIView * separator = [[UIView alloc] initWithFrame:CGRectMake(0, (i+1) * screenHeight * 0.064 /* i乘以高度*/, screenWide, 1)];
-            separator.backgroundColor = RGB(201, 201, 201);
+            separator.backgroundColor = RGB(238, 238, 238);
             [setTableView addSubview:separator];
       
         }
@@ -154,13 +156,13 @@ static NSString *setCellIdentifier = @"cellS";
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.row) {
         case 0:
-            
+            [self changeToAccountWithstr:@"现金账户"];
             break;
         case 1:
-            
+            [self changeToAccountWithstr:@"我的积分"];
             break;
         case 2:
-            
+            [self changeToGraceVC];
             break;
         case 3:
             [self changeToPasswordChangeVC];
@@ -173,6 +175,16 @@ static NSString *setCellIdentifier = @"cellS";
         default:
             break;
     }
+}
+-(void)changeToAccountWithstr:(NSString *)str {
+    AccountViewController * accountVC = [[AccountViewController alloc] init];
+    accountVC.titleName = str;
+    [self.navigationController pushViewController:accountVC animated:YES];
+}
+- (void)changeToGraceVC {
+    GraceVC * graceVC = [[GraceVC alloc] init];
+    graceVC.titleName = @"我的优惠券";
+    [self.navigationController pushViewController:graceVC animated:YES];
 }
 - (void)changeToPasswordChangeVC{
     PasswordCVController * passwordVC = [[PasswordCVController alloc] initWithNibName:@"PasswordCVController" bundle:nil];
@@ -217,7 +229,7 @@ static NSString *setCellIdentifier = @"cellS";
             [self pushToViewPersonWithTitle:@"我的订单" type:@"order"];
             break;
         case 402:
-            [self pushToViewPersonWithTitle:@"会员特权" type:@"member"];
+            [self pushToComAndCollVCWithTitle:@"会员特权" type:@"member"];
             break;
         case 403:
             [self pushToRefundVCWithTitle:@"退款维权" type:@"refund"];

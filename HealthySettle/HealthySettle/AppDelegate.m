@@ -51,6 +51,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+
+//    [NSThread sleepForTimeInterval:1.5f];
+    // Override point for customization after application launch.
     //配置服务器信息
     YTKNetworkConfig * config = [YTKNetworkConfig sharedInstance];
     config.baseUrl = @"http://api.meilijia.com/";

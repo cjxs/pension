@@ -8,10 +8,7 @@
 
 #import "PasswordCVController.h"
 
-@interface PasswordCVController ()
-
-@end
-
+//修改密码，两个入口＋- 
 @implementation PasswordCVController
 
 - (void)viewDidLoad {
@@ -27,14 +24,22 @@
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.navigationItem.title = _titleName;
-    self.navigationController.navigationBar.translucent = NO;
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    if (self.navigationController.navigationBar.translucent == YES) {
+        self.navigationController.navigationBar.translucent = NO;
+    }
+    if (_type_from) {
+        [self.navigationController setNavigationBarHidden:NO animated:NO];
+    }else {
+        [self.navigationController setNavigationBarHidden:NO animated:YES];
+
+    }
+
+    
 }
 -(void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    if (_type_from) {
-    }else {
-        [self.navigationController setNavigationBarHidden:YES animated:YES];
+    if (!_type_from) {
+        [self.navigationController setNavigationBarHidden:YES animated:YES];//我的
     }
 }
 - (void)changePasswordRightNow {

@@ -65,6 +65,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.tableView.bounces = NO;
     self.tableView.showsVerticalScrollIndicator = NO;
     [self.navigationItem setTitle:@"订单填写"];
     self.tableView.tableHeaderView = self.tableHeadView;

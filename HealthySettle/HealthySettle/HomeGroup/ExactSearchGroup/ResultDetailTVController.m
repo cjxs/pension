@@ -89,7 +89,7 @@
             NSArray * label_array = @[address_label,organDetail_label];
             for (UILabel * label in label_array) {
                 label.font = [UIFont systemFontOfSize:10];
-                label.textColor = RGB(196, 196, 196);
+                label.textColor = RGB(152, 152, 152);
                 [_tableHeadView addSubview:label];
             }
             UILabel * label1 = [[UILabel alloc] initWithFrame:CGRectMake(screenWide * 0.8, CGRectGetMaxY(organization_imageView.frame)+screenHeight * 0.018  , screenWide * 0.15, screenHeight * 0.035)];
@@ -140,9 +140,10 @@
             label_q.font = [UIFont systemFontOfSize:12];
             label_q.textColor = RGB(196, 196, 196);
             [_tableHeadView addSubview:label_q];
-            UILabel * label_gg = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(label_q.frame),CGRectGetMaxY(organization_imageView.frame) + screenHeight * 0.0185, screenWide * 0.3, screenHeight *0.02 )];
+            UILabel * label_gg = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(label_q.frame),CGRectGetMaxY(organization_imageView.frame) + screenHeight * 0.0175, screenWide * 0.3, screenHeight *0.022 )];
             label_gg.textColor = [UIColor whiteColor];
             label_gg.backgroundColor = RGB(230, 11, 24);
+            label_gg.adjustsFontSizeToFitWidth = YES;
             label_gg.text = @"去哪养老网 保证全网最低价";
             label_gg.font = [UIFont systemFontOfSize:9];
             [_tableHeadView addSubview:label_gg];
@@ -161,7 +162,7 @@
                             address_label.text = @"浙江省杭州市上城区近江南路2号（富春江路近江小区）";
                             address_label.font = [UIFont systemFontOfSize:12];
                             address_label.adjustsFontSizeToFitWidth = YES;
-                            address_label.textColor = RGB(196, 196, 196);
+                            address_label.textColor = RGB(152, 152, 152);
                             [_tableHeadView addSubview:address_label];
                             UILabel * map_label = [[UILabel alloc] initWithFrame:CGRectMake(screenWide * 0.8, CGRectGetMaxY(_tableHeadView.frame)- screenHeight * 0.104  , screenWide * 0.15, screenHeight * 0.03)];
                             map_label.textColor = [UIColor redColor];
@@ -176,7 +177,7 @@
          commentNumber_label = [[UILabel alloc] initWithFrame:CGRectMake(screenWide * 0.08, CGRectGetMaxY(_tableHeadView.frame)-screenHeight * 0.045 , screenWide * 0.72, screenHeight * 0.03)];
         commentNumber_label.text = @"点评：2458条";
         commentNumber_label.font = [UIFont systemFontOfSize:10];
-        commentNumber_label.textColor = RGB(196, 196, 196);
+        commentNumber_label.textColor = RGB(152, 152, 152);
         [_tableHeadView addSubview:commentNumber_label];
         commentRatio_label = [[UILabel alloc] initWithFrame:CGRectMake(screenWide * 0.8, CGRectGetMaxY(_tableHeadView.frame)- screenHeight * 0.045  , screenWide * 0.15, screenHeight * 0.03)];
         commentRatio_label.textColor = [UIColor redColor];
@@ -214,6 +215,11 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, screenHeight, screenWide, 49)];
+    view.backgroundColor = [UIColor redColor];
+    [self.tableView.superview addSubview:view];
+
+    self.tableView.bounces = NO;
     self.tableView.showsVerticalScrollIndicator = NO;
     UIBarButtonItem * returnBarButtonItem = [[UIBarButtonItem alloc] init];
     returnBarButtonItem.title = @"";
@@ -261,18 +267,19 @@
 }
 - (void)fillInOrderController {
     OrderTVController * orderVC = [[OrderTVController alloc] initWithStyle:UITableViewStylePlain];
-    [self.navigationController pushViewController:orderVC animated:NO];
+    [self.navigationController pushViewController:orderVC animated:YES];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-//    [UIApplication sharedApplication].statusBarHidden = YES;
-    [self.navigationController setNavigationBarHidden:YES animated: NO];
+    [self.navigationController setNavigationBarHidden:YES animated: YES];
+    
+    
 }
 -(void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
 //    [UIApplication sharedApplication].statusBarHidden = NO;
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [self.navigationController setNavigationBarHidden:NO animated:animated];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -373,6 +373,13 @@
                     <color key="textColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n5X-ZJ-82i">
+                    <rect key="frame" x="0.0" y="667" width="375" height="49"/>
+                    <color key="backgroundColor" red="0.95294117647058818" green="0.95294117647058818" blue="0.95294117647058818" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="49" id="NX5-AB-2Ot"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" red="0.95294117647058818" green="0.95294117647058818" blue="0.95294117647058818" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
@@ -396,12 +403,15 @@
                 <constraint firstAttribute="trailing" secondItem="3Rl-dL-oeu" secondAttribute="trailing" id="dvg-dI-E2C"/>
                 <constraint firstAttribute="trailing" secondItem="EKD-sd-Mgv" secondAttribute="trailing" id="eSu-mh-ugJ"/>
                 <constraint firstItem="XKC-8s-Fzt" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="fK9-FZ-4CQ"/>
+                <constraint firstAttribute="bottom" secondItem="n5X-ZJ-82i" secondAttribute="bottom" constant="-49" id="hRB-Qi-DGC"/>
                 <constraint firstItem="EKD-sd-Mgv" firstAttribute="top" secondItem="KbJ-D2-TOF" secondAttribute="bottom" constant="1" id="ipR-qv-W3o"/>
                 <constraint firstAttribute="trailing" secondItem="89A-FV-QyU" secondAttribute="trailing" id="mfN-ls-qnM"/>
+                <constraint firstItem="n5X-ZJ-82i" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="nM3-Le-cMO"/>
                 <constraint firstItem="NDZ-zT-Cdx" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="r7k-RF-eaL"/>
                 <constraint firstAttribute="trailing" secondItem="d1n-8H-bAR" secondAttribute="trailing" constant="40" id="rrE-iC-RPa"/>
                 <constraint firstItem="XKC-8s-Fzt" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="sto-sO-Uoq"/>
                 <constraint firstItem="NDZ-zT-Cdx" firstAttribute="top" secondItem="XKC-8s-Fzt" secondAttribute="bottom" constant="10" id="toe-oQ-UHL"/>
+                <constraint firstAttribute="trailing" secondItem="n5X-ZJ-82i" secondAttribute="trailing" id="uiH-Sp-rOz"/>
                 <constraint firstItem="NDZ-zT-Cdx" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="303" id="xpr-iC-YQD"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

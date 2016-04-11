@@ -8,6 +8,8 @@
 
 #import "ComAndCollVC.h"
 #import "ComOrCollTVCell.h"
+
+//收藏和点评
 @interface ComAndCollVC ()<UITableViewDataSource, UITableViewDelegate>
 
 @end
@@ -27,9 +29,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:self.homeTableView];
-     [self.homeTableView registerNib:[UINib nibWithNibName:@"ComOrCollTVCell" bundle:nil] forCellReuseIdentifier:@"cell123"];
-}
+    if ([self.type isEqualToString:@"member"]) {
+        UIImageView * imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"content"]];
+        imageView.frame = CGRectMake(0, 64, screenWide, screenHeight * 0.6727);
+        [self.view addSubview:imageView];
+    }else {
+        [self.view addSubview:self.homeTableView];
+        [self.homeTableView registerNib:[UINib nibWithNibName:@"ComOrCollTVCell" bundle:nil] forCellReuseIdentifier:@"cell123"];
+    }
+   }
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.navigationItem.title = _titleName;

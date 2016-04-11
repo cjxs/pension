@@ -107,6 +107,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="list1_show_4_" width="866" height="333"/>
+        <image name="list1_show_4_" width="960" height="174"/>
     </resources>
 </document>

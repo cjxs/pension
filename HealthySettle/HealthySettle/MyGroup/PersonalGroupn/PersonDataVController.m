@@ -9,6 +9,8 @@
 #import "PersonDataVController.h"
 #import "PersonTVCell.h"
 #import "PasswordCVController.h"
+
+//个人资料
 @interface PersonDataVController ()<UITableViewDelegate, UITableViewDataSource,UITextFieldDelegate>
 
 @end

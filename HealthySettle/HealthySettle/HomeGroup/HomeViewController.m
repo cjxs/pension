@@ -169,13 +169,14 @@
     
     _searchWhere = searchWhere;
     
-     UITableView * homeTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, screenWide, screenHeight-64) style:UITableViewStyleGrouped];
+     UITableView * homeTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, screenWide, screenHeight-64-screenHeight * 0.035) style:UITableViewStyleGrouped];
     [self.view addSubview:homeTableView];
     homeTableView.tableHeaderView = self.tableHeadView;
     homeTableView.delegate = self;
     homeTableView.dataSource = self;
     homeTableView.bounces = NO;
     homeTableView.showsVerticalScrollIndicator = NO;
+    homeTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     [homeTableView registerClass:[CitySkipViewCell class] forCellReuseIdentifier:@"cellCity"];
     [homeTableView registerClass:[SeasonCTViewCell class] forCellReuseIdentifier:@"cellSeason"];

@@ -13,6 +13,8 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    self.reserve_btn.clipsToBounds = YES;
+    self.reserve_btn.layer.cornerRadius = 5;
     
 }
 
