@@ -39,9 +39,9 @@
     NSURLRequest * request = [NSURLRequest requestWithURL:_urlLoad];
     [_webView loadRequest:request];
     btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn.frame = CGRectMake(kMargin * 2,kMargin * 3, kMargin * 4, kMargin *4);
-    [btn setTitle:@"返回" forState:UIControlStateNormal];
+    btn.frame = CGRectMake(kMargin * 2,screenHeight * 0.05, kMargin * 2, kMargin * 2/10*18);
     [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [btn setBackgroundImage:[UIImage imageNamed:@"leftop_r"] forState:UIControlStateNormal];
     btn.alpha = 0.4;
     [btn addTarget:self action:@selector(backTolastVC) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn];

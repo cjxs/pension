@@ -71,6 +71,12 @@
      [self.navigationController setNavigationBarHidden:NO animated:animated];
     
 }
+-(void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+   
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

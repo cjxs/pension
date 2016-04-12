@@ -51,7 +51,8 @@
         view.alpha = 0.5;
        
         UIButton * back_btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        back_btn.frame = CGRectMake(screenWide * 0.04, screenHeight * 0.02 , screenWide * 0.04, screenHeight * 0.05);
+        [back_btn setBackgroundImage:[UIImage imageNamed:@"leftop_w"] forState:UIControlStateNormal];
+        back_btn.frame = CGRectMake(screenWide * 0.04, screenHeight * 0.02 , screenWide * 0.035, screenWide * 0.035/10 *18 );
         [back_btn addTarget:self action:@selector(cancleToRootView) forControlEvents:UIControlEventTouchUpInside];
         if ([_vc_type isEqualToString:@"S"]) {
             _tableHeadView = [[UIView alloc] initWithFrame:CGRectMake(0,0 , screenWide, screenHeight * 0.469)];

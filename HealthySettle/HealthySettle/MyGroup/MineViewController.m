@@ -16,6 +16,7 @@
 #import "ComAndCollVC.h"
 #import "GraceVC.h"
 #import "AccountViewController.h"
+#import "LoginOrResView.h"
 
 static NSString *setCellIdentifier = @"cellS";
 
@@ -92,7 +93,7 @@ static NSString *setCellIdentifier = @"cellS";
     [topImageV addGestureRecognizer:tapRL];
     [topImageV addSubview:imagePerson];
     
-    UILabel * textLabel = [[UILabel alloc] initWithFrame:CGRectMake((screenWide - 200)/2, CGRectGetMaxY(imagePerson.frame) + screenHeight * 0.02, 200, 40)];
+    UILabel * textLabel = [[UILabel alloc] initWithFrame:CGRectMake((screenWide - 200)/2, CGRectGetMaxY(imagePerson.frame), 200, 40)];
     textLabel.textAlignment = NSTextAlignmentCenter;
     textLabel.font = [UIFont systemFontOfSize:16];
     textLabel.text = string;
@@ -105,7 +106,7 @@ static NSString *setCellIdentifier = @"cellS";
 - (void)setThingsView {
     UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, screenHeight * 0.33, screenWide, screenHeight * 0.119)];
     view.backgroundColor = RGB(255, 255, 255);
-    NSArray * dataArray = @[@"order_btn",@"member_btn",@"refund_btn",@"comment_btn"];
+    NSArray * dataArray = @[@"system_1_41",@"system_1_42",@"system_1_43",@"system_1_44"];
     for (int i = 0; i <dataArray.count; i++) {
         UIButton * btn = [UIButton buttonWithType:UIButtonTypeCustom];
         btn.frame = CGRectMake(screenWide /4.0 * i,0, screenWide /4.0, screenHeight * 0.119);
@@ -209,6 +210,8 @@ static NSString *setCellIdentifier = @"cellS";
 }
 - (void)resignOrLoad {
     NSLog(@"登录");
+    LoginOrResView * view = [[LoginOrResView alloc] init];
+    [[UIApplication sharedApplication].keyWindow addSubview:view];
 }
 - (void)clickTwoViews:(UITapGestureRecognizer *)gesture {
        if (gesture.view.frame.origin.x < screenWide / 2) {

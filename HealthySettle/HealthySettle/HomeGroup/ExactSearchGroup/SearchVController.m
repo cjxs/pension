@@ -10,7 +10,7 @@
 #import "CDDatePicker.h"
 #import "CDCityPicker.h"
 #import "ResultListVController.h"
-@interface SearchVController ()<HYMDatePickerDelegate,CDCityPickerDelegate> {
+@interface SearchVController ()<HYMDatePickerDelegate,CDCityPickerDelegate,UIGestureRecognizerDelegate> {
     NSDate * end_begain;
     NSDate * end_end;
 }
@@ -57,13 +57,16 @@
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
     self.navigationController.interactivePopGestureRecognizer.delegate = self;
     [self.navigationController.view sendSubviewToBack:self.navigationController.navigationBar];
+    // 下个页面准备
     UIBarButtonItem * returnBarButtonItem = [[UIBarButtonItem alloc] init];
     returnBarButtonItem.title = @"";
     [returnBarButtonItem setBackgroundImage:[UIImage imageNamed:@"leftop_r"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
     self.navigationItem.backBarButtonItem = returnBarButtonItem;
+    
       [self.back_btn addTarget:self action:@selector(cancleToRootView) forControlEvents:UIControlEventTouchUpInside];
     [self.serch_messagebtn addTarget:self action:@selector(skipToSearchResultVC) forControlEvents:UIControlEventTouchUpInside];
     if ([_vc_type isEqualToString:@"L"]) {
+        [self.back_btn setBackgroundImage:[UIImage imageNamed:@"black_w"] forState:UIControlStateNormal];
         [self setBottomPicWithPic:[UIImage imageNamed:@"pension_preview"] andTitle:nil];
         _third_markPic.image = [UIImage imageNamed:@"search_6_"];
         _four_markPic.image = [UIImage imageNamed:@"search_3_"];
@@ -91,8 +94,9 @@
         _priceAndCity_label.text = @"价格";
         
     }else {
-         [self setBottomPicWithPic:[UIImage imageNamed:@"regimen_preview"] andTitle:nil];
-        
+        [self.back_btn setBackgroundImage:[UIImage imageNamed:@"leftop_w"] forState:UIControlStateNormal];
+
+         [self setBottomPicWithPic:[UIImage imageNamed:@"regimen_preview"] andTitle:nil];//
         _third_markPic.image = [UIImage imageNamed:@"search_3_"];
         _four_markPic.image = [UIImage imageNamed:@"search_4_"];
         _fivth_markPic.image = [UIImage imageNamed:@"search_5_"];

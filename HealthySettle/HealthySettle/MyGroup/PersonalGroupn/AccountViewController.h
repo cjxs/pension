@@ -11,5 +11,7 @@
 @interface AccountViewController : UIViewController
 @property (nonatomic,strong)NSString *titleName;
 @property (nonatomic,strong)UIView * above_view;
-@property (nonatomic,strong)UITableView * trable_view;
+@property (nonatomic,strong)UITableView * table_view;
+@property (nonatomic,strong)UIButton * toCash_btn;
+@property (nonatomic,strong)UILabel * money_label,*nomoney_label;
 @end

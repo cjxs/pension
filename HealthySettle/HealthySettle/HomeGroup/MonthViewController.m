@@ -44,10 +44,15 @@
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:YES];
-    UIButton * return_btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    return_btn.frame = CGRectMake(screenWide * 0.04, screenHeight * 0.03, screenWide * 0.05, screenHeight * 0.05);
-    [self.view addSubview:return_btn];
-    [return_btn addTarget:self action:@selector(backToViewController) forControlEvents:UIControlEventTouchUpInside];
+    UIImageView * back_imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"leftop_w"]];
+    back_imageView.frame = CGRectMake(screenWide * 0.04, screenHeight * 0.05, screenWide * 0.03,screenWide * 0.03/10 * 18 );
+    [self.view addSubview:back_imageView];
+    
+    UIButton * back_btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    back_btn.frame = CGRectMake(screenWide * 0.02, screenHeight * 0.03, screenWide * 0.12,screenHeight * 0.08);
+    [back_btn addTarget:self action:@selector(backToViewController) forControlEvents:UIControlEventTouchUpInside];
+    [self.month_imageview addSubview:back_btn];
+    self.month_imageview.userInteractionEnabled = YES;
     
 }
 - (void)backToViewController {
