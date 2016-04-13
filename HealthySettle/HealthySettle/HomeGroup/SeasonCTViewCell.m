@@ -60,11 +60,6 @@ static NSString * const carouselID = @"TempCarouseView";
     }
 }
 
--(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-}
--(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-
-}
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
     

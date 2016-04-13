@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LoginOrResView : UIView {
+@interface LoginOrResView : UIView<UITextFieldDelegate> {
     UIView * bg_view;
 }
 @property (nonatomic,assign)NSInteger view_type;

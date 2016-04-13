@@ -8,7 +8,7 @@
 
 #import "LoginOrResView.h"
 
-@implementation LoginOrResView
+@implementation LoginOrResView 
 -(UITextField *)number_field  {
     if (!_number_field) {
         UITextField * number_field = [[UITextField alloc] initWithFrame:CGRectMake(screenWide * 0.0293, screenHeight * 0.0165, screenWide * 0.7274, screenHeight * 0.0585)];
@@ -16,6 +16,8 @@
         number_field.clipsToBounds = YES;
         number_field.layer.cornerRadius = 5;
         number_field.placeholder = @"    请输入手机号";
+        number_field.delegate = self;
+        number_field.keyboardType = UIKeyboardTypeNumberPad ;
         _number_field =number_field;
     }
     return _number_field;
@@ -27,6 +29,9 @@
         passWord_field.clipsToBounds = YES;
         passWord_field.layer.cornerRadius = 5;
         passWord_field.backgroundColor = RGB(239, 239, 239);
+        passWord_field.keyboardType = UIKeyboardTypeDefault;
+        passWord_field.delegate = self;
+        passWord_field.secureTextEntry = YES;
         _passWord_field = passWord_field;
     }
     return _passWord_field;
@@ -51,6 +56,8 @@
         test_field.clipsToBounds = YES;
         test_field.layer.cornerRadius = 5;
         test_field.backgroundColor = RGB(239, 239, 239);
+        test_field.keyboardType = UIKeyboardTypeNumberPad;
+        test_field.delegate = self;
         _test_field = test_field;
     }
     return _test_field;
@@ -121,6 +128,9 @@
         bg_view.layer.cornerRadius = 5;
         [self addSubview:bg_view];
         [self addSelfSubView];
+        RAC(self.login_btn,enabled) = [RACSignal combineLatest:@[self.number_field.rac_textSignal,self.passWord_field.rac_textSignal] reduce:^id{
+            return @(self.number_field.text.length > 0&& self.passWord_field.text.length > 6 );
+        }];
     }
     return self;
 }
@@ -133,6 +143,7 @@
     [UIView animateWithDuration:0.3 animations:^{
         bg_view.frame = CGRectMake(screenWide * 0.107, screenHeight * 0.38, screenWide * 0.786, screenHeight * 0.24);
            }];
+   
 
    
    
@@ -145,11 +156,13 @@
     //获取验证码
 }
 -(void)regisOrRegisVC {
+    self.login_btn.enabled = YES;
     if (self.view_type == 1) {
         NSLog(@"注册");
 
     }else {
         //切换界面
+        self.number_field.text = @"";
         [UIView animateWithDuration:0.5f animations:^{
             [self.reSetpass_btn removeFromSuperview];
             [self.passWord_field removeFromSuperview];
@@ -164,16 +177,22 @@
         _login_btn.frame = _regis_btn.frame;
         _regis_btn.frame = rect;
         _number_field.placeholder = @"    手机号";
-        self.view_type = 1;
+        RAC(self.regis_btn,enabled) = [RACSignal combineLatest:@[self.number_field.rac_textSignal,self.test_field.rac_textSignal] reduce:^id{
+            return @(self.number_field.text.length == 11 && self.test_field.text.length > 0);
+        }];
+              self.view_type = 1;
     }
 }
 -(void)loginOrloginView {
+    self.regis_btn.enabled = YES;
+
     if (self.view_type == 0) {
-        NSLog(@"登录");
+        NSLog(@"登录+++");
 //        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel://1008611"]];
 
     }else {
         //切换界面
+        self.number_field.text = @"";
         [UIView animateWithDuration:0.5f animations:^{
             [self.test_field removeFromSuperview];
             [self.getTest_btn removeFromSuperview];
@@ -188,6 +207,10 @@
         _login_btn.frame = _regis_btn.frame;
         _regis_btn.frame = rect;
         _number_field.placeholder = @"    请输入手机号";
+        RAC(self.login_btn,enabled) = [RACSignal combineLatest:@[self.number_field.rac_textSignal,self.passWord_field.rac_textSignal] reduce:^id{
+            return @(self.number_field.text.length == 11 && self.passWord_field.text.length > 0 );
+        }];
+
         self.view_type = 0;
     }
 }
@@ -198,6 +221,23 @@
     // Drawing code
 }
 */
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    if (IS_IPHONE5 &&textField.frame.origin.y == self.passWord_field.frame.origin.y ) {
+        [UIView animateWithDuration:0.3 animations:^{
+            bg_view.frame = CGRectMake(screenWide * 0.107, screenHeight * 0.33,screenWide * 0.786, screenHeight * 0.24);
+        }];
+    }
+    NSLog(@"++++++");
+}
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    if (IS_IPHONE5 &&textField.frame.origin.y == self.passWord_field.frame.origin.y ) {
+        [UIView animateWithDuration:0.3 animations:^{
+            bg_view.frame = CGRectMake(screenWide * 0.107, screenHeight * 0.38,screenWide * 0.786, screenHeight * 0.24);
+        }];
+    }
+
+    NSLog(@"--------");
+}
 - (void)remove {
     for (UIView * view in bg_view.subviews) {
         [view removeFromSuperview];

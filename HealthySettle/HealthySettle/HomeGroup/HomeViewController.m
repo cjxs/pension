@@ -152,11 +152,15 @@
 
     UIButton * city_Btn = [UIButton buttonWithType:UIButtonTypeCustom] ;
     city_Btn.frame = CGRectMake(0, 0, 60, 30);
-    [city_Btn setTitle:@"杭州 v" forState:UIControlStateNormal];
+    UIImageView * image_view = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"right_02"]];
+    image_view.frame = CGRectMake(48 , 12, 12, 6);
+    [city_Btn addSubview:image_view];
+    city_Btn.titleLabel.font = [UIFont systemFontOfSize:15];
+    [city_Btn setTitle:@"杭州" forState:UIControlStateNormal];
+    [city_Btn addTarget:self action:@selector(chooseIndexCity) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem * city_barBItem = [[UIBarButtonItem alloc] initWithCustomView:city_Btn];
     [self.navigationItem setLeftBarButtonItem:city_barBItem];
 
-    
     UISearchBar * searchWhere = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, screenWide - 100,0 )];
     [searchWhere setContentMode:UIViewContentModeLeft];
     searchWhere.placeholder = @"带着老伴儿去旅行";
@@ -190,7 +194,10 @@
     self.navigationItem.backBarButtonItem = returnBarButtonItem;
     
 }
-
+- (void)chooseIndexCity{
+    //选择城市
+    NSLog(@"+++----");
+}
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0) {
         return screenHeight * 0.269;
