@@ -9,6 +9,7 @@
 #import "CitySkipViewCell.h"
 #import "CityCollectionViewCell.h"
 #import "TempView.h"
+#import "ShareView.h"
 
 @implementation CitySkipViewCell
 - (UILabel *)title_label {
@@ -91,6 +92,8 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"%d",(int)self.type);
     NSLog(@"++++%d",(int)indexPath.row);
+    ShareView * shareView= [[ShareView alloc] init];
+    [[UIApplication sharedApplication].keyWindow addSubview:shareView];
 }
 
 -(void)dealloc {

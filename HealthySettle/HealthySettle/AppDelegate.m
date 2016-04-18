@@ -33,7 +33,24 @@
 #import "TabbarController.h"
 #import "YTKNetworkConfig.h"
 #import <iVersion.h>
+#import "MobClick.h"
+#import "UMSocial.h"
+#import "UMSocialWechatHandler.h"
+#import "UMSocialSinaSSOHandler.h"
+#import "UMSocialQQHandler.h"
+#import "UMessage.h"
+
+
+
+
+
+static NSString * const UMAppkey = @"5714557467e58e7bda001274";
+
 @interface AppDelegate ()
+
+
+
+
 @property (nonatomic, strong)TabbarController * tabbarController;
 @end
 
@@ -50,14 +67,19 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    
     // Override point for customization after application launch.
 
 //    [NSThread sleepForTimeInterval:1.5f];
     // Override point for customization after application launch.
+    
+    
     //配置服务器信息
     YTKNetworkConfig * config = [YTKNetworkConfig sharedInstance];
     config.baseUrl = @"http://api.meilijia.com/";
     config.cdnUrl = @"www.zhihu.com/";
+    
     
     //百度地图
 //    _mapManager = [[BMKMapManager alloc] init];
@@ -77,13 +99,57 @@
         self.window.rootViewController = self.tabbarController;
 
     }
+    //友盟统计
+    NSString * version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    [MobClick setAppVersion:version];
     
+    [MobClick startWithAppkey:UMAppkey reportPolicy:BATCH channelId: nil];
+    
+    //友盟分享
+    
+   [UMSocialData setAppKey:UMAppkey];
+  //设置微信AppId、appSecret，分享url
+ [UMSocialWechatHandler setWXAppId:@"wx6a68684031971e42" appSecret:@"dc5622186812b1928b2ef20355fd6ace" url:@"http://www.umeng.com/social"];
+   //设置手机QQ 的AppId，Appkey，和分享URL，需要#import "UMSocialQQHandler.h"
+   [UMSocialQQHandler setQQWithAppId:@"100424468" appKey:@"c7394704798a158208a74ab60104f0ba" url:@"http://www.umeng.com/social"];
+   //打开新浪微博的SSO开关，设置新浪微博回调地址，这里必须要和你在新浪微博后台设置的回调地址一致。需要 #import "UMSocialSinaSSOHandler.h"
+  [UMSocialSinaSSOHandler openNewSinaSSOWithAppKey:@"3921700954"
+                                              secret:@"04b48b094faeb16683c32669824eb"
+                                         RedirectURL:@"http://sns.whalecloud.com/sina2/callback"];
+    
+    //友盟推送
+    /*------------------------友盟推送----------------------------*/
+    [UMessage startWithAppkey:UMAppkey launchOptions:launchOptions];
+    if ([application respondsToSelector:@selector(isRegisteredForRemoteNotifications)])
+    {
+        UIUserNotificationType types = UIUserNotificationTypeSound | UIUserNotificationTypeBadge | UIUserNotificationTypeAlert;
+        UIUserNotificationSettings *notificationSettings = [UIUserNotificationSettings settingsForTypes:types categories:nil];
+        
+        [[UIApplication sharedApplication] registerUserNotificationSettings:notificationSettings];
+        
+        [UMessage registerRemoteNotificationAndUserNotificationSettings:notificationSettings];
+    }
+    else{
+        [UMessage registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeSound|UIRemoteNotificationTypeAlert];
+    }
+    [UMessage setLogEnabled:NO];
+
+
     return YES;
 }
 - (void)firstPressed {
     self.tabbarController = [[TabbarController alloc] init];
     self.window.rootViewController = self.tabbarController;
 
+}
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+    [UMessage registerDeviceToken:deviceToken];
+}
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
+    [UMessage didReceiveRemoteNotification:userInfo];
 }
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -106,5 +172,8 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
-
+-(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    return YES;
+}
 @end

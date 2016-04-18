@@ -83,7 +83,7 @@
         webVC.urlLoad = url;
         [self.navigationController pushViewController:webVC animated:NO];
     }else if (btn_number == 1) {
-        NSURL * url = [NSURL URLWithString:@"http://www.cjxs.github.io/"];
+        NSURL * url = [NSURL URLWithString:@"http://www.baidu.com"];
         WebViewController * webVC = [[WebViewController alloc] init];
         webVC.urlLoad = url;
         [self.navigationController pushViewController:webVC animated:NO];
