@@ -92,9 +92,7 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"%d",(int)self.type);
     NSLog(@"++++%d",(int)indexPath.row);
-    ShareView * shareView= [[ShareView alloc] init];
-    [[UIApplication sharedApplication].keyWindow addSubview:shareView];
-}
+  }
 
 -(void)dealloc {
     _cityCollect_view = nil;

@@ -40,11 +40,17 @@
 #import "UMSocialQQHandler.h"
 #import "UMessage.h"
 
+#import <AlipaySDK/AlipaySDK.h>
 
 
 
+
+#define UMSYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+#define _IPHONE80_ 80000
 
 static NSString * const UMAppkey = @"5714557467e58e7bda001274";
+static NSString * const UMDEVICETOKEN      = @"UMDeviceToken";// 友盟推送的设备Token
+
 
 @interface AppDelegate ()
 
@@ -111,29 +117,70 @@ static NSString * const UMAppkey = @"5714557467e58e7bda001274";
   //设置微信AppId、appSecret，分享url
  [UMSocialWechatHandler setWXAppId:@"wx6a68684031971e42" appSecret:@"dc5622186812b1928b2ef20355fd6ace" url:@"http://www.umeng.com/social"];
    //设置手机QQ 的AppId，Appkey，和分享URL，需要#import "UMSocialQQHandler.h"
-   [UMSocialQQHandler setQQWithAppId:@"100424468" appKey:@"c7394704798a158208a74ab60104f0ba" url:@"http://www.umeng.com/social"];
+//   [UMSocialQQHandler setQQWithAppId:@"100424468" appKey:@"c7394704798a158208a74ab60104f0ba" url:@"http://www.umeng.com/social"];
+    [UMSocialQQHandler setQQWithAppId:@"1105262497" appKey:@"M6CozYtRTBXDjVou" url:@"http://www.umeng.com/social/qq"];
+
    //打开新浪微博的SSO开关，设置新浪微博回调地址，这里必须要和你在新浪微博后台设置的回调地址一致。需要 #import "UMSocialSinaSSOHandler.h"
-  [UMSocialSinaSSOHandler openNewSinaSSOWithAppKey:@"3921700954"
-                                              secret:@"04b48b094faeb16683c32669824eb"
+
+    [UMSocialSinaSSOHandler openNewSinaSSOWithAppKey:@"sina3921700954"
+                                              secret:@"04b48b094faeb16683c32669824ebdad"
                                          RedirectURL:@"http://sns.whalecloud.com/sina2/callback"];
     
     //友盟推送
     /*------------------------友盟推送----------------------------*/
     [UMessage startWithAppkey:UMAppkey launchOptions:launchOptions];
-    if ([application respondsToSelector:@selector(isRegisteredForRemoteNotifications)])
+    
+//    if ([application respondsToSelector:@selector(isRegisteredForRemoteNotifications)])
+//    {
+//        UIUserNotificationType types = UIUserNotificationTypeSound | UIUserNotificationTypeBadge | UIUserNotificationTypeAlert;
+//        UIUserNotificationSettings *notificationSettings = [UIUserNotificationSettings settingsForTypes:types categories:nil];
+//        
+//        [[UIApplication sharedApplication] registerUserNotificationSettings:notificationSettings];
+//        
+//        [UMessage registerRemoteNotificationAndUserNotificationSettings:notificationSettings];
+//    }
+//    else{
+//        [UMessage registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeSound|UIRemoteNotificationTypeAlert];
+//    }
+//    [UMessage setLogEnabled:NO];
+    
+    
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= _IPHONE80_
+    if(UMSYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0"))
     {
-        UIUserNotificationType types = UIUserNotificationTypeSound | UIUserNotificationTypeBadge | UIUserNotificationTypeAlert;
-        UIUserNotificationSettings *notificationSettings = [UIUserNotificationSettings settingsForTypes:types categories:nil];
+        //register remoteNotification types
+        UIMutableUserNotificationAction *action1 = [[UIMutableUserNotificationAction alloc] init];
+        action1.identifier = @"action1_identifier";
+        action1.title=@"Accept";
+        action1.activationMode = UIUserNotificationActivationModeForeground;//当点击的时候启动程序
         
-        [[UIApplication sharedApplication] registerUserNotificationSettings:notificationSettings];
+        UIMutableUserNotificationAction *action2 = [[UIMutableUserNotificationAction alloc] init];  //第二按钮
+        action2.identifier = @"action2_identifier";
+        action2.title=@"Reject";
+        action2.activationMode = UIUserNotificationActivationModeBackground;//当点击的时候不启动程序，在后台处理
+        action2.authenticationRequired = YES;//需要解锁才能处理，如果action.activationMode = UIUserNotificationActivationModeForeground;则这个属性被忽略；
+        action2.destructive = YES;
         
-        [UMessage registerRemoteNotificationAndUserNotificationSettings:notificationSettings];
-    }
-    else{
-        [UMessage registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeSound|UIRemoteNotificationTypeAlert];
-    }
+        UIMutableUserNotificationCategory *categorys = [[UIMutableUserNotificationCategory alloc] init];
+        categorys.identifier = @"category1";//这组动作的唯一标示
+        [categorys setActions:@[action1,action2] forContext:(UIUserNotificationActionContextDefault)];
+        
+        UIUserNotificationSettings *userSettings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge|UIUserNotificationTypeSound|UIUserNotificationTypeAlert
+                                                                                     categories:[NSSet setWithObject:categorys]];
+        [UMessage registerRemoteNotificationAndUserNotificationSettings:userSettings];
+        
+    } 
+#else
+    
+    //register remoteNotification types
+    [UMessage registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge
+     |UIRemoteNotificationTypeSound
+     |UIRemoteNotificationTypeAlert];
+    
+#endif
+    
+    //for log
     [UMessage setLogEnabled:NO];
-
 
     return YES;
 }
@@ -145,11 +192,35 @@ static NSString * const UMAppkey = @"5714557467e58e7bda001274";
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
+    // 保存友盟推送的设备token
+    NSString *UMDeviceToken  = [[[[deviceToken description] stringByReplacingOccurrencesOfString: @"<" withString: @""] stringByReplacingOccurrencesOfString: @">" withString: @""]                 stringByReplacingOccurrencesOfString: @" " withString: @""];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:UMDeviceToken forKey:UMDEVICETOKEN];
+    [userDefaults synchronize];
+    
     [UMessage registerDeviceToken:deviceToken];
 }
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
+    //关闭友盟对话框
+    [UMessage setAutoAlert:NO];
+    //此方法不要删除
     [UMessage didReceiveRemoteNotification:userInfo];
+    NSLog(@"%@",userInfo);
+    
+    
+    // 定制自定的的弹出框
+    if([UIApplication sharedApplication].applicationState == UIApplicationStateActive){
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@""
+                                                            message:userInfo[@"aps"][@"alert"]
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"确定"
+                                                  otherButtonTitles:nil];
+        [alertView show];
+        [[alertView rac_buttonClickedSignal] subscribeNext:^(id x) {
+            [UMessage sendClickReportForRemoteNotification:userInfo];
+        }];
+    }
 }
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -167,13 +238,22 @@ static NSString * const UMAppkey = @"5714557467e58e7bda001274";
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [UMSocialSnsService  applicationDidBecomeActive];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
 -(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
+    if ([url.host isEqualToString:@"safepay"]) {
+        //跳转支付宝钱包进行支付，处理支付结果
+        [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
+            NSLog(@"result = %@",resultDic);
+        }];
+    }
+
     return YES;
 }
 @end

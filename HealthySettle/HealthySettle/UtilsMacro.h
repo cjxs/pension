@@ -13,6 +13,7 @@
 #define screenHeight [UIScreen mainScreen].bounds.size.height
 #define kMargin [UIScreen mainScreen].bounds.size.width / 50
 
+
 #define IS_Pad ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? !((NSInteger)[[UIScreen mainScreen] currentMode].size.width % 768) || !((NSInteger)[[UIScreen mainScreen] currentMode].size.width % 1024) : NO)
 
 #define IS_IOS8  ([[[UIDevice currentDevice] systemVersion] compare:@"8" options:NSNumericSearch] != NSOrderedAscending)
@@ -63,4 +64,6 @@
 #define ALLOrangeCOLOR    [UIColor colorWithRed:(240)/255.f green:(131)/255.f blue:(0)/255.f alpha:1.f]
 #define ALLFenSeCOLOR    [UIColor colorWithRed:(215)/255.f green:(0)/255.f blue:(52)/255.f alpha:1.f]
 #define ALLLittleYellowCOLOR    [UIColor colorWithRed:(254)/255.f green:(242)/255.f blue:(210)/255.f alpha:1.f]
+
+
 #endif /* UtilsMacro_h */

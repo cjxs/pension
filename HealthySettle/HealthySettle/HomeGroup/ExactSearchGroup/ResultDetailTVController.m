@@ -20,9 +20,11 @@
 #import "ShouldKnowTVCell.h"
 #import "OrderTVController.h"
 #import "CommentViewController.h"
+#import "ShareView.h"
+#import "UMSocial.h"
 
 
-@interface ResultDetailTVController () {
+@interface ResultDetailTVController () <UMSocialUIDelegate>{
     UIImageView * organization_imageView;
     UILabel *     organization_titleLabel;
     UILabel *     priceNow_label;
@@ -186,6 +188,8 @@
         commentRatio_label.textAlignment = NSTextAlignmentRight;
         commentRatio_label.font = [UIFont systemFontOfSize:10];
         [_tableHeadView addSubview:commentRatio_label];
+        
+       
 
         UIImageView * honourView = [[UIImageView alloc] initWithFrame:CGRectMake(screenHeight * 0.025, CGRectGetMaxY(organization_imageView.frame) - screenHeight * 0.033,screenHeight * 0.02/32*21 , screenHeight * 0.02)];
         honourView.image = [UIImage imageNamed:@"list1_show_0_"];
@@ -195,6 +199,9 @@
     }
     return _tableHeadView;
     
+}
+-(void)shareToEveryone {
+    [ShareView showShareViewInViewController:self];
 }
 //计算划掉的数字长度
 - (void)dealLinesWithString:(NSString *)string {
@@ -477,6 +484,9 @@
         return 0;
     }
 
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self shareToEveryone];
 }
 /*
 // Override to support conditional editing of the table view.
