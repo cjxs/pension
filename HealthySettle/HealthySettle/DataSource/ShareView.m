@@ -125,22 +125,25 @@
     }] subscribeNext:^(NSNumber *index) {
         @strongify(self);
         NSString *snsName = platformArray[index.integerValue];
-        
+        NSString * title = @"看看！看看！";
         NSString *url = @"http:www.5199yl.com";
-        NSString * shareText ;//= @"优游乐苹果端产品正式上线了，快来看看吧！";
+        NSString * shareText = @"优游乐苹果端产品正式上线了，快来看看吧！";
+        UIImage * image = [UIImage imageNamed:@"p_02"];
+        
         
         [UMSocialConfig setFinishToastIsHidden:NO position:UMSocialiToastPositionTop];
         
         UMSocialData *data = [[UMSocialData alloc] initWithIdentifier:@"Invite"];
         UMSocialExtConfig *config = [[UMSocialExtConfig alloc]init];
+        data.title = shareText;
         data.extConfig = config;
         
         /*----------微信会话微信朋友圈------------*/
         if ([snsName isEqualToString:UMShareToWechatTimeline]) {
             UMSocialWechatTimelineData *timelineData = [[UMSocialWechatTimelineData alloc] init];
             timelineData.url = url;
-            timelineData.shareText = @"老大， 我这边分享功能做完了，你看看！";
-            timelineData.shareImage = [UIImage imageNamed:@"p_02"];
+            timelineData.title = title;//只允许一段文字
+            timelineData.shareImage = image;
             config.wechatTimelineData = timelineData;
         }
         /*----------微信会话------------*/
@@ -154,21 +157,22 @@
         }
         /*----------QQ会话------------*/
         else if ([snsName isEqualToString:UMShareToQQ]){
-            UMSocialQQData *qqData = [[UMSocialQQData alloc] init];
-            qqData.url = url;
-            qqData.title = @"看看！看看！";
-            qqData.shareText = shareText;
-            qqData.shareImage = [UIImage imageNamed:@"Guide_01"];
-            config.qqData = qqData;
+//            UMSocialQQData *qqData = [[UMSocialQQData alloc] init];
+//            qqData.url = url;
+//            qqData.title = @"看看！看看！";
+//            qqData.shareText = shareText;
+//            qqData.shareImage = [UIImage imageNamed:@"p_02"];
+//            config.qqData = qqData;
         }
         /*----------QQ空间------------*/
         else if ([snsName isEqualToString:UMShareToQzone]){
-            UMSocialQzoneData *qzoneData = [[UMSocialQzoneData alloc] init];
-            qzoneData.url = url;
-            qzoneData.title = @"看看！看看！";
-            qzoneData.shareText = shareText;//文字
-            qzoneData.shareImage = [UIImage imageNamed:@"Guide_01"];
-            config.qzoneData = qzoneData;
+//            UMSocialQzoneData *qzoneData = [[UMSocialQzoneData alloc] init];
+//            qzoneData.url = url;
+//            qzoneData.title = @"看看！看看！";
+//            qzoneData.shareText = shareText;//文字
+//            qzoneData.shareImage = [UIImage imageNamed:@"p_02"];
+//            config.qzoneData = qzoneData;
+            NSLog(@"%@",data);
         
         }
         /*----------新浪微博------------*/
@@ -176,6 +180,7 @@
             UMSocialSinaData *sinaData = [[UMSocialSinaData alloc] init];
             sinaData.shareImage = [UIImage imageNamed:@"p_02"];
             config.sinaData = sinaData;
+            NSLog(@"%@",data);
         }
         else if ([snsName isEqualToString:UMShareToSms]){
             UMSocialSmsData *smsData = [[UMSocialSmsData alloc] init];

@@ -7,3 +7,4 @@ pod 'Mantle', '~> 2.0.6'    #model Vim库
 pod 'iVersion'              # 提示APP更新            https://github.com/nicklockwood/iVersion
 pod 'ReactiveCocoa'         # 关于OC的函数式编程库     https://github.com/ReactiveCocoa/ReactiveCocoa
 pod 'MTMigration'           # 版本更新处理            https://github.com/mysterioustrousers/MTMigration
+pod 'UMengSocial', '~> 5.0'

@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '7A3AD6C01F9BA12F503E4DE6'
+               BlueprintIdentifier = '44206C5861913EBE89119DFE'
                BlueprintName = 'MTMigration'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'libMTMigration.a'>
