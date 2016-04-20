@@ -11,6 +11,7 @@
 
 
 // Include any system framework and library headers here that should be included in all compilation units.
+#import<Foundation/Foundation.h>
 #import "UtilsMacro.h"
 #import "YTKRequest.h"
 #import <Masonry.h>

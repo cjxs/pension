@@ -127,7 +127,7 @@
         NSString *snsName = platformArray[index.integerValue];
         
         NSString *url = @"http:www.5199yl.com";
-        NSString * shareText = @"优游乐苹果端产品正式上线了，快来看看吧！";
+        NSString * shareText ;//= @"优游乐苹果端产品正式上线了，快来看看吧！";
         
         [UMSocialConfig setFinishToastIsHidden:NO position:UMSocialiToastPositionTop];
         
@@ -157,7 +157,8 @@
             UMSocialQQData *qqData = [[UMSocialQQData alloc] init];
             qqData.url = url;
             qqData.title = @"看看！看看！";
-            qqData.shareImage = [UIImage imageNamed:@"p_02"];
+            qqData.shareText = shareText;
+            qqData.shareImage = [UIImage imageNamed:@"Guide_01"];
             config.qqData = qqData;
         }
         /*----------QQ空间------------*/
@@ -165,9 +166,10 @@
             UMSocialQzoneData *qzoneData = [[UMSocialQzoneData alloc] init];
             qzoneData.url = url;
             qzoneData.title = @"看看！看看！";
-            qzoneData.shareText = shareText;
-            qzoneData.shareImage = [UIImage imageNamed:@"p_02"];
+            qzoneData.shareText = shareText;//文字
+            qzoneData.shareImage = [UIImage imageNamed:@"Guide_01"];
             config.qzoneData = qzoneData;
+        
         }
         /*----------新浪微博------------*/
         else if ([snsName isEqualToString:UMShareToSina]){
@@ -198,6 +200,7 @@
             });
         }
         else{
+        
             [[UMSocialControllerService defaultControllerService] setSocialData:data];
             
             [[UMSocialControllerService defaultControllerService] setShareText:shareText shareImage:[snsName isEqualToString:UMShareToSms] ?  nil : [UIImage imageNamed:@"icon"] socialUIDelegate:self.sourceViewController];

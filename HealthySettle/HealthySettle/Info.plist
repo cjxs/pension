@@ -47,8 +47,16 @@
 			<string>qq</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>QQ1105262497</string>
+				<string>QQ41e0f7a1</string>
 				<string>http://www.umeng.com/social/qq</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>ali</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>alisdkdemo</string>
 			</array>
 		</dict>
 	</array>

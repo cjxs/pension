@@ -112,13 +112,12 @@ static NSString * const UMDEVICETOKEN      = @"UMDeviceToken";// 友盟推送的
     [MobClick startWithAppkey:UMAppkey reportPolicy:BATCH channelId: nil];
     
     //友盟分享
-    
    [UMSocialData setAppKey:UMAppkey];
   //设置微信AppId、appSecret，分享url
  [UMSocialWechatHandler setWXAppId:@"wx6a68684031971e42" appSecret:@"dc5622186812b1928b2ef20355fd6ace" url:@"http://www.umeng.com/social"];
    //设置手机QQ 的AppId，Appkey，和分享URL，需要#import "UMSocialQQHandler.h"
 //   [UMSocialQQHandler setQQWithAppId:@"100424468" appKey:@"c7394704798a158208a74ab60104f0ba" url:@"http://www.umeng.com/social"];
-    [UMSocialQQHandler setQQWithAppId:@"1105262497" appKey:@"M6CozYtRTBXDjVou" url:@"http://www.umeng.com/social/qq"];
+    [UMSocialQQHandler setQQWithAppId:@"1105262497" appKey:@"M6CozYtRTBXDjVou" url:@"http://www.umeng.com/social"];
 
    //打开新浪微博的SSO开关，设置新浪微博回调地址，这里必须要和你在新浪微博后台设置的回调地址一致。需要 #import "UMSocialSinaSSOHandler.h"
 
