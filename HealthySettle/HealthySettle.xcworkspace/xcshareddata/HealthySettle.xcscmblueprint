@@ -1,0 +1,25 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "bc3bca63-60d8-6c46-8261-776b008d5234++3286",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+    "bc3bca63-60d8-6c46-8261-776b008d5234++3286" : {
+
+    }
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "bc3bca63-60d8-6c46-8261-776b008d5234++3286" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "2ED5ED8B-58CF-428B-BCEF-ABEC30492B44",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "bc3bca63-60d8-6c46-8261-776b008d5234++3286" : "HealthySettle\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "HealthySettle",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "HealthySettle.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/123.56.181.50\/svn\/app_5199yl",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "bc3bca63-60d8-6c46-8261-776b008d5234++3286"
+    }
+  ]
+}

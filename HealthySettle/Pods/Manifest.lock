@@ -44,7 +44,7 @@ PODS:
     - SDWebImage/Core (= 3.7.5)
   - SDWebImage/Core (3.7.5)
   - UMengSocial (5.0)
-  - YTKNetwork (0.6.0):
+  - YTKNetwork (1.0.0):
     - AFDownloadRequestOperation (~> 2.0)
     - AFNetworking (~> 2.0)
 
@@ -57,7 +57,7 @@ DEPENDENCIES:
   - ReactiveCocoa
   - SDWebImage (~> 3.7.5)
   - UMengSocial (~> 5.0)
-  - YTKNetwork (~> 0.6.0)
+  - YTKNetwork (~> 1.0.0)
 
 SPEC CHECKSUMS:
   AFDownloadRequestOperation: 748a1643423e1ddb23f2178f778087d4f0ae8ac7
@@ -70,6 +70,6 @@ SPEC CHECKSUMS:
   ReactiveCocoa: e2db045570aa97c695e7aa97c2bcab222ae51f4a
   SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
   UMengSocial: 48b67179c492a8cf7803fbb0438b8f55432e2fc1
-  YTKNetwork: 988660d5fab310a55895239751ecfa74c3224a77
+  YTKNetwork: 28ef7a3c119f61e737a76abbe74ff2fe1afec913
 
 COCOAPODS: 0.39.0
