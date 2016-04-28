@@ -55,7 +55,9 @@ static NSString *setCellIdentifier = @"cellS";
     self.navigationController.navigationBar.tintColor=[UIColor redColor];
     [returnBarButtonItem setBackgroundImage:[UIImage imageNamed:@"leftop_r"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
     self.navigationItem.backBarButtonItem = returnBarButtonItem;
-    self.view.backgroundColor = RGB(243, 244, 245);
+    
+    self.view.backgroundColor = RGB(243, 244, 245);//中间条的颜色
+    
     [self setBottomPicWithPic:[UIImage imageNamed:@"person_back"] withPerP:[UIImage imageNamed:@"boy_head"] andTitle:@"登录/注册"];
     
     TempView *collectView = [[TempView alloc] initWithFrame:CGRectMake(screenWide /9, screenHeight * 0.255, screenWide/3, screenHeight * 0.05) withMark:[UIImage imageNamed:@"star_"] andTitle:@"我的收藏"];

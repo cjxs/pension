@@ -472,18 +472,22 @@
 }
 
 //设置table
-//- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-//{
-//    CGFloat sectionHeaderHeight = screenHeight * 0.02;
-//    if (scrollView.contentOffset.y<=sectionHeaderHeight&&scrollView.contentOffset.y>0) {
-//        scrollView.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, 0, 0, 0);
-//    }
-//    else if (scrollView.contentOffset.y>=sectionHeaderHeight) {
-//        scrollView.contentInset = UIEdgeInsetsMake(sectionHeaderHeight, 0, 0, 0);
-//    }else if (scrollView.contentOffset.y == 0) {
-//        scrollView.contentInset = UIEdgeInsetsMake(sectionHeaderHeight*2, 0, 0, 0);;
-//    }
-//}
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    CGFloat sectionHeaderHeight = screenHeight * 0.02;
+    if (scrollView.contentOffset.y<=sectionHeaderHeight) {
+        if (scrollView.contentOffset.y > 0) {
+            scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+        }else if(scrollView.contentOffset.y == 0) {
+            scrollView.contentInset = UIEdgeInsetsMake(sectionHeaderHeight , 0, 0, 0);
+            //下降的位置
+            
+        }
+    }
+    else if (scrollView.contentOffset.y>=sectionHeaderHeight) {
+        scrollView.contentInset = UIEdgeInsetsMake(-sectionHeaderHeight , 0, 0, 0);//让headSectionView  上移到刚好盖住的位置
+    }
+}
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     if ([self.vc_type isEqualToString:@"S"]) {
                return screenHeight * 0.02;
