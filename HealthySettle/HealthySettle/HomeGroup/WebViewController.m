@@ -9,7 +9,8 @@
 #import "WebViewController.h"
 #import <NJKWebViewProgress.h>
 #import <NJKWebViewProgressView.h>
-@interface WebViewController ()<UIWebViewDelegate,NJKWebViewProgressDelegate>{
+@interface WebViewController ()<UIWebViewDelegate,NJKWebViewProgressDelegate>
+{
     UIButton * btn;
 }
 @property (nonatomic, strong)UIWebView * webView;
@@ -19,71 +20,73 @@
 
 @implementation WebViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     // Do any additional setup after loading the view.
     self.progressProxy = [[NJKWebViewProgress alloc] init]; // instance variable
-    self.webView =  [[UIWebView alloc] initWithFrame:self.view.bounds];
+    self.webView =  [[UIWebView alloc]
+                     initWithFrame:self.view.bounds];
     [self.view addSubview:_webView];
     self.webView.delegate = _progressProxy;
     self.progressProxy.webViewProxyDelegate = self;
     self.progressProxy.progressDelegate = self;
-    
     CGFloat progressBarHeight = 3.f;
     CGRect navigaitonBarBounds = self.navigationController.navigationBar.bounds;
     CGRect barFrame = CGRectMake(0, 20, navigaitonBarBounds.size.width, progressBarHeight);
-    self.progressView = [[NJKWebViewProgressView alloc] initWithFrame:barFrame];
+    self.progressView = [[NJKWebViewProgressView alloc]
+                         initWithFrame:barFrame];
     self.progressView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
-    
-    NSURLRequest * request = [NSURLRequest requestWithURL:_urlLoad];
+        NSURLRequest * request = [NSURLRequest requestWithURL:_urlLoad];
     [_webView loadRequest:request];
     btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.frame = CGRectMake(kMargin * 2,screenHeight * 0.05, kMargin * 2, kMargin * 2/10*18);
-    [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [btn setBackgroundImage:[UIImage imageNamed:@"leftop_r"] forState:UIControlStateNormal];
+    [btn setTitleColor:[UIColor blackColor]
+              forState:UIControlStateNormal];
+    [btn setBackgroundImage:[UIImage imageNamed:@"leftop_r"]
+                   forState:UIControlStateNormal];
     btn.alpha = 0.4;
-    [btn addTarget:self action:@selector(backTolastVC) forControlEvents:UIControlEventTouchUpInside];
+    [btn addTarget:self
+            action:@selector(backTolastVC)
+  forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn];
-
 }
-- (void)backTolastVC {
+- (void)backTolastVC
+{
     [self.navigationController popViewControllerAnimated:YES];
 }
--(void)viewWillAppear:(BOOL)animated {
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
+-(void)viewWillAppear:(BOOL)animated
+{
+    [self.navigationController setNavigationBarHidden:YES
+                                             animated:YES];
     [super viewWillAppear:animated];
     [self.navigationController.navigationBar addSubview:_progressView];
-
 }
--(void)viewWillDisappear:(BOOL)animated {
+-(void)viewWillDisappear:(BOOL)animated
+{
     [super viewWillDisappear:animated];
     [_webView stopLoading];
     [self.progressView removeFromSuperview];
     [btn removeFromSuperview];
     [self.webView removeFromSuperview];
-    
-    
 }
-- (void)viewDidUnload {
+- (void)viewDidUnload
+{
     [super viewDidUnload];
     self.webView = nil;
     self.webView.delegate = nil;
     self.urlLoad = nil;
     self.progressView = nil;
-    
-
+}
+#pragma mark - NJKWebViewProgressDelegate
+-(void)webViewProgress:(NJKWebViewProgress *)webViewProgress
+        updateProgress:(float)progress
+{
+    [self.progressView setProgress:progress
+                          animated:YES];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    if (!_webView) {
-        [[NSURLCache sharedURLCache] removeAllCachedResponses];
-        [[NSURLCache sharedURLCache] setDiskCapacity:0];
-        [[NSURLCache sharedURLCache] setMemoryCapacity:0];
-
-    }
-}
 
 /*
 #pragma mark - Navigation
@@ -94,10 +97,14 @@
     // Pass the selected object to the new view controller.
 }
 */
-#pragma mark - NJKWebViewProgressDelegate
--(void)webViewProgress:(NJKWebViewProgress *)webViewProgress updateProgress:(float)progress
+- (void)didReceiveMemoryWarning
 {
-    [self.progressView setProgress:progress animated:YES];
+    [super didReceiveMemoryWarning];
+    if (!_webView)
+    {
+        [[NSURLCache sharedURLCache] removeAllCachedResponses];
+        [[NSURLCache sharedURLCache] setDiskCapacity:0];
+        [[NSURLCache sharedURLCache] setMemoryCapacity:0];
+    }
 }
-
 @end

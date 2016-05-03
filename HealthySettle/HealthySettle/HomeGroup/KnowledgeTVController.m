@@ -14,17 +14,20 @@
 
 @implementation KnowledgeTVController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     self.navigationItem.title = @"养生常识";
-    [self.tableView registerNib:[UINib nibWithNibName:@"CommonTVCell" bundle:nil] forCellReuseIdentifier:@"cellCom"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"CommonTVCell" bundle:nil]
+         forCellReuseIdentifier:@"cellCom"];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
--(void)viewWillAppear:(BOOL)animated {
+-(void)viewWillAppear:(BOOL)animated
+{
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
@@ -33,23 +36,24 @@
   }
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)tableView:(UITableView *)tableView
+ numberOfRowsInSection:(NSInteger)section
+{
     return 20;
 }
-
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    CommonTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cellCom" forIndexPath:indexPath];
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    CommonTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cellCom"
+                                                          forIndexPath:indexPath];
     [cell configWithTitle:@"标题标题标题标题标题标题标题标题标题标题标题" date:[NSDate date]];
-    
-       return cell;
+    return cell;
 }
-
-
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {

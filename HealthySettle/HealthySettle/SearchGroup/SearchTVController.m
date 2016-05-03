@@ -8,7 +8,8 @@
 
 #import "SearchTVController.h"
 #import "SearchOrganTVCell.h"
-@interface SearchTVController () {
+@interface SearchTVController ()
+{
     NSArray * data_array;
 }
 
@@ -16,43 +17,46 @@
 
 @implementation SearchTVController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     self.navigationItem.title = @"发现 • 热门机构";
-    [self.tableView registerNib:[UINib nibWithNibName:@"SearchOrganTVCell" bundle:nil] forCellReuseIdentifier:@"cellSearch"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"SearchOrganTVCell" bundle:nil]
+         forCellReuseIdentifier:@"cellSearch"];
     data_array = @[[UIImage imageNamed:@"search_01"],[UIImage imageNamed:@"search_02"],[UIImage imageNamed:@"search_01"],[UIImage imageNamed:@"search_01"],[UIImage imageNamed:@"search_02"]];
-   
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
     return 5;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)tableView:(UITableView *)tableView
+ numberOfRowsInSection:(NSInteger)section
+{
     return 1;
 }
 
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    SearchOrganTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cellSearch" forIndexPath:indexPath];
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    SearchOrganTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cellSearch"
+                                                               forIndexPath:indexPath];
     [cell configWithImage:data_array[indexPath.section]];
-
-   
-    
     return cell;
 }
 
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+-(CGFloat)tableView:(UITableView *)tableView
+heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     return screenHeight * 0.33;
 }
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+-(CGFloat)tableView:(UITableView *)tableView
+heightForHeaderInSection:(NSInteger)section
+{
     return 0.5;
 }
 /*
@@ -98,5 +102,9 @@
     // Pass the selected object to the new view controller.
 }
 */
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
 
 @end

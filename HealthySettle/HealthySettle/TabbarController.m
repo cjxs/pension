@@ -21,19 +21,26 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     HomeViewController *homeVC = [[HomeViewController alloc] init];
-    UINavigationController * homeNaVC =[[UINavigationController alloc] initWithRootViewController:homeVC];
+    UINavigationController * homeNaVC =[[UINavigationController alloc]
+                                        initWithRootViewController:homeVC];
     homeNaVC.tabBarItem.title = @"首页";
     homeNaVC.tabBarItem.image = [UIImage imageNamed:@"home_g"];
+    
     SearchTVController * searchVC = [[SearchTVController alloc] init];
-    UINavigationController *searchNaVC = [[UINavigationController alloc] initWithRootViewController:searchVC];
+    UINavigationController *searchNaVC = [[UINavigationController alloc]
+                                          initWithRootViewController:searchVC];
     searchNaVC.tabBarItem.title = @"发现";
     searchNaVC.tabBarItem.image = [UIImage imageNamed:@"found_g"];
+    
     CustomerViewController * customerVC = [[CustomerViewController alloc] init];
-    UINavigationController *customerNaVC = [[UINavigationController alloc] initWithRootViewController:customerVC];
+    UINavigationController *customerNaVC = [[UINavigationController alloc]
+                                            initWithRootViewController:customerVC];
     customerNaVC.tabBarItem.title = @"客服";
     customerNaVC.tabBarItem.image = [UIImage imageNamed:@"call_g"];
+    
     MineViewController * mineVC = [[MineViewController alloc] init];
-    UINavigationController * mineNaVC = [[UINavigationController alloc] initWithRootViewController:mineVC];
+    UINavigationController * mineNaVC = [[UINavigationController alloc]
+                                         initWithRootViewController:mineVC];
     mineNaVC.tabBarItem.title = @"我的";
     mineNaVC.tabBarItem.image = [UIImage imageNamed:@"my_g"];
     

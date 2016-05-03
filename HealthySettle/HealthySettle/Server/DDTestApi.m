@@ -8,13 +8,17 @@
 
 #import "DDTestApi.h"
 
-@implementation DDTestApi {
+@implementation DDTestApi
+{
     NSString * _username;
     NSString * _password;
 }
--(id)initWithUsername:(NSString *)username password:(NSString *)password {
+-(id)initWithUsername:(NSString *)username
+             password:(NSString *)password
+{
     self = [super init];
-    if (self) {
+    if (self)
+    {
         _username = username;
         _password = password;
     }
@@ -22,20 +26,24 @@
 }
 
 /// Http请求的方法
--(YTKRequestMethod)requestMethod {
+-(YTKRequestMethod)requestMethod
+{
     return YTKRequestMethodGet;
 }
 
 // 请求的URL
-- (NSString *)requestUrl {
+- (NSString *)requestUrl
+{
     return @"app/featured_page3?page=3";
 }
 
 // 请求的参数列表
--(id)requestArgument {
+-(id)requestArgument
+{
     return nil;
 }//放字典的
-- (id)jsonValidator {
+- (id)jsonValidator
+{
     return @{
              @"nike":[NSString class],
              @"level":[NSNumber class]

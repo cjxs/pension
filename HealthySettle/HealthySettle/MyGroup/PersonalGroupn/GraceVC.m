@@ -14,17 +14,21 @@
 @end
 
 @implementation GraceVC
--(UIView *)headView {
-    if (!_headView) {
-        UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWide, screenHeight * 0.08)];
-        UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(screenWide * 0.03, screenHeight * 0.015, screenWide * 0.3, screenHeight * 0.05)];
+-(UIView *)headView
+{
+    if (!_headView)
+    {
+        UIView * view = [[UIView alloc]
+                         initWithFrame:CGRectMake(0, 0, screenWide, screenHeight * 0.08)];
+        UILabel * label = [[UILabel alloc]
+                           initWithFrame:CGRectMake(screenWide * 0.03, screenHeight * 0.015, screenWide * 0.3, screenHeight * 0.05)];
         label.text = @"请输入优惠券序列号:";
         label.textColor = RGB(138, 138, 138);
         label.font = [UIFont systemFontOfSize:14];
         label.adjustsFontSizeToFitWidth = YES;
-
         [view addSubview:label];
-        UITextField * textfield = [[UITextField alloc] initWithFrame:CGRectMake(screenWide * 0.35, screenHeight * 0.02, screenWide * 0.42, screenHeight * 0.04)];
+        UITextField * textfield = [[UITextField alloc]
+                                   initWithFrame:CGRectMake(screenWide * 0.35, screenHeight * 0.02, screenWide * 0.42, screenHeight * 0.04)];
         textfield.borderStyle = UITextBorderStyleLine;
         textfield.font = [UIFont systemFontOfSize:10];
         textfield.layer.borderColor = [RGB(252, 252, 252) CGColor];
@@ -37,58 +41,75 @@
         btn.titleLabel.font = [UIFont systemFontOfSize:11];
         btn.layer.masksToBounds = YES;
         btn.layer.cornerRadius = 4;
-        [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [btn setTitleColor:[UIColor whiteColor]
+                  forState:UIControlStateNormal];
         btn.backgroundColor = RGB(230, 11, 24);
         [view addSubview:btn];
         _headView = view;
     }
     return _headView;
 }
--(UITableView *)tableView {
-    if (!_tableView) {
-        UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, screenWide, screenHeight -64 - 49) style:UITableViewStylePlain];
+-(UITableView *)tableView
+{
+    if (!_tableView)
+    {
+        UITableView *tableView = [[UITableView alloc]
+                                  initWithFrame:CGRectMake(0, 0, screenWide, screenHeight -64 - 49)
+                                  style:UITableViewStylePlain];
         tableView.delegate = self;
         tableView.dataSource = self;
         tableView.showsVerticalScrollIndicator = NO;
         tableView.bounces = NO;
         tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        [tableView registerClass:[GraceTVCell class] forCellReuseIdentifier:@"cellGrace"];
+        [tableView registerClass:[GraceTVCell class]
+          forCellReuseIdentifier:@"cellGrace"];
         _tableView = tableView;
     }
     return _tableView;
 }
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     [self.view addSubview:self.tableView];
     self.tableView.tableHeaderView = self.headView;
     
     
 }
--(void)viewWillAppear:(BOOL)animated {
+-(void)viewWillAppear:(BOOL)animated
+{
     [super viewWillAppear:animated];
     self.navigationItem.title = self.titleName;
     self.navigationController.navigationBar.translucent = NO;
-     [self.navigationController setNavigationBarHidden:NO animated:animated];
-    
+     [self.navigationController setNavigationBarHidden:NO
+                                              animated:animated];
 }
--(void)viewWillDisappear:(BOOL)animated {
+-(void)viewWillDisappear:(BOOL)animated
+{
     [super viewWillDisappear:animated];
    
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
+    [self.navigationController setNavigationBarHidden:YES
+                                             animated:YES];
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+- (NSInteger)tableView:(UITableView *)tableView
+ numberOfRowsInSection:(NSInteger)section
+{
     return 7;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    GraceTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cellGrace" forIndexPath:indexPath];
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    GraceTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cellGrace"
+                                                         forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    switch (indexPath.row) {
+    switch (indexPath.row)
+    {
         case 0:
             [cell configWithMoneystr:@"10" use:@"100" timeF:@"2016.05.07" timeT:@"2016.11.07"];
             break;
@@ -100,10 +121,12 @@
             [cell configWithMoneystr:@"30" use:@"300" timeF:@"2015.05.07" timeT:@"2016.11.07"];
             break;
     }
-       return cell;
+    return cell;
 }
 
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+-(CGFloat)tableView:(UITableView *)tableView
+heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     return screenHeight * 0.21;
 }
 /*

@@ -9,9 +9,11 @@
 #import "TestModel.h"
 
 @implementation TestModel
--(instancetype)init {
+-(instancetype)init
+{
   self =  [super init];
-    if (self) {
+    if (self)
+    {
         self.show = @"n";
     }
     return self;

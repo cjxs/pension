@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GraceTVCell : UITableViewCell {
+@interface GraceTVCell : UITableViewCell
+{
     UILabel * money_label,*moneyuse_label,*timeFrom_label,*timeTo_label;
 }
 @property (nonatomic,strong)NSString * money_str,*moneyuse_str;

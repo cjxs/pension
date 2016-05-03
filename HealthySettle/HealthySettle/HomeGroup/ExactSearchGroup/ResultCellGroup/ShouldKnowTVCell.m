@@ -9,24 +9,28 @@
 #import "ShouldKnowTVCell.h"
 
 @implementation ShouldKnowTVCell
--(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+-(instancetype)initWithStyle:(UITableViewCellStyle)style
+             reuseIdentifier:(NSString *)reuseIdentifier
+{
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(8, 6, 60, 30)];
+        UILabel * label = [[UILabel alloc]
+                           initWithFrame:CGRectMake(8, 6, 60, 30)];
         label.text = @"预定须知";
         label.font = [UIFont systemFontOfSize:14];
         [self addSubview:label];
-        
-        
     }
     return self;
 }
-- (void)awakeFromNib {
+- (void)awakeFromNib
+{
     [super awakeFromNib];
     // Initialization code
 }
--(void)configWithStr:(NSString *)text {
-    if (text) {
+-(void)configWithStr:(NSString *)text
+{
+    if (text)
+    {
         UILabel * label = [[UILabel alloc] init];
         label.text = text;
         UIFont * fnt = [UIFont fontWithName:text size:8];
@@ -41,7 +45,6 @@
         label.textColor = RGB(158, 159, 159);
         [self addSubview:label];
     }
-
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

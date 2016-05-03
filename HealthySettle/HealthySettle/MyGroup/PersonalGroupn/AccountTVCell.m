@@ -10,7 +10,8 @@
 
 @implementation AccountTVCell
 
-- (void)awakeFromNib {
+- (void)awakeFromNib
+{
     [super awakeFromNib];
     // Initialization code
     self.title_label.text = @"吧啦吧啦吧吧啦吧养生基地";

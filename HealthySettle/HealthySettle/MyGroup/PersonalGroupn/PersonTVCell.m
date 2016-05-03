@@ -19,14 +19,21 @@
 
     // Configure the view for the selected state
 }
-- (void)configClassName:(NSString *)class_name Andresult:(NSString *)result with:(NSString *)type {
+- (void)configClassName:(NSString *)class_name
+              Andresult:(NSString *)result
+                   with:(NSString *)type
+{
        _className.text = class_name;
-    if (result) {
-        if ([type isEqualToString:@"L"]) {
+    if (result)
+    {
+        if ([type isEqualToString:@"L"])
+        {
             _resultLabel.text = result;
-        }else if ([type isEqualToString:@"T"]){
+        }else if ([type isEqualToString:@"T"])
+        {
             _resultField.placeholder = result;
-        }else {
+        }else
+        {
             NSLog(@"出错了%@",result);
         }
     }

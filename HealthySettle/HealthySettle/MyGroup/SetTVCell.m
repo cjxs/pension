@@ -13,13 +13,17 @@
 - (void)awakeFromNib {
     // Initialization code
 }
-- (void)setThingsWithName:(NSString *)stringQ Image:(UIImage *)imageB number:(NSString *)stringH
+- (void)setThingsWithName:(NSString *)stringQ
+                    Image:(UIImage *)imageB
+                   number:(NSString *)stringH
 {
     self.mark_View.image = imageB;
     self.mark_label.text = stringQ;
-    if (stringH) {
+    if (stringH)
+    {
         self.explain_label.text = stringH;
-    }else {
+    }else
+    {
         [self.explain_label removeFromSuperview];
     }
 }

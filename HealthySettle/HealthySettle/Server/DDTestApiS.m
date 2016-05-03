@@ -8,25 +8,31 @@
 
 #import "DDTestApiS.h"
 
-@implementation DDTestApiS {
+@implementation DDTestApiS
+{
     NSString * _thingsN;
 }
 
 
--(id)initWithThingsT:(NSString *)thingsT {
+-(id)initWithThingsT:(NSString *)thingsT
+{
     self = [super init];
-    if (self) {
+    if (self)
+    {
         _thingsN = thingsT;
     }
     return self;
 }
-- (NSString *)requestUrl {
+- (NSString *)requestUrl
+{
     return @"";
 }
--(YTKRequestMethod)requestMethod {
+-(YTKRequestMethod)requestMethod
+{
     return YTKRequestMethodGet;
 }
--(id)requestArgument {
+-(id)requestArgument
+{
     return @{@"s?wd=":_thingsN};
 }
 

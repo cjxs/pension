@@ -10,12 +10,11 @@
 
 @implementation PensionSRTVCell
 
-- (void)awakeFromNib {
+- (void)awakeFromNib
+{
     [super awakeFromNib];
     self.organization_title.adjustsFontSizeToFitWidth = YES;
     self.price_label.adjustsFontSizeToFitWidth = YES;
-
-    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -23,22 +22,32 @@
 
     // Configure the view for the selected state
 }
-- (void)configWithimage:(UIImage *)image title:(NSString *)title address:(NSString *)address number:(NSString *)number price:(NSString *)price  {
-    if (image) {
+- (void)configWithimage:(UIImage *)image
+                  title:(NSString *)title
+                address:(NSString *)address
+                 number:(NSString *)number
+                  price:(NSString *)price
+{
+    if (image)
+    {
         self.organization_image.image = image;
     }
-    if (title) {
+    if (title)
+    {
         self.organization_title.text = title;
     }
-    if (address) {
+    if (address)
+    {
         self.organization_address.text = [NSString stringWithFormat:@"地址: %@",address];
     }
-    if (number) {
+    if (number)
+    {
         self.available_bunk.text = [NSString stringWithFormat:@"床位: %@",number];
     }
-    if (price) {
+    if (price)
+    {
         self.price_label.text = [NSString stringWithFormat:@"¥%@",price];
-}
+    }
     
 }
 @end

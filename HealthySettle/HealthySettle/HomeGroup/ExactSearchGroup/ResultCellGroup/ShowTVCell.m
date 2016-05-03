@@ -20,16 +20,22 @@
 
     // Configure the view for the selected state
 }
--(void)configWithTitle:(NSString *)title imageArray:(NSArray *)array text:(NSString *)text {
-    if (title) {
+-(void)configWithTitle:(NSString *)title
+            imageArray:(NSArray *)array
+                  text:(NSString *)text
+{
+    if (title)
+    {
         self.title_label.text = title;
     }
-    if (array) {
+    if (array)
+    {
         self.left_imageView.image = array[0];
         self.mid_imageView.image = array[1];
         self.right_imageView.image = array[2];
     }
-    if (text) {
+    if (text)
+    {
         UILabel * label = [[UILabel alloc] init];
         label.text = text;
         UIFont * fnt = [UIFont fontWithName:text size:8];

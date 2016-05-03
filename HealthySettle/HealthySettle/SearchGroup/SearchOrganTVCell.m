@@ -20,8 +20,10 @@
 
     // Configure the view for the selected state
 }
--(void)configWithImage:(UIImage *)image {
-    if (image) {
+-(void)configWithImage:(UIImage *)image
+{
+    if (image)
+    {
         self.organ_imageView.image = image;
     }
 }

@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface Product : NSObject{
+@interface Product : NSObject
+{
 @private
     float     _price;
     NSString *_subject;

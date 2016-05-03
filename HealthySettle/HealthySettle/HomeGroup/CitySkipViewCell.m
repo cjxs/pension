@@ -14,7 +14,8 @@
 @implementation CitySkipViewCell
 - (UILabel *)title_label {
     if (_title_label== nil) {
-        _title_label = [[UILabel alloc] initWithFrame:CGRectMake(kMargin * 4, kMargin /2, screenWide - kMargin * 5 , screenHeight * 0.06)];
+        _title_label = [[UILabel alloc]
+                        initWithFrame:CGRectMake(kMargin * 4, kMargin /2, screenWide - kMargin * 5 , screenHeight * 0.06)];
         _title_label.textColor = RGB(25, 25, 25);
         _title_label.textAlignment = NSTextAlignmentLeft;
     }
@@ -22,7 +23,8 @@
 }
 - (UIImageView *)title_icon {
     if (_title_icon == nil) {
-        _title_icon = [[UIImageView alloc] initWithFrame:CGRectMake(kMargin, kMargin * 1.7, kMargin *1.7, kMargin*1.7/26*38)];
+        _title_icon = [[UIImageView alloc]
+                       initWithFrame:CGRectMake(kMargin, kMargin * 1.7, kMargin *1.7, kMargin*1.7/26*38)];
         _title_icon.image = [UIImage imageNamed:@"z_02"];
     }
     return _title_icon;
@@ -31,40 +33,46 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.backgroundColor = RGB(242, 242, 242);
-        UIView * line_view = [[UIView alloc] initWithFrame:CGRectMake(0, screenHeight * 0.012, screenWide, screenHeight * 0.001)];
+        UIView * line_view = [[UIView alloc]
+                              initWithFrame:CGRectMake(0, screenHeight * 0.012, screenWide, screenHeight * 0.001)];
         line_view.backgroundColor = RGB(229, 229, 229);
         [self addSubview:line_view];
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
         layout.itemSize = CGSizeMake( screenWide * 0.25 , screenHeight * 0.187);
-         UICollectionView * cityCollect_view = [[UICollectionView alloc] initWithFrame:CGRectMake(0, screenHeight * 0.073, screenWide, screenHeight * 0.187) collectionViewLayout:layout];
+         UICollectionView * cityCollect_view = [[UICollectionView alloc]
+                                        initWithFrame:CGRectMake(0, screenHeight * 0.073, screenWide, screenHeight * 0.187) collectionViewLayout:layout];
         cityCollect_view.backgroundColor = [UIColor whiteColor];
         cityCollect_view.delegate = self;
         cityCollect_view.dataSource = self;
         self.clipsToBounds = YES;
         [self addSubview:cityCollect_view];
         _cityCollect_view = cityCollect_view;
-        UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, screenHeight * 0.013, screenWide, screenHeight * 0.06)];
+        UIView * view = [[UIView alloc]
+                         initWithFrame:CGRectMake(0, screenHeight * 0.013, screenWide, screenHeight * 0.06)];
         [view addSubview:self.title_label];
         [view addSubview:self.title_icon];
         view.backgroundColor = [UIColor whiteColor];
         [self addSubview:view];
 
         
-        [_cityCollect_view registerClass:[CityCollectionViewCell class] forCellWithReuseIdentifier:@"cellC"];
+        [_cityCollect_view registerClass:[CityCollectionViewCell class]
+                            forCellWithReuseIdentifier:@"cellC"];
         data_array = @[@"city_01",@"city_02",@"city_03",@"city_04"];
 
     }
     return self;
 }
--(void)configWithicon:(UIImage *)icon title:(NSString *)title data:(NSArray *)data_array {
+-(void)configWithicon:(UIImage *)icon
+                title:(NSString *)title
+                 data:(NSArray *)dataArray {
     if (icon) {
         self.title_icon.image = icon;
     }
     if (title) {
         self.title_label.text = title;
     }
-    if (data_array) {
-        
+    if (dataArray) {
+        NSLog(@"有");
     }
 }
 #pragma mark - UICollectionViewDataSource
@@ -79,8 +87,11 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    CityCollectionViewCell * cell = [_cityCollect_view dequeueReusableCellWithReuseIdentifier:@"cellC" forIndexPath:indexPath];
-    [cell configWithImage:[UIImage imageNamed:data_array[indexPath.row]] name:nil];
+    CityCollectionViewCell * cell = [_cityCollect_view dequeueReusableCellWithReuseIdentifier:@"cellC"
+                                                                                 forIndexPath:indexPath];
+    [cell configWithImage:
+     [UIImage imageNamed:data_array[indexPath.row]]
+                     name:nil];
     return cell;
 }
 - (CGFloat) collectionView:(UICollectionView *)collectionView

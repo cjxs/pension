@@ -10,6 +10,5 @@
 
 @interface AccountTVCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *title_label;
-
 @property (weak, nonatomic) IBOutlet UILabel *number_label;
 @end

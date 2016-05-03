@@ -39,18 +39,39 @@
 @end
 
 @implementation SearchVController
--(void)viewWillAppear:(BOOL)animated {
+-(void)viewWillAppear:(BOOL)animated
+{
     [super viewWillAppear:animated];
     [UIApplication sharedApplication].statusBarHidden = YES;
     [self.navigationController setNavigationBarHidden:YES animated:animated];
-
+//    [self hideTabBar];
 }
--(void)viewWillDisappear:(BOOL)animated {
+- (void)hideTabBar
+{
+    if (self.tabBarController.tabBar.hidden == YES) {
+        return;
+    }
+    UIView *contentView;
+    if ( [[self.tabBarController.view.subviews objectAtIndex:0] isKindOfClass:[UITabBar class]] )
+    {
+        contentView = [self.tabBarController.view.subviews objectAtIndex:1];
+    }else
+    {
+        contentView = [self.tabBarController.view.subviews objectAtIndex:0];
+    }
+    CGRect  rect = CGRectMake(contentView.bounds.origin.x,  contentView.bounds.origin.y,  contentView.bounds.size.width, contentView.bounds.size.height + self.tabBarController.tabBar.frame.size.height);
+    contentView.frame = rect;
+    self.tabBarController.tabBar.hidden = YES;
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
     [super viewWillDisappear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:animated];
 
 }
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
     self.navigationController.interactivePopGestureRecognizer.delegate = self;
@@ -58,16 +79,28 @@
     // 下个页面准备
     UIBarButtonItem * returnBarButtonItem = [[UIBarButtonItem alloc] init];
     returnBarButtonItem.title = @"";
-    [returnBarButtonItem setBackgroundImage:[UIImage imageNamed:@"leftop_r"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    [returnBarButtonItem setBackgroundImage:[UIImage imageNamed:@"leftop_r"]
+                                   forState:UIControlStateNormal
+                                 barMetrics:UIBarMetricsDefault];
     self.navigationItem.backBarButtonItem = returnBarButtonItem;
     
-      [self.back_btn addTarget:self action:@selector(cancleToRootView) forControlEvents:UIControlEventTouchUpInside];
-    [self.serch_messagebtn addTarget:self action:@selector(skipToSearchResultVC) forControlEvents:UIControlEventTouchUpInside];
+    [self.back_btn addTarget:self
+                      action:@selector(cancleToRootView)
+            forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.serch_messagebtn addTarget:self
+                              action:@selector(skipToSearchResultVC)
+                    forControlEvents:UIControlEventTouchUpInside];
+    
     if ([_vc_type isEqualToString:@"L"]) {
-        [self.back_btn setBackgroundImage:[UIImage imageNamed:@"black_w"] forState:UIControlStateNormal];
-        [self setBottomPicWithPic:[UIImage imageNamed:@"pension_preview"] andTitle:nil];
+        [self.back_btn setBackgroundImage:
+                        [UIImage imageNamed:@"black_w"]
+                                 forState:UIControlStateNormal];
+        [self setBottomPicWithPic:
+                    [UIImage imageNamed:@"pension_preview"]
+                         andTitle:nil];
         _third_markPic.image = [UIImage imageNamed:@"search_6_"];
-        _four_markPic.image = [UIImage imageNamed:@"search_3_"];
+        _four_markPic.image  = [UIImage imageNamed:@"search_3_"];
         _fivth_markPic.image = [UIImage imageNamed:@"search_4_"];
         _city_label.text = @"杭州市";
         
@@ -81,7 +114,9 @@
         _sellectOn_label.text = @"区／县";
         _sellectOn_label.tag = 302;
         _sellectOn_label.userInteractionEnabled = YES;
-        UITapGestureRecognizer * tap_Counties = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(countiesPickerShowWithGesture:)];
+        UITapGestureRecognizer * tap_Counties = [[UITapGestureRecognizer alloc]
+                                                 initWithTarget:self
+                                                 action:@selector(countiesPickerShowWithGesture:)];
         [_sellectOn_label addGestureRecognizer:tap_Counties];
         tap_Counties.numberOfTapsRequired = 1;
         _seletOff_label.alpha = 0;
@@ -92,9 +127,13 @@
         _priceAndCity_label.text = @"价格";
         
     }else {
-        [self.back_btn setBackgroundImage:[UIImage imageNamed:@"leftop_w"] forState:UIControlStateNormal];
+        [self.back_btn setBackgroundImage:
+                            [UIImage imageNamed:@"leftop_w"]
+                        forState:UIControlStateNormal];
 
-         [self setBottomPicWithPic:[UIImage imageNamed:@"regimen_preview"] andTitle:nil];//
+         [self setBottomPicWithPic:
+                            [UIImage imageNamed:@"regimen_preview"]
+                    andTitle:nil];//
         _third_markPic.image = [UIImage imageNamed:@"search_3_"];
         _four_markPic.image = [UIImage imageNamed:@"search_4_"];
         _fivth_markPic.image = [UIImage imageNamed:@"search_5_"];
@@ -121,30 +160,38 @@
     }
     _city_label.userInteractionEnabled = YES;
     _city_label.tag = 301;
-    UITapGestureRecognizer * tap_City = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cityPickerShowWithGesture:)];
+    UITapGestureRecognizer * tap_City = [[UITapGestureRecognizer alloc]
+                                         initWithTarget:self
+                                         action:@selector(cityPickerShowWithGesture:)];
     [_city_label addGestureRecognizer:tap_City];
     tap_City.numberOfTapsRequired = 1;
     self.serch_messagebtn.clipsToBounds = YES;
     self.serch_messagebtn.layer.cornerRadius = 5;
 
 }
--(void)configDateChooseMachine {
+-(void)configDateChooseMachine
+{
     _sellectOn_label.userInteractionEnabled = YES;
     NSString * str = [self tringFromDate:nil];
     _sellectOn_label.text = [NSString stringWithFormat:@"%@      入住",str];
-    UITapGestureRecognizer * tapChoose_start = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pickViewAppear:)];
+    UITapGestureRecognizer * tapChoose_start = [[UITapGestureRecognizer alloc]
+                                                initWithTarget:self
+                                                action:@selector(pickViewAppear:)];
     tapChoose_start.numberOfTapsRequired = 1;
     [_sellectOn_label addGestureRecognizer:tapChoose_start];
     
     _seletOff_label.userInteractionEnabled = YES;
-    UITapGestureRecognizer * tapChoose_end = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pickViewAppear:)];
+    UITapGestureRecognizer * tapChoose_end = [[UITapGestureRecognizer alloc]
+                                              initWithTarget:self
+                                              action:@selector(pickViewAppear:)];
     tapChoose_end.numberOfTapsRequired = 1;
     [_seletOff_label addGestureRecognizer:tapChoose_end];
     _seletOff_label.text = @"－－－－－－     离店";
 
 }
 //把date转换成几月几日
-- (NSString *)tringFromDate:(NSDate *)date {
+- (NSString *)tringFromDate:(NSDate *)date
+{
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setLocale:[NSLocale localeWithLocaleIdentifier:@"zh_CN"]];
     [formatter setDateFormat:@"M月dd日EE"];
@@ -157,7 +204,8 @@
     return dateStr;
 }
 //得到该日期的凌晨时间对对应的date
--(NSDate *)getTimeOfNightFromdate:(NSDate *)date {
+-(NSDate *)getTimeOfNightFromdate:(NSDate *)date
+{
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setLocale:[NSLocale localeWithLocaleIdentifier:@"zh_CN"]];
     [formatter setDateFormat:@"yyyy-MM-dd"];
@@ -167,7 +215,8 @@
     return baseDate;
 }
 //日期选择器出来
-- (void)pickViewAppear:(UITapGestureRecognizer *)tap {
+- (void)pickViewAppear:(UITapGestureRecognizer *)tap
+{
      CDDatePicker * datePicker = [[CDDatePicker alloc] init];
     if (tap.view.frame.origin.y < 5) {//入住按钮
         datePicker.type = @"Z";
@@ -196,7 +245,8 @@
 
 }
 
-- (void)datePickerBtnDownCancel {
+- (void)datePickerBtnDownCancel
+{
     _sellectOn_label.userInteractionEnabled = YES;
     _seletOff_label.userInteractionEnabled = YES;
     _datePicker = nil;
@@ -213,14 +263,16 @@
     _datePicker = nil;
 
 }
--(NSDate *)choosingDate {
+-(NSDate *)choosingDate
+{
     if (!_choosingDate) {
         _choosingDate = [NSDate date];
     }
     return _choosingDate;
 }
 //选择器的代理方法
-- (void)currentSelectedDate:(NSDate *)a{
+- (void)currentSelectedDate:(NSDate *)a
+{
     _choosingDate = a;
     if ([_datePicker.type isEqualToString:@"Z"]) {
         end_begain = a;
@@ -229,7 +281,8 @@
     }
 
 }
-- (void)countiesPickerShowWithGesture:(UITapGestureRecognizer *)ges {
+- (void)countiesPickerShowWithGesture:(UITapGestureRecognizer *)ges
+{
     if (_chosed_cityArray) {
         [self cityPickerShowWithGesture:ges];
     }else {
@@ -239,7 +292,8 @@
 }
 
 
-- (void)cityPickerShowWithGesture:(UITapGestureRecognizer *)ges{
+- (void)cityPickerShowWithGesture:(UITapGestureRecognizer *)ges
+{
     CDCityPicker * city_picker = [[CDCityPicker alloc] init];
     if (ges.view.tag == 301) {
          city_picker.type = @"S";
@@ -252,7 +306,8 @@
     [city_picker showPickerView];
     _city_picker = city_picker;
 }
-- (void)currentSelectedName:(NSString *)name Array:(NSArray *)array
+- (void)currentSelectedName:(NSString *)name
+                      Array:(NSArray *)array
 {
     if ([_city_picker.type isEqualToString:@"S"]) {
         _chosedCity = name;
@@ -261,10 +316,12 @@
         _chosed_districtStr = name;
     }
 }
--(void)cityPickerBtnDownCancel {
+-(void)cityPickerBtnDownCancel
+{
     _city_picker = nil;
 }
--(void)cityPickerbtnDown {
+-(void)cityPickerbtnDown
+{
     if ([_city_picker.type isEqualToString:@"S"]) {
         _city_label.text = _chosedCity;
         NSLog(@"%@",_chosedCity);
@@ -274,13 +331,16 @@
     _city_picker = nil;
 }
 //配置上方图片和标题信息
-- (void)setBottomPicWithPic:(UIImage *)imageP andTitle:(NSString *)string {
+- (void)setBottomPicWithPic:(UIImage *)imageP
+                   andTitle:(NSString *)string
+{
     _topImageV.image = imageP;
     if (string) {
         _textLabel.text = string;
     }
 }
--(void)cancleToRootView {
+-(void)cancleToRootView
+{
     [self.navigationController popToRootViewControllerAnimated:YES];
     for (UIView * view in self.view.subviews) {
 //        if (!(view.bounds.size.height ==self.view.bounds.size.height)) {
@@ -289,7 +349,8 @@
     }
     
 }
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
@@ -303,12 +364,12 @@
     // Pass the selected object to the new view controller.
 }
 */
--(void)skipToSearchResultVC {
+-(void)skipToSearchResultVC
+{
     ResultListVController * ResultLVC = [[ResultListVController alloc] init];
     ResultLVC.vc_type = self.vc_type;
-    [self.navigationController pushViewController:ResultLVC animated:YES];
+    [self.navigationController pushViewController:ResultLVC
+                                animated:YES];
 }
--(void)dealloc {
-    
-}
+
 @end

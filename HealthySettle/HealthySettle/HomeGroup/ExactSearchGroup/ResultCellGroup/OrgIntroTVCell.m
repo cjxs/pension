@@ -10,11 +10,14 @@
 
 @implementation OrgIntroTVCell
 
-- (void)awakeFromNib {
+- (void)awakeFromNib
+{
     [super awakeFromNib];
     // Initialization code
-    for (int i = 0; i < 6; i++) {
-        UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 43 + 26*i, screenWide, 0.5)];
+    for (int i = 0; i < 6; i++)
+    {
+        UIView * view = [[UIView alloc]
+                         initWithFrame:CGRectMake(0, 43 + 26*i, screenWide, 0.5)];
         view.backgroundColor = RGB(228, 229, 230);
         [self addSubview:view];
     }
