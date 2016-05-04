@@ -9,7 +9,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SearchVController">
             <connections>
                 <outlet property="_topImageV" destination="XKC-8s-Fzt" id="1Fz-CX-751"/>
-                <outlet property="back_btn" destination="8UR-rP-RgU" id="O5b-0p-hVL"/>
                 <outlet property="city_label" destination="EHD-rK-DrS" id="DId-hu-eiu"/>
                 <outlet property="firstView" destination="NDZ-zT-Cdx" id="wyQ-gy-ufw"/>
                 <outlet property="first_markPic" destination="ycP-qg-wad" id="Wd2-e8-coZ"/>
@@ -353,23 +352,6 @@
                         </mask>
                     </variation>
                 </imageView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8UR-rP-RgU">
-                    <rect key="frame" x="10" y="19" width="15" height="27"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="18" id="9K6-pk-4cE"/>
-                        <constraint firstAttribute="width" secondItem="8UR-rP-RgU" secondAttribute="height" multiplier="5:9" id="Id4-py-Tto"/>
-                        <constraint firstAttribute="width" constant="15" id="QSI-Fv-u3c"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="27"/>
-                    <state key="normal">
-                        <color key="titleColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
-                    </state>
-                    <variation key="default">
-                        <mask key="constraints">
-                            <exclude reference="9K6-pk-4cE"/>
-                        </mask>
-                    </variation>
-                </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n5X-ZJ-82i">
                     <rect key="frame" x="0.0" y="667" width="375" height="49"/>
                     <color key="backgroundColor" red="0.95294117647058818" green="0.95294117647058818" blue="0.95294117647058818" alpha="1" colorSpace="calibratedRGB"/>
@@ -394,12 +376,10 @@
                 <constraint firstItem="89A-FV-QyU" firstAttribute="top" secondItem="3Rl-dL-oeu" secondAttribute="bottom" constant="1" id="69u-GV-W8L"/>
                 <constraint firstItem="89A-FV-QyU" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="8Fn-Jj-3f4"/>
                 <constraint firstItem="EKD-sd-Mgv" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="94h-6l-ncC"/>
-                <constraint firstItem="XKC-8s-Fzt" firstAttribute="top" secondItem="8UR-rP-RgU" secondAttribute="bottom" constant="-46" id="AHt-2w-5uh"/>
                 <constraint firstAttribute="trailing" secondItem="XKC-8s-Fzt" secondAttribute="trailing" id="Am4-sh-qhD"/>
                 <constraint firstItem="3Rl-dL-oeu" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="CVU-AM-2RC"/>
                 <constraint firstItem="KbJ-D2-TOF" firstAttribute="top" secondItem="C9B-Ij-BhF" secondAttribute="bottom" constant="12" id="Dxy-xa-wLK"/>
                 <constraint firstItem="XKC-8s-Fzt" firstAttribute="top" secondItem="jUm-LD-r6l" secondAttribute="bottom" constant="-80" id="FkQ-ZY-TXM"/>
-                <constraint firstItem="XKC-8s-Fzt" firstAttribute="leading" secondItem="8UR-rP-RgU" secondAttribute="trailing" constant="-25" id="PZv-DL-l74"/>
                 <constraint firstItem="d1n-8H-bAR" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="40" id="PhU-ZM-kNC"/>
                 <constraint firstItem="3Rl-dL-oeu" firstAttribute="top" secondItem="NDZ-zT-Cdx" secondAttribute="bottom" constant="1" id="QPE-gS-2xW"/>
                 <constraint firstItem="jUm-LD-r6l" firstAttribute="centerX" secondItem="XKC-8s-Fzt" secondAttribute="centerX" id="SDk-qN-OxF"/>

@@ -12,6 +12,7 @@
 @interface WebViewController ()<UIWebViewDelegate,NJKWebViewProgressDelegate>
 {
     UIButton * btn;
+    UIImageView * image_view;
 }
 @property (nonatomic, strong)UIWebView * webView;
 @property (nonatomic, strong) NJKWebViewProgress *progressProxy;
@@ -40,16 +41,16 @@
     self.progressView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
         NSURLRequest * request = [NSURLRequest requestWithURL:_urlLoad];
     [_webView loadRequest:request];
+    image_view = [[UIImageView alloc]initWithFrame:CGRectMake(kMargin * 1,screenHeight * 0.01, kMargin * 2, kMargin * 2/10*18)];
+    image_view.image = [UIImage imageNamed:@"leftop_r"];
+    
     btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn.frame = CGRectMake(kMargin * 2,screenHeight * 0.05, kMargin * 2, kMargin * 2/10*18);
-    [btn setTitleColor:[UIColor blackColor]
-              forState:UIControlStateNormal];
-    [btn setBackgroundImage:[UIImage imageNamed:@"leftop_r"]
-                   forState:UIControlStateNormal];
+    btn.frame = CGRectMake(kMargin * 1,screenHeight * 0.03, kMargin * 4, kMargin * 4/10*18);
     btn.alpha = 0.4;
     [btn addTarget:self
             action:@selector(backTolastVC)
   forControlEvents:UIControlEventTouchUpInside];
+    [btn addSubview:image_view];
     [self.view addSubview:btn];
 }
 - (void)backTolastVC

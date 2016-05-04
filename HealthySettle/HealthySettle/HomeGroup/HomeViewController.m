@@ -25,6 +25,7 @@
 @interface HomeViewController ()<UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate,UISearchBarDelegate,UIWebViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource>
 {
     NSMutableArray * imagesA;
+    UILabel * city_btn_label;
 }
 
 
@@ -174,16 +175,19 @@
 //    }];
     UIButton * city_Btn = [UIButton buttonWithType:UIButtonTypeCustom] ;
     city_Btn.frame = CGRectMake(0, 0, 60, 30);
-    UIImageView * image_view = [[UIImageView alloc]
-                                initWithImage:[UIImage imageNamed:@"right_02"]];
-    image_view.frame = CGRectMake(48 , 12, 12, 6);
-    [city_Btn addSubview:image_view];
     city_Btn.titleLabel.font = [UIFont systemFontOfSize:15];
-    [city_Btn setTitle:@"杭州"
-              forState:UIControlStateNormal];
     [city_Btn addTarget:self
                  action:@selector(chooseIndexCity)
        forControlEvents:UIControlEventTouchUpInside];
+    UIImageView * image_view = [[UIImageView alloc]
+                                initWithImage:[UIImage imageNamed:@"right_02"]];
+    image_view.frame = CGRectMake(45 , 13, 12,6);
+    [city_Btn addSubview:image_view];
+    city_btn_label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 40, 30)];
+    city_btn_label.text = @"杭州";
+    city_btn_label.textColor = [UIColor whiteColor];
+    city_btn_label.textAlignment = NSTextAlignmentCenter;
+    [city_Btn addSubview:city_btn_label];
     UIBarButtonItem * city_barBItem = [[UIBarButtonItem alloc]
                                        initWithCustomView:city_Btn];
     [self.navigationItem setLeftBarButtonItem:city_barBItem];
@@ -199,7 +203,7 @@
                                         initWithCustomView:searchWhere];
     [self.navigationItem setRightBarButtonItem:searchBarWhere];
     _searchWhere = searchWhere;
-     UITableView * homeTableView = [[UITableView alloc]
+    UITableView * homeTableView = [[UITableView alloc]
                                     initWithFrame:CGRectMake(0, 0, screenWide, screenHeight-64-screenHeight * 0.035)
                                     style:UITableViewStyleGrouped];
     [self.view addSubview:homeTableView];
@@ -224,7 +228,13 @@
 }
 - (void)chooseIndexCity
 {   //选择城市
-    NSLog(@"+++----");
+    if ([city_btn_label.text isEqualToString:@"杭州"])
+    {
+        city_btn_label.text = @"上海";
+    }else
+    {
+        city_btn_label.text = @"杭州";
+    }
 }
 -(CGFloat)tableView:(UITableView *)tableView
 heightForRowAtIndexPath:(NSIndexPath *)indexPath

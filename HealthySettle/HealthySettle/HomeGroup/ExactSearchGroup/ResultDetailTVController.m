@@ -57,13 +57,17 @@
                          initWithFrame:CGRectMake(0, CGRectGetMaxY(organization_imageView.frame) - screenHeight * 0.045,screenWide , screenHeight * 0.045)];
         view.backgroundColor = [UIColor blackColor];
         view.alpha = 0.5;
+        CGRect back_frame = CGRectMake(5, 5 , screenWide * 0.03, screenWide * 0.03/10 *18 );
+        UIImageView * back_imageView = [[UIImageView alloc] initWithFrame:back_frame];
+        back_imageView.image = [UIImage imageNamed:@"leftop_w"];
+        
         UIButton * back_btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [back_btn setBackgroundImage:[UIImage imageNamed:@"leftop_w"]
-                            forState:UIControlStateNormal];
-        back_btn.frame = CGRectMake(screenWide * 0.04, screenHeight * 0.02 , screenWide * 0.035, screenWide * 0.035/10 *18 );
+        back_btn.frame = CGRectMake(screenWide * 0.02, screenHeight * 0.01 , screenWide * 0.107, screenHeight * 0.06 );
         [back_btn addTarget:self
                      action:@selector(cancleToRootView)
            forControlEvents:UIControlEventTouchUpInside];
+        [back_btn addSubview:back_imageView];
+        
         if ([_vc_type isEqualToString:@"S"])
         {
             _tableHeadView = [[UIView alloc]

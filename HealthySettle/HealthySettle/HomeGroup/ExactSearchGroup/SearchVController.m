@@ -70,6 +70,28 @@
     [self.navigationController setNavigationBarHidden:NO animated:animated];
 
 }
+- (UIButton *)back_button
+{
+    if (_back_button == nil)
+    {
+        _back_button = [UIButton buttonWithType:UIButtonTypeCustom];
+        _back_button.frame = CGRectMake(10, 15, 40, 40);
+        [_back_button addTarget:self
+                          action:@selector(cancleToRootView)
+                forControlEvents:UIControlEventTouchUpInside];
+        
+    }
+    return _back_button;
+    
+}
+- (UIImageView *)back_imageView
+{
+    if (_back_imageView == nil)
+    {
+        _back_imageView = [[UIImageView alloc] initWithFrame:CGRectMake(3, 8, 10, 18)];
+    }
+    return _back_imageView;
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -83,19 +105,15 @@
                                    forState:UIControlStateNormal
                                  barMetrics:UIBarMetricsDefault];
     self.navigationItem.backBarButtonItem = returnBarButtonItem;
-    
-    [self.back_btn addTarget:self
-                      action:@selector(cancleToRootView)
-            forControlEvents:UIControlEventTouchUpInside];
-    
     [self.serch_messagebtn addTarget:self
                               action:@selector(skipToSearchResultVC)
                     forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.back_button];
+    [self.back_button addSubview:self.back_imageView];
+    
     
     if ([_vc_type isEqualToString:@"L"]) {
-        [self.back_btn setBackgroundImage:
-                        [UIImage imageNamed:@"black_w"]
-                                 forState:UIControlStateNormal];
+        self.back_imageView.image = [UIImage imageNamed:@"black_w"];
         [self setBottomPicWithPic:
                     [UIImage imageNamed:@"pension_preview"]
                          andTitle:nil];
@@ -127,10 +145,7 @@
         _priceAndCity_label.text = @"价格";
         
     }else {
-        [self.back_btn setBackgroundImage:
-                            [UIImage imageNamed:@"leftop_w"]
-                        forState:UIControlStateNormal];
-
+        self.back_imageView.image = [UIImage imageNamed:@"leftop_w"];
          [self setBottomPicWithPic:
                             [UIImage imageNamed:@"regimen_preview"]
                     andTitle:nil];//

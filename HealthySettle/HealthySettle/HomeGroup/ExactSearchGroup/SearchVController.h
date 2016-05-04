@@ -10,9 +10,10 @@
 
 @interface SearchVController : UIViewController
 @property (nonatomic, strong)NSString * vc_type;
-@property (weak, nonatomic) IBOutlet UIButton *back_btn;
+@property (strong, nonatomic)UIImageView *back_imageView;
 @property (nonatomic, strong)NSDate * choosingDate;
 @property (nonatomic, strong)NSString * chosedCity;
 @property (nonatomic, strong)NSArray * chosed_cityArray;
 @property (nonatomic, strong)NSString * chosed_districtStr;
+@property (nonatomic,strong)UIButton * back_button;
 @end
