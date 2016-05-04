@@ -17,7 +17,8 @@
 
 @implementation TabbarController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     HomeViewController *homeVC = [[HomeViewController alloc] init];
@@ -59,7 +60,8 @@
     self.viewControllers = @[homeNaVC, searchNaVC,customerNaVC, mineNaVC];
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }

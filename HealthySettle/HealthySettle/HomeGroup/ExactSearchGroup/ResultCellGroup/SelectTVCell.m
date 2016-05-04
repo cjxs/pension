@@ -58,6 +58,10 @@
                 action:@selector(selectNurseBtn:)
       forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:btn];
+        if (i == 0)
+        {
+            [self selectNurseBtn:btn];
+        }
     }
 }
 -(void)selectNurseBtn:(UIButton *)button

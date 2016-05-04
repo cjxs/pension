@@ -143,6 +143,9 @@
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     OrderLaeblTVCell * cell;
+    OrderTextFieldTVCell* cell1;
+    OrderBtnTVCell * cell2;
+    
     if (indexPath.section == 0)
     {
         switch (indexPath.row)
@@ -153,19 +156,23 @@
                 [cell configWithtitle:@"房间数" text:@"1间" next:YES];
                 break;
             case 1:
-                cell = (OrderTextFieldTVCell*)[tableView dequeueReusableCellWithIdentifier:@"cellF"
-                                                                              forIndexPath:indexPath];
-                [cell configWithtitle:@"联系人" text:@"姓名" next:YES];
+               cell1 = [tableView dequeueReusableCellWithIdentifier:@"cellF"
+                                                       forIndexPath:indexPath];
+              
+                [cell1 configWithtitle:@"联系人" text:@"姓名" next:YES];
+                return cell1;
                 break;
             case 2:
-                cell = [tableView dequeueReusableCellWithIdentifier:@"cellL"
+                cell1 = [tableView dequeueReusableCellWithIdentifier:@"cellF"
                                                        forIndexPath:indexPath];
-                [cell configWithtitle:@"联系人手机" text:@"13746464777" next:YES];
+                [cell1 configWithtitle:@"联系人手机" text:@"请输入" next:YES];
+                return cell1;
                 break;
             case 3:
-                cell = (OrderTextFieldTVCell*)[tableView dequeueReusableCellWithIdentifier:@"cellL"
-                                                                              forIndexPath:indexPath];
-                [cell configWithtitle:@"入住人" text:@"姓名" next:YES];
+                cell1 = [tableView dequeueReusableCellWithIdentifier:@"cellF"
+                                                    forIndexPath:indexPath];
+                [cell1 configWithtitle:@"入住人" text:@"姓名" next:YES];
+                return cell1;
                 break;
             case 4:
                 cell = [tableView dequeueReusableCellWithIdentifier:@"cellL"
@@ -173,9 +180,10 @@
                 [cell configWithtitle:@"证件类型" text:@"身份证" next:YES];
                 break;
             case 5:
-                cell = [tableView dequeueReusableCellWithIdentifier:@"cellL"
+                cell1 = [tableView dequeueReusableCellWithIdentifier:@"cellF"
                                                        forIndexPath:indexPath];
-                [cell configWithtitle:@"证件号码" text:@"3343487285234837383" next:NO];
+                [cell1 configWithtitle:@"证件号码" text:@"3343487285234837383" next:NO];
+                return cell1;
                 break;
             default:
                 break;
@@ -185,14 +193,16 @@
         switch (indexPath.row)
         {
             case 0:
-                cell = (OrderBtnTVCell *)[tableView dequeueReusableCellWithIdentifier:@"cellS"
-                                                                         forIndexPath:indexPath];
-                [cell configWithtitle:@"需要发票" text:nil next:YES];
+                cell2 = [tableView dequeueReusableCellWithIdentifier:@"cellS"
+                                                        forIndexPath:indexPath];
+                [cell2 configWithtitle:@"需要发票" text:nil next:YES];
+                return cell2;
                 break;
             case 1:
-                cell = (OrderTextFieldTVCell*)[tableView dequeueReusableCellWithIdentifier:@"cellL"
-                                                                              forIndexPath:indexPath];
-                [cell configWithtitle:@"发票抬头" text:@"请填写发票抬头" next:YES];
+                cell1 = [tableView dequeueReusableCellWithIdentifier:@"cellF"
+                                                        forIndexPath:indexPath];
+                [cell1 configWithtitle:@"发票抬头" text:@"请填写发票抬头" next:YES];
+                return cell1;
                 break;
             case 2:
                 cell = [tableView dequeueReusableCellWithIdentifier:@"cellL"
@@ -200,14 +210,16 @@
                 [cell configWithtitle:@"发票类型" text:@"住宿费" next:YES];
                 break;
             case 3:
-                cell = [tableView dequeueReusableCellWithIdentifier:@"cellL"
+                cell1 = [tableView dequeueReusableCellWithIdentifier:@"cellF"
                                                        forIndexPath:indexPath];
-                [cell configWithtitle:@"收件人" text:@"张三" next:NO];
+                [cell1 configWithtitle:@"收件人" text:@"张三" next:NO];
+                return cell1;
                 break;
             case 4:
-                cell = [tableView dequeueReusableCellWithIdentifier:@"cellL"
+                cell1 = [tableView dequeueReusableCellWithIdentifier:@"cellF"
                                                        forIndexPath:indexPath];
-                [cell configWithtitle:@"地址" text:@"浙江省杭州市滨江区隆和大厦603" next:NO];
+                [cell1 configWithtitle:@"地址" text:@"浙江省杭州市滨江区隆和大厦603" next:NO];
+                return cell1;
                 break;
             default:
                 break;
