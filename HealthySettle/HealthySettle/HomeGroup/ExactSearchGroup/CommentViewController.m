@@ -8,10 +8,11 @@
 
 #import "CommentViewController.h"
 
-@interface CommentViewController ()
+@interface CommentViewController ()<UITextViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 {
     UIView * select_view;
     UITextView * textView;
+    UILabel * label_view;
     UIButton *addImage_btn;
 }
 
@@ -64,10 +65,16 @@
     [self.view addSubview:title2_label];
     textView = [[UITextView alloc]
                 initWithFrame:CGRectMake(screenWide * 0.25, screenHeight * 0.1, screenWide * 0.7, screenHeight * 0.35)];
-    textView.text = @"你可以聊一聊机构服务,位置，设施等";
+    textView.delegate = self;
     textView.layer.borderColor = [RGB(244, 244, 244) CGColor];
     textView.layer.borderWidth = 1;
     [self.view addSubview:textView];
+    label_view = [[UILabel alloc]
+                  initWithFrame:CGRectMake(screenWide * 0.01, 0, screenWide * 0.68, screenHeight * 0.05)];
+    label_view.text = @"你可以聊一聊机构服务,位置，设施等";
+    label_view.numberOfLines = 0;
+    label_view.font = [UIFont systemFontOfSize:12];
+    [textView addSubview:label_view];
     UILabel * title3_label = [[UILabel alloc]
                               initWithFrame:CGRectMake(screenWide * 0.03, screenHeight * 0.495, screenWide * 0.2, screenHeight * 0.03)];
     title3_label.text = @"上传图片";
@@ -78,6 +85,9 @@
     addImage_btn.frame = CGRectMake(screenWide * 0.25, screenHeight * 0.495, screenHeight * 0.08, screenHeight * 0.08);
     [addImage_btn setBackgroundImage:[UIImage imageNamed:@"add_btn"]
                             forState:UIControlStateNormal];
+    [addImage_btn addTarget:self
+                     action:@selector(addImageToPP)
+           forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:addImage_btn];
     UILabel * addImage_label = [[UILabel alloc]
                                 initWithFrame:CGRectMake(screenWide * 0.25, screenHeight * 0.58, screenWide * 0.7, screenHeight * 0.02)];
@@ -100,9 +110,26 @@
                      forState:UIControlStateNormal];
     commit_btn.titleLabel.font = [UIFont systemFontOfSize:14];
     [self.view addSubview:commit_btn];
-
-    
-
+}
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView;
+{
+    if (label_view)
+    {
+        [UIView animateWithDuration:0.1f animations:^{
+            [label_view removeFromSuperview];
+        }];
+    }
+    return YES;
+}
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [textView resignFirstResponder];
+    if (textView.text.length == 0 && label_view)
+    {
+        [UIView animateWithDuration:0.1f animations:^{
+            [textView addSubview:label_view];
+        }];
+    }
 }
 -(void)fundButtonWithArray:(NSArray *)array
                  andHeight:(CGFloat)height Wide:(CGFloat)wide
@@ -150,6 +177,13 @@
                  forState:UIControlStateNormal];
     NSLog(@"%ld",button.tag - 600);
 }
+- (void)addImageToPP
+{
+    NSLog(@"添加照片");
+    [self useImageClickedWithStr:nil];
+
+    
+}
 - (void)pressBtnToSubmit
 {
     NSLog(@"提交点评");
@@ -159,6 +193,75 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+- (void)useImageClickedWithStr: (NSString *)str
+{
+    UIActionSheet *sheet;
+    // 判断是否支持相机
+    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+    {
+        sheet  = [[UIActionSheet alloc] initWithTitle:str delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"取消" otherButtonTitles:@"拍照", @"从相册选择", nil];
+    }
+    else {
+        sheet = [[UIActionSheet alloc] initWithTitle:str delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"取消" otherButtonTitles:@"从相册选择", nil];
+    }
+    
+    sheet.tag = 255;
+    
+    [sheet showInView:self.view];
+}
 
+
+#pragma mark - action sheet delegte
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (actionSheet.tag == 255) {
+        NSUInteger sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        // 判断是否支持相机
+        if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+            switch (buttonIndex) {
+                case 0:
+                    return;
+                case 1: //相机
+                    sourceType = UIImagePickerControllerSourceTypeCamera;
+                    break;
+                case 2: //相册
+                    sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                    break;
+            }
+        }
+        else {
+            if (buttonIndex == 0) {
+                return;
+            } else {
+                sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+            }
+        }
+        // 跳转到相机或相册页面
+        UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+        imagePickerController.delegate = self;
+        imagePickerController.allowsEditing = YES;
+        imagePickerController.sourceType = sourceType;
+        
+        [self presentViewController:imagePickerController animated:YES completion:^{}];
+    }
+}
+
+#pragma mark - image picker delegte
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    [picker dismissViewControllerAnimated:YES completion:^{}];
+    
+    UIImage *originImage = [info objectForKey:UIImagePickerControllerOriginalImage];
+    [addImage_btn setBackgroundImage:originImage forState:UIControlStateNormal];
+    
+    
+//    UIImage *scaleImage = [self scaleImage:originImage toScale:0.3];
+    
+//    NSData *imageData = UIImageJPEGRepresentation(image, COMPRESSED_RATE);
+//    UIImage *compressedImage = [UIImage imageWithData:imageData];
+    
+//    [HttpRequestManager uploadImage:compressedImage httpClient:self.httpClient delegate:self];
+    
+}
 
 @end
