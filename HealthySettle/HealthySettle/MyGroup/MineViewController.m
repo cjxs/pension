@@ -28,6 +28,7 @@ static NSString *setCellIdentifier = @"cellS";
 @end
 
 @implementation MineViewController
+#pragma mark - LazyLoading
 - (UITableView *)setTableView
 {
     if (! _setTableView)
@@ -53,6 +54,7 @@ static NSString *setCellIdentifier = @"cellS";
     }
     return _setTableView;
 }
+#pragma mark - auto_view
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -146,6 +148,12 @@ static NSString *setCellIdentifier = @"cellS";
     }
     [self.view addSubview:view];
 }
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+#pragma mark - UITableViewDataSource, UITableViewDelegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 2;
@@ -215,28 +223,6 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
             break;
     }
 }
--(void)changeToAccountWithstr:(NSString *)str
-{
-    AccountViewController * accountVC = [[AccountViewController alloc] init];
-    accountVC.titleName = str;
-    [self.navigationController pushViewController:accountVC
-                                         animated:YES];
-}
-- (void)changeToGraceVC
-{
-    GraceVC * graceVC = [[GraceVC alloc] init];
-    graceVC.titleName = @"我的优惠券";
-    [self.navigationController pushViewController:graceVC
-                                         animated:YES];
-}
-- (void)changeToPasswordChangeVC{
-    PasswordCVController * passwordVC = [[PasswordCVController alloc]
-                                         initWithNibName:@"PasswordCVController"
-                                         bundle:nil];
-    passwordVC.titleName = @"密码修改";
-    [self.navigationController pushViewController:passwordVC
-                                         animated:YES];
-}
 - (CGFloat)tableView:(UITableView *)tableView
 heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -259,14 +245,38 @@ heightForHeaderInSection:(NSInteger)section
     {
         return screenHeight * 0.015;
     }
-
+    
 }
+
+#pragma mark - VTOF
 - (void)resignOrLoad
 {
-    NSLog(@"登录");
     LoginOrResView * view = [[LoginOrResView alloc] init];
     [[UIApplication sharedApplication].keyWindow addSubview:view];
 }
+-(void)changeToAccountWithstr:(NSString *)str
+{
+    AccountViewController * accountVC = [[AccountViewController alloc] init];
+    accountVC.titleName = str;
+    [self.navigationController pushViewController:accountVC
+                                         animated:YES];
+}
+- (void)changeToGraceVC
+{
+    GraceVC * graceVC = [[GraceVC alloc] init];
+    graceVC.titleName = @"我的优惠券";
+    [self.navigationController pushViewController:graceVC
+                                         animated:YES];
+}
+- (void)changeToPasswordChangeVC{
+    PasswordCVController * passwordVC = [[PasswordCVController alloc]
+                                         initWithNibName:@"PasswordCVController"
+                                         bundle:nil];
+    passwordVC.titleName = @"密码修改";
+    [self.navigationController pushViewController:passwordVC
+                                         animated:YES];
+}
+
 - (void)clickTwoViews:(UITapGestureRecognizer *)gesture
 {
     
@@ -358,9 +368,5 @@ heightForHeaderInSection:(NSInteger)section
     // Pass the selected object to the new view controller.
 }
 */
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
 @end

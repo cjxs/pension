@@ -12,6 +12,7 @@
 #import "ShareView.h"
 
 @implementation CitySkipViewCell
+#pragma mark - LazyLoading
 - (UILabel *)title_label {
     if (_title_label== nil) {
         _title_label = [[UILabel alloc]
@@ -29,6 +30,7 @@
     }
     return _title_icon;
 }
+#pragma mark - auto_view
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
@@ -61,6 +63,9 @@
 
     }
     return self;
+}
+-(void)dealloc {
+    _cityCollect_view = nil;
 }
 -(void)configWithicon:(UIImage *)icon
                 title:(NSString *)title
@@ -100,14 +105,13 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 {
     return 0;
 }
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
     NSLog(@"%d",(int)self.type);
     NSLog(@"++++%d",(int)indexPath.row);
-  }
-
--(void)dealloc {
-    _cityCollect_view = nil;
 }
+
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

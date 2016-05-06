@@ -33,6 +33,7 @@
 @end
 
 @implementation HomeViewController
+#pragma mark - LazyLoading
 - (UIView *)tableHeadView
 {
     if (_tableHeadView == nil )
@@ -86,53 +87,6 @@
     }
     return _tableHeadView;
 }
-//四个跳转
-- (void)clipOnBtnsWithbtn:(UIButton *)btn
-{
-    int btn_number = btn.frame.origin.x /(screenWide/4);
-    if (btn_number == 0)
-    {
-        NSURL * url = [NSURL URLWithString:@"http://www.cjxs.github.io/"];
-        WebViewController * webVC = [[WebViewController alloc] init];
-        webVC.urlLoad = url;
-        [self.navigationController pushViewController:webVC
-                                             animated:NO];
-    }else if (btn_number == 1)
-    {
-        NSURL * url = [NSURL URLWithString:@"http://www.baidu.com"];
-        WebViewController * webVC = [[WebViewController alloc] init];
-        webVC.urlLoad = url;
-        [self.navigationController pushViewController:webVC
-                                             animated:NO];
-    }else if (btn_number == 2)
-    {
-        KnowledgeTVController * vc = [[KnowledgeTVController alloc] init];
-        [self.navigationController pushViewController:vc
-                                             animated:NO];
-    }else
-    {
-        NSURL * url = [NSURL URLWithString:@"http://www.cjxs.github.io/"];
-        WebViewController * webVC = [[WebViewController alloc] init];
-        webVC.urlLoad = url;
-        [self.navigationController pushViewController:webVC
-                                             animated:NO];
-    }
-}
-//两个跳转
-- (void)skipTOSecond:(UIButton *)button
-{
-    SearchVController * searchVC = [[SearchVController alloc] init];
-    searchVC.hidesBottomBarWhenPushed = YES;//隐藏tabBar
-    if (button.frame.origin.x < 100)
-    {
-          searchVC.vc_type = @"S";
-    }else
-    {
-        searchVC.vc_type = @"L";
-    }
-    [self.navigationController pushViewController:searchVC
-                                         animated:YES];
-}
 - (UITableView *)bottomTableV
 {
     if (_bottomTableV == nil)
@@ -142,6 +96,8 @@
     }
     return _bottomTableV;
 }
+
+#pragma mark - auto_view
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -226,16 +182,12 @@
                                  barMetrics:UIBarMetricsDefault];
     self.navigationItem.backBarButtonItem = returnBarButtonItem;
 }
-- (void)chooseIndexCity
-{   //选择城市
-    if ([city_btn_label.text isEqualToString:@"杭州"])
-    {
-        city_btn_label.text = @"上海";
-    }else
-    {
-        city_btn_label.text = @"杭州";
-    }
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
+
+#pragma mark - UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate
 -(CGFloat)tableView:(UITableView *)tableView
 heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -284,10 +236,6 @@ numberOfRowsInSection:(NSInteger)section
 didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-}
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
@@ -371,6 +319,71 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath
                                    bundle:nil];
        [self.navigationController pushViewController:monVC animated:NO];
 }
+- (void)searchBarClear
+{
+    [_searchWhere resignFirstResponder];
+    _searchWhere.text = nil;
+    _searchWhere.showsCancelButton = NO;
+}
+#pragma mark - VTOF
+- (void)chooseIndexCity
+{   //选择城市
+    if ([city_btn_label.text isEqualToString:@"杭州"])
+    {
+        city_btn_label.text = @"上海";
+    }else
+    {
+        city_btn_label.text = @"杭州";
+    }
+}
+
+//四个跳转
+- (void)clipOnBtnsWithbtn:(UIButton *)btn
+{
+    int btn_number = btn.frame.origin.x /(screenWide/4);
+    if (btn_number == 0)
+    {
+        NSURL * url = [NSURL URLWithString:@"http://www.cjxs.github.io/"];
+        WebViewController * webVC = [[WebViewController alloc] init];
+        webVC.urlLoad = url;
+        [self.navigationController pushViewController:webVC
+                                             animated:NO];
+    }else if (btn_number == 1)
+    {
+        NSURL * url = [NSURL URLWithString:@"http://www.baidu.com"];
+        WebViewController * webVC = [[WebViewController alloc] init];
+        webVC.urlLoad = url;
+        [self.navigationController pushViewController:webVC
+                                             animated:NO];
+    }else if (btn_number == 2)
+    {
+        KnowledgeTVController * vc = [[KnowledgeTVController alloc] init];
+        [self.navigationController pushViewController:vc
+                                             animated:NO];
+    }else
+    {
+        NSURL * url = [NSURL URLWithString:@"http://www.cjxs.github.io/"];
+        WebViewController * webVC = [[WebViewController alloc] init];
+        webVC.urlLoad = url;
+        [self.navigationController pushViewController:webVC
+                                             animated:NO];
+    }
+}
+//两个跳转
+- (void)skipTOSecond:(UIButton *)button
+{
+    SearchVController * searchVC = [[SearchVController alloc] init];
+    searchVC.hidesBottomBarWhenPushed = YES;//隐藏tabBar
+    if (button.frame.origin.x < 100)
+    {
+        searchVC.vc_type = @"S";
+    }else
+    {
+        searchVC.vc_type = @"L";
+    }
+    [self.navigationController pushViewController:searchVC
+                                         animated:YES];
+}
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     NSLog(@"%@",_searchWhere.text);
@@ -405,12 +418,6 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
 {
     [self searchBarClear];
-}
-- (void)searchBarClear
-{
-    [_searchWhere resignFirstResponder];
-    _searchWhere.text = nil;
-    _searchWhere.showsCancelButton = NO;
 }
 
 /*

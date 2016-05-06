@@ -23,6 +23,7 @@
 @end
 
 @implementation OrderTVController
+#pragma mark - LazyLoading
 -(UIView *)tableHeadView
 {
     if (!_tableHeadView)
@@ -79,6 +80,7 @@
     }
     return _tableHeadView;
 }
+#pragma mark - auto_view
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -122,6 +124,11 @@
                     forState:UIControlStateNormal];
     [backFootView addSubview:toPay_btn];
     self.tableView.tableFooterView = backFootView;
+}
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -247,6 +254,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
 }
+#pragma mark - PAY
 - (void)payToEveryOne
 {
     view_pay = [[UIView alloc] init];
@@ -399,10 +407,6 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
     // Pass the selected object to the new view controller.
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
 
 @end

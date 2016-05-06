@@ -153,6 +153,7 @@
 		327DC7D91CB50119005617D2 /* Guide_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 327DC7D81CB50119005617D2 /* Guide_btn.png */; };
 		327DC7DB1CB5011F005617D2 /* Loading.png in Resources */ = {isa = PBXBuildFile; fileRef = 327DC7DA1CB5011F005617D2 /* Loading.png */; };
 		327DC7DD1CB50BF4005617D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 327DC7DC1CB50BF4005617D2 /* Assets.xcassets */; };
+		328C3D941CD9EABD00615D38 /* Imagebutton.m in Sources */ = {isa = PBXBuildFile; fileRef = 328C3D931CD9EABD00615D38 /* Imagebutton.m */; };
 		3292A74F1CA3D14E004FEB57 /* CDCityPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 3292A74E1CA3D14E004FEB57 /* CDCityPicker.m */; };
 		3292A7511CA3DCA4004FEB57 /* districtMGE.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3292A7501CA3DCA4004FEB57 /* districtMGE.plist */; };
 		32BD27FF1CC07AFE00B8536E /* Member.m in Sources */ = {isa = PBXBuildFile; fileRef = 32BD27FE1CC07AFE00B8536E /* Member.m */; };
@@ -650,6 +651,8 @@
 		327DC7D81CB50119005617D2 /* Guide_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Guide_btn.png; sourceTree = "<group>"; };
 		327DC7DA1CB5011F005617D2 /* Loading.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Loading.png; sourceTree = "<group>"; };
 		327DC7DC1CB50BF4005617D2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		328C3D921CD9EABD00615D38 /* Imagebutton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Imagebutton.h; sourceTree = "<group>"; };
+		328C3D931CD9EABD00615D38 /* Imagebutton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Imagebutton.m; sourceTree = "<group>"; };
 		3292A74D1CA3D14E004FEB57 /* CDCityPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDCityPicker.h; sourceTree = "<group>"; };
 		3292A74E1CA3D14E004FEB57 /* CDCityPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDCityPicker.m; sourceTree = "<group>"; };
 		3292A7501CA3DCA4004FEB57 /* districtMGE.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = districtMGE.plist; sourceTree = "<group>"; };
@@ -1283,6 +1286,8 @@
 				324CD4A61CAE172000276B57 /* ResultDetailTVController.m */,
 				32D859751CB90B100074D5C3 /* CommentViewController.h */,
 				32D859761CB90B100074D5C3 /* CommentViewController.m */,
+				328C3D921CD9EABD00615D38 /* Imagebutton.h */,
+				328C3D931CD9EABD00615D38 /* Imagebutton.m */,
 				32E71C9B1CB23DD00079CD73 /* OrderTVController.h */,
 				32E71C9C1CB23DD00079CD73 /* OrderTVController.m */,
 				32E71C9E1CB255D50079CD73 /* OrderLaeblTVCell.h */,
@@ -2021,6 +2026,7 @@
 				3252D6541CC752B5000FAFBC /* MD5DataSigner.m in Sources */,
 				32CABD6A1CA373AA0068AE93 /* SeasonMCollectViewCell.m in Sources */,
 				32E71CA01CB255D50079CD73 /* OrderLaeblTVCell.m in Sources */,
+				328C3D941CD9EABD00615D38 /* Imagebutton.m in Sources */,
 				32F6CD2F1C9ABDF200E97B65 /* TabbarController.m in Sources */,
 				32D859701CB8D4400074D5C3 /* NMRangeSlider.m in Sources */,
 				320BE5C81CBC900D00A34FCB /* AccountTVCell.m in Sources */,

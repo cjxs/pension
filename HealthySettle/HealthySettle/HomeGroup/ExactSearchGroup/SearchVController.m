@@ -39,6 +39,30 @@
 @end
 
 @implementation SearchVController
+#pragma mark - LazyLoading
+- (UIButton *)back_button
+{
+    if (_back_button == nil)
+    {
+        _back_button = [UIButton buttonWithType:UIButtonTypeCustom];
+        _back_button.frame = CGRectMake(10, 15, 40, 40);
+        [_back_button addTarget:self
+                         action:@selector(cancleToRootView)
+               forControlEvents:UIControlEventTouchUpInside];
+        
+    }
+    return _back_button;
+    
+}
+- (UIImageView *)back_imageView
+{
+    if (_back_imageView == nil)
+    {
+        _back_imageView = [[UIImageView alloc] initWithFrame:CGRectMake(3, 8, 10, 18)];
+    }
+    return _back_imageView;
+}
+#pragma mark - auto_view
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -63,35 +87,6 @@
     contentView.frame = rect;
     self.tabBarController.tabBar.hidden = YES;
 }
-
--(void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    [self.navigationController setNavigationBarHidden:NO animated:animated];
-
-}
-- (UIButton *)back_button
-{
-    if (_back_button == nil)
-    {
-        _back_button = [UIButton buttonWithType:UIButtonTypeCustom];
-        _back_button.frame = CGRectMake(10, 15, 40, 40);
-        [_back_button addTarget:self
-                          action:@selector(cancleToRootView)
-                forControlEvents:UIControlEventTouchUpInside];
-        
-    }
-    return _back_button;
-    
-}
-- (UIImageView *)back_imageView
-{
-    if (_back_imageView == nil)
-    {
-        _back_imageView = [[UIImageView alloc] initWithFrame:CGRectMake(3, 8, 10, 18)];
-    }
-    return _back_imageView;
-}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -115,7 +110,7 @@
     if ([_vc_type isEqualToString:@"L"]) {
         self.back_imageView.image = [UIImage imageNamed:@"black_w"];
         [self setBottomPicWithPic:
-                    [UIImage imageNamed:@"pension_preview"]
+         [UIImage imageNamed:@"pension_preview"]
                          andTitle:nil];
         _third_markPic.image = [UIImage imageNamed:@"search_6_"];
         _four_markPic.image  = [UIImage imageNamed:@"search_3_"];
@@ -123,7 +118,7 @@
         _city_label.text = @"杭州市";
         
         [_sellectOn_label mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.height.mas_equalTo(69);
+            make.height.mas_equalTo(69);
         }];
         [_seletOff_label mas_makeConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(1);
@@ -146,9 +141,9 @@
         
     }else {
         self.back_imageView.image = [UIImage imageNamed:@"leftop_w"];
-         [self setBottomPicWithPic:
-                            [UIImage imageNamed:@"regimen_preview"]
-                    andTitle:nil];//
+        [self setBottomPicWithPic:
+         [UIImage imageNamed:@"regimen_preview"]
+                         andTitle:nil];//
         _third_markPic.image = [UIImage imageNamed:@"search_3_"];
         _four_markPic.image = [UIImage imageNamed:@"search_4_"];
         _fivth_markPic.image = [UIImage imageNamed:@"search_5_"];
@@ -164,14 +159,14 @@
             make.height.mas_equalTo(35);
         }];
         
-                [_nurseChoose_label mas_makeConstraints:^(MASConstraintMaker *make) {
+        [_nurseChoose_label mas_makeConstraints:^(MASConstraintMaker *make) {
             make.width.mas_equalTo(150);
         }];
         _nurseChoose_label.text = @"机构／位置／景点名";
         _nurseTrue_label.text = @"";
         _position_label.text = @"价格";
         _priceAndCity_label.alpha = 0;
-
+        
     }
     _city_label.userInteractionEnabled = YES;
     _city_label.tag = 301;
@@ -182,8 +177,23 @@
     tap_City.numberOfTapsRequired = 1;
     self.serch_messagebtn.clipsToBounds = YES;
     self.serch_messagebtn.layer.cornerRadius = 5;
+    
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:animated];
 
 }
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+
+#pragma mark - DateChoose,CityChoose
 -(void)configDateChooseMachine
 {
     _sellectOn_label.userInteractionEnabled = YES;
@@ -261,13 +271,13 @@
 }
 
 - (void)datePickerBtnDownCancel
-{
+{//取消按钮
     _sellectOn_label.userInteractionEnabled = YES;
     _seletOff_label.userInteractionEnabled = YES;
     _datePicker = nil;
 }
 -(void)datePickerbtnDown
-{
+{// 确定按钮
     _sellectOn_label.userInteractionEnabled = YES;
     _seletOff_label.userInteractionEnabled = YES;
     if ([_datePicker.type isEqualToString:@"Z"]) {
@@ -285,7 +295,7 @@
     }
     return _choosingDate;
 }
-//选择器的代理方法
+//日期选择器的代理方法
 - (void)currentSelectedDate:(NSDate *)a
 {
     _choosingDate = a;
@@ -354,6 +364,7 @@
         _textLabel.text = string;
     }
 }
+#pragma mark - VTOF
 -(void)cancleToRootView
 {
     [self.navigationController popToRootViewControllerAnimated:YES];
@@ -363,11 +374,6 @@
 //        }
     }
     
-}
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 /*

@@ -23,6 +23,7 @@
 @end
 
 @implementation ResultListVController
+#pragma mark - LazyLoading
 -(UITableView *)tableView
 {
     if (!_tableView)
@@ -38,8 +39,67 @@
     }
     return _tableView;
 }
+-(UIView *)tableHeadView {
+    if (!_tableHeadView)
+    {
+        UIView * view = [[UIView alloc]
+                         initWithFrame:CGRectMake(0, 0, screenWide, screenHeight * 0.08)];
+        view.backgroundColor = RGB(231, 231, 231);
+        UITextField * textField = [[UITextField alloc]
+                                   initWithFrame:CGRectMake(screenWide * 0.25, screenHeight * 0.01, screenWide * 0.73, screenHeight * 0.06)];
+        textField.backgroundColor = [UIColor whiteColor];
+        textField.clipsToBounds = YES;
+        textField.layer.cornerRadius = 5;
+        textField.placeholder = @"  机构名称／位置等";
+        textField.font = [UIFont systemFontOfSize:14];
+        _textField = textField;
+        [view addSubview:_textField];
+        
+        if ([self.vc_type isEqualToString:@"L"])
+        {
+            UILabel * checkIn_label = [[UILabel alloc]
+                                       initWithFrame:CGRectMake(screenWide * 0.02, screenHeight * 0.01, screenWide * 0.21, screenHeight * 0.06)];
+            checkIn_label.textColor = RGB(135, 135,135);
+            checkIn_label.clipsToBounds = YES;
+            checkIn_label.layer.cornerRadius = 5;
+            checkIn_label.backgroundColor = [UIColor whiteColor];
+            _checkIn_label = checkIn_label;
+            checkIn_label.text = @"   入2-15";
+            checkIn_label.font = [UIFont systemFontOfSize:14];
+            [view addSubview:_checkIn_label];
+            
+            
+        }else if ([self.vc_type isEqualToString:@"S"])
+        {
+            UIView * label_view = [[UIView alloc]
+                                   initWithFrame:CGRectMake(screenWide * 0.02, screenHeight * 0.01, screenWide * 0.21, screenHeight * 0.06)];
+            label_view.clipsToBounds = YES;
+            label_view.layer.cornerRadius = 5;
+            label_view.backgroundColor = [UIColor whiteColor];
+            
+            UILabel * checkIn_label = [[UILabel alloc]
+                                       initWithFrame:CGRectMake(0, 0, screenWide * 0.21, screenHeight * 0.03)];
+            checkIn_label.text = @"   入 2-15";
+            checkIn_label.font = [UIFont systemFontOfSize:12];
+            checkIn_label.textColor = RGB(135, 135,135);
+            _checkIn_label = checkIn_label;
+            [label_view addSubview:_checkIn_label];
+            UILabel * leave_label = [[UILabel alloc]
+                                     initWithFrame:CGRectMake(0, screenHeight * 0.03, screenWide * 0.21, screenHeight * 0.03)];
+            leave_label.text = @"   离 2-16";
+            leave_label.font = [UIFont systemFontOfSize:12];
+            leave_label.textColor = RGB(135, 135,135);
+            _leave_label = leave_label;
+            [label_view addSubview:_leave_label];
+            [view addSubview:label_view];
+        }
+        
+        _tableHeadView = view;
+    }
+    return _tableHeadView;
+}
 -(UIView *)filter_view
-{
+{ //筛选页面
     if (!_filter_view)
     {
         NSArray * image_array = @[@"list2_1_",@"list2_2_",@"list2_3_",@"list2_4_"];
@@ -102,92 +162,7 @@
         NSLog(@"排序");
     }
 }
--(UIView *)tableHeadView {
-    if (!_tableHeadView)
-    {
-        UIView * view = [[UIView alloc]
-                         initWithFrame:CGRectMake(0, 0, screenWide, screenHeight * 0.08)];
-        view.backgroundColor = RGB(231, 231, 231);
-        UITextField * textField = [[UITextField alloc]
-                                   initWithFrame:CGRectMake(screenWide * 0.25, screenHeight * 0.01, screenWide * 0.73, screenHeight * 0.06)];
-        textField.backgroundColor = [UIColor whiteColor];
-        textField.clipsToBounds = YES;
-        textField.layer.cornerRadius = 5;
-        textField.placeholder = @"  机构名称／位置等";
-        textField.font = [UIFont systemFontOfSize:14];
-        _textField = textField;
-        [view addSubview:_textField];
-        
-        if ([self.vc_type isEqualToString:@"L"])
-        {
-            UILabel * checkIn_label = [[UILabel alloc]
-                                       initWithFrame:CGRectMake(screenWide * 0.02, screenHeight * 0.01, screenWide * 0.21, screenHeight * 0.06)];
-            checkIn_label.textColor = RGB(135, 135,135);
-            checkIn_label.clipsToBounds = YES;
-            checkIn_label.layer.cornerRadius = 5;
-            checkIn_label.backgroundColor = [UIColor whiteColor];
-            _checkIn_label = checkIn_label;
-            checkIn_label.text = @"   入2-15";
-            checkIn_label.font = [UIFont systemFontOfSize:14];
-            [view addSubview:_checkIn_label];
-            
-            
-        }else if ([self.vc_type isEqualToString:@"S"])
-        {
-            UIView * label_view = [[UIView alloc]
-                                   initWithFrame:CGRectMake(screenWide * 0.02, screenHeight * 0.01, screenWide * 0.21, screenHeight * 0.06)];
-            label_view.clipsToBounds = YES;
-            label_view.layer.cornerRadius = 5;
-            label_view.backgroundColor = [UIColor whiteColor];
-            
-            UILabel * checkIn_label = [[UILabel alloc]
-                                       initWithFrame:CGRectMake(0, 0, screenWide * 0.21, screenHeight * 0.03)];
-            checkIn_label.text = @"   入 2-15";
-            checkIn_label.font = [UIFont systemFontOfSize:12];
-            checkIn_label.textColor = RGB(135, 135,135);
-            _checkIn_label = checkIn_label;
-            [label_view addSubview:_checkIn_label];
-            UILabel * leave_label = [[UILabel alloc]
-                                     initWithFrame:CGRectMake(0, screenHeight * 0.03, screenWide * 0.21, screenHeight * 0.03)];
-            leave_label.text = @"   离 2-16";
-            leave_label.font = [UIFont systemFontOfSize:12];
-            leave_label.textColor = RGB(135, 135,135);
-            _leave_label = leave_label;
-            [label_view addSubview:_leave_label];
-            [view addSubview:label_view];
-        }
-        
-        _tableHeadView = view;
-    }
-    return _tableHeadView;
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    [self.view addSubview:self.tableView];
-    [self.view addSubview:self.filter_view];
-    _searchPlace_name = @"杭州";
-    if (_searchPlace_name)
-    {
-        self.navigationItem.title = _searchPlace_name;
-    }
-    self.tableView.tableHeaderView = self.tableHeadView;
-    if ([_vc_type isEqualToString:@"S"])
-    {
-        [self.tableView registerNib:[UINib nibWithNibName:@"RegimenRTVCell" bundle:nil] forCellReuseIdentifier:@"cellRegimen"];
-        
-    }else if ([_vc_type isEqualToString:@"L"])
-    {
-        [self.tableView registerNib:[UINib nibWithNibName:@"PensionSRTVCell" bundle:nil] forCellReuseIdentifier:@"cellPension"];
-    }
-    array1 = @[@"wifi_is",@"tv_is",@"wifi_is",@"p_is"];
-    array3 = @[@"p_is",@"wifi_is",@"p_is",@"wifi_is"];
-    array2 = @[@"wifi_is",@"p_is",@"tv_is",@"p_is",@"wifi_is",@"wifi_is",@"p_is"];
-    
-
-}
+#pragma mark - auto_view
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -196,14 +171,13 @@
     self.navigationController.navigationBar.tintColor = [UIColor redColor];
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor blackColor]};
     [self.navigationController setNavigationBarHidden:NO animated:animated];
-//    [self hideTabBar];
+    //    [self hideTabBar];
     
 }
-
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-//    [self showTabBar];
+    //    [self showTabBar];
     
 }
 - (void)hideTabBar
@@ -240,6 +214,37 @@
     self.tabBarController.tabBar.hidden = NO;
     
 }
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+    [self.view addSubview:self.tableView];
+    [self.view addSubview:self.filter_view];
+    _searchPlace_name = @"杭州";
+    if (_searchPlace_name)
+    {
+        self.navigationItem.title = _searchPlace_name;
+    }
+    self.tableView.tableHeaderView = self.tableHeadView;
+    if ([_vc_type isEqualToString:@"S"])
+    {
+        [self.tableView registerNib:[UINib nibWithNibName:@"RegimenRTVCell" bundle:nil] forCellReuseIdentifier:@"cellRegimen"];
+        
+    }else if ([_vc_type isEqualToString:@"L"])
+    {
+        [self.tableView registerNib:[UINib nibWithNibName:@"PensionSRTVCell" bundle:nil] forCellReuseIdentifier:@"cellPension"];
+    }
+    array1 = @[@"wifi_is",@"tv_is",@"wifi_is",@"p_is"];
+    array3 = @[@"p_is",@"wifi_is",@"p_is",@"wifi_is"];
+    array2 = @[@"wifi_is",@"p_is",@"tv_is",@"p_is",@"wifi_is",@"wifi_is",@"p_is"];
+}
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - UITableViewDataSource ,UITableViewDelegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
@@ -314,11 +319,7 @@
     [self.navigationController pushViewController:resultDTVC
                                          animated:NO];
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+#pragma mark - FilterView
 - (void)showFilter_view {
     self.filter_view.frame = CGRectMake(0, screenHeight - 49-64, screenWide, 49);
 }
@@ -355,7 +356,6 @@
         isScroll = NO;
 
     }
-    
 }
     
 /*

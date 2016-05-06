@@ -41,6 +41,7 @@
 @end
 
 @implementation ResultDetailTVController
+#pragma mark - LazyLoading
 -(UIView *)tableHeadView
 {
     if (!_tableHeadView)
@@ -229,10 +230,6 @@
     return _tableHeadView;
     
 }
--(void)shareToEveryone
-{
-    [ShareView showShareViewInViewController:self];
-}
 //计算划掉的数字长度
 - (void)dealLinesWithString:(NSString *)string
 {
@@ -241,7 +238,7 @@
     UIFont * fnt = [UIFont fontWithName:string size:10];
     pricePast_label.font = fnt;
     CGSize size =[pricePast_label.text sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:fnt,NSFontAttributeName, nil]];
-     CGFloat nameW = size.width;
+    CGFloat nameW = size.width;
     CGFloat nameH = size.height;
     pricePast_label.frame = CGRectMake(screenWide * 0.03, CGRectGetMaxY(organization_imageView.frame) + screenHeight * 0.0485, nameW, nameH);
     UIView * view = [[UIView alloc]
@@ -251,6 +248,19 @@
     pricePast_label.textColor = RGB(199, 200, 201);
     pricePast_label.font = [UIFont systemFontOfSize:11];
     [_tableHeadView addSubview:pricePast_label];
+}
+#pragma mark - auto_view
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES
+                                             animated: YES];
+}
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self.navigationController setNavigationBarHidden:NO
+                                             animated:animated];
 }
 - (void)viewDidLoad
 {
@@ -316,39 +326,11 @@
     }
     
 }
-- (void)fillInOrderController
-{
-    OrderTVController * orderVC = [[OrderTVController alloc]
-                                   initWithStyle:UITableViewStylePlain];
-    [self.navigationController pushViewController:orderVC animated:YES];
-}
-
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES
-                                             animated: YES];
-}
--(void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    [self.navigationController setNavigationBarHidden:NO
-                                             animated:animated];
-}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
--(void)cancleToRootView
-{
-    [self.navigationController popViewControllerAnimated:YES];
-    for (UIView * view in self.view.subviews)
-    {
-        [view removeFromSuperview];
-    }
-}
-
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -498,13 +480,6 @@
         }
     }
 }
-- (void)submitCommentNow
-{
-    CommentViewController * commentVC = [[CommentViewController alloc] init];
-    [self.navigationController pushViewController:commentVC
-                                         animated:YES];
-}
-
 -(CGFloat)tableView:(UITableView *)tableView
 heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -568,7 +543,7 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath
 
 }
 - (CGFloat)backheightWith:(NSString *)str
-{
+{// 上面用得到
     if (str)
     {
         UILabel * label = [[UILabel alloc] init];
@@ -623,12 +598,39 @@ heightForHeaderInSection:(NSInteger)section
     }
 
 }
-
 - (void)tableView:(UITableView *)tableView
 didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self shareToEveryone];
 }
+#pragma mark - VTOF
+- (void)fillInOrderController
+{
+    OrderTVController * orderVC = [[OrderTVController alloc]
+                                   initWithStyle:UITableViewStylePlain];
+    [self.navigationController pushViewController:orderVC animated:YES];
+}
+- (void)submitCommentNow
+{
+    CommentViewController * commentVC = [[CommentViewController alloc] init];
+    [self.navigationController pushViewController:commentVC
+                                         animated:YES];
+}
+-(void)cancleToRootView
+{
+    [self.navigationController popViewControllerAnimated:YES];
+    for (UIView * view in self.view.subviews)
+    {
+        [view removeFromSuperview];
+    }
+}
+-(void)shareToEveryone
+{
+    [ShareView showShareViewInViewController:self];
+}
+
+
+
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
