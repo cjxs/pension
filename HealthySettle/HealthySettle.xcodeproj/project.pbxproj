@@ -30,6 +30,7 @@
 		32146AD41CC4CF650046F2BC /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 32146AD21CC4CF650046F2BC /* libMobClickLibrary.a */; };
 		32146B031CC4D6AF0046F2BC /* ShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 32146B021CC4D6AF0046F2BC /* ShareView.m */; };
 		32146B071CC50AFC0046F2BC /* libUMessage_Sdk_1.2.6.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 32146B051CC50AFC0046F2BC /* libUMessage_Sdk_1.2.6.a */; };
+		323499AB1CE1782200CBA680 /* Member.m in Sources */ = {isa = PBXBuildFile; fileRef = 323499AA1CE1782200CBA680 /* Member.m */; };
 		324075B61CACCE5D00BAF253 /* newsdynamic_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 324075B01CACCE5D00BAF253 /* newsdynamic_btn.png */; };
 		324075B71CACCE5D00BAF253 /* pensionCommon_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 324075B11CACCE5D00BAF253 /* pensionCommon_btn.png */; };
 		324075BA1CACCE5D00BAF253 /* pensionFind_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 324075B41CACCE5D00BAF253 /* pensionFind_btn.png */; };
@@ -156,7 +157,6 @@
 		328C3D941CD9EABD00615D38 /* Imagebutton.m in Sources */ = {isa = PBXBuildFile; fileRef = 328C3D931CD9EABD00615D38 /* Imagebutton.m */; };
 		3292A74F1CA3D14E004FEB57 /* CDCityPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 3292A74E1CA3D14E004FEB57 /* CDCityPicker.m */; };
 		3292A7511CA3DCA4004FEB57 /* districtMGE.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3292A7501CA3DCA4004FEB57 /* districtMGE.plist */; };
-		32BD27FF1CC07AFE00B8536E /* Member.m in Sources */ = {isa = PBXBuildFile; fileRef = 32BD27FE1CC07AFE00B8536E /* Member.m */; };
 		32CABD641CA373AA0068AE93 /* CityCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CABD571CA373AA0068AE93 /* CityCollectionViewCell.m */; };
 		32CABD651CA373AA0068AE93 /* CitySkipViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CABD591CA373AA0068AE93 /* CitySkipViewCell.m */; };
 		32CABD661CA373AA0068AE93 /* SearchVController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CABD5C1CA373AA0068AE93 /* SearchVController.m */; };
@@ -316,6 +316,8 @@
 		32146B021CC4D6AF0046F2BC /* ShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareView.m; sourceTree = "<group>"; };
 		32146B051CC50AFC0046F2BC /* libUMessage_Sdk_1.2.6.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUMessage_Sdk_1.2.6.a; sourceTree = "<group>"; };
 		32146B061CC50AFC0046F2BC /* UMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMessage.h; sourceTree = "<group>"; };
+		323499A91CE1782200CBA680 /* Member.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Member.h; sourceTree = "<group>"; };
+		323499AA1CE1782200CBA680 /* Member.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Member.m; sourceTree = "<group>"; };
 		324075B01CACCE5D00BAF253 /* newsdynamic_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newsdynamic_btn.png; sourceTree = "<group>"; };
 		324075B11CACCE5D00BAF253 /* pensionCommon_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pensionCommon_btn.png; sourceTree = "<group>"; };
 		324075B41CACCE5D00BAF253 /* pensionFind_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pensionFind_btn.png; sourceTree = "<group>"; };
@@ -656,8 +658,6 @@
 		3292A74D1CA3D14E004FEB57 /* CDCityPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDCityPicker.h; sourceTree = "<group>"; };
 		3292A74E1CA3D14E004FEB57 /* CDCityPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDCityPicker.m; sourceTree = "<group>"; };
 		3292A7501CA3DCA4004FEB57 /* districtMGE.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = districtMGE.plist; sourceTree = "<group>"; };
-		32BD27FD1CC07AFE00B8536E /* Member.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Member.h; sourceTree = "<group>"; };
-		32BD27FE1CC07AFE00B8536E /* Member.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Member.m; sourceTree = "<group>"; };
 		32CABD561CA373AA0068AE93 /* CityCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityCollectionViewCell.h; sourceTree = "<group>"; };
 		32CABD571CA373AA0068AE93 /* CityCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityCollectionViewCell.m; sourceTree = "<group>"; };
 		32CABD581CA373AA0068AE93 /* CitySkipViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CitySkipViewCell.h; sourceTree = "<group>"; };
@@ -1239,8 +1239,8 @@
 		32BD27FC1CC07AA300B8536E /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				32BD27FD1CC07AFE00B8536E /* Member.h */,
-				32BD27FE1CC07AFE00B8536E /* Member.m */,
+				323499A91CE1782200CBA680 /* Member.h */,
+				323499AA1CE1782200CBA680 /* Member.m */,
 			);
 			name = Models;
 			path = Server;
@@ -2011,7 +2011,6 @@
 				32E588B61CB78BE1002AED1A /* CommonTVCell.m in Sources */,
 				325C82411CB0E7530004EA0C /* OrgIntroTVCell.m in Sources */,
 				32CABD901CA374020068AE93 /* TempView.m in Sources */,
-				32BD27FF1CC07AFE00B8536E /* Member.m in Sources */,
 				3252D6511CC752B5000FAFBC /* base64.m in Sources */,
 				32CABD661CA373AA0068AE93 /* SearchVController.m in Sources */,
 				32CABD7F1CA373EF0068AE93 /* DDTestApiS.m in Sources */,
@@ -2031,6 +2030,7 @@
 				32D859701CB8D4400074D5C3 /* NMRangeSlider.m in Sources */,
 				320BE5C81CBC900D00A34FCB /* AccountTVCell.m in Sources */,
 				32CABD941CA384F50068AE93 /* SearchTVController.m in Sources */,
+				323499AB1CE1782200CBA680 /* Member.m in Sources */,
 				32CABD971CA39E2E0068AE93 /* CDDatePicker.m in Sources */,
 				32146B031CC4D6AF0046F2BC /* ShareView.m in Sources */,
 				3252D6621CC752F5000FAFBC /* Order.m in Sources */,

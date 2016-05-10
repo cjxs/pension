@@ -2,13 +2,13 @@
 //  Member.h
 //  HealthySettle
 //
-//  Created by yrc on 16/4/15.
+//  Created by yrc on 16/5/10.
 //  Copyright © 2016年 yrc. All rights reserved.
 //
 
-#import <Mantle/Mantle.h>
+#import <Foundation/Foundation.h>
 
-@interface Member : MTLModel<MTLJSONSerializing>
+@interface Member : NSObject
 @property (nonatomic,strong)NSString * uid;
 @property (nonatomic,strong)NSString * nickname;
 @property (nonatomic,strong)NSString * sex;
@@ -20,4 +20,5 @@
 @property (nonatomic,strong)NSString * vip_type;
 @property (nonatomic,strong)NSString * email;
 @property (nonatomic,strong)NSString * tel;
+
 @end

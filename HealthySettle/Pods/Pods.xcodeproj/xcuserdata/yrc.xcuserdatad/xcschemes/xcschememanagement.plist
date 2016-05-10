@@ -14,12 +14,12 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>MTMigration.xcscheme</key>
+		<key>MJExtension.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Mantle.xcscheme</key>
+		<key>MTMigration.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -62,17 +62,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>22A980D899BB6D9F2AF72A74D5139264</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>28EDA0AC3272A77B0575F728B99261BC</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>2DBCBD6EF4371404DEB54ACC62A8470B</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>426BC4549A625B5E1E4200D5261A98BF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -87,7 +82,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>8C20C33B60896BAB0C9A962FCB9DF6E2</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>95AEDBCFEC88054E112C4BBD06F5AD97</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>9B967037C12B2850F62DA100267569DF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9EAB3E42EF957541E6C3C76D35FD008E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -97,22 +107,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>B423B67859E9923EE59D296B1CDE4B21</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>B4A3E08D49931371F7247521A50EAF79</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>BA65E99381EB368A18C1101B9BF48035</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>DC7425C084C3063FB95C5691D392BB73</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>FFA75DB126171E817F37659A5FEFCA34</key>
 		<dict>
 			<key>primary</key>
 			<true/>
