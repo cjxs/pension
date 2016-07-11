@@ -7,6 +7,7 @@
 //
 
 #import "LoginOrResView.h"
+#import "DDLogin.h"
 
 @implementation LoginOrResView
 -(UITextField *)number_field  {
@@ -164,10 +165,15 @@
     [bg_view addSubview:self.reSetpass_btn];
     [bg_view addSubview:self.login_btn];
     [bg_view addSubview:self.regis_btn];
-    [UIView animateWithDuration:0.3 animations:^{
+  
+
+    [UIView animateWithDuration:0.5 delay:0 usingSpringWithDamping:0.5 initialSpringVelocity:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
         bg_view.frame = CGRectMake(screenWide * 0.107, screenHeight * 0.38, screenWide * 0.786, screenHeight * 0.24);
+    } completion:^(BOOL finished) {
+        
     }];
-    
+    //usingSpringWithDamping: 弹簧动画的阻尼值，也就是相当于摩擦力的大小。该属性的值从0.0到1.0之间。越高进0，阻尼越小，弹动幅度越大，反之阻尼越大，弹动的幅度越小，如果大道一定程度，会出现弹不动的情况。
+    //initialSpringVelocity：弹簧动画的速率，或者说是动力。值越小弹簧的动力越小，弹簧拉伸的幅度越小，反之动力越大，弹簧拉伸的幅度越大。这里需要注意的是，如果设置为0，表示忽略该属性，由动画持续时间和阻尼计算动画的效果。
     
     
     
@@ -210,6 +216,7 @@
     
     if (self.view_type == 0) {
         NSLog(@"登录+++");
+      [self loginWithUserName:@"13732212641"/*_number_field.text*/ password:@"cdd123"/*_passWord_field.text*/];
         
     }else {
         //切换界面
@@ -247,6 +254,25 @@
     }
     
 }
+-(NSString *)loginWithUserName:(NSString *)username password:(NSString *)pwd {
+   
+        DDLogin * loginApi = [[DDLogin alloc] initWithUsername:username password:pwd];
+    __block  YTKBaseRequest * resueltQuest = [[YTKBaseRequest alloc] init];
+        [loginApi startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
+        
+        
+        resueltQuest = request;
+        NSLog(@"%@",request.responseString);
+        
+    } failure:^(__kindof YTKBaseRequest *request) {
+        resueltQuest = request;
+    }];
+    
+    return resueltQuest.responseString;
+
+    
+    
+}
 - (void)remove {
     for (UIView * view in bg_view.subviews) {
         [view removeFromSuperview];
@@ -261,6 +287,8 @@
     [UIView animateWithDuration:0.3 animations:^{
         bg_view.frame = CGRectMake(screenWide * 0.107, screenHeight * 1.24, 0, 0);
     }];
+    
+
     [self performSelector:@selector(remove) withObject:nil afterDelay:0.3f];
     
     

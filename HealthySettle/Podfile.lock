@@ -22,7 +22,6 @@ PODS:
   - AFNetworking/UIKit (2.6.3):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - iVersion (1.11.4)
   - Masonry (0.6.4)
   - MJExtension (3.0.10)
   - MTMigration (0.0.5)
@@ -47,7 +46,6 @@ PODS:
     - AFNetworking (~> 2.0)
 
 DEPENDENCIES:
-  - iVersion
   - Masonry (~> 0.6.4)
   - MJExtension
   - MTMigration
@@ -60,7 +58,6 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   AFDownloadRequestOperation: 748a1643423e1ddb23f2178f778087d4f0ae8ac7
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
-  iVersion: 2b6ffe708672cb494ba3cab150a94800c2892e81
   Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
   MJExtension: d86aacb740c87519d20e3cca55b6fa4be6cc7548
   MTMigration: 725315e6469c8fd7d13966887f59e65eb8aecb2e

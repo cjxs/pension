@@ -20,6 +20,7 @@
 #import "KnowledgeTVController.h"
 #import "SeasonMCollectViewCell.h"
 #import "MonthViewController.h"
+#import "ShareView.h"
 
 
 @interface HomeViewController ()<UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate,UISearchBarDelegate,UIWebViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource>
@@ -44,7 +45,7 @@
          imagesA = [NSMutableArray arrayWithObjects:@"z_03",@"z_02", nil];
         GDScrollBanner * net = [[GDScrollBanner alloc]
                                 initWithFrame:CGRectMake(0, 0, screenWide , screenHeight * 0.222) WithLocalImages:imagesA];
-        net.AutoScrollDelay = 2.0f;
+        net.AutoScrollDelay = 1.0f;
         //占位图  net.placeImage
         [net setSmartImgdidSelectAtIndex:^(NSInteger index)
         {
@@ -331,6 +332,7 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath
     if ([city_btn_label.text isEqualToString:@"杭州"])
     {
         city_btn_label.text = @"上海";
+         [ShareView showShareViewInViewController:self];
     }else
     {
         city_btn_label.text = @"杭州";

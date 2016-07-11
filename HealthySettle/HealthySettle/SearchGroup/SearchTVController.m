@@ -8,6 +8,7 @@
 
 #import "SearchTVController.h"
 #import "SearchOrganTVCell.h"
+#import "ShareView.h"
 @interface SearchTVController ()
 {
     NSArray * data_array;
@@ -58,6 +59,10 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath
 heightForHeaderInSection:(NSInteger)section
 {
     return 0.5;
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+     [ShareView showShareViewInViewController:self];
 }
 /*
 // Override to support conditional editing of the table view.

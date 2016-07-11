@@ -9,31 +9,13 @@
 #import "DDTestApiS.h"
 
 @implementation DDTestApiS
-{
-    NSString * _thingsN;
-}
 
-
--(id)initWithThingsT:(NSString *)thingsT
-{
-    self = [super init];
-    if (self)
-    {
-        _thingsN = thingsT;
-    }
-    return self;
-}
 - (NSString *)requestUrl
 {
-    return @"";
+    return @"?id=3873";
 }
 -(YTKRequestMethod)requestMethod
 {
     return YTKRequestMethodGet;
 }
--(id)requestArgument
-{
-    return @{@"s?wd=":_thingsN};
-}
-
 @end

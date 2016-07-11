@@ -30,10 +30,10 @@
 {
     [super viewWillAppear:animated];
     self.navigationItem.title = _titleName;
-    if (self.navigationController.navigationBar.translucent == YES)
-    {
-        self.navigationController.navigationBar.translucent = NO;
-    }
+//    if (self.navigationController.navigationBar.translucent == YES)
+//    {
+//        self.navigationController.navigationBar.translucent = NO;
+//    }不一样的来源
     if (_type_from)
     {
         [self.navigationController setNavigationBarHidden:NO animated:NO];

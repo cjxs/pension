@@ -32,7 +32,6 @@
 #import "GuideVController.h"
 #import "TabbarController.h"
 #import "YTKNetworkConfig.h"
-#import <iVersion.h>
 #import "MobClick.h"
 #import "UMSocial.h"
 #import "UMSocialWechatHandler.h"
@@ -48,7 +47,7 @@
 #define _IPHONE80_ 80000
 
 
-static NSString * const UMDEVICETOKEN      = @"UMDeviceToken";// 友盟推送的设备Token
+static NSString * const UMDEVICETOKEN      = @"UMDeviceToken";// 友盟推送的设备Tokenhttps://app.yinxihttps://app.yinxiang.com/shard/s65/nl/2147483647/8e6041d0-0d64-4416-af62-6e0009025806/ang.com/shard/s65/nl/2147483647/8e6041d0-0d64-4416-af62-6e0009025806/
 
 
 @interface AppDelegate ()<WXApiDelegate>
@@ -60,15 +59,6 @@ static NSString * const UMDEVICETOKEN      = @"UMDeviceToken";// 友盟推送的
 @end
 
 @implementation AppDelegate
-+ (void)initialize{
-    
-  //  [iVersion sharedInstance].applicationBundleID = @"com.beik.zhuanla";
-//    [iVersion sharedInstance].appStoreID = 939985150;
-//    [iVersion sharedInstance].downloadButtonLabel = @"更新";
-//    [iVersion sharedInstance].remindButtonLabel = @"以后提醒";
-//    [iVersion sharedInstance].ignoreButtonLabel = @"忽略";
-//    [iVersion sharedInstance].updateAvailableTitle = @"有新版本";
-}
 
 
 - (BOOL)application:(UIApplication *)application
@@ -76,9 +66,9 @@ static NSString * const UMDEVICETOKEN      = @"UMDeviceToken";// 友盟推送的
 {
     
     //配置服务器信息
-    YTKNetworkConfig * config = [YTKNetworkConfig sharedInstance];
-    config.baseUrl = @"http://api.meilijia.com/";
-    config.cdnUrl = @"www.zhihu.com/";
+//    YTKNetworkConfig * config = [YTKNetworkConfig sharedInstance];
+//    config.baseUrl = @"http://www.5199yl.com";
+//    config.cdnUrl = @"www.zhihu.com/";
     
     
     //百度地图
@@ -120,14 +110,14 @@ static NSString * const UMDEVICETOKEN      = @"UMDeviceToken";// 友盟推送的
                          appSecret:WXAPPSECRET
                                url:@"http://www.umeng.com/social"];
    //设置手机QQ 的AppId，Appkey，和分享URL，需要#import "UMSocialQQHandler.h"
-;
+
     [UMSocialQQHandler setQQWithAppId:QAPPID appKey:QAPPKEY url:@"http://www.umeng.com/social"];
 
    //打开新浪微博的SSO开关，设置新浪微博回调地址，这里必须要和你在新浪微博后台设置的回调地址一致。需要 #import "UMSocialSinaSSOHandler.h"
 
     [UMSocialSinaSSOHandler openNewSinaSSOWithAppKey:SinaAPPID
                                               secret:SinaAPPSECRET
-                                         RedirectURL:@"http://sns.whalecloud.com/sina2/callback"];
+                                         RedirectURL:@"http://www.5199yl.com"];
     
     //友盟推送
     /*------------------------友盟推送----------------------------*/

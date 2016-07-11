@@ -281,10 +281,16 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
     wx_btn.layer.cornerRadius = 10;
     [view_pay addSubview:wx_btn];
     [self.view addSubview:view_pay];
-    [UIView animateWithDuration:0.5f animations:^
-    {
-         view_pay.frame = CGRectMake(0, screenHeight * 0.6, screenWide, screenHeight * 0.4);
+    
+    [UIView animateWithDuration:0.35 delay:0.5 usingSpringWithDamping:0.5 initialSpringVelocity:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+        view_pay.frame = CGRectMake(0, screenHeight * 0.6, screenWide, screenHeight * 0.4);
+    } completion:^(BOOL finished) {
+        
     }];
+//    [UIView animateWithDuration:0.5f animations:^
+//    {
+//        
+//    }];
     
 }
 - (void)payViewdimiss

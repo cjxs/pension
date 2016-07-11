@@ -8,5 +8,4 @@
 
 
 @interface DDTestApiS : YTKBaseRequest
--(id)initWithThingsT:(NSString *)thingsT;
 @end

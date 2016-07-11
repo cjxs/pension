@@ -28,27 +28,31 @@
 /// Http请求的方法
 -(YTKRequestMethod)requestMethod
 {
-    return YTKRequestMethodGet;
+    return YTKRequestMethodPost;
 }
 
 // 请求的URL
 - (NSString *)requestUrl
 {
-    return @"app/featured_page3?page=3";
+    return @"http://www.5199yl.com/index.php?g=Index&c=Login&a=index";
 }
 
 // 请求的参数列表
 -(id)requestArgument
 {
-    return nil;
+    return @ {
+        @"phone" : _username,
+        @"pwd" : _password,
+        @"aotulogin":@"1"
+    };
 }//放字典的
-- (id)jsonValidator
-{
-    return @{
-             @"nike":[NSString class],
-             @"level":[NSNumber class]
-             };
-}
+//- (id)jsonValidator
+//{
+//    return @{
+//             @"nike":[NSString class],
+//             @"level":[NSNumber class]
+//             };
+//}
 /*
 /// append self to request queue
 - (void)start;

@@ -27,8 +27,8 @@ static NSString * const UMAppkey = @"5714557467e58e7bda001274";
 static NSString * QAPPID = @"1105262497";
 static NSString * QAPPKEY = @"M6CozYtRTBXDjVou";
 
-static NSString * SinaAPPID = @"2041248377";
-static NSString * SinaAPPSECRET = @"36209c52e3da305d868ccf9aba9f0a16";
+static NSString * SinaAPPID = @"1475544274";
+static NSString * SinaAPPSECRET = @"53e3278df3c106f2a72565d606863207";
 
 static NSString * AliPID = @"2088121603474938";
 static NSString * AliMID = @"yrc@5199yl.com";

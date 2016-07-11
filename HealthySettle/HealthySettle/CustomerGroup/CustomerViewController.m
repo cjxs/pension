@@ -19,25 +19,23 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"客服";
-//    DDTestApi * ddTestApi = [[DDTestApi alloc] init];
-//    [ddTestApi startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
-//        NSLog(@"%@正常",request.responseData);
-//        NSLog(@"%d",(int)request.responseStatusCode);
-//
-//    } failure:^(__kindof YTKBaseRequest *request) {
-//        NSLog(@"%@错误",request.requestOperation);
-//        NSLog(@"%d",(int)request.responseStatusCode);
-//    }];
+    DDTestApi * ddTestApi = [[DDTestApi alloc] initWithUsername:@"13732212641" password:@"cdd123"];
+//    DDTestApiS * ddTestApi = [[DDTestApiS alloc] init];
+    
+    [ddTestApi startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
+        NSLog(@"%@-----正常",request.responseString);
+        
+        
+        
+        NSLog(@"%d +--=++\n%@\n,%@",(int)request.responseStatusCode,request.requestUrl,request.requestArgument);
+
+    } failure:^(__kindof YTKBaseRequest *request) {
+        NSLog(@"%@＋＋＋＋错误",request.requestOperation);
+        NSLog(@"%d",(int)request.responseStatusCode);
+        NSLog(@"%@",request.requestUrl);
+    }];
 
     
-//    [ddTestApi startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
-////        NSLog(@"%@", (NSDictionary )request.responseData);
-//        
-////        NSDictionary * dic = [NSDictionary]
-//    } failure:^(__kindof YTKBaseRequest *request) {
-//        
-//        
-//    }];
 //    YTKBatchRequest * batchRequest = [[YTKBatchRequest alloc] initWithRequestArray:@[ddTestApi,testApi]];
 //    [batchRequest startWithCompletionBlockWithSuccess:^(YTKBatchRequest *batchRequest) {
 //        YTKBaseRequest *request1 = batchRequest.requestArray.firstObject;
