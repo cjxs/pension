@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface TempView : UIView
-@property (nonatomic, strong)UIImageView * markImageV;
-@property (nonatomic, strong)UILabel * explainTitle;
+@property (nonatomic, strong) UIImageView * markImageV;
+@property (nonatomic, strong) UILabel     * explainTitle;
 -(instancetype)initWithFrame:(CGRect)frame withMark:(UIImage *)mark andTitle :(NSString *)string ;
 
 @end

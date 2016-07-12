@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface SeasonMCollectViewCell : UICollectionViewCell
-@property (nonatomic, strong)UIImageView * image_view;
-@property (nonatomic, strong)UILabel * season_label, *describe_label;
+@property (nonatomic, strong) UIImageView  * image_view;
+@property (nonatomic, strong) UILabel * season_label, *describe_label;
 -(void)configViewWithimage:(UIImage *)image season:(NSString *)season describ:(NSString *)describ;
 @end

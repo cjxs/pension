@@ -13,11 +13,11 @@
 - (void)currentSelectedName:(NSString *)name Array:(NSArray *)array;
 @end
 @interface CDCityPicker : UIView
-@property (strong ,nonatomic)NSString * type;
-@property (nonatomic, strong)UIView * titleView;
-@property (strong,nonatomic)UIPickerView * pick_view;
-@property (nonatomic, strong) NSArray *CityArray;   //市的数组
-@property (nonatomic, strong) NSArray *districtArray;  //县区数组
+@property (strong ,nonatomic) NSString     * type;
+@property (nonatomic, strong) UIView       * titleView;
+@property (strong,nonatomic ) UIPickerView * pick_view;
+@property (nonatomic, strong) NSArray      *CityArray;//市的数组
+@property (nonatomic, strong) NSArray      *districtArray;//县区数组
 @property (weak, nonatomic)id<CDCityPickerDelegate>delegate;
 -(void)showPickerView;
 @end

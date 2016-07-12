@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface SeasonCTViewCell : UITableViewCell<UIScrollViewDelegate>
-@property (nonatomic, strong)UICollectionView * season_collectionView;
-@property(nonatomic, weak)UIPageControl * carousePageControl;
+@property (nonatomic, strong) UICollectionView     * season_collectionView;
+@property (nonatomic, weak  ) UIPageControl        * carousePageControl;
 @end

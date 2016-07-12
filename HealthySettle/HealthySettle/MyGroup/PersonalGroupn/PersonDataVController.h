@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface PersonDataVController : UIViewController
-@property (nonatomic, strong)NSString * titleName;
-@property (nonatomic,strong)UITableView * tableView;
-@property (nonatomic, strong)NSString * type_next;
+@property (nonatomic, strong) NSString    * titleName;
+@property (nonatomic,strong ) UITableView * tableView;
+@property (nonatomic, strong) NSString    * type_next;
 @end

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface GraceVC : UIViewController
-@property (nonatomic,strong)NSString * titleName;
-@property (nonatomic,strong)UITableView * tableView;
-@property (nonatomic,strong)UIView * headView;
+@property (nonatomic,strong) NSString    * titleName;
+@property (nonatomic,strong) UITableView * tableView;
+@property (nonatomic,strong) UIView      * headView;
 @end

@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface ComAndCollVC : UIViewController
-@property (nonatomic, strong)NSString * titleName;
-@property (nonatomic, strong)NSString * type;
-@property (nonatomic, strong)UITableView * homeTableView;
+@property (nonatomic, strong) NSString    * titleName;
+@property (nonatomic, strong) NSString    * type;
+@property (nonatomic, strong) UITableView * homeTableView;
 
 @end

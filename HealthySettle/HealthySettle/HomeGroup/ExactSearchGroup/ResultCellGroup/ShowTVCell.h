@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface ShowTVCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UILabel *title_label;
+@property (weak, nonatomic) IBOutlet UILabel     *title_label;
 @property (weak, nonatomic) IBOutlet UIImageView *left_imageView;
 @property (weak, nonatomic) IBOutlet UIImageView *mid_imageView;
 @property (weak, nonatomic) IBOutlet UIImageView *right_imageView;

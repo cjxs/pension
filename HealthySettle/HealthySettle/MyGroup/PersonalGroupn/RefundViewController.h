@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface RefundViewController : UIViewController
-@property (nonatomic, strong)NSString * titleName;
-@property (nonatomic, strong)NSString * type;
-@property (nonatomic, strong)UIView * tableHeadView;
-@property (nonatomic, strong)UITableView * tableView;
+@property (nonatomic, strong) NSString    * titleName;
+@property (nonatomic, strong) NSString    * type;
+@property (nonatomic, strong) UIView      * tableHeadView;
+@property (nonatomic, strong) UITableView * tableView;
 @end

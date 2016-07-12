@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface ResultDetailTVController : UITableViewController
-@property (nonatomic, strong)NSString * vc_type;
-@property (nonatomic,strong)UIView * tableHeadView;
+@property (nonatomic, strong) NSString * vc_type;
+@property (nonatomic,strong ) UIView   * tableHeadView;
 @end

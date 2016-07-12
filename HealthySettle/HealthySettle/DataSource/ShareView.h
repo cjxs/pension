@@ -10,10 +10,10 @@
 
 
 @interface ShareView : UIView
-@property (nonatomic,strong)UIView * white_view;
-@property (nonatomic,strong)UIView * backgroundView;
-@property (nonatomic, weak) UIViewController  *sourceViewController;
-@property (nonatomic,strong)NSMutableArray * some_btns;
+@property (nonatomic,strong) UIView           * white_view;
+@property (nonatomic,strong) UIView           * backgroundView;
+@property (nonatomic, weak ) UIViewController *sourceViewController;
+@property (nonatomic,strong) NSMutableArray   * some_btns;
 + (ShareView *)showShareViewInViewController:(UIViewController *)viewController;
 
 @end

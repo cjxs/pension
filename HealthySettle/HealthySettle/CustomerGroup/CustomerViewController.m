@@ -25,7 +25,7 @@
     [ddTestApi startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
         NSLog(@"%@-----正常",request.responseString);
         
-        
+    
         
         NSLog(@"%d +--=++\n%@\n,%@",(int)request.responseStatusCode,request.requestUrl,request.requestArgument);
 
@@ -34,7 +34,6 @@
         NSLog(@"%d",(int)request.responseStatusCode);
         NSLog(@"%@",request.requestUrl);
     }];
-
     
 //    YTKBatchRequest * batchRequest = [[YTKBatchRequest alloc] initWithRequestArray:@[ddTestApi,testApi]];
 //    [batchRequest startWithCompletionBlockWithSuccess:^(YTKBatchRequest *batchRequest) {

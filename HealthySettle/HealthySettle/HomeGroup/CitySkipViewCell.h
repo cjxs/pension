@@ -11,9 +11,9 @@
 @interface CitySkipViewCell : UITableViewCell {
     NSArray * data_array;
 }
-@property (nonatomic, strong)UICollectionView * cityCollect_view;
-@property (nonatomic, strong)UIImageView * title_icon;
-@property (nonatomic, strong)UILabel * title_label;
-@property (nonatomic, assign)NSInteger type;
+@property (nonatomic, strong) UICollectionView * cityCollect_view;
+@property (nonatomic, strong) UIImageView      * title_icon;
+@property (nonatomic, strong) UILabel          * title_label;
+@property (nonatomic, assign) NSInteger        type;
 -(void)configWithicon:(UIImage *)icon title:(NSString *)title data:(NSArray *)dataArray;
 @end
