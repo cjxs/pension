@@ -8,6 +8,11 @@
 
 #import "LoginOrResView.h"
 #import "DDLogin.h"
+#import "YYLUser.h"
+#import "MJExtension.h"
+#import "NSString+MJExtension.h"
+#import "DDRegist.h"
+#import "DDGetTest.h"
 
 @implementation LoginOrResView
 -(UITextField *)number_field  {
@@ -105,7 +110,6 @@
         login_btn.backgroundColor = RGB(230, 11, 24);
         login_btn.layer.borderWidth = 1;
         login_btn.layer.borderColor = [RGB(229, 229, 229) CGColor];
-        
         _login_btn = login_btn;
     }
     return _login_btn;
@@ -148,13 +152,13 @@
         bg_view.layer.cornerRadius = 5;
         [self addSubview:bg_view];
         [self addSelfSubView];
-        RAC(self.login_btn,enabled) = [RACSignal combineLatest:@[self.number_field.rac_textSignal,self.passWord_field.rac_textSignal] reduce:^id{
-            return @(self.number_field.text.length == 11 && self.passWord_field.text.length > 6 );
-        }];
-        RAC(self.regis_btn,enabled) = [RACSignal combineLatest:@[self.number_field.rac_textSignal,self.test_field.rac_textSignal] reduce:^id{
-            return @(self.number_field.text.length == 11 && self.test_field.text.length > 0);
-        }];
-        self.regis_btn.enabled = YES;
+//        RAC(self.login_btn,enabled) = [RACSignal combineLatest:@[self.number_field.rac_textSignal,self.passWord_field.rac_textSignal] reduce:^id{
+//            return @(self.number_field.text.length == 11 && self.passWord_field.text.length > 6 );
+//        }];
+//        RAC(self.regis_btn,enabled) = [RACSignal combineLatest:@[self.number_field.rac_textSignal,self.test_field.rac_textSignal] reduce:^id{
+//            return @(self.number_field.text.length == 11 && self.test_field.text.length > 0);
+//        }];
+//        self.regis_btn.enabled = YES;
 
     }
     return self;
@@ -184,9 +188,13 @@
 }
 -(void)getTestPassword {
     //获取验证码
+    [self gettestWithPhoneNumber:_number_field.text];
+    
 }
 -(void)regisOrRegisVC {
-    self.login_btn.enabled = YES;
+    
+    
+//    self.login_btn.enabled = YES;
     if (self.view_type == 1) {
         NSLog(@"注册+++");
         
@@ -212,11 +220,11 @@
     }
 }
 -(void)loginOrloginView {
-    self.regis_btn.enabled = YES;
+
+//    self.regis_btn.enabled = YES;
     
     if (self.view_type == 0) {
-        NSLog(@"登录+++");
-      [self loginWithUserName:@"13732212641"/*_number_field.text*/ password:@"cdd123"/*_passWord_field.text*/];
+      [self loginWithUserName:_number_field.text password:_passWord_field.text];
         
     }else {
         //切换界面
@@ -238,6 +246,7 @@
         _number_field.placeholder = @"    请输入手机号";
         self.view_type = 0;
     }
+
 }
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
     if (IS_IPHONE5  ) {
@@ -257,21 +266,53 @@
 -(NSString *)loginWithUserName:(NSString *)username password:(NSString *)pwd {
    
         DDLogin * loginApi = [[DDLogin alloc] initWithUsername:username password:pwd];
-    __block  YTKBaseRequest * resueltQuest = [[YTKBaseRequest alloc] init];
+        __block NSDictionary * dic;
+        __block YYLUser * user;
+    
+    
         [loginApi startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
+            dic = [DDLogin dictionaryWithJsonString: request.responseString];
+            if (!dic[@"msg"]) {
+            user = [YYLUser mj_objectWithKeyValues:dic];
+            NSLog(@"%@++++",user.description);
+
+            [self dismiss];     
+
+            }else {
+                NSLog(@"%@++++++",dic[@"msg"]);
+            }
+    } failure:^(__kindof YTKBaseRequest *request) {
+    }];
+
+    return nil;
+}
+-(void)registWithPhoneNumber:(NSString *)number {
+    DDRegist * regist = [[DDRegist alloc] initWithRegisNumber:number];
+    [regist startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
         
+        NSLog(@"%@++++++%ld",request.responseString,request.responseStatusCode);
+        NSDictionary * dic = [DDLogin dictionaryWithJsonString:request.responseString];
         
-        resueltQuest = request;
-        NSLog(@"%@",request.responseString);
+        _test_field.text = dic[@"msg"];
+    
+    } failure:^(__kindof YTKBaseRequest *request) {
+        NSLog(@"%@++++++%ld",request.responseString,request.responseStatusCode);
+
+    }];
+}
+- (void)gettestWithPhoneNumber:(NSString *)number {
+    DDGetTest * getTest = [[DDGetTest alloc] initWithRegisNumber:number];
+    [getTest startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
+        NSLog(@"%@++++++%ld",request.responseString,request.responseStatusCode);
+        NSDictionary * dic = [DDLogin dictionaryWithJsonString:request.responseString];
+        
+        _test_field.text = dic[@"msg"];
+        
         
     } failure:^(__kindof YTKBaseRequest *request) {
-        resueltQuest = request;
-    }];
-    
-    return resueltQuest.responseString;
+        NSLog(@"%@++++++%ld",request.responseString,request.responseStatusCode);
 
-    
-    
+    }];
 }
 - (void)remove {
     for (UIView * view in bg_view.subviews) {

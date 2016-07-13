@@ -155,6 +155,9 @@
 		327DC7D91CB50119005617D2 /* Guide_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 327DC7D81CB50119005617D2 /* Guide_btn.png */; };
 		327DC7DB1CB5011F005617D2 /* Loading.png in Resources */ = {isa = PBXBuildFile; fileRef = 327DC7DA1CB5011F005617D2 /* Loading.png */; };
 		327DC7DD1CB50BF4005617D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 327DC7DC1CB50BF4005617D2 /* Assets.xcassets */; };
+		3285AEFC1D34D70C0070618A /* YYLUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3285AEFB1D34D70C0070618A /* YYLUser.m */; };
+		3285AEFF1D35D81A0070618A /* DDRegist.m in Sources */ = {isa = PBXBuildFile; fileRef = 3285AEFE1D35D81A0070618A /* DDRegist.m */; };
+		3285AF021D35DD8C0070618A /* DDGetTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3285AF011D35DD8C0070618A /* DDGetTest.m */; };
 		328C3D941CD9EABD00615D38 /* Imagebutton.m in Sources */ = {isa = PBXBuildFile; fileRef = 328C3D931CD9EABD00615D38 /* Imagebutton.m */; };
 		3292A74F1CA3D14E004FEB57 /* CDCityPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 3292A74E1CA3D14E004FEB57 /* CDCityPicker.m */; };
 		3292A7511CA3DCA4004FEB57 /* districtMGE.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3292A7501CA3DCA4004FEB57 /* districtMGE.plist */; };
@@ -656,6 +659,12 @@
 		327DC7D81CB50119005617D2 /* Guide_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Guide_btn.png; sourceTree = "<group>"; };
 		327DC7DA1CB5011F005617D2 /* Loading.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Loading.png; sourceTree = "<group>"; };
 		327DC7DC1CB50BF4005617D2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3285AEFA1D34D70C0070618A /* YYLUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYLUser.h; sourceTree = "<group>"; };
+		3285AEFB1D34D70C0070618A /* YYLUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYLUser.m; sourceTree = "<group>"; };
+		3285AEFD1D35D81A0070618A /* DDRegist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDRegist.h; sourceTree = "<group>"; };
+		3285AEFE1D35D81A0070618A /* DDRegist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDRegist.m; sourceTree = "<group>"; };
+		3285AF001D35DD8C0070618A /* DDGetTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDGetTest.h; sourceTree = "<group>"; };
+		3285AF011D35DD8C0070618A /* DDGetTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDGetTest.m; sourceTree = "<group>"; };
 		328C3D921CD9EABD00615D38 /* Imagebutton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Imagebutton.h; sourceTree = "<group>"; };
 		328C3D931CD9EABD00615D38 /* Imagebutton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Imagebutton.m; sourceTree = "<group>"; };
 		3292A74D1CA3D14E004FEB57 /* CDCityPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDCityPicker.h; sourceTree = "<group>"; };
@@ -1244,6 +1253,8 @@
 			children = (
 				323499A91CE1782200CBA680 /* Member.h */,
 				323499AA1CE1782200CBA680 /* Member.m */,
+				3285AEFA1D34D70C0070618A /* YYLUser.h */,
+				3285AEFB1D34D70C0070618A /* YYLUser.m */,
 			);
 			name = Models;
 			path = Server;
@@ -1488,6 +1499,10 @@
 				32CABD7B1CA373EF0068AE93 /* DDTestApi.m */,
 				322C36831D338607005163C4 /* DDLogin.h */,
 				322C36841D338607005163C4 /* DDLogin.m */,
+				3285AEFD1D35D81A0070618A /* DDRegist.h */,
+				3285AEFE1D35D81A0070618A /* DDRegist.m */,
+				3285AF001D35DD8C0070618A /* DDGetTest.h */,
+				3285AF011D35DD8C0070618A /* DDGetTest.m */,
 				32CABD7C1CA373EF0068AE93 /* DDTestApiS.h */,
 				32CABD7D1CA373EF0068AE93 /* DDTestApiS.m */,
 			);
@@ -1982,6 +1997,7 @@
 				322C36851D338607005163C4 /* DDLogin.m in Sources */,
 				3252D6571CC752B5000FAFBC /* RSADataSigner.m in Sources */,
 				324CD4BA1CAE70F000276B57 /* HomeTVCell.m in Sources */,
+				3285AF021D35DD8C0070618A /* DDGetTest.m in Sources */,
 				325051F81CB667A700D431F5 /* ComAndCollVC.m in Sources */,
 				325051FC1CB66C0500D431F5 /* ComOrCollTVCell.m in Sources */,
 				32CABD691CA373AA0068AE93 /* SeasonCTViewCell.m in Sources */,
@@ -2012,6 +2028,7 @@
 				3292A74F1CA3D14E004FEB57 /* CDCityPicker.m in Sources */,
 				326F24831CCB0690002BCE0D /* XMLDictionary.m in Sources */,
 				32518DAF1CB34AC700CEAE35 /* SearchOrganTVCell.m in Sources */,
+				3285AEFF1D35D81A0070618A /* DDRegist.m in Sources */,
 				3252D6521CC752B5000FAFBC /* DataSigner.m in Sources */,
 				324075D11CAD218800BAF253 /* RegimenRTVCell.m in Sources */,
 				32E588B61CB78BE1002AED1A /* CommonTVCell.m in Sources */,
@@ -2037,6 +2054,7 @@
 				320BE5C81CBC900D00A34FCB /* AccountTVCell.m in Sources */,
 				32CABD941CA384F50068AE93 /* SearchTVController.m in Sources */,
 				323499AB1CE1782200CBA680 /* Member.m in Sources */,
+				3285AEFC1D34D70C0070618A /* YYLUser.m in Sources */,
 				32CABD971CA39E2E0068AE93 /* CDDatePicker.m in Sources */,
 				32146B031CC4D6AF0046F2BC /* ShareView.m in Sources */,
 				3252D6621CC752F5000FAFBC /* Order.m in Sources */,

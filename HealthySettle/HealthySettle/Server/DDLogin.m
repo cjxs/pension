@@ -30,21 +30,34 @@
 {
     return YTKRequestMethodPost;
 }
-
-// 请求的URL
-- (NSString *)requestUrl
-{
-    return @"http://www.5199yl.com/index.php?g=Index&c=Login&a=index";
+-(NSString *)requestUrl {
+    return @"/Api.html";
 }
 
 // 请求的参数列表
 -(id)requestArgument
 {
     return @ {
+        @"controller":@"login",
         @"phone" : _username,
-        @"pwd" : _password,
-        @"aotulogin":@"1"
+        @"pwd" : _password
     };
+}
++ (NSDictionary *)dictionaryWithJsonString:(NSString *)jsonString {
+    if (jsonString == nil) {
+        return nil;
+    }
+    
+    NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *err;
+    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                        options:NSJSONReadingMutableContainers
+                                                          error:&err];
+    if(err) {
+        NSLog(@"json解析失败：%@",err);
+        return nil;
+    }
+    return dic;
 }
 
 @end
