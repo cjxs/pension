@@ -40,6 +40,7 @@ PODS:
   - SDWebImage (3.7.5):
     - SDWebImage/Core (= 3.7.5)
   - SDWebImage/Core (3.7.5)
+  - SVProgressHUD (2.0.3)
   - UMengSocial (5.0)
   - YTKNetwork (1.0.0):
     - AFDownloadRequestOperation (~> 2.0)
@@ -52,6 +53,7 @@ DEPENDENCIES:
   - NJKWebViewProgress
   - ReactiveCocoa
   - SDWebImage (~> 3.7.5)
+  - SVProgressHUD
   - UMengSocial (~> 5.0)
   - YTKNetwork (~> 1.0.0)
 
@@ -64,6 +66,7 @@ SPEC CHECKSUMS:
   NJKWebViewProgress: f481fd424cb5ecc27eacae11b5397db92fba9a4d
   ReactiveCocoa: e2db045570aa97c695e7aa97c2bcab222ae51f4a
   SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
+  SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
   UMengSocial: 48b67179c492a8cf7803fbb0438b8f55432e2fc1
   YTKNetwork: 28ef7a3c119f61e737a76abbe74ff2fe1afec913
 

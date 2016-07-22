@@ -8,3 +8,4 @@ pod 'MJExtension'             #model Vim库
 pod 'ReactiveCocoa'           #关于OC的函数式编程库     https://github.com/ReactiveCocoa/ReactiveCocoa
 pod 'MTMigration'             #版本更新处理            https://github.com/mysterioustrousers/MTMigration
 pod 'UMengSocial', '~> 5.0'
+pod 'SVProgressHUD'

@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		320BE5C81CBC900D00A34FCB /* AccountTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 320BE5C61CBC900D00A34FCB /* AccountTVCell.m */; };
 		320BE5C91CBC900D00A34FCB /* AccountTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 320BE5C71CBC900D00A34FCB /* AccountTVCell.xib */; };
-		320BE5CF1CBC943B00A34FCB /* LoginOrResView.m in Sources */ = {isa = PBXBuildFile; fileRef = 320BE5CE1CBC943B00A34FCB /* LoginOrResView.m */; };
 		320BE5D81CBCDFC700A34FCB /* system_1_41@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 320BE5D01CBCDFC700A34FCB /* system_1_41@2x.png */; };
 		320BE5D91CBCDFC700A34FCB /* system_1_41@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 320BE5D11CBCDFC700A34FCB /* system_1_41@3x.png */; };
 		320BE5DA1CBCDFC700A34FCB /* system_1_42@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 320BE5D21CBCDFC700A34FCB /* system_1_42@2x.png */; };
@@ -158,6 +157,11 @@
 		3285AEFC1D34D70C0070618A /* YYLUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3285AEFB1D34D70C0070618A /* YYLUser.m */; };
 		3285AEFF1D35D81A0070618A /* DDRegist.m in Sources */ = {isa = PBXBuildFile; fileRef = 3285AEFE1D35D81A0070618A /* DDRegist.m */; };
 		3285AF021D35DD8C0070618A /* DDGetTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3285AF011D35DD8C0070618A /* DDGetTest.m */; };
+		3285AF051D372C100070618A /* DDFirst.m in Sources */ = {isa = PBXBuildFile; fileRef = 3285AF041D372C100070618A /* DDFirst.m */; };
+		3285AF081D3742620070618A /* YYLGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 3285AF071D3742620070618A /* YYLGroup.m */; };
+		3285AF0B1D3760A20070618A /* YYLOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = 3285AF0A1D3760A20070618A /* YYLOrder.m */; };
+		3285AF0E1D376B3C0070618A /* GroupRoom.m in Sources */ = {isa = PBXBuildFile; fileRef = 3285AF0D1D376B3C0070618A /* GroupRoom.m */; };
+		3285AF111D3C72970070618A /* LoginOrRegisViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3285AF101D3C72970070618A /* LoginOrRegisViewController.m */; };
 		328C3D941CD9EABD00615D38 /* Imagebutton.m in Sources */ = {isa = PBXBuildFile; fileRef = 328C3D931CD9EABD00615D38 /* Imagebutton.m */; };
 		3292A74F1CA3D14E004FEB57 /* CDCityPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 3292A74E1CA3D14E004FEB57 /* CDCityPicker.m */; };
 		3292A7511CA3DCA4004FEB57 /* districtMGE.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3292A7501CA3DCA4004FEB57 /* districtMGE.plist */; };
@@ -169,8 +173,6 @@
 		32CABD691CA373AA0068AE93 /* SeasonCTViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CABD611CA373AA0068AE93 /* SeasonCTViewCell.m */; };
 		32CABD6A1CA373AA0068AE93 /* SeasonMCollectViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CABD631CA373AA0068AE93 /* SeasonMCollectViewCell.m */; };
 		32CABD771CA373DD0068AE93 /* z_02.png in Resources */ = {isa = PBXBuildFile; fileRef = 32CABD741CA373DD0068AE93 /* z_02.png */; };
-		32CABD7E1CA373EF0068AE93 /* DDTestApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CABD7B1CA373EF0068AE93 /* DDTestApi.m */; };
-		32CABD7F1CA373EF0068AE93 /* DDTestApiS.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CABD7D1CA373EF0068AE93 /* DDTestApiS.m */; };
 		32CABD8D1CA374020068AE93 /* CustomerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CABD821CA374020068AE93 /* CustomerViewController.m */; };
 		32CABD8E1CA374020068AE93 /* MineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CABD851CA374020068AE93 /* MineViewController.m */; };
 		32CABD901CA374020068AE93 /* TempView.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CABD891CA374020068AE93 /* TempView.m */; };
@@ -283,6 +285,9 @@
 		32FA73421CABC7FC00379855 /* PasswordCVController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32FA73401CABC7FC00379855 /* PasswordCVController.m */; };
 		32FA73431CABC7FC00379855 /* PasswordCVController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32FA73411CABC7FC00379855 /* PasswordCVController.xib */; };
 		32FA73461CABE32500379855 /* RefundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32FA73451CABE32500379855 /* RefundViewController.m */; };
+		32FB002B1D3F1BE4008A5497 /* GetPassWordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32FB002A1D3F1BE4008A5497 /* GetPassWordViewController.m */; };
+		32FB002E1D405D6F008A5497 /* DDToolKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 32FB002D1D405D6F008A5497 /* DDToolKit.m */; };
+		32FB00311D40C163008A5497 /* DDFindTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 32FB00301D40C163008A5497 /* DDFindTest.m */; };
 		32FD72CB1CAA26E4008CB917 /* ProductTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 32FD72CA1CAA26E4008CB917 /* ProductTipView.m */; };
 		32FD72CE1CAA301E008CB917 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32FD72CD1CAA301E008CB917 /* WebViewController.m */; };
 		32FD72D51CAA8263008CB917 /* PersonVController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32FD72D41CAA8263008CB917 /* PersonVController.m */; };
@@ -295,8 +300,6 @@
 		320BE5C51CBC900D00A34FCB /* AccountTVCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountTVCell.h; sourceTree = "<group>"; };
 		320BE5C61CBC900D00A34FCB /* AccountTVCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountTVCell.m; sourceTree = "<group>"; };
 		320BE5C71CBC900D00A34FCB /* AccountTVCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountTVCell.xib; sourceTree = "<group>"; };
-		320BE5CD1CBC943B00A34FCB /* LoginOrResView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginOrResView.h; sourceTree = "<group>"; };
-		320BE5CE1CBC943B00A34FCB /* LoginOrResView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginOrResView.m; sourceTree = "<group>"; };
 		320BE5D01CBCDFC700A34FCB /* system_1_41@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "system_1_41@2x.png"; sourceTree = "<group>"; };
 		320BE5D11CBCDFC700A34FCB /* system_1_41@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "system_1_41@3x.png"; sourceTree = "<group>"; };
 		320BE5D21CBCDFC700A34FCB /* system_1_42@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "system_1_42@2x.png"; sourceTree = "<group>"; };
@@ -665,6 +668,16 @@
 		3285AEFE1D35D81A0070618A /* DDRegist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDRegist.m; sourceTree = "<group>"; };
 		3285AF001D35DD8C0070618A /* DDGetTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDGetTest.h; sourceTree = "<group>"; };
 		3285AF011D35DD8C0070618A /* DDGetTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDGetTest.m; sourceTree = "<group>"; };
+		3285AF031D372C100070618A /* DDFirst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDFirst.h; sourceTree = "<group>"; };
+		3285AF041D372C100070618A /* DDFirst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDFirst.m; sourceTree = "<group>"; };
+		3285AF061D3742620070618A /* YYLGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYLGroup.h; sourceTree = "<group>"; };
+		3285AF071D3742620070618A /* YYLGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYLGroup.m; sourceTree = "<group>"; };
+		3285AF091D3760A20070618A /* YYLOrder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYLOrder.h; sourceTree = "<group>"; };
+		3285AF0A1D3760A20070618A /* YYLOrder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYLOrder.m; sourceTree = "<group>"; };
+		3285AF0C1D376B3C0070618A /* GroupRoom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupRoom.h; sourceTree = "<group>"; };
+		3285AF0D1D376B3C0070618A /* GroupRoom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupRoom.m; sourceTree = "<group>"; };
+		3285AF0F1D3C72970070618A /* LoginOrRegisViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginOrRegisViewController.h; sourceTree = "<group>"; };
+		3285AF101D3C72970070618A /* LoginOrRegisViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginOrRegisViewController.m; sourceTree = "<group>"; };
 		328C3D921CD9EABD00615D38 /* Imagebutton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Imagebutton.h; sourceTree = "<group>"; };
 		328C3D931CD9EABD00615D38 /* Imagebutton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Imagebutton.m; sourceTree = "<group>"; };
 		3292A74D1CA3D14E004FEB57 /* CDCityPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDCityPicker.h; sourceTree = "<group>"; };
@@ -684,10 +697,6 @@
 		32CABD621CA373AA0068AE93 /* SeasonMCollectViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeasonMCollectViewCell.h; sourceTree = "<group>"; };
 		32CABD631CA373AA0068AE93 /* SeasonMCollectViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeasonMCollectViewCell.m; sourceTree = "<group>"; };
 		32CABD741CA373DD0068AE93 /* z_02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = z_02.png; sourceTree = "<group>"; };
-		32CABD7A1CA373EF0068AE93 /* DDTestApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDTestApi.h; sourceTree = "<group>"; };
-		32CABD7B1CA373EF0068AE93 /* DDTestApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDTestApi.m; sourceTree = "<group>"; };
-		32CABD7C1CA373EF0068AE93 /* DDTestApiS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDTestApiS.h; sourceTree = "<group>"; };
-		32CABD7D1CA373EF0068AE93 /* DDTestApiS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDTestApiS.m; sourceTree = "<group>"; };
 		32CABD811CA374020068AE93 /* CustomerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomerViewController.h; sourceTree = "<group>"; };
 		32CABD821CA374020068AE93 /* CustomerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomerViewController.m; sourceTree = "<group>"; };
 		32CABD841CA374020068AE93 /* MineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineViewController.h; sourceTree = "<group>"; };
@@ -827,6 +836,12 @@
 		32FA73411CABC7FC00379855 /* PasswordCVController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PasswordCVController.xib; sourceTree = "<group>"; };
 		32FA73441CABE32500379855 /* RefundViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefundViewController.h; sourceTree = "<group>"; };
 		32FA73451CABE32500379855 /* RefundViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefundViewController.m; sourceTree = "<group>"; };
+		32FB00291D3F1BE4008A5497 /* GetPassWordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetPassWordViewController.h; sourceTree = "<group>"; };
+		32FB002A1D3F1BE4008A5497 /* GetPassWordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetPassWordViewController.m; sourceTree = "<group>"; };
+		32FB002C1D405D6F008A5497 /* DDToolKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDToolKit.h; sourceTree = "<group>"; };
+		32FB002D1D405D6F008A5497 /* DDToolKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDToolKit.m; sourceTree = "<group>"; };
+		32FB002F1D40C163008A5497 /* DDFindTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDFindTest.h; sourceTree = "<group>"; };
+		32FB00301D40C163008A5497 /* DDFindTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDFindTest.m; sourceTree = "<group>"; };
 		32FD72C91CAA26E4008CB917 /* ProductTipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductTipView.h; sourceTree = "<group>"; };
 		32FD72CA1CAA26E4008CB917 /* ProductTipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductTipView.m; sourceTree = "<group>"; };
 		32FD72CC1CAA301E008CB917 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
@@ -1255,6 +1270,12 @@
 				323499AA1CE1782200CBA680 /* Member.m */,
 				3285AEFA1D34D70C0070618A /* YYLUser.h */,
 				3285AEFB1D34D70C0070618A /* YYLUser.m */,
+				3285AF061D3742620070618A /* YYLGroup.h */,
+				3285AF071D3742620070618A /* YYLGroup.m */,
+				3285AF0C1D376B3C0070618A /* GroupRoom.h */,
+				3285AF0D1D376B3C0070618A /* GroupRoom.m */,
+				3285AF091D3760A20070618A /* YYLOrder.h */,
+				3285AF0A1D3760A20070618A /* YYLOrder.m */,
 			);
 			name = Models;
 			path = Server;
@@ -1348,6 +1369,8 @@
 				3292A74E1CA3D14E004FEB57 /* CDCityPicker.m */,
 				32D859481CB8B2420074D5C3 /* PriSeleView.h */,
 				32D859491CB8B2420074D5C3 /* PriSeleView.m */,
+				32FB002C1D405D6F008A5497 /* DDToolKit.h */,
+				32FB002D1D405D6F008A5497 /* DDToolKit.m */,
 				32D8594B1CB8D4400074D5C3 /* NMRangeSlider */,
 			);
 			path = DataSource;
@@ -1495,16 +1518,16 @@
 		32CABD791CA373EF0068AE93 /* Server */ = {
 			isa = PBXGroup;
 			children = (
-				32CABD7A1CA373EF0068AE93 /* DDTestApi.h */,
-				32CABD7B1CA373EF0068AE93 /* DDTestApi.m */,
 				322C36831D338607005163C4 /* DDLogin.h */,
 				322C36841D338607005163C4 /* DDLogin.m */,
 				3285AEFD1D35D81A0070618A /* DDRegist.h */,
 				3285AEFE1D35D81A0070618A /* DDRegist.m */,
+				3285AF031D372C100070618A /* DDFirst.h */,
+				3285AF041D372C100070618A /* DDFirst.m */,
 				3285AF001D35DD8C0070618A /* DDGetTest.h */,
 				3285AF011D35DD8C0070618A /* DDGetTest.m */,
-				32CABD7C1CA373EF0068AE93 /* DDTestApiS.h */,
-				32CABD7D1CA373EF0068AE93 /* DDTestApiS.m */,
+				32FB002F1D40C163008A5497 /* DDFindTest.h */,
+				32FB00301D40C163008A5497 /* DDFindTest.m */,
 			);
 			path = Server;
 			sourceTree = "<group>";
@@ -1528,8 +1551,10 @@
 				32DD1DC91CA5082B00E1C229 /* SetTVCell.h */,
 				32DD1DCA1CA5082B00E1C229 /* SetTVCell.m */,
 				32DD1DCB1CA5082B00E1C229 /* SetTVCell.xib */,
-				320BE5CD1CBC943B00A34FCB /* LoginOrResView.h */,
-				320BE5CE1CBC943B00A34FCB /* LoginOrResView.m */,
+				3285AF0F1D3C72970070618A /* LoginOrRegisViewController.h */,
+				3285AF101D3C72970070618A /* LoginOrRegisViewController.m */,
+				32FB00291D3F1BE4008A5497 /* GetPassWordViewController.h */,
+				32FB002A1D3F1BE4008A5497 /* GetPassWordViewController.m */,
 				32CABD881CA374020068AE93 /* TempView.h */,
 				32CABD891CA374020068AE93 /* TempView.m */,
 			);
@@ -1995,6 +2020,7 @@
 				326F24801CCB0690002BCE0D /* WXUtil.mm in Sources */,
 				32CABD8D1CA374020068AE93 /* CustomerViewController.m in Sources */,
 				322C36851D338607005163C4 /* DDLogin.m in Sources */,
+				32FB00311D40C163008A5497 /* DDFindTest.m in Sources */,
 				3252D6571CC752B5000FAFBC /* RSADataSigner.m in Sources */,
 				324CD4BA1CAE70F000276B57 /* HomeTVCell.m in Sources */,
 				3285AF021D35DD8C0070618A /* DDGetTest.m in Sources */,
@@ -2009,17 +2035,18 @@
 				325051E51CB620C300D431F5 /* OrdAndRefundTVCell.m in Sources */,
 				327DC7CE1CB4F8FD005617D2 /* GDScrollBanner.m in Sources */,
 				3252D6581CC752B5000FAFBC /* RSADataVerifier.m in Sources */,
+				32FB002E1D405D6F008A5497 /* DDToolKit.m in Sources */,
 				32F6CD081C9A734C00E97B65 /* AppDelegate.m in Sources */,
-				32CABD7E1CA373EF0068AE93 /* DDTestApi.m in Sources */,
+				3285AF0B1D3760A20070618A /* YYLOrder.m in Sources */,
 				327CA9761CBBB78E00FC4F8E /* AccountViewController.m in Sources */,
 				32FA73461CABE32500379855 /* RefundViewController.m in Sources */,
 				3252D6551CC752B5000FAFBC /* NSDataEx.m in Sources */,
 				32CABD651CA373AA0068AE93 /* CitySkipViewCell.m in Sources */,
+				3285AF081D3742620070618A /* YYLGroup.m in Sources */,
 				326F24821CCB0690002BCE0D /* WXApiRequestHandler.m in Sources */,
 				32DD1DCC1CA5082B00E1C229 /* SetTVCell.m in Sources */,
 				32E588D21CB7B8F8002AED1A /* MonthViewController.m in Sources */,
 				326F247C1CCB0690002BCE0D /* DataMD5.m in Sources */,
-				320BE5CF1CBC943B00A34FCB /* LoginOrResView.m in Sources */,
 				324CD4B01CAE630700276B57 /* LivingTimeTVCell.m in Sources */,
 				3278CCDF1CAF8E9800038B9D /* TestModel.m in Sources */,
 				326F247D1CCB0690002BCE0D /* getIPhoneIP.m in Sources */,
@@ -2036,9 +2063,10 @@
 				32CABD901CA374020068AE93 /* TempView.m in Sources */,
 				3252D6511CC752B5000FAFBC /* base64.m in Sources */,
 				32CABD661CA373AA0068AE93 /* SearchVController.m in Sources */,
-				32CABD7F1CA373EF0068AE93 /* DDTestApiS.m in Sources */,
+				3285AF0E1D376B3C0070618A /* GroupRoom.m in Sources */,
 				32D8594A1CB8B2420074D5C3 /* PriSeleView.m in Sources */,
 				32F6CD051C9A734C00E97B65 /* main.m in Sources */,
+				3285AF111D3C72970070618A /* LoginOrRegisViewController.m in Sources */,
 				32FD72D51CAA8263008CB917 /* PersonVController.m in Sources */,
 				327CA96B1CBB712000FC4F8E /* GraceTVCell.m in Sources */,
 				326F247F1CCB0690002BCE0D /* payRequsestHandler.mm in Sources */,
@@ -2046,6 +2074,8 @@
 				32E588B21CB78825002AED1A /* KnowledgeTVController.m in Sources */,
 				32FD72CE1CAA301E008CB917 /* WebViewController.m in Sources */,
 				3252D6541CC752B5000FAFBC /* MD5DataSigner.m in Sources */,
+				3285AF051D372C100070618A /* DDFirst.m in Sources */,
+				32FB002B1D3F1BE4008A5497 /* GetPassWordViewController.m in Sources */,
 				32CABD6A1CA373AA0068AE93 /* SeasonMCollectViewCell.m in Sources */,
 				32E71CA01CB255D50079CD73 /* OrderLaeblTVCell.m in Sources */,
 				328C3D941CD9EABD00615D38 /* Imagebutton.m in Sources */,

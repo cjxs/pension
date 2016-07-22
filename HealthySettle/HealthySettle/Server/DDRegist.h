@@ -8,5 +8,5 @@
 
 
 @interface DDRegist : YTKBaseRequest
--(id)initWithRegisNumber:(NSString *)number;
+-(id)initWithRegisNumber:(NSString *)number pwd:(NSString *)pwd vfycode: (NSString *)vfycode;
 @end

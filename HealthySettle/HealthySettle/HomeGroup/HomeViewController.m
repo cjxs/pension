@@ -7,8 +7,6 @@
 //
 
 #import "HomeViewController.h"
-#import "DDTestApi.h"
-#import "DDTestApiS.h"
 #import "TempView.h"
 #import "CitySkipViewCell.h"
 #import "GDScrollBanner.h"

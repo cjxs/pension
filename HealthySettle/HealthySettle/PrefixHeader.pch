@@ -17,6 +17,7 @@
 #import <Masonry.h>
 #import <ReactiveCocoa.h>
 #import <ReactiveCocoa/RACEXTScope.h>
+#import "SVProgressHUD.h"
 static NSString * WXAPPID = @"wx6a68684031971e42";
 static NSString * WXAPPSECRET = @"dc5622186812b1928b2ef20355fd6ace";
 static NSString * WXMID = @"1335997801";

@@ -7,9 +7,8 @@
 //
 
 #import "CustomerViewController.h"
-#import "DDTestApi.h"
-#import "DDTestApiS.h"
 #import "YTKBatchRequest.h"
+#import "DDFirst.h"
 @interface CustomerViewController ()
 @end
 @implementation CustomerViewController
@@ -19,10 +18,9 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"客服";
-    DDTestApi * ddTestApi = [[DDTestApi alloc] initWithUsername:@"13732212641" password:@"cdd123"];
-//    DDTestApiS * ddTestApi = [[DDTestApiS alloc] init];
+    DDFirst * first = [[DDFirst alloc] initWithUid:@"126" login:YES];
     
-    [ddTestApi startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
+    [first startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
         NSLog(@"%@-----正常",request.responseString);
         
     

@@ -264,7 +264,6 @@ static NSString * const UMDEVICETOKEN      = @"UMDeviceToken";// 友盟推送的
             [WXApi handleOpenURL:url delegate:self];
         }
         return YES;
-        
         if ([UMSocialSnsService handleOpenURL:url]) {
             return [UMSocialSnsService handleOpenURL:url wxApiDelegate:self];
         }else{

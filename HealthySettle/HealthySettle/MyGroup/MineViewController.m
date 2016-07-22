@@ -16,7 +16,7 @@
 #import "ComAndCollVC.h"
 #import "GraceVC.h"
 #import "AccountViewController.h"
-#import "LoginOrResView.h"
+#import "LoginOrRegisViewController.h"
 
 static NSString *setCellIdentifier = @"cellS";
 
@@ -251,8 +251,10 @@ heightForHeaderInSection:(NSInteger)section
 #pragma mark - VTOF
 - (void)resignOrLoad
 {
-    LoginOrResView * view = [[LoginOrResView alloc] init];
-    [[UIApplication sharedApplication].keyWindow addSubview:view];
+    LoginOrRegisViewController *loginOrRegVC = [[LoginOrRegisViewController alloc] init];
+    [self.navigationController pushViewController:loginOrRegVC animated:YES];
+    
+    
 }
 -(void)changeToAccountWithstr:(NSString *)str
 {

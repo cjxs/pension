@@ -11,6 +11,7 @@
 #import "CustomerViewController.h"
 #import "SearchTVController.h"
 #import "MineViewController.h"
+#import "LoginOrRegisViewController.h"
 @interface TabbarController ()
 
 @end

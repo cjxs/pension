@@ -10,11 +10,15 @@
 
 @implementation DDRegist {
     NSString * _number;
+    NSString * _vfycode;
+    NSString * _pwd;
 }
--(id)initWithRegisNumber:(NSString *)number
+-(id)initWithRegisNumber:(NSString *)number pwd:(NSString *)pwd vfycode: (NSString *)vfycode
 {
     if ([super init]) {
         _number = number;
+        _pwd = pwd;
+        _vfycode = vfycode;
     }
     return self;
 }
@@ -26,16 +30,17 @@
 // 请求的URL
 - (NSString *)requestUrl
 {
-    return @"http://cswl.5199yl.com/index.php?g=Index&c=Login&a=reg";
+    return @"/Api.html";
 }
 
 // 请求的参数列表
 -(id)requestArgument
 {
     return @ {
+        @"controller":@"reg",
         @"phone" : _number,
-        @"vfycode" : @"",
-        @"tmpid":@"0"
+        @"code" : _vfycode,
+        @"pwd":_pwd
     };
 }
 
