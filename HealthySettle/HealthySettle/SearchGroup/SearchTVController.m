@@ -9,7 +9,7 @@
 #import "SearchTVController.h"
 #import "SearchOrganTVCell.h"
 #import "ShareView.h"
-@interface SearchTVController ()
+@interface SearchTVController ()<UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate>
 {
     NSArray * data_array;
 }
@@ -17,27 +17,42 @@
 @end
 
 @implementation SearchTVController
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.navigationItem.title = @"发现 • 热门机构";
-    [self.tableView registerNib:[UINib nibWithNibName:@"SearchOrganTVCell" bundle:nil]
-         forCellReuseIdentifier:@"cellSearch"];
-    data_array = @[[UIImage imageNamed:@"search_01"],[UIImage imageNamed:@"search_02"],[UIImage imageNamed:@"search_01"],[UIImage imageNamed:@"search_01"],[UIImage imageNamed:@"search_02"]];
+    
+    data_array = @[[UIImage imageNamed:@"search_01"],
+                   [UIImage imageNamed:@"search_02"],
+                   [UIImage imageNamed:@"search_01"],
+                   [UIImage imageNamed:@"search_01"],
+                   [UIImage imageNamed:@"search_02"],
+                   [UIImage imageNamed:@"search_01"],
+                   [UIImage imageNamed:@"search_01"],
+                   [UIImage imageNamed:@"search_02"],
+                   [UIImage imageNamed:@"search_01"],
+                   [UIImage imageNamed:@"search_01"],
+                   [UIImage imageNamed:@"search_02"]];
+    self.view.backgroundColor = [UIColor blueColor];
+    self.tableView = [[UITableView alloc] initWithFrame:[[UIScreen mainScreen] bounds] style:UITableViewStylePlain];
+    [self.tableView registerClass:[SearchOrganTVCell class] forCellReuseIdentifier:@"cellSearch"];
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    [self.view addSubview:self.tableView];
+
 }
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 5;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+    return data_array.count;
 }
 
 
@@ -46,7 +61,8 @@
 {
     SearchOrganTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cellSearch"
                                                                forIndexPath:indexPath];
-    [cell configWithImage:data_array[indexPath.section]];
+    cell.clipsToBounds = YES;
+    [cell configWithImage:data_array[indexPath.row]];
     return cell;
 }
 
@@ -63,6 +79,12 @@ heightForHeaderInSection:(NSInteger)section
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
      [ShareView showShareViewInViewController:self];
+}
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    NSArray * visibleCells = [self.tableView visibleCells];
+    for (SearchOrganTVCell * cell in visibleCells) {
+        [cell cellOnTableView:self.tableView didScrollOnView:self.view];
+    }
 }
 /*
 // Override to support conditional editing of the table view.

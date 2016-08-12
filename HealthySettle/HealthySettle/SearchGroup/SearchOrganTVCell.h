@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface SearchOrganTVCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UIImageView *organ_imageView;
+@property (strong, nonatomic)  UIImageView *organ_imageView;
 -(void)configWithImage:(UIImage *)image;
+- (void)cellOnTableView:(UITableView *)tableView didScrollOnView:(UIView *)view;
+
 @end

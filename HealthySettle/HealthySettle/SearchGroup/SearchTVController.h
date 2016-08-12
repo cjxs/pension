@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SearchTVController : UITableViewController
+@interface SearchTVController : UIViewController
+@property (nonatomic,strong)UITableView * tableView;
 
 @end

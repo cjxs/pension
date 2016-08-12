@@ -9,7 +9,7 @@
 #import "CustomerViewController.h"
 #import "YTKBatchRequest.h"
 #import "DDFirst.h"
-@interface CustomerViewController ()
+@interface CustomerViewController ()<UIWebViewDelegate>
 @end
 @implementation CustomerViewController
 
@@ -18,20 +18,20 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"客服";
-    DDFirst * first = [[DDFirst alloc] initWithUid:@"126" login:YES];
-    
-    [first startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
-        NSLog(@"%@-----正常",request.responseString);
-        
-    
-        
-        NSLog(@"%d +--=++\n%@\n,%@",(int)request.responseStatusCode,request.requestUrl,request.requestArgument);
-
-    } failure:^(__kindof YTKBaseRequest *request) {
-        NSLog(@"%@＋＋＋＋错误",request.requestOperation);
-        NSLog(@"%d",(int)request.responseStatusCode);
-        NSLog(@"%@",request.requestUrl);
-    }];
+//    DDFirst * first = [[DDFirst alloc] initWithUid:@"126" login:YES];
+//    
+//    [first startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
+//        NSLog(@"%@-----正常",request.responseString);
+//        
+//    
+//        
+//        NSLog(@"%d +--=++\n%@\n,%@",(int)request.responseStatusCode,request.requestUrl,request.requestArgument);
+//
+//    } failure:^(__kindof YTKBaseRequest *request) {
+//        NSLog(@"%@＋＋＋＋错误",request.requestOperation);
+//        NSLog(@"%d",(int)request.responseStatusCode);
+//        NSLog(@"%@",request.requestUrl);
+//    }];
     
 //    YTKBatchRequest * batchRequest = [[YTKBatchRequest alloc] initWithRequestArray:@[ddTestApi,testApi]];
 //    [batchRequest startWithCompletionBlockWithSuccess:^(YTKBatchRequest *batchRequest) {
@@ -62,13 +62,40 @@
     NSArray * dataArray = @[@"custom_online",@"custom_number"];
     for (int i = 0; i< dataArray.count; i++)
     {
-        UIImageView * imageView = [[UIImageView alloc]
-                                   initWithFrame:CGRectMake(1, screenHeight * 0.338 *i + 65, screenWide, screenHeight * 0.333)];
-        imageView.image = [UIImage imageNamed:dataArray[i]];
-        [self.view addSubview:imageView];
+        UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
+        button.frame = CGRectMake(1, screenHeight * 0.338 *i + 65, screenWide, screenHeight * 0.333);
+        [button setBackgroundImage:[UIImage imageNamed:dataArray[i]] forState:UIControlStateNormal];
+        button.tag = 200 + i;
+        [button addTarget:self action:@selector(callCostomerWithBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:button];
     }
 }
+- (void)callCostomerWithBtn:(UIButton *)button {
+    if (button.tag == 200) {
+        
+        if([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"mqq://"]])
+        {
+            UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectZero];
+            NSURL *url = [NSURL URLWithString:@"mqq://im/chat?chat_type=wpa&uin=123456&version=1&src_type=web"];//uin=123456为你要跳转的QQ号码
+            NSURLRequest *request = [NSURLRequest requestWithURL:url];
+            webView.delegate = self;
+            [webView loadRequest:request];
+            [self.view addSubview:webView];                                                                                                                                                                                                      
+        }
+    }else {
+        NSLog(@"+++++++++");
+        NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"4006405199"];
+        UIWebView * callWebview = [[UIWebView alloc] init];
+        [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
+        [self.view addSubview:callWebview];
+        
+//        NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"telprompt://%@",@"186xxxx6979"];
+//        //            NSLog(@"str======%@",str);
+//        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
 
+
+    }
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

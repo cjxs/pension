@@ -223,6 +223,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear: animated];
     self.navigationController.navigationBar.translucent = NO;
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     [self.tabBarController.tabBar setHidden:YES];
@@ -487,7 +488,6 @@
         if (!dic[@"msg"]) {
             user = [YYLUser mj_objectWithKeyValues:dic];
             NSLog(@"%@++++",user.description);
-            
             
         }else {
             NSLog(@"%@++++++",dic[@"msg"]);

@@ -55,6 +55,10 @@ static NSString *setCellIdentifier = @"cellS";
     return _setTableView;
 }
 #pragma mark - auto_view
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.tabBarController.tabBar setHidden:NO];
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
