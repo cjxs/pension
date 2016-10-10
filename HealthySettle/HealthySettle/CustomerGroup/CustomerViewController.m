@@ -8,7 +8,7 @@
 
 #import "CustomerViewController.h"
 #import "YTKBatchRequest.h"
-#import "DDFirst.h"
+#import "DDLogin.h"
 @interface CustomerViewController ()<UIWebViewDelegate>
 @end
 @implementation CustomerViewController
@@ -18,57 +18,27 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"客服";
-//    DDFirst * first = [[DDFirst alloc] initWithUid:@"126" login:YES];
-//    
-//    [first startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
-//        NSLog(@"%@-----正常",request.responseString);
-//        
-//    
-//        
-//        NSLog(@"%d +--=++\n%@\n,%@",(int)request.responseStatusCode,request.requestUrl,request.requestArgument);
+   
+//    NSArray * dataArray = @[@"custom_online",@"custom_number"];
+//    for (int i = 0; i< dataArray.count; i++)
+//    {
+//        UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
+//        button.frame = CGRectMake(1, screenHeight * 0.338 *i + 65, screenWide, screenHeight * 0.333);
+//        [button setBackgroundImage:[UIImage imageNamed:dataArray[i]] forState:UIControlStateNormal];
+//        button.tag = 200 + i;
+//        button.highlighted = NO;
+//        [button addTarget:self action:@selector(callCostomerWithBtn:) forControlEvents:UIControlEventTouchUpInside];
+//        [self.view addSubview:button];
+//    }
+//    DDGet *test = [[DDGet alloc] init];
+//    [test startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
+//        NSDictionary * dic = [DDLogin dictionaryWithJsonString:request.responseString];
 //
-//    } failure:^(__kindof YTKBaseRequest *request) {
-//        NSLog(@"%@＋＋＋＋错误",request.requestOperation);
-//        NSLog(@"%d",(int)request.responseStatusCode);
-//        NSLog(@"%@",request.requestUrl);
-//    }];
-    
-//    YTKBatchRequest * batchRequest = [[YTKBatchRequest alloc] initWithRequestArray:@[ddTestApi,testApi]];
-//    [batchRequest startWithCompletionBlockWithSuccess:^(YTKBatchRequest *batchRequest) {
-//        YTKBaseRequest *request1 = batchRequest.requestArray.firstObject;
-//        YTKBaseRequest *request2 = batchRequest.requestArray.lastObject;
-//        NSLog(@"%d, %d",(int)request1.responseStatusCode,(int)request2.responseStatusCode);
-//    } failure:^(YTKBatchRequest *batchRequest) {
-//        YTKBaseRequest *request1 = batchRequest.requestArray.firstObject;
-//        YTKBaseRequest *request2 = batchRequest.requestArray.lastObject;
-//        NSLog(@"%d, %d",(int)request1.responseStatusCode,(int)request2.responseStatusCode);
+//        NSLog(@"sucess:%@",dic);
 //        
+//    } failure:^(__kindof YTKBaseRequest *request) {
+//        NSLog(@"error: %@",request);
 //    }];
-    
-    
-//    NSMutableDictionary *dic=[NSMutableDictionary dictionary];
-//    [dic setObject:@"v1" forKey:@"k1"];
-//    [dic setObject:@"v2" forKey:@"k2"];
-//    [dic setObject:@"v3" forKey:@"k3"];
-//    NSArray *array=[NSArray arrayWithObjects:@"2",@"3",@"4",@"5",nil];
-//    
-//    
-//    
-//    [dic setObject:array forKey:@"k4"];
-//    
-//    id obj=[dic valueForKeyPath:@"k4.@sum.floatValue"];
-//    
-//    NSLog(@"%@",[obj description]);//==14
-    NSArray * dataArray = @[@"custom_online",@"custom_number"];
-    for (int i = 0; i< dataArray.count; i++)
-    {
-        UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
-        button.frame = CGRectMake(1, screenHeight * 0.338 *i + 65, screenWide, screenHeight * 0.333);
-        [button setBackgroundImage:[UIImage imageNamed:dataArray[i]] forState:UIControlStateNormal];
-        button.tag = 200 + i;
-        [button addTarget:self action:@selector(callCostomerWithBtn:) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:button];
-    }
 }
 - (void)callCostomerWithBtn:(UIButton *)button {
     if (button.tag == 200) {

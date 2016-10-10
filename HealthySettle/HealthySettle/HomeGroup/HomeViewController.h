@@ -12,4 +12,6 @@
 @property (nonatomic,strong) UIView      * tableHeadView;
 @property (nonatomic,strong) UISearchBar * searchWhere;
 @property (nonatomic,strong) UITableView * homeTableView;
+@property (nonatomic,strong) UIWebView * webView;
+
 @end

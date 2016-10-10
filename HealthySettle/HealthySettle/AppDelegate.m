@@ -67,8 +67,8 @@ static NSString * const UMDEVICETOKEN      = @"UMDeviceToken";// 友盟推送的
     
     //配置服务器信息
     YTKNetworkConfig * config = [YTKNetworkConfig sharedInstance];
-    config.baseUrl = @"http://cswl.5199yl.com";
-    config.cdnUrl = @"http://cswl.5199yl.com";
+    config.baseUrl = @"http://www.5199yl.com";
+    config.cdnUrl = @"http://www.5199yl.com";
     
     
     //百度地图

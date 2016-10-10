@@ -7,6 +7,7 @@
 //
 
 #import "SeasonMCollectViewCell.h"
+#import "UIImageView+WebCache.h"
 
 @implementation SeasonMCollectViewCell
 -(instancetype)initWithFrame:(CGRect)frame
@@ -32,11 +33,11 @@
     }
     return self;
 }
--(void)configViewWithimage:(UIImage *)image
+-(void)configViewWithimage:(NSString *)imageurl
                     season:(NSString *)season
                    describ:(NSString *)describ
 {
-    _image_view.image = image;
+    [_image_view sd_setImageWithURL:[NSURL URLWithString:imageurl]];
     _season_label.text = season;
     _describe_label.text = describ;
 }

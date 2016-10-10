@@ -19,5 +19,6 @@
 @property (weak, nonatomic) IBOutlet UILabel     *citymid_label;
 @property (weak, nonatomic) IBOutlet UILabel     *cityright_label;
 @property (weak, nonatomic) IBOutlet UILabel     *month_label;
+@property (nonatomic,strong)NSDictionary * dataArr;
 
 @end

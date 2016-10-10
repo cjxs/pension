@@ -9,7 +9,6 @@
 #import "HomeViewController.h"
 #import "TempView.h"
 #import "CitySkipViewCell.h"
-#import "GDScrollBanner.h"
 #import "SearchVController.h"
 #import "SeasonCTViewCell.h"
 #import <MTMigration.h>
@@ -19,12 +18,21 @@
 #import "SeasonMCollectViewCell.h"
 #import "MonthViewController.h"
 #import "ShareView.h"
+#import "DDHome_page.h"
+#import "DDLogin.h"
+#import "YTKNetworkConfig.h"
+#import "SDCycleScrollView.h"
 
 
-@interface HomeViewController ()<UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate,UISearchBarDelegate,UIWebViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource>
+@interface HomeViewController ()<UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate,UISearchBarDelegate,UIWebViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,SDCycleScrollViewDelegate>
 {
     NSMutableArray * imagesA;
+    NSArray * urlA;
     UILabel * city_btn_label;
+    UIView * bg_view;
+    UIButton * back_btn;
+    NSArray * seasonsA;
+    NSArray * tag_A;
 }
 
 
@@ -33,23 +41,37 @@
 
 @implementation HomeViewController
 #pragma mark - LazyLoading
+-(UIWebView *)webView {
+    if (_webView == nil) {
+        bg_view = [[UIView alloc] initWithFrame:CGRectMake(0,0, screenWide, screenHeight)];
+        bg_view.backgroundColor = [UIColor whiteColor];
+        
+        back_btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        back_btn.frame = CGRectMake(0, 20, 40, 23);
+        back_btn.backgroundColor = [UIColor grayColor];
+        [back_btn addTarget:self action:@selector(cancelWeb:) forControlEvents:UIControlEventTouchUpInside];
+
+        
+        _webView = [[UIWebView alloc]initWithFrame:CGRectMake(0,44, screenWide, screenHeight-44)];
+        [_webView setUserInteractionEnabled:YES];//是否支持交互
+        _webView.delegate=self;
+        [_webView setOpaque:NO];//opaque是不透明的意思
+        [_webView setScalesPageToFit:YES];//自动缩放以适应屏幕
+    }
+    return _webView;
+}
+- (void)cancelWeb:(UIButton *)btn {
+    [_webView removeFromSuperview];
+    [btn removeFromSuperview];
+    [bg_view removeFromSuperview];
+}
 - (UIView *)tableHeadView
 {
     if (_tableHeadView == nil )
     {
         _tableHeadView = [[UIView alloc]
                           initWithFrame:CGRectMake(0, 0, screenWide, screenHeight * 0.477)];
-        //轮播图
-         imagesA = [NSMutableArray arrayWithObjects:@"z_03",@"z_02", nil];
-        GDScrollBanner * net = [[GDScrollBanner alloc]
-                                initWithFrame:CGRectMake(0, 0, screenWide , screenHeight * 0.222) WithLocalImages:imagesA];
-        net.AutoScrollDelay = 1.0f;
-        //占位图  net.placeImage
-        [net setSmartImgdidSelectAtIndex:^(NSInteger index)
-        {
-            NSLog(@"网络图片  %ld",(long)index);
-        }];
-        [_tableHeadView addSubview:net];
+        
         //轮播图下面的2+4
         UIButton * regimenFind_btn = [UIButton buttonWithType:UIButtonTypeSystem];
         regimenFind_btn.frame = CGRectMake(screenWide * 0.015, screenHeight * 0.227, screenWide * 0.48 , screenHeight * 0.12 );
@@ -107,9 +129,61 @@
     self.navigationController.navigationBar.translucent = NO;
     self.navigationController.tabBarController.tabBar.translucent = YES;//坑
 }
+- (void)setTableView {
+    UITableView * homeTableView = [[UITableView alloc]
+                                   initWithFrame:CGRectMake(0, 0, screenWide, screenHeight-64-screenHeight * 0.035)
+                                   style:UITableViewStyleGrouped];
+    [self.view addSubview:homeTableView];
+    homeTableView.tableHeaderView = self.tableHeadView;
+    homeTableView.delegate = self;
+    homeTableView.dataSource = self;
+    homeTableView.bounces = NO;
+    homeTableView.showsVerticalScrollIndicator = NO;
+    homeTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [homeTableView registerClass:[CitySkipViewCell class]
+          forCellReuseIdentifier:@"cellCity"];
+    [homeTableView registerClass:[SeasonCTViewCell class]
+          forCellReuseIdentifier:@"cellSeason"];
+    _homeTableView = homeTableView;
+    [self setBanner];
+}
+- (void)setBanner {
+    SDCycleScrollView *cycleScrollView3 = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, screenWide , screenHeight * 0.222) delegate:self placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    cycleScrollView3.currentPageDotImage = [UIImage imageNamed:@"pageControlCurrentDot"];
+    cycleScrollView3.pageDotImage = [UIImage imageNamed:@"pageControlDot"];
+    cycleScrollView3.imageURLStringsGroup = imagesA;
+    [_tableHeadView addSubview:cycleScrollView3];
+}
+- (void)loadNetWork {
+    DDHome_page * ddHome_page = [[DDHome_page alloc] initWithUid:@"13732212641" login:@"1"];
+    [ddHome_page startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
+        NSDictionary * dic = [DDLogin dictionaryWithJsonString:request.responseString];
+        NSArray * temp_arr = dic[@"banner"][@"img"];
+        YTKNetworkConfig * config = [YTKNetworkConfig sharedInstance];
+        imagesA = [NSMutableArray arrayWithCapacity:0];
+        for (NSString * str in temp_arr) {
+            NSString *  str2 = [NSString stringWithFormat:@"%@/upload/group/%@",config.baseUrl,str];
+            NSString * str3 = [str2 stringByReplacingOccurrencesOfString:@"," withString:@"/"];
+            [imagesA addObject:str3];
+        }
+        urlA = dic[@"banner"][@"url"];
+        seasonsA = dic[@"seasons"];
+        tag_A = dic[@"tag"];
+        
+        [self setTableView];
+        
+        
+    } failure:^(__kindof YTKBaseRequest *request) {
+        NSLog(@"%@++++++%ld--------",request.requestArgument,request.responseStatusCode);
+    }];
+
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor whiteColor];
+    [self loadNetWork];
+   
        // 版本更新的时候添加提示页面，任性的设计师要求的
 //    [MTMigration applicationUpdateBlock:^{
 //        ProductTipView *tipView = [[ProductTipView alloc] init];
@@ -158,21 +232,7 @@
                                         initWithCustomView:searchWhere];
     [self.navigationItem setRightBarButtonItem:searchBarWhere];
     _searchWhere = searchWhere;
-    UITableView * homeTableView = [[UITableView alloc]
-                                    initWithFrame:CGRectMake(0, 0, screenWide, screenHeight-64-screenHeight * 0.035)
-                                    style:UITableViewStyleGrouped];
-    [self.view addSubview:homeTableView];
-    homeTableView.tableHeaderView = self.tableHeadView;
-    homeTableView.delegate = self;
-    homeTableView.dataSource = self;
-    homeTableView.bounces = NO;
-    homeTableView.showsVerticalScrollIndicator = NO;
-    homeTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [homeTableView registerClass:[CitySkipViewCell class]
-          forCellReuseIdentifier:@"cellCity"];
-    [homeTableView registerClass:[SeasonCTViewCell class]
-          forCellReuseIdentifier:@"cellSeason"];
-    _homeTableView = homeTableView;
+    
     UIBarButtonItem * returnBarButtonItem = [[UIBarButtonItem alloc] init];
     returnBarButtonItem.title = @"";
     self.navigationController.navigationBar.tintColor=[UIColor redColor];
@@ -180,6 +240,7 @@
                                    forState:UIControlStateNormal
                                  barMetrics:UIBarMetricsDefault];
     self.navigationItem.backBarButtonItem = returnBarButtonItem;
+    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -201,7 +262,7 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath
 -(NSInteger)tableView:(UITableView *)tableView
 numberOfRowsInSection:(NSInteger)section
 {
-    return 3;
+    return tag_A.count +1;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -218,24 +279,13 @@ numberOfRowsInSection:(NSInteger)section
         CitySkipViewCell * cell = [_homeTableView dequeueReusableCellWithIdentifier:@"cellCity"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.type = indexPath.row;
-        if (indexPath.row == 1)
-        {
-            [cell configWithicon:[UIImage imageNamed:@"fir_"]
-                           title:@"浪漫海滨"
-                            data:nil];
-        }else {
-            [cell configWithicon:[UIImage imageNamed:@"fir_"]
-                           title:@"缤纷花海"
-                            data:nil];
-        }
+        [cell configWithicon:[UIImage imageNamed:@"fir_"]
+                       title:tag_A[indexPath.row -1][@"tag_name"]
+                            data:tag_A[indexPath.row -1][@"tag_info"]];
         return cell;
     }
 }
--(void)tableView:(UITableView *)tableView
-didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-}
+//四季轮播
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     SeasonCTViewCell * cell = [_homeTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
@@ -249,58 +299,28 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 - (NSInteger)collectionView:(UICollectionView *)collectionView
      numberOfItemsInSection:(NSInteger)section
 {
-    return 12;
+    if (seasonsA.count > 12) {
+        return 12;
+    }else {
+        return seasonsA.count;
+    }
+    
 }
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
     return 1;
 }
-
+//四季图片
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
                   cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     SeasonMCollectViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cellSea"
-                                                                              forIndexPath:indexPath];
-    switch (indexPath.row)
-    {
-        case 0:
-            [cell configViewWithimage:[UIImage imageNamed:@"p_01"] season:@"1 月" describ:@"新的开始"];
-            break;
-        case 1:
-            [cell configViewWithimage:[UIImage imageNamed:@"p_02"] season:@"2 月" describ:@"春季旅行"];
-            break;
-        case 2:
-            [cell configViewWithimage:[UIImage imageNamed:@"p_03"] season:@"3 月" describ:@"春节没玩够"];
-            break;
-        case 3:
-            [cell configViewWithimage:[UIImage imageNamed:@"p_01"] season:@"4 月" describ:@"新的开始"];
-            break;
-        case 4:
-            [cell configViewWithimage:[UIImage imageNamed:@"p_02"] season:@"5 月" describ:@"新的开始"];
-            break;
-        case 5:
-            [cell configViewWithimage:[UIImage imageNamed:@"p_03"] season:@"6 月" describ:@"新的开始"];
-            break;
-        case 6:
-            [cell configViewWithimage:[UIImage imageNamed:@"p_01"] season:@"7 月" describ:@"新的开始"];
-            break;
-        case 7:
-            [cell configViewWithimage:[UIImage imageNamed:@"p_02"] season:@"8月" describ:@"新的开始"];
-            break;
-        case 8:
-            [cell configViewWithimage:[UIImage imageNamed:@"p_03"] season:@"9 月" describ:@"新的开始"];
-            break;
-        case 9:
-            [cell configViewWithimage:[UIImage imageNamed:@"p_01"] season:@"10 月" describ:@"新的开始"];
-            break;
-        case 10:
-            [cell configViewWithimage:[UIImage imageNamed:@"p_02"] season:@"11月" describ:@"新的开始"];
-            break;
-            
-        default:
-            [cell configViewWithimage:[UIImage imageNamed:@"p_03"] season:@"12月" describ:@"新的开始"];
-            break;
+                                                                        forIndexPath:indexPath];
+    if (seasonsA != nil) {
+        NSString * temp_str = [NSString stringWithFormat:@"%@/%@",[[YTKNetworkConfig sharedInstance] baseUrl],seasonsA[indexPath.row][@"month_file"]];
+        [cell configViewWithimage:temp_str season:seasonsA[indexPath.row][@"month"] describ:seasonsA[indexPath.row][@"title"]];
     }
+    
     return cell;
 }
 - (CGFloat) collectionView:(UICollectionView *)collectionView
@@ -309,21 +329,18 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 {
     return 0;
 }
-
+//进入四季推荐
 - (void)collectionView:(UICollectionView *)collectionView
 didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     MonthViewController * monVC = [[MonthViewController alloc]
                                    initWithNibName:@"MonthViewController"
                                    bundle:nil];
-       [self.navigationController pushViewController:monVC animated:NO];
+    NSLog(@"%@",seasonsA[indexPath.row]);
+    monVC.dataArr = seasonsA[indexPath.row];
+    [self.navigationController pushViewController:monVC animated:NO];
 }
-- (void)searchBarClear
-{
-    [_searchWhere resignFirstResponder];
-    _searchWhere.text = nil;
-    _searchWhere.showsCancelButton = NO;
-}
+
 #pragma mark - VTOF
 - (void)chooseIndexCity
 {   //选择城市
@@ -383,6 +400,24 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath
     }
     [self.navigationController pushViewController:searchVC
                                          animated:YES];
+}
+#pragma mark - SDCycleScrollViewDelegate //轮播
+- (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index
+{
+    if ([urlA[index] length] !=0) {
+        NSURL *url = [NSURL URLWithString:urlA[index]];
+        [self.webView loadRequest:[NSURLRequest requestWithURL:url]];
+        [[[UIApplication sharedApplication].delegate window]addSubview:bg_view];
+        [bg_view addSubview:_webView];
+        [bg_view addSubview:back_btn];
+    }
+}
+
+- (void)searchBarClear
+{
+    [_searchWhere resignFirstResponder];
+    _searchWhere.text = nil;
+    _searchWhere.showsCancelButton = NO;
 }
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {

@@ -59,7 +59,6 @@
         
         [_cityCollect_view registerClass:[CityCollectionViewCell class]
                             forCellWithReuseIdentifier:@"cellC"];
-        data_array = @[@"city_01",@"city_02",@"city_03",@"city_04"];
 
     }
     return self;
@@ -77,14 +76,18 @@
         self.title_label.text = title;
     }
     if (dataArray) {
-        NSLog(@"有");
+        data_array = dataArray;
     }
 }
 #pragma mark - UICollectionViewDataSource
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return 4;
+    if (data_array.count > 4) {
+        return 4;
+    }else {
+        return data_array.count;
+    }
     
 }
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
@@ -94,9 +97,7 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     CityCollectionViewCell * cell = [_cityCollect_view dequeueReusableCellWithReuseIdentifier:@"cellC"
                                                                                  forIndexPath:indexPath];
-    [cell configWithImage:
-     [UIImage imageNamed:data_array[indexPath.row]]
-                     name:nil];
+    [cell configWithImage:data_array[indexPath.row][@"img"] name:data_array[indexPath.row][@"area_name"]];
     return cell;
 }
 - (CGFloat) collectionView:(UICollectionView *)collectionView

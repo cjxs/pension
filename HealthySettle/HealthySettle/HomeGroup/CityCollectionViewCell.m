@@ -7,6 +7,8 @@
 //
 
 #import "CityCollectionViewCell.h"
+#import "UIImageView+WebCache.h"
+
 
 @implementation CityCollectionViewCell
 -(instancetype)initWithFrame:(CGRect)frame {
@@ -26,10 +28,10 @@
     }
     return self;
 }
--(void)configWithImage:(UIImage *)image name:(NSString *)name {
+-(void)configWithImage:(NSString *)imageStr name:(NSString *)name {
     if (self) {
-        if (image) {
-            _image_view.image = image;
+        if (imageStr) {
+            [_image_view sd_setImageWithURL:[NSURL URLWithString:imageStr]];
         }
         if (name) {
             _describ_label.text = name;

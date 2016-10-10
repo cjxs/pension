@@ -57,6 +57,7 @@
     [self.tabBar insertSubview:v atIndex:0];
     self.tabBar.tintColor = RGB(229, 0, 0);
     
+    
      
     self.viewControllers = @[homeNaVC, searchNaVC,customerNaVC, mineNaVC];
 }

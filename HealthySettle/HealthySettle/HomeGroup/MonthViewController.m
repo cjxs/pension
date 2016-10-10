@@ -7,6 +7,7 @@
 //
 
 #import "MonthViewController.h"
+#import "UIImageView+WebCache.h"
 
 @interface MonthViewController ()
 
@@ -17,9 +18,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    NSLog(@"%@",self.dataArr);
     // Do any additional setup after loading the view from its nib.
    self.province2_label.text = self.province1_label.text = @"江苏";
-    self.month_imageview.image = [UIImage imageNamed:@"month_imagedemo"];
+//    [self.month_imageview sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",BASEURL,_dataArr[@"banner"]]]];
     self.cityleft_imageview.image = [UIImage imageNamed:@"image_left"];
     self.citymid_imageview.image = [UIImage imageNamed:@"image_mid"];
     self.cityright_imageview.image = [UIImage imageNamed:@"image_right"];

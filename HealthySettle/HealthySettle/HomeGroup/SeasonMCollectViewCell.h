@@ -11,5 +11,5 @@
 @interface SeasonMCollectViewCell : UICollectionViewCell
 @property (nonatomic, strong) UIImageView  * image_view;
 @property (nonatomic, strong) UILabel * season_label, *describe_label;
--(void)configViewWithimage:(UIImage *)image season:(NSString *)season describ:(NSString *)describ;
+-(void)configViewWithimage:(NSString *)imageurl season:(NSString *)season describ:(NSString *)describ;
 @end
