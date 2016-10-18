@@ -17,4 +17,5 @@
 @property (nonatomic, strong) UIView      * tableHeadView;
 @property (nonatomic,strong ) UIView      * filter_view;
 @property (nonatomic,strong ) UITableView * tableView;
+@property (nonatomic,strong)NSArray * data_arr;
 @end

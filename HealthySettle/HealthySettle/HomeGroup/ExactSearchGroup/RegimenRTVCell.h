@@ -13,6 +13,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *organization_title;
 @property (weak, nonatomic) IBOutlet UILabel *price_label;
 @property (weak, nonatomic) IBOutlet UILabel *address_label;
-- (void)configWithImage:(UIImage *)image title:(NSString *)title address:(NSString *)address price:(NSString *)price supportArray:(NSArray *)array;
+- (void)configWithImage:(NSString *)image_u title:(NSString *)title address:(NSString *)address price:(NSString *)price supportArray:(NSArray *)array;
 
 @end

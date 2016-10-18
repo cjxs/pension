@@ -9,7 +9,13 @@
 #import "DDSeaGet.h"
 
 @implementation DDSeaGet {
-    
+    NSString * _sea_id;
+}
+-(id)initWithSea_id:(NSString *)sea_id {
+    if ([super init]) {
+        _sea_id = sea_id;
+    }
+    return self;
 }
 -(YTKRequestMethod)requestMethod
 {
@@ -19,17 +25,15 @@
 // 请求的URL
 - (NSString *)requestUrl
 {
-    return @"/index.php?";
+    return @"/Api.html";
 }
 
 // 请求的参数列表
 -(id)requestArgument
 {
     return @ {
-        @"g":@"Api",
-        @"c":@"Api",
         @"controller":@"sea_city",
-        @"sea_id":@"1"
+        @"sea_id":_sea_id
     };
 }
 @end

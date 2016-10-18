@@ -7,7 +7,6 @@
 //
 
 #import "LoginOrRegisViewController.h"
-#import "DDLogin.h"
 #import "YYLUser.h"
 #import "MJExtension.h"
 #import "NSString+MJExtension.h"

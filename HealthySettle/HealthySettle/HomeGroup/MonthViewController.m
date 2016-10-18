@@ -8,6 +8,7 @@
 
 #import "MonthViewController.h"
 #import "UIImageView+WebCache.h"
+#import "DDSeaGet.h"
 
 @interface MonthViewController ()
 
@@ -18,34 +19,50 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSLog(@"%@",self.dataArr);
     // Do any additional setup after loading the view from its nib.
-   self.province2_label.text = self.province1_label.text = @"江苏";
-//    [self.month_imageview sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",BASEURL,_dataArr[@"banner"]]]];
-    self.cityleft_imageview.image = [UIImage imageNamed:@"image_left"];
-    self.citymid_imageview.image = [UIImage imageNamed:@"image_mid"];
-    self.cityright_imageview.image = [UIImage imageNamed:@"image_right"];
-    NSArray * array = @[@" 无锡",@"南京",@"苏州",@"扬州",@"周庄",@"镇江",@"常州"];
-    for (int i = 0; i < array.count; i++)
-    {
-        UILabel * label = [[UILabel alloc]
-                       initWithFrame:CGRectMake(15 +(screenWide/(array.count + 6)+kMargin)*i ,self.province1_label.frame.origin.y - 40, screenWide/(array.count + 6), 25)];
-        label.text = array[i];
-        label.font = [UIFont systemFontOfSize:10];
-        [self.view addSubview:label];
-    }
-    for (int i = 0; i < array.count; i++)
-    {
-        UILabel * label = [[UILabel alloc]
-                           initWithFrame:CGRectMake(15 +(screenWide/(array.count + 6)+kMargin)*i ,self.province2_label.frame.origin.y - 40, screenWide/(array.count + 6), 25)];
-        label.text = array[i];
-        label.font = [UIFont systemFontOfSize:10];
-        [self.view addSubview:label];
-    }
-//    self.cityright_label.text = self.citymid_label.text = self.cityleft_label.text = @"哈哈";
-//    self.month_label.text = @"二月在那里";
+    [self.month_imageview sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",BASEURL,_dataDic[@"banner"]]]];
+    NSLog(@"%@",_dataDic);
+    self.province1_label.text = [NSString stringWithFormat:@"        %@",_dataDic[@"desc"]];
+    self.month_label.text = _dataDic[@"title"];
+
+    
+    DDSeaGet * seaGet = [[DDSeaGet alloc] initWithSea_id:_dataDic[@"season_id"]];
+    [seaGet startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
+        NSArray * data = [DDLogin arrayWithJsonString:request.responseString];
+        for (int i = 0; i < data.count; i++ ) {
+            NSDictionary * dic = data[i];
+            NSString *  str2 = [NSString stringWithFormat:@"%@/upload/group/%@",BASEURL,dic[@"file"]];
+            NSString * str3 = [str2 stringByReplacingOccurrencesOfString:@"," withString:@"/"];
+            [dic setValue:str3 forKey:@"file"];
+            NSURL * url = [NSURL URLWithString:str3];
+            switch (i) {
+                case 0:
+                    [self.cityleft_imageview sd_setImageWithURL:url];
+                    self.cityleft_label.text = dic[@"area_name"];
+                    break;
+                case 1:
+                    [self.citymid_imageview sd_setImageWithURL:url];
+                    self.citymid_label.text = dic[@"area_name"];
+
+                    break;
+                case 2:
+                    [self.cityright_imageview sd_setImageWithURL:url];
+                    self.cityright_label.text = dic[@"area_name"];
+
+                    break;
+                default:
+                    break;
+            }
+        }
+     
+    } failure:^(__kindof YTKBaseRequest *request) {
+        
+    }];
+    
+    
     [self.view bringSubviewToFront:self.month_label];
 }
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];

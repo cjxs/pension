@@ -65,6 +65,9 @@
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>mqq</string>
+		<string>sinaweibo</string>
+		<string>weixin</string>
+		<string>wechat</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>

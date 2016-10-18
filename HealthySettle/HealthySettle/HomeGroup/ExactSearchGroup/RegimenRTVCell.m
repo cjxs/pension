@@ -7,6 +7,8 @@
 //
 
 #import "RegimenRTVCell.h"
+#import "UIImageView+WebCache.h"
+
 
 @implementation RegimenRTVCell
 
@@ -23,15 +25,15 @@
 
     // Configure the view for the selected state
 }
-- (void)configWithImage:(UIImage *)image
+- (void)configWithImage:(NSString *)image_u
                   title:(NSString *)title
                 address:(NSString *)address
                   price:(NSString *)price
            supportArray:(NSArray *)array
 {
-    if (image)
+    if (image_u)
     {
-        self.organization_image.image = image;
+        [self.organization_image sd_setImageWithURL:[NSURL URLWithString:image_u]];
     }
     if (title)
     {
@@ -49,8 +51,13 @@
     {
         for (int i = 0; i < array.count; i++)
         {
-            UIImageView * imageView = [[UIImageView alloc]
-                                       initWithImage:[UIImage imageNamed:array [i]]];
+            
+            NSString *  str2 = [NSString stringWithFormat:@"%@/upload/group/%@",BASEURL,array[i][@"spec_img"]];
+            NSString * str3 = [str2 stringByReplacingOccurrencesOfString:@"," withString:@"/"];
+            
+
+            UIImageView * imageView = [[UIImageView alloc]init];
+            [imageView sd_setImageWithURL:[NSURL URLWithString:str3]];
             imageView.frame = CGRectMake(100 + i * kMargin * 2.5, 45, kMargin * 2, kMargin * 2);
             imageView.backgroundColor = [UIColor blackColor];
             [self addSubview:imageView];

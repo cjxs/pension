@@ -7,6 +7,8 @@
 //
 
 #import "PensionSRTVCell.h"
+#import "UIImageView+WebCache.h"
+
 
 @implementation PensionSRTVCell
 
@@ -22,15 +24,15 @@
 
     // Configure the view for the selected state
 }
-- (void)configWithimage:(UIImage *)image
+- (void)configWithimage:(NSString *)image_u
                   title:(NSString *)title
                 address:(NSString *)address
                  number:(NSString *)number
                   price:(NSString *)price
 {
-    if (image)
+    if (image_u)
     {
-        self.organization_image.image = image;
+        [self.organization_image sd_setImageWithURL:[NSURL URLWithString:image_u]];
     }
     if (title)
     {

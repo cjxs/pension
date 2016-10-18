@@ -19,7 +19,6 @@
 #import "MonthViewController.h"
 #import "ShareView.h"
 #import "DDHome_page.h"
-#import "DDLogin.h"
 #import "YTKNetworkConfig.h"
 #import "SDCycleScrollView.h"
 
@@ -159,10 +158,9 @@
     [ddHome_page startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
         NSDictionary * dic = [DDLogin dictionaryWithJsonString:request.responseString];
         NSArray * temp_arr = dic[@"banner"][@"img"];
-        YTKNetworkConfig * config = [YTKNetworkConfig sharedInstance];
         imagesA = [NSMutableArray arrayWithCapacity:0];
         for (NSString * str in temp_arr) {
-            NSString *  str2 = [NSString stringWithFormat:@"%@/upload/group/%@",config.baseUrl,str];
+            NSString *  str2 = [NSString stringWithFormat:@"%@/upload/group/%@",BASEURL,str];
             NSString * str3 = [str2 stringByReplacingOccurrencesOfString:@"," withString:@"/"];
             [imagesA addObject:str3];
         }
@@ -336,8 +334,7 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath
     MonthViewController * monVC = [[MonthViewController alloc]
                                    initWithNibName:@"MonthViewController"
                                    bundle:nil];
-    NSLog(@"%@",seasonsA[indexPath.row]);
-    monVC.dataArr = seasonsA[indexPath.row];
+    monVC.dataDic = seasonsA[indexPath.row];
     [self.navigationController pushViewController:monVC animated:NO];
 }
 

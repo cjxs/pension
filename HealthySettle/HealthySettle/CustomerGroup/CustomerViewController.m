@@ -8,7 +8,7 @@
 
 #import "CustomerViewController.h"
 #import "YTKBatchRequest.h"
-#import "DDLogin.h"
+#import "DDFindGet.h"
 @interface CustomerViewController ()<UIWebViewDelegate>
 @end
 @implementation CustomerViewController
@@ -19,26 +19,19 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"客服";
    
-//    NSArray * dataArray = @[@"custom_online",@"custom_number"];
-//    for (int i = 0; i< dataArray.count; i++)
-//    {
-//        UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
-//        button.frame = CGRectMake(1, screenHeight * 0.338 *i + 65, screenWide, screenHeight * 0.333);
-//        [button setBackgroundImage:[UIImage imageNamed:dataArray[i]] forState:UIControlStateNormal];
-//        button.tag = 200 + i;
-//        button.highlighted = NO;
-//        [button addTarget:self action:@selector(callCostomerWithBtn:) forControlEvents:UIControlEventTouchUpInside];
-//        [self.view addSubview:button];
-//    }
-//    DDGet *test = [[DDGet alloc] init];
-//    [test startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
-//        NSDictionary * dic = [DDLogin dictionaryWithJsonString:request.responseString];
-//
-//        NSLog(@"sucess:%@",dic);
-//        
-//    } failure:^(__kindof YTKBaseRequest *request) {
-//        NSLog(@"error: %@",request);
-//    }];
+    NSArray * dataArray = @[@"custom_online",@"custom_number"];
+    for (int i = 0; i< dataArray.count; i++)
+    {
+        UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
+        button.frame = CGRectMake(1, screenHeight * 0.338 *i + 65, screenWide, screenHeight * 0.333);
+        [button setBackgroundImage:[UIImage imageNamed:dataArray[i]] forState:UIControlStateNormal];
+        button.tag = 200 + i;
+        button.highlighted = NO;
+        [button addTarget:self action:@selector(callCostomerWithBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:button];
+    }
+
+    
 }
 - (void)callCostomerWithBtn:(UIButton *)button {
     if (button.tag == 200) {

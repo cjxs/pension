@@ -7,7 +7,6 @@
 //
 
 #import "GetPassWordViewController.h"
-#import "DDLogin.h"
 #import "DDToolKit.h"
 #import "DDFindTest.h"
 

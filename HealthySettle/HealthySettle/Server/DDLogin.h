@@ -10,4 +10,5 @@
 @interface DDLogin : YTKBaseRequest
 -(id)initWithUsername:(NSString *)username password:(NSString *)password;
 + (NSDictionary *)dictionaryWithJsonString:(NSString *)jsonString;
++ (NSArray *)arrayWithJsonString:(NSString *)jsonString;
 @end

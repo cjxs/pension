@@ -10,7 +10,8 @@
 
 @interface SearchOrganTVCell : UITableViewCell
 @property (strong, nonatomic)  UIImageView *organ_imageView;
--(void)configWithImage:(UIImage *)image;
+@property (strong,nonatomic) UILabel * name_la;
+-(void)configWithImage:(NSString *)str title:(NSString *)title;
 - (void)cellOnTableView:(UITableView *)tableView didScrollOnView:(UIView *)view;
 
 @end

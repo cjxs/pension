@@ -11,13 +11,13 @@
 #import "RegimenRTVCell.h"
 #import "ResultDetailTVController.h"
 #import "PriSeleView.h"
+#import "DDListGet.h"
 @interface ResultListVController ()<UITableViewDataSource ,UITableViewDelegate>
 {
-    NSArray * array1;
-    NSArray * array2;
-    NSArray * array3;
+   
     BOOL hide;
     BOOL isScroll;
+    UIView * begin_view;
 }
 
 @end
@@ -171,7 +171,9 @@
     self.navigationController.navigationBar.tintColor = [UIColor redColor];
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor blackColor]};
     [self.navigationController setNavigationBarHidden:NO animated:animated];
-    //    [self hideTabBar];
+    
+   
+    // [self hideTabBar];
     
 }
 - (void)viewWillDisappear:(BOOL)animated
@@ -215,10 +217,24 @@
     
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
+-(void)setData{
+    DDListGet * ddlist;
+    if ([_vc_type isEqualToString:@"S"]) {
+        ddlist = [[DDListGet alloc] initWithController:@"ys_g" area_id:nil page:nil];
+    }else{
+        ddlist = [[DDListGet alloc] initWithController:@"yl_g" area_id:nil page:nil];
+    }
+    [ddlist startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
+        [begin_view removeFromSuperview];
+        NSArray * arr = [DDLogin arrayWithJsonString:request.responseString];
+        _data_arr = arr;
+        [self loadSomething];
+        
+    } failure:^(__kindof YTKBaseRequest *request) {
+        NSLog(@"%ld",request.responseStatusCode);
+    }];
+}
+-(void)loadSomething {
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.filter_view];
     _searchPlace_name = @"杭州";
@@ -235,9 +251,16 @@
     {
         [self.tableView registerNib:[UINib nibWithNibName:@"PensionSRTVCell" bundle:nil] forCellReuseIdentifier:@"cellPension"];
     }
-    array1 = @[@"wifi_is",@"tv_is",@"wifi_is",@"p_is"];
-    array3 = @[@"p_is",@"wifi_is",@"p_is",@"wifi_is"];
-    array2 = @[@"wifi_is",@"p_is",@"tv_is",@"p_is",@"wifi_is",@"wifi_is",@"p_is"];
+ 
+}
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+    begin_view = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    begin_view.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:begin_view];
+    [self setData];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -250,7 +273,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 7;
+    return _data_arr.count;
 }
 
 
@@ -259,20 +282,11 @@
     {
         PensionSRTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cellPension" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        switch (indexPath.row) {
-            case 0:
-                [cell configWithimage:[UIImage imageNamed:@"pension"] title:@"浙江省杭州市上城区维康老人" address:@"上城区近江南路4号"number:@"888" price:@"199"];
-                break;
-            case 1:
-                [cell configWithimage:[UIImage imageNamed:@"pension"] title:@"杭州滨江区维康疗养院" address:@"下城区近江南路2号"number:@"799" price:@"299"];
-                break;
-            case 2:
-                [cell configWithimage:[UIImage imageNamed:@"pension"] title:@"杭州上城区维康老人" address:@"左城区近江南路2号"number:@"999" price:@"399"];
-                break;
-            default:
-                [cell configWithimage:[UIImage imageNamed:@"pension"] title:@"杭州上城区维康老人" address:@"上城区近江南路2号"number:@"999" price:@"588"];
-                break;
-        }
+        NSDictionary * dic = _data_arr[indexPath.row];
+
+        NSString *  str2 = [NSString stringWithFormat:@"%@/upload/group/%@",BASEURL,dic[@"pic"]];
+        NSString * str3 = [str2 stringByReplacingOccurrencesOfString:@"," withString:@"/"];
+        [cell configWithimage:str3 title:dic[@"s_name"] address:dic[@"address"] number:dic[@"bed_nums"] price:dic[@"price"]];
         
         return cell;
         
@@ -280,24 +294,12 @@
     {
         RegimenRTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cellRegimen" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        switch (indexPath.row) {
-            case 0:
-                [cell configWithImage:[UIImage imageNamed:@"regimen"] title:@"杭州上城区维康老人上城区维康老人" address:@"上城区近江南路2号， 锦江南路哦" price:@"888" supportArray:array1];
-                break;
-            case 1:
-                [cell configWithImage:[UIImage imageNamed:@"regimen"] title:@"杭州上城区维康保健中心" address:@"上城区近江南路8号， 锦江南路哦" price:@"1088" supportArray:array2 ];
-                break;
-            case 2:
-                [cell configWithImage:[UIImage imageNamed:@"regimen"] title:@"杭州滨江老人院" address:@"滨江区近江南路2号， 锦江南路哦" price:@"699" supportArray:array3];
-                break;
-            case 3:
-                [cell configWithImage:[UIImage imageNamed:@"regimen"] title:@"杭州上城区老人上城区" address:@"下城区近江路2号， 锦江南路哦" price:@"599" supportArray:array1];
-                break;
-                
-            default:
-                [cell configWithImage:[UIImage imageNamed:@"regimen"] title:@"杭州上城区维康老人上城区维康老人" address:@"上城区近江南路20号， 锦江南路哦" price:@"299" supportArray:array1];
-                break;
-        }
+        NSDictionary * dic = _data_arr[indexPath.row];
+        NSString *  str2 = [NSString stringWithFormat:@"%@/upload/group/%@",BASEURL,dic[@"pic"]];
+        NSString * str3 = [str2 stringByReplacingOccurrencesOfString:@"," withString:@"/"];
+
+        
+        [cell configWithImage:str3 title:dic[@"s_name"] address:dic[@"address"] price:dic[@"price"] supportArray:dic[@"spec"]];
         return cell;
     }else
     {

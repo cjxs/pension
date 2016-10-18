@@ -9,5 +9,5 @@
 #import <Foundation/Foundation.h>
 
 @interface DDSeaGet : YTKBaseRequest
-
+-(id)initWithSea_id:(NSString *)sea_id;
 @end

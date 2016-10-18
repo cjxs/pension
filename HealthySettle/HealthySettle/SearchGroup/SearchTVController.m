@@ -9,9 +9,11 @@
 #import "SearchTVController.h"
 #import "SearchOrganTVCell.h"
 #import "ShareView.h"
+#import "DDFindGet.h"
 @interface SearchTVController ()<UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate>
 {
     NSArray * data_array;
+    UIView * begin_view;
 }
 
 @end
@@ -21,25 +23,36 @@
 {
     [super viewDidLoad];
     self.navigationItem.title = @"发现 • 热门机构";
-    
-    data_array = @[[UIImage imageNamed:@"search_01"],
-                   [UIImage imageNamed:@"search_02"],
-                   [UIImage imageNamed:@"search_01"],
-                   [UIImage imageNamed:@"search_01"],
-                   [UIImage imageNamed:@"search_02"],
-                   [UIImage imageNamed:@"search_01"],
-                   [UIImage imageNamed:@"search_01"],
-                   [UIImage imageNamed:@"search_02"],
-                   [UIImage imageNamed:@"search_01"],
-                   [UIImage imageNamed:@"search_01"],
-                   [UIImage imageNamed:@"search_02"]];
-    self.view.backgroundColor = [UIColor blueColor];
-    self.tableView = [[UITableView alloc] initWithFrame:[[UIScreen mainScreen] bounds] style:UITableViewStylePlain];
+    begin_view = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    begin_view.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:begin_view];
+
+
+
+
+    DDFindGet * find = [[DDFindGet alloc] init];
+    [find startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
+        [begin_view removeFromSuperview];
+        NSArray * arr = [DDLogin arrayWithJsonString:request.responseString];
+        data_array = arr;
+        [self setTableView];
+        
+    } failure:^(__kindof YTKBaseRequest *request) {
+        NSLog(@"%ld",request.responseStatusCode);
+    }];
+
+
+}
+-(void)viewWillAppear:(BOOL)animated {
+    self.navigationController.navigationBar.translucent = NO;
+
+}
+-(void)setTableView {
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, screenWide, screenHeight -64 ) style:UITableViewStylePlain];
     [self.tableView registerClass:[SearchOrganTVCell class] forCellReuseIdentifier:@"cellSearch"];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.view addSubview:self.tableView];
-
 }
 
 #pragma mark - Table view data source
@@ -62,7 +75,9 @@
     SearchOrganTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cellSearch"
                                                                forIndexPath:indexPath];
     cell.clipsToBounds = YES;
-    [cell configWithImage:data_array[indexPath.row]];
+    NSString *  str2 = [NSString stringWithFormat:@"%@/upload/group/%@",BASEURL,data_array[indexPath.row][@"pic"]];
+    NSString * str3 = [str2 stringByReplacingOccurrencesOfString:@"," withString:@"/"];
+    [cell configWithImage:str3 title:data_array[indexPath.row][@"s_name"]];
     return cell;
 }
 
