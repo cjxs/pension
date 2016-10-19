@@ -57,9 +57,10 @@
             
 
             UIImageView * imageView = [[UIImageView alloc]init];
-            [imageView sd_setImageWithURL:[NSURL URLWithString:str3]];
             imageView.frame = CGRectMake(100 + i * kMargin * 2.5, 45, kMargin * 2, kMargin * 2);
-            imageView.backgroundColor = [UIColor blackColor];
+            imageView.backgroundColor = [UIColor clearColor];
+            [imageView sd_setImageWithURL:[NSURL URLWithString:str3]];
+
             [self addSubview:imageView];
         }
     }

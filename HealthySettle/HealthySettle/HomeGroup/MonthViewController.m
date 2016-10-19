@@ -21,7 +21,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self.month_imageview sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",BASEURL,_dataDic[@"banner"]]]];
-    NSLog(@"%@",_dataDic);
     self.province1_label.text = [NSString stringWithFormat:@"        %@",_dataDic[@"desc"]];
     self.month_label.text = _dataDic[@"title"];
 

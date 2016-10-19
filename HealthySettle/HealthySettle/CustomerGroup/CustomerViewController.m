@@ -9,7 +9,7 @@
 #import "CustomerViewController.h"
 #import "YTKBatchRequest.h"
 #import "DDFindGet.h"
-@interface CustomerViewController ()<UIWebViewDelegate>
+@interface CustomerViewController ()<UIWebViewDelegate,UIGestureRecognizerDelegate>
 @end
 @implementation CustomerViewController
 
@@ -22,39 +22,35 @@
     NSArray * dataArray = @[@"custom_online",@"custom_number"];
     for (int i = 0; i< dataArray.count; i++)
     {
-        UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
-        button.frame = CGRectMake(1, screenHeight * 0.338 *i + 65, screenWide, screenHeight * 0.333);
-        [button setBackgroundImage:[UIImage imageNamed:dataArray[i]] forState:UIControlStateNormal];
-        button.tag = 200 + i;
-        button.highlighted = NO;
-        [button addTarget:self action:@selector(callCostomerWithBtn:) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:button];
+        UIImageView * image_view = [[UIImageView alloc] initWithFrame:CGRectMake(1, screenHeight * 0.338 *i  + 65, screenWide, screenHeight * 0.333)];
+        image_view.userInteractionEnabled = YES;
+        image_view.image = [UIImage imageNamed:dataArray[i]];
+        image_view.tag = 200 +i;
+        UITapGestureRecognizer * tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(callCostomerWithimage:)];
+        tap1.numberOfTouchesRequired = 1;
+        tap1.delegate = self;
+        [image_view addGestureRecognizer:tap1];
+        [self.view addSubview:image_view];
     }
-
-    
 }
-- (void)callCostomerWithBtn:(UIButton *)button {
-    if (button.tag == 200) {
+- (void)callCostomerWithimage:(UITapGestureRecognizer *)gesture{
+    if (gesture.view.tag == 200) {
         
         if([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"mqq://"]])
         {
             UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectZero];
-            NSURL *url = [NSURL URLWithString:@"mqq://im/chat?chat_type=wpa&uin=123456&version=1&src_type=web"];//uin=123456为你要跳转的QQ号码
+            NSURL *url = [NSURL URLWithString:@"mqq://im/chat?chat_type=wpa&uin=3395209105&version=1&src_type=web"];//uin=123456为你要跳转的QQ号码
             NSURLRequest *request = [NSURLRequest requestWithURL:url];
             webView.delegate = self;
             [webView loadRequest:request];
             [self.view addSubview:webView];                                                                                                                                                                                                      
         }
     }else {
-        NSLog(@"+++++++++");
         NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"4006405199"];
         UIWebView * callWebview = [[UIWebView alloc] init];
         [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
         [self.view addSubview:callWebview];
         
-//        NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"telprompt://%@",@"186xxxx6979"];
-//        //            NSLog(@"str======%@",str);
-//        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
 
 
     }

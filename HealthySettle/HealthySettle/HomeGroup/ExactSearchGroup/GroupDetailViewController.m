@@ -451,7 +451,6 @@
         }else if (indexPath.section <= [_data_dic[@"room"] count])
         {
             NSDictionary * dic = _data_dic[@"room"][indexPath.section - 1];
-            NSLog(@"%@",dic);
             HomeTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cellHome"
                                                                 forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
