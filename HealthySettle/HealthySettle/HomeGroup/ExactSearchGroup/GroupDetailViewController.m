@@ -288,6 +288,18 @@
     [group_data startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
         _data_dic = [DDLogin dictionaryWithJsonString:request.responseString];
         [begin_view removeFromSuperview];
+        if (!self.vc_type) {
+            switch ([_data_dic[@"cat_id"] integerValue]) {
+                case 1:
+                    self.vc_type = @"L";
+                    break;
+                    
+                default:
+                    self.vc_type = @"S";
+
+                    break;
+            }
+        }
         [self loadData];
         
     } failure:^(__kindof YTKBaseRequest *request) {
@@ -364,6 +376,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor whiteColor];
     // Do any additional setup after loading the view.
     [self setData];
     

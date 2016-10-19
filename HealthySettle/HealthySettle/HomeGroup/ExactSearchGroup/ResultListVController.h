@@ -10,6 +10,8 @@
 
 @interface ResultListVController : UIViewController
 @property (nonatomic, strong) NSString    * vc_type;
+@property (nonatomic, strong) NSString    *area_id;
+@property (nonatomic,strong)  NSString    * title_l;
 @property (nonatomic, strong) NSString    * searchPlace_name;
 @property (nonatomic, strong) UILabel     * checkIn_label;
 @property (nonatomic, strong) UILabel     * leave_label;

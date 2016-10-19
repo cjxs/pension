@@ -108,8 +108,10 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"%d",(int)self.type);
-    NSLog(@"++++%d",(int)indexPath.row);
+        NSString * area_id = data_array[indexPath.row][@"area_id"];
+        NSString * area = data_array[indexPath.row][@"area_name"];
+        [self.delegate pushToReginWithArea_id:area_id area:area];
+
 }
 
 

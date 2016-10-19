@@ -21,9 +21,11 @@
 #import "DDHome_page.h"
 #import "YTKNetworkConfig.h"
 #import "SDCycleScrollView.h"
+#import "ResultListVController.h"
 
 
-@interface HomeViewController ()<UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate,UISearchBarDelegate,UIWebViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,SDCycleScrollViewDelegate>
+
+@interface HomeViewController ()<UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate,UISearchBarDelegate,UIWebViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,SDCycleScrollViewDelegate,CityListDelegate>
 {
     NSMutableArray * imagesA;
     NSArray * urlA;
@@ -164,6 +166,7 @@
             NSString * str3 = [str2 stringByReplacingOccurrencesOfString:@"," withString:@"/"];
             [imagesA addObject:str3];
         }
+        
         urlA = dic[@"banner"][@"url"];
         seasonsA = dic[@"seasons"];
         tag_A = dic[@"tag"];
@@ -277,6 +280,7 @@ numberOfRowsInSection:(NSInteger)section
         CitySkipViewCell * cell = [_homeTableView dequeueReusableCellWithIdentifier:@"cellCity"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.type = indexPath.row;
+        cell.delegate = self;
         [cell configWithicon:[UIImage imageNamed:@"fir_"]
                        title:tag_A[indexPath.row -1][@"tag_name"]
                             data:tag_A[indexPath.row -1][@"tag_info"]];
@@ -397,6 +401,14 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath
     }
     [self.navigationController pushViewController:searchVC
                                          animated:YES];
+}
+-(void)pushToReginWithArea_id:(NSString *)area_id area:(NSString *)area{//代理方法
+    ResultListVController * ResultLVC = [[ResultListVController alloc] init];
+    ResultLVC.vc_type = @"S";
+    ResultLVC.area_id = area_id;
+    ResultLVC.title_l = area;
+    [self.navigationController pushViewController:ResultLVC
+                                             animated:YES];
 }
 #pragma mark - SDCycleScrollViewDelegate //轮播
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index

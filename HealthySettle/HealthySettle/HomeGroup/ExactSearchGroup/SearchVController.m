@@ -389,6 +389,8 @@
 {
     ResultListVController * ResultLVC = [[ResultListVController alloc] init];
     ResultLVC.vc_type = self.vc_type;
+    ResultLVC.area_id = @"3134";
+    ResultLVC.title_l = @"杭州";
     [self.navigationController pushViewController:ResultLVC
                                 animated:YES];
 }

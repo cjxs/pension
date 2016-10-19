@@ -10,6 +10,7 @@
 #import "SearchOrganTVCell.h"
 #import "ShareView.h"
 #import "DDFindGet.h"
+#import "GroupDetailViewController.h"
 @interface SearchTVController ()<UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate>
 {
     NSArray * data_array;
@@ -93,7 +94,13 @@ heightForHeaderInSection:(NSInteger)section
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-     [ShareView showShareViewInViewController:self];
+    GroupDetailViewController * resultDTVC = [[GroupDetailViewController alloc] init];
+    resultDTVC.hidesBottomBarWhenPushed = YES;
+    resultDTVC.group_id = data_array[indexPath.row][@"group_id"];
+    [self.navigationController pushViewController:resultDTVC
+                                         animated:NO];
+
+    
 }
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
     NSArray * visibleCells = [self.tableView visibleCells];

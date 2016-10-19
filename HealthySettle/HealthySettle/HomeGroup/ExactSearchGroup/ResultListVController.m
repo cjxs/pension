@@ -220,9 +220,9 @@
 -(void)setData{
     DDListGet * ddlist;
     if ([_vc_type isEqualToString:@"S"]) {
-        ddlist = [[DDListGet alloc] initWithController:@"ys_g" area_id:nil page:nil];
+        ddlist = [[DDListGet alloc] initWithController:@"ys_g" area_id:self.area_id page:nil];
     }else{
-        ddlist = [[DDListGet alloc] initWithController:@"yl_g" area_id:nil page:nil];
+        ddlist = [[DDListGet alloc] initWithController:@"yl_g" area_id:self.area_id page:nil];
     }
     [ddlist startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
         [begin_view removeFromSuperview];
@@ -237,7 +237,7 @@
 -(void)loadSomething {
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.filter_view];
-    _searchPlace_name = @"杭州";
+    _searchPlace_name = self.title_l;
     if (_searchPlace_name)
     {
         self.navigationItem.title = _searchPlace_name;
