@@ -13,5 +13,11 @@
 @property (weak, nonatomic) IBOutlet UIButton    *priceDetail_btn;
 @property (weak, nonatomic) IBOutlet UILabel     *price_label;
 @property (weak, nonatomic) IBOutlet UIButton    *reserve_btn;
--(void)configWithImage:(UIImage *)image price:(NSString *)price show:(NSString *)show;
+@property (weak, nonatomic) IBOutlet UILabel *room_type;
+@property (weak, nonatomic) IBOutlet UILabel *catered_l;
+@property (weak, nonatomic) IBOutlet UILabel *bed_type;
+@property (weak, nonatomic) IBOutlet UILabel *size_l;
+@property (weak, nonatomic) IBOutlet UILabel *live_num;
+
+-(void)configWithdic:(NSDictionary*)dic show:(NSString *)show;
 @end

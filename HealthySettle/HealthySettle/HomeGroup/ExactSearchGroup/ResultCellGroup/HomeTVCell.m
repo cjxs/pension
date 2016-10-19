@@ -7,6 +7,8 @@
 //
 
 #import "HomeTVCell.h"
+#import "UIImageView+WebCache.h"
+
 
 @implementation HomeTVCell
 
@@ -22,35 +24,54 @@
     [super setSelected:selected animated:animated];
     // Configure the view for the selected state
 }
--(void)configWithImage:(UIImage *)image
-                 price:(NSString *)price
-                  show:(NSString *)show
+-(void)configWithdic:(NSDictionary*)dic show:(NSString *)show
 {
-    if (image)
+    if (dic[@"pic"])
     {
-        self.organ_imageView.image = image;
+        [self.organ_imageView sd_setImageWithURL:[NSURL URLWithString:dic[@"pic"]]];
 
     }
-    if (price)
-    {
-        self.price_label.text = price;
+    if (dic[@"room_type"]) {
+        self.room_type.text = dic[@"room_type"];
     }
+
+    if (dic[@"room_price"])
+    {
+        self.price_label.text = [NSString stringWithFormat:@"¥ %d",[dic[@"room_price"] intValue]];
+    }
+    if ([dic[@"is_catered"] integerValue] == 1) {
+        self.catered_l.text = @"包早餐";
+    }else if ([dic[@"is_catered"] integerValue] == 2) {
+        self.catered_l.text = @"包三餐";
+    }else{
+        self.catered_l.text = @"不包餐";
+    }
+    if ([dic[@"is_wifi"] integerValue] == 1) {
+        self.bed_type.text = [NSString stringWithFormat:@"%@|免费WiFi",dic[@"bed_type"]];
+    }
+    if (dic[@"size"]) {
+        self.size_l.text = [NSString stringWithFormat:@"房间%@m2",dic[@"size"]];
+    }
+    if (dic[@"live_num"]) {
+        self.live_num.text = [NSString stringWithFormat:@"可住%@人",dic[@"live_num"]];
+    }
+    
     if ([show isEqualToString:@"y"])
     {
         UIView * view = [[UIView alloc]
-                         initWithFrame:CGRectMake(0, 143, screenWide, 72)];
-        for (int i = 0; i < 3; i++)
+                         initWithFrame:CGRectMake(0, 143, screenWide, 60)];
+        for (int i = 0; i < 2; i++)
         {
             UIView * viewB = [[UIView alloc]
-                              initWithFrame:CGRectMake(0, 20*i, screenWide , 19)];
+                              initWithFrame:CGRectMake(0, 25*i, screenWide , 23)];
             if (i == 0)
             {
                 viewB.backgroundColor = RGB(246, 246, 246);
-                NSArray * array = @[@"1-6天",@"7-14天",@"15-29天"];
-                for (int i = 0; i < 3; i++)
+                NSArray * array = @[@"1-6天",@"7-14天",@"15-29天",@"多于30天"];
+                for (int i = 0; i < 4; i++)
                 {
                     UILabel * label = [[UILabel alloc]
-                                       initWithFrame:CGRectMake((screenWide /4 )*(i+1), 0, screenWide /4 , 20)];
+                                       initWithFrame:CGRectMake((screenWide /4 )*i, 0, screenWide /4 , 25)];
                     label.font = [UIFont systemFontOfSize:10];
                     label.text = array[i];
                     label.textAlignment = NSTextAlignmentCenter;
@@ -58,33 +79,20 @@
                 }
             }else
             {
-                viewB.backgroundColor = RGB(251, 251, 251);
-                NSArray *array;
-                if (i== 1)
-                {
-                    array = @[@"200",@"180",@"160"];
-                }else
-                {
-                    array = @[@"180",@"160",@"140"];
-                }
-                for (int j = 0; j < 4; j ++)
-                {
+                NSDictionary * dic_b = dic[@"price_spec"];
+                int j = 0;
+                for (NSString * val in dic_b) {
                     UILabel * label = [[UILabel alloc]
-                                       initWithFrame:CGRectMake(screenWide/4 * j, 0, screenWide /4, 20)];
+                                       initWithFrame:CGRectMake(screenWide/4 * j, 0, screenWide /4, 25)];
                     label.font = [UIFont systemFontOfSize:10];
-                    if (i == 1 && j == 0)
-                    {
-                        label.text = @"旺季";
-                    }else if (i == 2 && j == 0)
-                    {
-                        label.text = @"淡季";
-                    }else
-                    {
-                        label.text = array[ j - 1];
-                    }
+                    label.text = dic_b[val];
                     label.textAlignment = NSTextAlignmentCenter;
                     [viewB addSubview:label];
-                    }
+                    j++;
+
+                }
+                viewB.backgroundColor = RGB(251, 251, 251);
+             
             }
             [view addSubview:viewB];
         }

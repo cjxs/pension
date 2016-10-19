@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -12,96 +13,87 @@
             <rect key="frame" x="0.0" y="0.0" width="634" height="249"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="634" height="248"/>
+                <frame key="frameInset" width="634" height="248"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="大床房" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WFY-tU-J1H">
-                        <rect key="frame" x="18" y="8" width="50" height="30"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="rPh-8w-zJR"/>
-                            <constraint firstAttribute="width" constant="50" id="sTT-1Q-pea"/>
+                            <constraint firstAttribute="width" constant="150" id="sTT-1Q-pea"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_pic.png" translatesAutoresizingMaskIntoConstraints="NO" id="9VC-PQ-aH2">
-                        <rect key="frame" x="13" y="48" width="90" height="90"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="90" id="8vX-oB-BeG"/>
                             <constraint firstAttribute="height" constant="90" id="TFM-qE-3hg"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="包餐" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T7C-Ys-ge4">
-                        <rect key="frame" x="113" y="48" width="50" height="18"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="18" id="1aw-5n-ihx"/>
                             <constraint firstAttribute="width" constant="50" id="F2s-ub-I7V"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="大床｜ 免费WIFI" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZMm-nX-r6z">
-                        <rect key="frame" x="113" y="66" width="80" height="18"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="80" id="7Jy-mX-hcv"/>
+                            <constraint firstAttribute="width" constant="150" id="7Jy-mX-hcv"/>
                             <constraint firstAttribute="height" constant="18" id="tug-Tb-KiC"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="房间26m2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ffP-Bb-nIv">
-                        <rect key="frame" x="113" y="84" width="50" height="18"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="18" id="FXw-ea-DZI"/>
-                            <constraint firstAttribute="width" constant="50" id="OoB-i7-ZrB"/>
+                            <constraint firstAttribute="width" constant="100" id="OoB-i7-ZrB"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="可住2人" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8YL-2t-tUs">
-                        <rect key="frame" x="113" y="102" width="50" height="18"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="50" id="Ajt-ay-YJ0"/>
+                            <constraint firstAttribute="width" constant="150" id="Ajt-ay-YJ0"/>
                             <constraint firstAttribute="height" constant="18" id="pWy-An-cBW"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gWL-f6-r94">
-                        <rect key="frame" x="113" y="120" width="50" height="18"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="18" id="Gv9-CF-AZ3"/>
-                            <constraint firstAttribute="width" constant="50" id="YmG-zt-NEk"/>
+                            <constraint firstAttribute="width" constant="60" id="YmG-zt-NEk"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                        <state key="normal" title="价格详情 V">
-                            <color key="titleColor" red="0.90196078430000004" green="0.043137254899999998" blue="0.094117647060000004" alpha="1" colorSpace="calibratedRGB"/>
+                        <state key="normal" title="收费标准 V">
+                            <color key="titleColor" red="0.90196078430000004" green="0.043137254899999998" blue="0.094117647060000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </state>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¥868" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fwu-Zd-5qu">
-                        <rect key="frame" x="566" y="56" width="50" height="30"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="QOD-es-DUc"/>
                             <constraint firstAttribute="width" constant="50" id="Zlo-HQ-06A"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                        <color key="textColor" red="0.90196078430000004" green="0.043137254899999998" blue="0.094117647060000004" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="textColor" red="0.90196078430000004" green="0.043137254899999998" blue="0.094117647060000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZDE-LT-1u2">
-                        <rect key="frame" x="566" y="91" width="50" height="30"/>
-                        <color key="backgroundColor" red="0.90196078430000004" green="0.043137254899999998" blue="0.094117647060000004" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.90196078430000004" green="0.043137254899999998" blue="0.094117647060000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <state key="normal" title="预定">
-                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </state>
                     </button>
                 </subviews>
-                <color key="backgroundColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
+                <color key="backgroundColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
                     <constraint firstItem="ZDE-LT-1u2" firstAttribute="height" secondItem="fwu-Zd-5qu" secondAttribute="height" id="09c-UB-RPf"/>
                     <constraint firstItem="ZMm-nX-r6z" firstAttribute="top" secondItem="T7C-Ys-ge4" secondAttribute="bottom" id="1Ou-2k-Xmq"/>
@@ -126,10 +118,15 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="bed_type" destination="ZMm-nX-r6z" id="AP9-Rh-jax"/>
+                <outlet property="catered_l" destination="T7C-Ys-ge4" id="947-PN-9gi"/>
+                <outlet property="live_num" destination="8YL-2t-tUs" id="XXx-Kh-0OQ"/>
                 <outlet property="organ_imageView" destination="9VC-PQ-aH2" id="fKJ-i2-Ppm"/>
                 <outlet property="priceDetail_btn" destination="gWL-f6-r94" id="0vL-wK-fc4"/>
                 <outlet property="price_label" destination="fwu-Zd-5qu" id="a86-5G-dum"/>
                 <outlet property="reserve_btn" destination="ZDE-LT-1u2" id="UCp-fk-k81"/>
+                <outlet property="room_type" destination="WFY-tU-J1H" id="fst-hQ-NGe"/>
+                <outlet property="size_l" destination="ffP-Bb-nIv" id="X1j-ii-3j6"/>
             </connections>
             <point key="canvasLocation" x="562" y="277.5"/>
         </tableViewCell>

@@ -1,12 +1,12 @@
 //
-//  ResultDetailTVController.m
+//  GroupDetailViewController.m
 //  HealthySettle
 //
-//  Created by yrc on 16/4/1.
+//  Created by yrc on 16/10/19.
 //  Copyright © 2016年 yrc. All rights reserved.
 //
 
-#import "ResultDetailTVController.h"
+#import "GroupDetailViewController.h"
 #import "LivingTimeTVCell.h"
 #import "ManageTimeTVCell.h"
 #import "HomeTVCell.h"
@@ -22,9 +22,10 @@
 #import "CommentViewController.h"
 #import "ShareView.h"
 #import "UMSocial.h"
+#import "DDGroupData.h"
+#import "UIImageView+WebCache.h"
 
-
-@interface ResultDetailTVController () <UMSocialUIDelegate>
+@interface GroupDetailViewController ()<UMSocialUIDelegate,UITableViewDelegate,UITableViewDataSource>
 {
     UIImageView * organization_imageView;
     UILabel *     organization_titleLabel;
@@ -36,11 +37,14 @@
     UILabel *     commentRatio_label;
     NSArray * showArray;
     UIView * backFootView;
+    UIView * begin_view;
 }
+
 
 @end
 
-@implementation ResultDetailTVController
+@implementation GroupDetailViewController
+
 #pragma mark - LazyLoading
 -(UIView *)tableHeadView
 {
@@ -52,18 +56,18 @@
                                    initWithFrame:CGRectMake(screenHeight * 0.035, CGRectGetMaxY(organization_imageView.frame) - screenHeight * 0.045,screenWide , screenHeight * 0.045)];
         organization_titleLabel.backgroundColor = [UIColor clearColor];
         organization_titleLabel.textColor = [UIColor whiteColor];
-        organization_titleLabel.text = [NSString stringWithFormat:@"   杭州上城区维康老人文化公寓%@",_vc_type];
+        organization_titleLabel.text = [NSString stringWithFormat:@"   %@",self.data_dic[@"name"]];
         organization_titleLabel.font = [UIFont systemFontOfSize:12];
         UIView * view = [[UIView alloc]
                          initWithFrame:CGRectMake(0, CGRectGetMaxY(organization_imageView.frame) - screenHeight * 0.045,screenWide , screenHeight * 0.045)];
         view.backgroundColor = [UIColor blackColor];
         view.alpha = 0.5;
-        CGRect back_frame = CGRectMake(5, 5 , screenWide * 0.03, screenWide * 0.03/10 *18 );
+        CGRect back_frame = CGRectMake(5, 15 , screenWide * 0.04, screenWide * 0.04/10 *18 );
         UIImageView * back_imageView = [[UIImageView alloc] initWithFrame:back_frame];
         back_imageView.image = [UIImage imageNamed:@"leftop_w"];
         
         UIButton * back_btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        back_btn.frame = CGRectMake(screenWide * 0.02, screenHeight * 0.01 , screenWide * 0.107, screenHeight * 0.06 );
+        back_btn.frame = CGRectMake(screenWide * 0.01, screenHeight * 0.005 , screenWide * 0.2, screenHeight * 0.1 );
         [back_btn addTarget:self
                      action:@selector(cancleToRootView)
            forControlEvents:UIControlEventTouchUpInside];
@@ -73,12 +77,14 @@
         {
             _tableHeadView = [[UIView alloc]
                               initWithFrame:CGRectMake(0,0 , screenWide, screenHeight * 0.469)];
-            organization_imageView.image = [UIImage imageNamed:@"regimen_organ"];
+            NSString *  str2 = [NSString stringWithFormat:@"%@/upload/group/%@",BASEURL,_data_dic[@"pic"]];
+            NSString * str3 = [str2 stringByReplacingOccurrencesOfString:@"," withString:@"/"];
+            [organization_imageView sd_setImageWithURL:[NSURL URLWithString:str3]];
             _tableHeadView.backgroundColor = RGB(249, 249, 249);
             [_tableHeadView addSubview:organization_imageView];
             [_tableHeadView addSubview:view];
             
-         
+            
             
             [_tableHeadView addSubview:organization_titleLabel];
             [_tableHeadView addSubview:back_btn];
@@ -104,13 +110,13 @@
             
             address_label = [[UILabel alloc]
                              initWithFrame:CGRectMake(screenWide * 0.08, CGRectGetMaxY(organization_imageView.frame)+screenHeight * 0.018 , screenWide * 0.72, screenHeight * 0.035)];
-            address_label.text = @"浙江省杭州市上城区近江南路20号（富春江路近江小区）";
+            address_label.text = _data_dic[@"address"];
             address_label.adjustsFontSizeToFitWidth = YES;
             
             organDetail_label = [[UILabel alloc]
                                  initWithFrame:CGRectMake(screenWide * 0.08, CGRectGetMaxY(organization_imageView.frame)+screenHeight * 0.077 , screenWide * 0.72, screenHeight * 0.035)];
-            organDetail_label.text = @"祥阳老年公寓是无锡市南长区民政局下属的福利企业受到环境";
-           
+            organDetail_label.text = _data_dic[@"intro"];
+            
             NSArray * label_array = @[address_label,organDetail_label];
             for (UILabel * label in label_array)
             {
@@ -153,13 +159,13 @@
                 lineView.backgroundColor = RGB(241, 241, 241);
                 [_tableHeadView addSubview:lineView];
             }
-                            UILabel * label_y = [[UILabel alloc]
-                                                 initWithFrame:CGRectMake(screenWide * 0.03, CGRectGetMaxY(organization_imageView.frame) + screenHeight * 0.019, screenWide * 0.03, screenHeight *0.0285 )];
-                            label_y.text = @"¥";
-                            label_y.font = [UIFont systemFontOfSize:12];
-                            label_y.textColor = RGB(230, 11, 24);
-                            [_tableHeadView addSubview:label_y];
-
+            UILabel * label_y = [[UILabel alloc]
+                                 initWithFrame:CGRectMake(screenWide * 0.03, CGRectGetMaxY(organization_imageView.frame) + screenHeight * 0.019, screenWide * 0.03, screenHeight *0.0285 )];
+            label_y.text = @"¥";
+            label_y.font = [UIFont systemFontOfSize:12];
+            label_y.textColor = RGB(230, 11, 24);
+            [_tableHeadView addSubview:label_y];
+            
             priceNow_label = [[UILabel alloc]
                               initWithFrame:CGRectMake(screenWide * 0.06, CGRectGetMaxY(organization_imageView.frame) + screenHeight * 0.015, screenWide * 0.12, screenHeight *0.0285 )];
             priceNow_label.font = [UIFont systemFontOfSize:20];
@@ -182,18 +188,18 @@
             [_tableHeadView addSubview:label_gg];
             [self dealLinesWithString:@"门市价 ¥10888"];
             NSArray * icon_array = @[@"list1_show_1_",@"list1_show_3_"];
-                for (int i = 0; i < 2; i++)
-                {
-                    UIImageView * imageView = [[UIImageView alloc]
-                                               initWithFrame:CGRectMake(screenWide * 0.03,CGRectGetMaxY(organization_imageView.frame)+screenHeight * 0.108 + screenHeight * 0.059 * i, screenHeight * 0.02, screenHeight * 0.02)];
-                        imageView.image = [UIImage imageNamed:icon_array[i]];
-                    [_tableHeadView addSubview:imageView];
-                    UIImageView * imageView2 = [[UIImageView alloc]
-                                                initWithFrame:CGRectMake(screenWide * 0.965,CGRectGetMaxY(organization_imageView.frame)+screenHeight * 0.11 + screenHeight * 0.059 * i, screenWide * 0.022, screenHeight * 0.017)];
-                    imageView2.image = [UIImage imageNamed:@"right_"];
-                    [_tableHeadView addSubview:imageView2];
-                }
-                            
+            for (int i = 0; i < 2; i++)
+            {
+                UIImageView * imageView = [[UIImageView alloc]
+                                           initWithFrame:CGRectMake(screenWide * 0.03,CGRectGetMaxY(organization_imageView.frame)+screenHeight * 0.108 + screenHeight * 0.059 * i, screenHeight * 0.02, screenHeight * 0.02)];
+                imageView.image = [UIImage imageNamed:icon_array[i]];
+                [_tableHeadView addSubview:imageView];
+                UIImageView * imageView2 = [[UIImageView alloc]
+                                            initWithFrame:CGRectMake(screenWide * 0.965,CGRectGetMaxY(organization_imageView.frame)+screenHeight * 0.11 + screenHeight * 0.059 * i, screenWide * 0.022, screenHeight * 0.017)];
+                imageView2.image = [UIImage imageNamed:@"right_"];
+                [_tableHeadView addSubview:imageView2];
+            }
+            
             address_label = [[UILabel alloc]
                              initWithFrame:CGRectMake(screenWide * 0.08, CGRectGetMaxY(organization_imageView.frame)+screenHeight * 0.102, screenWide * 0.72, screenHeight * 0.03)];
             address_label.text = @"浙江省杭州市上城区近江南路2号（富春江路近江小区）";
@@ -210,8 +216,8 @@
             [_tableHeadView addSubview:map_label];
         }
         commentNumber_label = [[UILabel alloc]
-                                initWithFrame:CGRectMake(screenWide * 0.08, CGRectGetMaxY(_tableHeadView.frame)-screenHeight * 0.045 , screenWide * 0.72, screenHeight * 0.03)];
-        commentNumber_label.text = @"点评：2458条";
+                               initWithFrame:CGRectMake(screenWide * 0.08, CGRectGetMaxY(_tableHeadView.frame)-screenHeight * 0.045 , screenWide * 0.72, screenHeight * 0.03)];
+        commentNumber_label.text = [NSString stringWithFormat:@"点评：%@条",_data_dic[@"reply_count"]];
         commentNumber_label.font = [UIFont systemFontOfSize:10];
         commentNumber_label.textColor = RGB(152, 152, 152);
         [_tableHeadView addSubview:commentNumber_label];
@@ -224,7 +230,22 @@
         [_tableHeadView addSubview:commentRatio_label];
         UIImageView * honourView = [[UIImageView alloc]
                                     initWithFrame:CGRectMake(screenHeight * 0.025, CGRectGetMaxY(organization_imageView.frame) - screenHeight * 0.033,screenHeight * 0.02/32*21 , screenHeight * 0.02)];
-        honourView.image = [UIImage imageNamed:@"list1_show_0_"];
+        switch ([_data_dic[@"level"] integerValue]) {
+            case 0:
+                honourView.image = [UIImage imageNamed:@"level_0"];
+                break;
+            case 1:
+                honourView.image = [UIImage imageNamed:@"level_1"];
+                break;
+            case 2:
+                honourView.image = [UIImage imageNamed:@"level_2"];
+                break;
+            case 3:
+                honourView.image = [UIImage imageNamed:@"level_3"];
+                break;
+            default:
+                break;
+        }
         [_tableHeadView addSubview:honourView];
     }
     return _tableHeadView;
@@ -249,7 +270,7 @@
     pricePast_label.font = [UIFont systemFontOfSize:11];
     [_tableHeadView addSubview:pricePast_label];
 }
-#pragma mark - auto_view
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -262,19 +283,33 @@
     [self.navigationController setNavigationBarHidden:NO
                                              animated:animated];
 }
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
+-(void)setData{
+    DDGroupData * group_data = [[DDGroupData alloc] initWithController:@"group" group_id:self.group_id];
+    [group_data startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
+        _data_dic = [DDLogin dictionaryWithJsonString:request.responseString];
+        [begin_view removeFromSuperview];
+        [self loadData];
+        
+    } failure:^(__kindof YTKBaseRequest *request) {
+        NSLog(@"%ld",request.responseStatusCode);
+    }];
+}
+-(UITableView *)tableView {
+    if (!_tableView) {
+        _tableView = [[UITableView alloc] initWithFrame:[[UIScreen mainScreen] bounds] style:UITableViewStylePlain];
+        [self.view addSubview:_tableView];
+    }
+    return _tableView;
+}
+-(void)loadData{
     self.tableView.bounces = NO;
     self.tableView.showsVerticalScrollIndicator = NO;
-    UIBarButtonItem * returnBarButtonItem = [[UIBarButtonItem alloc] init];
-    returnBarButtonItem.title = @"";
-    [returnBarButtonItem setBackgroundImage:[UIImage imageNamed:@"leftop_r"]
-                                   forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-    self.navigationItem.backBarButtonItem = returnBarButtonItem;
     self.tableView.tableHeaderView = self.tableHeadView;
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
     if ([self.vc_type isEqualToString:@"S"])
     {
+        self.tableView.backgroundColor = RGB(250, 250, 250);
         self.tableView.backgroundColor = RGB(250, 250, 250);
         [self.tableView registerNib:[UINib nibWithNibName:@"LivingTimeTVCell" bundle:nil]
              forCellReuseIdentifier:@"cellLiving"];
@@ -303,9 +338,9 @@
                forCellReuseIdentifier:@"cellKnow"];
         [self.tableView registerNib:[UINib nibWithNibName:@"CommentTVCell" bundle:nil]
              forCellReuseIdentifier:@"cellComment"];
-        
+
         backFootView = [[UIView alloc]
-                         initWithFrame:CGRectMake(0, 0, screenWide, 44 + 60)];
+                        initWithFrame:CGRectMake(0, 0, screenWide, 44 + 60)];
         UIButton * predeter_btn = [UIButton buttonWithType:UIButtonTypeCustom];
         predeter_btn.frame = CGRectMake(0, 0, screenWide/2, 44);
         [predeter_btn setTitle:@"立即预定"
@@ -326,8 +361,26 @@
     }
     
 }
-- (void)didReceiveMemoryWarning
-{
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+    [self setData];
+    
+    UIBarButtonItem * returnBarButtonItem = [[UIBarButtonItem alloc] init];
+    returnBarButtonItem.title = @"";
+    [returnBarButtonItem setBackgroundImage:[UIImage imageNamed:@"leftop_r"]
+                                   forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    self.navigationItem.backBarButtonItem = returnBarButtonItem;
+    
+    
+    begin_view = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    begin_view.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:begin_view];
+
+}
+
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
@@ -337,7 +390,7 @@
 {
     if ([self.vc_type isEqualToString:@"S"])
     {
-        return 5;
+        return 2+[_data_dic[@"room"] count];
     }else if ([self.vc_type isEqualToString:@"L"])
     {
         return 8;
@@ -350,7 +403,7 @@
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section
 {
-      return 1;
+    return 1;
 }
 
 - (void)cellShowPriceDetail:(UIButton *)btn
@@ -377,22 +430,17 @@
     if ([self.vc_type isEqualToString:@"S"])
     {
         if (indexPath.section == 0) {
-          LivingTimeTVCell *  cell  =  [tableView dequeueReusableCellWithIdentifier:@"cellLiving"
-                                                                       forIndexPath:indexPath];
+            LivingTimeTVCell *  cell  =  [tableView dequeueReusableCellWithIdentifier:@"cellLiving"
+                                                                         forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
-
-        }else if (indexPath.section == 1)
+            
+        }else if (indexPath.section <= [_data_dic[@"room"] count])
         {
-           ManageTimeTVCell * cell =  [tableView dequeueReusableCellWithIdentifier:@"cellManager"
-                                                                      forIndexPath:indexPath];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            return cell;
-
-        }else if (indexPath.section == 2 || indexPath.section == 3)
-        {
-         HomeTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cellHome"
-                                                             forIndexPath:indexPath];
+            NSDictionary * dic = _data_dic[@"room"][indexPath.section - 1];
+            NSLog(@"%@",dic);
+            HomeTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cellHome"
+                                                                forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.priceDetail_btn.tag = 500 + indexPath.section;
             [cell.priceDetail_btn addTarget:self
@@ -402,14 +450,13 @@
                                  action:@selector(fillInOrderController)
                        forControlEvents:UIControlEventTouchUpInside];
             TestModel * model = showArray[indexPath.section];
-            [cell configWithImage:nil
-                            price:nil
+            [cell configWithdic:dic
                              show:model.show];
             return cell;
         }else
         {
-           CommentTVCell *  cell  = [tableView dequeueReusableCellWithIdentifier:@"cellComment"
-                                                                    forIndexPath:indexPath];
+            CommentTVCell *  cell  = [tableView dequeueReusableCellWithIdentifier:@"cellComment"
+                                                                     forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             [cell.commentNow_btn addTarget:self
                                     action:@selector(submitCommentNow)
@@ -437,7 +484,7 @@
                                                                  forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
- 
+            
         }else if (indexPath.section == 3)
         {
             ChargeTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cellCharge"
@@ -485,10 +532,10 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([self.vc_type isEqualToString:@"S"])
     {
-        if (indexPath.section < 2)
+        if (indexPath.section < 1)
         {
             return 0.0449 * screenHeight;
-        }else if (indexPath.section == 2 || indexPath.section == 3)
+        }else if (indexPath.section <= [_data_dic[@"room"] count])
         {
             TestModel * model = showArray[indexPath.section];
             if ([model.show isEqualToString:@"y"])
@@ -496,13 +543,13 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath
                 return 215;
             }else
             {
-            return 143;
+                return 143;
             }
         }else
         {
             return 288;
         }
-
+        
     }else if ([self.vc_type isEqualToString:@"L"])
     {
         if (indexPath.section == 0)
@@ -525,7 +572,7 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath
                 string = @"    黄精声讨时代感和解放军三合适的高富帅对方感受到结婚高峰   电视剧发噶时间会发生的阿萨德和规范哈健身房大世界一个五言绝句 ";
             }else
             {
-               string = @"    阿萨德和规范哈公司的发送到官方的那首风格哈枫叶如图俄企业听日 u 全额退；也咖啡公司的人哈 u 俄国也让其他育儿课堂人跟同事打好几个发生开发高的水果变成美女不为所动简单啊  啊社区家风格的活动放大个人过五个人啊 test发的话题任何事 ";
+                string = @"    阿萨德和规范哈公司的发送到官方的那首风格哈枫叶如图俄企业听日 u 全额退；也咖啡公司的人哈 u 俄国也让其他育儿课堂人跟同事打好几个发生开发高的水果变成美女不为所动简单啊  啊社区家风格的活动放大个人过五个人啊 test发的话题任何事 ";
             }
             return  [self backheightWith:string];
         }else if (indexPath.section == 6)
@@ -535,12 +582,12 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath
         {
             return 288;
         }
-
+        
     }else
     {
         return 0;
     }
-
+    
 }
 - (CGFloat)backheightWith:(NSString *)str
 {// 上面用得到
@@ -588,7 +635,7 @@ heightForHeaderInSection:(NSInteger)section
 {
     if ([self.vc_type isEqualToString:@"S"])
     {
-               return screenHeight * 0.02;
+        return screenHeight * 0.02;
     }else if ([self.vc_type isEqualToString:@"L"])
     {
         return screenHeight * 0.02;
@@ -596,12 +643,12 @@ heightForHeaderInSection:(NSInteger)section
     {
         return 0;
     }
-
+    
 }
 - (void)tableView:(UITableView *)tableView
 didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self shareToEveryone];
+    //    [self shareToEveryone];
 }
 #pragma mark - VTOF
 - (void)fillInOrderController
@@ -628,42 +675,6 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [ShareView showShareViewInViewController:self];
 }
-
-
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 /*
 #pragma mark - Navigation

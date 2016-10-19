@@ -9,7 +9,7 @@
 #import "ResultListVController.h"
 #import "PensionSRTVCell.h"
 #import "RegimenRTVCell.h"
-#import "ResultDetailTVController.h"
+#import "GroupDetailViewController.h"
 #import "PriSeleView.h"
 #import "DDListGet.h"
 @interface ResultListVController ()<UITableViewDataSource ,UITableViewDelegate>
@@ -315,9 +315,10 @@
     return screenHeight * 0.158;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    ResultDetailTVController * resultDTVC = [[ResultDetailTVController alloc] initWithStyle:UITableViewStylePlain];
+    GroupDetailViewController * resultDTVC = [[GroupDetailViewController alloc] init];
     resultDTVC.hidesBottomBarWhenPushed = YES;
     resultDTVC.vc_type = self.vc_type;
+    resultDTVC.group_id = _data_arr[indexPath.row][@"group_id"];
     [self.navigationController pushViewController:resultDTVC
                                          animated:NO];
 }
