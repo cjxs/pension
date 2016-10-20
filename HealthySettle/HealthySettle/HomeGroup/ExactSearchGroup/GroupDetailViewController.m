@@ -25,7 +25,7 @@
 #import "DDGroupData.h"
 #import "UIImageView+WebCache.h"
 
-@interface GroupDetailViewController ()<UMSocialUIDelegate,UITableViewDelegate,UITableViewDataSource>
+@interface GroupDetailViewController ()<UMSocialUIDelegate,UITableViewDelegate,UITableViewDataSource,UpdatePriceDelegate>
 {
     UIImageView * organization_imageView;
     UILabel *     organization_titleLabel;
@@ -46,6 +46,11 @@
 @implementation GroupDetailViewController
 
 #pragma mark - LazyLoading
+-(void)updatePriceWithNumber:(NSInteger )number{
+    priceNow_label.text = [NSString stringWithFormat:@"%ld",number-50];
+    [self dealLinesWithString:[NSString stringWithFormat:@"门市价 ¥%ld",number]];
+
+}
 -(UIView *)tableHeadView
 {
     if (!_tableHeadView)
@@ -486,6 +491,8 @@
             SelectTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cellSelect"
                                                                   forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            [cell configWithDic:_data_dic[@"spec_tag"]];
+            cell.delegate = self;
             return cell;
         }else  if (indexPath.section == 1)
         {
@@ -578,7 +585,7 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath
     {
         if (indexPath.section == 0)
         {
-            return screenHeight * 0.3688;
+            return screenHeight * 0.4917;
         }else if (indexPath.section == 1)
         {
             return 173;
@@ -603,7 +610,6 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath
                 string = _data_dic[@"fun_desc"];
                 image_array = _data_dic[@"fun_file"];
             }
-            NSLog(@"%ld+++++++++++++++++++++++++++++++++++",image_array.count);
             if (image_array.count == 0) {
                 return  [self backheightWith:string] - 120;
             }
