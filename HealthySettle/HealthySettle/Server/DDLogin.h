@@ -7,7 +7,7 @@
 //
 
 
-@interface DDLogin : YTKBaseRequest
+@interface DDLogin : YTKBaseRequest     //登陆
 -(id)initWithUsername:(NSString *)username password:(NSString *)password;
 + (NSDictionary *)dictionaryWithJsonString:(NSString *)jsonString;
 + (NSArray *)arrayWithJsonString:(NSString *)jsonString;

@@ -8,6 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@interface DDGroupData : YTKBaseRequest
+@interface DDGroupData : YTKBaseRequest //详情页的数据
 -(id)initWithController:(NSString *)controller group_id:(NSString *)group_id;
 @end

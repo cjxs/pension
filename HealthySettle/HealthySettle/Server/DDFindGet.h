@@ -8,6 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@interface DDFindGet : YTKBaseRequest
+@interface DDFindGet : YTKBaseRequest  //发现精彩
 
 @end

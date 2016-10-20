@@ -7,6 +7,6 @@
 //
 
 
-@interface DDGetTest : YTKBaseRequest
+@interface DDGetTest : YTKBaseRequest  //所要验证码
 -(id)initWithRegisNumber:(NSString *)number;
 @end

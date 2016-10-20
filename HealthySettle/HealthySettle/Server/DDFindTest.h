@@ -8,6 +8,6 @@
 
 
 
-@interface DDFindTest : YTKBaseRequest
+@interface DDFindTest : YTKBaseRequest //找回密码
 -(id)initWithUserNumber:(NSString *)number;
 @end

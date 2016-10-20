@@ -26,7 +26,7 @@
 // 请求的URL
 - (NSString *)requestUrl
 {
-    return @"http://cswl.5199yl.com/index.php?g=Index&c=Login&a=Generate";
+    return @"/index.php?g=Index&c=Login&a=Generate";
 }
 
 // 请求的参数列表

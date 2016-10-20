@@ -7,7 +7,6 @@
 //
 
 #import "PensionSRTVCell.h"
-#import "UIImageView+WebCache.h"
 
 
 @implementation PensionSRTVCell

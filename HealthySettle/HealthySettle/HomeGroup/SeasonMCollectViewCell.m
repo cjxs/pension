@@ -7,7 +7,6 @@
 //
 
 #import "SeasonMCollectViewCell.h"
-#import "UIImageView+WebCache.h"
 
 @implementation SeasonMCollectViewCell
 -(instancetype)initWithFrame:(CGRect)frame

@@ -8,6 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@interface DDListGet : YTKBaseRequest
+@interface DDListGet : YTKBaseRequest //列表数据
 -(id)initWithController:(NSString *)controller area_id:(NSString *)area_id page:(NSString *)page;
 @end

@@ -7,7 +7,6 @@
 //
 
 #import "RegimenRTVCell.h"
-#import "UIImageView+WebCache.h"
 
 
 @implementation RegimenRTVCell

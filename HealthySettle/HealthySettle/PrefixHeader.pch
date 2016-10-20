@@ -20,6 +20,7 @@
 #import "SVProgressHUD.h"
 #import "DDLogin.h"
 #import "UIImageView+WebCache.h"
+#import "Member.h"
 
 
 

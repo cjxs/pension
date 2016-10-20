@@ -7,7 +7,6 @@
 //
 
 #import "CityCollectionViewCell.h"
-#import "UIImageView+WebCache.h"
 
 
 @implementation CityCollectionViewCell

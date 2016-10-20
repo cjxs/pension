@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "32F6CCFF1C9A734C00E97B65"
-               BuildableName = "HealthySettle.app"
-               BlueprintName = "HealthySettle"
+               BuildableName = "&#x4f18;&#x60a0;&#x4e50;.app"
+               BlueprintName = "&#x4f18;&#x60a0;&#x4e50;"
                ReferencedContainer = "container:HealthySettle.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -33,8 +33,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "32F6CCFF1C9A734C00E97B65"
-            BuildableName = "HealthySettle.app"
-            BlueprintName = "HealthySettle"
+            BuildableName = "&#x4f18;&#x60a0;&#x4e50;.app"
+            BlueprintName = "&#x4f18;&#x60a0;&#x4e50;"
             ReferencedContainer = "container:HealthySettle.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -47,7 +47,7 @@
       </AdditionalOptions>
    </TestAction>
    <LaunchAction
-      buildConfiguration = "Debug"
+      buildConfiguration = "Release"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
@@ -61,17 +61,12 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "32F6CCFF1C9A734C00E97B65"
-            BuildableName = "HealthySettle.app"
-            BlueprintName = "HealthySettle"
+            BuildableName = "&#x4f18;&#x60a0;&#x4e50;.app"
+            BlueprintName = "&#x4f18;&#x60a0;&#x4e50;"
             ReferencedContainer = "container:HealthySettle.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
-         <AdditionalOption
-            key = "NSZombieEnabled"
-            value = "YES"
-            isEnabled = "YES">
-         </AdditionalOption>
       </AdditionalOptions>
    </LaunchAction>
    <ProfileAction
@@ -85,8 +80,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "32F6CCFF1C9A734C00E97B65"
-            BuildableName = "HealthySettle.app"
-            BlueprintName = "HealthySettle"
+            BuildableName = "&#x4f18;&#x60a0;&#x4e50;.app"
+            BlueprintName = "&#x4f18;&#x60a0;&#x4e50;"
             ReferencedContainer = "container:HealthySettle.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

@@ -7,6 +7,6 @@
 //
 
 
-@interface DDRegist : YTKBaseRequest
+@interface DDRegist : YTKBaseRequest  //注册
 -(id)initWithRegisNumber:(NSString *)number pwd:(NSString *)pwd vfycode: (NSString *)vfycode;
 @end

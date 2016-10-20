@@ -23,7 +23,6 @@
 #import "ShareView.h"
 #import "UMSocial.h"
 #import "DDGroupData.h"
-#import "UIImageView+WebCache.h"
 
 @interface GroupDetailViewController ()<UMSocialUIDelegate,UITableViewDelegate,UITableViewDataSource,UpdatePriceDelegate>
 {
@@ -47,7 +46,7 @@
 
 #pragma mark - LazyLoading
 -(void)updatePriceWithNumber:(NSInteger )number{
-    priceNow_label.text = [NSString stringWithFormat:@"%ld",number-50];
+    priceNow_label.text = [NSString stringWithFormat:@"%d",(int)number-50];
     [self dealLinesWithString:[NSString stringWithFormat:@"门市价 ¥%ld",number]];
 
 }
@@ -159,6 +158,7 @@
             [_tableHeadView addSubview:view];
             [_tableHeadView addSubview:organization_titleLabel];
             [_tableHeadView addSubview:back_btn];
+            pricePast_label = [[UILabel alloc] init];
             for (int i = 0; i < 3; i ++)
             {
                 UIView * lineView = [[UIView alloc]
@@ -261,7 +261,6 @@
 //计算划掉的数字长度
 - (void)dealLinesWithString:(NSString *)string
 {
-    pricePast_label = [[UILabel alloc] init];
     pricePast_label.text = string;
     UIFont * fnt = [UIFont fontWithName:string size:10];
     pricePast_label.font = fnt;

@@ -7,6 +7,6 @@
 //
 
 
-@interface DDFirst : YTKBaseRequest
+@interface DDFirst : YTKBaseRequest //订单接口
 -(id)initWithUid:(NSString *)uid login:(BOOL)login;
 @end

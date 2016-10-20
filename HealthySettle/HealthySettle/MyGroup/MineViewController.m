@@ -20,15 +20,18 @@
 
 static NSString *setCellIdentifier = @"cellS";
 
-@interface MineViewController ()<UITableViewDataSource, UITableViewDelegate>
+@interface MineViewController ()<UITableViewDataSource, UITableViewDelegate,UserDataDelegate>
 {
-    
+    UIImageView * imagePerson;
+    UILabel * textLabel;
+    UITapGestureRecognizer * tapRL;
 }
 
 @end
 
 @implementation MineViewController
 #pragma mark - LazyLoading
+
 - (UITableView *)setTableView
 {
     if (! _setTableView)
@@ -62,6 +65,9 @@ static NSString *setCellIdentifier = @"cellS";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.view.backgroundColor = RGB(244,244, 244);
+    [UIApplication sharedApplication].statusBarHidden = YES;
+    self.navigationController.navigationBarHidden = YES;
     UIBarButtonItem * returnBarButtonItem = [[UIBarButtonItem alloc] init];
     returnBarButtonItem.title = @"";
     self.navigationController.navigationBar.tintColor=[UIColor redColor];
@@ -95,24 +101,25 @@ static NSString *setCellIdentifier = @"cellS";
     [self setThingsView];
     [self.view addSubview:self.setTableView];
     self.automaticallyAdjustsScrollViewInsets = NO;
+    if ([Member DefaultUser].login) {
+        [self performSelector:@selector(updateUserData) withObject:self afterDelay:2];
+        
+    }
 }
 - (void)setBottomPicWithPic:(UIImage *)imageP
                    withPerP:(UIImage *)personP
                    andTitle:(NSString *)string
 {
-    self.view.backgroundColor = RGB(244,244, 244);
-    [UIApplication sharedApplication].statusBarHidden = YES;
-    self.navigationController.navigationBarHidden = YES;
     UIImageView * topImageV =[[UIImageView alloc]
                               initWithFrame:CGRectMake(0, 0,screenWide , screenHeight * 0.33)];
     topImageV.image = imageP;
     topImageV.alpha = 0.85;
     [self.view addSubview:topImageV];
-    UITapGestureRecognizer * tapRL = [[UITapGestureRecognizer alloc]
+    tapRL = [[UITapGestureRecognizer alloc]
                                       initWithTarget:self
                                       action:@selector(resignOrLoad)];
     tapRL.numberOfTapsRequired = 1;
-    UIImageView * imagePerson = [[UIImageView alloc]
+    imagePerson = [[UIImageView alloc]
                                  initWithFrame:CGRectMake(screenWide/2 -30, screenHeight * 0.075, 60, 60)];
     imagePerson.image = personP;
     imagePerson.clipsToBounds = YES;
@@ -120,7 +127,7 @@ static NSString *setCellIdentifier = @"cellS";
     imagePerson.userInteractionEnabled = YES;
     [topImageV addGestureRecognizer:tapRL];
     [topImageV addSubview:imagePerson];
-    UILabel * textLabel = [[UILabel alloc]
+    textLabel = [[UILabel alloc]
                            initWithFrame:CGRectMake((screenWide - 200)/2, CGRectGetMaxY(imagePerson.frame), 200, 40)];
     textLabel.textAlignment = NSTextAlignmentCenter;
     textLabel.font = [UIFont systemFontOfSize:16];
@@ -184,13 +191,21 @@ static NSString *setCellIdentifier = @"cellS";
     {
         if (indexPath.row == 0)
         {
-            [cell setThingsWithName:@"现金账户" Image:[UIImage imageNamed:@"system_1_"] number:@"¥ 0.00"];
+            if ([Member DefaultUser].login.length != 0) {
+                [cell setThingsWithName:@"现金账户" Image:[UIImage imageNamed:@"system_1_"] number:[NSString stringWithFormat:@"¥ %@",[Member DefaultUser].now_money]];
+            }else{
+                [cell setThingsWithName:@"现金账户" Image:[UIImage imageNamed:@"system_1_"] number:@""];
+            }
         }else if (indexPath.row == 1)
         {
-            [cell setThingsWithName:@"我的积分" Image:[UIImage imageNamed:@"system_2_"] number:@"350"];
+            if ([Member DefaultUser].login.length != 0) {
+                [cell setThingsWithName:@"我的积分" Image:[UIImage imageNamed:@"system_2_"] number:[Member DefaultUser].score_count];
+            }else{
+                [cell setThingsWithName:@"我的积分" Image:[UIImage imageNamed:@"system_2_"] number:@""];
+            }
         }else if (indexPath.row == 2 )
         {
-            [cell setThingsWithName:@"优惠券" Image:[UIImage imageNamed:@"system_3_"] number:@"1 张"];
+            [cell setThingsWithName:@"优惠券" Image:[UIImage imageNamed:@"system_3_"] number:@""];
         }else
         {
             [cell setThingsWithName:@"密码修改" Image:[UIImage imageNamed:@"system_4_"] number:nil];
@@ -256,68 +271,108 @@ heightForHeaderInSection:(NSInteger)section
 - (void)resignOrLoad
 {
     LoginOrRegisViewController *loginOrRegVC = [[LoginOrRegisViewController alloc] init];
+    loginOrRegVC.delegate = self;
     [self.navigationController pushViewController:loginOrRegVC animated:YES];
     
+}
+-(void)updateUserData{//代理协议方法
+    NSString * str = [NSString stringWithFormat:@"%@/%@",BASEURL,[Member DefaultUser].avatar];
+    [imagePerson sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"boy_head"]];
+    textLabel.text = [Member DefaultUser].phone;
+     [textLabel removeGestureRecognizer:tapRL];
+    NSIndexPath *indexPath1=[NSIndexPath indexPathForRow:1 inSection:0];  //你需要更新的组数中的cell
+    NSIndexPath *indexPath2=[NSIndexPath indexPathForRow:0 inSection:0];  //你需要更新的组数中的cell
+
+    
+    [self.setTableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath1,indexPath2,nil] withRowAnimation:UITableViewRowAnimationNone];
     
 }
+
 -(void)changeToAccountWithstr:(NSString *)str
 {
-    AccountViewController * accountVC = [[AccountViewController alloc] init];
-    accountVC.titleName = str;
-    [self.navigationController pushViewController:accountVC
-                                         animated:YES];
+    if ([Member DefaultUser].login.length !=0) {
+        AccountViewController * accountVC = [[AccountViewController alloc] init];
+        accountVC.titleName = str;
+        [self.navigationController pushViewController:accountVC
+                                             animated:YES];
+    }else{
+        [self resignOrLoad];
+    }
+    
 }
 - (void)changeToGraceVC
 {
-    GraceVC * graceVC = [[GraceVC alloc] init];
-    graceVC.titleName = @"我的优惠券";
-    [self.navigationController pushViewController:graceVC
-                                         animated:YES];
+    if ([Member DefaultUser].login.length !=0) {
+        GraceVC * graceVC = [[GraceVC alloc] init];
+        graceVC.titleName = @"我的优惠券";
+        [self.navigationController pushViewController:graceVC
+                                             animated:YES];
+    }else{
+        [self resignOrLoad];
+    }
+
+    
 }
 - (void)changeToPasswordChangeVC{
-    PasswordCVController * passwordVC = [[PasswordCVController alloc]
-                                         initWithNibName:@"PasswordCVController"
-                                         bundle:nil];
-    passwordVC.titleName = @"密码修改";
-    [self.navigationController pushViewController:passwordVC
-                                         animated:YES];
+    
+    if ([Member DefaultUser].login.length !=0) {
+        PasswordCVController * passwordVC = [[PasswordCVController alloc]
+                                             initWithNibName:@"PasswordCVController"
+                                             bundle:nil];
+        passwordVC.titleName = @"密码修改";
+        [self.navigationController pushViewController:passwordVC
+                                             animated:YES];
+    }else{
+        [self resignOrLoad];
+    }
+
 }
 
 - (void)clickTwoViews:(UITapGestureRecognizer *)gesture
 {
-    
-    if (gesture.view.frame.origin.x < screenWide / 2)
-    {
-        [self pushToComAndCollVCWithTitle:@"我的收藏"
-                                 type:@"collect"];
-    }else
-    {
-        PersonDataVController * personDataVC = [[PersonDataVController alloc] init];
-        personDataVC.titleName = @"个人资料";
-        [self.navigationController pushViewController:personDataVC
-                                             animated:YES];
+    if ([Member DefaultUser].login.length !=0) {
+        if (gesture.view.frame.origin.x < screenWide / 2)
+        {
+            [self pushToComAndCollVCWithTitle:@"我的收藏"
+                                     type:@"collect"];
+        }else
+        {
+            PersonDataVController * personDataVC = [[PersonDataVController alloc] init];
+            personDataVC.titleName = @"个人资料";
+            [self.navigationController pushViewController:personDataVC
+                                                 animated:YES];
+        }
+    }else{
+        [self resignOrLoad];
     }
+
 }
 - (void)clickFourViews:(UIButton *)btn
 {
-    int number = (int)btn.tag;
-    switch (number)
-    {
-        case 401:
-            [self pushToViewPersonWithTitle:@"我的订单" type:@"order"];
-            break;
-        case 402:
-            [self pushToComAndCollVCWithTitle:@"会员特权" type:@"member"];
-            break;
-        case 403:
-            [self pushToRefundVCWithTitle:@"退款维权" type:@"refund"];
-            break;
-        case 404:
-            [self pushToComAndCollVCWithTitle:@"我的点评" type:@"comment"];
-            break;
-        default:
-            break;
+    if ([Member DefaultUser].login.length !=0) {
+
+        int number = (int)btn.tag;
+        switch (number)
+        {
+            case 401:
+                [self pushToViewPersonWithTitle:@"我的订单" type:@"order"];
+                break;
+            case 402:
+                [self pushToComAndCollVCWithTitle:@"会员特权" type:@"member"];
+                break;
+            case 403:
+                [self pushToRefundVCWithTitle:@"退款维权" type:@"refund"];
+                break;
+            case 404:
+                [self pushToComAndCollVCWithTitle:@"我的点评" type:@"comment"];
+                break;
+            default:
+                break;
+        }
+    }else{
+        [self resignOrLoad];
     }
+
 }
 -(void)pushToComAndCollVCWithTitle:(NSString *)title
                              type :(NSString *)type

@@ -8,6 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@interface DDSeaGet : YTKBaseRequest
+@interface DDSeaGet : YTKBaseRequest //四季
 -(id)initWithSea_id:(NSString *)sea_id;
 @end

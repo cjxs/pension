@@ -7,6 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+@protocol LoginDelegate <NSObject>
+-(void)loginCurrentuser:(NSString *)phone;
+@end
 
 @interface GetPassWordViewController : UIViewController
 @property (nonatomic,strong)UIImageView * backPicView;
@@ -21,6 +24,7 @@
 @property (nonatomic,strong)UIButton * back_btn;
 @property (nonatomic,strong)NSString * number_text;
 @property (nonatomic,strong)UIButton * submit_btn;
+@property (nonatomic,strong)id<LoginDelegate>delegate;
 
 
 @end

@@ -7,7 +7,6 @@
 //
 
 #import "MonthViewController.h"
-#import "UIImageView+WebCache.h"
 #import "DDSeaGet.h"
 
 @interface MonthViewController ()

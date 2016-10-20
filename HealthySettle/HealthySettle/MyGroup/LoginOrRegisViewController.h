@@ -7,8 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+@protocol UserDataDelegate <NSObject>
 
+-(void)updateUserData;
+
+@end
 @interface LoginOrRegisViewController : UIViewController
+@property (nonatomic,weak)id<UserDataDelegate> delegate;
 
 
 

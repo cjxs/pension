@@ -9,6 +9,7 @@
 #import "GetPassWordViewController.h"
 #import "DDToolKit.h"
 #import "DDFindTest.h"
+#import "DDUpdatePWD.h"
 
 @interface GetPassWordViewController ()<UITextFieldDelegate> {
     UIView * backView;
@@ -41,8 +42,8 @@
 - (UIButton *)back_btn {
     if (!_back_btn) {
         UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
-        button.frame = CGRectMake(10, 10,40 , 40);
-        button.backgroundColor = [UIColor greenColor];
+        button.frame = CGRectMake(10, 15,screenWide*0.05 , screenWide* 0.05*1.85);
+        [button setBackgroundImage:[UIImage imageNamed:@"leftop_r"] forState:UIControlStateNormal];
         [button addTarget:self action:@selector(backToView) forControlEvents:UIControlEventTouchUpInside];
         _back_btn = button;
     }
@@ -180,29 +181,52 @@
        UIAlertView *   alertView = [[UIAlertView alloc] initWithTitle:@"手机号不能为空！" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
         alertV = YES;
         [alertView show];
-    }
+    }else
     if (!test) {
        UIAlertView *  alertView = [[UIAlertView alloc] initWithTitle:@"验证码不能为空！" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
         alertV = YES;
         [alertView show];
-    }
+    }else
     
     
     if (!regis1) {
        UIAlertView *  alertView = [[UIAlertView alloc] initWithTitle:@"密码不能为空！" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
         alertV = YES;
         [alertView show];
-    }
+    }else
     if (!regis2) {
        UIAlertView *  alertView = [[UIAlertView alloc] initWithTitle:@"请输入确认密码！" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
         alertV = YES;
         [alertView show];
     }
-    NSLog(@"提交");
+    
+    if ([_regispwd_field1.text isEqualToString:_regispwd_field2.text]) {
+        [self updatePwdWithnumber:_number_field.text pwd:_regispwd_field2.text vfycode:_test_field.text];
+    }else{
+        UIAlertView *   alertView = [[UIAlertView alloc] initWithTitle:@"您输入的密码不一致，请重新输入" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+        _regispwd_field2.text = @"";
+        alertV = YES;
+        [alertView show];
+    }
 
 }
 - (void)backToView {
     [self.navigationController popViewControllerAnimated:YES];
+}
+-(void)updatePwdWithnumber:(NSString *)number pwd:(NSString *)newpwd vfycode:(NSString *)vfycode{
+    DDUpdatePWD * updatePWD = [[DDUpdatePWD alloc] initWithUserNumber:number pwd:newpwd vfycode:vfycode];
+    [updatePWD startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
+        NSDictionary * dic = [DDLogin dictionaryWithJsonString:request.responseString];
+        UIAlertView *  alertView = [[UIAlertView alloc] initWithTitle:dic[@"msg"] message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+        alertV = YES;
+        [alertView show];
+        if ([dic[@"error_code"] intValue] == 0) {
+            [self backToView];
+            [self.delegate loginCurrentuser:number];
+        }
+    } failure:^(__kindof YTKBaseRequest *request) {
+        NSLog(@"%@++++++%ld",request.responseString,request.responseStatusCode);
+    }];
 }
 - (void)getTestNumber:(UIButton *)button {
     [self gettestWithPhoneNumber:_number_field.text];
@@ -212,14 +236,13 @@
     DDFindTest * findTest = [[DDFindTest alloc] initWithUserNumber:number];
     [findTest startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
         NSDictionary * dic = [DDLogin dictionaryWithJsonString:request.responseString];
-        
+        NSLog(@"%@",dic);
         if ([dic[@"error_code"] integerValue] == 0) {
             timeTick = 601;
             timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timeFireMethod) userInfo:nil repeats:YES];
             _getTest_btn.enabled = NO;
             _code = dic[@"code"];
             _time = dic[@"time"];
-            NSLog(@"%@",dic);
         }else {
           UIAlertView *   alertView = [[UIAlertView alloc] initWithTitle:dic[@"msg"] message:nil delegate:nil cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
             alertV = YES;
@@ -230,6 +253,7 @@
         
     }];
 }
+
 -(void)textFieldDidEndEditing:(UITextField *)textField {
     
     if (textField.text.length != 0) {

@@ -63,7 +63,6 @@
 		32518DB41CB34EFC00CEAE35 /* custom_number.png in Resources */ = {isa = PBXBuildFile; fileRef = 32518DB21CB34EFC00CEAE35 /* custom_number.png */; };
 		32518DE51CB3A2D500CEAE35 /* pension_preview.png in Resources */ = {isa = PBXBuildFile; fileRef = 32518DE31CB3A2D500CEAE35 /* pension_preview.png */; };
 		32518DE61CB3A2D500CEAE35 /* regimen_preview.png in Resources */ = {isa = PBXBuildFile; fileRef = 32518DE41CB3A2D500CEAE35 /* regimen_preview.png */; };
-		32518DEA1CB3A4E100CEAE35 /* wifi_is.png in Resources */ = {isa = PBXBuildFile; fileRef = 32518DE71CB3A4E100CEAE35 /* wifi_is.png */; };
 		3252D6511CC752B5000FAFBC /* base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 3252D63C1CC752B5000FAFBC /* base64.m */; };
 		3252D6521CC752B5000FAFBC /* DataSigner.m in Sources */ = {isa = PBXBuildFile; fileRef = 3252D63F1CC752B5000FAFBC /* DataSigner.m */; };
 		3252D6531CC752B5000FAFBC /* DataVerifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 3252D6411CC752B5000FAFBC /* DataVerifier.m */; };
@@ -170,6 +169,7 @@
 		32CEF82E1DB713E700CB7584 /* level_3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 32CEF8261DB713E700CB7584 /* level_3@2x.png */; };
 		32CEF82F1DB713E700CB7584 /* level_3@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 32CEF8271DB713E700CB7584 /* level_3@3x.png */; };
 		32CEF8321DB71F0A00CB7584 /* GroupDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CEF8311DB71F0A00CB7584 /* GroupDetailViewController.m */; };
+		32CEF8351DB8B4ED00CB7584 /* DDUpdatePWD.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CEF8341DB8B4ED00CB7584 /* DDUpdatePWD.m */; };
 		32D8593B1CB896530074D5C3 /* ResultListVController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D8593A1CB896530074D5C3 /* ResultListVController.m */; };
 		32D859421CB89E420074D5C3 /* list2_2_@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 32D8593C1CB89E420074D5C3 /* list2_2_@2x.png */; };
 		32D859431CB89E420074D5C3 /* list2_2_@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 32D8593D1CB89E420074D5C3 /* list2_2_@3x.png */; };
@@ -369,7 +369,6 @@
 		32518DB21CB34EFC00CEAE35 /* custom_number.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = custom_number.png; sourceTree = "<group>"; };
 		32518DE31CB3A2D500CEAE35 /* pension_preview.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pension_preview.png; sourceTree = "<group>"; };
 		32518DE41CB3A2D500CEAE35 /* regimen_preview.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = regimen_preview.png; sourceTree = "<group>"; };
-		32518DE71CB3A4E100CEAE35 /* wifi_is.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wifi_is.png; sourceTree = "<group>"; };
 		3252D5211CC74845000FAFBC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = InfoPlist.strings; sourceTree = "<group>"; };
 		3252D5241CC74A55000FAFBC /* aes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = aes.h; sourceTree = "<group>"; };
 		3252D5251CC74A55000FAFBC /* asn1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = asn1.h; sourceTree = "<group>"; };
@@ -699,6 +698,8 @@
 		32CEF8271DB713E700CB7584 /* level_3@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "level_3@3x.png"; sourceTree = "<group>"; };
 		32CEF8301DB71F0A00CB7584 /* GroupDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupDetailViewController.h; sourceTree = "<group>"; };
 		32CEF8311DB71F0A00CB7584 /* GroupDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupDetailViewController.m; sourceTree = "<group>"; };
+		32CEF8331DB8B4ED00CB7584 /* DDUpdatePWD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDUpdatePWD.h; sourceTree = "<group>"; };
+		32CEF8341DB8B4ED00CB7584 /* DDUpdatePWD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDUpdatePWD.m; sourceTree = "<group>"; };
 		32D859371CB893E80074D5C3 /* ResultListVController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultListVController.h; sourceTree = "<group>"; };
 		32D8593A1CB896530074D5C3 /* ResultListVController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultListVController.m; sourceTree = "<group>"; };
 		32D8593C1CB89E420074D5C3 /* list2_2_@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list2_2_@2x.png"; sourceTree = "<group>"; };
@@ -1492,7 +1493,6 @@
 				327DC7D21CB4FFE5005617D2 /* Guide_01.png */,
 				327DC7D31CB4FFE5005617D2 /* Guide_02.png */,
 				327DC7D41CB4FFE5005617D2 /* Guide_03.png */,
-				32518DE71CB3A4E100CEAE35 /* wifi_is.png */,
 				32518DE31CB3A2D500CEAE35 /* pension_preview.png */,
 				32518DE41CB3A2D500CEAE35 /* regimen_preview.png */,
 				32518DB11CB34EFC00CEAE35 /* custom_online.png */,
@@ -1534,6 +1534,8 @@
 				3285AF011D35DD8C0070618A /* DDGetTest.m */,
 				32FB002F1D40C163008A5497 /* DDFindTest.h */,
 				32FB00301D40C163008A5497 /* DDFindTest.m */,
+				32CEF8331DB8B4ED00CB7584 /* DDUpdatePWD.h */,
+				32CEF8341DB8B4ED00CB7584 /* DDUpdatePWD.m */,
 			);
 			path = Server;
 			sourceTree = "<group>";
@@ -1783,9 +1785,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		32F6CCFF1C9A734C00E97B65 /* HealthySettle */ = {
+		32F6CCFF1C9A734C00E97B65 /* 优悠乐 */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 32F6CD171C9A734C00E97B65 /* Build configuration list for PBXNativeTarget "HealthySettle" */;
+			buildConfigurationList = 32F6CD171C9A734C00E97B65 /* Build configuration list for PBXNativeTarget "优悠乐" */;
 			buildPhases = (
 				05FD7EADA56C41DDDAD904CD /* Check Pods Manifest.lock */,
 				32F6CCFC1C9A734C00E97B65 /* Sources */,
@@ -1798,7 +1800,7 @@
 			);
 			dependencies = (
 			);
-			name = HealthySettle;
+			name = "优悠乐";
 			productName = HealthySettle;
 			productReference = 32F6CD001C9A734C00E97B65 /* HealthySettle.app */;
 			productType = "com.apple.product-type.application";
@@ -1832,7 +1834,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				32F6CCFF1C9A734C00E97B65 /* HealthySettle */,
+				32F6CCFF1C9A734C00E97B65 /* 优悠乐 */,
 			);
 		};
 /* End PBXProject section */
@@ -1863,7 +1865,6 @@
 				327DC7DD1CB50BF4005617D2 /* Assets.xcassets in Resources */,
 				32DD1DCD1CA5082B00E1C229 /* SetTVCell.xib in Resources */,
 				32E588931CB7594A002AED1A /* search_5_@3x.png in Resources */,
-				32518DEA1CB3A4E100CEAE35 /* wifi_is.png in Resources */,
 				325051E11CB6001500D431F5 /* boy_head.png in Resources */,
 				32E5887D1CB74EA0002AED1A /* user_@3x.png in Resources */,
 				32E588A21CB75DE3002AED1A /* list1_show_1_@2x.png in Resources */,
@@ -2123,6 +2124,7 @@
 				32DB05381DA8CDF40041C4F5 /* TADotView.m in Sources */,
 				32FD72CE1CAA301E008CB917 /* WebViewController.m in Sources */,
 				3252D6541CC752B5000FAFBC /* MD5DataSigner.m in Sources */,
+				32CEF8351DB8B4ED00CB7584 /* DDUpdatePWD.m in Sources */,
 				3285AF051D372C100070618A /* DDFirst.m in Sources */,
 				32FB002B1D3F1BE4008A5497 /* GetPassWordViewController.m in Sources */,
 				32DB053B1DA8CDF40041C4F5 /* SDCycleScrollView.m in Sources */,
@@ -2466,7 +2468,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		32F6CD171C9A734C00E97B65 /* Build configuration list for PBXNativeTarget "HealthySettle" */ = {
+		32F6CD171C9A734C00E97B65 /* Build configuration list for PBXNativeTarget "优悠乐" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				32F6CD181C9A734C00E97B65 /* Debug */,

@@ -8,6 +8,6 @@
 
 
 
-@interface DDHome_page : YTKBaseRequest
+@interface DDHome_page : YTKBaseRequest   //主页接口
 -(id)initWithUid:(NSString *)uid login:(BOOL)login;
 @end

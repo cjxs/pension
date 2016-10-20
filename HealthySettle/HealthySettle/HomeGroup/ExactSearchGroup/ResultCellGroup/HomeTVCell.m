@@ -7,7 +7,6 @@
 //
 
 #import "HomeTVCell.h"
-#import "UIImageView+WebCache.h"
 
 
 @implementation HomeTVCell

@@ -14,8 +14,9 @@
 #import "GetPassWordViewController.h"
 #import "DDToolKit.h"
 #import "DDRegist.h"
+#import "Member.h"
 
-@interface LoginOrRegisViewController ()<UITextFieldDelegate>{
+@interface LoginOrRegisViewController ()<UITextFieldDelegate,LoginDelegate>{
     UIView * backView;
     BOOL agree;
     int timeTick;
@@ -49,8 +50,8 @@
 - (UIButton *)back_btn {
     if (!_back_btn) {
         UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
-        button.frame = CGRectMake(10, 10,40 , 40);
-        button.backgroundColor = [UIColor greenColor];
+        button.frame = CGRectMake(10, 15,screenWide*0.05 , screenWide* 0.05*1.85);
+        [button setBackgroundImage:[UIImage imageNamed:@"leftop_r"] forState:UIControlStateNormal];
         [button addTarget:self action:@selector(backToView) forControlEvents:UIControlEventTouchUpInside];
         _back_btn = button;
     }
@@ -325,8 +326,12 @@
     }
     
 }
+-(void)loginCurrentuser:(NSString *)phone{
+    _number_field.text = phone;
+}
 -(void)findPassWordViewAppeaar {
     GetPassWordViewController * getPwdVC = [[GetPassWordViewController alloc] init];
+    getPwdVC.delegate = self;
     if (_number_field.text.length != 0) {
         getPwdVC.number_text = _number_field.text;
     }
@@ -479,17 +484,26 @@
     
     DDLogin * loginApi = [[DDLogin alloc] initWithUsername:username password:pwd];
     __block NSDictionary * dic;
-    __block YYLUser * user;
     
     
     [loginApi startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
-        dic = [DDLogin dictionaryWithJsonString: request.responseString];
-        if (!dic[@"msg"]) {
-            user = [YYLUser mj_objectWithKeyValues:dic];
-            NSLog(@"%@++++",user.description);
-            
+        NSString *str = [request.responseString stringByReplacingOccurrencesOfString:@":null" withString:@":\"\""];
+        dic = [DDLogin dictionaryWithJsonString: str];
+        if ([dic[@"msg"]length] == 0) {
+            [Member DefaultUser].uid = dic[@"uid"];
+            [Member DefaultUser].nickname = dic[@"nickname"];
+            [Member DefaultUser].sex = dic[@"gender"];
+            [Member DefaultUser].birthday = dic[@"birthday"];
+            [Member DefaultUser].email = dic[@"email"];
+            [Member DefaultUser].phone = dic[@"phone"];
+            [Member DefaultUser].avatar = dic[@"avatar"];
+            [Member DefaultUser].now_money = dic[@"now_money"];
+            [Member DefaultUser].score_count = dic[@"score_count"];
+            [Member DefaultUser].login = @"online";
+            [self.navigationController popViewControllerAnimated:YES];
+            [self.delegate updateUserData];
+
         }else {
-            NSLog(@"%@++++++",dic[@"msg"]);
             UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:dic[@"msg"] message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
             [self touchesBegan:nil withEvent:nil];
             [alertView show];
@@ -506,7 +520,7 @@
     [regisApi startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
         dic = [DDLogin dictionaryWithJsonString:request.responseString];
         if (![dic[@"msg"] isEqualToString:@"OK"]) {
-            UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:dic[@"msg"] message:nil delegate:nil cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+            UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"注册成功！" message:nil delegate:nil cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
              [self touchesBegan:nil withEvent:nil];
             [alertView show];
         }else {

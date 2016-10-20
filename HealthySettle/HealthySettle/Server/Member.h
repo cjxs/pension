@@ -12,13 +12,13 @@
 @property (nonatomic,strong)NSString * uid;
 @property (nonatomic,strong)NSString * nickname;
 @property (nonatomic,strong)NSString * sex;
-@property (nonatomic,strong)NSString * province;
-@property (nonatomic,strong)NSString * city;
+@property (nonatomic,strong)NSString * birthday;
+@property (nonatomic,strong)NSString * email;
+@property (nonatomic,strong)NSString * phone;
 @property (nonatomic,strong)NSString * avatar;
 @property (nonatomic,strong)NSString * now_money;
-@property (nonatomic,strong)NSString * birthday;
-@property (nonatomic,strong)NSString * vip_type;
-@property (nonatomic,strong)NSString * email;
-@property (nonatomic,strong)NSString * tel;
+@property (nonatomic,strong)NSString * score_count;
+@property (nonatomic,strong)NSString * login;
 
++(Member *)DefaultUser;
 @end

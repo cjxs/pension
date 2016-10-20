@@ -7,7 +7,6 @@
 //
 
 #import "SearchOrganTVCell.h"
-#import "UIImageView+WebCache.h"
 
 
 @implementation SearchOrganTVCell
