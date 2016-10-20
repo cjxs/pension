@@ -10,4 +10,5 @@
 
 @interface SelectTVCell : UITableViewCell
 @property (nonatomic,strong)UILabel * title_label;
+
 @end

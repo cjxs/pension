@@ -11,4 +11,7 @@
 @interface ServeTVCell : UITableViewCell
 @property (nonatomic, strong) UIView * commonServe_view;
 @property (nonatomic,strong ) UIView * tollServe_view;
+@property (nonatomic,strong)NSString * common_t;
+@property (nonatomic,strong)NSString * charge_t;
+-(void)configwithCommon:(NSString *)common charge:(NSString *)charge;
 @end

@@ -65,6 +65,9 @@
     }
     return self;
 }
+-(void)configWithDataDic:(NSDictionary *)dic{
+    
+}
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code

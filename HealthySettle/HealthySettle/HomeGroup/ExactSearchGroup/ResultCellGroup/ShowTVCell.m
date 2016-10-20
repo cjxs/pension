@@ -29,10 +29,31 @@
         self.title_label.text = title;
     }
     if (array)
-    {
-        self.left_imageView.image = array[0];
-        self.mid_imageView.image = array[1];
-        self.right_imageView.image = array[2];
+    {   NSMutableArray * arr = [NSMutableArray arrayWithCapacity:0];
+        for (NSString * str in array) {
+            NSString *  str2 = [NSString stringWithFormat:@"%@/upload/group/%@",BASEURL,str];
+            NSString * str3 = [str2 stringByReplacingOccurrencesOfString:@"," withString:@"/"];
+            [arr addObject:str3];
+        }
+        switch (array.count) {
+            case 0:
+               
+                break;
+            case 1:
+                [self.left_imageView sd_setImageWithURL:[NSURL URLWithString:arr[0]]];
+                
+                break;
+            case 2:
+                [self.left_imageView sd_setImageWithURL:[NSURL URLWithString:arr[0]]];
+                 [self.mid_imageView sd_setImageWithURL:[NSURL URLWithString:arr[1]]];
+                
+                break;
+            default:
+                [self.left_imageView sd_setImageWithURL:[NSURL URLWithString:arr[0]]];
+                [self.mid_imageView sd_setImageWithURL:[NSURL URLWithString:arr[1]]];
+                [self.right_imageView sd_setImageWithURL:[NSURL URLWithString:arr[2]]];
+                break;
+        }
     }
     if (text)
     {

@@ -27,7 +27,7 @@
     [super awakeFromNib];
     // Initialization code
 }
--(void)configWithStr:(NSString *)text
+-(CGFloat)configWithStr:(NSString *)text
 {
     if (text)
     {
@@ -44,7 +44,9 @@
         label.numberOfLines = 0;
         label.textColor = RGB(158, 159, 159);
         [self addSubview:label];
+        return height;
     }
+    return 0;
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

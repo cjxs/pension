@@ -146,7 +146,9 @@
         {
             _tableHeadView = [[UIView alloc]
                               initWithFrame:CGRectMake(0,0 , screenWide, screenHeight * 0.496)];
-            organization_imageView.image = [UIImage imageNamed:@"pension_organ"];
+            NSString *  str2 = [NSString stringWithFormat:@"%@/upload/group/%@",BASEURL,_data_dic[@"pic"]];
+            NSString * str3 = [str2 stringByReplacingOccurrencesOfString:@"," withString:@"/"];
+            [organization_imageView sd_setImageWithURL:[NSURL URLWithString:str3]];
             _tableHeadView.backgroundColor = RGB(254, 255, 255);
             [_tableHeadView addSubview:organization_imageView];
             [_tableHeadView addSubview:view];
@@ -167,11 +169,11 @@
             [_tableHeadView addSubview:label_y];
             
             priceNow_label = [[UILabel alloc]
-                              initWithFrame:CGRectMake(screenWide * 0.06, CGRectGetMaxY(organization_imageView.frame) + screenHeight * 0.015, screenWide * 0.12, screenHeight *0.0285 )];
-            priceNow_label.font = [UIFont systemFontOfSize:20];
+                              initWithFrame:CGRectMake(screenWide * 0.07, CGRectGetMaxY(organization_imageView.frame) + screenHeight * 0.015, screenWide * 0.15, screenHeight *0.0285 )];
+            priceNow_label.font = [UIFont systemFontOfSize:18];
             priceNow_label.textColor = [UIColor redColor];
             [_tableHeadView addSubview:priceNow_label];
-            priceNow_label.text = @"999";
+            priceNow_label.text = [NSString stringWithFormat:@"%ld",[_data_dic[@"price"] integerValue]-50];
             UILabel * label_q = [[UILabel alloc]
                                  initWithFrame:CGRectMake(CGRectGetMaxX(priceNow_label.frame),CGRectGetMaxY(organization_imageView.frame) + screenHeight * 0.017, screenWide * 0.05, screenHeight *0.0285 )];
             label_q.text = @"起";
@@ -186,7 +188,7 @@
             label_gg.text = @"去哪养老网 保证全网最低价";
             label_gg.font = [UIFont systemFontOfSize:9];
             [_tableHeadView addSubview:label_gg];
-            [self dealLinesWithString:@"门市价 ¥10888"];
+            [self dealLinesWithString:[NSString stringWithFormat:@"门市价 ¥%@",_data_dic[@"price"]]];
             NSArray * icon_array = @[@"list1_show_1_",@"list1_show_3_"];
             for (int i = 0; i < 2; i++)
             {
@@ -202,7 +204,7 @@
             
             address_label = [[UILabel alloc]
                              initWithFrame:CGRectMake(screenWide * 0.08, CGRectGetMaxY(organization_imageView.frame)+screenHeight * 0.102, screenWide * 0.72, screenHeight * 0.03)];
-            address_label.text = @"浙江省杭州市上城区近江南路2号（富春江路近江小区）";
+            address_label.text = _data_dic[@"address"];
             address_label.font = [UIFont systemFontOfSize:12];
             address_label.adjustsFontSizeToFitWidth = YES;
             address_label.textColor = RGB(152, 152, 152);
@@ -286,7 +288,8 @@
 -(void)setData{
     DDGroupData * group_data = [[DDGroupData alloc] initWithController:@"group" group_id:self.group_id];
     [group_data startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
-        _data_dic = [DDLogin dictionaryWithJsonString:request.responseString];
+        NSString *str = [request.responseString stringByReplacingOccurrencesOfString:@":null" withString:@":\"\""];
+        _data_dic = [DDLogin dictionaryWithJsonString:str];
         [begin_view removeFromSuperview];
         if (!self.vc_type) {
             switch ([_data_dic[@"cat_id"] integerValue]) {
@@ -406,7 +409,7 @@
         return 2+[_data_dic[@"room"] count];
     }else if ([self.vc_type isEqualToString:@"L"])
     {
-        return 8;
+        return 7;
     }else
     {
         return 0;
@@ -489,43 +492,52 @@
             OrgIntroTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cellIntro"
                                                                     forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            [cell configWithtelephone:_data_dic[@"telphone"] bed_nums:_data_dic[@"bed_nums"] spec:nil special_s:_data_dic[@"special_service"] intro:_data_dic[@"intro"]];
+            
             return cell;
         }else if (indexPath.section == 2)
         {
             ServeTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cellServe"
                                                                  forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            [cell configwithCommon:_data_dic[@"comm_content"] charge:_data_dic[@"charge_content"]];
             return cell;
             
-        }else if (indexPath.section == 3)
+        }
+       /* else if (indexPath.section == 3)
         {
             ChargeTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cellCharge"
                                                                   forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            [cell configWithDataDic:_data_dic[@"spec_tag"]];
+            
             return cell;
-        }else  if (indexPath.section == 4 || indexPath.section == 5)
+        }*/
+        else  if (indexPath.section == 3 || indexPath.section == 4)
         {
             ShowTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cellShow"
                                                                 forIndexPath:indexPath];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             NSString * string;
-            if (indexPath.section == 4)
-            {
-                string = @"    黄精声讨时代感和解放军三大发感慨合适的高富帅对方感受到结婚高峰   电视剧发噶时间会发生的阿萨德和规范哈健身房大世界一个五言绝句 ";
+            NSString * title;
+            NSArray * image_array;
+            if (indexPath.section == 3)
+            {   image_array = _data_dic[@"fun_file"];
+                string = _data_dic[@"fun_desc"];
             }else
             {
-                string = @"    阿萨德和规范哈公司的发送到官方的那首风格哈枫叶如图俄企业听日 u 全额退；也咖啡公司的人哈 u 俄国也让其他育儿课堂人跟同事打好几个发生开发高的水果变成美女不为所动简单啊  啊社区家风格的活动放大个人过五个人啊 test发的话题任何事 ";
+                image_array = _data_dic[@"style_file"];
+                title = @"文化活动";
             }
-            NSArray * image_array = @[[UIImage imageNamed:@"p_01"],[UIImage imageNamed:@"p_02"],[UIImage imageNamed:@"p_03"]];
-            [cell configWithTitle:@"文化活动"
+            [cell configWithTitle:title
                        imageArray:image_array text:string];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
-        }else if (indexPath.section == 6)
+        }else if (indexPath.section == 5)
         {
             ShouldKnowTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cellKnow"
                                                                       forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            [cell configWithStr:@"吧啦吧啦吧啦吧啦吧啦吧啦吧啦吧啦吧啦吧吧啦吧啦吧吧啦吧啦吧啦吧啦吧吧啦吧啦吧啦吧啦吧吧啦吧啦吧啦吧啊啦吧啦"];
+            [cell configWithStr:_data_dic[@"cue"]];
             return cell;
         }else
         {
@@ -573,23 +585,32 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath
         }else if (indexPath.section == 2)
         {
             return 110;
-        }else if (indexPath.section == 3)
-        {
-            return 176;
-        }else if (indexPath.section == 4 || indexPath.section ==5)
+        }
+//        else if (indexPath.section == 3)
+//        {
+//            return 176;
+//        }
+        else if (indexPath.section == 3 || indexPath.section ==4)
         {
             NSString * string;
+            NSArray * image_array;
             if (indexPath.section == 4)
             {
-                string = @"    黄精声讨时代感和解放军三合适的高富帅对方感受到结婚高峰   电视剧发噶时间会发生的阿萨德和规范哈健身房大世界一个五言绝句 ";
+                string = @" ";
+                image_array = _data_dic[@"style_file"];
             }else
             {
-                string = @"    阿萨德和规范哈公司的发送到官方的那首风格哈枫叶如图俄企业听日 u 全额退；也咖啡公司的人哈 u 俄国也让其他育儿课堂人跟同事打好几个发生开发高的水果变成美女不为所动简单啊  啊社区家风格的活动放大个人过五个人啊 test发的话题任何事 ";
+                string = _data_dic[@"fun_desc"];
+                image_array = _data_dic[@"fun_file"];
+            }
+            NSLog(@"%ld+++++++++++++++++++++++++++++++++++",image_array.count);
+            if (image_array.count == 0) {
+                return  [self backheightWith:string] - 120;
             }
             return  [self backheightWith:string];
-        }else if (indexPath.section == 6)
+        }else if (indexPath.section == 5)
         {
-            return [self backheightWith:@"吧啦吧啦吧啦吧啦吧啦吧啦吧啦吧啦吧啦吧吧啦吧啦吧啦吧吧啦吧啦吧啦吧啦吧啦吧吧啦吧啦吧啦吧啦吧吧啦吧啦吧啦吧啊啦吧啦"] - 80;
+            return [self backheightWith:_data_dic[@"cue"]] - 80;
         }else
         {
             return 288;

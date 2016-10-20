@@ -19,6 +19,7 @@
 #import <ReactiveCocoa/RACEXTScope.h>
 #import "SVProgressHUD.h"
 #import "DDLogin.h"
+#import "UIImageView+WebCache.h"
 
 
 

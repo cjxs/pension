@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface ChargeTVCell : UITableViewCell
+-(void)configWithDataDic:(NSDictionary *)dic;
 
 @end
