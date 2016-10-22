@@ -23,6 +23,7 @@
 #import "ShareView.h"
 #import "UMSocial.h"
 #import "DDGroupData.h"
+#import "LoginOrRegisViewController.h"
 
 @interface GroupDetailViewController ()<UMSocialUIDelegate,UITableViewDelegate,UITableViewDataSource,UpdatePriceDelegate>
 {
@@ -688,12 +689,23 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //    [self shareToEveryone];
 }
+- (void)resignOrLoad
+{
+    LoginOrRegisViewController *loginOrRegVC = [[LoginOrRegisViewController alloc] init];
+    loginOrRegVC.delegate = self;
+    [self.navigationController pushViewController:loginOrRegVC animated:YES];
+}
 #pragma mark - VTOF
 - (void)fillInOrderController
 {
+    
+    if (![Member DefaultUser].login) {
+        [self resignOrLoad];
+    }else{
     OrderTVController * orderVC = [[OrderTVController alloc]
                                    initWithStyle:UITableViewStylePlain];
     [self.navigationController pushViewController:orderVC animated:YES];
+    }
 }
 - (void)submitCommentNow
 {

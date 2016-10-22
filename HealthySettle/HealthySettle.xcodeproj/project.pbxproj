@@ -34,7 +34,7 @@
 		3223F1151DB8D87D001F1DCC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3223F1121DB8D87D001F1DCC /* Main.storyboard */; };
 		3223F1191DB8DC17001F1DCC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3223F1181DB8DC17001F1DCC /* Assets.xcassets */; };
 		3223F11B1DB8DCFE001F1DCC /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3223F11A1DB8DCFE001F1DCC /* Launch Screen.storyboard */; };
-		3223F11E1DB8E19F001F1DCC /* Loading@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3223F11C1DB8E19F001F1DCC /* Loading@3x.png */; };
+		3223F11E1DB8E19F001F1DCC /* Loading1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3223F11C1DB8E19F001F1DCC /* Loading1.png */; };
 		3223F11F1DB8E19F001F1DCC /* Loading@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3223F11D1DB8E19F001F1DCC /* Loading@2x.png */; };
 		322C36851D338607005163C4 /* DDLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = 322C36841D338607005163C4 /* DDLogin.m */; };
 		323499AB1CE1782200CBA680 /* Member.m in Sources */ = {isa = PBXBuildFile; fileRef = 323499AA1CE1782200CBA680 /* Member.m */; };
@@ -212,7 +212,6 @@
 		32DB05421DA8D0830041C4F5 /* pageControlCurrentDot@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 32DB053E1DA8D0830041C4F5 /* pageControlCurrentDot@3x.png */; };
 		32DB05431DA8D0830041C4F5 /* pageControlDot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 32DB053F1DA8D0830041C4F5 /* pageControlDot@2x.png */; };
 		32DB05441DA8D0830041C4F5 /* pageControlDot@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 32DB05401DA8D0830041C4F5 /* pageControlDot@3x.png */; };
-		32DB05471DA8D8930041C4F5 /* BannerWebVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 32DB05461DA8D8930041C4F5 /* BannerWebVC.m */; };
 		32DD1DCC1CA5082B00E1C229 /* SetTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32DD1DCA1CA5082B00E1C229 /* SetTVCell.m */; };
 		32DD1DCD1CA5082B00E1C229 /* SetTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32DD1DCB1CA5082B00E1C229 /* SetTVCell.xib */; };
 		32DDD31C1CA1406A00EFACF9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 32DDD31B1CA1406A00EFACF9 /* libPods.a */; };
@@ -338,7 +337,7 @@
 		3223F1131DB8D87D001F1DCC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Main.storyboard; sourceTree = "<group>"; };
 		3223F1181DB8DC17001F1DCC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3223F11A1DB8DCFE001F1DCC /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
-		3223F11C1DB8E19F001F1DCC /* Loading@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Loading@3x.png"; sourceTree = "<group>"; };
+		3223F11C1DB8E19F001F1DCC /* Loading1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Loading1.png; sourceTree = "<group>"; };
 		3223F11D1DB8E19F001F1DCC /* Loading@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Loading@2x.png"; sourceTree = "<group>"; };
 		322C36831D338607005163C4 /* DDLogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDLogin.h; sourceTree = "<group>"; };
 		322C36841D338607005163C4 /* DDLogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDLogin.m; sourceTree = "<group>"; };
@@ -766,8 +765,6 @@
 		32DB053E1DA8D0830041C4F5 /* pageControlCurrentDot@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pageControlCurrentDot@3x.png"; sourceTree = "<group>"; };
 		32DB053F1DA8D0830041C4F5 /* pageControlDot@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pageControlDot@2x.png"; sourceTree = "<group>"; };
 		32DB05401DA8D0830041C4F5 /* pageControlDot@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pageControlDot@3x.png"; sourceTree = "<group>"; };
-		32DB05451DA8D8930041C4F5 /* BannerWebVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BannerWebVC.h; sourceTree = "<group>"; };
-		32DB05461DA8D8930041C4F5 /* BannerWebVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BannerWebVC.m; sourceTree = "<group>"; };
 		32DD1DC91CA5082B00E1C229 /* SetTVCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetTVCell.h; sourceTree = "<group>"; };
 		32DD1DCA1CA5082B00E1C229 /* SetTVCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetTVCell.m; sourceTree = "<group>"; };
 		32DD1DCB1CA5082B00E1C229 /* SetTVCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SetTVCell.xib; sourceTree = "<group>"; };
@@ -1334,8 +1331,6 @@
 				32CABD5A1CA373AA0068AE93 /* ExactSearchGroup */,
 				32CABD5E1CA373AA0068AE93 /* HomeViewController.h */,
 				32CABD5F1CA373AA0068AE93 /* HomeViewController.m */,
-				32DB05451DA8D8930041C4F5 /* BannerWebVC.h */,
-				32DB05461DA8D8930041C4F5 /* BannerWebVC.m */,
 				32E588B01CB78825002AED1A /* KnowledgeTVController.h */,
 				32E588B11CB78825002AED1A /* KnowledgeTVController.m */,
 				32E588B31CB78BE1002AED1A /* CommonTVCell.h */,
@@ -1535,7 +1530,7 @@
 				324075BC1CACE3F900BAF253 /* regimenstrategy_btn.png */,
 				324075B41CACCE5D00BAF253 /* pensionFind_btn.png */,
 				324075B51CACCE5D00BAF253 /* regimenFind_btn.png */,
-				3223F11C1DB8E19F001F1DCC /* Loading@3x.png */,
+				3223F11C1DB8E19F001F1DCC /* Loading1.png */,
 				3223F11D1DB8E19F001F1DCC /* Loading@2x.png */,
 			);
 			path = Images;
@@ -1897,7 +1892,7 @@
 				32E588711CB74A87002AED1A /* system_3_@3x.png in Resources */,
 				320BE5DF1CBCDFC700A34FCB /* system_1_44@3x.png in Resources */,
 				32FA73431CABC7FC00379855 /* PasswordCVController.xib in Resources */,
-				3223F11E1DB8E19F001F1DCC /* Loading@3x.png in Resources */,
+				3223F11E1DB8E19F001F1DCC /* Loading1.png in Resources */,
 				32E588A51CB75DE3002AED1A /* list1_show_2_@3x.png in Resources */,
 				32E5888A1CB7594A002AED1A /* search_1_@2x.png in Resources */,
 				32E5888F1CB7594A002AED1A /* search_3_@3x.png in Resources */,
@@ -2112,7 +2107,6 @@
 				325051FC1CB66C0500D431F5 /* ComOrCollTVCell.m in Sources */,
 				32CABD691CA373AA0068AE93 /* SeasonCTViewCell.m in Sources */,
 				32E71CA31CB256770079CD73 /* OrderTextFieldTVCell.m in Sources */,
-				32DB05471DA8D8930041C4F5 /* BannerWebVC.m in Sources */,
 				320108161DBB58F9007ACA6B /* DDScoreList.m in Sources */,
 				32CEF81E1DB7027E00CB7584 /* DDGroupData.m in Sources */,
 				325C82501CB12BB70004EA0C /* ShouldKnowTVCell.m in Sources */,

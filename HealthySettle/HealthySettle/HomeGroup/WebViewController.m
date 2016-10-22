@@ -46,7 +46,7 @@
     
     btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.frame = CGRectMake(kMargin * 1,screenHeight * 0.03, kMargin * 4, kMargin * 4/10*18);
-    btn.alpha = 0.4;
+    btn.alpha = 0.6;
     [btn addTarget:self
             action:@selector(backTolastVC)
   forControlEvents:UIControlEventTouchUpInside];

@@ -48,12 +48,10 @@
         bg_view.backgroundColor = [UIColor whiteColor];
         
         back_btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        back_btn.frame = CGRectMake(0, 20, 40, 23);
-        back_btn.backgroundColor = [UIColor grayColor];
+        back_btn.frame = CGRectMake(10, 20, 20, 20*1.85);
+        [back_btn setBackgroundImage:[UIImage imageNamed:@"leftop_r"] forState:UIControlStateNormal];
         [back_btn addTarget:self action:@selector(cancelWeb:) forControlEvents:UIControlEventTouchUpInside];
-
-        
-        _webView = [[UIWebView alloc]initWithFrame:CGRectMake(0,44, screenWide, screenHeight-44)];
+        _webView = [[UIWebView alloc]initWithFrame:CGRectMake(0,64, screenWide, screenHeight-64)];
         [_webView setUserInteractionEnabled:YES];//是否支持交互
         _webView.delegate=self;
         [_webView setOpaque:NO];//opaque是不透明的意思

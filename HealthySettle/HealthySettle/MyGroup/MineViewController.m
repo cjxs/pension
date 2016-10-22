@@ -285,7 +285,6 @@ heightForHeaderInSection:(NSInteger)section
     LoginOrRegisViewController *loginOrRegVC = [[LoginOrRegisViewController alloc] init];
     loginOrRegVC.delegate = self;
     [self.navigationController pushViewController:loginOrRegVC animated:YES];
-    
 }
 -(void)exitLogin{//退出登录,代理协议方法
     if ([[Member DefaultUser].login length] == 0) {

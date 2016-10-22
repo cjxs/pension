@@ -8,8 +8,11 @@
 
 #import "MonthViewController.h"
 #import "DDSeaGet.h"
+#import "ResultListVController.h"
 
-@interface MonthViewController ()
+@interface MonthViewController ()<UIGestureRecognizerDelegate>{
+    NSArray * data;
+}
 
 @end
 
@@ -22,31 +25,32 @@
     [self.month_imageview sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",BASEURL,_dataDic[@"banner"]]]];
     self.province1_label.text = [NSString stringWithFormat:@"        %@",_dataDic[@"desc"]];
     self.month_label.text = _dataDic[@"title"];
-
+    [self.cityleft_btn addTarget:self action:@selector(pushToListWithbtn:) forControlEvents:UIControlEventTouchUpInside];
+    [self.citymid_btn addTarget:self action:@selector(pushToListWithbtn:) forControlEvents:UIControlEventTouchUpInside];
+    [self.cityright_btn addTarget:self action:@selector(pushToListWithbtn:) forControlEvents:UIControlEventTouchUpInside];
+    
     
     DDSeaGet * seaGet = [[DDSeaGet alloc] initWithSea_id:_dataDic[@"season_id"]];
     [seaGet startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
-        NSArray * data = [DDLogin arrayWithJsonString:request.responseString];
+        data = [DDLogin arrayWithJsonString:request.responseString];
         for (int i = 0; i < data.count; i++ ) {
             NSDictionary * dic = data[i];
             NSString *  str2 = [NSString stringWithFormat:@"%@/upload/group/%@",BASEURL,dic[@"file"]];
             NSString * str3 = [str2 stringByReplacingOccurrencesOfString:@"," withString:@"/"];
             [dic setValue:str3 forKey:@"file"];
             NSURL * url = [NSURL URLWithString:str3];
-            switch (i) {
+                    switch (i) {
                 case 0:
                     [self.cityleft_imageview sd_setImageWithURL:url];
-                    self.cityleft_label.text = dic[@"area_name"];
+                    [self.cityleft_btn setTitle:dic[@"area_name"] forState:UIControlStateNormal];
                     break;
                 case 1:
                     [self.citymid_imageview sd_setImageWithURL:url];
-                    self.citymid_label.text = dic[@"area_name"];
-
+                    [self.citymid_btn setTitle:dic[@"area_name"] forState:UIControlStateNormal];
                     break;
                 case 2:
                     [self.cityright_imageview sd_setImageWithURL:url];
-                    self.cityright_label.text = dic[@"area_name"];
-
+                    [self.cityright_btn setTitle:dic[@"area_name"] forState:UIControlStateNormal];
                     break;
                 default:
                     break;
@@ -59,6 +63,18 @@
     
     
     [self.view bringSubviewToFront:self.month_label];
+}
+-(void)pushToListWithbtn:(UIButton *)btn {
+    NSInteger number = btn.frame.origin.x/(screenWide/3);
+    [self pushToReginWithArea_id:data[number][@"area_id"] area:data[number][@"area_name"]];
+}
+-(void)pushToReginWithArea_id:(NSString *)area_id area:(NSString *)area{//代理方法
+    ResultListVController * ResultLVC = [[ResultListVController alloc] init];
+    ResultLVC.vc_type = @"S";
+    ResultLVC.area_id = area_id;
+    ResultLVC.title_l = area;
+    [self.navigationController pushViewController:ResultLVC
+                                         animated:YES];
 }
 
 -(void)viewWillAppear:(BOOL)animated
