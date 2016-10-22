@@ -162,7 +162,7 @@
         NSDictionary * dic = [DDLogin dictionaryWithJsonString:request.responseString];
         if ([dic[@"error_code"] intValue] == 0) {
             data_Arr = [NSMutableArray arrayWithCapacity:0];
-            for (NSDictionary *dic_l  in dic[@"money_list"]) {
+            for (NSDictionary *dic_l  in dic[@"score_list"]) {
                 [data_Arr addObject:dic_l];
             }
             [self loadData];
