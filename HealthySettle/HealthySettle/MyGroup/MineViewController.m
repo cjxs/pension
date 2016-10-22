@@ -20,7 +20,7 @@
 
 static NSString *setCellIdentifier = @"cellS";
 
-@interface MineViewController ()<UITableViewDataSource, UITableViewDelegate,UserDataDelegate>
+@interface MineViewController ()<UITableViewDataSource, UITableViewDelegate,UserDataDelegate,ExitLoginDelegate>
 {
     UIImageView * imagePerson;
     UILabel * textLabel;
@@ -61,13 +61,20 @@ static NSString *setCellIdentifier = @"cellS";
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.tabBarController.tabBar setHidden:NO];
+    [self.navigationController setNavigationBarHidden:YES animated:animated];
+
+    
+}
+-(void)viewWillDisappear:(BOOL)animated{
+    self.navigationController.tabBarController.tabBar.translucent = YES;
 }
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.view.backgroundColor = RGB(244,244, 244);
-    [UIApplication sharedApplication].statusBarHidden = YES;
-    self.navigationController.navigationBarHidden = YES;
+    self.navigationController.navigationBar.translucent = NO;
+    self.navigationController.tabBarController.tabBar.translucent = NO;
+//    [UIApplication sharedApplication].statusBarHidden = YES;
     UIBarButtonItem * returnBarButtonItem = [[UIBarButtonItem alloc] init];
     returnBarButtonItem.title = @"";
     self.navigationController.navigationBar.tintColor=[UIColor redColor];
@@ -102,7 +109,7 @@ static NSString *setCellIdentifier = @"cellS";
     [self.view addSubview:self.setTableView];
     self.automaticallyAdjustsScrollViewInsets = NO;
     if ([Member DefaultUser].login) {
-        [self performSelector:@selector(updateUserData) withObject:self afterDelay:2];
+        [self performSelector:@selector(updateUserData) withObject:self afterDelay:0.2];
         
     }
 }
@@ -219,27 +226,32 @@ static NSString *setCellIdentifier = @"cellS";
 -(void)tableView:(UITableView *)tableView
 didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    switch (indexPath.row)
-    {
-        case 0:
-            [self changeToAccountWithstr:@"现金账户"];
-            break;
-        case 1:
-            [self changeToAccountWithstr:@"我的积分"];
-            break;
-        case 2:
-            [self changeToGraceVC];
-            break;
-        case 3:
-            [self changeToPasswordChangeVC];
-            
-            break;
-        case 4:
-            
-            break;
-            
-        default:
-            break;
+    if (indexPath.section == 0) {
+        switch (indexPath.row)
+        {
+            case 0:
+                [self changeToAccountWithstr:@"现金账户"];
+                break;
+            case 1:
+                [self changeToAccountWithstr:@"我的积分"];
+                break;
+            case 2:
+                [self changeToGraceVC];
+                break;
+            case 3:
+                [self changeToPasswordChangeVC];
+                
+                break;
+            case 4:
+                
+                break;
+                
+            default:
+                break;
+        }
+
+    }else{
+        NSLog(@"设置");
     }
 }
 - (CGFloat)tableView:(UITableView *)tableView
@@ -275,7 +287,18 @@ heightForHeaderInSection:(NSInteger)section
     [self.navigationController pushViewController:loginOrRegVC animated:YES];
     
 }
--(void)updateUserData{//代理协议方法
+-(void)exitLogin{//退出登录,代理协议方法
+    if ([[Member DefaultUser].login length] == 0) {
+        imagePerson.image = [UIImage imageNamed:@"boy_head"];
+        [textLabel addGestureRecognizer:tapRL];
+        textLabel.text = @"登录/注册";
+        NSIndexPath *indexPath1=[NSIndexPath indexPathForRow:1 inSection:0];  //你需要更新的组数中的cell
+        NSIndexPath *indexPath2=[NSIndexPath indexPathForRow:0 inSection:0];  //你需要更新的组数中的cell
+        [self.setTableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath1,indexPath2,nil] withRowAnimation:UITableViewRowAnimationNone];
+    }
+    
+}
+-(void)updateUserData{//登录成功，代理协议方法
     NSString * str = [NSString stringWithFormat:@"%@/%@",BASEURL,[Member DefaultUser].avatar];
     [imagePerson sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"boy_head"]];
     textLabel.text = [Member DefaultUser].phone;
@@ -285,7 +308,6 @@ heightForHeaderInSection:(NSInteger)section
 
     
     [self.setTableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath1,indexPath2,nil] withRowAnimation:UITableViewRowAnimationNone];
-    
 }
 
 -(void)changeToAccountWithstr:(NSString *)str
@@ -339,6 +361,7 @@ heightForHeaderInSection:(NSInteger)section
         {
             PersonDataVController * personDataVC = [[PersonDataVController alloc] init];
             personDataVC.titleName = @"个人资料";
+            personDataVC.delegate = self;
             [self.navigationController pushViewController:personDataVC
                                                  animated:YES];
         }

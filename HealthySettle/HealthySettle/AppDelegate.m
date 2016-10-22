@@ -166,8 +166,36 @@ static NSString * const UMDEVICETOKEN      = @"UMDeviceToken";// 友盟推送的
     [UMessage setLogEnabled:NO];
     //注册微信
     [WXApi registerApp:WXAPPID withDescription:@"weixin"];
+    NSUserDefaults * user = [NSUserDefaults standardUserDefaults];
+    if ([[user valueForKey:@"username"] length] != 0 && [[user valueForKey:@"password"] length] != 0) {
+        [self defaultLoginWithUserName:[user valueForKey:@"username"] password:[user valueForKey:@"password"]];
+
+    }
 
     return YES;
+}
+-(void)defaultLoginWithUserName:(NSString *)username password:(NSString *)pwd {
+    
+    DDLogin * loginApi = [[DDLogin alloc] initWithUsername:username password:pwd];
+    __block NSDictionary * dic;
+    
+    
+    [loginApi startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
+        NSString *str = [request.responseString stringByReplacingOccurrencesOfString:@":null" withString:@":\"\""];
+        dic = [DDLogin dictionaryWithJsonString: str];
+            [Member DefaultUser].uid = dic[@"uid"];
+            [Member DefaultUser].nickname = dic[@"nickname"];
+            [Member DefaultUser].sex = dic[@"gender"];
+            [Member DefaultUser].birthday = dic[@"birthday"];
+            [Member DefaultUser].email = dic[@"email"];
+            [Member DefaultUser].phone = dic[@"phone"];
+            [Member DefaultUser].avatar = dic[@"avatar"];
+            [Member DefaultUser].now_money = dic[@"now_money"];
+            [Member DefaultUser].score_count = dic[@"score_count"];
+            [Member DefaultUser].login = @"online";
+            
+            } failure:^(__kindof YTKBaseRequest *request) {
+    }];
 }
 - (void)firstPressed
 {

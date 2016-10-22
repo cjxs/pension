@@ -7,6 +7,7 @@
 //
 
 #import "OrdAndRefundTVCell.h"
+#import "Order_ed.h"
 
 @implementation OrdAndRefundTVCell
 
@@ -23,52 +24,68 @@
 
     // Configure the view for the selected state
 }
+-(void)configOrderWithOrder:(Order_ed *)order {
+    if (self)
+    {
+        if (order.order_name)
+        {
+            self.title_label.text = order.order_name;
+        }
+        if (order.pic)
+        {
+            [self.organImage_view sd_setImageWithURL:[NSURL URLWithString:order.pic]];
+        }
+        
+        if ([order.dd_status length] == 0) {
+            self.type_label.text = @"";
+            self.first_btn.alpha = 0;
+            self.second_btn.alpha = 0;
+        }else{
+            self.first_btn.alpha = 1;
+            self.second_btn.alpha = 1;
+            if ([order.dd_status intValue] == 19)
+            {
+                self.type_label.text = @"待付款";
+                [self.first_btn setTitle:@"取消订单"
+                                forState:UIControlStateNormal];
+                [self.second_btn setTitle:@"付款"
+                                 forState:UIControlStateNormal];
+            }else if ([order.dd_status intValue] == 20) {
+                self.type_label.text = @"待使用";
+                [self.first_btn setTitle:@"取消订单"
+                                forState:UIControlStateNormal];
+                [self.second_btn setTitle:@"使用"
+                                 forState:UIControlStateNormal];
+            }else if ([order.dd_status intValue] == 21) {
+                self.type_label.text = @"待评价";
+                [self.first_btn setTitle:@"取消订单"
+                                forState:UIControlStateNormal];
+                [self.second_btn setTitle:@"评价"
+                                 forState:UIControlStateNormal];
+            }
+            
+        }
+        if (order.address) {
+            self.organAddress_label.text = order.address;
+        }else{
+            self.organAddress_label.text = @"我不信";
+        }
+        if (order.price) {
+            self.price_label.text = order.price;
+        }
+        if (order.order_spec) {
+            self.serve_label.text = order.order_spec;
+        }
+    }
+
+    
+}
 -(void)configOrderWithtitle:(NSString *)title
                       image:(UIImage *)image
                        type:(NSInteger)type
                       price:(NSString *)price
 {
-    if (self)
-    {
-        if (title)
-        {
-            self.title_label.text = title;
-        }
-        if (image)
-        {
-            self.organImage_view.image = image;
-        }
-        if (type == 1)
-        {
-            self.type_label.text = @"待付款";
-            [self.first_btn setTitle:@"取消订单"
-                            forState:UIControlStateNormal];
-            [self.second_btn setTitle:@"付款"
-                             forState:UIControlStateNormal];
-            self.serve_label.text = @"自理｜单人间朝南｜包餐";
-            self.organAddress_label.text = @"地址：杭州市滨江区江晖路隆和国际603fsgsdkyarhkgadgdshgfjzdhgfzdhj";
-        }else if (type == 2) {
-            self.type_label.text = @"待使用";
-            [self.first_btn setTitle:@"取消订单"
-                            forState:UIControlStateNormal];
-            [self.second_btn setTitle:@"使用"
-                             forState:UIControlStateNormal];
-            self.serve_label.text = @"自理｜单人间朝南｜包餐";
-            self.organAddress_label.text = @"地址：杭州市滨江区江晖路隆和国际603fsgsdkyarhkgadgdshgfjzdhgfzdhj";
-        }else if (type == 3) {
-            self.type_label.text = @"待评价";
-            [self.first_btn setTitle:@"取消订单"
-                            forState:UIControlStateNormal];
-            [self.second_btn setTitle:@"评价"
-                             forState:UIControlStateNormal];
-            self.serve_label.text = @"自理｜单人间朝南｜包餐";
-            self.organAddress_label.text = @"地址：杭州市滨江区江晖路隆和国际603fsgsdkyarhkgadgdshgfjzdhgfzdhj";
-        }
-        if (price) {
-            self.price_label.text = price;
-        }
     }
-}
 -(void)configRefundWithtitle:(NSString *)title
                        image:(UIImage *)image
                         type:(NSInteger)type

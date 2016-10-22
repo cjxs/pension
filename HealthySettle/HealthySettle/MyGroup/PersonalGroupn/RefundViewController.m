@@ -111,8 +111,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.navigationController.navigationBar.translucent = NO;
-    self.navigationController.tabBarController.tabBar.translucent = NO;
+
     self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.tableView];
     [self.tableView registerNib:[UINib nibWithNibName:@"OrdAndRefundTVCell" bundle:nil]
@@ -123,14 +122,16 @@
 {
     [super viewWillAppear:animated];
     self.navigationItem.title = _titleName;
-    [self.navigationController setNavigationBarHidden:NO
-                                             animated:YES];
+    [self.tabBarController.tabBar setHidden:YES];
+    [self.navigationController setNavigationBarHidden:NO animated:animated];
+
+
+
 }
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [self.navigationController setNavigationBarHidden:YES
-                                             animated:YES];
+
 }
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section

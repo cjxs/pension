@@ -7,9 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+@protocol ExitLoginDelegate <NSObject>
 
+-(void)exitLogin;
+
+@end
 @interface PersonDataVController : UIViewController
 @property (nonatomic, strong) NSString    * titleName;
 @property (nonatomic,strong ) UITableView * tableView;
 @property (nonatomic, strong) NSString    * type_next;
+@property (nonatomic,weak) id<ExitLoginDelegate> delegate;
 @end
+

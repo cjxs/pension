@@ -26,16 +26,14 @@
        _className.text = class_name;
     if (result)
     {
-        if ([type isEqualToString:@"L"])
+        if ([type isEqualToString:@"Y"])
         {
             _resultLabel.text = result;
-        }else if ([type isEqualToString:@"T"])
-        {
-            _resultField.placeholder = result;
         }else
         {
-            NSLog(@"出错了%@",result);
-        }
+            _resultLabel.text = result;
+            _resultLabel.textColor = RGB(14, 161, 207);
+            }
     }
 }
 @end

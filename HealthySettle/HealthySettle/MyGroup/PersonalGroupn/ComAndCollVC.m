@@ -37,7 +37,7 @@
     {
         UIImageView * imageView = [[UIImageView alloc]
                                    initWithImage:[UIImage imageNamed:@"content"]];
-        imageView.frame = CGRectMake(0, 64, screenWide, screenHeight * 0.6727);
+        imageView.frame = CGRectMake(0, 0, screenWide, screenHeight * 0.6727);
         [self.view addSubview:imageView];
     }else
     {
@@ -50,15 +50,13 @@
 {
     [super viewWillAppear:animated];
     self.navigationItem.title = _titleName;
-    [self.navigationController setNavigationBarHidden:NO
-                                             animated:YES];
+    [self.tabBarController.tabBar setHidden:YES];
+    [self.navigationController setNavigationBarHidden:NO animated:animated];
 }
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [self.navigationController setNavigationBarHidden:YES
-                                             animated:YES];
-}
+  }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;

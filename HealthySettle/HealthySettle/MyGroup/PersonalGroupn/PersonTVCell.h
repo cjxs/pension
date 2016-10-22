@@ -10,7 +10,6 @@
 
 @interface PersonTVCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel     *className;
-@property (weak, nonatomic) IBOutlet UITextField *resultField;
 @property (weak, nonatomic) IBOutlet UILabel     *resultLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *NextImage;
 - (void)configClassName:(NSString *)class_name Andresult:(NSString *)result with:(NSString *)type;

@@ -30,26 +30,13 @@
 {
     [super viewWillAppear:animated];
     self.navigationItem.title = _titleName;
-//    if (self.navigationController.navigationBar.translucent == YES)
-//    {
-//        self.navigationController.navigationBar.translucent = NO;
-//    }不一样的来源
-    if (_type_from)
-    {
-        [self.navigationController setNavigationBarHidden:NO animated:NO];
-    }else
-    {
-        [self.navigationController setNavigationBarHidden:NO animated:YES];
-    }
+
+    [self.tabBarController.tabBar setHidden:YES];
+    [self.navigationController setNavigationBarHidden:NO animated:animated];
 }
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    if (!_type_from)
-    {
-        [self.navigationController setNavigationBarHidden:YES
-                                                 animated:YES];//我的
-    }
 }
 - (void)changePasswordRightNow
 {

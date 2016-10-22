@@ -175,6 +175,9 @@
         UITextField * textfield = [[UITextField alloc] initWithFrame:CGRectMake(screenWide * 0.1, screenHeight * 0.45, screenWide * 0.8, screenHeight * 0.07)];
         textfield.keyboardType = 4;
         _number_field = textfield;
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"username"] length]!= 0) {
+            _number_field.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+        }
         UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(screenWide * 0.08, screenHeight * 0.53, screenWide * 0.84, 1)];
         label.backgroundColor = RGB(224, 225, 226);
         textfield.delegate = self;
@@ -224,7 +227,6 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear: animated];
-    self.navigationController.navigationBar.translucent = NO;
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     [self.tabBarController.tabBar setHidden:YES];
 }
@@ -502,7 +504,8 @@
             [Member DefaultUser].login = @"online";
             [self.navigationController popViewControllerAnimated:YES];
             [self.delegate updateUserData];
-
+            [[NSUserDefaults standardUserDefaults] setObject:pwd forKey:@"password"];
+            [[NSUserDefaults standardUserDefaults] setObject:username forKey:@"username"];
         }else {
             UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:dic[@"msg"] message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
             [self touchesBegan:nil withEvent:nil];

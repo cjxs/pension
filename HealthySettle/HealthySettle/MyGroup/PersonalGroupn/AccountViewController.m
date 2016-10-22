@@ -147,14 +147,11 @@
 {
     [super viewWillAppear:animated];
     self.navigationItem.title = _titleName;
-    self.navigationController.navigationBar.translucent = NO;
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
-}
+    [self.tabBarController.tabBar setHidden:YES];
+    [self.navigationController setNavigationBarHidden:NO animated:animated];}
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [self.navigationController setNavigationBarHidden:YES
-                                             animated:YES];
 }
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section

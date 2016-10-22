@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+@class Order_ed;
 
 @interface OrdAndRefundTVCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel     *title_label;
@@ -17,6 +18,6 @@
 @property (weak, nonatomic) IBOutlet UILabel     *price_label;
 @property (weak, nonatomic) IBOutlet UIButton    *first_btn;
 @property (weak, nonatomic) IBOutlet UIButton    *second_btn;
--(void)configOrderWithtitle:(NSString *)title image:(UIImage *)image type:(NSInteger)type price:(NSString *)price;
+-(void)configOrderWithOrder:(Order_ed *)order ;
 -(void)configRefundWithtitle:(NSString *)title image:(UIImage *)image type:(NSInteger)type price:(NSString *)price ;
 @end

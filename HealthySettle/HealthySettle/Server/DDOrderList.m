@@ -1,22 +1,26 @@
 //
-//  DDFirst.m
+//  DDOrderList.m
 //  HealthySettle
 //
-//  Created by yrc on 16/7/14.
+//  Created by yrc on 16/10/21.
 //  Copyright © 2016年 yrc. All rights reserved.
 //
 
-#import "DDFirst.h"
+#import "DDOrderList.h"
 
-@implementation DDFirst {
+@implementation DDOrderList{
     NSString * _uid;
-    BOOL _login;
+    NSString * _login;
 }
--(id)initWithUid:(NSString *)uid login:(BOOL)login {
+-(id)initWithUid:(NSString *)uid login:(NSString *)login {
     self = [super init];
     if (self) {
         _uid = uid;
-        _login = login;
+        if (!login) {
+            _login = @"";
+        }else{
+            _login = login;
+        }
     }
     return self;
 }
@@ -33,9 +37,11 @@
 -(id)requestArgument
 {
     return @ {
-        @"controller":@"getdata",
+        @"controller":@"order_l",
         @"uid" : _uid,
-        @"login" : @(_login)
+        @"login" : _login
     };
 }
+
+
 @end

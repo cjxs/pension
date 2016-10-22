@@ -8,8 +8,13 @@
 
 #import "PersonVController.h"
 #import "OrdAndRefundTVCell.h"
+#import "DDOrderList.h"
+#import "Order_ed.h"
 //我的订单
-@interface PersonVController ()<UITableViewDataSource, UITableViewDelegate>
+@interface PersonVController ()<UITableViewDataSource, UITableViewDelegate>{
+    NSMutableArray * dataSource;
+    NSMutableArray * current_arr;
+}
 
 @end
 
@@ -68,8 +73,7 @@
 - (UITableView *)tableView
 {
     if (!_tableView) {
-        _tableView = [[UITableView alloc]
-                      initWithFrame:CGRectMake(0, 31, screenWide, 500)];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 31, screenWide, 500) style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
@@ -79,34 +83,52 @@
 }
 - (void)changeDataOfbtn:(UIButton *)btn
 {
-    [self changeColorForAll];
-    [btn setTitleColor:[UIColor redColor]
-              forState:UIControlStateNormal];
-    for (UIView *view in _tableHeadView.subviews)
-    {
-        if (view.frame.size.height == 1 && view.frame.origin.x == btn.frame.origin.x)
+    if (btn.titleLabel.textColor == [UIColor redColor]) {
+        //释放没用的事件
+    }else{
+        [self changeColorForAll];
+        [btn setTitleColor:[UIColor redColor]
+                  forState:UIControlStateNormal];
+        for (UIView *view in _tableHeadView.subviews)
         {
-            view.backgroundColor = [UIColor redColor];
+            if (view.frame.size.height == 1 && view.frame.origin.x == btn.frame.origin.x)
+            {
+                view.backgroundColor = [UIColor redColor];
+            }
         }
+        int wave = btn.frame.origin.x  / (screenWide / 4);
+        [self changeDataWithWave:wave];
     }
-    int wave = btn.frame.origin.x  / (screenWide / 4);
-    [self changeDataWithWave:wave];
 }
 -(void)changeDataWithWave:(int)wave
 {
+    [current_arr removeAllObjects];
     if (wave == 0)
     {
-        NSLog(@"数组来自数据源, 数据库数组");
+        current_arr = [NSMutableArray arrayWithArray:dataSource];
+
     }else if (wave == 1)
     {
-        NSLog(@"新建一个数组， 按所对应筛选条件滤出数组， 作为数据源");
-        _order_type =1;
+        for (Order_ed * order in dataSource) {
+            if ([order.dd_status intValue] == 19) {
+                [current_arr addObject:order];
+            }
+        }
     }else if (wave == 2)
     {
-        _order_type = 2;
+        for (Order_ed * order in dataSource) {
+            if ([order.dd_status intValue] == 20) {
+                NSLog(@"^%@",order.dd_status);
+                [current_arr addObject:order];
+            }
+        }
     }else
     {
-        _order_type = 3;
+        for (Order_ed * order in dataSource) {
+            if ([order.dd_status intValue] == 21) {
+                [current_arr addObject:order];
+            }
+        }
     }
     [self.tableView reloadData];
 }
@@ -114,26 +136,60 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.navigationController.navigationBar.translucent = NO;
-    self.navigationController.tabBarController.tabBar.translucent = NO;
     self.view.backgroundColor = [UIColor whiteColor];
+    [self setData];
+}
+-(void)setData{
+    Member * user = [Member DefaultUser];
+    DDOrderList * order_list = [[DDOrderList alloc] initWithUid:user.uid login:user.login];
+    [order_list startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
+        NSDictionary * dic = [DDLogin dictionaryWithJsonString:request.responseString];
+        dataSource = [NSMutableArray arrayWithCapacity:0];
+        current_arr = [NSMutableArray arrayWithCapacity:0];
+        if ([dic[@"error_code"] intValue] == 0) {
+            Order_ed * order;
+            for (NSDictionary * dic_l in dic[@"order"]) {
+                NSLog(@"%@",dic_l[@"address"]);
+                order = [Order_ed mj_objectWithKeyValues:dic_l];
+                NSLog(@"%@",order.order_sn);
+                if ([order.status intValue] == 10||[order.status intValue] == 11) {
+                    order.dd_status = @"21";
+                }
+                else if ([order.status intValue] == 3||[order.status intValue] == 7||[order.status intValue] == 1) {
+                    order.dd_status = @"20";
+                }else if ([order.status intValue] == 6) {
+                    order.dd_status = @"19";
+                }
+                [dataSource addObject:order];
+            }
+            current_arr = [NSMutableArray arrayWithArray:dataSource];
+            [self loadData];
+        }
+        else{
+             //其他途径获取数据
+        }
+    } failure:^(__kindof YTKBaseRequest *request) {
+        
+    }];
+    
+}
+-(void)loadData{
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.tableHeadView];
     [self.tableView registerNib:[UINib nibWithNibName:@"OrdAndRefundTVCell" bundle:nil]
          forCellReuseIdentifier:@"cellOrder"];
+
 }
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     self.navigationItem.title = _titleName;
-    [self.navigationController setNavigationBarHidden:NO
-                                             animated:YES];
+    [self.tabBarController.tabBar setHidden:YES];
+    self.navigationController.navigationBarHidden = NO;
 }
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [self.navigationController setNavigationBarHidden:YES
-                                             animated:YES];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView
@@ -141,7 +197,7 @@
 {
     if ([_type isEqualToString:@"order"])
     {
-        return 1;
+        return current_arr.count;
     }else if ([_type isEqualToString:@"collect"])
     {
         return 1;
@@ -153,12 +209,12 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-          OrdAndRefundTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cellOrder"
+    OrdAndRefundTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cellOrder"
                                                                       forIndexPath:indexPath];
-        [cell configOrderWithtitle:@"杭州滨江区养老院"
-                             image:[UIImage imageNamed:@"order_image"]
-                              type:self.order_type
-                             price:@"999.00"];
+    Order_ed * order = [Order_ed mj_objectWithKeyValues:current_arr[indexPath.row]];
+    [cell configOrderWithOrder:order];
+    
+       
         return cell;
  }
 -(CGFloat)tableView:(UITableView *)tableView

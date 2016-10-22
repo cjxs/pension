@@ -72,23 +72,18 @@
     [super viewDidLoad];
     [self.view addSubview:self.tableView];
     self.tableView.tableHeaderView = self.headView;
-    
-    
 }
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     self.navigationItem.title = self.titleName;
-    self.navigationController.navigationBar.translucent = NO;
-     [self.navigationController setNavigationBarHidden:NO
-                                              animated:animated];
+    [self.tabBarController.tabBar setHidden:NO];
+    self.navigationController.navigationBarHidden = NO;
 }
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
    
-    [self.navigationController setNavigationBarHidden:YES
-                                             animated:YES];
 }
 
 - (void)didReceiveMemoryWarning
