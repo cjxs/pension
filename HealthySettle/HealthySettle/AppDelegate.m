@@ -183,6 +183,7 @@ static NSString * const UMDEVICETOKEN      = @"UMDeviceToken";// 友盟推送的
     [loginApi startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
         NSString *str = [request.responseString stringByReplacingOccurrencesOfString:@":null" withString:@":\"\""];
         dic = [DDLogin dictionaryWithJsonString: str];
+        if ([dic[@"error_code"] intValue] == 0) {
             [Member DefaultUser].uid = dic[@"uid"];
             [Member DefaultUser].nickname = dic[@"nickname"];
             [Member DefaultUser].sex = dic[@"gender"];
@@ -193,8 +194,12 @@ static NSString * const UMDEVICETOKEN      = @"UMDeviceToken";// 友盟推送的
             [Member DefaultUser].now_money = dic[@"now_money"];
             [Member DefaultUser].score_count = dic[@"score_count"];
             [Member DefaultUser].login = @"online";
-            
+        }else{
+            [Member DefaultUser].login = @"";
+
+        }
             } failure:^(__kindof YTKBaseRequest *request) {
+                [Member DefaultUser].login = @"";
     }];
 }
 - (void)firstPressed

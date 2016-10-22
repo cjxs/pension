@@ -33,7 +33,9 @@
         }
         if (order.pic)
         {
-            [self.organImage_view sd_setImageWithURL:[NSURL URLWithString:order.pic]];
+            NSString *  str2 = [NSString stringWithFormat:@"%@/upload/group/%@",BASEURL,order.pic];
+            NSString * str3 = [str2 stringByReplacingOccurrencesOfString:@"," withString:@"/"];
+            [self.organImage_view sd_setImageWithURL:[NSURL URLWithString:str3]];
         }
         
         if ([order.dd_status length] == 0) {
@@ -62,6 +64,18 @@
                                 forState:UIControlStateNormal];
                 [self.second_btn setTitle:@"评价"
                                  forState:UIControlStateNormal];
+            }else if ([order.dd_status intValue] == 29) {
+                self.type_label.text = @"待处理";
+                [self.first_btn setTitle:@"取消退款"
+                                forState:UIControlStateNormal];
+                [self.second_btn setTitle:@"去投诉"
+                                 forState:UIControlStateNormal];
+            }else if ([order.dd_status intValue] == 31) {
+                self.type_label.text = @"已退款";
+                [self.first_btn setTitle:@"去评价"
+                                forState:UIControlStateNormal];
+                [self.second_btn setTitle:@"去购买"
+                                 forState:UIControlStateNormal];
             }
             
         }
@@ -71,7 +85,7 @@
             self.organAddress_label.text = @"我不信";
         }
         if (order.price) {
-            self.price_label.text = order.price;
+            self.price_label.text = [order.price stringByReplacingOccurrencesOfString:@".00" withString:@""];
         }
         if (order.order_spec) {
             self.serve_label.text = order.order_spec;

@@ -149,9 +149,7 @@
         if ([dic[@"error_code"] intValue] == 0) {
             Order_ed * order;
             for (NSDictionary * dic_l in dic[@"order"]) {
-                NSLog(@"%@",dic_l[@"address"]);
                 order = [Order_ed mj_objectWithKeyValues:dic_l];
-                NSLog(@"%@",order.order_sn);
                 if ([order.status intValue] == 10||[order.status intValue] == 11) {
                     order.dd_status = @"21";
                 }
@@ -212,6 +210,7 @@
     OrdAndRefundTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cellOrder"
                                                                       forIndexPath:indexPath];
     Order_ed * order = [Order_ed mj_objectWithKeyValues:current_arr[indexPath.row]];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     [cell configOrderWithOrder:order];
     
        

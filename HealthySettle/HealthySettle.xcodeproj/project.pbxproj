@@ -153,6 +153,7 @@
 		3285AF111D3C72970070618A /* LoginOrRegisViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3285AF101D3C72970070618A /* LoginOrRegisViewController.m */; };
 		3292A74F1CA3D14E004FEB57 /* CDCityPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 3292A74E1CA3D14E004FEB57 /* CDCityPicker.m */; };
 		3292A7511CA3DCA4004FEB57 /* districtMGE.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3292A7501CA3DCA4004FEB57 /* districtMGE.plist */; };
+		32A3BB771DBB16490009D50F /* DDCollectList.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A3BB761DBB16490009D50F /* DDCollectList.m */; };
 		32CABD641CA373AA0068AE93 /* CityCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CABD571CA373AA0068AE93 /* CityCollectionViewCell.m */; };
 		32CABD651CA373AA0068AE93 /* CitySkipViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CABD591CA373AA0068AE93 /* CitySkipViewCell.m */; };
 		32CABD661CA373AA0068AE93 /* SearchVController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CABD5C1CA373AA0068AE93 /* SearchVController.m */; };
@@ -675,6 +676,8 @@
 		3292A74D1CA3D14E004FEB57 /* CDCityPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDCityPicker.h; sourceTree = "<group>"; };
 		3292A74E1CA3D14E004FEB57 /* CDCityPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDCityPicker.m; sourceTree = "<group>"; };
 		3292A7501CA3DCA4004FEB57 /* districtMGE.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = districtMGE.plist; sourceTree = "<group>"; };
+		32A3BB751DBB16490009D50F /* DDCollectList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDCollectList.h; sourceTree = "<group>"; };
+		32A3BB761DBB16490009D50F /* DDCollectList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDCollectList.m; sourceTree = "<group>"; };
 		32CABD561CA373AA0068AE93 /* CityCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityCollectionViewCell.h; sourceTree = "<group>"; };
 		32CABD571CA373AA0068AE93 /* CityCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityCollectionViewCell.m; sourceTree = "<group>"; };
 		32CABD581CA373AA0068AE93 /* CitySkipViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CitySkipViewCell.h; sourceTree = "<group>"; };
@@ -1551,6 +1554,8 @@
 				32CEF81D1DB7027E00CB7584 /* DDGroupData.m */,
 				3273DF8C1DB9F2750094AD42 /* DDOrderList.h */,
 				3273DF8D1DB9F2750094AD42 /* DDOrderList.m */,
+				32A3BB751DBB16490009D50F /* DDCollectList.h */,
+				32A3BB761DBB16490009D50F /* DDCollectList.m */,
 				3285AF001D35DD8C0070618A /* DDGetTest.h */,
 				3285AF011D35DD8C0070618A /* DDGetTest.m */,
 				32FB002F1D40C163008A5497 /* DDFindTest.h */,
@@ -2152,6 +2157,7 @@
 				3252D6541CC752B5000FAFBC /* MD5DataSigner.m in Sources */,
 				32CEF8351DB8B4ED00CB7584 /* DDUpdatePWD.m in Sources */,
 				32FB002B1D3F1BE4008A5497 /* GetPassWordViewController.m in Sources */,
+				32A3BB771DBB16490009D50F /* DDCollectList.m in Sources */,
 				32DB053B1DA8CDF40041C4F5 /* SDCycleScrollView.m in Sources */,
 				32CABD6A1CA373AA0068AE93 /* SeasonMCollectViewCell.m in Sources */,
 				32E71CA01CB255D50079CD73 /* OrderLaeblTVCell.m in Sources */,

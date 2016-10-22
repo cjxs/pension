@@ -8,9 +8,16 @@
 
 #import "RefundViewController.h"
 #import "OrdAndRefundTVCell.h"
+#import "DDOrderList.h"
+#import "Order_ed.h"
+
 
 //维权
-@interface RefundViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface RefundViewController ()<UITableViewDelegate,UITableViewDataSource>{
+    NSMutableArray * dataSource;
+    NSMutableArray * current_arr;
+}
+
 
 @end
 
@@ -83,6 +90,9 @@
 }
 - (void)changeDataOfbtn:(UIButton *)btn
 {
+    if (btn.titleLabel.textColor == [UIColor redColor]) {
+        //释放没用的事件
+    }else{
     [self changeColorForAll];
     [btn setTitleColor:[UIColor redColor]
               forState:UIControlStateNormal];
@@ -94,30 +104,82 @@
             view.backgroundColor = [UIColor redColor];
         }
     }
-    int wave = btn.frame.origin.x  / (screenWide / 4);
+    int wave = (btn.frame.origin.x+5)  / (screenWide / 3);
     [self changeDataWithWave:wave];
+    }
 }
 -(void)changeDataWithWave:(int)wave
 {
+     [current_arr removeAllObjects];
     if (wave == 0)
     {
-        NSLog(@"数组来自数据源, 数据库数组");
+        for (Order_ed * order in dataSource) {
+            if ([order.dd_status intValue] == 31||[order.dd_status intValue] == 29) {
+                [current_arr addObject:order];
+            }
+        }
     }else if (wave == 1)
     {
-        NSLog(@"新建一个数组， 按所对应筛选条件滤出数组， 作为数据源");
+        for (Order_ed * order in dataSource) {
+            if ([order.dd_status intValue] == 29) {
+                [current_arr addObject:order];
+            }
+        }
+    }else{
+        for (Order_ed * order in dataSource) {
+            if ([order.dd_status intValue] == 31) {
+                [current_arr addObject:order];
+            }
+        }
     }
+    [self.tableView reloadData];
 }
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-
     self.view.backgroundColor = [UIColor whiteColor];
+    [self setData];
+}
+-(void)loadData{
     [self.view addSubview:self.tableView];
     [self.tableView registerNib:[UINib nibWithNibName:@"OrdAndRefundTVCell" bundle:nil]
          forCellReuseIdentifier:@"cellRefund"];
     [self.view addSubview:self.tableHeadView];
- }
+}
+-(void)setData{
+    Member * user = [Member DefaultUser];
+    DDOrderList * order_list = [[DDOrderList alloc] initWithUid:user.uid login:user.login];
+    [order_list startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
+        NSDictionary * dic = [DDLogin dictionaryWithJsonString:request.responseString];
+        dataSource = [NSMutableArray arrayWithCapacity:0];
+        current_arr = [NSMutableArray arrayWithCapacity:0];
+        if ([dic[@"error_code"] intValue] == 0) {
+            Order_ed * order;
+            for (NSDictionary * dic_l in dic[@"order"]) {
+                order = [Order_ed mj_objectWithKeyValues:dic_l];
+                
+                if ([order.status intValue] == 2||[order.status intValue] == 9) {
+                    order.dd_status = @"29";
+                    [current_arr addObject:order];
+                }
+                else if ([order.status intValue] == 4||[order.status intValue] == 5||[order.status intValue] == 8) {
+                    order.dd_status = @"31";
+                    [current_arr addObject:order];
+                }
+                [dataSource addObject:order];
+            }
+            [self loadData];
+        }
+        else{
+            //其他途径获取数据
+        }
+    } failure:^(__kindof YTKBaseRequest *request) {
+        
+    }];
+    
+}
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -136,7 +198,7 @@
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section
 {
-        return 5;
+        return current_arr.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -144,10 +206,10 @@
     
     OrdAndRefundTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cellRefund"
                                                                 forIndexPath:indexPath];
-    [cell configRefundWithtitle:@"杭州滨江区"
-                          image:[UIImage imageNamed:@"order_image"]
-                           type:1
-                          price:@"999.00"];
+    Order_ed * order = [Order_ed mj_objectWithKeyValues:current_arr[indexPath.row]];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    [cell configOrderWithOrder:order];
+
     return cell;
     
 }

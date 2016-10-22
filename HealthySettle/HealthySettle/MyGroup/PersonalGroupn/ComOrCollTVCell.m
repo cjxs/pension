@@ -36,7 +36,9 @@
         }
         if (image)
         {
-            self.organimage_view.image = image;
+            NSString *  str2 = [NSString stringWithFormat:@"%@/upload/group/%@",BASEURL,image];
+            NSString * str3 = [str2 stringByReplacingOccurrencesOfString:@"," withString:@"/"];
+            [self.organimage_view sd_setImageWithURL:[NSURL URLWithString:str3]];
         }
         if ([type isEqualToString:@"collect"])
         {

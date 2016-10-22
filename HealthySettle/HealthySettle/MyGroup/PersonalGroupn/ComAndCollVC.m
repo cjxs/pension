@@ -8,9 +8,12 @@
 
 #import "ComAndCollVC.h"
 #import "ComOrCollTVCell.h"
+#import "DDCollectList.h"
 
 //收藏和点评
-@interface ComAndCollVC ()<UITableViewDataSource, UITableViewDelegate>
+@interface ComAndCollVC ()<UITableViewDataSource, UITableViewDelegate>{
+    NSMutableArray * collect_Arr;
+}
 
 @end
 
@@ -39,12 +42,31 @@
                                    initWithImage:[UIImage imageNamed:@"content"]];
         imageView.frame = CGRectMake(0, 0, screenWide, screenHeight * 0.6727);
         [self.view addSubview:imageView];
-    }else
-    {
-        [self.view addSubview:self.homeTableView];
-        [self.homeTableView registerNib:[UINib nibWithNibName:@"ComOrCollTVCell" bundle:nil]
-                 forCellReuseIdentifier:@"cell123"];
+    }else if ([self.type isEqualToString:@"collect"]){
+        [self setCollectData];
     }
+}
+-(void)setCollectData{
+    Member * user = [Member DefaultUser];
+
+    DDCollectList * collect_list = [[DDCollectList alloc] initWithUid:user.uid login:user.login];
+    [collect_list startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
+        NSDictionary * dic = [DDLogin dictionaryWithJsonString:request.responseString];
+        if ([dic[@"error_code"] intValue]== 0) {
+            collect_Arr = dic[@"collect"];
+            [self loadCollectData];
+        }else{
+            NSLog(@"出错啦%@",dic);
+        }
+    } failure:^(__kindof YTKBaseRequest *request) {
+        
+    }];
+    
+}
+-(void)loadCollectData{
+    [self.view addSubview:self.homeTableView];
+    [self.homeTableView registerNib:[UINib nibWithNibName:@"ComOrCollTVCell" bundle:nil]
+             forCellReuseIdentifier:@"cell123"];
 }
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -64,7 +86,7 @@
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+    return collect_Arr.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -72,10 +94,11 @@
     ComOrCollTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell123"
                                                              forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    [cell configRefundWithtitle:@"杭州收藏所有养生基地"
-                          image:[UIImage imageNamed:@"order_image"]
+    NSDictionary *dic = collect_Arr[indexPath.row];
+    [cell configRefundWithtitle:dic[@"s_name"]
+                          image:dic[@"pic"]
                            type: _type
-                          price:@"699.00"];
+                          price:dic[@"price"]];
     return cell;
 }
 -(CGFloat)tableView:(UITableView *)tableView

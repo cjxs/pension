@@ -26,7 +26,7 @@
 
 
 
-static NSString * BASEURL = @"http://cswl.5199yl.com";
+static NSString * BASEURL = @"http://www.5199yl.com";
 static NSString * WXAPPID = @"wx6a68684031971e42";
 static NSString * WXAPPSECRET = @"dc5622186812b1928b2ef20355fd6ace";
 static NSString * WXMID = @"1335997801";
