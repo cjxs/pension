@@ -8,8 +8,11 @@
 
 #import "AccountViewController.h"
 #import "AccountTVCell.h"
-
-@interface AccountViewController ()<UITableViewDelegate,UITableViewDataSource>
+#import "DDMoneyList.h"
+#import "DDScoreList.h"
+@interface AccountViewController ()<UITableViewDelegate,UITableViewDataSource>{
+    NSMutableArray * data_Arr;
+}
 
 @end
 
@@ -19,7 +22,7 @@
     if (!_nomoney_label)
     {
         UILabel * label = [[UILabel alloc]
-                           initWithFrame:CGRectMake(screenWide * 0.15, screenHeight * 0.08, screenWide * 0.2, screenHeight * 0.04)];
+                           initWithFrame:CGRectMake(screenWide * 0.4, screenHeight * 0.08, screenWide * 0.2, screenHeight * 0.04)];
         label.textAlignment = NSTextAlignmentCenter;
         label.font = [UIFont systemFontOfSize:14];
         _nomoney_label = label;
@@ -31,8 +34,8 @@
     if (!_money_label)
     {
         UILabel * label = [[UILabel alloc]
-                           initWithFrame:CGRectMake(screenWide * 0.45, screenHeight * 0.08, screenWide * 0.4, screenHeight * 0.04)];
-        label.textAlignment = NSTextAlignmentRight;
+                           initWithFrame:CGRectMake(screenWide * 0.3, screenHeight * 0.08, screenWide * 0.4, screenHeight * 0.04)];
+        label.textAlignment = NSTextAlignmentCenter;
         label.font = [UIFont systemFontOfSize:14];
         label.adjustsFontSizeToFitWidth = YES;
         _money_label = label;
@@ -49,10 +52,13 @@
         {
             view.frame = CGRectMake(0, screenHeight * 0.01, screenWide, screenHeight * 0.18);
             //加限制条件判断有无积分
-            self.nomoney_label.text = @"暂无积分";
-            [view addSubview:self.nomoney_label];
-            self.money_label.text = @"1000";
-            [view addSubview:self.money_label];
+            if ([[Member DefaultUser].score_count integerValue] != 0 ) {
+                self.money_label.text = [NSString stringWithFormat:@"我的积分:%@",[Member DefaultUser].score_count];
+                [view addSubview:self.money_label];
+            }else{
+                self.nomoney_label.text = @"暂无积分";
+                [view addSubview:self.nomoney_label];
+            }
         }else
         {
             view.frame = CGRectMake(0, screenHeight * 0.01, screenWide, screenHeight * 0.29);
@@ -68,11 +74,16 @@
             _toCash_btn = button;
             [view addSubview:button];
             //加限制条件判断有无现金
-            self.nomoney_label.text = @"暂无现金";
-            [view addSubview:self.nomoney_label];
             button.backgroundColor = RGB(190, 190, 190);
-            self.money_label.text = @"¥1000.00";
-            [view addSubview:self.money_label];
+
+            if ([[Member DefaultUser].now_money integerValue] != 0 ) {
+                self.money_label.text = [NSString stringWithFormat:@"¥%@",[Member DefaultUser].now_money];
+                [view addSubview:self.money_label];
+            }else{
+                self.nomoney_label.text = @"暂无现金";
+                [view addSubview:self.nomoney_label];
+
+            }
         }
         UIView * line = [[UIView alloc]
                          initWithFrame:CGRectMake(0, CGRectGetHeight(view.frame) - 1, screenWide, 1)];
@@ -104,21 +115,65 @@
 {
     [super viewDidLoad];
     self.view.backgroundColor = RGB(244, 244, 244);
-    UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.frame = CGRectMake(0, 0, screenWide * 0.175, 35);
-    button.titleLabel.font = [UIFont systemFontOfSize:14];
-    [button setTitle:@"全部明细" forState:UIControlStateNormal];
-    [button addTarget:self
-               action:@selector(showAllData)
-     forControlEvents:UIControlEventTouchUpInside];
-    [button setTitleColor:RGB(229, 0, 0)
-                 forState:UIControlStateNormal];
-    UIBarButtonItem * rightButtonItem = [[UIBarButtonItem alloc]
-                                         initWithCustomView:button];
-    self.navigationItem.rightBarButtonItem = rightButtonItem;
+    if ([self.titleName isEqualToString:@"我的积分"])
+    {
+        [self setScoreData];
+    }else{
+        [self setMoneyData];
+    }
+}
+-(void)loadData {
+//    UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
+//    button.frame = CGRectMake(0, 0, screenWide * 0.175, 35);
+//    button.titleLabel.font = [UIFont systemFontOfSize:14];
+//    [button setTitle:@"全部明细" forState:UIControlStateNormal];
+//    [button addTarget:self
+//               action:@selector(showAllData)
+//     forControlEvents:UIControlEventTouchUpInside];
+//    [button setTitleColor:RGB(229, 0, 0)
+//                 forState:UIControlStateNormal];
+//    UIBarButtonItem * rightButtonItem = [[UIBarButtonItem alloc]
+//                                         initWithCustomView:button];
+//    self.navigationItem.rightBarButtonItem = rightButtonItem;
     [self.view addSubview:self.above_view];
     [self showAllData];
+
 }
+-(void)setMoneyData {
+    Member * user = [Member DefaultUser];
+    DDMoneyList * money_list = [[DDMoneyList alloc] initWithUid:user.uid login:user.login];
+    [money_list startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
+        NSDictionary * dic = [DDLogin dictionaryWithJsonString:request.responseString];
+        if ([dic[@"error_code"] intValue] == 0) {
+            data_Arr = [NSMutableArray arrayWithCapacity:0];
+            for (NSDictionary *dic_l  in dic[@"money_list"]) {
+                [data_Arr addObject:dic_l];
+                }
+            [self loadData];
+            }
+           } failure:^(__kindof YTKBaseRequest *request) {
+        NSLog(@"%@",request.requestOperation);
+    }];
+}
+-(void)setScoreData{
+    Member * user = [Member DefaultUser];
+    DDScoreList * score_list = [[DDScoreList alloc] initWithUid:user.uid login:user.login];
+    [score_list startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
+        NSDictionary * dic = [DDLogin dictionaryWithJsonString:request.responseString];
+        if ([dic[@"error_code"] intValue] == 0) {
+            data_Arr = [NSMutableArray arrayWithCapacity:0];
+            for (NSDictionary *dic_l  in dic[@"money_list"]) {
+                [data_Arr addObject:dic_l];
+            }
+            [self loadData];
+        }
+
+    } failure:^(__kindof YTKBaseRequest *request) {
+        
+    }];
+    
+}
+
 -(void)showAllData
 {
     if ([self.titleName isEqualToString:@"我的积分"])
@@ -131,7 +186,7 @@
         label.textAlignment = NSTextAlignmentCenter;
         label.textColor = RGB(188, 188, 188);
         [self.view addSubview:label];
-//        [self.view addSubview:self.table_view];
+        [self.view addSubview:self.table_view];
     }else
     {
 //        UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(screenWide * 0.3, screenHeight * 0.36, screenWide * 0.4, screenHeight * 0.05)];
@@ -156,14 +211,21 @@
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section
 {
-    return 5;
+    return data_Arr.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     AccountTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cellAccount"
                                                            forIndexPath:indexPath];
-    
+    NSDictionary * dic = data_Arr[indexPath.row];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    if ([self.titleName isEqualToString:@"我的积分"])
+    {
+        [cell configWithTitle:dic[@"desc"] type:dic[@"type"] score:dic[@"score"]];
+    }else{
+        [cell configWithTitle:dic[@"desc"] type:dic[@"type"] money:dic[@"money"]];
+    }
     return cell;
 }
 -(CGFloat)tableView:(UITableView *)tableView

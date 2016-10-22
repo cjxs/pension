@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		320108131DBB4A38007ACA6B /* DDMoneyList.m in Sources */ = {isa = PBXBuildFile; fileRef = 320108121DBB4A38007ACA6B /* DDMoneyList.m */; };
+		320108161DBB58F9007ACA6B /* DDScoreList.m in Sources */ = {isa = PBXBuildFile; fileRef = 320108151DBB58F9007ACA6B /* DDScoreList.m */; };
 		320BE5C81CBC900D00A34FCB /* AccountTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 320BE5C61CBC900D00A34FCB /* AccountTVCell.m */; };
 		320BE5C91CBC900D00A34FCB /* AccountTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 320BE5C71CBC900D00A34FCB /* AccountTVCell.xib */; };
 		320BE5D81CBCDFC700A34FCB /* system_1_41@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 320BE5D01CBCDFC700A34FCB /* system_1_41@2x.png */; };
@@ -303,6 +305,10 @@
 
 /* Begin PBXFileReference section */
 		19C0DD8F63F6611305C1DF8C /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		320108111DBB4A38007ACA6B /* DDMoneyList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDMoneyList.h; sourceTree = "<group>"; };
+		320108121DBB4A38007ACA6B /* DDMoneyList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDMoneyList.m; sourceTree = "<group>"; };
+		320108141DBB58F9007ACA6B /* DDScoreList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDScoreList.h; sourceTree = "<group>"; };
+		320108151DBB58F9007ACA6B /* DDScoreList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDScoreList.m; sourceTree = "<group>"; };
 		320BE5C51CBC900D00A34FCB /* AccountTVCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountTVCell.h; sourceTree = "<group>"; };
 		320BE5C61CBC900D00A34FCB /* AccountTVCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountTVCell.m; sourceTree = "<group>"; };
 		320BE5C71CBC900D00A34FCB /* AccountTVCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountTVCell.xib; sourceTree = "<group>"; };
@@ -1556,6 +1562,10 @@
 				3273DF8D1DB9F2750094AD42 /* DDOrderList.m */,
 				32A3BB751DBB16490009D50F /* DDCollectList.h */,
 				32A3BB761DBB16490009D50F /* DDCollectList.m */,
+				320108111DBB4A38007ACA6B /* DDMoneyList.h */,
+				320108121DBB4A38007ACA6B /* DDMoneyList.m */,
+				320108141DBB58F9007ACA6B /* DDScoreList.h */,
+				320108151DBB58F9007ACA6B /* DDScoreList.m */,
 				3285AF001D35DD8C0070618A /* DDGetTest.h */,
 				3285AF011D35DD8C0070618A /* DDGetTest.m */,
 				32FB002F1D40C163008A5497 /* DDFindTest.h */,
@@ -2103,6 +2113,7 @@
 				32CABD691CA373AA0068AE93 /* SeasonCTViewCell.m in Sources */,
 				32E71CA31CB256770079CD73 /* OrderTextFieldTVCell.m in Sources */,
 				32DB05471DA8D8930041C4F5 /* BannerWebVC.m in Sources */,
+				320108161DBB58F9007ACA6B /* DDScoreList.m in Sources */,
 				32CEF81E1DB7027E00CB7584 /* DDGroupData.m in Sources */,
 				325C82501CB12BB70004EA0C /* ShouldKnowTVCell.m in Sources */,
 				326F247E1CCB0690002BCE0D /* ApiXml.mm in Sources */,
@@ -2140,6 +2151,7 @@
 				324075D11CAD218800BAF253 /* RegimenRTVCell.m in Sources */,
 				32E588B61CB78BE1002AED1A /* CommonTVCell.m in Sources */,
 				325C82411CB0E7530004EA0C /* OrgIntroTVCell.m in Sources */,
+				320108131DBB4A38007ACA6B /* DDMoneyList.m in Sources */,
 				32CABD901CA374020068AE93 /* TempView.m in Sources */,
 				3252D6511CC752B5000FAFBC /* base64.m in Sources */,
 				32CABD661CA373AA0068AE93 /* SearchVController.m in Sources */,
