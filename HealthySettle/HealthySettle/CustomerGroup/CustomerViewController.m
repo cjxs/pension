@@ -9,6 +9,7 @@
 #import "CustomerViewController.h"
 #import "YTKBatchRequest.h"
 #import "DDFindGet.h"
+#import "DDGetCity.h"
 @interface CustomerViewController ()<UIWebViewDelegate,UIGestureRecognizerDelegate>
 @end
 @implementation CustomerViewController
@@ -32,6 +33,23 @@
         [image_view addGestureRecognizer:tap1];
         [self.view addSubview:image_view];
     }
+//    DDGetCity * getcity = [[DDGetCity alloc] init];
+//    [getcity startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
+//        NSArray * arr = [DDLogin arrayWithJsonString:request.responseString];
+//        if (arr) {
+//            NSArray *paths=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
+//            NSString *path=[paths  objectAtIndex:0];
+//            NSLog(@"path = %@",path);
+//            NSString *filename=[path stringByAppendingPathComponent:@"city_01.plist"];
+//            NSFileManager* fm = [NSFileManager defaultManager];
+//            [fm createFileAtPath:filename contents:nil attributes:nil];
+//            [arr writeToFile:filename atomically:YES];
+//            NSLog(@"已经全部写入%@",filename);
+//        }
+//    } failure:^(__kindof YTKBaseRequest *request) {
+//        
+//    }];
+
 }
 - (void)callCostomerWithimage:(UITapGestureRecognizer *)gesture{
     if (gesture.view.tag == 200) {

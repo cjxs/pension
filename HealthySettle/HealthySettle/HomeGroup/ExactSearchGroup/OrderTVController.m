@@ -14,10 +14,15 @@
 #import "DataSigner.h"
 #import <AlipaySDK/AlipaySDK.h>
 #import "WXApiRequestHandler.h"
+#import "CDDatePicker.h"
 
-@interface OrderTVController ()
+@interface OrderTVController ()<HYMDatePickerDelegate>
 {
     UIView * view_pay;
+    NSDate * end_begin;
+    NSDate * end_end;
+    UILabel * checkIn_timelabel;
+    UILabel * leave_timelabel;
 }
 
 @end
@@ -37,7 +42,8 @@
         [_tableHeadView addSubview:backHeadView];
         UILabel * organ_label = [[UILabel alloc]
                                  initWithFrame:CGRectMake(8,0 , screenWide - 50, 0.05 * screenHeight)];
-        organ_label.text = @"巴拉巴拉小魔仙养老机构";
+        
+        organ_label.text = _group_dic[@"name"];
         organ_label.font = [UIFont systemFontOfSize:14];
         [backHeadView addSubview:organ_label];
         UIView * line_view = [[UIView alloc]
@@ -54,20 +60,17 @@
             label.textColor = RGB(190, 190, 190);
             [backHeadView addSubview:label];
         }
-        UILabel * checkIn_timelabel = [[UILabel alloc]
+        checkIn_timelabel = [[UILabel alloc]
                                        initWithFrame:CGRectMake(8 + screenWide * 0.1, screenHeight * 0.06, screenWide /3 - screenWide * 0.1, screenHeight * 0.04)];
-        checkIn_timelabel.text = @"2月14日（今天）";
         checkIn_timelabel.font = [UIFont systemFontOfSize:10];
         [backHeadView addSubview:checkIn_timelabel];
-        UILabel * leave_timelabel = [[UILabel alloc]
+        leave_timelabel = [[UILabel alloc]
                                      initWithFrame:CGRectMake(8+ screenWide *0.1 + screenWide /3, screenHeight * 0.06, screenWide /3 - screenWide * 0.1, screenHeight * 0.04)];
-        leave_timelabel.text = @"2月15日（明天）";
         leave_timelabel.font = [UIFont systemFontOfSize:10];
         [backHeadView addSubview:leave_timelabel];
         UILabel * home_label = [[UILabel alloc]
                                 initWithFrame:CGRectMake(8, screenHeight * 0.11, screenWide - 80, screenHeight * 0.04)];
         home_label.font = [UIFont systemFontOfSize:12];
-        home_label.text = @"大床房";
         [backHeadView addSubview:home_label];
         UIButton * btn = [UIButton buttonWithType:UIButtonTypeCustom];
         btn.frame = CGRectMake(screenWide - 64, screenHeight * 0.11, 40, screenHeight * 0.04);
@@ -76,6 +79,32 @@
         btn.titleLabel.font = [UIFont systemFontOfSize:10];
         [btn setTitleColor:RGB(240, 71, 76)
                   forState:UIControlStateNormal];
+        if ([_vc_type isEqualToString:@"S"]) {
+            home_label.text = _group_dic[@"room"][[_room_index intValue]][@"room_type"];
+            if ([YYLOrder YSOrder].checkin_time) {
+                checkIn_timelabel.text = [CDDatePicker getStringFromDate:[YYLOrder YSOrder].checkin_time];
+                end_begin = [YYLOrder YSOrder].checkin_time;
+            }
+            if ([YYLOrder YSOrder].checkout_time) {
+                leave_timelabel.text = [CDDatePicker getStringFromDate:[YYLOrder YSOrder].checkout_time];
+                end_end = [YYLOrder YSOrder].checkout_time;
+            }
+            UITapGestureRecognizer * tapChoose_start = [[UITapGestureRecognizer alloc]
+                                                        initWithTarget:self
+                                                        action:@selector(pickViewAppear:)];
+            tapChoose_start.numberOfTapsRequired = 1;
+            checkIn_timelabel.userInteractionEnabled = YES;
+            [checkIn_timelabel addGestureRecognizer:tapChoose_start];
+            UITapGestureRecognizer * tapChoose_end = [[UITapGestureRecognizer alloc]
+                                                      initWithTarget:self
+                                                      action:@selector(pickViewAppear:)];
+            tapChoose_end.numberOfTapsRequired = 1;
+            leave_timelabel.userInteractionEnabled = YES;
+            [leave_timelabel addGestureRecognizer:tapChoose_end];
+
+        }else{
+            
+        }
         [backHeadView addSubview:btn];
     }
     return _tableHeadView;
@@ -108,7 +137,11 @@
     [backFootView addSubview:label];
     UILabel * money_label = [[UILabel alloc]
                              initWithFrame:CGRectMake(screenWide * 0.25, 1, screenWide * 0.2, screenHeight * 0.06 -1)];
-    money_label.text = @"¥888";
+    if ([_vc_type isEqualToString:@"S"]) {
+        money_label.text = _group_dic[@"room"][[_room_index intValue]][@"room_price"];
+    }else {
+        
+    }
     money_label.textAlignment = NSTextAlignmentLeft;
     money_label.font = [UIFont systemFontOfSize:14];
     [backFootView addSubview:money_label];
@@ -403,6 +436,51 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
         [resultStr appendString:oneStr];
     }
     return resultStr;
+}
+
+
+//日期选择器出来
+- (void)pickViewAppear:(UITapGestureRecognizer *)tap
+{
+    BOOL tap_where = tap.view == checkIn_timelabel?YES:NO;
+    CDDatePicker * datePicker;
+    if (tap_where) {//入住按钮
+        datePicker = [[CDDatePicker alloc] initWithOff_label:leave_timelabel];
+        datePicker.type = @"Z";
+        datePicker.date_start = [CDDatePicker getTimeOfNightFromdate:[NSDate date]];
+        if (end_end) {
+            NSTimeInterval  timeIn =[end_end timeIntervalSinceDate:datePicker.date_start];
+            NSTimeInterval  oneDay = 24*60*60;
+            int days = timeIn / oneDay ;
+            NSInteger day = days;
+            datePicker.choose_day_count = day;
+        }
+    }else {
+        datePicker = [[CDDatePicker alloc] initWithOff_label:checkIn_timelabel];
+        if (end_begin) {
+            NSTimeInterval  oneDay = 24*60*60;  //1天的长度
+            end_begin = [NSDate dateWithTimeInterval:oneDay sinceDate:end_begin];
+            datePicker.date_start = end_begin;
+        }
+        
+    }
+    datePicker.delegateDiy = self;
+    [datePicker show];
+    _datePicker = datePicker;
+    
+}
+-(void)datePickerbtnDownWithDate:(NSDate *)date{
+    if (date) {
+        if ([_datePicker.type isEqualToString:@"Z"]) {
+            checkIn_timelabel.text = [NSString stringWithFormat:@"   %@",[CDDatePicker getStringFromDate:date]];
+            [YYLOrder YSOrder].checkin_time = date;
+            end_begin = date;
+        }else{
+            leave_timelabel.text = [NSString stringWithFormat:@"   %@",[CDDatePicker getStringFromDate:date]];
+            [YYLOrder YSOrder].checkout_time = date;
+            end_end = date;
+        }
+    }//日期选择器的代理方法
 }
 
 #pragma mark - Navigation

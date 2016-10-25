@@ -12,9 +12,11 @@
 #import "GroupDetailViewController.h"
 #import "PriSeleView.h"
 #import "DDListGet.h"
-@interface ResultListVController ()<UITableViewDataSource ,UITableViewDelegate>
-{
-   
+#import "CDDatePicker.h"
+
+@interface ResultListVController ()<UITableViewDataSource ,UITableViewDelegate,HYMDatePickerDelegate,UIGestureRecognizerDelegate> {
+    NSDate * end_begain;
+    NSDate * end_end;
     BOOL hide;
     BOOL isScroll;
     UIView * begin_view;
@@ -46,7 +48,7 @@
                          initWithFrame:CGRectMake(0, 0, screenWide, screenHeight * 0.08)];
         view.backgroundColor = RGB(231, 231, 231);
         UITextField * textField = [[UITextField alloc]
-                                   initWithFrame:CGRectMake(screenWide * 0.25, screenHeight * 0.01, screenWide * 0.73, screenHeight * 0.06)];
+                                   initWithFrame:CGRectMake(screenWide * 0.3, screenHeight * 0.01, screenWide * 0.68, screenHeight * 0.06)];
         textField.backgroundColor = [UIColor whiteColor];
         textField.clipsToBounds = YES;
         textField.layer.cornerRadius = 5;
@@ -58,13 +60,14 @@
         if ([self.vc_type isEqualToString:@"L"])
         {
             UILabel * checkIn_label = [[UILabel alloc]
-                                       initWithFrame:CGRectMake(screenWide * 0.02, screenHeight * 0.01, screenWide * 0.21, screenHeight * 0.06)];
+                                       initWithFrame:CGRectMake(screenWide * 0.02, screenHeight * 0.01, screenWide * 0.26, screenHeight * 0.06)];
             checkIn_label.textColor = RGB(135, 135,135);
             checkIn_label.clipsToBounds = YES;
             checkIn_label.layer.cornerRadius = 5;
             checkIn_label.backgroundColor = [UIColor whiteColor];
             _checkIn_label = checkIn_label;
-            checkIn_label.text = @"   入2-15";
+            _checkIn_label.textAlignment = NSTextAlignmentCenter;
+            checkIn_label.text = [NSString stringWithFormat:@"入 %@",[self tringFromDate:[NSDate date]]];
             checkIn_label.font = [UIFont systemFontOfSize:14];
             [view addSubview:_checkIn_label];
             
@@ -72,23 +75,48 @@
         }else if ([self.vc_type isEqualToString:@"S"])
         {
             UIView * label_view = [[UIView alloc]
-                                   initWithFrame:CGRectMake(screenWide * 0.02, screenHeight * 0.01, screenWide * 0.21, screenHeight * 0.06)];
+                                   initWithFrame:CGRectMake(screenWide * 0.02, screenHeight * 0.01, screenWide * 0.26, screenHeight * 0.06)];
             label_view.clipsToBounds = YES;
             label_view.layer.cornerRadius = 5;
             label_view.backgroundColor = [UIColor whiteColor];
             
             UILabel * checkIn_label = [[UILabel alloc]
-                                       initWithFrame:CGRectMake(0, 0, screenWide * 0.21, screenHeight * 0.03)];
-            checkIn_label.text = @"   入 2-15";
+                                       initWithFrame:CGRectMake(0, 0, screenWide * 0.26, screenHeight * 0.03)];
+            if ([YYLOrder YSOrder].checkin_time) {
+                checkIn_label.text = [NSString stringWithFormat:@"入 %@",[self tringFromDate:[YYLOrder YSOrder].checkin_time]];;
+                end_begain = [YYLOrder YSOrder].checkin_time;
+            }else{
+                 checkIn_label.text = [NSString stringWithFormat:@"入 %@",[self tringFromDate:[NSDate date]]];
+            }
+            checkIn_label.userInteractionEnabled = YES;
             checkIn_label.font = [UIFont systemFontOfSize:12];
             checkIn_label.textColor = RGB(135, 135,135);
+            checkIn_label.textAlignment = NSTextAlignmentCenter;
             _checkIn_label = checkIn_label;
+            UITapGestureRecognizer * tapChoose_start = [[UITapGestureRecognizer alloc]
+                                                        initWithTarget:self
+                                                        action:@selector(pickViewAppear:)];
+            tapChoose_start.numberOfTapsRequired = 1;
+            [_checkIn_label addGestureRecognizer:tapChoose_start];
             [label_view addSubview:_checkIn_label];
             UILabel * leave_label = [[UILabel alloc]
-                                     initWithFrame:CGRectMake(0, screenHeight * 0.03, screenWide * 0.21, screenHeight * 0.03)];
-            leave_label.text = @"   离 2-16";
+                                     initWithFrame:CGRectMake(0, screenHeight * 0.03, screenWide * 0.26, screenHeight * 0.03)];
+            
+            if ([YYLOrder YSOrder].checkout_time) {
+                leave_label.text = [NSString stringWithFormat:@"离 %@",[self tringFromDate:[YYLOrder YSOrder].checkout_time]];
+                end_end = [YYLOrder YSOrder].checkout_time;
+            }else {
+                leave_label.text = @"离 ----------";
+            }
+            leave_label.userInteractionEnabled = YES;
             leave_label.font = [UIFont systemFontOfSize:12];
             leave_label.textColor = RGB(135, 135,135);
+            leave_label.textAlignment = NSTextAlignmentCenter;
+            UITapGestureRecognizer * tapChoose_end = [[UITapGestureRecognizer alloc]
+                                                      initWithTarget:self
+                                                      action:@selector(pickViewAppear:)];
+            tapChoose_end.numberOfTapsRequired = 1;
+            [leave_label addGestureRecognizer:tapChoose_end];
             _leave_label = leave_label;
             [label_view addSubview:_leave_label];
             [view addSubview:label_view];
@@ -98,6 +126,7 @@
     }
     return _tableHeadView;
 }
+
 -(UIView *)filter_view
 { //筛选页面
     if (!_filter_view)
@@ -262,6 +291,19 @@
     [self.view addSubview:begin_view];
     [self setData];
 }
+- (NSString *)tringFromDate:(NSDate *)date
+{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setLocale:[NSLocale localeWithLocaleIdentifier:@"zh_CN"]];
+    [formatter setDateFormat:@"M月dd日"];
+    NSMutableString *dateStr;
+    if (!date) {
+        dateStr = [[formatter stringFromDate:[NSDate date]] mutableCopy];
+    }else {
+        dateStr = [[formatter stringFromDate:date] mutableCopy];
+    }
+    return dateStr;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -360,7 +402,47 @@
 
     }
 }
+//日期选择器出来
+- (void)pickViewAppear:(UITapGestureRecognizer *)tap
+{
+    CDDatePicker * datePicker;
+    if (tap.view.frame.origin.y < 5) {//入住按钮
+        datePicker = [[CDDatePicker alloc] initWithOff_label:_leave_label];
+        datePicker.type = @"Z";
+        datePicker.date_start = [CDDatePicker getTimeOfNightFromdate:[NSDate date]];
+        if (end_end) {
+            NSTimeInterval  timeIn =[end_end timeIntervalSinceDate:datePicker.date_start];
+            NSTimeInterval  oneDay = 24*60*60;
+            int days = timeIn / oneDay;
+            NSInteger day = days;
+            datePicker.choose_day_count = day;
+        }
+    }else {
+        datePicker = [[CDDatePicker alloc] initWithOff_label:_checkIn_label];
+        if (end_begain) {
+            NSTimeInterval  oneDay = 24*60*60;  //1天的长度
+            end_begain = [NSDate dateWithTimeInterval:oneDay sinceDate:end_begain];
+            datePicker.date_start = end_begain;
+        }
+    }
+    datePicker.delegateDiy = self;
+    [datePicker show];
+    _datePicker = datePicker;
     
+}
+-(void)datePickerbtnDownWithDate:(NSDate *)date{
+    if (date) {
+        if ([_datePicker.type isEqualToString:@"Z"]) {
+            _checkIn_label.text = [NSString stringWithFormat:@" 入 %@",[CDDatePicker getStringFromDate:date]];
+            [YYLOrder YSOrder].checkin_time = date;
+            end_begain = date;
+        }else{
+            _leave_label.text = [NSString stringWithFormat:@" 离 %@",[CDDatePicker getStringFromDate:date]];
+            [YYLOrder YSOrder].checkout_time = date;
+            end_end = date;
+        }
+    }//日期选择器的代理方法
+}
 /*
 #pragma mark - Navigation
 

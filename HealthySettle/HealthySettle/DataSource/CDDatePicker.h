@@ -20,13 +20,16 @@
 @property (nonatomic, strong) UIView       * titleView;
 @property (strong,nonatomic ) UIPickerView * pick_view;
 @property (strong, nonatomic) NSArray      *dataSourceForDayComponent;
+@property (strong,nonatomic)  NSDate *current_date;
+@property (nonatomic,strong) UILabel * off_label;
 - (void)show ;
+-(instancetype)initWithOff_label:(UILabel *)label;
++(NSDate *)getTimeOfNightFromdate:(NSDate *)date;
++(NSString *)getStringFromDate:(NSDate *)date;
 @end
 
 @protocol HYMDatePickerDelegate <NSObject>
 @optional
-- (void)currentSelectedDate:(NSDate *)a;
--(void)datePickerBtnDownCancel;
--(void)datePickerbtnDown;
+-(void)datePickerbtnDownWithDate:(NSDate *)date;
 @end
 

@@ -14,6 +14,7 @@
 @end
 @interface LoginOrRegisViewController : UIViewController
 @property (nonatomic,weak)id<UserDataDelegate> delegate;
+@property (nonatomic,strong)NSString * vc_type;
 
 
 

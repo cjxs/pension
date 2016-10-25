@@ -503,7 +503,9 @@
             [Member DefaultUser].score_count = dic[@"score_count"];
             [Member DefaultUser].login = @"online";
             [self.navigationController popViewControllerAnimated:YES];
-            [self.delegate updateUserData];
+            if ([_vc_type isEqualToString:@"login"]) {
+                [self.delegate updateUserData];
+            }
             [[NSUserDefaults standardUserDefaults] setObject:pwd forKey:@"password"];
             [[NSUserDefaults standardUserDefaults] setObject:username forKey:@"username"];
         }else {

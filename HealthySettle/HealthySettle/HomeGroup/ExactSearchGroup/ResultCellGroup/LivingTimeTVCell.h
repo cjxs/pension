@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+@class CDDatePicker;
 
 @interface LivingTimeTVCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *leave_label;
+@property (weak, nonatomic) IBOutlet UILabel *checkIn_label;
+@property (nonatomic,strong) CDDatePicker * datePicker;
 
+-(void)configTimes;
 @end

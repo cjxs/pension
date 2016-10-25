@@ -8,14 +8,10 @@
 
 #import "CDCityPicker.h"
 
-#define Key_Division        @"Division"
-#define Key_DivisionCode    @"DivisionCode"
-#define Key_DivisionName    @"DivisionName"
-#define Key_DivisionSub     @"DivisionSub"
-#define Key_DivisionVersion @"DivisionVersion"
-#define KDistrictSelectNotification     @"KDistrictSelectNotification"
+#define Key_DivisionCode    @"area_id"
+#define Key_DivisionName    @"area_name"
+#define Key_DivisionSub     @"city"
 
-#define KDistrictSelectDistrict         @"KDistrictSelectDistrict"
 
 @interface CDCityPicker()
 
@@ -23,12 +19,21 @@
 
 @property (nonatomic, strong) NSArray *ProvinceArray; //省的数组
 @property (nonatomic, strong) NSString *cityStr;      // 市名
-@property (nonatomic, strong) NSString *provinceCode;//  省编码
+@property (nonatomic,strong) NSString * city_code;    //市编码
 
 @property (nonatomic, strong) NSString *districtStr;//  县区名
+@property (nonatomic,strong)NSString * district_code;  //县区编码
 
 @end
 @implementation CDCityPicker
++(CDCityPicker *)currentCity{
+    static CDCityPicker * default_city= nil;
+    static dispatch_once_t predicate;
+    dispatch_once(&predicate, ^{
+        default_city = [[self alloc] init];
+    });
+    return default_city;
+}
 
 -(instancetype)init {
     self = [super init];
@@ -59,11 +64,18 @@
 
 -(CGRect)getMainViewFrame
 {
+    CGFloat size_h;
+    if (IS_IPHONE5) {
+        size_h = 2.8;
+    }else{
+        size_h = 3;
+    }
+
     CGRect rect = self.frame;
     rect.origin.x = kMargin;
-    rect.origin.y = screenHeight /3;
+    rect.origin.y = screenHeight /size_h;
     rect.size.width = screenWide - kMargin *2;
-    rect.size.height = screenHeight /3;
+    rect.size.height = screenHeight /size_h;
     return rect;
 }
 -(UIView *)titleView
@@ -71,9 +83,16 @@
     if (_titleView!=nil) {
         return _titleView;
     }
+    CGFloat size_h;
+    if (IS_IPHONE5) {
+        size_h = 2.8;
+    }else{
+        size_h = 3;
+    }
+
     CGRect rect;
     rect.origin.x = kMargin;
-    rect.origin.y = screenHeight / 3;
+    rect.origin.y = screenHeight / size_h;
     rect.size.width = screenWide - kMargin *2 ;
     rect.size.height = kMargin * 4;
     _titleView = [[UIView alloc] initWithFrame:rect];
@@ -109,8 +128,9 @@
 
 -(void)showPickerView
 {
-    self.districtDict = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"districtMGE" ofType:@"plist"]];
-    self.ProvinceArray = self.districtDict[Key_Division];
+//    self.districtDict = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"city_" ofType:@"plist"]];
+//    self.ProvinceArray = self.districtDict[Key_Division];
+   self.ProvinceArray =  [NSArray arrayWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"city_" ofType:@"plist"]];
     UIWindow * window = [UIApplication  sharedApplication].keyWindow;
     [window addSubview:self];
     [window addSubview:self.pick_view];
@@ -156,7 +176,7 @@
         if (component==0)
         {
             NSDictionary *ProvinceDict = self.ProvinceArray[row];
-            title = [ProvinceDict objectForKey:Key_DivisionName];
+            title = [ProvinceDict objectForKey:@"province_name"];
             
         }
         else if(component ==1)
@@ -203,26 +223,29 @@
         
             //*****
         
-            NSArray *array = [ProvinceDict objectForKey:Key_DivisionSub];
+            NSArray *array = [ProvinceDict objectForKey:Key_DivisionSub];        
             if ([_pick_view selectedRowInComponent:1] > array.count - 1) {
                 return;
             }
     NSDictionary *CityDict = [[ProvinceDict objectForKey:Key_DivisionSub] objectAtIndex:[_pick_view selectedRowInComponent:1]];
-            self.cityStr = [CityDict objectForKey:Key_DivisionName];
+        self.cityStr = [CityDict objectForKey:Key_DivisionName];
+        self.city_code = [CityDict objectForKey:Key_DivisionCode];
+        
         self.districtArray = [CityDict objectForKey:Key_DivisionSub];
 
-        if (self.delegate && [self.delegate respondsToSelector:@selector(currentSelectedName: Array:)]) {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(currentSelectedName:code:Array:)]) {
             
-            [self.delegate currentSelectedName:self.cityStr Array:self.districtArray];
+            [self.delegate currentSelectedName:self.cityStr code:self.city_code Array:self.districtArray];
         }
        
     }else {
 
     self.districtStr = [self.districtArray[[_pick_view selectedRowInComponent:0]] objectForKey:Key_DivisionName];//****
+        self.district_code = [self.districtArray[[_pick_view selectedRowInComponent:0]] objectForKey:Key_DivisionCode];//****
         
 
-        if (self.delegate && [self.delegate respondsToSelector:@selector(currentSelectedName: Array:)]) {
-            [self.delegate currentSelectedName:self.districtStr Array:nil];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(currentSelectedName:code: Array:)]) {
+            [self.delegate currentSelectedName:self.cityStr code:self.city_code Array:nil];
         }
     }
     

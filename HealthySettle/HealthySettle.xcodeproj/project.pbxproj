@@ -31,6 +31,7 @@
 		32146AD41CC4CF650046F2BC /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 32146AD21CC4CF650046F2BC /* libMobClickLibrary.a */; };
 		32146B031CC4D6AF0046F2BC /* ShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 32146B021CC4D6AF0046F2BC /* ShareView.m */; };
 		32146B071CC50AFC0046F2BC /* libUMessage_Sdk_1.2.6.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 32146B051CC50AFC0046F2BC /* libUMessage_Sdk_1.2.6.a */; };
+		321C43091DBF5AE100192243 /* city_.plist in Resources */ = {isa = PBXBuildFile; fileRef = 321C43081DBF5AE100192243 /* city_.plist */; };
 		3223F1151DB8D87D001F1DCC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3223F1121DB8D87D001F1DCC /* Main.storyboard */; };
 		3223F1191DB8DC17001F1DCC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3223F1181DB8DC17001F1DCC /* Assets.xcassets */; };
 		3223F11B1DB8DCFE001F1DCC /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3223F11A1DB8DCFE001F1DCC /* Launch Screen.storyboard */; };
@@ -154,7 +155,6 @@
 		3285AF0E1D376B3C0070618A /* GroupRoom.m in Sources */ = {isa = PBXBuildFile; fileRef = 3285AF0D1D376B3C0070618A /* GroupRoom.m */; };
 		3285AF111D3C72970070618A /* LoginOrRegisViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3285AF101D3C72970070618A /* LoginOrRegisViewController.m */; };
 		3292A74F1CA3D14E004FEB57 /* CDCityPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 3292A74E1CA3D14E004FEB57 /* CDCityPicker.m */; };
-		3292A7511CA3DCA4004FEB57 /* districtMGE.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3292A7501CA3DCA4004FEB57 /* districtMGE.plist */; };
 		32A3BB771DBB16490009D50F /* DDCollectList.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A3BB761DBB16490009D50F /* DDCollectList.m */; };
 		32CABD641CA373AA0068AE93 /* CityCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CABD571CA373AA0068AE93 /* CityCollectionViewCell.m */; };
 		32CABD651CA373AA0068AE93 /* CitySkipViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CABD591CA373AA0068AE93 /* CitySkipViewCell.m */; };
@@ -334,6 +334,7 @@
 		32146B021CC4D6AF0046F2BC /* ShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareView.m; sourceTree = "<group>"; };
 		32146B051CC50AFC0046F2BC /* libUMessage_Sdk_1.2.6.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUMessage_Sdk_1.2.6.a; sourceTree = "<group>"; };
 		32146B061CC50AFC0046F2BC /* UMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMessage.h; sourceTree = "<group>"; };
+		321C43081DBF5AE100192243 /* city_.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = city_.plist; sourceTree = "<group>"; };
 		3223F1131DB8D87D001F1DCC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Main.storyboard; sourceTree = "<group>"; };
 		3223F1181DB8DC17001F1DCC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3223F11A1DB8DCFE001F1DCC /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
@@ -680,7 +681,6 @@
 		3285AF101D3C72970070618A /* LoginOrRegisViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginOrRegisViewController.m; sourceTree = "<group>"; };
 		3292A74D1CA3D14E004FEB57 /* CDCityPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDCityPicker.h; sourceTree = "<group>"; };
 		3292A74E1CA3D14E004FEB57 /* CDCityPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDCityPicker.m; sourceTree = "<group>"; };
-		3292A7501CA3DCA4004FEB57 /* districtMGE.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = districtMGE.plist; sourceTree = "<group>"; };
 		32A3BB751DBB16490009D50F /* DDCollectList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDCollectList.h; sourceTree = "<group>"; };
 		32A3BB761DBB16490009D50F /* DDCollectList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDCollectList.m; sourceTree = "<group>"; };
 		32CABD561CA373AA0068AE93 /* CityCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityCollectionViewCell.h; sourceTree = "<group>"; };
@@ -1399,9 +1399,9 @@
 				32146AD21CC4CF650046F2BC /* libMobClickLibrary.a */,
 				32146B011CC4D6AF0046F2BC /* ShareView.h */,
 				32146B021CC4D6AF0046F2BC /* ShareView.m */,
+				321C43081DBF5AE100192243 /* city_.plist */,
 				32CABD951CA39E2E0068AE93 /* CDDatePicker.h */,
 				32CABD961CA39E2E0068AE93 /* CDDatePicker.m */,
-				3292A7501CA3DCA4004FEB57 /* districtMGE.plist */,
 				3292A74D1CA3D14E004FEB57 /* CDCityPicker.h */,
 				3292A74E1CA3D14E004FEB57 /* CDCityPicker.m */,
 				32D859481CB8B2420074D5C3 /* PriSeleView.h */,
@@ -1965,7 +1965,6 @@
 				3278CCE61CAFC17400038B9D /* shareCompany.png in Resources */,
 				324CD4B11CAE630700276B57 /* LivingTimeTVCell.xib in Resources */,
 				3269BAB51CC62E8400C855FC /* choose_72_@2x.png in Resources */,
-				3292A7511CA3DCA4004FEB57 /* districtMGE.plist in Resources */,
 				32E5887A1CB74EA0002AED1A /* star_@2x.png in Resources */,
 				3278CCE41CAFBB4500038B9D /* CommentTVCell.xib in Resources */,
 				327CA9731CBBA28A00FC4F8E /* add_btn.png in Resources */,
@@ -2010,6 +2009,7 @@
 				327DC7D91CB50119005617D2 /* Guide_btn.png in Resources */,
 				32E588921CB7594A002AED1A /* search_5_@2x.png in Resources */,
 				32E5888C1CB7594A002AED1A /* search_2_@2x.png in Resources */,
+				321C43091DBF5AE100192243 /* city_.plist in Resources */,
 				320BE5E51CBCE46000A34FCB /* leftop_w@2x.png in Resources */,
 				32CEF82A1DB713E700CB7584 /* level_1@2x.png in Resources */,
 				3223F1151DB8D87D001F1DCC /* Main.storyboard in Resources */,

@@ -10,7 +10,7 @@
 @protocol CDCityPickerDelegate <NSObject>
 -(void)cityPickerBtnDownCancel;
 -(void)cityPickerbtnDown;
-- (void)currentSelectedName:(NSString *)name Array:(NSArray *)array;
+- (void)currentSelectedName:(NSString *)name code:(NSString *)code Array:(NSArray *)array;
 @end
 @interface CDCityPicker : UIView
 @property (strong ,nonatomic) NSString     * type;
@@ -20,4 +20,5 @@
 @property (nonatomic, strong) NSArray      *districtArray;//县区数组
 @property (weak, nonatomic)id<CDCityPickerDelegate>delegate;
 -(void)showPickerView;
++(CDCityPicker *)currentCity;
 @end

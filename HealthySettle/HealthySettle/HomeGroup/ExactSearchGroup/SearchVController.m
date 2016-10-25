@@ -111,7 +111,7 @@
         self.back_imageView.image = [UIImage imageNamed:@"black_w"];
         [self setBottomPicWithPic:
          [UIImage imageNamed:@"pension_preview"]
-                         andTitle:nil];
+                         andTitle:@"找·养老院"];
         _third_markPic.image = [UIImage imageNamed:@"search_6_"];
         _four_markPic.image  = [UIImage imageNamed:@"search_3_"];
         _fivth_markPic.image = [UIImage imageNamed:@"search_4_"];
@@ -123,7 +123,9 @@
         [_seletOff_label mas_makeConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(1);
         }];
-        _sellectOn_label.font = [UIFont systemFontOfSize:16];
+        
+        
+        /*_sellectOn_label.font = [UIFont systemFontOfSize:16];
         _sellectOn_label.text = @"区／县";
         _sellectOn_label.tag = 302;
         _sellectOn_label.userInteractionEnabled = YES;
@@ -131,7 +133,8 @@
                                                  initWithTarget:self
                                                  action:@selector(countiesPickerShowWithGesture:)];
         [_sellectOn_label addGestureRecognizer:tap_Counties];
-        tap_Counties.numberOfTapsRequired = 1;
+        tap_Counties.numberOfTapsRequired = 1; 县区的选择
+         */
         _seletOff_label.alpha = 0;
         _nurseChoose_label.text = @"护理等级";
         _nurseTrue_label.text = @"全护";
@@ -143,11 +146,10 @@
         self.back_imageView.image = [UIImage imageNamed:@"leftop_w"];
         [self setBottomPicWithPic:
          [UIImage imageNamed:@"regimen_preview"]
-                         andTitle:nil];//
+                         andTitle:@"养生·度假"];//
         _third_markPic.image = [UIImage imageNamed:@"search_3_"];
         _four_markPic.image = [UIImage imageNamed:@"search_4_"];
         _fivth_markPic.image = [UIImage imageNamed:@"search_5_"];
-        
         _city_label.text = @"杭州市";
         
         _seletOff_label.alpha = 1.0;
@@ -166,7 +168,6 @@
         _nurseTrue_label.text = @"";
         _position_label.text = @"价格";
         _priceAndCity_label.alpha = 0;
-        
     }
     _city_label.userInteractionEnabled = YES;
     _city_label.tag = 301;
@@ -197,8 +198,8 @@
 -(void)configDateChooseMachine
 {
     _sellectOn_label.userInteractionEnabled = YES;
-    NSString * str = [self tringFromDate:nil];
-    _sellectOn_label.text = [NSString stringWithFormat:@"%@      入住",str];
+    NSString * str = [CDDatePicker getStringFromDate:nil];
+    _sellectOn_label.text = [NSString stringWithFormat:@"%@     入住",str];
     UITapGestureRecognizer * tapChoose_start = [[UITapGestureRecognizer alloc]
                                                 initWithTarget:self
                                                 action:@selector(pickViewAppear:)];
@@ -211,41 +212,18 @@
                                               action:@selector(pickViewAppear:)];
     tapChoose_end.numberOfTapsRequired = 1;
     [_seletOff_label addGestureRecognizer:tapChoose_end];
-    _seletOff_label.text = @"－－－－－－     离店";
+    _seletOff_label.text = @"－－－－      离店";
 
 }
-//把date转换成几月几日
-- (NSString *)tringFromDate:(NSDate *)date
-{
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setLocale:[NSLocale localeWithLocaleIdentifier:@"zh_CN"]];
-    [formatter setDateFormat:@"M月dd日EE"];
-    NSMutableString *dateStr;
-    if (!date) {
-        dateStr = [[formatter stringFromDate:[NSDate date]] mutableCopy];
-    }else {
-        dateStr = [[formatter stringFromDate:date] mutableCopy];
-    }
-    return dateStr;
-}
-//得到该日期的凌晨时间对对应的date
--(NSDate *)getTimeOfNightFromdate:(NSDate *)date
-{
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setLocale:[NSLocale localeWithLocaleIdentifier:@"zh_CN"]];
-    [formatter setDateFormat:@"yyyy-MM-dd"];
-    NSString *str = [NSString stringWithFormat:@"%@ 00:00:00",[formatter stringFromDate:date]];
-    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    NSDate *baseDate = [formatter dateFromString:str];
-    return baseDate;
-}
+
 //日期选择器出来
 - (void)pickViewAppear:(UITapGestureRecognizer *)tap
 {
-     CDDatePicker * datePicker = [[CDDatePicker alloc] init];
+    CDDatePicker * datePicker;
     if (tap.view.frame.origin.y < 5) {//入住按钮
+        datePicker = [[CDDatePicker alloc] initWithOff_label:_seletOff_label];
         datePicker.type = @"Z";
-        datePicker.date_start = [self getTimeOfNightFromdate:[NSDate date]];
+        datePicker.date_start = [CDDatePicker getTimeOfNightFromdate:[NSDate date]];
         if (end_end) {
             NSTimeInterval  timeIn =[end_end timeIntervalSinceDate:datePicker.date_start];
             NSTimeInterval  oneDay = 24*60*60;
@@ -253,11 +231,9 @@
             NSInteger day = days;
             datePicker.choose_day_count = day;
         }
-        _seletOff_label.userInteractionEnabled = NO;
     }else {
-        _sellectOn_label.userInteractionEnabled = NO;
+        datePicker = [[CDDatePicker alloc] initWithOff_label:_sellectOn_label];
         if (end_begain) {
-            datePicker.type = @"L";
             NSTimeInterval  oneDay = 24*60*60;  //1天的长度
             end_begain = [NSDate dateWithTimeInterval:oneDay sinceDate:end_begain];
             datePicker.date_start = end_begain;
@@ -269,43 +245,26 @@
     _datePicker = datePicker;
 
 }
+-(void)datePickerbtnDownWithDate:(NSDate *)date{
+    if (date) {
+        if ([_datePicker.type isEqualToString:@"Z"]) {
+            _sellectOn_label.text = [NSString stringWithFormat:@"%@      入住",[CDDatePicker getStringFromDate:date]];
+            [YYLOrder YSOrder].checkin_time = date;
+            end_begain = date;
+        }else{
+            _seletOff_label.text = [NSString stringWithFormat:@"%@      离店",[CDDatePicker getStringFromDate:date]];
+            [YYLOrder YSOrder].checkout_time = date;
+            end_end = date;
+        }
+    }//日期选择器的代理方法
+}
 
-- (void)datePickerBtnDownCancel
-{//取消按钮
-    _sellectOn_label.userInteractionEnabled = YES;
-    _seletOff_label.userInteractionEnabled = YES;
-    _datePicker = nil;
-}
--(void)datePickerbtnDown
-{// 确定按钮
-    _sellectOn_label.userInteractionEnabled = YES;
-    _seletOff_label.userInteractionEnabled = YES;
-    if ([_datePicker.type isEqualToString:@"Z"]) {
-        _sellectOn_label.text = [NSString stringWithFormat:@"%@      入住",[self tringFromDate:_choosingDate]];
-    }else if ([_datePicker.type isEqualToString:@"L"]){
-        _seletOff_label.text = [NSString stringWithFormat:@"%@      离店",[self tringFromDate:_choosingDate]];
-    }
-    _datePicker = nil;
 
-}
--(NSDate *)choosingDate
-{
-    if (!_choosingDate) {
-        _choosingDate = [NSDate date];
-    }
-    return _choosingDate;
-}
-//日期选择器的代理方法
-- (void)currentSelectedDate:(NSDate *)a
-{
-    _choosingDate = a;
-    if ([_datePicker.type isEqualToString:@"Z"]) {
-        end_begain = a;
-    }else if ([_datePicker.type isEqualToString:@"L"]){
-        end_end = a;
-    }
 
-}
+
+
+
+
 - (void)countiesPickerShowWithGesture:(UITapGestureRecognizer *)ges
 {
     if (_chosed_cityArray) {
@@ -319,7 +278,7 @@
 
 - (void)cityPickerShowWithGesture:(UITapGestureRecognizer *)ges
 {
-    CDCityPicker * city_picker = [[CDCityPicker alloc] init];
+    CDCityPicker * city_picker = [CDCityPicker currentCity];
     if (ges.view.tag == 301) {
          city_picker.type = @"S";
     }else if(ges.view.tag == 302){
@@ -331,15 +290,15 @@
     [city_picker showPickerView];
     _city_picker = city_picker;
 }
-- (void)currentSelectedName:(NSString *)name
-                      Array:(NSArray *)array
-{
+- (void)currentSelectedName:(NSString *)name code:(NSString *)code Array:(NSArray *)array{
     if ([_city_picker.type isEqualToString:@"S"]) {
         _chosedCity = name;
+        _chosed_code = code;
         _chosed_cityArray = [NSArray arrayWithArray:array];
     }else {
         _chosed_districtStr = name;
     }
+
 }
 -(void)cityPickerBtnDownCancel
 {
@@ -349,7 +308,6 @@
 {
     if ([_city_picker.type isEqualToString:@"S"]) {
         _city_label.text = _chosedCity;
-        NSLog(@"%@",_chosedCity);
     }else {
         _sellectOn_label.text = _chosed_districtStr;
     }
@@ -362,6 +320,7 @@
     _topImageV.image = imageP;
     if (string) {
         _textLabel.text = string;
+        _textLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:25];
     }
 }
 #pragma mark - VTOF
@@ -389,8 +348,17 @@
 {
     ResultListVController * ResultLVC = [[ResultListVController alloc] init];
     ResultLVC.vc_type = self.vc_type;
-    ResultLVC.area_id = @"3134";
-    ResultLVC.title_l = @"杭州";
+    if (!_chosed_code) {
+        ResultLVC.area_id = @"3134";
+    }else{
+        ResultLVC.area_id = _chosed_code;
+    }
+    if (!_chosedCity) {
+        ResultLVC.title_l = @"杭州";
+    }else{
+        ResultLVC.title_l = _chosedCity;
+    }
+
     [self.navigationController pushViewController:ResultLVC
                                 animated:YES];
 }

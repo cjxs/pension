@@ -9,8 +9,7 @@
 #import "CDDatePicker.h"
 #define CHOOSE_DAY_COUNT 365 //可选时间天数
 
-@interface HYMDatePicker : UIView<UIPickerViewDataSource,UIPickerViewDelegate>
-//pickerView数据源
+@interface HYMDatePicker : UIView<UIPickerViewDataSource,UIPickerViewDelegate>//pickerView数据源
 
 @end
 
@@ -22,9 +21,15 @@
     if (_titleView!=nil) {
         return _titleView;
     }
+    CGFloat size_h;
+    if (IS_IPHONE5) {
+        size_h = 2.8;
+    }else{
+        size_h = 3;
+    }
     CGRect rect;
     rect.origin.x = kMargin;
-    rect.origin.y = screenHeight / 3;
+    rect.origin.y = screenHeight /size_h ;
     rect.size.width = screenWide - kMargin *2 ;
     rect.size.height = kMargin * 4;
     _titleView = [[UIView alloc] initWithFrame:rect];
@@ -52,6 +57,7 @@
     btn.backgroundColor = [UIColor clearColor];
     btn.layer.cornerRadius = 5;
     [btn addTarget:self action:@selector(datePickerbtnDown) forControlEvents:UIControlEventTouchUpInside];
+    
     [_titleView addSubview:btn];
     
     [_titleView bringSubviewToFront:btn];
@@ -61,13 +67,21 @@
 }
 
 - (void)show {
+    CGFloat size_h;
+    if (IS_IPHONE5) {
+        size_h = 2.8;
+    }else{
+        size_h = 3;
+    }
     UIWindow * window = [UIApplication  sharedApplication].keyWindow;
     [window addSubview:self];
     [window addSubview:self.pick_view];
     [window addSubview:self.titleView];
-    
+    if (_off_label) {
+        _off_label.userInteractionEnabled = NO;
+    }
 }
--(instancetype)init {
+-(instancetype)initWithOff_label:(UILabel *)label {
     self = [super init];
     if (self) {
         self.frame = [UIScreen mainScreen].bounds;
@@ -75,7 +89,7 @@
         UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(datePickerbtnDown)];
         tap.numberOfTapsRequired = 1;
         [self addGestureRecognizer:tap];
-        
+        _off_label = label;
     }
     return self;
 }
@@ -95,11 +109,18 @@
 
 -(CGRect)getMainViewFrame
 {
+    CGFloat size_h;
+    if (IS_IPHONE5) {
+        size_h = 2.8;
+    }else{
+        size_h = 3;
+    }
+
     CGRect rect = self.frame;
     rect.origin.x = kMargin;
-    rect.origin.y = screenHeight /3;
+    rect.origin.y = screenHeight /size_h;
     rect.size.width = screenWide - kMargin *2;
-    rect.size.height = screenHeight /3;
+    rect.size.height = screenHeight /size_h;
     return rect;
 }
 
@@ -189,18 +210,14 @@
     
     
     [formatter setDateFormat:@"yyyy年MM月dd日EE HH时mm分"];
-    NSDate *date = [formatter dateFromString:dateStr];
+    _current_date = [formatter dateFromString:dateStr];
     
-    if ([date timeIntervalSince1970] < [_date_start timeIntervalSince1970]) {
+    if ([_current_date timeIntervalSince1970] < [_date_start timeIntervalSince1970]) {
         NSTimeInterval  oneYear = 365 *24*60*60;  //1年的长度
-        date = [date initWithTimeIntervalSinceNow: +oneYear ];
+        _current_date = [_current_date initWithTimeIntervalSinceNow: +oneYear ];
         
     }//下一年的时候加一年
-    
     [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    if(self.delegateDiy && [self.delegateDiy respondsToSelector:@selector(currentSelectedDate:)]){
-        [self.delegateDiy currentSelectedDate:date];
-    }
 }
 
 
@@ -213,17 +230,14 @@
 {
     return screenHeight * 0.08;
 }
+
 -(void)datePickerBtnDownCancel {
     [self dismiss];
-        if(self.delegateDiy && [self.delegateDiy respondsToSelector:@selector(datePickerBtnDownCancel)]){
-        [self.delegateDiy datePickerBtnDownCancel];
-    }
-
 }
 -(void)datePickerbtnDown {
     [self dismiss];
-    if(self.delegateDiy && [self.delegateDiy respondsToSelector:@selector(datePickerbtnDown)]){
-        [self.delegateDiy datePickerbtnDown];
+    if(self.delegateDiy && [self.delegateDiy respondsToSelector:@selector(datePickerbtnDownWithDate:)]&& _current_date){
+        [self.delegateDiy datePickerbtnDownWithDate:_current_date];
     }
 }
 - (void)dismiss {
@@ -232,8 +246,35 @@
     _titleView = nil;
     [_pick_view removeFromSuperview];
     _pick_view = nil;
+    _off_label.userInteractionEnabled = YES;
 
 }
+//得到该日期的凌晨时间对对应的date
++(NSDate *)getTimeOfNightFromdate:(NSDate *)date
+{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setLocale:[NSLocale localeWithLocaleIdentifier:@"zh_CN"]];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *str = [NSString stringWithFormat:@"%@ 00:00:00",[formatter stringFromDate:date]];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSDate *baseDate = [formatter dateFromString:str];
+    return baseDate;
+}
+//把date转换成几月几日
++ (NSString *)getStringFromDate:(NSDate *)date
+{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setLocale:[NSLocale localeWithLocaleIdentifier:@"zh_CN"]];
+    [formatter setDateFormat:@"M月dd日"];
+    NSMutableString *dateStr;
+    if (!date) {
+        dateStr = [[formatter stringFromDate:[NSDate date]] mutableCopy];
+    }else {
+        dateStr = [[formatter stringFromDate:date] mutableCopy];
+    }
+    return dateStr;
+}
+
 
 
 @end

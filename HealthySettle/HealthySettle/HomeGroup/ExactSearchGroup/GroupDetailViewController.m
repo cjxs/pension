@@ -24,6 +24,7 @@
 #import "UMSocial.h"
 #import "DDGroupData.h"
 #import "LoginOrRegisViewController.h"
+#import "CDDatePicker.h"
 
 @interface GroupDetailViewController ()<UMSocialUIDelegate,UITableViewDelegate,UITableViewDataSource,UpdatePriceDelegate>
 {
@@ -38,6 +39,7 @@
     NSArray * showArray;
     UIView * backFootView;
     UIView * begin_view;
+
 }
 
 
@@ -387,7 +389,6 @@
     self.view.backgroundColor = [UIColor whiteColor];
     // Do any additional setup after loading the view.
     [self setData];
-    
     UIBarButtonItem * returnBarButtonItem = [[UIBarButtonItem alloc] init];
     returnBarButtonItem.title = @"";
     [returnBarButtonItem setBackgroundImage:[UIImage imageNamed:@"leftop_r"]
@@ -454,6 +455,7 @@
             LivingTimeTVCell *  cell  =  [tableView dequeueReusableCellWithIdentifier:@"cellLiving"
                                                                          forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            [cell configTimes];
             return cell;
             
         }else if (indexPath.section <= [_data_dic[@"room"] count])
@@ -466,8 +468,9 @@
             [cell.priceDetail_btn addTarget:self
                                      action:@selector(cellShowPriceDetail:)
                            forControlEvents:UIControlEventTouchUpInside];
+            cell.reserve_btn.tag = 500 + indexPath.section;
             [cell.reserve_btn addTarget:self
-                                 action:@selector(fillInOrderController)
+                                 action:@selector(fillInOrderController:)
                        forControlEvents:UIControlEventTouchUpInside];
             TestModel * model = showArray[indexPath.section];
             [cell configWithdic:dic
@@ -611,12 +614,12 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath
                 image_array = _data_dic[@"fun_file"];
             }
             if (image_array.count == 0) {
-                return  [self backheightWith:string] - 120;
+                return  [self backheightWith:string] - 105;
             }
             return  [self backheightWith:string];
         }else if (indexPath.section == 5)
         {
-            return [self backheightWith:_data_dic[@"cue"]] - 80;
+            return [self backheightWith:_data_dic[@"cue"]] - 100;
         }else
         {
             return 288;
@@ -696,7 +699,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
     [self.navigationController pushViewController:loginOrRegVC animated:YES];
 }
 #pragma mark - VTOF
-- (void)fillInOrderController
+- (void)fillInOrderController:(UIButton *)btn
 {
     
     if (![Member DefaultUser].login) {
@@ -704,6 +707,9 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
     }else{
     OrderTVController * orderVC = [[OrderTVController alloc]
                                    initWithStyle:UITableViewStylePlain];
+    orderVC.group_dic = _data_dic;
+    orderVC.room_index = [NSString stringWithFormat:@"%ld",btn.tag -501];
+        orderVC.vc_type = _vc_type;
     [self.navigationController pushViewController:orderVC animated:YES];
     }
 }
@@ -725,6 +731,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [ShareView showShareViewInViewController:self];
 }
+
 
 /*
 #pragma mark - Navigation
