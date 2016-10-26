@@ -67,10 +67,21 @@
             checkIn_label.backgroundColor = [UIColor whiteColor];
             _checkIn_label = checkIn_label;
             _checkIn_label.textAlignment = NSTextAlignmentCenter;
-            checkIn_label.text = [NSString stringWithFormat:@"入 %@",[self tringFromDate:[NSDate date]]];
+            
+            if ([YYLOrder YLOrder].checkin_time) {
+                checkIn_label.text = [NSString stringWithFormat:@"入 %@",[CDDatePicker getStringFromDate:[YYLOrder YLOrder].checkin_time]];;
+            }else{
+                checkIn_label.text = [NSString stringWithFormat:@"入 %@",[CDDatePicker getStringFromDate:[NSDate date]]];
+            }
+
             checkIn_label.font = [UIFont systemFontOfSize:14];
             [view addSubview:_checkIn_label];
-            
+            checkIn_label.userInteractionEnabled = YES;
+            UITapGestureRecognizer * tapChoose_start = [[UITapGestureRecognizer alloc]
+                                                        initWithTarget:self
+                                                        action:@selector(pickViewAppear:)];
+            tapChoose_start.numberOfTapsRequired = 1;
+            [_checkIn_label addGestureRecognizer:tapChoose_start];
             
         }else if ([self.vc_type isEqualToString:@"S"])
         {
@@ -83,10 +94,10 @@
             UILabel * checkIn_label = [[UILabel alloc]
                                        initWithFrame:CGRectMake(0, 0, screenWide * 0.26, screenHeight * 0.03)];
             if ([YYLOrder YSOrder].checkin_time) {
-                checkIn_label.text = [NSString stringWithFormat:@"入 %@",[self tringFromDate:[YYLOrder YSOrder].checkin_time]];;
+                checkIn_label.text = [NSString stringWithFormat:@"入 %@",[CDDatePicker getStringFromDate:[YYLOrder YSOrder].checkin_time]];;
                 end_begain = [YYLOrder YSOrder].checkin_time;
             }else{
-                 checkIn_label.text = [NSString stringWithFormat:@"入 %@",[self tringFromDate:[NSDate date]]];
+                 checkIn_label.text = [NSString stringWithFormat:@"入 %@",[CDDatePicker getStringFromDate:[NSDate date]]];
             }
             checkIn_label.userInteractionEnabled = YES;
             checkIn_label.font = [UIFont systemFontOfSize:12];
@@ -103,7 +114,7 @@
                                      initWithFrame:CGRectMake(0, screenHeight * 0.03, screenWide * 0.26, screenHeight * 0.03)];
             
             if ([YYLOrder YSOrder].checkout_time) {
-                leave_label.text = [NSString stringWithFormat:@"离 %@",[self tringFromDate:[YYLOrder YSOrder].checkout_time]];
+                leave_label.text = [NSString stringWithFormat:@"离 %@",[CDDatePicker getStringFromDate:[YYLOrder YSOrder].checkout_time]];
                 end_end = [YYLOrder YSOrder].checkout_time;
             }else {
                 leave_label.text = @"离 ----------";
@@ -291,19 +302,6 @@
     [self.view addSubview:begin_view];
     [self setData];
 }
-- (NSString *)tringFromDate:(NSDate *)date
-{
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setLocale:[NSLocale localeWithLocaleIdentifier:@"zh_CN"]];
-    [formatter setDateFormat:@"M月dd日"];
-    NSMutableString *dateStr;
-    if (!date) {
-        dateStr = [[formatter stringFromDate:[NSDate date]] mutableCopy];
-    }else {
-        dateStr = [[formatter stringFromDate:date] mutableCopy];
-    }
-    return dateStr;
-}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -406,24 +404,32 @@
 - (void)pickViewAppear:(UITapGestureRecognizer *)tap
 {
     CDDatePicker * datePicker;
-    if (tap.view.frame.origin.y < 5) {//入住按钮
-        datePicker = [[CDDatePicker alloc] initWithOff_label:_leave_label];
+    if ([_vc_type isEqualToString:@"L"]) {
+        datePicker = [[CDDatePicker alloc] initWithOff_label:nil];
         datePicker.type = @"Z";
         datePicker.date_start = [CDDatePicker getTimeOfNightFromdate:[NSDate date]];
-        if (end_end) {
-            NSTimeInterval  timeIn =[end_end timeIntervalSinceDate:datePicker.date_start];
-            NSTimeInterval  oneDay = 24*60*60;
-            int days = timeIn / oneDay;
-            NSInteger day = days;
-            datePicker.choose_day_count = day;
+
+    }else{
+        if (tap.view.frame.origin.y < 5) {//入住按钮
+            datePicker = [[CDDatePicker alloc] initWithOff_label:_leave_label];
+            datePicker.type = @"Z";
+            datePicker.date_start = [CDDatePicker getTimeOfNightFromdate:[NSDate date]];
+            if (end_end) {
+                NSTimeInterval  timeIn =[end_end timeIntervalSinceDate:datePicker.date_start];
+                NSTimeInterval  oneDay = 24*60*60;
+                int days = timeIn / oneDay;
+                NSInteger day = days;
+                datePicker.choose_day_count = day;
+            }
+        }else {
+            datePicker = [[CDDatePicker alloc] initWithOff_label:_checkIn_label];
+            if (end_begain) {
+                NSTimeInterval  oneDay = 24*60*60;  //1天的长度
+                end_begain = [NSDate dateWithTimeInterval:oneDay sinceDate:end_begain];
+                datePicker.date_start = end_begain;
+            }
         }
-    }else {
-        datePicker = [[CDDatePicker alloc] initWithOff_label:_checkIn_label];
-        if (end_begain) {
-            NSTimeInterval  oneDay = 24*60*60;  //1天的长度
-            end_begain = [NSDate dateWithTimeInterval:oneDay sinceDate:end_begain];
-            datePicker.date_start = end_begain;
-        }
+
     }
     datePicker.delegateDiy = self;
     [datePicker show];
@@ -434,8 +440,12 @@
     if (date) {
         if ([_datePicker.type isEqualToString:@"Z"]) {
             _checkIn_label.text = [NSString stringWithFormat:@" 入 %@",[CDDatePicker getStringFromDate:date]];
-            [YYLOrder YSOrder].checkin_time = date;
-            end_begain = date;
+            if ([_vc_type isEqualToString:@"L"]) {
+                [YYLOrder YLOrder].checkin_time = date;
+            }else{
+                [YYLOrder YSOrder].checkin_time = date;
+                end_begain = date;
+            }
         }else{
             _leave_label.text = [NSString stringWithFormat:@" 离 %@",[CDDatePicker getStringFromDate:date]];
             [YYLOrder YSOrder].checkout_time = date;

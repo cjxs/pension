@@ -33,6 +33,8 @@
 @property (nonatomic,strong)NSString * room_id;         //房型ID （养生专用）
 @property (nonatomic,strong)NSString * order_spec;       //订单信息
 
+
+
 +(YYLOrder *)YLOrder;
 +(YYLOrder *)YSOrder;
 

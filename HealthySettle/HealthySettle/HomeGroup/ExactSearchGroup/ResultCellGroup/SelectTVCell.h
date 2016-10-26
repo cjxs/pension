@@ -10,17 +10,17 @@
 @protocol UpdatePriceDelegate <NSObject>
 
 -(void)updatePriceWithNumber:(NSInteger )number;
-
+-(void)rememberSelectWithnum1:(NSMutableString *)num1 num2:(NSMutableString *)num2 num3:(NSMutableString *)num3 num4:(NSMutableString *)num4;
 @end
 
 @interface SelectTVCell : UITableViewCell
 {
     NSMutableArray * type_Arr;
     NSMutableArray * type_2arr;
-    int num_1;
-    int num_2;
-    int num_3;
-    int num_4;
+    NSMutableString * _num_1;
+    NSMutableString * _num_2;
+    NSMutableString * _num_3;
+    NSMutableString * _num_4;
     NSDictionary * _dic;
     NSMutableArray* type_a;
     NSMutableArray* type_b;
@@ -29,6 +29,5 @@
 }
 @property (nonatomic,strong)UILabel * title_label;
 @property (nonatomic,weak) id<UpdatePriceDelegate> delegate;
--(void)configWithDic:(NSDictionary *)dic;
-
+-(void)configWithDic:(NSDictionary *)dic num1:(NSMutableString *)num1 num2:(NSMutableString *)num2 num3:(NSMutableString *)num3 num4:(NSMutableString*)num4;
 @end

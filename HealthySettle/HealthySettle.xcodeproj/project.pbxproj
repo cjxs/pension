@@ -32,6 +32,10 @@
 		32146B031CC4D6AF0046F2BC /* ShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 32146B021CC4D6AF0046F2BC /* ShareView.m */; };
 		32146B071CC50AFC0046F2BC /* libUMessage_Sdk_1.2.6.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 32146B051CC50AFC0046F2BC /* libUMessage_Sdk_1.2.6.a */; };
 		321C43091DBF5AE100192243 /* city_.plist in Resources */ = {isa = PBXBuildFile; fileRef = 321C43081DBF5AE100192243 /* city_.plist */; };
+		321C430C1DC04A2300192243 /* DDArticleList.m in Sources */ = {isa = PBXBuildFile; fileRef = 321C430B1DC04A2300192243 /* DDArticleList.m */; };
+		321C430F1DC04AF600192243 /* ArticleListTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 321C430E1DC04AF600192243 /* ArticleListTVC.m */; };
+		321C43171DC0575600192243 /* ArticleListTViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 321C43161DC0575600192243 /* ArticleListTViewCell.m */; };
+		321C431A1DC0879E00192243 /* DDArticleDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 321C43191DC0879E00192243 /* DDArticleDetail.m */; };
 		3223F1151DB8D87D001F1DCC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3223F1121DB8D87D001F1DCC /* Main.storyboard */; };
 		3223F1191DB8DC17001F1DCC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3223F1181DB8DC17001F1DCC /* Assets.xcassets */; };
 		3223F11B1DB8DCFE001F1DCC /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3223F11A1DB8DCFE001F1DCC /* Launch Screen.storyboard */; };
@@ -335,6 +339,14 @@
 		32146B051CC50AFC0046F2BC /* libUMessage_Sdk_1.2.6.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUMessage_Sdk_1.2.6.a; sourceTree = "<group>"; };
 		32146B061CC50AFC0046F2BC /* UMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMessage.h; sourceTree = "<group>"; };
 		321C43081DBF5AE100192243 /* city_.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = city_.plist; sourceTree = "<group>"; };
+		321C430A1DC04A2300192243 /* DDArticleList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDArticleList.h; sourceTree = "<group>"; };
+		321C430B1DC04A2300192243 /* DDArticleList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDArticleList.m; sourceTree = "<group>"; };
+		321C430D1DC04AF600192243 /* ArticleListTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleListTVC.h; sourceTree = "<group>"; };
+		321C430E1DC04AF600192243 /* ArticleListTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleListTVC.m; sourceTree = "<group>"; };
+		321C43151DC0575600192243 /* ArticleListTViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleListTViewCell.h; sourceTree = "<group>"; };
+		321C43161DC0575600192243 /* ArticleListTViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleListTViewCell.m; sourceTree = "<group>"; };
+		321C43181DC0879E00192243 /* DDArticleDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDArticleDetail.h; sourceTree = "<group>"; };
+		321C43191DC0879E00192243 /* DDArticleDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDArticleDetail.m; sourceTree = "<group>"; };
 		3223F1131DB8D87D001F1DCC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Main.storyboard; sourceTree = "<group>"; };
 		3223F1181DB8DC17001F1DCC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3223F11A1DB8DCFE001F1DCC /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
@@ -1336,6 +1348,10 @@
 				32E588B31CB78BE1002AED1A /* CommonTVCell.h */,
 				32E588B41CB78BE1002AED1A /* CommonTVCell.m */,
 				32E588B51CB78BE1002AED1A /* CommonTVCell.xib */,
+				321C430D1DC04AF600192243 /* ArticleListTVC.h */,
+				321C430E1DC04AF600192243 /* ArticleListTVC.m */,
+				321C43151DC0575600192243 /* ArticleListTViewCell.h */,
+				321C43161DC0575600192243 /* ArticleListTViewCell.m */,
 				32FD72CC1CAA301E008CB917 /* WebViewController.h */,
 				32FD72CD1CAA301E008CB917 /* WebViewController.m */,
 				32CABD601CA373AA0068AE93 /* SeasonCTViewCell.h */,
@@ -1543,6 +1559,10 @@
 				322C36841D338607005163C4 /* DDLogin.m */,
 				32DB05231D9E5B740041C4F5 /* DDHome_page.h */,
 				32DB05241D9E5B740041C4F5 /* DDHome_page.m */,
+				321C430A1DC04A2300192243 /* DDArticleList.h */,
+				321C430B1DC04A2300192243 /* DDArticleList.m */,
+				321C43181DC0879E00192243 /* DDArticleDetail.h */,
+				321C43191DC0879E00192243 /* DDArticleDetail.m */,
 				3285AEFD1D35D81A0070618A /* DDRegist.h */,
 				3285AEFE1D35D81A0070618A /* DDRegist.m */,
 				32EFA25D1DB62F6000903D04 /* DDFindGet.h */,
@@ -2111,12 +2131,14 @@
 				32CEF81E1DB7027E00CB7584 /* DDGroupData.m in Sources */,
 				325C82501CB12BB70004EA0C /* ShouldKnowTVCell.m in Sources */,
 				326F247E1CCB0690002BCE0D /* ApiXml.mm in Sources */,
+				321C431A1DC0879E00192243 /* DDArticleDetail.m in Sources */,
 				32CEF8321DB71F0A00CB7584 /* GroupDetailViewController.m in Sources */,
 				32DB05391DA8CDF40041C4F5 /* TAPageControl.m in Sources */,
 				32FD72CB1CAA26E4008CB917 /* ProductTipView.m in Sources */,
 				32FA73421CABC7FC00379855 /* PasswordCVController.m in Sources */,
 				325051E51CB620C300D431F5 /* OrdAndRefundTVCell.m in Sources */,
 				3252D6581CC752B5000FAFBC /* RSADataVerifier.m in Sources */,
+				321C43171DC0575600192243 /* ArticleListTViewCell.m in Sources */,
 				32FB002E1D405D6F008A5497 /* DDToolKit.m in Sources */,
 				32F6CD081C9A734C00E97B65 /* AppDelegate.m in Sources */,
 				3285AF0B1D3760A20070618A /* YYLOrder.m in Sources */,
@@ -2152,6 +2174,7 @@
 				3285AF0E1D376B3C0070618A /* GroupRoom.m in Sources */,
 				32D8594A1CB8B2420074D5C3 /* PriSeleView.m in Sources */,
 				32F6CD051C9A734C00E97B65 /* main.m in Sources */,
+				321C430F1DC04AF600192243 /* ArticleListTVC.m in Sources */,
 				3285AF111D3C72970070618A /* LoginOrRegisViewController.m in Sources */,
 				32FD72D51CAA8263008CB917 /* PersonVController.m in Sources */,
 				32F5D1C81DAA3C0E000FC6B1 /* DDSeaGet.m in Sources */,
@@ -2182,6 +2205,7 @@
 				32D8593B1CB896530074D5C3 /* ResultListVController.m in Sources */,
 				32D859771CB90B100074D5C3 /* CommentViewController.m in Sources */,
 				3273DF8E1DB9F2750094AD42 /* DDOrderList.m in Sources */,
+				321C430C1DC04A2300192243 /* DDArticleList.m in Sources */,
 				32E71CA61CB256920079CD73 /* OrderBtnTVCell.m in Sources */,
 				3273DF911DBA1CA50094AD42 /* Order_ed.m in Sources */,
 				327CA9681CBB692000FC4F8E /* GraceVC.m in Sources */,

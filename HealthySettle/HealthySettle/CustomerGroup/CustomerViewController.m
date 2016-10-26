@@ -9,7 +9,6 @@
 #import "CustomerViewController.h"
 #import "YTKBatchRequest.h"
 #import "DDFindGet.h"
-#import "DDGetCity.h"
 @interface CustomerViewController ()<UIWebViewDelegate,UIGestureRecognizerDelegate>
 @end
 @implementation CustomerViewController

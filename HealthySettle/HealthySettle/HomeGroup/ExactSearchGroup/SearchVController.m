@@ -13,12 +13,12 @@
 @interface SearchVController ()<HYMDatePickerDelegate,CDCityPickerDelegate,UIGestureRecognizerDelegate> {
     NSDate * end_begain;
     NSDate * end_end;
+    UITextField * text_field;
 }
 @property (weak, nonatomic) IBOutlet UIImageView * topImageV;
 @property (weak, nonatomic) IBOutlet UILabel *textLabel;
 @property (weak, nonatomic) IBOutlet UIView *firstView;
 @property (weak, nonatomic) IBOutlet UIView *secondView;
-@property (weak, nonatomic) IBOutlet UIView *thirdView;
 @property (weak, nonatomic) IBOutlet UIView *fourthView;
 @property (weak, nonatomic) IBOutlet UIView *fivthView;
 @property (weak, nonatomic) IBOutlet UIButton *serch_messagebtn;
@@ -30,7 +30,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *city_label;
 @property (weak, nonatomic) IBOutlet UILabel *sellectOn_label;
 @property (weak, nonatomic) IBOutlet UILabel *seletOff_label;
-@property (weak, nonatomic) IBOutlet UILabel *nurseChoose_label;
 @property (weak, nonatomic) IBOutlet UILabel *nurseTrue_label;
 @property (weak, nonatomic) IBOutlet UILabel *position_label;
 @property (weak, nonatomic) IBOutlet UILabel *priceAndCity_label;
@@ -112,42 +111,26 @@
         [self setBottomPicWithPic:
          [UIImage imageNamed:@"pension_preview"]
                          andTitle:@"找·养老院"];
-        _third_markPic.image = [UIImage imageNamed:@"search_6_"];
-        _four_markPic.image  = [UIImage imageNamed:@"search_3_"];
-        _fivth_markPic.image = [UIImage imageNamed:@"search_4_"];
+        _four_markPic.image  = [UIImage imageNamed:@"search_4_"];
+        _fivth_markPic.image = [UIImage imageNamed:@"search_5_"];
         _city_label.text = @"杭州市";
         
-        [_sellectOn_label mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(69);
-        }];
-        [_seletOff_label mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(1);
-        }];
         
-        
-        /*_sellectOn_label.font = [UIFont systemFontOfSize:16];
-        _sellectOn_label.text = @"区／县";
-        _sellectOn_label.tag = 302;
-        _sellectOn_label.userInteractionEnabled = YES;
-        UITapGestureRecognizer * tap_Counties = [[UITapGestureRecognizer alloc]
-                                                 initWithTarget:self
-                                                 action:@selector(countiesPickerShowWithGesture:)];
-        [_sellectOn_label addGestureRecognizer:tap_Counties];
-        tap_Counties.numberOfTapsRequired = 1; 县区的选择
-         */
-        _seletOff_label.alpha = 0;
-        _nurseChoose_label.text = @"护理等级";
-        _nurseTrue_label.text = @"全护";
-        _position_label.text = @"机构名称／位置";
+        text_field = [[UITextField alloc] initWithFrame:CGRectMake(70, 1, screenWide-90, 68)];
+        [_seletOff_label removeFromSuperview];
+        [_sellectOn_label removeFromSuperview];
+        text_field.placeholder = @"机构关键字";
+        text_field.clearButtonMode = UITextFieldViewModeWhileEditing;
+        [self.secondView addSubview:text_field];
+        _position_label.text = @"价格";
         _priceAndCity_label.alpha = 1.0;
-        _priceAndCity_label.text = @"价格";
+        _priceAndCity_label.text = @"";
         
     }else {
         self.back_imageView.image = [UIImage imageNamed:@"leftop_w"];
         [self setBottomPicWithPic:
          [UIImage imageNamed:@"regimen_preview"]
                          andTitle:@"养生·度假"];//
-        _third_markPic.image = [UIImage imageNamed:@"search_3_"];
         _four_markPic.image = [UIImage imageNamed:@"search_4_"];
         _fivth_markPic.image = [UIImage imageNamed:@"search_5_"];
         _city_label.text = @"杭州市";
@@ -161,10 +144,6 @@
             make.height.mas_equalTo(35);
         }];
         
-        [_nurseChoose_label mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.width.mas_equalTo(150);
-        }];
-        _nurseChoose_label.text = @"机构／位置／景点名";
         _nurseTrue_label.text = @"";
         _position_label.text = @"价格";
         _priceAndCity_label.alpha = 0;
@@ -322,6 +301,9 @@
         _textLabel.text = string;
         _textLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:25];
     }
+}
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    [text_field resignFirstResponder];
 }
 #pragma mark - VTOF
 -(void)cancleToRootView

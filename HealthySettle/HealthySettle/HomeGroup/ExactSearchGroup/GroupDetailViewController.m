@@ -39,7 +39,10 @@
     NSArray * showArray;
     UIView * backFootView;
     UIView * begin_view;
-
+    NSMutableString * _num_1;
+    NSMutableString * _num_2;
+    NSMutableString * _num_3;
+    NSMutableString * _num_4;
 }
 
 
@@ -368,7 +371,7 @@
         [predeter_btn setTitle:@"立即预定"
                       forState:UIControlStateNormal];
         [predeter_btn addTarget:self
-                         action:@selector(fillInOrderController)
+                         action:@selector(fillInOrderController:)
                forControlEvents:UIControlEventTouchUpInside];
         predeter_btn.backgroundColor = RGB(229, 12, 24);
         [backFootView addSubview:predeter_btn];
@@ -387,6 +390,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    _num_1 = [NSMutableString stringWithString:@"0"];
+    _num_2 = [NSMutableString stringWithString:@"0"];
+    _num_3 = [NSMutableString stringWithString:@"0"];
+    _num_4 = [NSMutableString stringWithString:@"0"];
+
     // Do any additional setup after loading the view.
     [self setData];
     UIBarButtonItem * returnBarButtonItem = [[UIBarButtonItem alloc] init];
@@ -494,7 +502,7 @@
             SelectTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cellSelect"
                                                                   forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            [cell configWithDic:_data_dic[@"spec_tag"]];
+            [cell configWithDic:_data_dic[@"spec_tag"] num1:_num_1 num2:_num_2 num3:_num_3 num4:_num_4];
             cell.delegate = self;
             return cell;
         }else  if (indexPath.section == 1)
@@ -707,10 +715,16 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
     }else{
     OrderTVController * orderVC = [[OrderTVController alloc]
                                    initWithStyle:UITableViewStylePlain];
+    orderVC.vc_type = _vc_type;
     orderVC.group_dic = _data_dic;
-    orderVC.room_index = [NSString stringWithFormat:@"%ld",btn.tag -501];
-        orderVC.vc_type = _vc_type;
-    [self.navigationController pushViewController:orderVC animated:YES];
+
+
+        if ([_vc_type isEqualToString:@"S"]) {
+            orderVC.room_index = [NSString stringWithFormat:@"%ld",btn.tag -501];
+        }else{
+            
+        }
+     [self.navigationController pushViewController:orderVC animated:YES];
     }
 }
 - (void)submitCommentNow
@@ -732,7 +746,13 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
     [ShareView showShareViewInViewController:self];
 }
 
-
+-(void)rememberSelectWithnum1:(NSMutableString *)num1 num2:(NSMutableString *)num2 num3:(NSMutableString *)num3 num4:(NSMutableString *)num4 {
+    _num_1 = num1;
+    _num_2 = num2;
+    _num_3 = num3;
+    _num_4 = num4;
+    
+}
 /*
 #pragma mark - Navigation
 

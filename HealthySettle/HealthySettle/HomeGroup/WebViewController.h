@@ -10,5 +10,6 @@
 
 @interface WebViewController : UIViewController
 @property (nonatomic, strong)NSURL * urlLoad;
+@property (nonatomic,strong)NSString * h5_str;
 
 @end

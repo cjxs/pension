@@ -22,6 +22,7 @@
 #import "YTKNetworkConfig.h"
 #import "SDCycleScrollView.h"
 #import "ResultListVController.h"
+#import "ArticleListTVC.h"
 
 
 
@@ -357,33 +358,31 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 - (void)clipOnBtnsWithbtn:(UIButton *)btn
 {
     int btn_number = btn.frame.origin.x /(screenWide/4);
+    
+    
     if (btn_number == 0)
     {
-        NSURL * url = [NSURL URLWithString:@"http://www.cjxs.github.io/"];
-        WebViewController * webVC = [[WebViewController alloc] init];
-        webVC.urlLoad = url;
-        [self.navigationController pushViewController:webVC
-                                             animated:NO];
+        [self pushToArticleWithTitle:@"养生攻略"type:@"health"];
     }else if (btn_number == 1)
     {
-        NSURL * url = [NSURL URLWithString:@"http://www.baidu.com"];
-        WebViewController * webVC = [[WebViewController alloc] init];
-        webVC.urlLoad = url;
-        [self.navigationController pushViewController:webVC
-                                             animated:NO];
+        [self pushToArticleWithTitle:@"新闻动态"type:@"news"];
     }else if (btn_number == 2)
     {
-        KnowledgeTVController * vc = [[KnowledgeTVController alloc] init];
-        [self.navigationController pushViewController:vc
-                                             animated:NO];
+        [self pushToArticleWithTitle:@"养老常识"type:@"pension"];
     }else
     {
-        NSURL * url = [NSURL URLWithString:@"http://www.cjxs.github.io/"];
+        NSURL * url = [NSURL URLWithString:@"http://n.5199yl.com/#/assess"];
         WebViewController * webVC = [[WebViewController alloc] init];
         webVC.urlLoad = url;
         [self.navigationController pushViewController:webVC
                                              animated:NO];
     }
+}
+- (void)pushToArticleWithTitle:(NSString *)title type:(NSString *)type{
+    ArticleListTVC * arti_listVC= [[ArticleListTVC alloc] init];
+    arti_listVC.type = type;
+    arti_listVC.title = title;
+    [self.navigationController pushViewController:arti_listVC animated:YES];
 }
 //两个跳转
 - (void)skipTOSecond:(UIButton *)button

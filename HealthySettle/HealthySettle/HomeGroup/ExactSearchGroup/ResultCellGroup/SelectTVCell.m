@@ -15,7 +15,12 @@
     return self;
 }
 
--(void)configWithDic:(NSDictionary *)dic{
+-(void)configWithDic:(NSDictionary *)dic num1:(NSMutableString *)num1 num2:(NSMutableString *)num2 num3:(NSMutableString *)num3 num4:(NSMutableString*)num4{
+    _num_1 = num1;
+    _num_2 = num2;
+    _num_3 = num3;
+    _num_4 = num4;
+
     type_Arr = [NSMutableArray arrayWithCapacity:0];
     for (NSString * key in dic) {
         [type_Arr addObject:key];
@@ -25,7 +30,6 @@
         [type_2arr addObject:str];
         
     }
-
        for (int i = 0; i < 4; i++)
     {
         UIView * line_view = [[UIView alloc]
@@ -39,19 +43,17 @@
             label.text = @"护理级别";
         }else{
             label.text = type_2arr[i-1];
-
         }
         [self addSubview:label];
     }
     [self fundButtonWithArray:type_Arr andHeight:screenHeight * 0.055 Wide:screenWide /(type_Arr.count+2)];
-    num_1 = 0;
     _dic = [NSDictionary dictionaryWithDictionary:dic];
-    [self addSomeBtnsWithnum:num_1];
+    [self addSomeBtnsWithnum:_num_1];
 
 }
 -(void)fundPriceButtonWithArray:(NSMutableArray *)array
                  andHeight:(CGFloat)height
-                      Wide:(CGFloat)wide
+                      Wide:(CGFloat)wide title:(NSString *)title
 {
     if (array) {
         for (int i = 0; i < array.count; i++)
@@ -71,9 +73,62 @@
                     action:@selector(selectNurseBtn:)
           forControlEvents:UIControlEventTouchUpInside];
             [self addSubview:btn];
-            if (i == 0)
-            {
-                [self selectNurseBtn:btn];
+            switch ([title length]) {
+                case 2:
+                    if (array.count -1 < [_num_2 intValue])
+                    {
+                        if (i == 0)
+                        {
+                            _num_2 = [NSMutableString stringWithString:@"0"];
+                            [self selectNurseBtn:btn];
+                        }
+
+                    }else {
+                        if (i == [_num_2 intValue])
+                        {
+                            [self selectNurseBtn:btn];
+                        }
+
+                    }
+                    break;
+                case 6:
+                    if (array.count -1 < [_num_3 intValue])
+                    {
+                        if (i == 0)
+                        {
+                            _num_4 = [NSMutableString stringWithString:@"0"];
+                            [self selectNurseBtn:btn];
+
+                        }
+                    }else{
+                        if (i == [_num_3 intValue])
+                        {
+                            [self selectNurseBtn:btn];
+                        }
+
+                    }
+                    break;
+                case 4:
+                    if (array.count -1 < [_num_4 intValue])
+                    {
+                        if (i == 0)
+                        {
+                            _num_4 = [NSMutableString stringWithString:@"0"];
+
+                            [self selectNurseBtn:btn];
+                        }
+
+                    }else {
+                        if (i == [_num_4 intValue])
+                        {
+                            [self selectNurseBtn:btn];
+                        }
+
+                    }
+                    break;
+                    
+                default:
+                    break;
             }
         }
         
@@ -102,7 +157,7 @@
                     action:@selector(selectNurseBtn:)
           forControlEvents:UIControlEventTouchUpInside];
             [self addSubview:btn];
-            if (i == 0)
+            if ([_num_1 intValue]== i)
             {
                 [self selectNurseBtn:btn];
             }
@@ -110,10 +165,10 @@
 
     }
 }
--(void)addSomeBtnsWithnum:(int)num{
+-(void)addSomeBtnsWithnum:(NSMutableString *)num{
 
     type_a = [NSMutableArray arrayWithCapacity:0];
-    NSString * str_a = type_Arr[num];
+    NSString * str_a = type_Arr[[num intValue]];
     NSDictionary * Dic = _dic[str_a][@"tag"];
     for (NSDictionary  * dic in Dic[type_2arr[0]]) {
         [type_a addObject:dic];//护理明细字典数组
@@ -127,9 +182,9 @@
     for (NSDictionary * dic  in Dic[type_2arr[2]]) {
         [type_c addObject:dic];//餐饮选择
     }
-    [self fundPriceButtonWithArray:type_a andHeight:screenHeight * 0.178 Wide:screenWide /(type_a.count+2)];  //添加护理
-    [self fundPriceButtonWithArray:type_b andHeight:screenHeight * 0.301 Wide:screenWide /(type_b.count+2)]; //添加床位
-    [self fundPriceButtonWithArray:type_c andHeight:screenHeight * 0.424 Wide:screenWide /(type_c.count+2)]; //添加餐饮
+    [self fundPriceButtonWithArray:type_a andHeight:screenHeight * 0.178 Wide:screenWide /(type_a.count+2) title:@"hu"];  //添加护理  2
+    [self fundPriceButtonWithArray:type_b andHeight:screenHeight * 0.301 Wide:screenWide /(type_b.count+2) title:@"chuang"]; //添加床位  6
+    [self fundPriceButtonWithArray:type_c andHeight:screenHeight * 0.424 Wide:screenWide /(type_c.count+2) title:@"ying"]; //添加餐饮   4
 
 }
 -(void)selectNurseBtn:(UIButton *)button
@@ -161,31 +216,39 @@
                     [btn removeFromSuperview];
                 }
             }
-            num_1 = button.tag-300;
-            [self addSomeBtnsWithnum:num_1];
+            _num_1 =  [NSMutableString stringWithFormat:@"%ld",button.tag-300];
+            [self addSomeBtnsWithnum:_num_1];
         }else if (button.frame.origin.y <140){
-            num_2 = button.tag - 400;
+            _num_2 =  [NSMutableString stringWithFormat:@"%ld",button.tag-400];
             
         }else if (button.frame.origin.y <230){
-            num_3 = button.tag - 400;
+            _num_3 = [NSMutableString stringWithFormat:@"%ld",button.tag-400];
             
         }else if (button.frame.origin.y<320){
-            num_4 = button.tag - 400;
+            _num_4 = [NSMutableString stringWithFormat:@"%ld",button.tag-400];
         }else{
             
         }
          if (button.frame.origin.y >50) {
-            [self totalPrice];
+             [self totalPrice];
+
          }
     }
     
 }
 -(void)totalPrice{
-    NSInteger pri_a = [type_a[num_2][@"tag_price"] integerValue];
-    NSInteger pri_b = [type_b[num_3][@"tag_price"] integerValue];
-    NSInteger pri_c = [type_c[num_4][@"tag_price"] integerValue];
-    
-    [self.delegate updatePriceWithNumber:pri_a+pri_b+pri_c];
+
+    NSInteger pri_a = [type_a count]-1>=[_num_2 intValue]? [type_a[[_num_2 intValue]][@"tag_price"] integerValue]:[type_a[0][@"tag_price"] integerValue];
+    NSInteger pri_b = type_b.count-1 >= _num_3.intValue? [type_b[[_num_3 intValue]][@"tag_price"] integerValue]:[type_b[0][@"tag_price"] integerValue];
+      NSInteger pri_c = type_c.count-1 >= _num_4.intValue ?[type_c[[_num_4 intValue]][@"tag_price"] integerValue]:[type_c[0][@"tag_price"] integerValue];
+    if (pri_a&&pri_b&&pri_c) {
+        [self.delegate updatePriceWithNumber:pri_a+pri_b+pri_c];
+    }
+    [self.delegate rememberSelectWithnum1:_num_1 num2:_num_2 num3:_num_3 num4:_num_4];
+//    NSLog(@"%@",type_Arr[[_num_1 intValue]]);
+//    NSLog(@"%@",type_a[[_num_2 intValue]]);
+//    NSLog(@"%@",type_b[_num_3.intValue]);
+//    NSLog(@"%@",type_c[_num_4.intValue]);
 
     
 }
