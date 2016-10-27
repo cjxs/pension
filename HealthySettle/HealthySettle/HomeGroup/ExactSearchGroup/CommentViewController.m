@@ -19,6 +19,15 @@
 @end
 
 @implementation CommentViewController
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.translucent = NO;
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.tintColor = [UIColor redColor];
+    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor blackColor]};
+    [self.navigationController setNavigationBarHidden:NO animated:animated];
+
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];

@@ -128,6 +128,7 @@
     self.navigationController.navigationBar.barTintColor = RGB(205, 8, 20);
     self.navigationController.navigationBar.translucent = NO;
     self.navigationController.tabBarController.tabBar.translucent = YES;//坑
+    [UIApplication sharedApplication].statusBarHidden = NO;
 }
 - (void)setTableView {
     UITableView * homeTableView = [[UITableView alloc]

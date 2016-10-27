@@ -15,19 +15,22 @@
    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self)
     {
+        UIView * margin_view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWide, 13)];
+        margin_view.backgroundColor =  RGB(242, 242, 242);
+        [self addSubview:margin_view];
         UIView * view = [[UIView alloc]
-                         initWithFrame:CGRectMake(screenWide /2, 3, 1, 25)];
+                         initWithFrame:CGRectMake(screenWide /2, 16, 1, 25)];
         view.backgroundColor = RGB(250, 251, 252);
         [self addSubview:view];
         NSArray * array =@[@"通用服务",@"收费服务"];
         UIView * line_view =[[UIView alloc]
-                             initWithFrame:CGRectMake(0, 29, screenWide, 1)];
+                             initWithFrame:CGRectMake(0, 42, screenWide, 1)];
         line_view.backgroundColor = RGB(250, 251, 252);
         [self addSubview:line_view];
         for (int i = 0; i < 2; i++)
         {
             UIButton * btn = [UIButton buttonWithType:UIButtonTypeCustom];
-            btn.frame = CGRectMake(screenWide /2 *i, 0, screenWide/2, 29);
+            btn.frame = CGRectMake(screenWide /2 *i, 13, screenWide/2, 29);
             [btn setTitle:array[i]
                  forState:UIControlStateNormal];
             if (i == 0)
@@ -84,38 +87,51 @@
 {
     if (_tollServe_view)
     {
+        [charge_label removeFromSuperview];
+        charge_label = nil;
         [_tollServe_view removeFromSuperview];
         _tollServe_view = nil;
     }
-    _commonServe_view = [[UIView alloc]
-                         initWithFrame:CGRectMake(0, 30, screenWide, 80)];
-
-    UILabel * text_label = [[UILabel alloc]
-                            initWithFrame:CGRectMake(15, 0, screenWide - 20, 70)];
-    text_label.numberOfLines = 0;
-    text_label.font = [UIFont systemFontOfSize:10];
-    text_label.textColor = RGB(205, 206, 207);
-    text_label.text = self.common_t;
-    [_commonServe_view addSubview:text_label];
+    if (!_commonServe_view) {
+        _commonServe_view = [[UIView alloc]
+                             initWithFrame:CGRectMake(0, 43, screenWide, 80)];
+    }
+        if (!common_label) {
+        UILabel * text_label = [[UILabel alloc]
+                                initWithFrame:CGRectMake(15, 0, screenWide - 20, 70)];
+        text_label.numberOfLines = 0;
+        text_label.font = [UIFont systemFontOfSize:10];
+        text_label.textColor = RGB(205, 206, 207);
+        text_label.text = self.common_t;
+        common_label = text_label;
+    }
+    [_commonServe_view addSubview:common_label];
     [self addSubview:_commonServe_view];
 }
 - (void)showTollServe
 {
     if (_commonServe_view)
     {
+        [common_label removeFromSuperview];
+        common_label = nil;
         [_commonServe_view removeFromSuperview];
         _commonServe_view = nil;
+       
     }
-    _tollServe_view = [[UIView alloc]
-                       initWithFrame:CGRectMake(0, 30, screenWide, 80)];
-
-    UILabel * text_label = [[UILabel alloc]
-                            initWithFrame:CGRectMake(15, 0, screenWide - 20, 70)];
-    text_label.numberOfLines = 0;
-    text_label.text = self.charge_t;
-    text_label.font = [UIFont systemFontOfSize:10];
-    text_label.textColor = RGB(205, 206, 207);
-    [_tollServe_view addSubview:text_label];
+    if (!_tollServe_view) {
+        _tollServe_view = [[UIView alloc]
+                           initWithFrame:CGRectMake(0, 43, screenWide, 80)];
+    }
+    if (!charge_label) {
+        UILabel * text_label = [[UILabel alloc]
+                                initWithFrame:CGRectMake(15, 0, screenWide - 20, 70)];
+        text_label.numberOfLines = 0;
+        text_label.text = self.charge_t;
+        text_label.font = [UIFont systemFontOfSize:10];
+        text_label.textColor = RGB(205, 206, 207);
+        charge_label = text_label;
+    }
+        [_tollServe_view addSubview:charge_label];
     [self addSubview:_tollServe_view];
 }
 - (void)awakeFromNib {

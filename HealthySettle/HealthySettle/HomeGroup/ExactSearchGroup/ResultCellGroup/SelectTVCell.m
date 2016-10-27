@@ -12,6 +12,9 @@
              reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    UIView * margin_view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWide, 13)];
+    margin_view.backgroundColor =  RGB(242, 242, 242);
+    [self addSubview:margin_view];
     return self;
 }
 
@@ -33,11 +36,11 @@
        for (int i = 0; i < 4; i++)
     {
         UIView * line_view = [[UIView alloc]
-                              initWithFrame:CGRectMake(0, screenHeight * 0.123 *(i+1), screenWide, 1)];
+                              initWithFrame:CGRectMake(0, screenHeight * 0.02+screenHeight * 0.123 *(i+1), screenWide, 1)];
         line_view.backgroundColor = RGB(245, 245, 245);
         [self addSubview:line_view];
         UILabel * label = [[UILabel alloc]
-                           initWithFrame:CGRectMake(screenWide * 0.02, screenHeight *0.008 +screenHeight * 0.123 * i, screenWide * 0.18, screenHeight * 0.045)];
+                           initWithFrame:CGRectMake(screenWide * 0.02, screenHeight *0.028 +screenHeight * 0.123 * i, screenWide * 0.18, screenHeight * 0.045)];
         label.adjustsFontSizeToFitWidth = YES;
         if (i==0) {
             label.text = @"护理级别";
@@ -46,7 +49,7 @@
         }
         [self addSubview:label];
     }
-    [self fundButtonWithArray:type_Arr andHeight:screenHeight * 0.055 Wide:screenWide /(type_Arr.count+2)];
+    [self fundButtonWithArray:type_Arr andHeight:screenHeight * 0.075 Wide:screenWide /(type_Arr.count+2)];
     _dic = [NSDictionary dictionaryWithDictionary:dic];
     [self addSomeBtnsWithnum:_num_1];
 
@@ -182,9 +185,9 @@
     for (NSDictionary * dic  in Dic[type_2arr[2]]) {
         [type_c addObject:dic];//餐饮选择
     }
-    [self fundPriceButtonWithArray:type_a andHeight:screenHeight * 0.178 Wide:screenWide /(type_a.count+2) title:@"hu"];  //添加护理  2
-    [self fundPriceButtonWithArray:type_b andHeight:screenHeight * 0.301 Wide:screenWide /(type_b.count+2) title:@"chuang"]; //添加床位  6
-    [self fundPriceButtonWithArray:type_c andHeight:screenHeight * 0.424 Wide:screenWide /(type_c.count+2) title:@"ying"]; //添加餐饮   4
+    [self fundPriceButtonWithArray:type_a andHeight:screenHeight * 0.198 Wide:screenWide /(type_a.count+2) title:@"hu"];  //添加护理  2
+    [self fundPriceButtonWithArray:type_b andHeight:screenHeight * 0.321 Wide:screenWide /(type_b.count+2) title:@"chuang"]; //添加床位  6
+    [self fundPriceButtonWithArray:type_c andHeight:screenHeight * 0.444 Wide:screenWide /(type_c.count+2) title:@"ying"]; //添加餐饮   4
 
 }
 -(void)selectNurseBtn:(UIButton *)button
@@ -206,7 +209,7 @@
         button.backgroundColor = RGB(229, 12, 24);
         [button setTitleColor:[UIColor whiteColor]
                      forState:UIControlStateNormal];
-        if (button.frame.origin.y <50) {
+        if (button.frame.origin.y <63) {
             for (UIView * view in self.subviews)
             {
                 if ([view isKindOfClass:[UIButton class]]
@@ -218,18 +221,18 @@
             }
             _num_1 =  [NSMutableString stringWithFormat:@"%ld",button.tag-300];
             [self addSomeBtnsWithnum:_num_1];
-        }else if (button.frame.origin.y <140){
+        }else if (button.frame.origin.y <153){
             _num_2 =  [NSMutableString stringWithFormat:@"%ld",button.tag-400];
             
-        }else if (button.frame.origin.y <230){
+        }else if (button.frame.origin.y <243){
             _num_3 = [NSMutableString stringWithFormat:@"%ld",button.tag-400];
             
-        }else if (button.frame.origin.y<320){
+        }else if (button.frame.origin.y<333){
             _num_4 = [NSMutableString stringWithFormat:@"%ld",button.tag-400];
         }else{
             
         }
-         if (button.frame.origin.y >50) {
+         if (button.frame.origin.y >=63) {
              [self totalPrice];
 
          }

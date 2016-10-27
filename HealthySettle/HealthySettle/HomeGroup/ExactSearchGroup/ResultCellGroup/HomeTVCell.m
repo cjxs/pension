@@ -15,6 +15,10 @@
 {
     [super awakeFromNib];
     // Initialization code
+    UIView * margin_view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWide, 13)];
+    margin_view.backgroundColor =  RGB(242, 242, 242);
+    [self addSubview:margin_view];
+
     self.reserve_btn.clipsToBounds = YES;
     self.reserve_btn.layer.cornerRadius = 5;
 }
@@ -58,7 +62,7 @@
     if ([show isEqualToString:@"y"])
     {
         UIView * view = [[UIView alloc]
-                         initWithFrame:CGRectMake(0, 143, screenWide, 60)];
+                         initWithFrame:CGRectMake(0, 156, screenWide, 60)];
         for (int i = 0; i < 2; i++)
         {
             UIView * viewB = [[UIView alloc]

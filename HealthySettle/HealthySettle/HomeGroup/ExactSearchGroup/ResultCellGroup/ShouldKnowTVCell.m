@@ -14,8 +14,12 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        UIView * margin_view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWide, 13)];
+        margin_view.backgroundColor =  RGB(242, 242, 242);
+        [self addSubview:margin_view];
+
         UILabel * label = [[UILabel alloc]
-                           initWithFrame:CGRectMake(8, 6, 60, 30)];
+                           initWithFrame:CGRectMake(8, 19, 60, 30)];
         label.text = @"预定须知";
         label.font = [UIFont systemFontOfSize:14];
         [self addSubview:label];
@@ -40,7 +44,7 @@
                           CGSizeMake(screenWide - 20, CGFLOAT_MAX)
                                                   options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading
                                                attributes:[NSDictionary dictionaryWithObjectsAndKeys:label.font,NSFontAttributeName, nil] context:nil].size.height;
-        label.frame = CGRectMake(10, 40, screenWide - 20, height);
+        label.frame = CGRectMake(10, 50, screenWide - 20, height);
         label.numberOfLines = 0;
         label.textColor = RGB(158, 159, 159);
         [self addSubview:label];

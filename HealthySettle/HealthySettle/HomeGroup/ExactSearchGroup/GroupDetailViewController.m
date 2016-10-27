@@ -286,14 +286,14 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES
-                                             animated: YES];
+    [UIApplication sharedApplication].statusBarHidden = NO;
+    [self.navigationController setNavigationBarHidden:YES animated:animated];
+
 }
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [self.navigationController setNavigationBarHidden:NO
-                                             animated:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:animated];
 }
 -(void)setData{
     DDGroupData * group_data = [[DDGroupData alloc] initWithController:@"group" group_id:self.group_id];
@@ -332,9 +332,9 @@
     self.tableView.tableHeaderView = self.tableHeadView;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     if ([self.vc_type isEqualToString:@"S"])
     {
-        self.tableView.backgroundColor = RGB(250, 250, 250);
         self.tableView.backgroundColor = RGB(250, 250, 250);
         [self.tableView registerNib:[UINib nibWithNibName:@"LivingTimeTVCell" bundle:nil]
              forCellReuseIdentifier:@"cellLiving"];
@@ -397,6 +397,10 @@
 
     // Do any additional setup after loading the view.
     [self setData];
+    self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+    self.navigationController.interactivePopGestureRecognizer.delegate = self;
+    [self.navigationController.view sendSubviewToBack:self.navigationController.navigationBar];
+
     UIBarButtonItem * returnBarButtonItem = [[UIBarButtonItem alloc] init];
     returnBarButtonItem.title = @"";
     [returnBarButtonItem setBackgroundImage:[UIImage imageNamed:@"leftop_r"]
@@ -418,6 +422,13 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+    return 1;
+
+}
+
+- (NSInteger)tableView:(UITableView *)tableView
+ numberOfRowsInSection:(NSInteger)section
+{
     if ([self.vc_type isEqualToString:@"S"])
     {
         return 2+[_data_dic[@"room"] count];
@@ -428,30 +439,22 @@
     {
         return 0;
     }
-}
 
-- (NSInteger)tableView:(UITableView *)tableView
- numberOfRowsInSection:(NSInteger)section
-{
-    return 1;
 }
 
 - (void)cellShowPriceDetail:(UIButton *)btn
 {
     NSInteger number = btn.tag - 500;
     TestModel * model = showArray[number];
-    NSIndexSet *indexSet=[[NSIndexSet alloc]
-                          initWithIndex:number];
+    NSIndexPath * indexPath = [NSIndexPath indexPathForRow:number inSection:0];
     if ([model.show isEqualToString:@"y"])
     {
         model.show = @"n";
-        [self.tableView reloadSections:indexSet
-                      withRowAnimation:UITableViewRowAnimationAutomatic];
-    }else
+        [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+       }else
     {
         model.show = @"y";
-        [self.tableView reloadSections:indexSet
-                      withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     }
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView
@@ -459,28 +462,28 @@
 {
     if ([self.vc_type isEqualToString:@"S"])
     {
-        if (indexPath.section == 0) {
+        if (indexPath.row == 0) {
             LivingTimeTVCell *  cell  =  [tableView dequeueReusableCellWithIdentifier:@"cellLiving"
                                                                          forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             [cell configTimes];
             return cell;
             
-        }else if (indexPath.section <= [_data_dic[@"room"] count])
+        }else if (indexPath.row <= [_data_dic[@"room"] count])
         {
-            NSDictionary * dic = _data_dic[@"room"][indexPath.section - 1];
+            NSDictionary * dic = _data_dic[@"room"][indexPath.row - 1];
             HomeTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cellHome"
                                                                 forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.priceDetail_btn.tag = 500 + indexPath.section;
+            cell.priceDetail_btn.tag = 500 + indexPath.row;
             [cell.priceDetail_btn addTarget:self
                                      action:@selector(cellShowPriceDetail:)
                            forControlEvents:UIControlEventTouchUpInside];
-            cell.reserve_btn.tag = 500 + indexPath.section;
+            cell.reserve_btn.tag = 500 + indexPath.row;
             [cell.reserve_btn addTarget:self
                                  action:@selector(fillInOrderController:)
                        forControlEvents:UIControlEventTouchUpInside];
-            TestModel * model = showArray[indexPath.section];
+            TestModel * model = showArray[indexPath.row];
             [cell configWithdic:dic
                              show:model.show];
             return cell;
@@ -497,7 +500,7 @@
         
     }else
     {
-        if (indexPath.section == 0)
+        if (indexPath.row == 0)
         {
             SelectTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cellSelect"
                                                                   forIndexPath:indexPath];
@@ -505,7 +508,7 @@
             [cell configWithDic:_data_dic[@"spec_tag"] num1:_num_1 num2:_num_2 num3:_num_3 num4:_num_4];
             cell.delegate = self;
             return cell;
-        }else  if (indexPath.section == 1)
+        }else  if (indexPath.row == 1)
         {
             OrgIntroTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cellIntro"
                                                                     forIndexPath:indexPath];
@@ -513,7 +516,7 @@
             [cell configWithtelephone:_data_dic[@"telphone"] bed_nums:_data_dic[@"bed_nums"] spec:nil special_s:_data_dic[@"special_service"] intro:_data_dic[@"intro"]];
             
             return cell;
-        }else if (indexPath.section == 2)
+        }else if (indexPath.row == 2)
         {
             ServeTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cellServe"
                                                                  forIndexPath:indexPath];
@@ -522,16 +525,7 @@
             return cell;
             
         }
-       /* else if (indexPath.section == 3)
-        {
-            ChargeTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cellCharge"
-                                                                  forIndexPath:indexPath];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            [cell configWithDataDic:_data_dic[@"spec_tag"]];
-            
-            return cell;
-        }*/
-        else  if (indexPath.section == 3 || indexPath.section == 4)
+        else  if (indexPath.row == 3 || indexPath.row == 4)
         {
             ShowTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cellShow"
                                                                 forIndexPath:indexPath];
@@ -539,7 +533,7 @@
             NSString * string;
             NSString * title;
             NSArray * image_array;
-            if (indexPath.section == 3)
+            if (indexPath.row == 3)
             {   image_array = _data_dic[@"fun_file"];
                 string = _data_dic[@"fun_desc"];
             }else
@@ -550,7 +544,7 @@
             [cell configWithTitle:title
                        imageArray:image_array text:string];
             return cell;
-        }else if (indexPath.section == 5)
+        }else if (indexPath.row == 5)
         {
             ShouldKnowTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cellKnow"
                                                                       forIndexPath:indexPath];
@@ -574,45 +568,41 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([self.vc_type isEqualToString:@"S"])
     {
-        if (indexPath.section < 1)
+        if (indexPath.row < 1)
         {
-            return 0.0449 * screenHeight;
-        }else if (indexPath.section <= [_data_dic[@"room"] count])
+            return 0.0649 * screenHeight;
+        }else if (indexPath.row <= [_data_dic[@"room"] count])
         {
-            TestModel * model = showArray[indexPath.section];
+            TestModel * model = showArray[indexPath.row];
             if ([model.show isEqualToString:@"y"])
             {
-                return 215;
+                return 228;
             }else
             {
-                return 143;
+                return 156;
             }
         }else
         {
-            return 288;
+            return 301;
         }
         
     }else if ([self.vc_type isEqualToString:@"L"])
     {
-        if (indexPath.section == 0)
+        if (indexPath.row == 0)
         {
-            return screenHeight * 0.4917;
-        }else if (indexPath.section == 1)
+            return screenHeight * 0.5117;
+        }else if (indexPath.row == 1)
         {
-            return 173;
-        }else if (indexPath.section == 2)
+            return 186;
+        }else if (indexPath.row == 2)
         {
-            return 110;
+            return 123;
         }
-//        else if (indexPath.section == 3)
-//        {
-//            return 176;
-//        }
-        else if (indexPath.section == 3 || indexPath.section ==4)
+        else if (indexPath.row == 3 || indexPath.row ==4)
         {
             NSString * string;
             NSArray * image_array;
-            if (indexPath.section == 4)
+            if (indexPath.row == 4)
             {
                 string = @" ";
                 image_array = _data_dic[@"style_file"];
@@ -622,15 +612,15 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath
                 image_array = _data_dic[@"fun_file"];
             }
             if (image_array.count == 0) {
-                return  [self backheightWith:string] - 105;
+                return  [self backheightWith:string] - 92;
             }
-            return  [self backheightWith:string];
-        }else if (indexPath.section == 5)
+            return  [self backheightWith:string] + 13;
+        }else if (indexPath.row == 5)
         {
-            return [self backheightWith:_data_dic[@"cue"]] - 100;
+            return [self backheightWith:_data_dic[@"cue"]] - 80;
         }else
         {
-            return 288;
+            return 301;
         }
         
     }else
@@ -658,43 +648,6 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath
     }
 }
 
-//设置table
-//- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-//{
-//    CGFloat sectionHeaderHeight = screenHeight * 0.02;
-//    if (scrollView.contentOffset.y<=sectionHeaderHeight)
-//    {
-//        if (scrollView.contentOffset.y > 0)
-//        {
-//            scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
-//        }else if(scrollView.contentOffset.y == 0)
-//        {   //下降的位置
-//            scrollView.contentInset = UIEdgeInsetsMake(sectionHeaderHeight , 0, 0, 0);
-////            if (backFootView.frame.size.height == sectionHeaderHeight + 44) {
-////                backFootView.frame = CGRectMake(0, 0, screenWide, 44);
-////            }
-//        }
-//    }
-//    else if (scrollView.contentOffset.y>=sectionHeaderHeight)
-//    {   //让headSectionView  上移到刚好盖住的位置
-//        scrollView.contentInset = UIEdgeInsetsMake(-sectionHeaderHeight , 0, 0, 0);
-//    }
-//}
--(CGFloat)tableView:(UITableView *)tableView
-heightForHeaderInSection:(NSInteger)section
-{
-    if ([self.vc_type isEqualToString:@"S"])
-    {
-        return screenHeight * 0.02;
-    }else if ([self.vc_type isEqualToString:@"L"])
-    {
-        return screenHeight * 0.02;
-    }else
-    {
-        return 0;
-    }
-    
-}
 - (void)tableView:(UITableView *)tableView
 didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {

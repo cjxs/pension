@@ -19,6 +19,9 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
+    UIView * margin_view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWide, 13)];
+    margin_view.backgroundColor =  RGB(242, 242, 242);
+    [self addSubview:margin_view];
     // Initialization code
 }
 
