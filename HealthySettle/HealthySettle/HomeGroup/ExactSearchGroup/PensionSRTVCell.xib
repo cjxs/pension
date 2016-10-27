@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,11 +14,10 @@
             <rect key="frame" x="0.0" y="0.0" width="425" height="130"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <frame key="frameInset" width="425" height="129"/>
+                <frame key="frameInset" width="425" height="129.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JbI-4x-C1l">
-                        <frame key="frameInset" minX="107" minY="8" width="281" height="28"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JbI-4x-C1l">
                         <constraints>
                             <constraint firstAttribute="width" constant="250" id="1AL-7u-Vmr"/>
                             <constraint firstAttribute="height" constant="28" id="C6l-Bp-jt9"/>
@@ -37,12 +37,12 @@
                             <constraint firstAttribute="height" constant="20" id="ol9-vg-duc"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                        <color key="textColor" red="0.84705882352941175" green="0.84705882352941175" blue="0.84705882352941175" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="textColor" red="0.75686274509803919" green="0.75686274509803919" blue="0.75686274509803919" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="V4a-sH-wOz">
                         <constraints>
-                            <constraint firstAttribute="width" constant="78" id="Gc2-mp-epn"/>
+                            <constraint firstAttribute="width" secondItem="V4a-sH-wOz" secondAttribute="height" multiplier="1.1:1" id="vhf-eQ-RNi"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ap-gO-BzL">
@@ -51,7 +51,7 @@
                             <constraint firstAttribute="height" constant="20" id="o5m-dd-8UD"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                        <color key="textColor" red="0.84705882352941175" green="0.84705882352941175" blue="0.84705882352941175" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="textColor" red="0.75686274509803919" green="0.75686274509803919" blue="0.75686274509803919" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dgv-NV-VNK">
@@ -66,14 +66,14 @@
                         <constraints>
                             <constraint firstAttribute="width" constant="20" id="f2N-9l-Z1l"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.7725490196" green="0.7725490196" blue="0.7725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="Dgv-NV-VNK" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="23" id="2Bc-RG-VdS"/>
-                    <constraint firstItem="JbI-4x-C1l" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="98" id="2kB-Cs-8Ie"/>
+                    <constraint firstItem="Dgv-NV-VNK" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="21" id="2Bc-RG-VdS"/>
+                    <constraint firstItem="JbI-4x-C1l" firstAttribute="leading" secondItem="V4a-sH-wOz" secondAttribute="trailing" constant="5" id="4Ky-Ja-cc3"/>
                     <constraint firstItem="Bhv-uA-hch" firstAttribute="leading" secondItem="JbI-4x-C1l" secondAttribute="leading" id="922-Fl-RCa"/>
                     <constraint firstItem="aoO-Rn-UJJ" firstAttribute="leading" secondItem="Dgv-NV-VNK" secondAttribute="trailing" constant="1" id="AgO-nP-ffD"/>
                     <constraint firstItem="V4a-sH-wOz" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="FQb-gf-Zog"/>
@@ -83,9 +83,9 @@
                     <constraint firstItem="V4a-sH-wOz" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="5" id="MwH-Of-4dI"/>
                     <constraint firstItem="9ap-gO-BzL" firstAttribute="top" secondItem="JbI-4x-C1l" secondAttribute="bottom" constant="13" id="Nro-sy-EA6"/>
                     <constraint firstAttribute="trailingMargin" secondItem="aoO-Rn-UJJ" secondAttribute="trailing" id="Qez-z4-f2T"/>
-                    <constraint firstItem="JbI-4x-C1l" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="Rz6-Fb-4tj"/>
+                    <constraint firstItem="JbI-4x-C1l" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-1" id="Rz6-Fb-4tj"/>
                     <constraint firstAttribute="trailingMargin" secondItem="JbI-4x-C1l" secondAttribute="trailing" constant="30" id="SrS-U9-smY"/>
-                    <constraint firstItem="aoO-Rn-UJJ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="23" id="VAv-a2-jDU"/>
+                    <constraint firstItem="aoO-Rn-UJJ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="21" id="VAv-a2-jDU"/>
                     <constraint firstAttribute="bottomMargin" secondItem="aoO-Rn-UJJ" secondAttribute="bottom" constant="30" id="z4n-Up-Ayz"/>
                     <constraint firstAttribute="bottomMargin" secondItem="V4a-sH-wOz" secondAttribute="bottom" id="zKv-J2-MNB"/>
                 </constraints>

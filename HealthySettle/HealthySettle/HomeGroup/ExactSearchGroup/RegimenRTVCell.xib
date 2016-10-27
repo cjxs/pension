@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,7 +14,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="128"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <frame key="frameInset" width="320" height="127"/>
+                <frame key="frameInset" width="320" height="128"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x4h-Bf-lal">
@@ -29,13 +30,13 @@
                             <constraint firstAttribute="width" constant="20" id="FkM-7f-Fce"/>
                             <constraint firstAttribute="height" constant="25" id="vHT-B9-vg1"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Fh4-Z0-71E">
                         <constraints>
-                            <constraint firstAttribute="width" constant="78" id="A9c-Ll-8s4"/>
+                            <constraint firstAttribute="width" secondItem="Fh4-Z0-71E" secondAttribute="height" multiplier="1.1:1" id="lTg-We-WO9"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wNm-tJ-BgS">
@@ -68,8 +69,8 @@
                     </label>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="Vgi-pc-lMb" firstAttribute="leading" secondItem="Fh4-Z0-71E" secondAttribute="trailing" constant="5" id="4gv-IH-ZTu"/>
                     <constraint firstAttribute="trailingMargin" secondItem="Vgi-pc-lMb" secondAttribute="trailing" constant="30" id="E2e-aS-ShE"/>
-                    <constraint firstItem="Vgi-pc-lMb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="92" id="G5N-fG-tu4"/>
                     <constraint firstAttribute="trailingMargin" secondItem="AJc-0Q-awe" secondAttribute="trailing" constant="5" id="I3c-wS-EaE"/>
                     <constraint firstAttribute="trailingMargin" secondItem="wNm-tJ-BgS" secondAttribute="trailing" constant="30" id="KWQ-Rz-Yar"/>
                     <constraint firstItem="wNm-tJ-BgS" firstAttribute="leading" secondItem="Vgi-pc-lMb" secondAttribute="leading" id="Oev-mY-BLA"/>

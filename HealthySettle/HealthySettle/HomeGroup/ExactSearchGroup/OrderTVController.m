@@ -79,21 +79,26 @@
         btn.titleLabel.font = [UIFont systemFontOfSize:10];
         [btn setTitleColor:RGB(240, 71, 76)
                   forState:UIControlStateNormal];
+        checkIn_timelabel.userInteractionEnabled = YES;
+
         if ([_vc_type isEqualToString:@"S"]) {
             home_label.text = _group_dic[@"room"][[_room_index intValue]][@"room_type"];
             if ([YYLOrder YSOrder].checkin_time) {
                 checkIn_timelabel.text = [CDDatePicker getStringFromDate:[YYLOrder YSOrder].checkin_time];
                 end_begin = [YYLOrder YSOrder].checkin_time;
+            }else{
+                checkIn_timelabel.text = [CDDatePicker getStringFromDate:[NSDate date]];
             }
             if ([YYLOrder YSOrder].checkout_time) {
                 leave_timelabel.text = [CDDatePicker getStringFromDate:[YYLOrder YSOrder].checkout_time];
                 end_end = [YYLOrder YSOrder].checkout_time;
+            }else{
+               leave_timelabel.text = @"--------";
             }
             UITapGestureRecognizer * tapChoose_start = [[UITapGestureRecognizer alloc]
                                                         initWithTarget:self
                                                         action:@selector(pickViewAppear:)];
             tapChoose_start.numberOfTapsRequired = 1;
-            checkIn_timelabel.userInteractionEnabled = YES;
             [checkIn_timelabel addGestureRecognizer:tapChoose_start];
             UITapGestureRecognizer * tapChoose_end = [[UITapGestureRecognizer alloc]
                                                       initWithTarget:self
@@ -103,11 +108,41 @@
             [leave_timelabel addGestureRecognizer:tapChoose_end];
 
         }else{
-            
+            if ([YYLOrder YLOrder].checkin_time) {
+                checkIn_timelabel.text = [CDDatePicker getStringFromDate:[YYLOrder YLOrder].checkin_time];
+                NSDate * date = [self getPriousorLaterDateFromDate:[YYLOrder YLOrder].checkin_time withMonth:1];
+                leave_timelabel.text = [CDDatePicker getStringFromDate:date];
+            }else{
+                checkIn_timelabel.text = [CDDatePicker getStringFromDate:[NSDate date]];
+                NSDate * date = [self getPriousorLaterDateFromDate:[NSDate date] withMonth:1];
+                leave_timelabel.text = [CDDatePicker getStringFromDate:date];
+                UITapGestureRecognizer * tapChoose_start = [[UITapGestureRecognizer alloc]
+                                                            initWithTarget:self
+                                                            action:@selector(pickViewAppear:)];
+                tapChoose_start.numberOfTapsRequired = 1;
+                checkIn_timelabel.userInteractionEnabled = YES;
+                [checkIn_timelabel addGestureRecognizer:tapChoose_start];
+                
+            }
         }
         [backHeadView addSubview:btn];
     }
     return _tableHeadView;
+}
+-(NSDate *)getPriousorLaterDateFromDate:(NSDate *)date withMonth:(int)month
+    
+{
+        
+    NSDateComponents *comps = [[NSDateComponents alloc] init];
+    [comps setMonth:month];
+    NSCalendar *calender = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDate *mDate = [calender dateByAddingComponents:comps toDate:date options:0];
+    NSTimeInterval  oneDay = 24*60*60;  //1年的长度
+    NSTimeInterval current_time = [mDate timeIntervalSince1970] - oneDay;
+    NSDate * currentDate = [NSDate dateWithTimeIntervalSince1970:current_time];
+
+    return currentDate;
+        
 }
 #pragma mark - auto_view
 - (void)viewDidLoad
@@ -442,27 +477,32 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 //日期选择器出来
 - (void)pickViewAppear:(UITapGestureRecognizer *)tap
 {
-    BOOL tap_where = tap.view == checkIn_timelabel?YES:NO;
     CDDatePicker * datePicker;
-    if (tap_where) {//入住按钮
+
+    if ([_vc_type isEqualToString:@"S"]) {
+        BOOL tap_where = tap.view == checkIn_timelabel?YES:NO;
+        if (tap_where) {//入住按钮
+            datePicker = [[CDDatePicker alloc] initWithOff_label:leave_timelabel];
+            datePicker.type = @"Z";
+            datePicker.date_start = [CDDatePicker getTimeOfNightFromdate:[NSDate date]];
+            if (end_end) {
+                NSTimeInterval  timeIn =[end_end timeIntervalSinceDate:datePicker.date_start];
+                NSTimeInterval  oneDay = 24*60*60;
+                int days = timeIn / oneDay ;
+                NSInteger day = days;
+                datePicker.choose_day_count = day;
+            }
+        }else {
+            datePicker = [[CDDatePicker alloc] initWithOff_label:checkIn_timelabel];
+            if (end_begin) {
+                NSTimeInterval  oneDay = 24*60*60;  //1天的长度
+                end_begin = [NSDate dateWithTimeInterval:oneDay sinceDate:end_begin];
+                datePicker.date_start = end_begin;
+            }
+        }
+    }else{
         datePicker = [[CDDatePicker alloc] initWithOff_label:leave_timelabel];
-        datePicker.type = @"Z";
         datePicker.date_start = [CDDatePicker getTimeOfNightFromdate:[NSDate date]];
-        if (end_end) {
-            NSTimeInterval  timeIn =[end_end timeIntervalSinceDate:datePicker.date_start];
-            NSTimeInterval  oneDay = 24*60*60;
-            int days = timeIn / oneDay ;
-            NSInteger day = days;
-            datePicker.choose_day_count = day;
-        }
-    }else {
-        datePicker = [[CDDatePicker alloc] initWithOff_label:checkIn_timelabel];
-        if (end_begin) {
-            NSTimeInterval  oneDay = 24*60*60;  //1天的长度
-            end_begin = [NSDate dateWithTimeInterval:oneDay sinceDate:end_begin];
-            datePicker.date_start = end_begin;
-        }
-        
     }
     datePicker.delegateDiy = self;
     [datePicker show];
@@ -470,17 +510,26 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
     
 }
 -(void)datePickerbtnDownWithDate:(NSDate *)date{
-    if (date) {
-        if ([_datePicker.type isEqualToString:@"Z"]) {
-            checkIn_timelabel.text = [NSString stringWithFormat:@"   %@",[CDDatePicker getStringFromDate:date]];
-            [YYLOrder YSOrder].checkin_time = date;
-            end_begin = date;
-        }else{
-            leave_timelabel.text = [NSString stringWithFormat:@"   %@",[CDDatePicker getStringFromDate:date]];
-            [YYLOrder YSOrder].checkout_time = date;
-            end_end = date;
-        }
-    }//日期选择器的代理方法
+    if ([_vc_type isEqualToString:@"S"]) {
+        if (date) {
+            if ([_datePicker.type isEqualToString:@"Z"]) {
+                checkIn_timelabel.text = [NSString stringWithFormat:@"   %@",[CDDatePicker getStringFromDate:date]];
+                [YYLOrder YSOrder].checkin_time = date;
+                end_begin = date;
+            }else{
+                leave_timelabel.text = [NSString stringWithFormat:@"   %@",[CDDatePicker getStringFromDate:date]];
+                [YYLOrder YSOrder].checkout_time = date;
+                end_end = date;
+            }
+        }//日期选择器的代理方法
+
+    }else{
+        checkIn_timelabel.text = [CDDatePicker getStringFromDate:date];
+        NSDate * date_l = [self getPriousorLaterDateFromDate:date withMonth:1];
+        leave_timelabel.text = [CDDatePicker getStringFromDate:date_l];
+        [YYLOrder YLOrder].checkin_time = date;
+        [YYLOrder YLOrder].checkout_time = date_l;
+    }
 }
 
 #pragma mark - Navigation

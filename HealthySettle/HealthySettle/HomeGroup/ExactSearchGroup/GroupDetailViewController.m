@@ -37,12 +37,15 @@
     UILabel *     commentNumber_label;
     UILabel *     commentRatio_label;
     NSArray * showArray;
-    UIView * backFootView;
     UIView * begin_view;
     NSMutableString * _num_1;
     NSMutableString * _num_2;
     NSMutableString * _num_3;
     NSMutableString * _num_4;
+    BOOL hide;
+    BOOL isScroll;
+    UIButton * predeter_btn;
+
 }
 
 
@@ -364,27 +367,59 @@
         [self.tableView registerNib:[UINib nibWithNibName:@"CommentTVCell" bundle:nil]
              forCellReuseIdentifier:@"cellComment"];
 
-        backFootView = [[UIView alloc]
-                        initWithFrame:CGRectMake(0, 0, screenWide, 44 + 60)];
-        UIButton * predeter_btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        predeter_btn.frame = CGRectMake(0, 0, screenWide/2, 44);
+
+        predeter_btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        predeter_btn.frame = CGRectMake(0, screenHeight-44, screenWide, 44);
         [predeter_btn setTitle:@"立即预定"
                       forState:UIControlStateNormal];
         [predeter_btn addTarget:self
                          action:@selector(fillInOrderController:)
                forControlEvents:UIControlEventTouchUpInside];
-        predeter_btn.backgroundColor = RGB(229, 12, 24);
-        [backFootView addSubview:predeter_btn];
-        UIButton * try_btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        try_btn.frame = CGRectMake(screenWide /2, 0, screenWide/2, 44);
-        [try_btn setTitle:@"一元试住" forState:UIControlStateNormal];
-        try_btn.backgroundColor = [UIColor whiteColor];
-        [try_btn setTitleColor:RGB(60, 61, 63)
-                      forState:UIControlStateNormal];
-        [backFootView addSubview:try_btn];
-        self.tableView.tableFooterView = backFootView;
+        predeter_btn.backgroundColor = RGB(242, 79, 11);
+//        UIButton * try_btn = [UIButton buttonWithType:UIButtonTypeCustom];
+//        try_btn.frame = CGRectMake(screenWide /2, 0, screenWide/2, 44);
+//        [try_btn setTitle:@"一元试住" forState:UIControlStateNormal];
+//        try_btn.backgroundColor = [UIColor whiteColor];
+//        [try_btn setTitleColor:RGB(60, 61, 63)
+//                      forState:UIControlStateNormal];
+//        [backFootView addSubview:try_btn];
+//        self.tableView.tableFooterView = backFootView;
+        [self.view addSubview:predeter_btn];
     }
     
+}
+-(void)hidePredeterbtn{
+    
+}
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    static float newy = 0;
+    static float oldy = 0;
+    newy = scrollView.contentOffset.y ;
+    if (isScroll == NO)
+    {
+        isScroll = YES;
+        if (newy != oldy )
+        {
+            if (newy > oldy && hide == NO)
+            {
+                
+                [UIView animateWithDuration:0.5 animations:^{
+                    predeter_btn.frame = CGRectMake(0, screenHeight, screenWide, 44);
+                }];
+                hide = YES;
+            }else if(newy < oldy&& hide == YES)
+            {
+                [UIView animateWithDuration:0.5 animations:^{
+                    predeter_btn.frame = CGRectMake(0, screenHeight-44, screenWide, 44);
+                }];
+                hide = NO;
+            }
+            oldy = newy;
+        }
+        isScroll = NO;
+        
+    }
 }
 
 - (void)viewDidLoad {
