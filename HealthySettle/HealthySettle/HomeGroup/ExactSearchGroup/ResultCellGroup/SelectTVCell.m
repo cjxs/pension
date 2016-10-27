@@ -238,18 +238,13 @@
 }
 -(void)totalPrice{
 
-    NSInteger pri_a = [type_a count]-1>=[_num_2 intValue]? [type_a[[_num_2 intValue]][@"tag_price"] integerValue]:[type_a[0][@"tag_price"] integerValue];
-    NSInteger pri_b = type_b.count-1 >= _num_3.intValue? [type_b[[_num_3 intValue]][@"tag_price"] integerValue]:[type_b[0][@"tag_price"] integerValue];
-      NSInteger pri_c = type_c.count-1 >= _num_4.intValue ?[type_c[[_num_4 intValue]][@"tag_price"] integerValue]:[type_c[0][@"tag_price"] integerValue];
-    if (pri_a&&pri_b&&pri_c) {
+    NSInteger pri_a = [_num_2 intValue] > [type_a count]-1? [type_a[0][@"tag_price"] integerValue]:[type_a[[_num_2 intValue]][@"tag_price"] integerValue];
+    NSInteger pri_b =  _num_3.intValue > type_b.count-1 ? [type_b[0][@"tag_price"] integerValue]:[type_b[[_num_3 intValue]][@"tag_price"] integerValue];
+    NSInteger pri_c = _num_4.intValue > type_c.count-1 ?[type_c[0][@"tag_price"] integerValue]:[type_c[[_num_4 intValue]][@"tag_price"] integerValue];
+    if (pri_b&&pri_c) {
         [self.delegate updatePriceWithNumber:pri_a+pri_b+pri_c];
     }
     [self.delegate rememberSelectWithnum1:_num_1 num2:_num_2 num3:_num_3 num4:_num_4];
-//    NSLog(@"%@",type_Arr[[_num_1 intValue]]);
-//    NSLog(@"%@",type_a[[_num_2 intValue]]);
-//    NSLog(@"%@",type_b[_num_3.intValue]);
-//    NSLog(@"%@",type_c[_num_4.intValue]);
-
     
 }
 - (void)awakeFromNib {

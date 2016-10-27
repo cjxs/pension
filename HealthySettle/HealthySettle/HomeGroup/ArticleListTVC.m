@@ -32,6 +32,8 @@
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.tintColor = [UIColor redColor];
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor blackColor]};
+    [self.navigationController setNavigationBarHidden:NO
+                                             animated:animated];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -39,12 +41,9 @@
     [self setData];
     [self.tableView registerClass:[ArticleListTViewCell class] forCellReuseIdentifier:@"article"];
     self.tableView.tableFooterView = [UIView new];
-
-
-
-    
   
 }
+
 -(void)setData{
     DDArticleList * articleList = [[DDArticleList alloc] initWithtype:_type];
     [articleList startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
@@ -100,21 +99,10 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString * article_id = data_Arr[indexPath.row][@"id"];//时机不成熟
-    
-//    DDArticleDetail * article = [[DDArticleDetail alloc] initWithtitle_id:article_id];
-//    [article startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
-//        NSDictionary * dic = [DDLogin dictionaryWithJsonString:request.responseString];
-//        WebViewController * web_vc = [[WebViewController alloc] init];
-//        web_vc.h5_str = dic[@"content"];
-//        if (web_vc.h5_str) {
-//            [self.navigationController pushViewController:web_vc animated:YES];
-//        }
-//        
-//    } failure:^(__kindof YTKBaseRequest *request) {
-//        NSLog(@"出错");
-//    }];
-    
-    NSLog(@"%@",article_id);
+    WebViewController * web_vc = [[WebViewController alloc] init];
+    NSString * str= [NSString stringWithFormat:@"http://n.5199yl.com/#/article/news?id=%@",article_id];
+    web_vc.urlLoad = [NSURL URLWithString:str];
+    [self.navigationController pushViewController:web_vc animated:YES];
 }
 
 /*

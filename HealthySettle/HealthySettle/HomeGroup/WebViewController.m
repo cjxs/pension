@@ -34,11 +34,11 @@
     self.progressProxy.progressDelegate = self;
     CGFloat progressBarHeight = 3.f;
     CGRect navigaitonBarBounds = self.navigationController.navigationBar.bounds;
-    CGRect barFrame = CGRectMake(0, 20, navigaitonBarBounds.size.width, progressBarHeight);
+    CGRect barFrame = CGRectMake(0, 20, navigaitonBarBounds.size.width, progressBarHeight);\
     self.progressView = [[NJKWebViewProgressView alloc]
                          initWithFrame:barFrame];
     self.progressView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
-        NSURLRequest * request = [NSURLRequest requestWithURL:_urlLoad];
+    NSURLRequest * request = [NSURLRequest requestWithURL:_urlLoad];
     [_webView loadRequest:request];
     
     btn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -58,6 +58,7 @@
     [self.navigationController setNavigationBarHidden:YES
                                              animated:YES];
     [super viewWillAppear:animated];
+
     [self.navigationController.navigationBar addSubview:_progressView];
 }
 -(void)viewWillDisappear:(BOOL)animated

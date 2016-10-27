@@ -19,7 +19,6 @@
 @end
 
 @implementation CommentViewController
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
