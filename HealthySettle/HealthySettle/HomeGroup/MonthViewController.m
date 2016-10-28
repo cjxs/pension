@@ -22,7 +22,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [self.month_imageview sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",BASEURL,_dataDic[@"banner"]]]];
+    [self.month_imageview sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",BASEURL,_dataDic[@"banner"]]] placeholderImage:[UIImage imageNamed:@"season_p_2"]];
     self.province1_label.text = [NSString stringWithFormat:@"        %@",_dataDic[@"desc"]];
     self.month_label.text = _dataDic[@"title"];
     [self.cityleft_btn addTarget:self action:@selector(pushToListWithbtn:) forControlEvents:UIControlEventTouchUpInside];
@@ -41,15 +41,15 @@
             NSURL * url = [NSURL URLWithString:str3];
                     switch (i) {
                 case 0:
-                    [self.cityleft_imageview sd_setImageWithURL:url];
+                    [self.cityleft_imageview sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"season_p_1"]];
                     [self.cityleft_btn setTitle:dic[@"area_name"] forState:UIControlStateNormal];
                     break;
                 case 1:
-                    [self.citymid_imageview sd_setImageWithURL:url];
+                    [self.citymid_imageview sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"season_p_1"]];
                     [self.citymid_btn setTitle:dic[@"area_name"] forState:UIControlStateNormal];
                     break;
                 case 2:
-                    [self.cityright_imageview sd_setImageWithURL:url];
+                    [self.cityright_imageview sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"season_p_1"]];
                     [self.cityright_btn setTitle:dic[@"area_name"] forState:UIControlStateNormal];
                     break;
                 default:

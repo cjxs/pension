@@ -94,7 +94,7 @@
                               initWithFrame:CGRectMake(0,0 , screenWide, screenHeight * 0.469)];
             NSString *  str2 = [NSString stringWithFormat:@"%@/upload/group/%@",BASEURL,_data_dic[@"pic"]];
             NSString * str3 = [str2 stringByReplacingOccurrencesOfString:@"," withString:@"/"];
-            [organization_imageView sd_setImageWithURL:[NSURL URLWithString:str3]];
+            [organization_imageView sd_setImageWithURL:[NSURL URLWithString:str3] placeholderImage:[UIImage imageNamed:@"banner_p"]];
             _tableHeadView.backgroundColor = RGB(249, 249, 249);
             [_tableHeadView addSubview:organization_imageView];
             [_tableHeadView addSubview:view];
@@ -163,7 +163,7 @@
                               initWithFrame:CGRectMake(0,0 , screenWide, screenHeight * 0.496)];
             NSString *  str2 = [NSString stringWithFormat:@"%@/upload/group/%@",BASEURL,_data_dic[@"pic"]];
             NSString * str3 = [str2 stringByReplacingOccurrencesOfString:@"," withString:@"/"];
-            [organization_imageView sd_setImageWithURL:[NSURL URLWithString:str3]];
+            [organization_imageView sd_setImageWithURL:[NSURL URLWithString:str3] placeholderImage:[UIImage imageNamed:@"banner_p"]];
             _tableHeadView.backgroundColor = RGB(254, 255, 255);
             [_tableHeadView addSubview:organization_imageView];
             [_tableHeadView addSubview:view];

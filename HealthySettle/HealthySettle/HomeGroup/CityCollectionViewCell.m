@@ -30,7 +30,7 @@
 -(void)configWithImage:(NSString *)imageStr name:(NSString *)name {
     if (self) {
         if (imageStr) {
-            [_image_view sd_setImageWithURL:[NSURL URLWithString:imageStr]];
+            [_image_view sd_setImageWithURL:[NSURL URLWithString:imageStr] placeholderImage:[UIImage imageNamed:@"city_p"]];
         }
         if (name) {
             _describ_label.text = name;

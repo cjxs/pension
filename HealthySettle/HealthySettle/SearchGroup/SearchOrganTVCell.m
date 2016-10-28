@@ -43,7 +43,7 @@
 {
     if (str)
     {
-        [self.organ_imageView sd_setImageWithURL:[NSURL URLWithString:str]];
+        [self.organ_imageView sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"banner_p"]];
     }
     if (title) {
         self.name_la.text =  title;

@@ -36,7 +36,7 @@
                     season:(NSString *)season
                    describ:(NSString *)describ
 {
-    [_image_view sd_setImageWithURL:[NSURL URLWithString:imageurl]];
+    [_image_view sd_setImageWithURL:[NSURL URLWithString:imageurl] placeholderImage:[UIImage imageNamed:@"season_p_1"]];
     _season_label.text = season;
     _describe_label.text = describ;
 }

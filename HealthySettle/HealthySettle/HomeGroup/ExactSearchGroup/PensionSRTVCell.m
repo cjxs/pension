@@ -30,7 +30,7 @@
 {
     if (image_u)
     {
-        [self.organization_image sd_setImageWithURL:[NSURL URLWithString:image_u]];
+        [self.organization_image sd_setImageWithURL:[NSURL URLWithString:image_u] placeholderImage:[UIImage imageNamed:@"list_p"]];
     }
     if (title)
     {

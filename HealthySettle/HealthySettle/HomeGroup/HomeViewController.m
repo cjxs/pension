@@ -121,28 +121,20 @@
 }
 
 - (void)setTableView {
-    CGRect rect;
-    rect = CGRectMake(0, 0, screenWide, screenHeight-64-screenHeight * 0.035);
-
-    UITableView * homeTableView = [[UITableView alloc]
-                                   initWithFrame:rect
-                                   style:UITableViewStyleGrouped];
-    [self.view addSubview:homeTableView];
-    homeTableView.tableHeaderView = self.tableHeadView;
-    homeTableView.delegate = self;
-    homeTableView.dataSource = self;
-    homeTableView.bounces = NO;
-    homeTableView.showsVerticalScrollIndicator = NO;
-    homeTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [homeTableView registerClass:[CitySkipViewCell class]
+   
+    _homeTableView.tableHeaderView = self.tableHeadView;
+    _homeTableView.delegate = self;
+    _homeTableView.dataSource = self;
+    _homeTableView.showsVerticalScrollIndicator = NO;
+    _homeTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [_homeTableView registerClass:[CitySkipViewCell class]
           forCellReuseIdentifier:@"cellCity"];
-    [homeTableView registerClass:[SeasonCTViewCell class]
+    [_homeTableView registerClass:[SeasonCTViewCell class]
           forCellReuseIdentifier:@"cellSeason"];
-    _homeTableView = homeTableView;
     [self setBanner];
 }
 - (void)setBanner {
-    SDCycleScrollView *cycleScrollView3 = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, screenWide , screenHeight * 0.222) delegate:self placeholderImage:[UIImage imageNamed:@"轮播-1"]];
+    SDCycleScrollView *cycleScrollView3 = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, screenWide , screenHeight * 0.222) delegate:self placeholderImage:[UIImage imageNamed:@"banner_p"]];
     cycleScrollView3.currentPageDotImage = [UIImage imageNamed:@"pageControlCurrentDot"];
     cycleScrollView3.pageDotImage = [UIImage imageNamed:@"pageControlDot"];
     cycleScrollView3.imageURLStringsGroup = imagesA;
@@ -176,6 +168,10 @@
 {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    _homeTableView = [[UITableView alloc]
+                                   initWithFrame:CGRectMake(0, 0, screenWide, screenHeight-64-screenHeight * 0.035)
+                                   style:UITableViewStyleGrouped];
+    [self.view addSubview:_homeTableView];
     [self loadNetWork];
    
        // 版本更新的时候添加提示页面，任性的设计师要求的

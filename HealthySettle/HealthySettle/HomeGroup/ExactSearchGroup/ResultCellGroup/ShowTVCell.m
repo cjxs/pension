@@ -49,18 +49,18 @@
                
                 break;
             case 1:
-                [self.left_imageView sd_setImageWithURL:[NSURL URLWithString:arr[0]]];
+                [self.left_imageView sd_setImageWithURL:[NSURL URLWithString:arr[0]] placeholderImage:[UIImage imageNamed:@"list_p"]];
                 
                 break;
             case 2:
-                [self.left_imageView sd_setImageWithURL:[NSURL URLWithString:arr[0]]];
-                 [self.mid_imageView sd_setImageWithURL:[NSURL URLWithString:arr[1]]];
+                [self.left_imageView sd_setImageWithURL:[NSURL URLWithString:arr[0]] placeholderImage:[UIImage imageNamed:@"list_p"]];
+                 [self.mid_imageView sd_setImageWithURL:[NSURL URLWithString:arr[1]] placeholderImage:[UIImage imageNamed:@"list_p"]];
                 
                 break;
             default:
-                [self.left_imageView sd_setImageWithURL:[NSURL URLWithString:arr[0]]];
-                [self.mid_imageView sd_setImageWithURL:[NSURL URLWithString:arr[1]]];
-                [self.right_imageView sd_setImageWithURL:[NSURL URLWithString:arr[2]]];
+                [self.left_imageView sd_setImageWithURL:[NSURL URLWithString:arr[0]] placeholderImage:[UIImage imageNamed:@"list_p"]];
+                [self.mid_imageView sd_setImageWithURL:[NSURL URLWithString:arr[1]] placeholderImage:[UIImage imageNamed:@"list_p"]];
+                [self.right_imageView sd_setImageWithURL:[NSURL URLWithString:arr[2]] placeholderImage:[UIImage imageNamed:@"list_p"]];
                 break;
         }
     }
