@@ -13,7 +13,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="154"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <frame key="frameInset" width="320" height="153"/>
+                <frame key="frameInset" width="320" height="153.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="康娱设施" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nm2-cO-ofi">
@@ -25,10 +25,10 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EpC-tf-sGo">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EpC-tf-sGo">
+                        <frame key="frameInset" minX="8" minY="59" width="100" height="75"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="54" id="Dor-qy-XK1"/>
-                            <constraint firstAttribute="height" constant="75" id="Nqo-KN-It8"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -36,8 +36,11 @@
                             </mask>
                         </variation>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4eN-7r-HUO"/>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ea6-6L-H0n">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4eN-7r-HUO">
+                        <frame key="frameInset" minX="110" minY="59" width="100" height="75"/>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ea6-6L-H0n">
+                        <frame key="frameInset" minX="212" minY="59" width="100" height="75"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="85" id="aOs-oW-y4Q"/>
                         </constraints>
@@ -58,7 +61,7 @@
                     <constraint firstItem="Ea6-6L-H0n" firstAttribute="height" secondItem="4eN-7r-HUO" secondAttribute="height" id="caX-Fc-eZp"/>
                     <constraint firstItem="Ea6-6L-H0n" firstAttribute="width" secondItem="EpC-tf-sGo" secondAttribute="width" id="i4I-km-nKl"/>
                     <constraint firstAttribute="topMargin" secondItem="Nm2-cO-ofi" secondAttribute="top" constant="-13" id="jaJ-zW-k4U"/>
-                    <constraint firstItem="EpC-tf-sGo" firstAttribute="top" secondItem="Nm2-cO-ofi" secondAttribute="bottom" constant="8" id="kEu-cu-uqU"/>
+                    <constraint firstItem="EpC-tf-sGo" firstAttribute="top" secondItem="Nm2-cO-ofi" secondAttribute="bottom" constant="5" id="kEu-cu-uqU"/>
                     <constraint firstItem="4eN-7r-HUO" firstAttribute="width" secondItem="EpC-tf-sGo" secondAttribute="width" id="ng7-Pf-We6"/>
                     <constraint firstItem="Ea6-6L-H0n" firstAttribute="leading" secondItem="4eN-7r-HUO" secondAttribute="trailing" constant="2" id="o7T-lW-b9I"/>
                     <constraint firstItem="Nm2-cO-ofi" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="sdf-kB-8xa"/>

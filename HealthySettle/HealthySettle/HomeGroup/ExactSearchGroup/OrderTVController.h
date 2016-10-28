@@ -33,4 +33,6 @@
 @property (nonatomic,strong)NSString * room_index;
 @property (nonatomic,strong)NSString * vc_type;
 @property (nonatomic,strong) CDDatePicker * datePicker;
+@property (nonatomic,strong)NSArray * chargeArray;
+@property (nonatomic,strong)NSString * charge_price;
 @end

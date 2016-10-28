@@ -45,6 +45,7 @@
     BOOL hide;
     BOOL isScroll;
     UIButton * predeter_btn;
+    NSString * price_Now;
 
 }
 
@@ -57,6 +58,7 @@
 -(void)updatePriceWithNumber:(NSInteger )number{
     priceNow_label.text = [NSString stringWithFormat:@"%d",(int)number-50];
     [self dealLinesWithString:[NSString stringWithFormat:@"门市价 ¥%ld",number]];
+    price_Now = [NSString stringWithFormat:@"%ld",number];
 
 }
 -(UIView *)tableHeadView
@@ -289,7 +291,6 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [UIApplication sharedApplication].statusBarHidden = NO;
     [self.navigationController setNavigationBarHidden:YES animated:animated];
 
 }
@@ -388,9 +389,7 @@
     }
     
 }
--(void)hidePredeterbtn{
-    
-}
+
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     static float newy = 0;
@@ -675,11 +674,11 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath
                           CGSizeMake(screenWide - 20, CGFLOAT_MAX)
                                            options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading
                                         attributes:[NSDictionary dictionaryWithObjectsAndKeys:label.font,NSFontAttributeName, nil] context:nil].size.height;
-        return height + 130;
+        return height + screenHeight * 0.19;
         
     }else
     {
-        return 120;
+        return screenHeight * 0.18;
     }
 }
 
@@ -705,12 +704,16 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
                                    initWithStyle:UITableViewStylePlain];
     orderVC.vc_type = _vc_type;
     orderVC.group_dic = _data_dic;
-
-
         if ([_vc_type isEqualToString:@"S"]) {
             orderVC.room_index = [NSString stringWithFormat:@"%ld",btn.tag -501];
         }else{
-            
+            SelectTVCell * cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+            orderVC.chargeArray = cell.spec_array;
+            if (price_Now) {
+                orderVC.charge_price = price_Now;
+            }else{
+                orderVC.charge_price = [NSString stringWithFormat:@"%ld",[_data_dic[@"price"] integerValue]];
+            }
         }
      [self.navigationController pushViewController:orderVC animated:YES];
     }

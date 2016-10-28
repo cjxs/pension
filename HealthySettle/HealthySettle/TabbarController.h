@@ -9,6 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface TabbarController : UITabBarController
-@property (nonatomic,assign)BOOL statusBarHidden;
 
 @end

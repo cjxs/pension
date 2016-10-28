@@ -10,6 +10,7 @@
 @class CDDatePicker;
 
 @interface ResultListVController : UIViewController
+@property (nonatomic,strong)NSString * tab_show;
 @property (nonatomic, strong) NSString    * vc_type;
 @property (nonatomic, strong) NSString    *area_id;
 @property (nonatomic,strong)  NSString    * title_l;

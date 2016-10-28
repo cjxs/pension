@@ -238,14 +238,10 @@
         pri_c = _num_4.intValue > type_a.count-1 ?[type_a[0][@"tag_price"] integerValue]:[type_a[[_num_4 intValue]][@"tag_price"] integerValue];
         pri_a = [_num_2 intValue] > [type_b count]-1? [type_b[0][@"tag_price"] integerValue]:[type_b[[_num_2 intValue]][@"tag_price"] integerValue];
         [self.delegate updatePriceWithNumber:pri_a+pri_b+pri_c];
-            [self.delegate rememberSelectWithnum1:_num_1 num2:_num_2 num3:_num_3 num4:_num_4];
-
-
+        [self.delegate rememberSelectWithnum1:_num_1 num2:_num_2 num3:_num_3 num4:_num_4];
+        self.spec_array = [NSMutableArray arrayWithArray:@[type_Arr[_num_1.intValue],type_b[_num_2.intValue][@"tag_name"],type_c[_num_3.intValue][@"tag_name"],type_a[_num_4.intValue][@"tag_name"]]];
     }
-    
-    NSLog(@"%@  %@,   %@,,    %@ ",type_Arr[_num_1.intValue],type_b[_num_2.intValue][@"tag_name"],type_c[_num_3.intValue][@"tag_name"],type_a[_num_4.intValue][@"tag_name"]);
-    
-}
+ }
 - (void)awakeFromNib {
     [super awakeFromNib];
    

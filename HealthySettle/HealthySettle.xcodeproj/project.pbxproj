@@ -160,6 +160,7 @@
 		3285AF111D3C72970070618A /* LoginOrRegisViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3285AF101D3C72970070618A /* LoginOrRegisViewController.m */; };
 		3292A74F1CA3D14E004FEB57 /* CDCityPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 3292A74E1CA3D14E004FEB57 /* CDCityPicker.m */; };
 		32A3BB771DBB16490009D50F /* DDCollectList.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A3BB761DBB16490009D50F /* DDCollectList.m */; };
+		32ADE60F1DC3046900FACE81 /* 轮播-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 32ADE60E1DC3046900FACE81 /* 轮播-1.png */; };
 		32CABD641CA373AA0068AE93 /* CityCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CABD571CA373AA0068AE93 /* CityCollectionViewCell.m */; };
 		32CABD651CA373AA0068AE93 /* CitySkipViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CABD591CA373AA0068AE93 /* CitySkipViewCell.m */; };
 		32CABD661CA373AA0068AE93 /* SearchVController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CABD5C1CA373AA0068AE93 /* SearchVController.m */; };
@@ -695,6 +696,7 @@
 		3292A74E1CA3D14E004FEB57 /* CDCityPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDCityPicker.m; sourceTree = "<group>"; };
 		32A3BB751DBB16490009D50F /* DDCollectList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDCollectList.h; sourceTree = "<group>"; };
 		32A3BB761DBB16490009D50F /* DDCollectList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDCollectList.m; sourceTree = "<group>"; };
+		32ADE60E1DC3046900FACE81 /* 轮播-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "轮播-1.png"; sourceTree = "<group>"; };
 		32CABD561CA373AA0068AE93 /* CityCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityCollectionViewCell.h; sourceTree = "<group>"; };
 		32CABD571CA373AA0068AE93 /* CityCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityCollectionViewCell.m; sourceTree = "<group>"; };
 		32CABD581CA373AA0068AE93 /* CitySkipViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CitySkipViewCell.h; sourceTree = "<group>"; };
@@ -1343,6 +1345,7 @@
 				32CABD5A1CA373AA0068AE93 /* ExactSearchGroup */,
 				32CABD5E1CA373AA0068AE93 /* HomeViewController.h */,
 				32CABD5F1CA373AA0068AE93 /* HomeViewController.m */,
+				32ADE60E1DC3046900FACE81 /* 轮播-1.png */,
 				32E588B01CB78825002AED1A /* KnowledgeTVController.h */,
 				32E588B11CB78825002AED1A /* KnowledgeTVController.m */,
 				32E588B31CB78BE1002AED1A /* CommonTVCell.h */,
@@ -1945,6 +1948,7 @@
 				3252D6631CC752F5000FAFBC /* AlipaySDK.bundle in Resources */,
 				3269BA9D1CC5DAA200C855FC /* choose_74_@2x.png in Resources */,
 				320BE5C91CBC900D00A34FCB /* AccountTVCell.xib in Resources */,
+				32ADE60F1DC3046900FACE81 /* 轮播-1.png in Resources */,
 				32E5883F1CB73A72002AED1A /* call_g@3x.png in Resources */,
 				32E5884A1CB73CFE002AED1A /* system_2_@2x.png in Resources */,
 				32DB05431DA8D0830041C4F5 /* pageControlDot@2x.png in Resources */,

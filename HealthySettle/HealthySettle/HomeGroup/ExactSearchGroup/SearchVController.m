@@ -65,26 +65,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [UIApplication sharedApplication].statusBarHidden = NO;
     [self.navigationController setNavigationBarHidden:YES animated:animated];
-//    [self hideTabBar];
-}
-- (void)hideTabBar
-{
-    if (self.tabBarController.tabBar.hidden == YES) {
-        return;
-    }
-    UIView *contentView;
-    if ( [[self.tabBarController.view.subviews objectAtIndex:0] isKindOfClass:[UITabBar class]] )
-    {
-        contentView = [self.tabBarController.view.subviews objectAtIndex:1];
-    }else
-    {
-        contentView = [self.tabBarController.view.subviews objectAtIndex:0];
-    }
-    CGRect  rect = CGRectMake(contentView.bounds.origin.x,  contentView.bounds.origin.y,  contentView.bounds.size.width, contentView.bounds.size.height + self.tabBarController.tabBar.frame.size.height);
-    contentView.frame = rect;
-    self.tabBarController.tabBar.hidden = YES;
 }
 - (void)viewDidLoad
 {

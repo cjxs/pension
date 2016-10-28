@@ -14,7 +14,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="128"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <frame key="frameInset" width="320" height="128"/>
+                <frame key="frameInset" width="320" height="127.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x4h-Bf-lal">
@@ -76,12 +76,12 @@
                     <constraint firstItem="wNm-tJ-BgS" firstAttribute="leading" secondItem="Vgi-pc-lMb" secondAttribute="leading" id="Oev-mY-BLA"/>
                     <constraint firstItem="AJc-0Q-awe" firstAttribute="top" secondItem="x4h-Bf-lal" secondAttribute="top" id="Slq-rY-SOe"/>
                     <constraint firstItem="AJc-0Q-awe" firstAttribute="height" secondItem="x4h-Bf-lal" secondAttribute="height" id="VVH-RA-mNR"/>
-                    <constraint firstItem="Fh4-Z0-71E" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="5" id="aTe-42-KrQ"/>
+                    <constraint firstItem="Fh4-Z0-71E" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="aTe-42-KrQ"/>
                     <constraint firstAttribute="leadingMargin" secondItem="Fh4-Z0-71E" secondAttribute="leading" constant="-5" id="eRt-id-zb2"/>
                     <constraint firstItem="AJc-0Q-awe" firstAttribute="top" secondItem="Vgi-pc-lMb" secondAttribute="bottom" constant="-4" id="jOf-Z3-z7n"/>
                     <constraint firstItem="Vgi-pc-lMb" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="5" id="ojd-9T-NRx"/>
                     <constraint firstItem="wNm-tJ-BgS" firstAttribute="bottom" secondItem="Fh4-Z0-71E" secondAttribute="bottom" id="tEv-Dg-rik"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="Fh4-Z0-71E" secondAttribute="bottom" constant="5" id="ymU-oD-Mun"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="Fh4-Z0-71E" secondAttribute="bottom" id="ymU-oD-Mun"/>
                     <constraint firstItem="AJc-0Q-awe" firstAttribute="leading" secondItem="x4h-Bf-lal" secondAttribute="trailing" constant="5" id="ywN-J3-WNj"/>
                 </constraints>
             </tableViewCellContentView>

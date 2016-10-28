@@ -60,14 +60,13 @@ static NSString *setCellIdentifier = @"cellS";
 #pragma mark - auto_view
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self.tabBarController.tabBar setHidden:NO];
+    [self.navigationController.tabBarController.tabBar setHidden:NO];
     [self.navigationController setNavigationBarHidden:YES animated:animated];
     if ([Member DefaultUser].login && [textLabel.text isEqualToString:@"登录/注册"]) {
         [self performSelector:@selector(updateUserData) withObject:self afterDelay:0.05];
     }
 }
 -(void)viewWillDisappear:(BOOL)animated{
-    self.navigationController.tabBarController.tabBar.translucent = YES;
 
 }
 - (void)viewDidLoad
@@ -75,7 +74,6 @@ static NSString *setCellIdentifier = @"cellS";
     [super viewDidLoad];
     self.view.backgroundColor = RGB(244,244, 244);
     self.navigationController.navigationBar.translucent = NO;
-//    [UIApplication sharedApplication].statusBarHidden = YES;
     UIBarButtonItem * returnBarButtonItem = [[UIBarButtonItem alloc] init];
     returnBarButtonItem.title = @"";
     self.navigationController.navigationBar.tintColor=[UIColor redColor];

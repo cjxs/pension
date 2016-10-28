@@ -17,9 +17,7 @@
 @end
 
 @implementation TabbarController
--(BOOL)prefersStatusBarHidden{
-    return _statusBarHidden;
-}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];

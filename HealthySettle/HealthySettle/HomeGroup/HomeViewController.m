@@ -108,16 +108,6 @@
     }
     return _tableHeadView;
 }
-- (UITableView *)bottomTableV
-{
-    if (_bottomTableV == nil)
-    {
-        self.bottomTableV = [[UITableView alloc]
-                             initWithFrame:CGRectMake(0, 64 + screenHeight /4, screenWide, screenHeight/4*3 -64 ) style:UITableViewStylePlain];
-    }
-    return _bottomTableV;
-}
-
 #pragma mark - auto_view
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -127,12 +117,15 @@
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor whiteColor]};
     self.navigationController.navigationBar.barTintColor = RGB(205, 8, 20);
     self.navigationController.navigationBar.translucent = NO;
-    self.navigationController.tabBarController.tabBar.translucent = YES;//坑
-    [UIApplication sharedApplication].statusBarHidden = NO;
+    self.navigationController.tabBarController.tabBar.translucent = NO;//不透明 0 开始的位置
 }
+
 - (void)setTableView {
+    CGRect rect;
+    rect = CGRectMake(0, 0, screenWide, screenHeight-64-screenHeight * 0.035);
+
     UITableView * homeTableView = [[UITableView alloc]
-                                   initWithFrame:CGRectMake(0, 0, screenWide, screenHeight-64-screenHeight * 0.035)
+                                   initWithFrame:rect
                                    style:UITableViewStyleGrouped];
     [self.view addSubview:homeTableView];
     homeTableView.tableHeaderView = self.tableHeadView;
@@ -149,7 +142,7 @@
     [self setBanner];
 }
 - (void)setBanner {
-    SDCycleScrollView *cycleScrollView3 = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, screenWide , screenHeight * 0.222) delegate:self placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    SDCycleScrollView *cycleScrollView3 = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, screenWide , screenHeight * 0.222) delegate:self placeholderImage:[UIImage imageNamed:@"轮播-1"]];
     cycleScrollView3.currentPageDotImage = [UIImage imageNamed:@"pageControlCurrentDot"];
     cycleScrollView3.pageDotImage = [UIImage imageNamed:@"pageControlDot"];
     cycleScrollView3.imageURLStringsGroup = imagesA;
@@ -257,7 +250,7 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath
         return screenHeight * 0.269;
     }else
     {
-        return screenHeight * 0.247;
+        return screenHeight * 0.21;
     }
 }
 -(NSInteger)tableView:(UITableView *)tableView
@@ -338,6 +331,7 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath
     MonthViewController * monVC = [[MonthViewController alloc]
                                    initWithNibName:@"MonthViewController"
                                    bundle:nil];
+    monVC.hidesBottomBarWhenPushed = YES;//隐藏tabBar
     monVC.dataDic = seasonsA[indexPath.row];
     [self.navigationController pushViewController:monVC animated:NO];
 }
@@ -405,6 +399,7 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath
     ResultLVC.vc_type = @"S";
     ResultLVC.area_id = area_id;
     ResultLVC.title_l = area;
+    ResultLVC.hidesBottomBarWhenPushed = YES;//隐藏tabBar
     [self.navigationController pushViewController:ResultLVC
                                              animated:YES];
 }

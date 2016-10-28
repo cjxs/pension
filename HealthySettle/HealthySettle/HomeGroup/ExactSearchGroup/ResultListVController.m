@@ -212,49 +212,10 @@
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor blackColor]};
     [self.navigationController setNavigationBarHidden:NO animated:animated];
     
-   
-    // [self hideTabBar];
-    
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    //    [self showTabBar];
-    
-}
-- (void)hideTabBar
-{
-    if (self.tabBarController.tabBar.hidden == YES) {
-        return;
-    }
-    UIView *contentView;
-    if ( [[self.tabBarController.view.subviews objectAtIndex:0] isKindOfClass:[UITabBar class]] )
-    {
-        contentView = [self.tabBarController.view.subviews objectAtIndex:1];
-    }else
-    {
-        contentView = [self.tabBarController.view.subviews objectAtIndex:0];
-    }
-    CGRect  rect = CGRectMake(contentView.bounds.origin.x,  contentView.bounds.origin.y,  contentView.bounds.size.width, contentView.bounds.size.height + self.tabBarController.tabBar.frame.size.height);
-    contentView.frame = rect;
-    self.tabBarController.tabBar.hidden = YES;
-}
-- (void)showTabBar{
-    if (self.tabBarController.tabBar.hidden == NO)
-    {
-        return;
-    }
-    UIView *contentView;
-    if ([[self.tabBarController.view.subviews objectAtIndex:0] isKindOfClass:[UITabBar class]])
-    {
-        contentView = [self.tabBarController.view.subviews objectAtIndex:1];
-    }else
-    {
-        contentView = [self.tabBarController.view.subviews objectAtIndex:0];
-    }
-    contentView.frame = CGRectMake(contentView.bounds.origin.x, contentView.bounds.origin.y,  contentView.bounds.size.width, contentView.bounds.size.height - self.tabBarController.tabBar.frame.size.height);
-    self.tabBarController.tabBar.hidden = NO;
-    
 }
 
 -(void)setData{
@@ -296,6 +257,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
     // Do any additional setup after loading the view.
     begin_view = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     begin_view.backgroundColor = [UIColor whiteColor];
@@ -348,10 +310,6 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([[UIScreen mainScreen] bounds].size.width == 321)
-    {
-        return 105;
-    }
     return screenHeight * 0.158;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

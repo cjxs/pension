@@ -29,5 +29,6 @@
 }
 @property (nonatomic,strong)UILabel * title_label;
 @property (nonatomic,weak) id<UpdatePriceDelegate> delegate;
+@property (nonatomic,strong)NSMutableArray * spec_array;
 -(void)configWithDic:(NSDictionary *)dic num1:(NSMutableString *)num1 num2:(NSMutableString *)num2 num3:(NSMutableString *)num3 num4:(NSMutableString*)num4;
 @end

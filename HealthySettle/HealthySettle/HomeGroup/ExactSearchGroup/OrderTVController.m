@@ -122,8 +122,10 @@
                 tapChoose_start.numberOfTapsRequired = 1;
                 checkIn_timelabel.userInteractionEnabled = YES;
                 [checkIn_timelabel addGestureRecognizer:tapChoose_start];
-                
             }
+            home_label.text = [NSString stringWithFormat:@"%@ | %@ | %@ | %@",_chargeArray[0],_chargeArray[1],_chargeArray[2],_chargeArray[3]];
+            
+            
         }
         [backHeadView addSubview:btn];
     }
@@ -175,6 +177,7 @@
     if ([_vc_type isEqualToString:@"S"]) {
         money_label.text = _group_dic[@"room"][[_room_index intValue]][@"room_price"];
     }else {
+        money_label.text = [NSString stringWithFormat:@"  %d",_charge_price.intValue - 50];
         
     }
     money_label.textAlignment = NSTextAlignmentLeft;

@@ -40,9 +40,9 @@
         line_view.backgroundColor = RGB(229, 229, 229);
         [self addSubview:line_view];
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-        layout.itemSize = CGSizeMake( screenWide * 0.25 , screenHeight * 0.187);
+        layout.itemSize = CGSizeMake( screenWide * 0.25 , screenHeight * 0.143);
          UICollectionView * cityCollect_view = [[UICollectionView alloc]
-                                        initWithFrame:CGRectMake(0, screenHeight * 0.073, screenWide, screenHeight * 0.187) collectionViewLayout:layout];
+                                        initWithFrame:CGRectMake(0, screenHeight * 0.073, screenWide, screenHeight * 0.145) collectionViewLayout:layout];
         cityCollect_view.backgroundColor = [UIColor whiteColor];
         cityCollect_view.delegate = self;
         cityCollect_view.dataSource = self;
