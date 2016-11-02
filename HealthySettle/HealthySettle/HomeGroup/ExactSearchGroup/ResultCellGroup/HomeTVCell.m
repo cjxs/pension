@@ -31,7 +31,7 @@
 {
     if (dic[@"pic"])
     {
-        [self.organ_imageView sd_setImageWithURL:[NSURL URLWithString:dic[@"pic"]] placeholderImage:@"list_p"];
+        [self.organ_imageView sd_setImageWithURL:[NSURL URLWithString:dic[@"pic"]] placeholderImage:[UIImage imageNamed:@"list_p"]];
 
     }
     if (dic[@"room_type"]) {

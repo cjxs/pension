@@ -32,11 +32,11 @@
 // 请求的参数列表
 -(id)requestArgument
 {
-    return @ {
-        @"phone" : _number,
-        @"vfycode" : @"",//验证的种类
-        @"tmpid":@"0"
-    };
+    return @{
+          @"phone" : _number,
+          @"vfycode" : @"",//验证的种类
+          @"tmpid":@"0"
+          };
 }
 
 @end

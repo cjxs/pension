@@ -13,13 +13,16 @@
 #import "PriSeleView.h"
 #import "DDListGet.h"
 #import "CDDatePicker.h"
+#import "MJRefresh.h"
+static NSInteger page = 1;
+
 
 @interface ResultListVController ()<UITableViewDataSource ,UITableViewDelegate,HYMDatePickerDelegate,UIGestureRecognizerDelegate> {
     NSDate * end_begain;
     NSDate * end_end;
     BOOL hide;
     BOOL isScroll;
-    UIView * begin_view;
+    
 }
 
 @end
@@ -34,10 +37,11 @@
                                    initWithFrame:CGRectMake(0, 0, screenWide, screenHeight -64)
                                    style:UITableViewStylePlain];
         tableView.showsVerticalScrollIndicator = NO;
-        tableView.bounces = NO;
         tableView.delegate = self;
         tableView.dataSource = self;
+        tableView.tableFooterView = [UIView new];
         _tableView = tableView;
+        
     }
     return _tableView;
 }
@@ -137,7 +141,9 @@
     }
     return _tableHeadView;
 }
-
+/**
+ *  集成刷新控件
+ */
 -(UIView *)filter_view
 { //筛选页面
     if (!_filter_view)
@@ -213,29 +219,35 @@
     [self.navigationController setNavigationBarHidden:NO animated:animated];
     
 }
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-}
+
 
 -(void)setData{
     DDListGet * ddlist;
     if ([_vc_type isEqualToString:@"S"]) {
-        ddlist = [[DDListGet alloc] initWithController:@"ys_g" area_id:self.area_id page:nil];
+        ddlist = [[DDListGet alloc] initWithController:@"ys_g" area_id:self.area_id page:[NSString stringWithFormat:@"%ld",page]];
     }else{
-        ddlist = [[DDListGet alloc] initWithController:@"yl_g" area_id:self.area_id page:nil];
+        ddlist = [[DDListGet alloc] initWithController:@"yl_g" area_id:self.area_id page:[NSString stringWithFormat:@"%ld",page]];
     }
     [ddlist startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
-        [begin_view removeFromSuperview];
-        NSArray * arr = [DDLogin arrayWithJsonString:request.responseString];
-        _data_arr = arr;
-        [self loadSomething];
-        
+        NSMutableArray * arr = [DDLogin arrayWithJsonString:request.responseString];
+        if (arr && arr.count < 15) {
+            self.tableView.footerHidden = YES;
+        }
+        if (page == 1) {
+            _data_arr = [NSMutableArray arrayWithCapacity:0];
+        }
+        for (NSDictionary * dic in arr) {
+            [_data_arr addObject:dic];
+        }
+        [self.tableView reloadData];
     } failure:^(__kindof YTKBaseRequest *request) {
         NSLog(@"%ld",request.responseStatusCode);
     }];
 }
--(void)loadSomething {
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.filter_view];
     _searchPlace_name = self.title_l;
@@ -252,18 +264,50 @@
     {
         [self.tableView registerNib:[UINib nibWithNibName:@"PensionSRTVCell" bundle:nil] forCellReuseIdentifier:@"cellPension"];
     }
- 
-}
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
+
+
 
     // Do any additional setup after loading the view.
-    begin_view = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    begin_view.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:begin_view];
-    [self setData];
+
+    [self setupRefresh];
 }
+-(void)headerRereshing {
+    page = 1;
+    [self setData];
+    if (self.tableView.footerHidden) {
+        self.tableView.footerHidden = NO;
+    }
+    [self.tableView headerEndRefreshing];
+
+}
+-(void)footerRereshing {
+    page++;
+    [self setData];
+    [self.tableView footerEndRefreshing];
+    
+}
+- (void)setupRefresh
+{
+    // 1.下拉刷新(进入刷新状态就会调用self的headerRereshing)
+    //    [self.tableView addHeaderWithTarget:self action:@selector(headerRereshing)];
+    // dateKey用于存储刷新时间，可以保证不同界面拥有不同的刷新时间
+    [self.tableView addHeaderWithTarget:self action:@selector(headerRereshing) dateKey:@"table"];
+#warning 自动刷新(一进入程序就下拉刷新)
+    [self.tableView headerBeginRefreshing];
+    
+    // 2.上拉加载更多(进入刷新状态就会调用self的footerRereshing)
+    [self.tableView addFooterWithTarget:self action:@selector(footerRereshing)];
+    
+    // 设置文字(也可以不设置,默认的文字在MJRefreshConst中修改)
+    self.tableView.headerPullToRefreshText = @"下拉可以刷新了";
+    self.tableView.headerReleaseToRefreshText = @"松开马上刷新了";
+    self.tableView.headerRefreshingText = @" 小优悠正在帮你刷新中,不客气";
+    
+    self.tableView.footerPullToRefreshText = @"上拉可以加载更多数据了";
+    self.tableView.footerReleaseToRefreshText = @"松开马上加载更多数据了";
+    self.tableView.footerRefreshingText = @"正在加载更多,请稍后";
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -275,7 +319,11 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _data_arr.count;
+    if (_data_arr) {
+        return _data_arr.count;
+    }else{
+        return 0;
+    }
 }
 
 
@@ -300,7 +348,6 @@
         NSString *  str2 = [NSString stringWithFormat:@"%@/upload/group/%@",BASEURL,dic[@"pic"]];
         NSString * str3 = [str2 stringByReplacingOccurrencesOfString:@"," withString:@"/"];
 
-        
         [cell configWithImage:str3 title:dic[@"s_name"] address:dic[@"address"] price:dic[@"price"] supportArray:dic[@"spec"]];
         return cell;
     }else

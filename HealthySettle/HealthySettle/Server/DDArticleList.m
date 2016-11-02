@@ -33,6 +33,7 @@
 // 请求的参数列表
 -(id)requestArgument
 {
+    
     return @ {
         @"type":_type
     };

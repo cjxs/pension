@@ -11,10 +11,11 @@
 #import "ShareView.h"
 #import "DDFindGet.h"
 #import "GroupDetailViewController.h"
+#import "MJRefresh.h"
+#import <SVProgressHUD.h>
 @interface SearchTVController ()<UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate>
 {
     NSArray * data_array;
-    UIView * begin_view;
 }
 
 @end
@@ -24,36 +25,44 @@
 {
     [super viewDidLoad];
     self.navigationItem.title = @"发现 • 热门机构";
-    begin_view = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    begin_view.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:begin_view];
-
-
-
-
-    DDFindGet * find = [[DDFindGet alloc] init];
-    [find startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
-        [begin_view removeFromSuperview];
-        NSArray * arr = [DDLogin arrayWithJsonString:request.responseString];
-        data_array = arr;
-        [self setTableView];
-        
-    } failure:^(__kindof YTKBaseRequest *request) {
-        NSLog(@"%ld",request.responseStatusCode);
-    }];
-
-
-}
--(void)viewWillAppear:(BOOL)animated {
-    self.navigationController.navigationBar.translucent = NO;
-
-}
--(void)setTableView {
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, screenWide, screenHeight -64 ) style:UITableViewStylePlain];
     [self.tableView registerClass:[SearchOrganTVCell class] forCellReuseIdentifier:@"cellSearch"];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.tableFooterView = [UIView new];
     [self.view addSubview:self.tableView];
+    [self.tableView addHeaderWithTarget:self action:@selector(loadNetWork) dateKey:@"table"];
+    [self.tableView headerBeginRefreshing];
+    self.tableView.headerPullToRefreshText = @"下拉可以刷新了";
+    self.tableView.headerReleaseToRefreshText = @"松开马上刷新了";
+    self.tableView.headerRefreshingText = @"小优悠正在帮你刷新中。。。";
+
+
+
+
+}
+- (void)loadNetWork{
+    DDFindGet * find = [[DDFindGet alloc] init];
+    [find startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
+        NSArray * arr = [DDLogin arrayWithJsonString:request.responseString];
+        data_array = arr;
+        [self.tableView reloadData];
+        [self.tableView headerEndRefreshing];
+        
+    } failure:^(__kindof YTKBaseRequest *request) {
+        [self.tableView headerEndRefreshing];
+        [SVProgressHUD showErrorWithStatus:@"网络错误！"];
+        [self performSelector:@selector(dismiss:) withObject:nil afterDelay:3];
+    }];
+
+
+}
+- (void)dismiss:(id)sender {
+    [SVProgressHUD dismiss];
+}
+-(void)viewWillAppear:(BOOL)animated {
+    self.navigationController.navigationBar.translucent = NO;
+
 }
 
 #pragma mark - Table view data source
@@ -66,7 +75,11 @@
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section
 {
-    return data_array.count;
+    if (data_array) {
+        return data_array.count;
+    }else{
+        return 0;
+    }
 }
 
 

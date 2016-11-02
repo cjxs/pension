@@ -72,7 +72,6 @@
 {
     [super viewWillAppear:animated];
     self.navigationItem.title = _titleName;
-    [self.tabBarController.tabBar setHidden:YES];
     [self.navigationController setNavigationBarHidden:NO animated:animated];
 }
 -(void)viewWillDisappear:(BOOL)animated

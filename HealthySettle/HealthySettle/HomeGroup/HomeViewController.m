@@ -23,6 +23,9 @@
 #import "SDCycleScrollView.h"
 #import "ResultListVController.h"
 #import "ArticleListTVC.h"
+#import "MJRefresh.h"
+#import <SVProgressHUD.h>
+
 
 
 
@@ -35,6 +38,7 @@
     UIButton * back_btn;
     NSArray * seasonsA;
     NSArray * tag_A;
+    SDCycleScrollView *cycleScrollView3;
 }
 
 
@@ -64,6 +68,13 @@
     [_webView removeFromSuperview];
     [btn removeFromSuperview];
     [bg_view removeFromSuperview];
+}
+- (void)setBanner {
+    cycleScrollView3 = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, screenWide , screenHeight * 0.222) delegate:self placeholderImage:[UIImage imageNamed:@"banner_p"]];
+    cycleScrollView3.currentPageDotImage = [UIImage imageNamed:@"pageControlCurrentDot"];
+    cycleScrollView3.pageDotImage = [UIImage imageNamed:@"pageControlDot"];
+    cycleScrollView3.imageURLStringsGroup = imagesA;
+    [_tableHeadView addSubview:cycleScrollView3];
 }
 - (UIView *)tableHeadView
 {
@@ -120,26 +131,15 @@
     self.navigationController.tabBarController.tabBar.translucent = NO;//不透明 0 开始的位置
 }
 
-- (void)setTableView {
-   
+- (void)reloadTableView {
+    [_homeTableView reloadData];
     _homeTableView.tableHeaderView = self.tableHeadView;
-    _homeTableView.delegate = self;
-    _homeTableView.dataSource = self;
-    _homeTableView.showsVerticalScrollIndicator = NO;
-    _homeTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [_homeTableView registerClass:[CitySkipViewCell class]
-          forCellReuseIdentifier:@"cellCity"];
-    [_homeTableView registerClass:[SeasonCTViewCell class]
-          forCellReuseIdentifier:@"cellSeason"];
-    [self setBanner];
+    if (!cycleScrollView3) {
+        [self setBanner];
+    }
+    [_homeTableView headerEndRefreshing];
 }
-- (void)setBanner {
-    SDCycleScrollView *cycleScrollView3 = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, screenWide , screenHeight * 0.222) delegate:self placeholderImage:[UIImage imageNamed:@"banner_p"]];
-    cycleScrollView3.currentPageDotImage = [UIImage imageNamed:@"pageControlCurrentDot"];
-    cycleScrollView3.pageDotImage = [UIImage imageNamed:@"pageControlDot"];
-    cycleScrollView3.imageURLStringsGroup = imagesA;
-    [_tableHeadView addSubview:cycleScrollView3];
-}
+
 - (void)loadNetWork {
     DDHome_page * ddHome_page = [[DDHome_page alloc] initWithUid:@"13732212641" login:@"1"];
     [ddHome_page startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
@@ -151,18 +151,33 @@
             NSString * str3 = [str2 stringByReplacingOccurrencesOfString:@"," withString:@"/"];
             [imagesA addObject:str3];
         }
-        
         urlA = dic[@"banner"][@"url"];
         seasonsA = dic[@"seasons"];
         tag_A = dic[@"tag"];
         
-        [self setTableView];
+        [self reloadTableView];
         
         
     } failure:^(__kindof YTKBaseRequest *request) {
+        [SVProgressHUD showErrorWithStatus:@"网络错误！"];
+        [_homeTableView headerEndRefreshing];
+        [self performSelector:@selector(dismiss:) withObject:nil afterDelay:3];
         NSLog(@"%@++++++%ld--------",request.requestArgument,request.responseStatusCode);
     }];
 
+}
+- (void)dismiss:(id)sender {
+    [SVProgressHUD dismiss];
+}
+- (void)setupHeaderRefresh {
+    [_homeTableView addHeaderWithTarget:self action:@selector(headerRereshing) dateKey:@"table"];
+    [_homeTableView headerBeginRefreshing];
+    _homeTableView.headerPullToRefreshText = @"下拉可以刷新了";
+    _homeTableView.headerReleaseToRefreshText = @"松开马上刷新了";
+    _homeTableView.headerRefreshingText = @"小优悠正在帮你刷新中。。。";
+}
+-(void)headerRereshing{
+    [self loadNetWork];
 }
 - (void)viewDidLoad
 {
@@ -171,8 +186,16 @@
     _homeTableView = [[UITableView alloc]
                                    initWithFrame:CGRectMake(0, 0, screenWide, screenHeight-64-screenHeight * 0.035)
                                    style:UITableViewStyleGrouped];
+    _homeTableView.delegate = self;
+    _homeTableView.dataSource = self;
+    _homeTableView.showsVerticalScrollIndicator = NO;
+    _homeTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [_homeTableView registerClass:[CitySkipViewCell class]
+           forCellReuseIdentifier:@"cellCity"];
+    [_homeTableView registerClass:[SeasonCTViewCell class]
+           forCellReuseIdentifier:@"cellSeason"];
     [self.view addSubview:_homeTableView];
-    [self loadNetWork];
+    [self setupHeaderRefresh];
    
        // 版本更新的时候添加提示页面，任性的设计师要求的
 //    [MTMigration applicationUpdateBlock:^{
@@ -252,7 +275,11 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath
 -(NSInteger)tableView:(UITableView *)tableView
 numberOfRowsInSection:(NSInteger)section
 {
-    return tag_A.count +1;
+    if (tag_A) {
+        return tag_A.count +1;
+    }else{
+        return 0;
+    }
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath

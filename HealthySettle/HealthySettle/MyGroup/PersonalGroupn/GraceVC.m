@@ -54,7 +54,7 @@
     if (!_tableView)
     {
         UITableView *tableView = [[UITableView alloc]
-                                  initWithFrame:CGRectMake(0, 0, screenWide, screenHeight -64 - 49)
+                                  initWithFrame:CGRectMake(0, 0, screenWide, screenHeight -64)
                                   style:UITableViewStylePlain];
         tableView.delegate = self;
         tableView.dataSource = self;
@@ -77,7 +77,6 @@
 {
     [super viewWillAppear:animated];
     self.navigationItem.title = self.titleName;
-    [self.tabBarController.tabBar setHidden:NO];
     self.navigationController.navigationBarHidden = NO;
 }
 -(void)viewWillDisappear:(BOOL)animated

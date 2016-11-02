@@ -31,7 +31,7 @@
 // 请求的参数列表
 -(id)requestArgument
 {
-    return @ {
+    return @{
         @"controller":@"sea_city",
         @"sea_id":_sea_id
     };

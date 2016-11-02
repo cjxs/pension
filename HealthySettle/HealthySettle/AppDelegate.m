@@ -178,6 +178,7 @@ static NSString * const UMDEVICETOKEN      = @"UMDeviceToken";// 友盟推送的
     
     DDLogin * loginApi = [[DDLogin alloc] initWithUsername:username password:pwd];
     __block NSDictionary * dic;
+    NSLog(@"%@+++---",loginApi.requestArgument);
     
     
     [loginApi startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {

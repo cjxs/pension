@@ -36,11 +36,11 @@
 // 请求的参数列表
 -(id)requestArgument
 {
-    return @ {
-        @"controller":@"collect",
-        @"uid" : _uid,
-        @"login" : _login
-    };
+    return @{@"rsa": [DDLogin RSAsignWithdic:@{
+                                               @"controller":@"collect",
+                                               @"uid" : _uid,
+                                               @"login" : _login
+                                               }]};
 }
 
 

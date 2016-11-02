@@ -35,7 +35,7 @@
 // 请求的参数列表
 -(id)requestArgument
 {
-    return @ {
+    return @{
         @"controller":_controller,
         @"group_id":_group_id,
     };

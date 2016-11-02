@@ -280,6 +280,7 @@ heightForHeaderInSection:(NSInteger)section
     LoginOrRegisViewController *loginOrRegVC = [[LoginOrRegisViewController alloc] init];
     loginOrRegVC.delegate = self;
     loginOrRegVC.vc_type = @"login";
+    loginOrRegVC.hidesBottomBarWhenPushed = YES;//隐藏tabBar
     [self.navigationController pushViewController:loginOrRegVC animated:YES];
 }
 -(void)exitLogin{//退出登录,代理协议方法
@@ -310,6 +311,7 @@ heightForHeaderInSection:(NSInteger)section
     if ([Member DefaultUser].login.length !=0) {
         AccountViewController * accountVC = [[AccountViewController alloc] init];
         accountVC.titleName = str;
+        accountVC.hidesBottomBarWhenPushed = YES;//隐藏tabBar
         [self.navigationController pushViewController:accountVC
                                              animated:YES];
     }else{
@@ -322,6 +324,7 @@ heightForHeaderInSection:(NSInteger)section
     if ([Member DefaultUser].login.length !=0) {
         GraceVC * graceVC = [[GraceVC alloc] init];
         graceVC.titleName = @"我的优惠券";
+        graceVC.hidesBottomBarWhenPushed = YES;//隐藏tabBar
         [self.navigationController pushViewController:graceVC
                                              animated:YES];
     }else{
@@ -337,6 +340,7 @@ heightForHeaderInSection:(NSInteger)section
                                              initWithNibName:@"PasswordCVController"
                                              bundle:nil];
         passwordVC.titleName = @"密码修改";
+        passwordVC.hidesBottomBarWhenPushed = YES;//隐藏tabBar
         [self.navigationController pushViewController:passwordVC
                                              animated:YES];
     }else{
@@ -357,6 +361,7 @@ heightForHeaderInSection:(NSInteger)section
             PersonDataVController * personDataVC = [[PersonDataVController alloc] init];
             personDataVC.titleName = @"个人资料";
             personDataVC.delegate = self;
+            personDataVC.hidesBottomBarWhenPushed = YES;//隐藏tabBar
             [self.navigationController pushViewController:personDataVC
                                                  animated:YES];
         }
@@ -404,6 +409,7 @@ heightForHeaderInSection:(NSInteger)section
     {
         cVC.type = type;
     }
+    cVC.hidesBottomBarWhenPushed = YES;//隐藏tabBar
     [self.navigationController pushViewController:cVC
                                          animated:YES];
 
@@ -420,6 +426,7 @@ heightForHeaderInSection:(NSInteger)section
     {
         refundVC.type = type;
     }
+    refundVC.hidesBottomBarWhenPushed = YES;//隐藏tabBar
     [self.navigationController pushViewController:refundVC
                                          animated:YES];
 }
@@ -435,6 +442,7 @@ heightForHeaderInSection:(NSInteger)section
     {
         viewC.type = type;
     }
+    viewC.hidesBottomBarWhenPushed = YES;//隐藏tabBar
     [self.navigationController pushViewController:viewC
                                          animated:YES];
 }

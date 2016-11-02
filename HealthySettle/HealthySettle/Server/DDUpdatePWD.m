@@ -37,7 +37,7 @@
 // 请求的参数列表
 -(id)requestArgument
 {
-    return @ {
+    return @{
         @"phone" : _number,
         @"vfycode" : _vfycode,//验证的种类
         @"newpwd": _newpwd

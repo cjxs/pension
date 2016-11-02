@@ -36,12 +36,12 @@
 // 请求的参数列表
 -(id)requestArgument
 {
-    return @ {
-        @"controller":@"reg",
-        @"phone" : _number,
-        @"code" : _vfycode,
-        @"pwd":_pwd
-    };
+    return @{@"rsa":[DDLogin RSAsignWithdic:@{
+                                              @"controller":@"reg",
+                                              @"phone" : _number,
+                                              @"code" : _vfycode,
+                                              @"pwd":_pwd
+                                              }]};
 }
 
 @end

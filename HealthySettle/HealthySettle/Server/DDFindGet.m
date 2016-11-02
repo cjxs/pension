@@ -24,7 +24,7 @@
 // 请求的参数列表
 -(id)requestArgument
 {
-    return @ {
+    return @{
         @"controller":@"find"
     };
 }

@@ -44,7 +44,7 @@
 // 请求的参数列表
 -(id)requestArgument
 {
-    return @ {
+    return @{
         @"controller":_controller,
         @"area_id":_area_id,
         @"page":_page
