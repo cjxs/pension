@@ -46,6 +46,7 @@
     BOOL isScroll;
     UIButton * predeter_btn;
     NSString * price_Now;
+    DDGroupData * group_data; //网络请求指针
 
 }
 
@@ -300,7 +301,7 @@
     [self.navigationController setNavigationBarHidden:NO animated:animated];
 }
 -(void)setData{
-    DDGroupData * group_data = [[DDGroupData alloc] initWithController:@"group" group_id:self.group_id];
+    group_data = [[DDGroupData alloc] initWithController:@"group" group_id:self.group_id];
     [group_data startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
         NSString *str = [request.responseString stringByReplacingOccurrencesOfString:@":null" withString:@":\"\""];
         _data_dic = [DDLogin dictionaryWithJsonString:str];
@@ -742,7 +743,9 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
     _num_2 = num2;
     _num_3 = num3;
     _num_4 = num4;
-    
+}
+-(void)dealloc{
+    [group_data clearCompletionBlock];
 }
 /*
 #pragma mark - Navigation

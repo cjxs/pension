@@ -10,9 +10,11 @@
 #import "PersonTVCell.h"
 #import "PasswordCVController.h"
 #import "PersonNTVCell.h"
+#import "PasswordSetVC.h"
+#import "PersonMSetVC.h"
 
 //个人资料
-@interface PersonDataVController ()<UITableViewDelegate, UITableViewDataSource,UITextFieldDelegate>{
+@interface PersonDataVController ()<UITableViewDelegate, UITableViewDataSource,UITextFieldDelegate,PaySetDelegate,PersonMSDelegate>{
     UIButton * regis_btn;
 }
 
@@ -65,7 +67,7 @@
     self.navigationItem.backBarButtonItem = returnBarButtonItem;
     regis_btn = [UIButton buttonWithType:UIButtonTypeCustom];
     regis_btn.backgroundColor = RGB(248, 69, 69);
-    regis_btn.frame = CGRectMake(screenWide * 0.05, CGRectGetMaxY(self.tableView.frame), screenWide * 0.9, screenWide * 0.15);
+    regis_btn.frame = CGRectMake(screenWide * 0.05, CGRectGetMaxY(self.tableView.frame) + 50, screenWide * 0.9, screenWide * 0.15);
     [regis_btn addTarget:self action:@selector(exitLogin) forControlEvents:UIControlEventTouchUpInside];
     [regis_btn setTitle:@"退出登录" forState:UIControlStateNormal];
     [regis_btn setTintColor:[UIColor whiteColor]];
@@ -86,7 +88,7 @@
         return 4;
     }else
     {
-        return 1;
+        return 2;
     }
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView
@@ -134,11 +136,24 @@
             
         }else
         {
-            if (!user.pay_can) {
+            switch (indexPath.row)
+            {
+                case 1:
+
+            if ([user.pay_can isEqualToString:@"N"]) {
                 [cell configClassName:@"支付密码" Andresult:@"未设置" with:@"N"];
             }else{
                 [cell configClassName:@"支付密码" Andresult:@"修改" with:@"Y"];
             }
+                    break;
+                case 0:
+                [cell configClassName:@"登录密码" Andresult:@"修改" with:@"Y"];
+                    break;
+                default:
+                    break;
+            }
+
+
         }
         return cell;
 
@@ -164,19 +179,55 @@ heightForHeaderInSection:(NSInteger)section
 -(void)tableView:(UITableView *)tableView
 didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 1)
+    if (indexPath.section == 0&& indexPath.row == 0)
     {
+       
+    }else if (indexPath.section == 0&& indexPath.row >=1 && indexPath.row < 3)
+    {
+        PersonMSetVC * personVC = [[PersonMSetVC alloc] init];
+        if (indexPath.row == 1) {
+            personVC.title = @"手机号";
+            personVC.vc_type = @"phone";
+        }else{
+            personVC.title = @"邮箱";
+            personVC.vc_type = @"email";
+        }
+        personVC.delegate = self;
+        [self.navigationController pushViewController:personVC animated:YES];
+    }else if (indexPath.section == 0&& indexPath.row == 3){
+        
+        
+    }else if (indexPath.section == 1&& indexPath.row == 0){
         PasswordCVController * passwordVC = [[PasswordCVController alloc]
                                              initWithNibName:@"PasswordCVController"
                                              bundle:nil];
-        passwordVC.titleName = @"密码修改";
-        passwordVC.type_from = @"fdhjgsfad";
+        passwordVC.titleName = @"登录密码修改";
+        passwordVC.type_from = @"D";
         [self.navigationController pushViewController:passwordVC
                                              animated:YES];
-    }else
-    {
+        
+    }else if (indexPath.section == 1&& indexPath.row == 1){
+        
+        if ([[Member DefaultUser].pay_can isEqualToString:@"N"]) {
+            PasswordSetVC * passwordSet = [[PasswordSetVC alloc] init];
+            passwordSet.delegate = self;
+            [self.navigationController pushViewController:passwordSet animated:YES];
+        }else{
+            PasswordCVController * passwordVC = [[PasswordCVController alloc]
+                                                 initWithNibName:@"PasswordCVController"
+                                                 bundle:nil];
+            passwordVC.titleName = @"支付密码修改";
+            passwordVC.type_from = @"L";
+            [self.navigationController pushViewController:passwordVC
+                                                 animated:YES];
+
+        }
+        
+    }else{
         
     }
+
+
 }
 -(void)exitLogin{
     Member * user = [Member DefaultUser];
@@ -184,10 +235,10 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
     [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"password"];
     [self.navigationController popViewControllerAnimated:YES];
     [self.delegate exitLogin];
-    
-    
 }
-
+-(void)updateView{
+    [self.tableView reloadData];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

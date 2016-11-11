@@ -178,8 +178,6 @@ static NSString * const UMDEVICETOKEN      = @"UMDeviceToken";// 友盟推送的
     
     DDLogin * loginApi = [[DDLogin alloc] initWithUsername:username password:pwd];
     __block NSDictionary * dic;
-    NSLog(@"%@+++---",loginApi.requestArgument);
-    
     
     [loginApi startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
         NSString *str = [request.responseString stringByReplacingOccurrencesOfString:@":null" withString:@":\"\""];
@@ -195,6 +193,7 @@ static NSString * const UMDEVICETOKEN      = @"UMDeviceToken";// 友盟推送的
             [Member DefaultUser].now_money = dic[@"now_money"];
             [Member DefaultUser].score_count = dic[@"score_count"];
             [Member DefaultUser].login = @"online";
+            [Member DefaultUser].pay_can = dic[@"pay_can"];
         }else{
             [Member DefaultUser].login = @"";
 

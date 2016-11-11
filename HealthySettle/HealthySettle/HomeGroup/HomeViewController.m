@@ -24,8 +24,7 @@
 #import "ResultListVController.h"
 #import "ArticleListTVC.h"
 #import "MJRefresh.h"
-#import <SVProgressHUD.h>
-
+#import "INTULocationManager.h"
 
 
 
@@ -40,7 +39,10 @@
     NSArray * tag_A;
     SDCycleScrollView *cycleScrollView3;
 }
-
+/** 地理编码管理器 */
+@property (nonatomic, strong) CLGeocoder *geoC;
+/** 定位按钮 */
+@property (nonatomic, weak) UIButton *cityPositionBtn;
 
 
 @end
@@ -158,7 +160,7 @@
         [self reloadTableView];
         
         
-    } failure:^(__kindof YTKBaseRequest *request) {
+    } failure:^(__kindof YTKBaseRequest *request){
         [SVProgressHUD showErrorWithStatus:@"网络错误！"];
         [_homeTableView headerEndRefreshing];
         [self performSelector:@selector(dismiss:) withObject:nil afterDelay:3];
@@ -215,24 +217,39 @@
 //            [LoginManaged sharedInstance].isLogin = NO;
 //        }];
 //    }];
-    UIButton * city_Btn = [UIButton buttonWithType:UIButtonTypeCustom] ;
-    city_Btn.frame = CGRectMake(0, 0, 60, 30);
-    city_Btn.titleLabel.font = [UIFont systemFontOfSize:15];
-    [city_Btn addTarget:self
-                 action:@selector(chooseIndexCity)
-       forControlEvents:UIControlEventTouchUpInside];
-    UIImageView * image_view = [[UIImageView alloc]
-                                initWithImage:[UIImage imageNamed:@"right_02"]];
-    image_view.frame = CGRectMake(45 , 13, 12,6);
-    [city_Btn addSubview:image_view];
-    city_btn_label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 40, 30)];
-    city_btn_label.text = @"杭州";
-    city_btn_label.textColor = [UIColor whiteColor];
-    city_btn_label.textAlignment = NSTextAlignmentCenter;
-    [city_Btn addSubview:city_btn_label];
-    UIBarButtonItem * city_barBItem = [[UIBarButtonItem alloc]
-                                       initWithCustomView:city_Btn];
-    [self.navigationItem setLeftBarButtonItem:city_barBItem];
+//    UIButton * city_Btn = [UIButton buttonWithType:UIButtonTypeCustom] ;
+//    city_Btn.frame = CGRectMake(0, 0, 60, 30);
+//    city_Btn.titleLabel.font = [UIFont systemFontOfSize:15];
+//    [city_Btn addTarget:self
+//                 action:@selector(chooseIndexCity)
+//       forControlEvents:UIControlEventTouchUpInside];
+//    UIImageView * image_view = [[UIImageView alloc]
+//                                initWithImage:[UIImage imageNamed:@"right_02"]];
+//    image_view.frame = CGRectMake(45 , 13, 12,6);
+//    [city_Btn addSubview:image_view];
+//    city_btn_label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 40, 30)];
+//    city_btn_label.text = @"杭州";
+//    city_btn_label.textColor = [UIColor whiteColor];
+//    city_btn_label.textAlignment = NSTextAlignmentCenter;
+//    [city_Btn addSubview:city_btn_label];
+//    UIBarButtonItem * city_barBItem = [[UIBarButtonItem alloc]
+//                                       initWithCustomView:city_Btn];
+    NSString *cityName = @"定位中";
+    CGSize cityNameSize = [self sizeWithText:cityName font:[UIFont systemFontOfSize:15] maxH:44];
+    UIButton *leftBaritem = [UIButton buttonWithType:UIButtonTypeCustom];
+    [leftBaritem setTitle:cityName forState:UIControlStateNormal];
+    leftBaritem.titleLabel.font = [UIFont systemFontOfSize:15];
+    [leftBaritem setImage:[UIImage imageNamed:@"home-cityPosition"] forState:UIControlStateNormal];
+    //25 ---->图片宽度
+    //cityNameSize.width--------->根据要展示的城市名计算出来的宽度
+    //15----> 因为设置了leftBaritem左侧内边距为   -15
+    leftBaritem.frame = CGRectMake(0, 0, 25 + cityNameSize.width - 10, 44);
+    leftBaritem.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    leftBaritem.contentEdgeInsets = UIEdgeInsetsMake(0, -5, 0, 5);
+    [leftBaritem addTarget:self action:@selector(findLocation) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftBaritem];
+    self.cityPositionBtn = leftBaritem;
+    [self findLocation];
     UISearchBar * searchWhere = [[UISearchBar alloc]
                                  initWithFrame:CGRectMake(0, 0, screenWide - 100,0 )];
     [searchWhere setContentMode:UIViewContentModeLeft];
@@ -478,6 +495,69 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
 {
     [self searchBarClear];
+}
+#pragma mark -------------------------------定位-------------------
+-(void)findLocation{
+    if ([self.cityPositionBtn.titleLabel.text isEqualToString:@"定位中"]) {
+        INTULocationManager *locMgr = [INTULocationManager sharedInstance];
+        [locMgr requestLocationWithDesiredAccuracy:INTULocationAccuracyCity
+                                           timeout:10.0
+                              delayUntilAuthorized:YES  // This parameter is optional, defaults to NO if omitted
+                                             block:^(CLLocation *currentLocation, INTULocationAccuracy achievedAccuracy, INTULocationStatus status) {
+                                                 if (status == INTULocationStatusSuccess) {
+                                                     [self reverseGeoCode:currentLocation];
+                                                 }else {
+                                                     NSString *cityName = @"杭州";
+                                                     CGSize cityNameSize = [self sizeWithText:cityName font:[UIFont systemFontOfSize:15] maxH:44];
+                                                     //25 ---->图片宽度
+                                                     //cityNameSize.width--------->根据要展示的城市名计算出来的宽度
+                                                     //15----> 因为设置了leftBaritem左侧内边距为   -15
+                                                     self.cityPositionBtn.frame = CGRectMake(100, 0, 25+cityNameSize.width - 10, 44);
+                                                     [self.cityPositionBtn setTitle:cityName forState:UIControlStateNormal];
+
+                                                 }
+                                             }];
+    }else {
+        NSLog(@"出列表");
+    }
+    
+}
+-(void)reverseGeoCode:(CLLocation *)currentLocation{
+    [self.geoC reverseGeocodeLocation:currentLocation completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
+        CLPlacemark *pl = [placemarks firstObject];
+        if (error == nil) {
+            NSString *cityName;
+            NSString *shiStr = [pl.locality substringFromIndex:pl.locality.length-1];
+            if ([shiStr isEqualToString:@"市"]) {
+                cityName =  [pl.locality substringToIndex:pl.locality.length -1];
+            } else {
+                cityName = pl.locality;
+            }
+            if (cityName.length > 4) {
+                cityName = [cityName substringToIndex:4];
+            }
+            
+            CGSize cityNameSize = [self sizeWithText:cityName font:[UIFont systemFontOfSize:15] maxH:44];
+            //25 ---->图片宽度
+            //cityNameSize.width--------->根据要展示的城市名计算出来的宽度
+            //15----> 因为设置了leftBaritem左侧内边距为   -15
+            self.cityPositionBtn.frame = CGRectMake(100, 0, 25+cityNameSize.width - 10, 44);
+            [self.cityPositionBtn setTitle:cityName forState:UIControlStateNormal];
+        }
+    }];
+}
+-(CGSize)sizeWithText:(NSString *)text font:(UIFont *)font maxH:(CGFloat)maxH{
+    NSMutableDictionary *attrs = [NSMutableDictionary dictionary];
+    attrs[NSFontAttributeName] = font;
+    CGSize maxSize = CGSizeMake(MAXFLOAT, maxH);
+    return [text boundingRectWithSize:maxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:attrs context:nil].size;
+}
+
+- (CLGeocoder *)geoC {
+    if (!_geoC){
+        _geoC = [[CLGeocoder alloc] init];
+    }
+    return _geoC;
 }
 
 /*

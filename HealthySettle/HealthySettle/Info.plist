@@ -77,7 +77,7 @@
 		<true/>
 		<key>NSExceptionDomains</key>
 		<dict>
-			<key>alipay</key>
+			<key>alipay.com</key>
 			<dict>
 				<key>NSIncludesSubdomains</key>
 				<true/>
@@ -101,6 +101,8 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string></string>
 	<key>UILaunchStoryboardName</key>
 	<string>Launch Screen</string>
 	<key>UIMainStoryboardFile</key>

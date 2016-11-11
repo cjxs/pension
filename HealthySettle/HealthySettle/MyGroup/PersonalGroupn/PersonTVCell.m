@@ -29,6 +29,8 @@
         if ([type isEqualToString:@"Y"])
         {
             _resultLabel.text = result;
+            _resultLabel.textColor = [UIColor blackColor];
+
         }else
         {
             _resultLabel.text = result;

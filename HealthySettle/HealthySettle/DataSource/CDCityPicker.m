@@ -131,12 +131,32 @@
 //    self.districtDict = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"city_" ofType:@"plist"]];
 //    self.ProvinceArray = self.districtDict[Key_Division];
    self.ProvinceArray =  [NSArray arrayWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"city_" ofType:@"plist"]];
+//    NSMutableArray * m_arr = [NSMutableArray arrayWithCapacity:0];
+//    for (NSDictionary * dic in self.ProvinceArray) {
+//        for (NSDictionary * city_d in dic[@"city"]) {
+//            [m_arr addObject:city_d];
+//        }
+//    }
+//    NSArray * array = [m_arr sortedArrayUsingComparator:^NSComparisonResult(NSDictionary *obj1, NSDictionary *obj2) {
+//        NSComparisonResult result = [obj1[@"aera_name"]compare:obj2[@"area_name"]];
+//            return result;
+//    }];
+//    //1. 创建一个plist文件
+//    NSArray *paths=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
+//    NSString *path=[paths  objectAtIndex:0];
+//    NSLog(@"path = %@",path);
+//    NSString *filename=[path stringByAppendingPathComponent:@"city_2.plist"];
+//    NSFileManager* fm = [NSFileManager defaultManager];
+//    [fm createFileAtPath:filename contents:nil attributes:nil];
+//    [array writeToFile:filename atomically:YES];
+   
     UIWindow * window = [UIApplication  sharedApplication].keyWindow;
     [window addSubview:self];
     [window addSubview:self.pick_view];
     [window addSubview:self.titleView];
     
 }
+
 #pragma mark - UIPickerViewDataSource,UIPickerViewDelegate
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{

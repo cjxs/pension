@@ -22,6 +22,7 @@ static NSInteger page = 1;
     NSDate * end_end;
     BOOL hide;
     BOOL isScroll;
+    DDListGet * ddlist;//网络请求的指针
     
 }
 
@@ -222,7 +223,7 @@ static NSInteger page = 1;
 
 
 -(void)setData{
-    DDListGet * ddlist;
+    
     if ([_vc_type isEqualToString:@"S"]) {
         ddlist = [[DDListGet alloc] initWithController:@"ys_g" area_id:self.area_id page:[NSString stringWithFormat:@"%ld",page]];
     }else{
@@ -457,6 +458,9 @@ static NSInteger page = 1;
             end_end = date;
         }
     }//日期选择器的代理方法
+}
+-(void)dealloc{
+    [ddlist clearCompletionBlock];
 }
 /*
 #pragma mark - Navigation

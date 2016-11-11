@@ -10,5 +10,6 @@
 
 @interface DDToolKit : NSObject
 + (BOOL)checkPhoneNumberWithText:(NSString *)str;
++(BOOL)checkEmailWithText:(NSString *)text;
 
 @end

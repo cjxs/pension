@@ -501,6 +501,7 @@
             [Member DefaultUser].now_money = dic[@"now_money"];
             [Member DefaultUser].score_count = dic[@"score_count"];
             [Member DefaultUser].login = @"online";
+            [Member DefaultUser].pay_can = dic[@"pay_can"];
             [self.navigationController popViewControllerAnimated:YES];
             if ([_vc_type isEqualToString:@"login"]) {
                 [self.delegate updateUserData];
