@@ -82,7 +82,6 @@
             [SVProgressHUD showSuccessWithStatus:@"success！"];
             [Member DefaultUser].pay_can = @"Y";
             [self.navigationController popViewControllerAnimated:YES];
-            [self.delegate updateView];
             
         }else{
             [SVProgressHUD showErrorWithStatus:@"failed！"];

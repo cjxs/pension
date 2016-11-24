@@ -12,5 +12,5 @@
 @property (weak, nonatomic) IBOutlet UILabel     *className;
 @property (weak, nonatomic) IBOutlet UILabel     *resultLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *NextImage;
-- (void)configClassName:(NSString *)class_name Andresult:(NSString *)result with:(NSString *)type;
+- (void)configClassName:(NSString *)class_name ;
 @end

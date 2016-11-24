@@ -54,6 +54,9 @@
         [_next_btn  removeFromSuperview];
     }
 }
+-(NSString *)returnfromtextField{
+    return _text_field.text;
+}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

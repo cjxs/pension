@@ -59,7 +59,6 @@
             }else{
                 [Member DefaultUser].email = _text_Input.text;
             }
-            [self.delegate updateView];
             [self.navigationController popViewControllerAnimated:YES];
             
         }else{

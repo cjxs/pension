@@ -31,12 +31,12 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="pNewcell" text="去设置" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EWi-uC-hZW">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="pNewcell" text="去修改" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EWi-uC-hZW">
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="4Hz-5g-sPS"/>
-                            <constraint firstAttribute="width" constant="45" id="nZ4-Wf-DgR"/>
+                            <constraint firstAttribute="width" constant="60" id="nZ4-Wf-DgR"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -47,7 +47,7 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bN1-Dx-TiF">
-                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -65,7 +65,7 @@
                     <constraint firstItem="205-mN-ZPP" firstAttribute="width" secondItem="205-mN-ZPP" secondAttribute="height" multiplier="1:1" id="hrR-Kk-IRn"/>
                     <constraint firstItem="bN1-Dx-TiF" firstAttribute="width" secondItem="eWQ-Wy-i6Y" secondAttribute="width" id="ipv-1M-Rpt"/>
                     <constraint firstItem="bN1-Dx-TiF" firstAttribute="height" secondItem="205-mN-ZPP" secondAttribute="height" multiplier="1:2.5" id="k43-XW-KdX"/>
-                    <constraint firstItem="eWQ-Wy-i6Y" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="5" id="rvH-KS-jEt"/>
+                    <constraint firstItem="eWQ-Wy-i6Y" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="10" id="rvH-KS-jEt"/>
                     <constraint firstAttribute="bottomMargin" secondItem="205-mN-ZPP" secondAttribute="bottom" constant="5" id="ssP-Nq-ND7"/>
                     <constraint firstItem="eWQ-Wy-i6Y" firstAttribute="leading" secondItem="205-mN-ZPP" secondAttribute="trailing" constant="21.5" id="wdk-jL-3Xu"/>
                 </constraints>

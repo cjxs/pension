@@ -13,5 +13,6 @@
 @property (nonatomic,strong) UITextField * text_field;
 @property (nonatomic,strong) UIButton    * next_btn;
 -(void)configWithtitle:(NSString *)title text:(NSString *)text next:(BOOL)next;
+-(NSString *)returnfromtextField;
 
 @end

@@ -13,6 +13,8 @@
 #define screenHeight [UIScreen mainScreen].bounds.size.height
 #define kMargin [UIScreen mainScreen].bounds.size.width / 50
 
+#define CStringToOcString(cstr) [NSString stringWithCString:cstr encoding:GBK_ENCODE] ? [NSString stringWithCString:cstr encoding:GBK_ENCODE] : @""     //过滤为空的对象
+
 
 #define IS_Pad ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? !((NSInteger)[[UIScreen mainScreen] currentMode].size.width % 768) || !((NSInteger)[[UIScreen mainScreen] currentMode].size.width % 1024) : NO)
 

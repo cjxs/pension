@@ -116,6 +116,7 @@
             [regimenstrategy_btn addTarget:self
                                     action:@selector(clipOnBtnsWithbtn:)
                           forControlEvents:UIControlEventTouchUpInside];
+            
             [_tableHeadView addSubview:regimenstrategy_btn];
         }
     }
@@ -135,7 +136,6 @@
 
 - (void)reloadTableView {
     [_homeTableView reloadData];
-    _homeTableView.tableHeaderView = self.tableHeadView;
     if (!cycleScrollView3) {
         [self setBanner];
     }
@@ -158,7 +158,6 @@
         tag_A = dic[@"tag"];
         
         [self reloadTableView];
-        
         
     } failure:^(__kindof YTKBaseRequest *request){
         [SVProgressHUD showErrorWithStatus:@"网络错误！"];
@@ -184,7 +183,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor greenColor];
     _homeTableView = [[UITableView alloc]
                                    initWithFrame:CGRectMake(0, 0, screenWide, screenHeight-64-screenHeight * 0.035)
                                    style:UITableViewStyleGrouped];
@@ -196,44 +195,11 @@
            forCellReuseIdentifier:@"cellCity"];
     [_homeTableView registerClass:[SeasonCTViewCell class]
            forCellReuseIdentifier:@"cellSeason"];
+    
     [self.view addSubview:_homeTableView];
     [self setupHeaderRefresh];
+    _homeTableView.tableHeaderView = self.tableHeadView;
    
-       // 版本更新的时候添加提示页面，任性的设计师要求的
-//    [MTMigration applicationUpdateBlock:^{
-//        ProductTipView *tipView = [[ProductTipView alloc] init];
-//        [self.navigationController.view addSubview:tipView];
-//        [tipView mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.edges.equalTo(self.navigationController.view);
-//        }];
-//    }];
-    
-//    [MTMigration migrateToVersion:@"1.1.1" block:^{
-//        [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
-//            [MemberManaged MR_truncateAllInContext:localContext];
-//            [CardManaged MR_truncateAllInContext:localContext];
-//            [NoticeManaged MR_truncateAllInContext:localContext];
-//        } completion:^(BOOL success, NSError *error) {
-//            [LoginManaged sharedInstance].isLogin = NO;
-//        }];
-//    }];
-//    UIButton * city_Btn = [UIButton buttonWithType:UIButtonTypeCustom] ;
-//    city_Btn.frame = CGRectMake(0, 0, 60, 30);
-//    city_Btn.titleLabel.font = [UIFont systemFontOfSize:15];
-//    [city_Btn addTarget:self
-//                 action:@selector(chooseIndexCity)
-//       forControlEvents:UIControlEventTouchUpInside];
-//    UIImageView * image_view = [[UIImageView alloc]
-//                                initWithImage:[UIImage imageNamed:@"right_02"]];
-//    image_view.frame = CGRectMake(45 , 13, 12,6);
-//    [city_Btn addSubview:image_view];
-//    city_btn_label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 40, 30)];
-//    city_btn_label.text = @"杭州";
-//    city_btn_label.textColor = [UIColor whiteColor];
-//    city_btn_label.textAlignment = NSTextAlignmentCenter;
-//    [city_Btn addSubview:city_btn_label];
-//    UIBarButtonItem * city_barBItem = [[UIBarButtonItem alloc]
-//                                       initWithCustomView:city_Btn];
     NSString *cityName = @"定位中";
     CGSize cityNameSize = [self sizeWithText:cityName font:[UIFont systemFontOfSize:15] maxH:44];
     UIButton *leftBaritem = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -242,7 +208,7 @@
     [leftBaritem setImage:[UIImage imageNamed:@"home-cityPosition"] forState:UIControlStateNormal];
     //25 ---->图片宽度
     //cityNameSize.width--------->根据要展示的城市名计算出来的宽度
-    //15----> 因为设置了leftBaritem左侧内边距为   -15
+    //10----> 因为设置了leftBaritem左侧内边距为   -15
     leftBaritem.frame = CGRectMake(0, 0, 25 + cityNameSize.width - 10, 44);
     leftBaritem.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     leftBaritem.contentEdgeInsets = UIEdgeInsetsMake(0, -5, 0, 5);
@@ -270,7 +236,6 @@
                                    forState:UIControlStateNormal
                                  barMetrics:UIBarMetricsDefault];
     self.navigationItem.backBarButtonItem = returnBarButtonItem;
-    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -406,7 +371,7 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath
         [self pushToArticleWithTitle:@"养老常识"type:@"pension"];
     }else
     {
-        NSURL * url = [NSURL URLWithString:@"http://n.5199yl.com/#/assess"];
+        NSURL * url = [NSURL URLWithString:@"http://m.5199yl.com/#/assess"];
         WebViewController * webVC = [[WebViewController alloc] init];
         webVC.urlLoad = url;
         [self.navigationController pushViewController:webVC

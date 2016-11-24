@@ -20,22 +20,7 @@
     // Configure the view for the selected state
 }
 - (void)configClassName:(NSString *)class_name
-              Andresult:(NSString *)result
-                   with:(NSString *)type
 {
        _className.text = class_name;
-    if (result)
-    {
-        if ([type isEqualToString:@"Y"])
-        {
-            _resultLabel.text = result;
-            _resultLabel.textColor = [UIColor blackColor];
-
-        }else
-        {
-            _resultLabel.text = result;
-            _resultLabel.textColor = RGB(14, 161, 207);
-            }
-    }
 }
 @end

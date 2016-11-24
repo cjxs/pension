@@ -704,6 +704,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
     OrderTVController * orderVC = [[OrderTVController alloc]
                                    initWithStyle:UITableViewStylePlain];
     orderVC.vc_type = _vc_type;
+    orderVC.gid = self.group_id;
     orderVC.group_dic = _data_dic;
         if ([_vc_type isEqualToString:@"S"]) {
             orderVC.room_index = [NSString stringWithFormat:@"%ld",btn.tag -501];

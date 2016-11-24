@@ -12,9 +12,10 @@
 #import "PersonNTVCell.h"
 #import "PasswordSetVC.h"
 #import "PersonMSetVC.h"
+#import "PersonDataSetVC.h"
 
 //个人资料
-@interface PersonDataVController ()<UITableViewDelegate, UITableViewDataSource,UITextFieldDelegate,PaySetDelegate,PersonMSDelegate>{
+@interface PersonDataVController ()<UITableViewDelegate, UITableViewDataSource,UITextFieldDelegate>{
     UIButton * regis_btn;
 }
 
@@ -42,9 +43,8 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.navigationItem.title = _titleName;
     [self.navigationController setNavigationBarHidden:NO animated:animated];
-    [self.view addSubview:self.tableView];
+
 }
 -(void)viewWillDisappear:(BOOL)animated
 {
@@ -54,6 +54,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.navigationItem.title = _titleName;
+    [self.view addSubview:self.tableView];
+
     // Do any additional setup after loading the view.
     self.tableView.backgroundColor = RGB(242, 242, 242);
     self.view.backgroundColor = RGB(242, 242, 242);
@@ -100,6 +103,7 @@
         [tableView registerNib:[UINib nibWithNibName:@"PersonNTVCell" bundle:nil] forCellReuseIdentifier:@"pNewcell"];
         PersonNTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"pNewcell" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        [cell configs];
         
         return cell;
         
@@ -111,43 +115,71 @@
         {
             switch (indexPath.row)
             {
-                    
                 case 1:
-                    if (!user.phone) {
-                        [cell configClassName:@"手机号" Andresult:@"未绑定" with:@"N"];
-                        
-                    }else{
-                        [cell configClassName:@"手机号" Andresult:user.phone with:@"Y"];
-                    }
+                {
+                    [cell configClassName:@"手机号"];
+                    [RACObserve(user, phone)
+                     subscribeNext:^(NSString * str) {
+                         if (str.length > 0) {
+                             cell.resultLabel.text = str;
+                             cell.resultLabel.textColor = RGB(14, 161, 207);
+                         }else{
+                             cell.resultLabel.text = @"未绑定";
+                             cell.resultLabel.textColor = [UIColor blackColor];
+                         }
+                     }];
+                }
                     break;
                 case 2:
-                    if (!user.email) {
-                        [cell configClassName:@"邮箱" Andresult:@"未绑定" with:@"N"];
-                        
-                    }
-                    [cell configClassName:@"邮箱" Andresult:user.email with:@"Y"];
+                {
+                    [cell configClassName:@"邮箱"];
+                    [RACObserve(user, email)
+                     subscribeNext:^(NSString * str) {
+                         if (str.length > 0) {
+                             cell.resultLabel.text = str;
+                             cell.resultLabel.textColor = RGB(14, 161, 207);
+                         }else{
+                             cell.resultLabel.text = @"未绑定";
+                             cell.resultLabel.textColor = [UIColor blackColor];
+                         }
+                     }];
+                }
                     break;
                 case 3:
-                    [cell configClassName:@"会员等级" Andresult:@"普通会员" with:@"Y"];
+                {
+                    [cell configClassName:@"会员等级"];
+                    cell.resultLabel.text = @"普通会员";
+                }
                     break;
                 default:
                     break;
             }
-            
+
         }else
-        {
+            {
             switch (indexPath.row)
             {
                 case 1:
-
-            if ([user.pay_can isEqualToString:@"N"]) {
-                [cell configClassName:@"支付密码" Andresult:@"未设置" with:@"N"];
-            }else{
-                [cell configClassName:@"支付密码" Andresult:@"修改" with:@"Y"];
-            }
+                {
+                    [cell configClassName:@"支付密码"];
+                    [RACObserve(user, pay_can)
+                     subscribeNext:^(NSString * str) {
+                         if ([str isEqualToString:@"Y"]) {
+                             cell.resultLabel.text = @"修改";
+                             cell.resultLabel.textColor = [UIColor blackColor];
+                         }else{
+                             cell.resultLabel.text = @"未设置";
+                             cell.resultLabel.textColor = RGB(14, 161, 207);
+                         }
+                     }];
+                }
                     break;
                 case 0:
-                [cell configClassName:@"登录密码" Andresult:@"修改" with:@"Y"];
+                {
+                [cell configClassName:@"登录密码"];
+                cell.resultLabel.text = @"修改";
+                cell.resultLabel.textColor = [UIColor blackColor];
+                }
                     break;
                 default:
                     break;
@@ -181,6 +213,10 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0&& indexPath.row == 0)
     {
+        PersonDataSetVC * perDataVC = [[PersonDataSetVC alloc] init];
+        perDataVC.title = @"编辑个人资料";
+        [self.navigationController pushViewController:perDataVC animated:YES];
+        
        
     }else if (indexPath.section == 0&& indexPath.row >=1 && indexPath.row < 3)
     {
@@ -192,7 +228,6 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
             personVC.title = @"邮箱";
             personVC.vc_type = @"email";
         }
-        personVC.delegate = self;
         [self.navigationController pushViewController:personVC animated:YES];
     }else if (indexPath.section == 0&& indexPath.row == 3){
         
@@ -210,7 +245,6 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
         
         if ([[Member DefaultUser].pay_can isEqualToString:@"N"]) {
             PasswordSetVC * passwordSet = [[PasswordSetVC alloc] init];
-            passwordSet.delegate = self;
             [self.navigationController pushViewController:passwordSet animated:YES];
         }else{
             PasswordCVController * passwordVC = [[PasswordCVController alloc]
@@ -237,7 +271,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
     [self.delegate exitLogin];
 }
 -(void)updateView{
-    [self.tableView reloadData];
+//    [self.tableView reloadData];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

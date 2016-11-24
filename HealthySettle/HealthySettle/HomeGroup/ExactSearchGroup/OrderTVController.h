@@ -30,6 +30,7 @@
 @property (nonatomic,strong)UIView * tableHeadView;
 @property(nonatomic, strong)NSMutableArray *productList;
 @property (nonatomic,strong)NSDictionary * group_dic;
+@property (nonatomic,strong)NSString * gid;
 @property (nonatomic,strong)NSString * room_index;
 @property (nonatomic,strong)NSString * vc_type;
 @property (nonatomic,strong) CDDatePicker * datePicker;

@@ -7,15 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-@protocol PaySetDelegate <NSObject>
 
--(void)updateView;
-
-@end
 @interface PasswordSetVC : UIViewController
 @property (strong, nonatomic  )  UITextField *fresh_passInput;
 @property (strong, nonatomic  )  UITextField *refresh_passInput;
 @property (weak, nonatomic  )    UIButton    *changePass_btn;
-@property (nonatomic,weak)id <PaySetDelegate>  delegate;
 @end
 

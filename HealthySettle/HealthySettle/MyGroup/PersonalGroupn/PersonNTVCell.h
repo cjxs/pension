@@ -13,4 +13,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *nick_name_l;
 @property (weak, nonatomic) IBOutlet UILabel *sex_bir_l;
 @property (weak, nonatomic) IBOutlet UILabel *set_l;
+-(void)configs;
 @end

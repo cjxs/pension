@@ -48,7 +48,6 @@
     DDArticleList * articleList = [[DDArticleList alloc] initWithtype:_type];
     [articleList startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
         data_Arr = [DDLogin arrayWithJsonString:request.responseString];
-        NSLog(@"%ld",data_Arr.count);
         self.tableView.tableHeaderView = self.view_head;
         [self.tableView reloadData];
         
@@ -100,7 +99,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString * article_id = data_Arr[indexPath.row][@"id"];//时机不成熟
     WebViewController * web_vc = [[WebViewController alloc] init];
-    NSString * str= [NSString stringWithFormat:@"http://n.5199yl.com/#/article/news?id=%@",article_id];
+    NSString * str= [NSString stringWithFormat:@"http://m.5199yl.com/#/article/%@?id=%@",_type,article_id];
     web_vc.urlLoad = [NSURL URLWithString:str];
     [self.navigationController pushViewController:web_vc animated:YES];
 }

@@ -40,11 +40,12 @@ static NSString *setCellIdentifier = @"cellS";
                                       initWithFrame:CGRectMake(0,screenHeight * 0.465 , screenWide, screenHeight * 0.064 * 5 + screenHeight * 0.015) style:UITableViewStylePlain];
         setTableView.delegate = self;
         setTableView.dataSource = self;
+        setTableView.backgroundColor =  RGB(244,244, 244);
         setTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [setTableView registerNib:[UINib nibWithNibName:@"SetTVCell" bundle:nil]
            forCellReuseIdentifier:setCellIdentifier];
        
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 3; i++)
         {
             UIView * separator = [[UIView alloc]
                                   initWithFrame:CGRectMake(0, (i+1) * screenHeight * 0.064 /* i乘以高度*/, screenWide, 1)];
@@ -177,7 +178,7 @@ static NSString *setCellIdentifier = @"cellS";
 {
     if (section == 0)
     {
-        return 4;
+        return 3;
     }else
     {
         return 1;
@@ -208,9 +209,6 @@ static NSString *setCellIdentifier = @"cellS";
         }else if (indexPath.row == 2 )
         {
             [cell setThingsWithName:@"优惠券" Image:[UIImage imageNamed:@"system_3_"] number:@""];
-        }else
-        {
-            [cell setThingsWithName:@"密码修改" Image:[UIImage imageNamed:@"system_4_"] number:nil];
         }
     }else
     {
@@ -233,14 +231,6 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
             case 2:
                 [self changeToGraceVC];
                 break;
-            case 3:
-                [self changeToPasswordChangeVC];
-                
-                break;
-            case 4:
-                
-                break;
-                
             default:
                 break;
         }
@@ -297,7 +287,10 @@ heightForHeaderInSection:(NSInteger)section
 -(void)updateUserData{//登录成功，代理协议方法
     NSString * str = [NSString stringWithFormat:@"%@/%@",BASEURL,[Member DefaultUser].avatar];
     [imagePerson sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"boy_head"]];
-    textLabel.text = [Member DefaultUser].nickname;
+    [RACObserve([Member DefaultUser], nickname)
+     subscribeNext:^(id x) {
+         textLabel.text = x;
+     }];
      [textLabel removeGestureRecognizer:tapRL];
     NSIndexPath *indexPath1=[NSIndexPath indexPathForRow:1 inSection:0];  //你需要更新的组数中的cell
     NSIndexPath *indexPath2=[NSIndexPath indexPathForRow:0 inSection:0];  //你需要更新的组数中的cell
@@ -333,22 +326,6 @@ heightForHeaderInSection:(NSInteger)section
 
     
 }
-- (void)changeToPasswordChangeVC{
-    
-    if ([Member DefaultUser].login.length !=0) {
-        PasswordCVController * passwordVC = [[PasswordCVController alloc]
-                                             initWithNibName:@"PasswordCVController"
-                                             bundle:nil];
-        passwordVC.titleName = @"密码修改";
-        passwordVC.hidesBottomBarWhenPushed = YES;//隐藏tabBar
-        [self.navigationController pushViewController:passwordVC
-                                             animated:YES];
-    }else{
-        [self resignOrLoad];
-    }
-
-}
-
 - (void)clickTwoViews:(UITapGestureRecognizer *)gesture
 {
     if ([Member DefaultUser].login.length !=0) {

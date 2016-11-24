@@ -213,6 +213,10 @@
 		32D693DF1DD45567001D5C7F /* PasswordSetVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D693DE1DD45567001D5C7F /* PasswordSetVC.m */; };
 		32D693E21DD466E8001D5C7F /* PersonMSetVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D693E11DD466E8001D5C7F /* PersonMSetVC.m */; };
 		32D693EB1DD4748F001D5C7F /* UIButton+DDButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D693EA1DD4748F001D5C7F /* UIButton+DDButton.m */; };
+		32D693EF1DD56380001D5C7F /* PersonDataSetVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D693ED1DD56380001D5C7F /* PersonDataSetVC.m */; };
+		32D693F01DD56380001D5C7F /* PersonDataSetVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32D693EE1DD56380001D5C7F /* PersonDataSetVC.xib */; };
+		32D693F31DD5BBA5001D5C7F /* HMDatePickView.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D693F21DD5BBA5001D5C7F /* HMDatePickView.m */; };
+		32D693F61DE28E43001D5C7F /* PayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D693F51DE28E43001D5C7F /* PayViewController.m */; };
 		32D8593B1CB896530074D5C3 /* ResultListVController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D8593A1CB896530074D5C3 /* ResultListVController.m */; };
 		32D859421CB89E420074D5C3 /* list2_2_@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 32D8593C1CB89E420074D5C3 /* list2_2_@2x.png */; };
 		32D859431CB89E420074D5C3 /* list2_2_@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 32D8593D1CB89E420074D5C3 /* list2_2_@3x.png */; };
@@ -816,6 +820,13 @@
 		32D693E11DD466E8001D5C7F /* PersonMSetVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonMSetVC.m; sourceTree = "<group>"; };
 		32D693E91DD4748F001D5C7F /* UIButton+DDButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+DDButton.h"; sourceTree = "<group>"; };
 		32D693EA1DD4748F001D5C7F /* UIButton+DDButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+DDButton.m"; sourceTree = "<group>"; };
+		32D693EC1DD56380001D5C7F /* PersonDataSetVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonDataSetVC.h; sourceTree = "<group>"; };
+		32D693ED1DD56380001D5C7F /* PersonDataSetVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonDataSetVC.m; sourceTree = "<group>"; };
+		32D693EE1DD56380001D5C7F /* PersonDataSetVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonDataSetVC.xib; sourceTree = "<group>"; };
+		32D693F11DD5BBA5001D5C7F /* HMDatePickView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMDatePickView.h; sourceTree = "<group>"; };
+		32D693F21DD5BBA5001D5C7F /* HMDatePickView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMDatePickView.m; sourceTree = "<group>"; };
+		32D693F41DE28E43001D5C7F /* PayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayViewController.h; sourceTree = "<group>"; };
+		32D693F51DE28E43001D5C7F /* PayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayViewController.m; sourceTree = "<group>"; };
 		32D859371CB893E80074D5C3 /* ResultListVController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultListVController.h; sourceTree = "<group>"; };
 		32D8593A1CB896530074D5C3 /* ResultListVController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultListVController.m; sourceTree = "<group>"; };
 		32D8593C1CB89E420074D5C3 /* list2_2_@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list2_2_@2x.png"; sourceTree = "<group>"; };
@@ -1492,6 +1503,8 @@
 				32D859761CB90B100074D5C3 /* CommentViewController.m */,
 				32E71C9B1CB23DD00079CD73 /* OrderTVController.h */,
 				32E71C9C1CB23DD00079CD73 /* OrderTVController.m */,
+				32D693F41DE28E43001D5C7F /* PayViewController.h */,
+				32D693F51DE28E43001D5C7F /* PayViewController.m */,
 				32E71C9E1CB255D50079CD73 /* OrderLaeblTVCell.h */,
 				32E71C9F1CB255D50079CD73 /* OrderLaeblTVCell.m */,
 				32E71CA11CB256770079CD73 /* OrderTextFieldTVCell.h */,
@@ -1533,6 +1546,8 @@
 				321C43081DBF5AE100192243 /* city_.plist */,
 				32CABD951CA39E2E0068AE93 /* CDDatePicker.h */,
 				32CABD961CA39E2E0068AE93 /* CDDatePicker.m */,
+				32D693F11DD5BBA5001D5C7F /* HMDatePickView.h */,
+				32D693F21DD5BBA5001D5C7F /* HMDatePickView.m */,
 				3292A74D1CA3D14E004FEB57 /* CDCityPicker.h */,
 				3292A74E1CA3D14E004FEB57 /* CDCityPicker.m */,
 				32D859481CB8B2420074D5C3 /* PriSeleView.h */,
@@ -1954,6 +1969,9 @@
 				325051F71CB667A700D431F5 /* ComAndCollVC.m */,
 				32FA73341CAB7E4F00379855 /* PersonDataVController.h */,
 				32FA73351CAB7E4F00379855 /* PersonDataVController.m */,
+				32D693EC1DD56380001D5C7F /* PersonDataSetVC.h */,
+				32D693ED1DD56380001D5C7F /* PersonDataSetVC.m */,
+				32D693EE1DD56380001D5C7F /* PersonDataSetVC.xib */,
 				32FA733F1CABC7FC00379855 /* PasswordCVController.h */,
 				32FA73401CABC7FC00379855 /* PasswordCVController.m */,
 				32FA73411CABC7FC00379855 /* PasswordCVController.xib */,
@@ -2254,6 +2272,7 @@
 				32D859611CB8D4400074D5C3 /* slider-default-handle-highlighted@2x.png in Resources */,
 				32DB05411DA8D0830041C4F5 /* pageControlCurrentDot@2x.png in Resources */,
 				32E5883B1CB73A47002AED1A /* found_g@3x.png in Resources */,
+				32D693F01DD56380001D5C7F /* PersonDataSetVC.xib in Resources */,
 				3223F11F1DB8E19F001F1DCC /* Loading@2x.png in Resources */,
 				324075B61CACCE5D00BAF253 /* newsdynamic_btn.png in Resources */,
 				32D23E781DC33932009154F6 /* MJRefresh.bundle in Resources */,
@@ -2334,6 +2353,7 @@
 				32E71CA31CB256770079CD73 /* OrderTextFieldTVCell.m in Sources */,
 				320108161DBB58F9007ACA6B /* DDScoreList.m in Sources */,
 				32D23E7F1DC33932009154F6 /* UIView+MJExtension.m in Sources */,
+				32D693F61DE28E43001D5C7F /* PayViewController.m in Sources */,
 				32CEF81E1DB7027E00CB7584 /* DDGroupData.m in Sources */,
 				325C82501CB12BB70004EA0C /* ShouldKnowTVCell.m in Sources */,
 				326F247E1CCB0690002BCE0D /* ApiXml.mm in Sources */,
@@ -2345,6 +2365,7 @@
 				32FA73421CABC7FC00379855 /* PasswordCVController.m in Sources */,
 				325051E51CB620C300D431F5 /* OrdAndRefundTVCell.m in Sources */,
 				3252D6581CC752B5000FAFBC /* RSADataVerifier.m in Sources */,
+				32D693F31DD5BBA5001D5C7F /* HMDatePickView.m in Sources */,
 				321C43171DC0575600192243 /* ArticleListTViewCell.m in Sources */,
 				32FB002E1D405D6F008A5497 /* DDToolKit.m in Sources */,
 				32F6CD081C9A734C00E97B65 /* AppDelegate.m in Sources */,
@@ -2415,6 +2436,7 @@
 				323499AB1CE1782200CBA680 /* Member.m in Sources */,
 				3285AEFC1D34D70C0070618A /* YYLUser.m in Sources */,
 				32CABD971CA39E2E0068AE93 /* CDDatePicker.m in Sources */,
+				32D693EF1DD56380001D5C7F /* PersonDataSetVC.m in Sources */,
 				32146B031CC4D6AF0046F2BC /* ShareView.m in Sources */,
 				3252D6621CC752F5000FAFBC /* Order.m in Sources */,
 				325C82451CB0EF7B0004EA0C /* ServeTVCell.m in Sources */,

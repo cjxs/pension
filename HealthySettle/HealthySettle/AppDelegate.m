@@ -70,6 +70,14 @@ static NSString * const UMDEVICETOKEN      = @"UMDeviceToken";// 友盟推送的
     config.baseUrl = BASEURL;
     config.cdnUrl = BASEURL;
     
+    /*-----------------------全局设置返回按钮-------------------------*/
+    [[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil] setBackButtonTitlePositionAdjustment:UIOffsetMake(1000, -60) forBarMetrics:UIBarMetricsDefault];
+    UIImage *backButtonImage = [[UIImage imageNamed:@"leftop_r"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    [[UINavigationBar appearance] setBackIndicatorImage:backButtonImage];
+    [[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:backButtonImage];
+    [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
+
+    
     
     //百度地图
 //    _mapManager = [[BMKMapManager alloc] init];

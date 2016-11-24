@@ -10,15 +10,11 @@
 #import "OrderLaeblTVCell.h"
 #import "OrderTextFieldTVCell.h"
 #import "OrderBtnTVCell.h"
-#import "Order.h"
-#import "DataSigner.h"
-#import <AlipaySDK/AlipaySDK.h>
-#import "WXApiRequestHandler.h"
 #import "CDDatePicker.h"
+#import "PayViewController.h"
 
 @interface OrderTVController ()<HYMDatePickerDelegate>
 {
-    UIView * view_pay;
     NSDate * end_begin;
     NSDate * end_end;
     UILabel * checkIn_timelabel;
@@ -150,9 +146,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.tableView.bounces = NO;
+    self.tableView.bounces = YES;
     self.tableView.showsVerticalScrollIndicator = NO;
-    [self.navigationItem setTitle:@"订单填写"];
+    self.title = @"订单填写";
     self.tableView.tableHeaderView = self.tableHeadView;
     [self.tableView registerClass:[OrderLaeblTVCell class]
            forCellReuseIdentifier:@"cellL"];
@@ -161,7 +157,8 @@
     [self.tableView registerClass:[OrderBtnTVCell class]
            forCellReuseIdentifier:@"cellS"];
     UIView * backFootView = [[UIView alloc]
-                      initWithFrame:CGRectMake(0, 0, screenWide, screenHeight * 0.06)];
+                      initWithFrame:CGRectMake(0, screenHeight * 0.94-64, screenWide, screenHeight * 0.06)];
+    backFootView.backgroundColor = [UIColor whiteColor];
     UIView * line_view =[[UIView alloc]
                          initWithFrame:CGRectMake(0, 0, screenWide, 1)];
     line_view.backgroundColor = RGB(246, 246, 246);
@@ -186,15 +183,17 @@
     UIButton * toPay_btn = [UIButton buttonWithType:UIButtonTypeCustom];
     toPay_btn.frame = CGRectMake(screenWide /2, 0, screenWide/2, screenHeight * 0.06);
     toPay_btn.backgroundColor = RGB(226, 11, 24);
-    [toPay_btn setTitle:@"去支付"
+    [toPay_btn setTitle:@"提交订单"
                forState:UIControlStateNormal];
     [toPay_btn addTarget:self
-                  action:@selector(payToEveryOne)
+                  action:@selector(submitOrder)
         forControlEvents:UIControlEventTouchUpInside];
     [toPay_btn setTitleColor:[UIColor whiteColor]
                     forState:UIControlStateNormal];
     [backFootView addSubview:toPay_btn];
-    self.tableView.tableFooterView = backFootView;
+    [self.view addSubview:backFootView];
+//    self.tableView.tableFooterView = backFootView;
+    self.tableView.tableFooterView = [UIView new];
 }
 - (void)didReceiveMemoryWarning
 {
@@ -204,7 +203,8 @@
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+//    return 2;
+    return 1;
 }
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section
@@ -325,156 +325,6 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
 }
-#pragma mark - PAY
-- (void)payToEveryOne
-{
-    view_pay = [[UIView alloc] init];
-    view_pay.backgroundColor = [UIColor grayColor];
-    view_pay.frame = CGRectMake(0, screenHeight, screenWide, screenHeight * 0.4);
-    UIButton * ali_btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    ali_btn.frame = CGRectMake(50, screenHeight * 0.1, (screenWide-100)/3, 50);
-    [ali_btn addTarget:self
-                action:@selector(payToNext:)
-      forControlEvents:UIControlEventTouchUpInside];
-    ali_btn.clipsToBounds = YES;
-    [ali_btn setTitle:@"支付宝"
-             forState:UIControlStateNormal];
-    ali_btn.layer.cornerRadius = 10;
-    [view_pay addSubview:ali_btn];
-    UIButton * wx_btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    wx_btn.frame = CGRectMake(50 + (screenWide-100)/3*2, screenHeight * 0.1, (screenWide-100)/3, 50);
-    [wx_btn addTarget:self
-               action:@selector(payToNext:)
-     forControlEvents:UIControlEventTouchUpInside];
-    [wx_btn setTitle:@"微信"
-            forState:UIControlStateNormal];
-    wx_btn.clipsToBounds = YES;
-    wx_btn.layer.cornerRadius = 10;
-    [view_pay addSubview:wx_btn];
-    [self.view addSubview:view_pay];
-    
-    [UIView animateWithDuration:0.35 delay:0.5 usingSpringWithDamping:0.5 initialSpringVelocity:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
-        view_pay.frame = CGRectMake(0, screenHeight * 0.6, screenWide, screenHeight * 0.4);
-    } completion:^(BOOL finished) {
-        
-    }];
-//    [UIView animateWithDuration:0.5f animations:^
-//    {
-//        
-//    }];
-    
-}
-- (void)payViewdimiss
-{
-    [UIView animateWithDuration:0.3f animations:^
-    {
-        view_pay.frame = CGRectMake(0, screenHeight, screenWide, screenHeight * 0.4);
-    }];
-    [view_pay removeFromSuperview];
-     [self performSelector:@selector(remove)
-                withObject:nil
-                afterDelay:0.3f];
-}
-- (void)remove {
-    for (UIButton * btn  in view_pay.subviews)
-    {
-        [btn removeFromSuperview];
-    }
-    [view_pay removeFromSuperview];
-}
-- (void)payToNext:(UIButton *)btn
-{
-    if (btn.frame.origin.x < screenWide/2)
-    {
-        [self payToAlipay];
-    }else
-    {
-        WXApiRequestHandler *wxapi = [[WXApiRequestHandler  alloc] init];
-        [wxapi httpService:nil];
-    }
-    [self payViewdimiss];
-}
--(void)payToAlipay
-{
-    /*=======================需要填写商户app申请的===================================*/
-    NSString *partner = AliPID;
-    NSString *seller = AliMID;
-    NSString *privateKey = AliPRIKEY;
-    /*============================================================================*/
-    if ([partner length] == 0 ||
-        [seller length] == 0 ||
-        [privateKey length] == 0)
-    {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
-                                                        message:@"缺少partner或者seller或者私钥。"
-                                                       delegate:self
-                                              cancelButtonTitle:@"确定"
-                                              otherButtonTitles:nil];
-        [alert show];
-        return;
-    }
-    
-    /*
-     *生成订单信息及签名
-     */
-    //将商品信息赋予AlixPayOrder的成员变量
-    Order *order = [[Order alloc] init];
-    order.partner = partner;
-    order.seller = seller;
-    order.tradeNO = [self generateTradeNO]; //订单ID（由商家自行制定）
-    order.productName = @"好的设计开发";//product.subject; //商品标题
-    order.productDescription = @"四大皆空会收到后给的反馈";//product.body; //商品描述
-    order.amount = @"0.01";//[NSString stringWithFormat:@"%f",product.price]; //商品价格
-    order.notifyURL =  @"http://www.xxx.com"; //回调URL
-    order.service = @"mobile.securitypay.pay";
-    order.paymentType = @"1";
-    order.inputCharset = @"utf-8";
-    order.itBPay = @"30m";
-    order.showUrl = @"m.alipay.com";
-    //应用注册scheme,在AlixPayDemo-Info.plist定义URL types
-    NSString *appScheme = @"alisdkdemo";
-    
-    //将商品信息拼接成字符串
-    NSString *orderSpec = [order description];
-    
-    //获取私钥并将商户信息签名,外部商户可以根据情况存放私钥和签名,只需要遵循RSA签名规范,并将签名字符串base64编码和UrlEncode
-    id<DataSigner> signer = CreateRSADataSigner(AliPRIKEY);
-    NSString *signedString = [signer signString:orderSpec];
-    NSLog(@"\n%@\n",signedString);
-    
-    
-    //将签名成功字符串格式化为订单字符串,请严格按照该格式
-    NSString *orderString = nil;
-    if (signedString != nil)
-    {
-        orderString = [NSString stringWithFormat:@"%@&sign=\"%@\"&sign_type=\"%@\"",
-                       orderSpec, signedString, @"RSA"];
-        
-        [[AlipaySDK defaultService] payOrder:orderString
-                                  fromScheme:appScheme
-                                    callback:^(NSDictionary *resultDic)
-        {
-            NSLog(@"reslut = %@",resultDic);
-        }];
-    }
-
-}
-
-- (NSString *)generateTradeNO
-{
-    static int kNumber = 15;
-    
-    NSString *sourceStr = @"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    NSMutableString *resultStr = [[NSMutableString alloc] init];
-    srand((unsigned)time(0));
-    for (int i = 0; i < kNumber; i++)
-    {
-        unsigned index = rand() % [sourceStr length];
-        NSString *oneStr = [sourceStr substringWithRange:NSMakeRange(index, 1)];
-        [resultStr appendString:oneStr];
-    }
-    return resultStr;
-}
 
 
 //日期选择器出来
@@ -534,7 +384,51 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
         [YYLOrder YLOrder].checkout_time = date_l;
     }
 }
-
+- (void)submitOrder {
+    YYLOrder * order;
+    if ([_vc_type isEqualToString:@"S"]) {
+        order = [YYLOrder YSOrder];
+        order.order_name = _group_dic[@"name"];
+        order.group_id = self.gid;
+        order.cat_id = @"2";
+        order.price = self.charge_price;
+        order.subsidy_money_m = @"50";
+        order.subsidy_money_u = @"50";
+        OrderTextFieldTVCell * cell;
+        cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+        order.contact_name = [cell returnfromtextField];
+        cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
+        order.contact_phone = [cell returnfromtextField];
+        cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
+        NSString *str = [cell returnfromtextField];
+        cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:5 inSection:0]];
+        order.checkin_name = [NSString stringWithFormat:@"%@,%@",str,[cell returnfromtextField]];
+        order.beds = @"1";
+        
+    }else{
+        order = [YYLOrder YLOrder];
+        order.order_name = _group_dic[@"name"];
+        order.group_id = self.gid;
+        order.cat_id = @"1";
+        order.price = self.charge_price;
+        order.subsidy_money_m = @"50";
+        order.subsidy_money_u = @"50";
+        order.order_spec =  [NSString stringWithFormat:@"%@ | %@ | %@ | %@",_chargeArray[0],_chargeArray[1],_chargeArray[2],_chargeArray[3]];
+        OrderTextFieldTVCell * cell;
+        cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+        order.contact_name = [cell returnfromtextField];
+        cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
+        order.contact_phone = [cell returnfromtextField];
+        cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
+        NSString *str = [cell returnfromtextField];
+        cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:5 inSection:0]];
+        order.checkin_name = [NSString stringWithFormat:@"%@,%@",str,[cell returnfromtextField]];
+        order.beds = @"1";
+    }
+    PayViewController * payVC = [[PayViewController alloc] init];
+    payVC.vc_type = self.vc_type;
+    [self.navigationController pushViewController:payVC animated:YES];
+}
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
