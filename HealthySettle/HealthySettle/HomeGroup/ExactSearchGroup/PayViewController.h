@@ -10,4 +10,7 @@
 
 @interface PayViewController : UIViewController
 @property (nonatomic,strong)NSString * vc_type;
+@property (nonatomic,strong)UIView * tableHeadView;
+@property (nonatomic,strong)UITableView * tableView;
+
 @end

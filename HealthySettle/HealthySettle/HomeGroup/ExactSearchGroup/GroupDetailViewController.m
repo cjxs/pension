@@ -352,7 +352,7 @@
         TestModel * model1 = [[TestModel alloc] init];
         TestModel * model2 = [[TestModel alloc] init];
         TestModel * model3 = [[TestModel alloc] init];
-        showArray = @[model1,model2,model3,model1];
+        showArray = @[model1,model2,model3,model1,model1,model1,model1,model1,model1,model1,model1,model1];
     }else {
         [self.tableView registerClass:[SelectTVCell class]
                forCellReuseIdentifier:@"cellSelect"];
@@ -378,14 +378,7 @@
                          action:@selector(fillInOrderController:)
                forControlEvents:UIControlEventTouchUpInside];
         predeter_btn.backgroundColor = RGB(242, 79, 11);
-//        UIButton * try_btn = [UIButton buttonWithType:UIButtonTypeCustom];
-//        try_btn.frame = CGRectMake(screenWide /2, 0, screenWide/2, 44);
-//        [try_btn setTitle:@"一元试住" forState:UIControlStateNormal];
-//        try_btn.backgroundColor = [UIColor whiteColor];
-//        [try_btn setTitleColor:RGB(60, 61, 63)
-//                      forState:UIControlStateNormal];
-//        [backFootView addSubview:try_btn];
-//        self.tableView.tableFooterView = backFootView;
+
         [self.view addSubview:predeter_btn];
     }
     
@@ -433,7 +426,6 @@
     // Do any additional setup after loading the view.
     [self setData];
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
-    self.navigationController.interactivePopGestureRecognizer.delegate = self;
     [self.navigationController.view sendSubviewToBack:self.navigationController.navigationBar];
 
     UIBarButtonItem * returnBarButtonItem = [[UIBarButtonItem alloc] init];
@@ -467,6 +459,7 @@
     if ([self.vc_type isEqualToString:@"S"])
     {
         return 2+[_data_dic[@"room"] count];
+        
     }else if ([self.vc_type isEqualToString:@"L"])
     {
         return 7;

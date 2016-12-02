@@ -11,24 +11,125 @@
 #import "WXApiRequestHandler.h"
 #import "Order.h"
 #import "DataSigner.h"
+#import "CDDatePicker.h"
+#import "SpecialLabelTVC.h"
+#import "OrderLaeblTVCell.h"
+#import "PayWayTVC.h"
 
 
 
-@interface PayViewController ()
+@interface PayViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
     UIView * view_pay;
+    BOOL ali_pay;
 
 }
 
 @end
 
 @implementation PayViewController
+-(UIView *)tableHeadView
+{
+    if (!_tableHeadView)
+    {
+        _tableHeadView = [[UIView alloc]
+                          initWithFrame:CGRectMake(0, 0, screenWide, screenHeight *0.203 )];
+        _tableHeadView.backgroundColor = RGB(252, 229, 229);
+        UIView * backHeadView = [[UIView alloc]
+                                 initWithFrame:CGRectMake(8, 8, screenWide - 16, screenHeight * 0.203 - 16)];
+        backHeadView.backgroundColor = [UIColor whiteColor];
+        backHeadView.layer.masksToBounds = YES;
+        backHeadView.layer.cornerRadius = 5;
+        [_tableHeadView addSubview:backHeadView];
+        UILabel * organ_label = [[UILabel alloc]
+                                 initWithFrame:CGRectMake(8,0 , screenWide - 150, 0.05 * screenHeight)];
+        YYLOrder * order = [_vc_type isEqualToString:@"S"]? [YYLOrder YSOrder]:[YYLOrder YLOrder];
+        
+        organ_label.text = order.order_name;
+        organ_label.font = [UIFont systemFontOfSize:14];
+        [backHeadView addSubview:organ_label];
+        UILabel * price_sum_label= [[UILabel alloc] initWithFrame:CGRectMake(screenWide - 124, 0, 100, 0.05 * screenHeight)];
+        price_sum_label.text = [NSString stringWithFormat:@"¥%@.00",order.price];
+        price_sum_label.font = [UIFont systemFontOfSize:17];
+        price_sum_label.textAlignment = NSTextAlignmentRight;
+        price_sum_label.textColor = REDCOLOR;
+        [backHeadView addSubview:price_sum_label];
+        
+        UIView * line_view = [[UIView alloc]
+                              initWithFrame:CGRectMake(10, screenHeight * 0.05, screenWide -36, 1)];
+        line_view.backgroundColor = RGB(190, 190, 190);
+        [backHeadView addSubview:line_view];
+        NSArray * array = @[@"入住",@"离店"];
+        for (int i = 0; i < 2; i ++)
+        {
+            UILabel * label = [[UILabel alloc]
+                               initWithFrame:CGRectMake(8 + screenWide/3 * i, screenHeight * 0.06, screenWide * 0.1, screenHeight *0.04)];
+            label.text = array[i];
+            label.font = [UIFont systemFontOfSize:12];
+            label.textColor = RGB(190, 190, 190);
+            [backHeadView addSubview:label];
+        }
+        UILabel * checkIn_timelabel = [[UILabel alloc]
+                             initWithFrame:CGRectMake(8 + screenWide * 0.1, screenHeight * 0.06, screenWide /3 - screenWide * 0.1, screenHeight * 0.04)];
+        checkIn_timelabel.font = [UIFont systemFontOfSize:10];
+        checkIn_timelabel.text = [CDDatePicker getStringFromDate:order.checkin_time];
+        [backHeadView addSubview:checkIn_timelabel];
+        
+        UILabel * leave_timelabel = [[UILabel alloc]
+                           initWithFrame:CGRectMake(8+ screenWide *0.1 + screenWide /3, screenHeight * 0.06, screenWide /3 - screenWide * 0.1, screenHeight * 0.04)];
+        leave_timelabel.text = [CDDatePicker getStringFromDate:order.checkout_time];
+
+        leave_timelabel.font = [UIFont systemFontOfSize:10];
+        [backHeadView addSubview:leave_timelabel];
+        
+        UILabel *  home_label = [[UILabel alloc]
+                      initWithFrame:CGRectMake(8, screenHeight * 0.11, screenWide - 80, screenHeight * 0.04)];
+        home_label.font = [UIFont systemFontOfSize:10];
+        home_label.text = order.order_spec;
+        [backHeadView addSubview:home_label];
+        
+        UIButton * btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        btn.frame = CGRectMake(screenWide - 74, screenHeight * 0.11, 50, screenHeight * 0.04);
+        [btn setTitle:@"房型详情"
+             forState:UIControlStateNormal];
+        btn.titleLabel.font = [UIFont systemFontOfSize:10];
+        [btn setTitleColor:RGB(240, 71, 76)
+                  forState:UIControlStateNormal];
+        checkIn_timelabel.userInteractionEnabled = YES;
+        [backHeadView addSubview:btn];
+    }
+    return _tableHeadView;
+}
+-(UITableView *)tableView
+{
+    if (!_tableView)
+    {
+        UITableView * tableView = [[UITableView alloc]
+                                   initWithFrame:CGRectMake(0, 0, screenWide, screenHeight -64)
+                                   style:UITableViewStylePlain];
+        tableView.showsVerticalScrollIndicator = NO;
+        tableView.tableFooterView = [UIView new];
+        _tableView = tableView;
+        
+    }
+    return _tableView;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    ali_pay = YES;
     // Do any additional setup after loading the view.
     [self.navigationItem setTitle:@"支付中心"];
     self.view.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:self.tableView];
+    self.tableView.tableHeaderView = self.tableHeadView;
+    self.tableView.dataSource = self;
+    self.tableView.delegate =self;
+    [self.tableView registerClass:[SpecialLabelTVC class] forCellReuseIdentifier:@"cellmao"];
+    [self.tableView registerClass:[PayWayTVC class] forCellReuseIdentifier:@"cellway"];
+    
+    
+    
     
     
     
@@ -36,6 +137,126 @@
     
 }
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 3;
+}
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (section == 0) {
+        return 2;
+    }else if (section == 1) {
+        return 2;
+    }else {
+        return 2;
+    }
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    switch (indexPath.section) {
+        case 0:
+            switch (indexPath.row) {
+                case 0:
+                    return 50;
+                    break;
+                case 1:
+                    return 50;
+                    break;
+                default:
+                    return 150;
+                    break;
+            }
+            break;
+        case 1:
+            switch (indexPath.row) {
+                case 0:
+                    return 150;
+                    break;
+                default:
+                    return 50;
+                    break;
+            }
+        default:
+            return 50;
+            break;
+    }
+    return 50;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSArray * data;
+    SpecialLabelTVC * cell;
+    PayWayTVC * cell_way;
+    int a = indexPath.section;
+    int b = indexPath.row;
+    switch (a) {
+        case 0:
+            switch (b) {
+                case 0:
+                    cell =  [tableView dequeueReusableCellWithIdentifier:@"cellmao" forIndexPath:indexPath];
+                    data = @[@"平台补贴",@"50元"];
+                    [cell configWithData:data color:RGB(190, 190, 190)];
+
+                    break;
+                case 1:
+                    cell  =  [tableView dequeueReusableCellWithIdentifier:@"cellmao" forIndexPath:indexPath];
+                    data = @[@"优惠券",@"无可用优惠券"];
+                    [cell configWithData:data color:RGB(190, 190, 190)];
+
+                    break;
+                default:
+                    break;
+            }
+            return cell;
+            break;
+        case 1:
+            switch (b) {
+                case 0:
+                    cell  =  [tableView dequeueReusableCellWithIdentifier:@"cellmao" forIndexPath:indexPath];
+                    data = @[@"用户补贴",@"50元",@"优惠券",@"0元",@"现金账户",@"30元"];
+                    [cell configWithData:data color:RGB(190, 190, 190)];
+                    break;
+                default:
+                    cell  =  [tableView dequeueReusableCellWithIdentifier:@"cellmao" forIndexPath:indexPath];
+                    data = @[@"还需支付",@"800元"];
+                    [cell configWithData:data color:RGB(190, 190, 190)];
+                    break;
+            }
+            return cell;
+            break;
+        default:
+            cell_way = [tableView dequeueReusableCellWithIdentifier:@"cellway" forIndexPath:indexPath];
+            switch (b) {
+                case 0:
+                    [cell_way configWithimageName:@"choose_44_@2x" title:@"微信支付" aliPay:ali_pay];
+                    break;
+                default:
+                    [cell_way configWithimageName:@"ali_btn" title:@"支付宝支付" aliPay:ali_pay];
+                    break;
+
+            }
+            return cell_way;
+            break;
+    }
+    
+}
+- (nullable NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+    if (section == 2) {
+        return @"选择支付方式";
+    }
+    return nil;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 2) {
+        if (indexPath.row == 0) {
+            ali_pay = NO;
+        }else{
+            ali_pay = YES;
+        }
+        NSIndexSet *indexSet=[[NSIndexSet alloc]initWithIndex:2];
+        [tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

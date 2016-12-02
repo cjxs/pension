@@ -206,7 +206,7 @@ static NSInteger page = 1;
     {
         NSLog(@"筛选");
     }else {
-        NSLog(@"排序");
+  NSLog(@"排序");
     }
 }
 #pragma mark - auto_view
@@ -224,14 +224,13 @@ static NSInteger page = 1;
 
 -(void)setData{
     
-    if ([_vc_type isEqualToString:@"S"]) {
-        ddlist = [[DDListGet alloc] initWithController:@"ys_g" area_id:self.area_id page:[NSString stringWithFormat:@"%ld",page]];
-    }else{
-        ddlist = [[DDListGet alloc] initWithController:@"yl_g" area_id:self.area_id page:[NSString stringWithFormat:@"%ld",page]];
-    }
+    NSString * catid = [_vc_type isEqualToString:@"S"]? [NSString stringWithFormat:@"2"]:[NSString stringWithFormat:@"1"];
+    
+    ddlist = [[DDListGet alloc] initWithcat_id:catid keyword:nil area_id:_area_id sort:nil priceRange:nil level:nil page:[NSString stringWithFormat:@"%ld",page]];
     [ddlist startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
         NSMutableArray * arr = [DDLogin arrayWithJsonString:request.responseString];
-        if (arr && arr.count < 15) {
+        NSLog(@"%@",arr[0]);
+        if (arr && arr.count < 6) {
             self.tableView.footerHidden = YES;
         }
         if (page == 1) {

@@ -12,13 +12,16 @@
 #import "OrderBtnTVCell.h"
 #import "CDDatePicker.h"
 #import "PayViewController.h"
+#import "SpecialLabelTVC.h"
 
-@interface OrderTVController ()<HYMDatePickerDelegate>
+@interface OrderTVController ()<HYMDatePickerDelegate, UITextFieldDelegate>
 {
     NSDate * end_begin;
     NSDate * end_end;
     UILabel * checkIn_timelabel;
     UILabel * leave_timelabel;
+    UILabel * home_label;
+    UITextField * current_field;
 }
 
 @end
@@ -35,6 +38,8 @@
         UIView * backHeadView = [[UIView alloc]
                           initWithFrame:CGRectMake(8, 8, screenWide - 16, screenHeight * 0.203 - 16)];
         backHeadView.backgroundColor = [UIColor whiteColor];
+        backHeadView.layer.masksToBounds = YES;
+        backHeadView.layer.cornerRadius = 5;
         [_tableHeadView addSubview:backHeadView];
         UILabel * organ_label = [[UILabel alloc]
                                  initWithFrame:CGRectMake(8,0 , screenWide - 50, 0.05 * screenHeight)];
@@ -64,9 +69,9 @@
                                      initWithFrame:CGRectMake(8+ screenWide *0.1 + screenWide /3, screenHeight * 0.06, screenWide /3 - screenWide * 0.1, screenHeight * 0.04)];
         leave_timelabel.font = [UIFont systemFontOfSize:10];
         [backHeadView addSubview:leave_timelabel];
-        UILabel * home_label = [[UILabel alloc]
+        home_label = [[UILabel alloc]
                                 initWithFrame:CGRectMake(8, screenHeight * 0.11, screenWide - 80, screenHeight * 0.04)];
-        home_label.font = [UIFont systemFontOfSize:12];
+        home_label.font = [UIFont systemFontOfSize:10];
         [backHeadView addSubview:home_label];
         UIButton * btn = [UIButton buttonWithType:UIButtonTypeCustom];
         btn.frame = CGRectMake(screenWide - 64, screenHeight * 0.11, 40, screenHeight * 0.04);
@@ -78,7 +83,25 @@
         checkIn_timelabel.userInteractionEnabled = YES;
 
         if ([_vc_type isEqualToString:@"S"]) {
-            home_label.text = _group_dic[@"room"][[_room_index intValue]][@"room_type"];
+            NSDictionary * dic = _group_dic[@"room"][[_room_index intValue]];
+            
+            NSString * is_catered;
+            switch ([dic[@"is_catered"] integerValue]) {
+                case 0:
+                    is_catered = @"不包餐";
+                    break;
+                case 1:
+                    is_catered = @"包早餐";
+                    break;
+                case 2:
+                    is_catered = @"包三餐";
+                    break;
+                default:
+                    break;
+            }
+            NSString * is_wifi = [dic[@"is_wifi"] isEqualToString:@"1"]?@"免费WiFi":@"";
+            
+            home_label.text = [NSString stringWithFormat:@"%@ | %@ | %@ | %@",dic[@"room_type"],dic[@"bed_type"],is_wifi,is_catered];
             if ([YYLOrder YSOrder].checkin_time) {
                 checkIn_timelabel.text = [CDDatePicker getStringFromDate:[YYLOrder YSOrder].checkin_time];
                 end_begin = [YYLOrder YSOrder].checkin_time;
@@ -128,9 +151,7 @@
     return _tableHeadView;
 }
 -(NSDate *)getPriousorLaterDateFromDate:(NSDate *)date withMonth:(int)month
-    
 {
-        
     NSDateComponents *comps = [[NSDateComponents alloc] init];
     [comps setMonth:month];
     NSCalendar *calender = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
@@ -194,6 +215,11 @@
     [self.view addSubview:backFootView];
 //    self.tableView.tableFooterView = backFootView;
     self.tableView.tableFooterView = [UIView new];
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardHide:)];
+    //设置成NO表示当前控件响应后会传播到其他控件上，默认为YES。
+    tapGestureRecognizer.cancelsTouchesInView = NO;
+    //将触摸事件添加到当前view
+    [self.tableView addGestureRecognizer:tapGestureRecognizer];
 }
 - (void)didReceiveMemoryWarning
 {
@@ -231,25 +257,28 @@
             case 0:
                 cell = [tableView dequeueReusableCellWithIdentifier:@"cellL"
                                                        forIndexPath:indexPath];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 [cell configWithtitle:@"房间数" text:@"1间" next:YES];
                 break;
             case 1:
                cell1 = [tableView dequeueReusableCellWithIdentifier:@"cellF"
                                                        forIndexPath:indexPath];
-              
-                [cell1 configWithtitle:@"联系人" text:@"姓名" next:YES];
+                cell1.selectionStyle = UITableViewCellSelectionStyleNone;
+                [cell1 configWithtitle:@"联系人" text:@"姓名" next:YES controller:self];
                 return cell1;
                 break;
             case 2:
                 cell1 = [tableView dequeueReusableCellWithIdentifier:@"cellF"
-                                                       forIndexPath:indexPath];
-                [cell1 configWithtitle:@"联系人手机" text:@"请输入" next:YES];
+                                                        forIndexPath:indexPath];
+                cell1.selectionStyle = UITableViewCellSelectionStyleNone;
+                [cell1 configWithtitle:@"联系人手机" text:@"请输入" next:YES controller:self];
                 return cell1;
                 break;
             case 3:
                 cell1 = [tableView dequeueReusableCellWithIdentifier:@"cellF"
                                                     forIndexPath:indexPath];
-                [cell1 configWithtitle:@"入住人" text:@"姓名" next:YES];
+                cell1.selectionStyle = UITableViewCellSelectionStyleNone;
+                [cell1 configWithtitle:@"入住人" text:@"姓名" next:YES controller:self];
                 return cell1;
                 break;
             case 4:
@@ -260,7 +289,8 @@
             case 5:
                 cell1 = [tableView dequeueReusableCellWithIdentifier:@"cellF"
                                                        forIndexPath:indexPath];
-                [cell1 configWithtitle:@"证件号码" text:@"3343487285234837383" next:NO];
+                cell1.selectionStyle = UITableViewCellSelectionStyleNone;
+                [cell1 configWithtitle:@"证件号码" text:@"3343487285234837383" next:NO controller:self];
                 return cell1;
                 break;
             default:
@@ -279,7 +309,7 @@
             case 1:
                 cell1 = [tableView dequeueReusableCellWithIdentifier:@"cellF"
                                                         forIndexPath:indexPath];
-                [cell1 configWithtitle:@"发票抬头" text:@"请填写发票抬头" next:YES];
+                [cell1 configWithtitle:@"发票抬头" text:@"请填写发票抬头" next:YES controller:self];
                 return cell1;
                 break;
             case 2:
@@ -290,13 +320,13 @@
             case 3:
                 cell1 = [tableView dequeueReusableCellWithIdentifier:@"cellF"
                                                        forIndexPath:indexPath];
-                [cell1 configWithtitle:@"收件人" text:@"张三" next:NO];
+                [cell1 configWithtitle:@"收件人" text:@"张三" next:NO controller:self];
                 return cell1;
                 break;
             case 4:
                 cell1 = [tableView dequeueReusableCellWithIdentifier:@"cellF"
                                                        forIndexPath:indexPath];
-                [cell1 configWithtitle:@"地址" text:@"浙江省杭州市滨江区隆和大厦603" next:NO];
+                [cell1 configWithtitle:@"地址" text:@"浙江省杭州市滨江区隆和大厦603" next:NO controller:self];
                 return cell1;
                 break;
             default:
@@ -319,11 +349,6 @@ heightForHeaderInSection:(NSInteger)section
         return 12;
     }
     return 0;
-}
--(void)tableView:(UITableView *)tableView
-didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
 }
 
 
@@ -384,53 +409,95 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
         [YYLOrder YLOrder].checkout_time = date_l;
     }
 }
-- (void)submitOrder {
-    YYLOrder * order;
+-(BOOL)testOrderMassage{
     if ([_vc_type isEqualToString:@"S"]) {
-        order = [YYLOrder YSOrder];
+        YYLOrder * order = [YYLOrder YSOrder];
+        if (!order.checkout_time) {
+            return NO;
+        }
+    }
+    OrderTextFieldTVCell * cell;
+    cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+    ;
+    if ([[cell returnfromtextField].text length] == 0) {
+        return NO;
+    }
+    cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
+    if ([[cell returnfromtextField].text length] == 0) {
+        return NO;
+    }
+    cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:5 inSection:0]];
+    if ([[cell returnfromtextField].text length] == 0) {
+        return NO;
+    }
+    cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:5 inSection:0]];
+    if ([[cell returnfromtextField].text length] == 0) {
+        return NO;
+    }
+    
+    return YES;
+
+}
+-(BOOL)creatOrderInterNet{
+    return YES;
+}
+- (void)submitOrder {
+    if (![self testOrderMassage]) {
+        YYLOrder * order;
+        if ([_vc_type isEqualToString:@"S"]) {
+            order = [YYLOrder YSOrder];
+            order.cat_id = @"2";
+        }else{
+            order = [YYLOrder YLOrder];
+            order.cat_id = @"1";
+            if (!order.checkout_time) {
+                order.checkout_time = [self getPriousorLaterDateFromDate:[NSDate date] withMonth:1];
+            }
+        }
+        if (!order.checkin_time) {
+            order.checkin_time = [NSDate date];
+        }
         order.order_name = _group_dic[@"name"];
         order.group_id = self.gid;
-        order.cat_id = @"2";
         order.price = self.charge_price;
         order.subsidy_money_m = @"50";
         order.subsidy_money_u = @"50";
         OrderTextFieldTVCell * cell;
         cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
-        order.contact_name = [cell returnfromtextField];
+        order.contact_name = [cell returnfromtextField].text;
         cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
-        order.contact_phone = [cell returnfromtextField];
+        order.contact_phone = [cell returnfromtextField].text;
         cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
-        NSString *str = [cell returnfromtextField];
+        NSString *str = [cell returnfromtextField].text;
         cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:5 inSection:0]];
         order.checkin_name = [NSString stringWithFormat:@"%@,%@",str,[cell returnfromtextField]];
+        order.order_spec =  home_label.text;
         order.beds = @"1";
         
+        if ([self creatOrderInterNet]) {
+            PayViewController * payVC = [[PayViewController alloc] init];
+            payVC.vc_type = self.vc_type;
+            [SVProgressHUD showSuccessWithStatus:@"订单提交成功！"];
+            [self.navigationController pushViewController:payVC animated:YES];
+        }else{
+            [SVProgressHUD showErrorWithStatus:@"订单提交失败！"];
+
+        }
+       
     }else{
-        order = [YYLOrder YLOrder];
-        order.order_name = _group_dic[@"name"];
-        order.group_id = self.gid;
-        order.cat_id = @"1";
-        order.price = self.charge_price;
-        order.subsidy_money_m = @"50";
-        order.subsidy_money_u = @"50";
-        order.order_spec =  [NSString stringWithFormat:@"%@ | %@ | %@ | %@",_chargeArray[0],_chargeArray[1],_chargeArray[2],_chargeArray[3]];
-        OrderTextFieldTVCell * cell;
-        cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
-        order.contact_name = [cell returnfromtextField];
-        cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
-        order.contact_phone = [cell returnfromtextField];
-        cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
-        NSString *str = [cell returnfromtextField];
-        cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:5 inSection:0]];
-        order.checkin_name = [NSString stringWithFormat:@"%@,%@",str,[cell returnfromtextField]];
-        order.beds = @"1";
+        [SVProgressHUD showErrorWithStatus:@"请补全订单信息！"];
+
     }
-    PayViewController * payVC = [[PayViewController alloc] init];
-    payVC.vc_type = self.vc_type;
-    [self.navigationController pushViewController:payVC animated:YES];
+}
+-(void)textFieldDidBeginEditing:(UITextField *)textField{
+    current_field = textField;
+}
+-(void)keyboardHide:(UITapGestureRecognizer*)tap{
+    if (current_field) {
+        [current_field resignFirstResponder];
+    }
 }
 #pragma mark - Navigation
-
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].

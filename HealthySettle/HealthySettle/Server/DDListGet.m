@@ -11,16 +11,42 @@
 @implementation DDListGet{
     NSString * _controller;
     NSString * _area_id;
+    NSString * _keyword;
+    NSString * _cat_id;
     NSString * _page;
+    NSArray * _price_range;
+    NSString * _sort;
+    NSString * _level;
+
 }
--(id)initWithController:(NSString *)controller area_id:(NSString *)area_id page:(NSString *)page{
+-(id)initWithcat_id:(NSString *)cat_id keyword:(NSString *)keyword  area_id:(NSString *)area_id sort:(NSString *)sort priceRange:(NSArray *)priceRange level:(NSString *)level page:(NSString *)page{
     self = [super init];
     if (self ) {
-        _controller = controller;
+        _cat_id = cat_id;
+        if (keyword) {
+            _keyword = keyword;
+        }else {
+            _keyword = @"";
+        }
         if (area_id) {
             _area_id = area_id;
         }else{
             _area_id = @"3134";
+        }
+        if (sort) {
+            _sort = sort;
+        }else{
+            _sort = @"";
+        }
+        if (priceRange) {
+            _price_range = [NSArray arrayWithArray:priceRange];
+        }else{
+            _price_range = [NSArray array];
+        }
+        if (level) {
+            _level = level;
+        }else{
+            _level = @"";
         }
         if (page) {
             _page = page;
@@ -45,8 +71,13 @@
 -(id)requestArgument
 {
     return @{
-        @"controller":_controller,
+        @"controller":@"group_list",
+        @"cat_id":_cat_id,
         @"area_id":_area_id,
+        @"keyword":_keyword,
+        @"price_range":_price_range,
+        @"sort":_sort,
+        @"level":_level,
         @"page":_page
     };
 }

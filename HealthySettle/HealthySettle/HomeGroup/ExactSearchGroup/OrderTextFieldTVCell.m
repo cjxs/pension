@@ -38,9 +38,8 @@
     [super awakeFromNib];
     // Initialization code
 }
--(void)configWithtitle:(NSString *)title
-                  text:(NSString *)text
-                  next:(BOOL)next {
+-(void)configWithtitle:(NSString *)title text:(NSString *)text next:(BOOL)next controller:(UIViewController *)controller
+    {
     if (title)
     {
         _title_label.text = title;
@@ -53,9 +52,10 @@
     {
         [_next_btn  removeFromSuperview];
     }
+        _text_field.delegate = controller;
 }
--(NSString *)returnfromtextField{
-    return _text_field.text;
+-(UITextField *)returnfromtextField{
+    return _text_field;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
