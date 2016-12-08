@@ -10,7 +10,7 @@
 @protocol UpdatePriceDelegate <NSObject>
 
 -(void)updatePriceWithNumber:(NSInteger )number;
--(void)rememberSelectWithnum1:(NSMutableString *)num1 num2:(NSMutableString *)num2 num3:(NSMutableString *)num3 num4:(NSMutableString *)num4;
+-(void)rememberSelectWithnum1:(NSMutableString *)num1 num2:(NSMutableString *)num2 num3:(NSMutableString *)num3 num4:(NSMutableString *)num4 arr:(NSMutableArray *)spec_arr;
 @end
 
 @interface SelectTVCell : UITableViewCell

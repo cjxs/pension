@@ -42,10 +42,19 @@
         UILabel * label = [[UILabel alloc]
                            initWithFrame:CGRectMake(screenWide * 0.02, screenHeight *0.028 +screenHeight * 0.123 * i, screenWide * 0.18, screenHeight * 0.045)];
         label.adjustsFontSizeToFitWidth = YES;
-        if (i==0) {
-            label.text = @"护理级别";
-        }else{
-            label.text = type_2arr[i-1];
+        switch (i) {
+            case 0:
+                label.text = @"护理级别";
+                break;
+            case 1:
+                label.text = @"护理明细";
+                break;
+            case 2:
+                label.text = @"床位选择";
+                break;
+            default:
+                label.text = @"餐饮选择";
+                break;
         }
         [self addSubview:label];
     }
@@ -238,10 +247,12 @@
         pri_c = _num_4.intValue > type_a.count-1 ?[type_a[0][@"tag_price"] integerValue]:[type_a[[_num_4 intValue]][@"tag_price"] integerValue];
         pri_a = [_num_2 intValue] > [type_b count]-1? [type_b[0][@"tag_price"] integerValue]:[type_b[[_num_2 intValue]][@"tag_price"] integerValue];
         [self.delegate updatePriceWithNumber:pri_a+pri_b+pri_c];
-        [self.delegate rememberSelectWithnum1:_num_1 num2:_num_2 num3:_num_3 num4:_num_4];
         self.spec_array = [NSMutableArray arrayWithArray:@[type_Arr[_num_1.intValue],type_b[_num_2.intValue][@"tag_name"],type_c[_num_3.intValue][@"tag_name"],type_a[_num_4.intValue][@"tag_name"]]];
+        [self.delegate rememberSelectWithnum1:_num_1 num2:_num_2 num3:_num_3 num4:_num_4 arr:self.spec_array];
+
     }
- }
+}
+
 - (void)awakeFromNib {
     [super awakeFromNib];
    

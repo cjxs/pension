@@ -35,7 +35,7 @@
         {
             NSString *  str2 = [NSString stringWithFormat:@"%@/upload/group/%@",BASEURL,order.pic];
             NSString * str3 = [str2 stringByReplacingOccurrencesOfString:@"," withString:@"/"];
-            [self.organImage_view sd_setImageWithURL:[NSURL URLWithString:str3]];
+            [self.organImage_view sd_setImageWithURL:[NSURL URLWithString:str3] placeholderImage:[UIImage imageNamed:@"list_p"]];
         }
         
         if ([order.dd_status length] == 0) {
@@ -89,6 +89,8 @@
         }
         if (order.order_spec) {
             self.serve_label.text = order.order_spec;
+        }else{
+            self.serve_label.text = @"";
         }
     }
 

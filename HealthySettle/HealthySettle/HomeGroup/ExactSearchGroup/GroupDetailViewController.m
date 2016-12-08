@@ -699,17 +699,16 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
     orderVC.vc_type = _vc_type;
     orderVC.gid = self.group_id;
     orderVC.group_dic = _data_dic;
-        if ([_vc_type isEqualToString:@"S"]) {
-            orderVC.room_index = [NSString stringWithFormat:@"%ld",btn.tag -501];
+    orderVC.chargeArray = _spec_Arr;
+    if ([_vc_type isEqualToString:@"S"]) {
+        orderVC.room_index = [NSString stringWithFormat:@"%ld",btn.tag -501];
+    }else{
+        if (price_Now) {
+            orderVC.charge_price = price_Now;
         }else{
-            SelectTVCell * cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-            orderVC.chargeArray = cell.spec_array;
-            if (price_Now) {
-                orderVC.charge_price = price_Now;
-            }else{
-                orderVC.charge_price = [NSString stringWithFormat:@"%ld",[_data_dic[@"price"] integerValue]];
-            }
+            orderVC.charge_price = [NSString stringWithFormat:@"%ld",[_data_dic[@"price"] integerValue]];
         }
+    }
      [self.navigationController pushViewController:orderVC animated:YES];
     }
 }
@@ -732,11 +731,12 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
     [ShareView showShareViewInViewController:self];
 }
 
--(void)rememberSelectWithnum1:(NSMutableString *)num1 num2:(NSMutableString *)num2 num3:(NSMutableString *)num3 num4:(NSMutableString *)num4 {
+-(void)rememberSelectWithnum1:(NSMutableString *)num1 num2:(NSMutableString *)num2 num3:(NSMutableString *)num3 num4:(NSMutableString *)num4 arr:(NSMutableArray *)spec_arr{
     _num_1 = num1;
     _num_2 = num2;
     _num_3 = num3;
     _num_4 = num4;
+    _spec_Arr = spec_arr;
 }
 -(void)dealloc{
     [group_data clearCompletionBlock];

@@ -24,12 +24,12 @@
     if (!_tableHeadView)
     {
         _tableHeadView = [[UIView alloc]
-                          initWithFrame:CGRectMake(0, 1, screenWide, 30)];
+                          initWithFrame:CGRectMake(0, 1, screenWide, 40)];
         NSArray * array = @[@"全部", @"待付款", @"待使用", @"待评价"];
         for (int i = 0; i < 4; i++)
         {
             UIButton * btn = [UIButton buttonWithType:UIButtonTypeCustom];
-            btn.frame = CGRectMake(i *screenWide /4, 0, screenWide /4, 29);
+            btn.frame = CGRectMake(i *screenWide /4, 0, screenWide /4, 39);
             btn.tag = 500 + i;
             [btn setTitle:array[i]
                  forState:UIControlStateNormal];
@@ -38,7 +38,7 @@
           forControlEvents:UIControlEventTouchUpInside];
             [_tableHeadView addSubview:btn];
             UILabel * label = [[UILabel alloc]
-                               initWithFrame:CGRectMake(i *screenWide /4, 29, screenWide /4, 1)];
+                               initWithFrame:CGRectMake(i *screenWide /4, 39, screenWide /4, 1)];
             [_tableHeadView addSubview:label];
             if (i == 0)
             {
@@ -73,7 +73,7 @@
 - (UITableView *)tableView
 {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 31, screenWide, 500) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 41, screenWide, screenHeight - 64 - 40) style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
@@ -143,12 +143,12 @@
     Member * user = [Member DefaultUser];
     DDOrderList * order_list = [[DDOrderList alloc] initWithUid:user.uid login:user.login];
     [order_list startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
-        NSDictionary * dic = [DDLogin dictionaryWithJsonString:request.responseString];
+        NSArray * arr = [DDLogin arrayWithJsonString:request.responseString];
         dataSource = [NSMutableArray arrayWithCapacity:0];
         current_arr = [NSMutableArray arrayWithCapacity:0];
-        if ([dic[@"error_code"] intValue] == 0) {
+        if (arr) {
             Order_ed * order;
-            for (NSDictionary * dic_l in dic[@"order"]) {
+            for (NSDictionary * dic_l in arr) {
                 order = [Order_ed mj_objectWithKeyValues:dic_l];
                 if ([order.status intValue] == 10||[order.status intValue] == 11) {
                     order.dd_status = @"21";

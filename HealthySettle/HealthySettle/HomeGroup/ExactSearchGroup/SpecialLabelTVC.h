@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface SpecialLabelTVC : UITableViewCell
--(void)configWithData:(NSArray *)data_arr color:(UIColor *)color;
+-(void)configWithData:(NSArray *)data_arr color:(UIColor *)color font:(UIFont *)font vc_type:(NSString *)type;
 @end

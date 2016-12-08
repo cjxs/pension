@@ -177,8 +177,19 @@
            forCellReuseIdentifier:@"cellF"];
     [self.tableView registerClass:[OrderBtnTVCell class]
            forCellReuseIdentifier:@"cellS"];
+    [self creatBackFootView];
+    
+    
+    self.tableView.tableFooterView = [UIView new];
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardHide:)];
+    //设置成NO表示当前控件响应后会传播到其他控件上，默认为YES。
+    tapGestureRecognizer.cancelsTouchesInView = NO;
+    //将触摸事件添加到当前view
+    [self.tableView addGestureRecognizer:tapGestureRecognizer];
+}
+-(void)creatBackFootView{
     UIView * backFootView = [[UIView alloc]
-                      initWithFrame:CGRectMake(0, screenHeight * 0.94-64, screenWide, screenHeight * 0.06)];
+                             initWithFrame:CGRectMake(0, screenHeight * 0.94-64, screenWide, screenHeight * 0.06)];
     backFootView.backgroundColor = [UIColor whiteColor];
     UIView * line_view =[[UIView alloc]
                          initWithFrame:CGRectMake(0, 0, screenWide, 1)];
@@ -194,9 +205,9 @@
                              initWithFrame:CGRectMake(screenWide * 0.25, 1, screenWide * 0.2, screenHeight * 0.06 -1)];
     if ([_vc_type isEqualToString:@"S"]) {
         money_label.text = _group_dic[@"room"][[_room_index intValue]][@"room_price"];
+        _charge_price = money_label.text;
     }else {
         money_label.text = [NSString stringWithFormat:@"  %d",_charge_price.intValue - 50];
-        
     }
     money_label.textAlignment = NSTextAlignmentLeft;
     money_label.font = [UIFont systemFontOfSize:14];
@@ -213,15 +224,9 @@
                     forState:UIControlStateNormal];
     [backFootView addSubview:toPay_btn];
     [self.view addSubview:backFootView];
-//    self.tableView.tableFooterView = backFootView;
-    self.tableView.tableFooterView = [UIView new];
-    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardHide:)];
-    //设置成NO表示当前控件响应后会传播到其他控件上，默认为YES。
-    tapGestureRecognizer.cancelsTouchesInView = NO;
-    //将触摸事件添加到当前view
-    [self.tableView addGestureRecognizer:tapGestureRecognizer];
+
 }
-- (void)didReceiveMemoryWarning
+-(void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -447,9 +452,16 @@ heightForHeaderInSection:(NSInteger)section
         if ([_vc_type isEqualToString:@"S"]) {
             order = [YYLOrder YSOrder];
             order.cat_id = @"2";
+            order.subsidy_money_m = @"0";
+            order.subsidy_money_u = @"0";
+            order.balance_money = self.charge_price;
         }else{
             order = [YYLOrder YLOrder];
             order.cat_id = @"1";
+            order.subsidy_money_m = @"50";
+            order.subsidy_money_u = @"50";
+            CGFloat pay_money = [self.charge_price floatValue] - [order.subsidy_money_u floatValue];
+            order.balance_money = [NSString stringWithFormat:@"%.0f",pay_money];
             if (!order.checkout_time) {
                 order.checkout_time = [self getPriousorLaterDateFromDate:[NSDate date] withMonth:1];
             }
@@ -457,11 +469,9 @@ heightForHeaderInSection:(NSInteger)section
         if (!order.checkin_time) {
             order.checkin_time = [NSDate date];
         }
+        order.price = self.charge_price;
         order.order_name = _group_dic[@"name"];
         order.group_id = self.gid;
-        order.price = self.charge_price;
-        order.subsidy_money_m = @"50";
-        order.subsidy_money_u = @"50";
         OrderTextFieldTVCell * cell;
         cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
         order.contact_name = [cell returnfromtextField].text;

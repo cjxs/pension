@@ -15,13 +15,17 @@
 #import "SpecialLabelTVC.h"
 #import "OrderLaeblTVCell.h"
 #import "PayWayTVC.h"
+#import "CashStatusTVC.h"
 
 
 
-@interface PayViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface PayViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 {
     UIView * view_pay;
     BOOL ali_pay;
+    BOOL cash_use;
+    UITextField * current_field;
+
 
 }
 
@@ -49,7 +53,8 @@
         organ_label.font = [UIFont systemFontOfSize:14];
         [backHeadView addSubview:organ_label];
         UILabel * price_sum_label= [[UILabel alloc] initWithFrame:CGRectMake(screenWide - 124, 0, 100, 0.05 * screenHeight)];
-        price_sum_label.text = [NSString stringWithFormat:@"¥%@.00",order.price];
+        CGFloat pay_mon = [order.price floatValue] - [order.subsidy_money_u floatValue];
+        price_sum_label.text = [NSString stringWithFormat:@"¥%.2lf",pay_mon];
         price_sum_label.font = [UIFont systemFontOfSize:17];
         price_sum_label.textAlignment = NSTextAlignmentRight;
         price_sum_label.textColor = REDCOLOR;
@@ -127,16 +132,58 @@
     self.tableView.delegate =self;
     [self.tableView registerClass:[SpecialLabelTVC class] forCellReuseIdentifier:@"cellmao"];
     [self.tableView registerClass:[PayWayTVC class] forCellReuseIdentifier:@"cellway"];
+    [self.tableView registerClass:[CashStatusTVC class] forCellReuseIdentifier:@"cellcash"];
+    cash_use = NO;
     
-    
-    
-    
-    
-    
-    
+    [self creatBackFootView];
+
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardHide:)];
+    //设置成NO表示当前控件响应后会传播到其他控件上，默认为YES。
+    tapGestureRecognizer.cancelsTouchesInView = NO;
+    //将触摸事件添加到当前view
+    [self.tableView addGestureRecognizer:tapGestureRecognizer];
     
 }
+-(void)creatBackFootView{
+    UIView * backFootView = [[UIView alloc]
+                             initWithFrame:CGRectMake(0, screenHeight * 0.94-64, screenWide, screenHeight * 0.06)];
+    backFootView.backgroundColor = [UIColor whiteColor];
+    UIView * line_view =[[UIView alloc]
+                         initWithFrame:CGRectMake(0, 0, screenWide, 1)];
+    line_view.backgroundColor = RGB(246, 246, 246);
+    [backFootView addSubview:line_view];
+    UILabel * label = [[UILabel alloc]
+                       initWithFrame:CGRectMake(screenWide * 0.1, 1, screenWide * 0.15, screenHeight * 0.06-1)];
+    label.text = @"还需支付:";
+    label.font = [UIFont systemFontOfSize:14];
+    label.textAlignment = NSTextAlignmentRight;
+    [backFootView addSubview:label];
+    UILabel * money_label = [[UILabel alloc]
+                             initWithFrame:CGRectMake(screenWide * 0.25, 1, screenWide * 0.2, screenHeight * 0.06 -1)];
+    YYLOrder * order = [_vc_type isEqualToString:@"S"]? [YYLOrder YSOrder]:[YYLOrder YLOrder];
+    [RACObserve(order, balance_money) subscribeNext:^(id x) {
+        NSString *str = x;
+        money_label.text = [NSString stringWithFormat:@"¥%.2lf",[str floatValue]];
 
+    }];
+
+    money_label.textAlignment = NSTextAlignmentLeft;
+    money_label.font = [UIFont systemFontOfSize:14];
+    [backFootView addSubview:money_label];
+    UIButton * toPay_btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    toPay_btn.frame = CGRectMake(screenWide /2, 0, screenWide/2, screenHeight * 0.06);
+    toPay_btn.backgroundColor = RGB(226, 11, 24);
+    [toPay_btn setTitle:@"付款"
+               forState:UIControlStateNormal];
+    [toPay_btn addTarget:self
+                  action:@selector(payToThird)
+        forControlEvents:UIControlEventTouchUpInside];
+    [toPay_btn setTitleColor:[UIColor whiteColor]
+                    forState:UIControlStateNormal];
+    [backFootView addSubview:toPay_btn];
+    [self.view addSubview:backFootView];
+    
+}
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 3;
 }
@@ -157,6 +204,9 @@
                     return 50;
                     break;
                 case 1:
+                    if (cash_use) {
+                        return 110;
+                    }
                     return 50;
                     break;
                 default:
@@ -167,7 +217,7 @@
         case 1:
             switch (indexPath.row) {
                 case 0:
-                    return 150;
+                    return 90;
                     break;
                 default:
                     return 50;
@@ -186,41 +236,47 @@
     NSArray * data;
     SpecialLabelTVC * cell;
     PayWayTVC * cell_way;
+    CashStatusTVC * cell_cash;
     int a = indexPath.section;
     int b = indexPath.row;
     switch (a) {
         case 0:
             switch (b) {
                 case 0:
-                    cell =  [tableView dequeueReusableCellWithIdentifier:@"cellmao" forIndexPath:indexPath];
-                    data = @[@"平台补贴",@"50元"];
-                    [cell configWithData:data color:RGB(190, 190, 190)];
-
-                    break;
-                case 1:
                     cell  =  [tableView dequeueReusableCellWithIdentifier:@"cellmao" forIndexPath:indexPath];
                     data = @[@"优惠券",@"无可用优惠券"];
-                    [cell configWithData:data color:RGB(190, 190, 190)];
-
+                    [cell configWithData:data color:RGB(190, 190, 190) font:[UIFont systemFontOfSize:17] vc_type:_vc_type];
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    return cell;
                     break;
                 default:
+                    cell_cash = [tableView dequeueReusableCellWithIdentifier:@"cellcash" forIndexPath:indexPath];
+                    [cell_cash.cash_switch_btn addTarget:self action:@selector(reloadCashCell:) forControlEvents:UIControlEventValueChanged];
+                    [cell_cash configWithUse:cash_use];
+                    current_field = cell_cash.cash_use_field ;
+                    current_field.delegate = self;
+                    cell_cash.selectionStyle = UITableViewCellSelectionStyleNone;
+                    YYLOrder * order = [_vc_type isEqualToString:@"S"]? [YYLOrder YSOrder]:[YYLOrder YLOrder];
+                    order.balance_pay = @"0.00";
+                    return cell_cash;
                     break;
             }
-            return cell;
             break;
         case 1:
             switch (b) {
                 case 0:
                     cell  =  [tableView dequeueReusableCellWithIdentifier:@"cellmao" forIndexPath:indexPath];
-                    data = @[@"用户补贴",@"50元",@"优惠券",@"0元",@"现金账户",@"30元"];
-                    [cell configWithData:data color:RGB(190, 190, 190)];
+                    data = @[@"优惠券",@"¥0.00",@"现金账户",@"¥0.00"];
+                    [cell configWithData:data color:RGB(190, 190, 190) font:[UIFont systemFontOfSize:12] vc_type:_vc_type];
                     break;
                 default:
                     cell  =  [tableView dequeueReusableCellWithIdentifier:@"cellmao" forIndexPath:indexPath];
-                    data = @[@"还需支付",@"800元"];
-                    [cell configWithData:data color:RGB(190, 190, 190)];
+                    data = @[@"还需支付",@"0"];
+                    [cell configWithData:data color:RGB(190, 190, 190) font:[UIFont systemFontOfSize:12] vc_type:_vc_type];
+
                     break;
             }
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
             break;
         default:
@@ -234,13 +290,36 @@
                     break;
 
             }
+            cell_way.selectionStyle = UITableViewCellSelectionStyleNone;
+
             return cell_way;
             break;
     }
     
 }
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    Member * user = [Member DefaultUser];
+    NSString * text = textField.text;
+    if (text.floatValue >0) {
+        CGFloat y = text.floatValue< user.now_money.floatValue ?text.floatValue:user.now_money.floatValue;
+        textField.text = [NSString stringWithFormat:@"%.2lf",y];
+
+    }else{
+        textField.text = @"0.00";
+    }
+    YYLOrder * order = [_vc_type isEqualToString:@"S"]? [YYLOrder YSOrder]:[YYLOrder YLOrder];
+    order.balance_pay = textField.text;
+}
+-(void)reloadCashCell:(UISwitch *)switch_btn{
+    cash_use = switch_btn.on;
+    NSIndexPath *indexPath=[NSIndexPath indexPathForRow:1 inSection:0];
+    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    
+}
 - (nullable NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-    if (section == 2) {
+    if (section == 1) {
+        return @" ";
+    } else if (section == 2) {
         return @"选择支付方式";
     }
     return nil;
@@ -257,78 +336,26 @@
         [tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
     }
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-#pragma mark - PAY
-- (void)payToEveryOne
-{
-    view_pay = [[UIView alloc] init];
-    view_pay.backgroundColor = [UIColor grayColor];
-    view_pay.frame = CGRectMake(0, screenHeight, screenWide, screenHeight * 0.4);
-    UIButton * ali_btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    ali_btn.frame = CGRectMake(50, screenHeight * 0.1, (screenWide-100)/3, 50);
-    [ali_btn addTarget:self
-                action:@selector(payToNext:)
-      forControlEvents:UIControlEventTouchUpInside];
-    ali_btn.clipsToBounds = YES;
-    [ali_btn setTitle:@"支付宝"
-             forState:UIControlStateNormal];
-    ali_btn.layer.cornerRadius = 10;
-    [view_pay addSubview:ali_btn];
-    UIButton * wx_btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    wx_btn.frame = CGRectMake(50 + (screenWide-100)/3*2, screenHeight * 0.1, (screenWide-100)/3, 50);
-    [wx_btn addTarget:self
-               action:@selector(payToNext:)
-     forControlEvents:UIControlEventTouchUpInside];
-    [wx_btn setTitle:@"微信"
-            forState:UIControlStateNormal];
-    wx_btn.clipsToBounds = YES;
-    wx_btn.layer.cornerRadius = 10;
-    [view_pay addSubview:wx_btn];
-    [self.view addSubview:view_pay];
-    
-    [UIView animateWithDuration:0.35 delay:0.5 usingSpringWithDamping:0.5 initialSpringVelocity:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
-        view_pay.frame = CGRectMake(0, screenHeight * 0.6, screenWide, screenHeight * 0.4);
-    } completion:^(BOOL finished) {
-        
-    }];
 
-    
-}
-- (void)payViewdimiss
-{
-    [UIView animateWithDuration:0.3f animations:^
-     {
-         view_pay.frame = CGRectMake(0, screenHeight, screenWide, screenHeight * 0.4);
-     }];
-    [view_pay removeFromSuperview];
-    [self performSelector:@selector(remove)
-               withObject:nil
-               afterDelay:0.3f];
-}
-- (void)remove {
-    for (UIButton * btn  in view_pay.subviews)
-    {
-        [btn removeFromSuperview];
-    }
-    [view_pay removeFromSuperview];
-}
-- (void)payToNext:(UIButton *)btn
-{
-    if (btn.frame.origin.x < screenWide/2)
-    {
+#pragma mark - PAY
+- (void)payToThird{
+    if (ali_pay) {
         [self payToAlipay];
-    }else
-    {
+    }else{
         WXApiRequestHandler *wxapi = [[WXApiRequestHandler  alloc] init];
+        wxapi.type = _vc_type;
         [wxapi httpService:nil];
     }
-    [self payViewdimiss];
+    
 }
 -(void)payToAlipay
 {
+     YYLOrder * order_pay = [_vc_type isEqualToString:@"S"]? [YYLOrder YSOrder]:[YYLOrder YLOrder];
     /*=======================需要填写商户app申请的===================================*/
     NSString *partner = AliPID;
     NSString *seller = AliMID;
@@ -355,9 +382,9 @@
     order.partner = partner;
     order.seller = seller;
     order.tradeNO = [self generateTradeNO]; //订单ID（由商家自行制定）
-    order.productName = @"好的设计开发";//product.subject; //商品标题
-    order.productDescription = @"四大皆空会收到后给的反馈";//product.body; //商品描述
-    order.amount = @"0.01";//[NSString stringWithFormat:@"%f",product.price]; //商品价格
+    order.productName = order_pay.group_id;//product.subject; //商品标题
+    order.productDescription = order_pay.order_name;//product.body; //商品描述
+    order.amount = order_pay.balance_money;//[NSString stringWithFormat:@"%f",product.price]; //商品价格
     order.notifyURL =  @"http://www.xxx.com"; //回调URL
     order.service = @"mobile.securitypay.pay";
     order.paymentType = @"1";
@@ -408,7 +435,11 @@
     }
     return resultStr;
 }
-
+-(void)keyboardHide:(UITapGestureRecognizer*)tap{
+    if (current_field) {
+        [current_field resignFirstResponder];
+    }
+}
 /*
 #pragma mark - Navigation
 

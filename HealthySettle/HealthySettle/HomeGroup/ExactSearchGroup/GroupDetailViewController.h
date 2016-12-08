@@ -14,5 +14,6 @@
 @property (nonatomic,strong ) UIView   * tableHeadView;
 @property (nonatomic,strong)NSString * group_id;
 @property (nonatomic,strong)NSDictionary * data_dic;
+@property (nonatomic,copy)NSMutableArray * spec_Arr;
 
 @end

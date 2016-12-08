@@ -10,6 +10,7 @@
 #import "WXApiObject.h"
 #import <UIKit/UIKit.h>
 @interface WXApiRequestHandler : NSObject
+@property (nonatomic,strong)NSString * type;
 
 + (BOOL)sendText:(NSString *)text
          InScene:(enum WXScene)scene;
