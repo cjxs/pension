@@ -289,7 +289,7 @@ static NSString * const UMDEVICETOKEN      = @"UMDeviceToken";// 友盟推送的
         //跳转支付宝钱包进行支付，处理支付结果
         [[AlipaySDK defaultService] processOrderWithPaymentResult:url
                                                   standbyCallback:^(NSDictionary *resultDic) {
-            NSLog(@"result = %@",resultDic);
+            NSLog(@"result = %@支付宝客户端返回",resultDic);
         }];
     }
     if ([url.host isEqualToString:@"platformapi"]){//支付宝钱包快登授权返回authCode

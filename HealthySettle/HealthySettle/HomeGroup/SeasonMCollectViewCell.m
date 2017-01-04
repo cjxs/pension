@@ -14,21 +14,17 @@
     self = [super initWithFrame:frame];
     if (self)
     {
-        self.backgroundColor = [UIColor whiteColor];
+        self.backgroundColor = WHITECOLOR;
         self.image_view = [[UIImageView alloc]
-                           initWithFrame:CGRectMake(screenWide * 0.015, screenHeight * 0.017, screenWide * 0.303, screenHeight * 0.175)];
+                           initWithFrame:CGRectMake(screenWide * 0.015, 0, screenWide * 0.303,screenHeight * 0.1686)];
         self.season_label = [[UILabel alloc]
-                             initWithFrame:CGRectMake(kMargin/2, CGRectGetMaxY(self.image_view.frame),frame.size.width - kMargin, frame.size.height/12)];
-        self.describe_label = [[UILabel alloc]
-                               initWithFrame:CGRectMake(kMargin/2, CGRectGetMaxY(self.season_label.frame), frame.size.width - kMargin, frame.size.height/12)];
+                             initWithFrame:CGRectMake(kMargin/2, CGRectGetMaxY(self.image_view.frame)/2,frame.size.width - kMargin, frame.size.height/10)];
         [self addSubview:_image_view];
         [self addSubview:_season_label];
-        [self addSubview:_describe_label];
-        _describe_label.textColor = RGB(173, 173, 173);
         _season_label.textAlignment = NSTextAlignmentCenter;
-        _season_label.font = [UIFont systemFontOfSize:12];
-        _describe_label.textAlignment = NSTextAlignmentCenter;
-        _describe_label.font = [UIFont systemFontOfSize:10];
+        _season_label.backgroundColor =  [UIColor clearColor];
+        _season_label.textColor = WHITECOLOR;
+//        _season_label.font = [UIFont systemFontOfSize:12];
     }
     return self;
 }
@@ -38,7 +34,6 @@
 {
     [_image_view sd_setImageWithURL:[NSURL URLWithString:imageurl] placeholderImage:[UIImage imageNamed:@"season_p_1"]];
     _season_label.text = season;
-    _describe_label.text = describ;
 }
 
 

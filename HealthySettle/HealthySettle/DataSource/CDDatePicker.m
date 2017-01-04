@@ -40,7 +40,7 @@
     quxiaobtn.frame = CGRectMake(5, rect.size.height* 0.2, 55,CGRectGetHeight(_titleView.frame) * 0.6 );
     quxiaobtn.titleLabel.font = [UIFont boldSystemFontOfSize:18];
     [quxiaobtn setTitle:@"取消" forState:UIControlStateNormal];
-    [quxiaobtn setTitleColor:ALLGRAYCOLOR forState:UIControlStateNormal];
+    [quxiaobtn setTitleColor:GRAYCOLOR forState:UIControlStateNormal];
     quxiaobtn.backgroundColor = [UIColor clearColor];
     quxiaobtn.layer.cornerRadius = 5;
     
@@ -53,7 +53,7 @@
     btn.frame = CGRectMake(screenWide - 2 * kMargin-60, rect.size.height* 0.2, 55, CGRectGetHeight(_titleView.frame)* 0.6);
     btn.titleLabel.font = [UIFont boldSystemFontOfSize:18];
     [btn setTitle:@"确定" forState:UIControlStateNormal];
-    [btn setTitleColor:ALLOrangeCOLOR forState:UIControlStateNormal];
+    [btn setTitleColor:DARKBROWNCOLOR forState:UIControlStateNormal];
     btn.backgroundColor = [UIColor clearColor];
     btn.layer.cornerRadius = 5;
     [btn addTarget:self action:@selector(datePickerbtnDown) forControlEvents:UIControlEventTouchUpInside];

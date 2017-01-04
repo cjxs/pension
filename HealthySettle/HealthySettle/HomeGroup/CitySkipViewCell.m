@@ -16,8 +16,9 @@
 - (UILabel *)title_label {
     if (_title_label== nil) {
         _title_label = [[UILabel alloc]
-                        initWithFrame:CGRectMake(kMargin * 4, kMargin /2, screenWide - kMargin * 5 , screenHeight * 0.06)];
+                        initWithFrame:CGRectMake(screenWide * 0.08, screenHeight * 0.03728, screenWide * 0.25, screenWide * 0.048)];
         _title_label.textColor = RGB(25, 25, 25);
+        _title_label.text = @"热门城市";
         _title_label.textAlignment = NSTextAlignmentLeft;
     }
     return _title_label;
@@ -25,8 +26,8 @@
 - (UIImageView *)title_icon {
     if (_title_icon == nil) {
         _title_icon = [[UIImageView alloc]
-                       initWithFrame:CGRectMake(kMargin, kMargin * 1.7, kMargin *1.7, kMargin*1.7/26*38)];
-        _title_icon.image = [UIImage imageNamed:@"z_02"];
+                       initWithFrame:CGRectMake(screenWide * 0.016, screenHeight * 0.03728, screenWide * 0.048, screenWide * 0.048)];
+        _title_icon.image = [UIImage imageNamed:@"热门"];
     }
     return _title_icon;
 }
@@ -34,28 +35,26 @@
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        self.backgroundColor = RGB(242, 242, 242);
+        [self addSubview:self.title_label];
+        [self addSubview:self.title_icon];
+        
+        self.backgroundColor = WHITECOLOR;
         UIView * line_view = [[UIView alloc]
-                              initWithFrame:CGRectMake(0, screenHeight * 0.012, screenWide, screenHeight * 0.001)];
-        line_view.backgroundColor = RGB(229, 229, 229);
+                              initWithFrame:CGRectMake(0, 0, screenWide, screenHeight * 0.0148)];
+        line_view.backgroundColor = GRAYCOLOR;
+        
         [self addSubview:line_view];
+
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-        layout.itemSize = CGSizeMake( screenWide * 0.25 , screenHeight * 0.143);
+        layout.itemSize = CGSizeMake( screenWide * 0.4667 , screenHeight * 0.1439);
          UICollectionView * cityCollect_view = [[UICollectionView alloc]
-                                        initWithFrame:CGRectMake(0, screenHeight * 0.073, screenWide, screenHeight * 0.145) collectionViewLayout:layout];
+                                        initWithFrame:CGRectMake(screenWide * 0.015, screenHeight * 0.073, screenWide * 0.97, screenHeight * 0.3328) collectionViewLayout:layout];
         cityCollect_view.backgroundColor = [UIColor whiteColor];
         cityCollect_view.delegate = self;
         cityCollect_view.dataSource = self;
         self.clipsToBounds = YES;
         [self addSubview:cityCollect_view];
         _cityCollect_view = cityCollect_view;
-        UIView * view = [[UIView alloc]
-                         initWithFrame:CGRectMake(0, screenHeight * 0.013, screenWide, screenHeight * 0.06)];
-        [view addSubview:self.title_label];
-        [view addSubview:self.title_icon];
-        view.backgroundColor = [UIColor whiteColor];
-        [self addSubview:view];
-
         
         [_cityCollect_view registerClass:[CityCollectionViewCell class]
                             forCellWithReuseIdentifier:@"cellC"];
@@ -66,15 +65,7 @@
 -(void)dealloc {
     _cityCollect_view = nil;
 }
--(void)configWithicon:(UIImage *)icon
-                title:(NSString *)title
-                 data:(NSArray *)dataArray {
-    if (icon) {
-        self.title_icon.image = icon;
-    }
-    if (title) {
-        self.title_label.text = title;
-    }
+-(void)configWithdata:(NSArray *)dataArray {
     if (dataArray) {
         data_array = dataArray;
     }

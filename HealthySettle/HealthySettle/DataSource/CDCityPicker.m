@@ -104,7 +104,7 @@
     quxiaobtn.titleLabel.font = [UIFont boldSystemFontOfSize:18];
     [quxiaobtn setTitle:@"取消" forState:UIControlStateNormal];
     [quxiaobtn addTarget:self action:@selector(cityPickerBtnDownCancel) forControlEvents:UIControlEventTouchUpInside];
-    [quxiaobtn setTitleColor:ALLGRAYCOLOR forState:UIControlStateNormal];
+    [quxiaobtn setTitleColor:GRAYCOLOR forState:UIControlStateNormal];
     quxiaobtn.backgroundColor = [UIColor clearColor];
     quxiaobtn.layer.cornerRadius = 5;
     
@@ -116,7 +116,7 @@
     btn.titleLabel.font = [UIFont boldSystemFontOfSize:18];
     [btn setTitle:@"确定" forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(cityPickerbtnDown) forControlEvents:UIControlEventTouchUpInside];
-    [btn setTitleColor:ALLOrangeCOLOR forState:UIControlStateNormal];
+    [btn setTitleColor:DARKBROWNCOLOR forState:UIControlStateNormal];
     btn.backgroundColor = [UIColor clearColor];
     btn.layer.cornerRadius = 5;
     [_titleView addSubview:btn];

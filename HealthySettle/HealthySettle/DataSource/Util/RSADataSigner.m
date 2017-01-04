@@ -63,7 +63,6 @@
     NSString * signedString = nil;
     NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *path = [documentPath stringByAppendingPathComponent:@"AlixPay-RSAPrivateKey"];
-    NSLog(@"%@",path);
     
     //
     // 把密钥写入文件

@@ -25,10 +25,16 @@
 #import "ArticleListTVC.h"
 #import "MJRefresh.h"
 #import "INTULocationManager.h"
+#import "TravelView.h"
+#import "EntranceView.h"
+#import "NewsView.h"
+#import "RecommendViewCell.h"
+#import "TravelTVCell.h"
+#import "PensionSRTVCell.h"
+#import "RegimenRTVCell.h"
 
 
-
-@interface HomeViewController ()<UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate,UISearchBarDelegate,UIWebViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,SDCycleScrollViewDelegate,CityListDelegate>
+@interface HomeViewController ()<UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate,UISearchBarDelegate,UIWebViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,SDCycleScrollViewDelegate,CityListDelegate,RecommendDelegate>
 {
     NSMutableArray * imagesA;
     NSArray * urlA;
@@ -37,6 +43,7 @@
     UIButton * back_btn;
     NSArray * seasonsA;
     NSArray * tag_A;
+    int _wave;
     SDCycleScrollView *cycleScrollView3;
 }
 /** 地理编码管理器 */
@@ -72,56 +79,64 @@
     [bg_view removeFromSuperview];
 }
 - (void)setBanner {
-    cycleScrollView3 = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, screenWide , screenHeight * 0.222) delegate:self placeholderImage:[UIImage imageNamed:@"banner_p"]];
+    cycleScrollView3 = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, screenWide , screenHeight * 0.197) delegate:self placeholderImage:[UIImage imageNamed:@"banner_p"]];
     cycleScrollView3.currentPageDotImage = [UIImage imageNamed:@"pageControlCurrentDot"];
     cycleScrollView3.pageDotImage = [UIImage imageNamed:@"pageControlDot"];
     cycleScrollView3.imageURLStringsGroup = imagesA;
     [_tableHeadView addSubview:cycleScrollView3];
 }
+
 - (UIView *)tableHeadView
 {
     if (_tableHeadView == nil )
     {
         _tableHeadView = [[UIView alloc]
-                          initWithFrame:CGRectMake(0, 0, screenWide, screenHeight * 0.477)];
+                          initWithFrame:CGRectMake(0, 0, screenWide, screenHeight * 0.5874 )];
+        _tableHeadView.backgroundColor = GRAYCOLOR;
+        TravelView * travel_view = [[TravelView alloc] initWithFrame:CGRectMake(0, screenHeight * 0.197, screenWide/2-0.5, 0.2248 * screenHeight)];
+        UITapGestureRecognizer * tapges = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(skipTOTravelList)];
+        [travel_view configWithtitle:@"养生度假" text:@"专业为老人服务的特色养生体验" imageName:@"travel" gesture:tapges];
+        [_tableHeadView addSubview:travel_view];
+        EntranceView *pensionFind_view = [[EntranceView alloc] initWithFrame:CGRectMake(screenWide/2+0.5, screenHeight * 0.197, screenWide/2-0.5, 0.1124 * screenHeight-0.5)];
+        UITapGestureRecognizer * tap_pension = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(skipTOSecond:)];
+        [pensionFind_view configWithtitle:@"找养老院" text:@"幸福安康的家" imageName:@"pension" gesture: tap_pension];
+
+        [_tableHeadView addSubview:pensionFind_view];
+        EntranceView *regimenFind_view = [[EntranceView alloc] initWithFrame:CGRectMake(screenWide/2+0.5, screenHeight * 0.309+0.5, screenWide/2, 0.1124 * screenHeight-0.5)];
+        UITapGestureRecognizer * tap_regiment = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(skipTOSecond:)];
+        [regimenFind_view configWithtitle:@"养生基地" text:@"延年益寿的好去处" imageName:@"regiment" gesture: tap_regiment];
+
+        [_tableHeadView addSubview:regimenFind_view];
         
-        //轮播图下面的2+4
-        UIButton * regimenFind_btn = [UIButton buttonWithType:UIButtonTypeSystem];
-        regimenFind_btn.frame = CGRectMake(screenWide * 0.015, screenHeight * 0.227, screenWide * 0.48 , screenHeight * 0.12 );
-        [regimenFind_btn addTarget:self
-                            action:@selector(skipTOSecond:)
-                  forControlEvents:UIControlEventTouchUpInside];
-        [regimenFind_btn setBackgroundImage:[UIImage imageNamed:@"regimenFind_btn"]
-                                   forState:UIControlStateNormal];
-        regimenFind_btn.clipsToBounds = YES;
-        regimenFind_btn.layer.cornerRadius = 5;
-        [_tableHeadView addSubview:regimenFind_btn];
-        UIButton * pensionFind_btn = [UIButton buttonWithType:UIButtonTypeSystem];
-        pensionFind_btn.frame = CGRectMake(screenWide *0.505 , screenHeight * 0.227, screenWide * 0.48, screenHeight *0.12 );
-        [pensionFind_btn addTarget:self
-                            action:@selector(skipTOSecond:)
-                  forControlEvents:UIControlEventTouchUpInside];
-        [pensionFind_btn setBackgroundImage:[UIImage imageNamed:@"pensionFind_btn"]
-                                   forState:UIControlStateNormal];
-        pensionFind_btn.clipsToBounds = YES;
-        pensionFind_btn.layer.cornerRadius = 5;
-        [_tableHeadView addSubview:pensionFind_btn];
-        NSArray * btn_array = @[@"regimenstrategy_btn",@"newsdynamic_btn",@"pensionCommon_btn",@"healthassess_btn"];
-        for (int i = 0; i < 4; i++)
-        {
-            UIButton * regimenstrategy_btn = [UIButton buttonWithType:UIButtonTypeSystem];
-            regimenstrategy_btn.frame = CGRectMake(i * screenWide /4, screenHeight * 0.352, screenWide /4, screenHeight * 0.125);
-            [regimenstrategy_btn setBackgroundImage:[UIImage imageNamed:btn_array[i]]
-                                           forState:UIControlStateNormal];
-            [regimenstrategy_btn addTarget:self
-                                    action:@selector(clipOnBtnsWithbtn:)
-                          forControlEvents:UIControlEventTouchUpInside];
-            
-            [_tableHeadView addSubview:regimenstrategy_btn];
-        }
+        UITapGestureRecognizer * tap0 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clipOnBtnsWithbtn:)];
+        UITapGestureRecognizer * tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clipOnBtnsWithbtn:)];
+        UITapGestureRecognizer * tap2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clipOnBtnsWithbtn:)];
+        UITapGestureRecognizer * tap3 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clipOnBtnsWithbtn:)];
+
+        
+        NewsView * regimenstrategy_view = [[NewsView alloc] initWithFrame:CGRectMake(0, 0.4218 * screenHeight+0.5, screenWide/2-0.5, 0.0824 * screenHeight)];
+        [regimenstrategy_view configWithtitle:@"养生攻略" text:@"文字动态" imageName:@"regimenstrategy" gesture:tap0];
+        [_tableHeadView addSubview:regimenstrategy_view];
+        
+        NewsView * newsdynamic_view = [[NewsView alloc] initWithFrame:CGRectMake(screenWide/2+0.5, 0.4218 * screenHeight+0.5, screenWide/2-0.5, 0.0824 * screenHeight)];
+        [newsdynamic_view configWithtitle:@"新闻动态" text:@"文字动态" imageName:@"newsdynamic" gesture:tap1];
+        [_tableHeadView addSubview:newsdynamic_view];
+        
+        NewsView * pensionCommon_view = [[NewsView alloc] initWithFrame:CGRectMake(0, 0.505 * screenHeight+0.5, screenWide/2-0.5, 0.0824 * screenHeight)];
+        [pensionCommon_view configWithtitle:@"养老常识" text:@"文字动态" imageName:@"pensionCommon" gesture:tap2];
+        [_tableHeadView addSubview:pensionCommon_view];
+        
+        NewsView * healthassess_view = [[NewsView alloc] initWithFrame:CGRectMake(screenWide/2+0.5, 0.505 * screenHeight+0.5, screenWide/2-0.5, 0.0824 * screenHeight)];
+        [healthassess_view configWithtitle:@"健康评估" text:@"文字动态" imageName:@"healthassess" gesture:tap3];
+        [_tableHeadView addSubview:healthassess_view];
+        
+
+
+        
     }
     return _tableHeadView;
 }
+
 #pragma mark - auto_view
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -187,6 +202,9 @@
     _homeTableView = [[UITableView alloc]
                                    initWithFrame:CGRectMake(0, 0, screenWide, screenHeight-64-screenHeight * 0.035)
                                    style:UITableViewStyleGrouped];
+    _homeTableView.backgroundColor = WHITECOLOR;
+    _homeTableView.sectionHeaderHeight = 0;
+    _homeTableView.sectionFooterHeight = 0;
     _homeTableView.delegate = self;
     _homeTableView.dataSource = self;
     _homeTableView.showsVerticalScrollIndicator = NO;
@@ -195,6 +213,11 @@
            forCellReuseIdentifier:@"cellCity"];
     [_homeTableView registerClass:[SeasonCTViewCell class]
            forCellReuseIdentifier:@"cellSeason"];
+    [_homeTableView registerClass:[RecommendViewCell class] forCellReuseIdentifier:@"recommend"];
+    [_homeTableView registerClass:[TravelTVCell class] forCellReuseIdentifier:@"travel"];
+    [_homeTableView registerNib:[UINib nibWithNibName:@"RegimenRTVCell" bundle:nil] forCellReuseIdentifier:@"regimen"];
+    [_homeTableView registerNib:[UINib nibWithNibName:@"PensionSRTVCell" bundle:nil] forCellReuseIdentifier:@"pension"];
+
     
     [self.view addSubview:_homeTableView];
     [self setupHeaderRefresh];
@@ -246,49 +269,95 @@
 -(CGFloat)tableView:(UITableView *)tableView
 heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 0)
-    {
-        return screenHeight * 0.269;
-    }else
-    {
-        return screenHeight * 0.21;
+    if (indexPath.section == 0) {
+        if (indexPath.row == 0)
+        {
+            return screenHeight * 0.412;
+        }else if (indexPath.row == 1)
+        {
+            return screenHeight * 0.2961;
+        }else{
+            return screenHeight * 0.11544;
+        }
+    }else{
+       
+            return screenHeight * 0.17241;
     }
+   }
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    if (tag_A) {
+        return 2;
+    }else{
+        return 0;
+    }
+ 
 }
 -(NSInteger)tableView:(UITableView *)tableView
 numberOfRowsInSection:(NSInteger)section
 {
     if (tag_A) {
-        return tag_A.count +1;
+        if (section == 0) {
+            return 3;
+        }else{
+            return 15;
+        }
     }else{
         return 0;
     }
 }
+
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 0)
-    {
-        SeasonCTViewCell * cell = [_homeTableView dequeueReusableCellWithIdentifier:@"cellSeason"];
-        cell.season_collectionView.delegate = self;
-        cell.season_collectionView.dataSource = self;
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        return cell;
-    }else
-    {
-        CitySkipViewCell * cell = [_homeTableView dequeueReusableCellWithIdentifier:@"cellCity"];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.type = indexPath.row;
-        cell.delegate = self;
-        [cell configWithicon:[UIImage imageNamed:@"fir_"]
-                       title:tag_A[indexPath.row -1][@"tag_name"]
-                            data:tag_A[indexPath.row -1][@"tag_info"]];
-        return cell;
-    }
+    if (indexPath.section == 0) {
+        if (indexPath.row == 0)
+        {
+            CitySkipViewCell * cell = [_homeTableView dequeueReusableCellWithIdentifier:@"cellCity"];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.type = indexPath.row;
+            cell.delegate = self;
+            [cell configWithdata:tag_A[indexPath.row][@"tag_info"]];
+            return cell;
+            
+        }else if (indexPath.row == 1)
+        {
+            SeasonCTViewCell * cell = [_homeTableView dequeueReusableCellWithIdentifier:@"cellSeason"];
+            cell.season_collectionView.delegate = self;
+            cell.season_collectionView.dataSource = self;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            return cell;
+            
+        }else{
+            RecommendViewCell * cell = [_homeTableView dequeueReusableCellWithIdentifier:@"recommend"];
+            cell.delegate = self;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            return cell;
+        }
+    }else{
+        if (!_wave || _wave == 0) {
+            TravelTVCell * cell = [_homeTableView dequeueReusableCellWithIdentifier:@"travel"];
+            return cell;
+        }else if ( _wave == 1){
+            PensionSRTVCell * cell = [_homeTableView dequeueReusableCellWithIdentifier:@"pension"];
+            return cell;
+            
+        }else{
+            RegimenRTVCell * cell = [_homeTableView dequeueReusableCellWithIdentifier:@"regimen"];
+            return cell;
+            
+        }
+    
+   }
+}
+-(void)updateDataWithWave:(int)wave{
+    _wave = wave;
+    NSIndexSet  * indexSet = [[NSIndexSet alloc] initWithIndex:1];
+    [_homeTableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationRight];
 }
 //四季轮播
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    SeasonCTViewCell * cell = [_homeTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    SeasonCTViewCell * cell = [_homeTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
     if (scrollView == cell.season_collectionView )
     {
         int page = scrollView.contentOffset.x /scrollView.bounds.size.width + 0.5;
@@ -329,7 +398,7 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 {
     return 0;
 }
-//进入四季推荐
+//进入四季推荐详情
 - (void)collectionView:(UICollectionView *)collectionView
 didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -342,36 +411,42 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 }
 
 #pragma mark - VTOF
-- (void)chooseIndexCity
-{   //选择城市
-    if ([city_btn_label.text isEqualToString:@"杭州"])
+- (void)skipTOTravelList{
+    //旅游路线
+}
+//两个跳转
+- (void)skipTOSecond:(UITapGestureRecognizer *)gesture
+{
+    SearchVController * searchVC = [[SearchVController alloc] init];
+    searchVC.hidesBottomBarWhenPushed = YES;//隐藏tabBar
+    if (gesture.view.frame.origin.y-screenHeight * 0.197==0)
     {
-        city_btn_label.text = @"上海";
-         [ShareView showShareViewInViewController:self];
+        searchVC.vc_type = @"L";
     }else
     {
-        city_btn_label.text = @"杭州";
+        searchVC.vc_type = @"S";
     }
+    [self.navigationController pushViewController:searchVC
+                                         animated:YES];
 }
 
-//四个跳转
-- (void)clipOnBtnsWithbtn:(UIButton *)btn
+//四个跳转链接
+- (void)clipOnBtnsWithbtn:(UITapGestureRecognizer *)gesture
 {
-    int btn_number = btn.frame.origin.x /(screenWide/4);
-    
-    
-    if (btn_number == 0)
+    int number_x = gesture.view.frame.origin.x;
+    int number_y = gesture.view.frame.origin.y- 0.4218 * screenHeight;
+    if (number_x == 0 && number_y == 0)
     {
         [self pushToArticleWithTitle:@"养生攻略"type:@"health"];
-    }else if (btn_number == 1)
+    }else if ( number_x != 0&&number_y == 0)
     {
         [self pushToArticleWithTitle:@"新闻动态"type:@"news"];
-    }else if (btn_number == 2)
+    }else if (number_x == 0&& number_y != 0)
     {
         [self pushToArticleWithTitle:@"养老常识"type:@"pension"];
     }else
     {
-        NSURL * url = [NSURL URLWithString:@"http://m.5199yl.com/#/assess"];
+        NSURL * url = [NSURL URLWithString:@"http://n.5199yl.com/#/assess"];
         WebViewController * webVC = [[WebViewController alloc] init];
         webVC.urlLoad = url;
         [self.navigationController pushViewController:webVC
@@ -384,21 +459,19 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath
     arti_listVC.title = title;
     [self.navigationController pushViewController:arti_listVC animated:YES];
 }
-//两个跳转
-- (void)skipTOSecond:(UIButton *)button
-{
-    SearchVController * searchVC = [[SearchVController alloc] init];
-    searchVC.hidesBottomBarWhenPushed = YES;//隐藏tabBar
-    if (button.frame.origin.x < 100)
+
+- (void)chooseIndexCity
+{   //选择城市
+    if ([city_btn_label.text isEqualToString:@"杭州"])
     {
-        searchVC.vc_type = @"S";
+        city_btn_label.text = @"上海";
+         [ShareView showShareViewInViewController:self];
     }else
     {
-        searchVC.vc_type = @"L";
+        city_btn_label.text = @"杭州";
     }
-    [self.navigationController pushViewController:searchVC
-                                         animated:YES];
 }
+
 -(void)pushToReginWithArea_id:(NSString *)area_id area:(NSString *)area{//代理方法
     ResultListVController * ResultLVC = [[ResultListVController alloc] init];
     ResultLVC.vc_type = @"S";

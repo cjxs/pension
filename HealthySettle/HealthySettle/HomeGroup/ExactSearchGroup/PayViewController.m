@@ -251,7 +251,11 @@
                     break;
                 default:
                     cell_cash = [tableView dequeueReusableCellWithIdentifier:@"cellcash" forIndexPath:indexPath];
-                    [cell_cash.cash_switch_btn addTarget:self action:@selector(reloadCashCell:) forControlEvents:UIControlEventValueChanged];
+//                    [cell_cash.cash_switch_btn addTarget:self action:@selector(reloadCashCell:) forControlEvents:UIControlEventValueChanged];
+                    [[cell_cash.cash_switch_btn rac_signalForControlEvents:UIControlEventValueChanged] subscribeNext:^(UISwitch * switch_btn) {
+                        cash_use = switch_btn.on;
+                        [self reloadCashCell:nil];
+                    }];
                     [cell_cash configWithUse:cash_use];
                     current_field = cell_cash.cash_use_field ;
                     current_field.delegate = self;
@@ -311,7 +315,7 @@
     order.balance_pay = textField.text;
 }
 -(void)reloadCashCell:(UISwitch *)switch_btn{
-    cash_use = switch_btn.on;
+    
     NSIndexPath *indexPath=[NSIndexPath indexPathForRow:1 inSection:0];
     [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     
@@ -379,28 +383,29 @@
      */
     //将商品信息赋予AlixPayOrder的成员变量
     Order *order = [[Order alloc] init];
-    order.partner = partner;
-    order.seller = seller;
+    order.partner = partner; // 合作商号
+    order.seller = seller; // 支付宝账号
     order.tradeNO = [self generateTradeNO]; //订单ID（由商家自行制定）
     order.productName = order_pay.group_id;//product.subject; //商品标题
     order.productDescription = order_pay.order_name;//product.body; //商品描述
-    order.amount = order_pay.balance_money;//[NSString stringWithFormat:@"%f",product.price]; //商品价格
+    order.amount = @"0.01";//[NSString stringWithFormat:@"%f",product.price]; //商品价格
     order.notifyURL =  @"http://www.xxx.com"; //回调URL
     order.service = @"mobile.securitypay.pay";
     order.paymentType = @"1";
-    order.inputCharset = @"utf-8";
-    order.itBPay = @"30m";
+    order.inputCharset = @"utf-8";// 使用的编码格式
+    order.itBPay = @"30m";//允许的最晚付款时间
     order.showUrl = @"m.alipay.com";
-    //应用注册scheme,在AlixPayDemo-Info.plist定义URL types
-    NSString *appScheme = @"alisdkdemo";
+    //应用注册scheme,在Info.plist定义URL types
+    NSString *appScheme = @"yyl_ali";
     
     //将商品信息拼接成字符串
     NSString *orderSpec = [order description];
+    NSLog(@"%@",orderSpec);
+
     
     //获取私钥并将商户信息签名,外部商户可以根据情况存放私钥和签名,只需要遵循RSA签名规范,并将签名字符串base64编码和UrlEncode
     id<DataSigner> signer = CreateRSADataSigner(AliPRIKEY);
     NSString *signedString = [signer signString:orderSpec];
-    NSLog(@"\n%@\n",signedString);
     
     
     //将签名成功字符串格式化为订单字符串,请严格按照该格式
@@ -414,7 +419,7 @@
                                   fromScheme:appScheme
                                     callback:^(NSDictionary *resultDic)
          {
-             NSLog(@"reslut = %@",resultDic);
+             NSLog(@"reslut = %@,H5界面返回",resultDic);
          }];
     }
     

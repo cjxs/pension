@@ -533,8 +533,8 @@
             SelectTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cellSelect"
                                                                   forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            [cell configWithDic:_data_dic[@"spec_tag"] num1:_num_1 num2:_num_2 num3:_num_3 num4:_num_4];
             cell.delegate = self;
+            [cell configWithDic:_data_dic[@"spec_tag"] num1:_num_1 num2:_num_2 num3:_num_3 num4:_num_4];
             return cell;
         }else  if (indexPath.row == 1)
         {

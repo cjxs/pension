@@ -22,6 +22,6 @@
 @property (nonatomic, assign) NSInteger        type;
 @property (nonatomic,strong )NSArray * dataArr;
 @property (nonatomic,weak)id <CityListDelegate>  delegate;
--(void)configWithicon:(UIImage *)icon title:(NSString *)title data:(NSArray *)dataArray;
+-(void)configWithdata:(NSArray *)dataArray;
 @end
 

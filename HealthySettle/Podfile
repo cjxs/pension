@@ -1,4 +1,4 @@
-platform :ios, '7.0'
+platform :ios, ‘8.0’
 inhibit_all_warnings!
 pod 'NJKWebViewProgress'      #网页加载进度条           https://github.com/ninjinkun/NJKWebViewProgress
 pod 'Masonry', '~> 0.6.4'     #自定义布局

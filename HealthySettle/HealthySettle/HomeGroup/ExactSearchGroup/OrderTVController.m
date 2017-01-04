@@ -447,7 +447,7 @@ heightForHeaderInSection:(NSInteger)section
     return YES;
 }
 - (void)submitOrder {
-    if (![self testOrderMassage]) {
+    if ([self testOrderMassage]) {
         YYLOrder * order;
         if ([_vc_type isEqualToString:@"S"]) {
             order = [YYLOrder YSOrder];

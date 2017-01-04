@@ -10,6 +10,8 @@
 #import "OrdAndRefundTVCell.h"
 #import "DDOrderList.h"
 #import "Order_ed.h"
+#import "PerOrderDetailVC.h"
+
 //我的订单
 @interface PersonVController ()<UITableViewDataSource, UITableViewDelegate>{
     NSMutableArray * dataSource;
@@ -208,6 +210,7 @@
 {
     OrdAndRefundTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cellOrder"
                                                                       forIndexPath:indexPath];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     Order_ed * order = [Order_ed mj_objectWithKeyValues:current_arr[indexPath.row]];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     [cell configOrderWithOrder:order];
@@ -219,6 +222,11 @@
 heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return screenHeight * 0.2544;
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    PerOrderDetailVC * orderDetailVC = [[PerOrderDetailVC alloc] init];
+    orderDetailVC.order = [Order_ed mj_objectWithKeyValues:current_arr[indexPath.row]];
+    [self.navigationController pushViewController:orderDetailVC animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

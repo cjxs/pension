@@ -13,15 +13,14 @@
 -(instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor whiteColor];
+        self.backgroundColor = [UIColor blackColor];
         self.image_view = [[UIImageView alloc]
-                           initWithFrame:CGRectMake(screenWide * 0.01, 0, screenWide * 0.235, screenHeight * 0.134)];
-        _image_view.image = [UIImage imageNamed:@"z_03"];
+                           initWithFrame:CGRectMake(0, 0, screenWide *0.4667, screenHeight * 0.1439)];
         [self addSubview:_image_view];
         self.describ_label = [[UILabel alloc]
-                              initWithFrame:CGRectMake(0, screenWide/8 - kMargin * 3, screenWide/4 - kMargin, 30)];
+                              initWithFrame:CGRectMake(screenWide *0.4667/4,screenHeight * 0.06, screenWide *0.4667/2, 40)];
         _describ_label.textAlignment = NSTextAlignmentCenter;
-        _describ_label.font = [UIFont systemFontOfSize:18];
+        _describ_label.backgroundColor = [UIColor clearColor];
         _describ_label.textColor = [UIColor whiteColor];
         [self addSubview:_describ_label];
     }
