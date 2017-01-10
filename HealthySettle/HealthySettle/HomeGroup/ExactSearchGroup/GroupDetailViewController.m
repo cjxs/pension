@@ -89,7 +89,7 @@
            forControlEvents:UIControlEventTouchUpInside];
         [back_btn addSubview:back_imageView];
         
-        if ([_vc_type isEqualToString:@"S"])
+        if ([_vc_type isEqualToString:@"2"])
         {
             _tableHeadView = [[UIView alloc]
                               initWithFrame:CGRectMake(0,0 , screenWide, screenHeight * 0.469)];
@@ -158,7 +158,7 @@
                                  initWithFrame:CGRectMake(0, CGRectGetMaxY(_tableHeadView.frame)-1, screenWide, 1)];
             lineView.backgroundColor = RGB(241, 241, 241);
             [_tableHeadView addSubview:lineView];
-        }else if ([_vc_type isEqualToString:@"L"] )
+        }else if ([_vc_type isEqualToString:@"1"] )
         {
             _tableHeadView = [[UIView alloc]
                               initWithFrame:CGRectMake(0,0 , screenWide, screenHeight * 0.496)];
@@ -309,11 +309,11 @@
         if (!self.vc_type) {
             switch ([_data_dic[@"cat_id"] integerValue]) {
                 case 1:
-                    self.vc_type = @"L";
+                    self.vc_type = @"1";
                     break;
                     
                 default:
-                    self.vc_type = @"S";
+                    self.vc_type = @"2";
 
                     break;
             }
@@ -338,7 +338,7 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    if ([self.vc_type isEqualToString:@"S"])
+    if ([self.vc_type isEqualToString:@"2"])
     {
         self.tableView.backgroundColor = RGB(250, 250, 250);
         [self.tableView registerNib:[UINib nibWithNibName:@"LivingTimeTVCell" bundle:nil]
@@ -456,11 +456,11 @@
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section
 {
-    if ([self.vc_type isEqualToString:@"S"])
+    if ([self.vc_type isEqualToString:@"2"])
     {
         return 2+[_data_dic[@"room"] count];
         
-    }else if ([self.vc_type isEqualToString:@"L"])
+    }else if ([self.vc_type isEqualToString:@"1"])
     {
         return 7;
     }else
@@ -488,7 +488,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([self.vc_type isEqualToString:@"S"])
+    if ([self.vc_type isEqualToString:@"2"])
     {
         if (indexPath.row == 0) {
             LivingTimeTVCell *  cell  =  [tableView dequeueReusableCellWithIdentifier:@"cellLiving"
@@ -594,7 +594,7 @@
 -(CGFloat)tableView:(UITableView *)tableView
 heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([self.vc_type isEqualToString:@"S"])
+    if ([self.vc_type isEqualToString:@"2"])
     {
         if (indexPath.row < 1)
         {
@@ -614,7 +614,7 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath
             return 301;
         }
         
-    }else if ([self.vc_type isEqualToString:@"L"])
+    }else if ([self.vc_type isEqualToString:@"1"])
     {
         if (indexPath.row == 0)
         {
@@ -700,7 +700,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
     orderVC.gid = self.group_id;
     orderVC.group_dic = _data_dic;
     orderVC.chargeArray = _spec_Arr;
-    if ([_vc_type isEqualToString:@"S"]) {
+    if ([_vc_type isEqualToString:@"2"]) {
         orderVC.room_index = [NSString stringWithFormat:@"%ld",btn.tag -501];
     }else{
         if (price_Now) {
@@ -712,6 +712,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
      [self.navigationController pushViewController:orderVC animated:YES];
     }
 }
+
 - (void)submitCommentNow
 {
     CommentViewController * commentVC = [[CommentViewController alloc] init];

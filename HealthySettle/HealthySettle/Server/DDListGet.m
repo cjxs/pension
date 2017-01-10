@@ -31,7 +31,7 @@
         if (area_id) {
             _area_id = area_id;
         }else{
-            _area_id = @"3134";
+            _area_id = @"";
         }
         if (sort) {
             _sort = sort;
@@ -71,7 +71,7 @@
 -(id)requestArgument
 {
     return @{
-        @"controller":@"group_list",
+        @"controller":@"new_g_list",
         @"cat_id":_cat_id,
         @"area_id":_area_id,
         @"keyword":_keyword,

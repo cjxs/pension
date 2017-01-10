@@ -107,7 +107,7 @@
                                                           error:&err];
     if(err) {
         NSLog(@"json解析失败：%@",err);
-        return nil;
+        return [NSMutableArray array];
     }
     NSMutableArray * _arr = [NSMutableArray arrayWithArray:arr];
     return _arr;

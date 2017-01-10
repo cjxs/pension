@@ -29,8 +29,9 @@
 }
 -(UILabel *)price_label {
     if (_price_label == nil) {
-        _price_label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, screenWide * 0.134, screenHeight * 0.0201)];
+        _price_label = [[UILabel alloc] init];
         _price_label.textColor = PINKCOLOR;
+        _price_label.textAlignment = NSTextAlignmentRight;
         _price_label.font = [UIFont systemFontOfSize:15];
     }
     return _price_label;
@@ -41,27 +42,51 @@
         [self addSubview:self.organization_image];
         
         [self addSubview:self.organization_title];
-        _organization_title.text = @"的房间客户公司电话概括地说法国进口是倒海翻江韩国棒子广播电视界官方图为一人一天噶俄还将发布";
-        
-//        [self.price_label mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.bottom.equalTo(self.organization_image);
-//            make.right.mas_equalTo(_organization_title.mas_right).offset(-15);
-//        }];
-//        [self.price_label mas_remakeConstraints:^(MASConstraintMaker *make) {
-
-//        }];
-//        [self addSubview:_price_label];
+        [self addSubview:self.price_label];
+        [self.price_label mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(screenWide * 0.134, screenHeight * 0.0201));
+            make.bottom.equalTo(_organization_image);
+            make.right.equalTo(_organization_title).offset(-15);
+        }];
         UILabel * qi_label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 15, 15)];
         qi_label.text = @"起";
-//        [qi_label mas_remakeConstraints:^(MASConstraintMaker *make) {
-//            make.bottom.equalTo(_organization_image);
-//            make.right.equalTo(_organization_title.mas_right);
-//        }];
+        [self addSubview:qi_label];
+
+        [qi_label mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.equalTo(_organization_image);
+            make.right.equalTo(_organization_title);
+        }];
         qi_label.textColor = [UIColor colorWithHexString:@"#999999"];
         qi_label.font = [UIFont systemFontOfSize:10];
-//        [self addSubview:qi_label];
+        
+        UIView * line_view = [[UIView alloc] initWithFrame:CGRectMake(0, 0.17241 * screenHeight-1, screenWide, 1)];
+        [self addSubview:line_view];
+        line_view.backgroundColor = GRAYCOLOR;
     }
     return self;
+}
+-(void)configWithData:(NSDictionary *)data{
+    if (data[@"discount_info"]) {
+        UILabel * dis_label = [[UILabel alloc] init];
+        dis_label.textColor = WHITECOLOR;
+        
+        dis_label.backgroundColor = [UIColor colorWithHexString:@"#73b8ff"];
+        dis_label.text = @"满减";
+        dis_label.textAlignment = NSTextAlignmentCenter;
+        dis_label.font = [UIFont systemFontOfSize:11];
+        [self addSubview:dis_label];
+        [dis_label mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(screenWide * 0.09066, screenHeight * 0.02099));
+            make.left.equalTo(self.organization_title);
+            make.bottom.equalTo(self.organization_image);
+        }];
+
+    }
+    _price_label.text = [NSString stringWithFormat:@"¥ %@",data[@"price"]];
+    _organization_title.text = data[@"name"];
+    NSString *  str2 = [NSString stringWithFormat:@"%@/upload/group/%@",BASEURL,data[@"pic"]];
+    NSString * str3 = [str2 stringByReplacingOccurrencesOfString:@"," withString:@"/"];
+    [_organization_image sd_setImageWithURL:[NSURL URLWithString:str3] placeholderImage:[UIImage imageNamed:@"list_p"]];
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

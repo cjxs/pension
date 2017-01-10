@@ -47,7 +47,7 @@
         [_tableHeadView addSubview:backHeadView];
         UILabel * organ_label = [[UILabel alloc]
                                  initWithFrame:CGRectMake(8,0 , screenWide - 150, 0.05 * screenHeight)];
-        YYLOrder * order = [_vc_type isEqualToString:@"S"]? [YYLOrder YSOrder]:[YYLOrder YLOrder];
+        YYLOrder * order = [_vc_type isEqualToString:@"2"]? [YYLOrder YSOrder]:[YYLOrder YLOrder];
         
         organ_label.text = order.order_name;
         organ_label.font = [UIFont systemFontOfSize:14];
@@ -160,7 +160,7 @@
     [backFootView addSubview:label];
     UILabel * money_label = [[UILabel alloc]
                              initWithFrame:CGRectMake(screenWide * 0.25, 1, screenWide * 0.2, screenHeight * 0.06 -1)];
-    YYLOrder * order = [_vc_type isEqualToString:@"S"]? [YYLOrder YSOrder]:[YYLOrder YLOrder];
+    YYLOrder * order = [_vc_type isEqualToString:@"2"]? [YYLOrder YSOrder]:[YYLOrder YLOrder];
     [RACObserve(order, balance_money) subscribeNext:^(id x) {
         NSString *str = x;
         money_label.text = [NSString stringWithFormat:@"¥%.2lf",[str floatValue]];
@@ -260,7 +260,7 @@
                     current_field = cell_cash.cash_use_field ;
                     current_field.delegate = self;
                     cell_cash.selectionStyle = UITableViewCellSelectionStyleNone;
-                    YYLOrder * order = [_vc_type isEqualToString:@"S"]? [YYLOrder YSOrder]:[YYLOrder YLOrder];
+                    YYLOrder * order = [_vc_type isEqualToString:@"2"]? [YYLOrder YSOrder]:[YYLOrder YLOrder];
                     order.balance_pay = @"0.00";
                     return cell_cash;
                     break;
@@ -311,7 +311,7 @@
     }else{
         textField.text = @"0.00";
     }
-    YYLOrder * order = [_vc_type isEqualToString:@"S"]? [YYLOrder YSOrder]:[YYLOrder YLOrder];
+    YYLOrder * order = [_vc_type isEqualToString:@"2"]? [YYLOrder YSOrder]:[YYLOrder YLOrder];
     order.balance_pay = textField.text;
 }
 -(void)reloadCashCell:(UISwitch *)switch_btn{
@@ -359,7 +359,7 @@
 }
 -(void)payToAlipay
 {
-     YYLOrder * order_pay = [_vc_type isEqualToString:@"S"]? [YYLOrder YSOrder]:[YYLOrder YLOrder];
+     YYLOrder * order_pay = [_vc_type isEqualToString:@"2"]? [YYLOrder YSOrder]:[YYLOrder YLOrder];
     /*=======================需要填写商户app申请的===================================*/
     NSString *partner = AliPID;
     NSString *seller = AliMID;

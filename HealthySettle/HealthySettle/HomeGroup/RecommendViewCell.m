@@ -23,7 +23,7 @@
         title_label.text = @"——— 精品推荐 ———";
         title_label.textAlignment = NSTextAlignmentCenter;
         [line_view addSubview:title_label];
-        bg_view = [[UIView alloc] initWithFrame:CGRectMake(0, screenHeight * 0.05547, screenWide, screenHeight * 0.05997)];
+        bg_view = [[UIView alloc] initWithFrame:CGRectMake(0, screenHeight * 0.05547, screenWide, screenHeight * 0.05997 -1)];
         [self addSubview:bg_view];
         bg_view.backgroundColor = WHITECOLOR;
         
@@ -31,7 +31,7 @@
         for (int i = 0; i < 3; i++)
         {
             UIButton * btn = [UIButton buttonWithType:UIButtonTypeCustom];
-            btn.frame = CGRectMake(i *screenWide /4 + screenWide /8, 0.005, screenWide /4, screenHeight * 0.05);
+            btn.frame = CGRectMake(i *screenWide /4 + screenWide /8, 0.005 * screenHeight, screenWide /4, screenHeight * 0.05);
             btn.tag = 500 + i;
             [btn setTitle:array[i]
                  forState:UIControlStateNormal];
@@ -40,10 +40,13 @@
           forControlEvents:UIControlEventTouchUpInside];
             [bg_view addSubview:btn];
             UIView * label = [[UIView alloc]
-                               initWithFrame:CGRectMake(i *screenWide /4+ screenWide /8, screenHeight * 0.055, screenWide /4, screenHeight * 0.00497)];
+                               initWithFrame:CGRectMake(i *screenWide /4+ screenWide /8, screenHeight * 0.05997-2, screenWide /4, 1)];
             label.clipsToBounds = YES;
             label.layer.cornerRadius = 3;
             [bg_view addSubview:label];
+            UIView * line_view = [[UIView alloc] initWithFrame:CGRectMake(0, screenHeight * 0.11544 -1, screenWide, 1)];
+            line_view.backgroundColor = GRAYCOLOR;
+            [self addSubview:line_view];
             if (i == 0)
             {
                 [btn setTitleColor:[UIColor redColor]
@@ -71,7 +74,7 @@
                       forState:UIControlStateNormal];
             for (UIView *view in bg_view.subviews)
             {
-                if (view.frame.size.height == screenHeight * 0.00497&&
+                if (view.frame.size.height == 1&&
                     view.frame.origin.x == btn.frame.origin.x)
                 {
                     view.backgroundColor = [UIColor redColor];

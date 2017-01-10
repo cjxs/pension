@@ -62,7 +62,7 @@ static NSInteger page = 1;
         _textField = textField;
         [view addSubview:_textField];
         
-        if ([self.vc_type isEqualToString:@"L"])
+        if ([self.vc_type isEqualToString:@"1"])
         {
             UILabel * checkIn_label = [[UILabel alloc]
                                        initWithFrame:CGRectMake(screenWide * 0.02, screenHeight * 0.01, screenWide * 0.26, screenHeight * 0.06)];
@@ -88,7 +88,7 @@ static NSInteger page = 1;
             tapChoose_start.numberOfTapsRequired = 1;
             [_checkIn_label addGestureRecognizer:tapChoose_start];
             
-        }else if ([self.vc_type isEqualToString:@"S"])
+        }else if ([self.vc_type isEqualToString:@"2"])
         {
             UIView * label_view = [[UIView alloc]
                                    initWithFrame:CGRectMake(screenWide * 0.02, screenHeight * 0.01, screenWide * 0.26, screenHeight * 0.06)];
@@ -224,22 +224,26 @@ static NSInteger page = 1;
 
 -(void)setData{
     
-    NSString * catid = [_vc_type isEqualToString:@"S"]? [NSString stringWithFormat:@"2"]:[NSString stringWithFormat:@"1"];
     
-    ddlist = [[DDListGet alloc] initWithcat_id:catid keyword:nil area_id:_area_id sort:nil priceRange:nil level:nil page:[NSString stringWithFormat:@"%ld",page]];
+    ddlist = [[DDListGet alloc] initWithcat_id:_vc_type keyword:nil area_id:_area_id sort:nil priceRange:nil level:nil page:[NSString stringWithFormat:@"%ld",page]];
     [ddlist startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
-        NSMutableArray * arr = [DDLogin arrayWithJsonString:request.responseString];
-        NSLog(@"%@",arr[0]);
-        if (arr && arr.count < 6) {
-            self.tableView.footerHidden = YES;
+        NSDictionary * dic = [DDLogin dictionaryWithJsonString:request.responseString];
+        if ([dic[@"error_code"] intValue] == 1) {
+            [SVProgressHUD showErrorWithStatus:@"暂时没有相应数据！"];
+            [self.tableView headerEndRefreshing];
+        }else{
+            NSArray * arr = dic[@"list"];
+            if (arr && arr.count < 15) {
+                self.tableView.footerHidden = YES;
+            }
+            if (page == 1) {
+                _data_arr = [NSMutableArray arrayWithCapacity:0];
+            }
+            for (NSDictionary * dic in arr) {
+                [_data_arr addObject:dic];
+            }
+            [self.tableView reloadData];
         }
-        if (page == 1) {
-            _data_arr = [NSMutableArray arrayWithCapacity:0];
-        }
-        for (NSDictionary * dic in arr) {
-            [_data_arr addObject:dic];
-        }
-        [self.tableView reloadData];
     } failure:^(__kindof YTKBaseRequest *request) {
         NSLog(@"%ld",request.responseStatusCode);
     }];
@@ -256,13 +260,14 @@ static NSInteger page = 1;
         self.navigationItem.title = _searchPlace_name;
     }
     self.tableView.tableHeaderView = self.tableHeadView;
-    if ([_vc_type isEqualToString:@"S"])
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    if ([_vc_type isEqualToString:@"2"])
     {
-        [self.tableView registerNib:[UINib nibWithNibName:@"RegimenRTVCell" bundle:nil] forCellReuseIdentifier:@"cellRegimen"];
+        [self.tableView registerClass:[RegimenRTVCell class] forCellReuseIdentifier:@"cellRegimen"];
         
-    }else if ([_vc_type isEqualToString:@"L"])
+    }else if ([_vc_type isEqualToString:@"1"])
     {
-        [self.tableView registerNib:[UINib nibWithNibName:@"PensionSRTVCell" bundle:nil] forCellReuseIdentifier:@"cellPension"];
+        [self.tableView registerClass:[PensionSRTVCell class] forCellReuseIdentifier:@"cellPension"];
     }
 
 
@@ -328,27 +333,22 @@ static NSInteger page = 1;
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([_vc_type isEqualToString:@"L"])
+    if ([_vc_type isEqualToString:@"1"])
     {
         PensionSRTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cellPension" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         NSDictionary * dic = _data_arr[indexPath.row];
-
-        NSString *  str2 = [NSString stringWithFormat:@"%@/upload/group/%@",BASEURL,dic[@"pic"]];
-        NSString * str3 = [str2 stringByReplacingOccurrencesOfString:@"," withString:@"/"];
-        [cell configWithimage:str3 title:dic[@"s_name"] address:dic[@"address"] number:dic[@"bed_nums"] price:dic[@"price"]];
+        [cell configWithData:dic];
         
         return cell;
         
-    }else if ([_vc_type isEqualToString:@"S"])
+    }else if ([_vc_type isEqualToString:@"2"])
     {
         RegimenRTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cellRegimen" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         NSDictionary * dic = _data_arr[indexPath.row];
-        NSString *  str2 = [NSString stringWithFormat:@"%@/upload/group/%@",BASEURL,dic[@"pic"]];
-        NSString * str3 = [str2 stringByReplacingOccurrencesOfString:@"," withString:@"/"];
+        [cell configWithData:dic];
 
-        [cell configWithImage:str3 title:dic[@"s_name"] address:dic[@"address"] price:dic[@"price"] supportArray:dic[@"spec"]];
         return cell;
     }else
     {
@@ -357,11 +357,10 @@ static NSInteger page = 1;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return screenHeight * 0.158;
+    return screenHeight * 0.17241;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     GroupDetailViewController * resultDTVC = [[GroupDetailViewController alloc] init];
-    resultDTVC.hidesBottomBarWhenPushed = YES;
     resultDTVC.vc_type = self.vc_type;
     resultDTVC.group_id = _data_arr[indexPath.row][@"group_id"];
     [self.navigationController pushViewController:resultDTVC
@@ -405,11 +404,21 @@ static NSInteger page = 1;
 
     }
 }
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    if (hide == YES) {
+        [UIView animateWithDuration:0.5 animations:^{
+            [self showFilter_view];
+        }];
+        hide = NO;
+    }
+    
+}
+
 //日期选择器出来
 - (void)pickViewAppear:(UITapGestureRecognizer *)tap
 {
     CDDatePicker * datePicker;
-    if ([_vc_type isEqualToString:@"L"]) {
+    if ([_vc_type isEqualToString:@"1"]) {
         datePicker = [[CDDatePicker alloc] initWithOff_label:nil];
         datePicker.type = @"Z";
         datePicker.date_start = [CDDatePicker getTimeOfNightFromdate:[NSDate date]];

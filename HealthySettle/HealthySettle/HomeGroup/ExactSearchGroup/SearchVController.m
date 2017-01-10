@@ -87,7 +87,7 @@
     [self.back_button addSubview:self.back_imageView];
     
     
-    if ([_vc_type isEqualToString:@"L"]) {
+    if ([_vc_type isEqualToString:@"1"]) {
         self.back_imageView.image = [UIImage imageNamed:@"black_w"];
         [self setBottomPicWithPic:
          [UIImage imageNamed:@"pension_preview"]
@@ -241,18 +241,18 @@
 {
     CDCityPicker * city_picker = [CDCityPicker currentCity];
     if (ges.view.tag == 301) {
-         city_picker.type = @"S";
+         city_picker.type = @"2";
     }else if(ges.view.tag == 302){
         city_picker.districtArray = _chosed_cityArray;
     }else {
-         city_picker.type = @"S";
+         city_picker.type = @"2";
     }
     city_picker.delegate = self;
     [city_picker showPickerView];
     _city_picker = city_picker;
 }
 - (void)currentSelectedName:(NSString *)name code:(NSString *)code Array:(NSArray *)array{
-    if ([_city_picker.type isEqualToString:@"S"]) {
+    if ([_city_picker.type isEqualToString:@"2"]) {
         _chosedCity = name;
         _chosed_code = code;
         _chosed_cityArray = [NSArray arrayWithArray:array];
@@ -267,7 +267,7 @@
 }
 -(void)cityPickerbtnDown
 {
-    if ([_city_picker.type isEqualToString:@"S"]) {
+    if ([_city_picker.type isEqualToString:@"2"]) {
         _city_label.text = _chosedCity;
     }else {
         _sellectOn_label.text = _chosed_districtStr;

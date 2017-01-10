@@ -22,6 +22,8 @@
     UILabel * leave_timelabel;
     UILabel * home_label;
     UITextField * current_field;
+    UILabel * money_label;
+    YYLOrder * order;
 }
 
 @end
@@ -82,7 +84,7 @@
                   forState:UIControlStateNormal];
         checkIn_timelabel.userInteractionEnabled = YES;
 
-        if ([_vc_type isEqualToString:@"S"]) {
+        if ([_vc_type isEqualToString:@"2"]) {
             NSDictionary * dic = _group_dic[@"room"][[_room_index intValue]];
             
             NSString * is_catered;
@@ -102,15 +104,15 @@
             NSString * is_wifi = [dic[@"is_wifi"] isEqualToString:@"1"]?@"免费WiFi":@"";
             
             home_label.text = [NSString stringWithFormat:@"%@ | %@ | %@ | %@",dic[@"room_type"],dic[@"bed_type"],is_wifi,is_catered];
-            if ([YYLOrder YSOrder].checkin_time) {
+            if (order.checkin_time) {
                 checkIn_timelabel.text = [CDDatePicker getStringFromDate:[YYLOrder YSOrder].checkin_time];
-                end_begin = [YYLOrder YSOrder].checkin_time;
+                end_begin = order.checkin_time;
             }else{
                 checkIn_timelabel.text = [CDDatePicker getStringFromDate:[NSDate date]];
             }
-            if ([YYLOrder YSOrder].checkout_time) {
+            if (order.checkout_time) {
                 leave_timelabel.text = [CDDatePicker getStringFromDate:[YYLOrder YSOrder].checkout_time];
-                end_end = [YYLOrder YSOrder].checkout_time;
+                end_end = order.checkout_time;
             }else{
                leave_timelabel.text = @"--------";
             }
@@ -127,9 +129,9 @@
             [leave_timelabel addGestureRecognizer:tapChoose_end];
 
         }else{
-            if ([YYLOrder YLOrder].checkin_time) {
-                checkIn_timelabel.text = [CDDatePicker getStringFromDate:[YYLOrder YLOrder].checkin_time];
-                NSDate * date = [self getPriousorLaterDateFromDate:[YYLOrder YLOrder].checkin_time withMonth:1];
+            if (order.checkin_time) {
+                checkIn_timelabel.text = [CDDatePicker getStringFromDate:order.checkin_time];
+                NSDate * date = [self getPriousorLaterDateFromDate:order.checkin_time withMonth:1];
                 leave_timelabel.text = [CDDatePicker getStringFromDate:date];
             }else{
                 checkIn_timelabel.text = [CDDatePicker getStringFromDate:[NSDate date]];
@@ -170,6 +172,7 @@
     self.tableView.bounces = YES;
     self.tableView.showsVerticalScrollIndicator = NO;
     self.title = @"订单填写";
+    order = [_vc_type intValue]==2 ? [YYLOrder YSOrder]:[YYLOrder YLOrder];
     self.tableView.tableHeaderView = self.tableHeadView;
     [self.tableView registerClass:[OrderLaeblTVCell class]
            forCellReuseIdentifier:@"cellL"];
@@ -201,11 +204,23 @@
     label.font = [UIFont systemFontOfSize:14];
     label.textAlignment = NSTextAlignmentRight;
     [backFootView addSubview:label];
-    UILabel * money_label = [[UILabel alloc]
+    money_label = [[UILabel alloc]
                              initWithFrame:CGRectMake(screenWide * 0.25, 1, screenWide * 0.2, screenHeight * 0.06 -1)];
-    if ([_vc_type isEqualToString:@"S"]) {
-        money_label.text = _group_dic[@"room"][[_room_index intValue]][@"room_price"];
-        _charge_price = money_label.text;
+    if ([_vc_type isEqualToString:@"2"]) {
+        _charge_price = _group_dic[@"room"][[_room_index intValue]][@"room_price"];
+        
+        if (order.checkout_time) {
+            if (!order.checkin_time) {
+                order.checkin_time = [NSDate date];
+            }
+            NSTimeInterval oneDay = 24*60*60;
+            NSTimeInterval time = [order.checkout_time timeIntervalSinceDate:order.checkin_time];
+            int number = round(time/oneDay * 1.0);
+            money_label.text = [NSString stringWithFormat:@"%ld.00",[self.charge_price integerValue] * number];
+            
+        }else{
+            money_label.text = _charge_price;
+        }
     }else {
         money_label.text = [NSString stringWithFormat:@"  %d",_charge_price.intValue - 50];
     }
@@ -362,7 +377,7 @@ heightForHeaderInSection:(NSInteger)section
 {
     CDDatePicker * datePicker;
 
-    if ([_vc_type isEqualToString:@"S"]) {
+    if ([_vc_type isEqualToString:@"2"]) {
         BOOL tap_where = tap.view == checkIn_timelabel?YES:NO;
         if (tap_where) {//入住按钮
             datePicker = [[CDDatePicker alloc] initWithOff_label:leave_timelabel];
@@ -393,16 +408,26 @@ heightForHeaderInSection:(NSInteger)section
     
 }
 -(void)datePickerbtnDownWithDate:(NSDate *)date{
-    if ([_vc_type isEqualToString:@"S"]) {
+    if ([_vc_type isEqualToString:@"2"]) {
         if (date) {
             if ([_datePicker.type isEqualToString:@"Z"]) {
                 checkIn_timelabel.text = [NSString stringWithFormat:@"   %@",[CDDatePicker getStringFromDate:date]];
-                [YYLOrder YSOrder].checkin_time = date;
+                order.checkin_time = date;
                 end_begin = date;
             }else{
                 leave_timelabel.text = [NSString stringWithFormat:@"   %@",[CDDatePicker getStringFromDate:date]];
-                [YYLOrder YSOrder].checkout_time = date;
+                order.checkout_time = date;
                 end_end = date;
+            }
+            if (order.checkout_time) {
+                if (!order.checkin_time) {
+                    order.checkin_time = [NSDate date];
+                }
+                NSTimeInterval oneDay = 24*60*60;
+                NSTimeInterval time = [order.checkout_time timeIntervalSinceDate:order.checkin_time];
+                int number = round(time/oneDay * 1.0);
+                money_label.text = [NSString stringWithFormat:@"%ld.00",[self.charge_price integerValue] * number];
+                
             }
         }//日期选择器的代理方法
 
@@ -410,13 +435,12 @@ heightForHeaderInSection:(NSInteger)section
         checkIn_timelabel.text = [CDDatePicker getStringFromDate:date];
         NSDate * date_l = [self getPriousorLaterDateFromDate:date withMonth:1];
         leave_timelabel.text = [CDDatePicker getStringFromDate:date_l];
-        [YYLOrder YLOrder].checkin_time = date;
-        [YYLOrder YLOrder].checkout_time = date_l;
+        order.checkin_time = date;
+        order.checkout_time = date_l;
     }
 }
 -(BOOL)testOrderMassage{
-    if ([_vc_type isEqualToString:@"S"]) {
-        YYLOrder * order = [YYLOrder YSOrder];
+    if ([_vc_type isEqualToString:@"2"]) {
         if (!order.checkout_time) {
             return NO;
         }
@@ -448,16 +472,15 @@ heightForHeaderInSection:(NSInteger)section
 }
 - (void)submitOrder {
     if ([self testOrderMassage]) {
-        YYLOrder * order;
-        if ([_vc_type isEqualToString:@"S"]) {
-            order = [YYLOrder YSOrder];
-            order.cat_id = @"2";
+        if ([_vc_type isEqualToString:@"2"]) {
             order.subsidy_money_m = @"0";
             order.subsidy_money_u = @"0";
-            order.balance_money = self.charge_price;
+            NSTimeInterval oneDay = 24*60*60;
+            NSTimeInterval time = [order.checkout_time timeIntervalSinceDate:order.checkin_time];
+            int number = time/oneDay;
+
+            order.balance_money = [NSString stringWithFormat:@"%ld",[self.charge_price integerValue] * number];
         }else{
-            order = [YYLOrder YLOrder];
-            order.cat_id = @"1";
             order.subsidy_money_m = @"50";
             order.subsidy_money_u = @"50";
             CGFloat pay_money = [self.charge_price floatValue] - [order.subsidy_money_u floatValue];
@@ -469,6 +492,7 @@ heightForHeaderInSection:(NSInteger)section
         if (!order.checkin_time) {
             order.checkin_time = [NSDate date];
         }
+        order.cat_id = _vc_type;
         order.price = self.charge_price;
         order.order_name = _group_dic[@"name"];
         order.group_id = self.gid;

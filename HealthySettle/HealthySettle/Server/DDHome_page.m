@@ -37,7 +37,7 @@
 
     return @{@"rsa":[DDLogin RSAsignWithdic:@{
                                               @"phone" : _uid,
-                                              @"controller":@"home_page",
+                                              @"controller":@"new_home_page",
                                               @"login" : @(_login)
                                               }]};
 }

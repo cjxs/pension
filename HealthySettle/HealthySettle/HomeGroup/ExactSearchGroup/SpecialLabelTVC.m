@@ -35,7 +35,7 @@
         status_label.font = font;
         status_label.textAlignment = NSTextAlignmentRight;
         status_label.font = font;
-        YYLOrder * order = [type isEqualToString:@"S"]? [YYLOrder YSOrder]:[YYLOrder YLOrder];
+        YYLOrder * order = [type isEqualToString:@"2"]? [YYLOrder YSOrder]:[YYLOrder YLOrder];
         if ([data_arr[0+i*2] isEqualToString:@"现金账户"]) {
             [RACObserve(order, balance_pay) subscribeNext:^(id x) {
                 NSString * text = x;

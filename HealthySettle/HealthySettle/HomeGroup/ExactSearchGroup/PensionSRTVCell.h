@@ -9,10 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface PensionSRTVCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UIImageView *organization_image;
-@property (weak, nonatomic) IBOutlet UILabel *organization_title;
-@property (weak, nonatomic) IBOutlet UILabel *organization_address;
-@property (weak, nonatomic) IBOutlet UILabel *available_bunk;
-@property (weak, nonatomic) IBOutlet UILabel *price_label;
+@property (strong, nonatomic)  UIImageView *organization_image;
+@property (strong, nonatomic)  UILabel *organization_title;
+@property (strong, nonatomic)  UILabel *organization_address;
+@property (strong, nonatomic)  UILabel *price_label;
 - (void)configWithimage:(NSString *)image_u title:(NSString *)title address:(NSString *)address number:(NSString *)number price:(NSString *)price;
+-(void)configWithData:(NSDictionary *)data;
 @end

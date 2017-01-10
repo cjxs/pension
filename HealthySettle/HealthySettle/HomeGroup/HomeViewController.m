@@ -32,6 +32,9 @@
 #import "TravelTVCell.h"
 #import "PensionSRTVCell.h"
 #import "RegimenRTVCell.h"
+#import "TravelResultVController.h"
+#import "GroupDetailViewController.h"
+#import "TravelDetailVController.h"
 
 
 @interface HomeViewController ()<UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate,UISearchBarDelegate,UIWebViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,SDCycleScrollViewDelegate,CityListDelegate,RecommendDelegate>
@@ -43,6 +46,8 @@
     UIButton * back_btn;
     NSArray * seasonsA;
     NSArray * tag_A;
+    NSArray * groups;
+    NSMutableArray * m_groups;
     int _wave;
     SDCycleScrollView *cycleScrollView3;
 }
@@ -171,14 +176,19 @@
         urlA = dic[@"banner"][@"url"];
         seasonsA = dic[@"seasons"];
         tag_A = dic[@"tag"];
-        
+        groups = dic[@"group"];
+        m_groups = [NSMutableArray array];
+        for (NSDictionary  * dic in groups) {
+            if ([dic[@"cat_id"] intValue]== 3) {
+                [m_groups addObject:dic];
+            }
+        }
         [self reloadTableView];
         
     } failure:^(__kindof YTKBaseRequest *request){
-        [SVProgressHUD showErrorWithStatus:@"网络错误！"];
+        [SVProgressHUD showErrorWithStatus:@"网络错误"];
         [_homeTableView headerEndRefreshing];
         [self performSelector:@selector(dismiss:) withObject:nil afterDelay:3];
-        NSLog(@"%@++++++%ld--------",request.requestArgument,request.responseStatusCode);
     }];
 
 }
@@ -198,11 +208,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor greenColor];
+    self.view.backgroundColor = [UIColor whiteColor];
     _homeTableView = [[UITableView alloc]
                                    initWithFrame:CGRectMake(0, 0, screenWide, screenHeight-64-screenHeight * 0.035)
                                    style:UITableViewStyleGrouped];
-    _homeTableView.backgroundColor = WHITECOLOR;
+    _homeTableView.backgroundColor = GRAYCOLOR;
     _homeTableView.sectionHeaderHeight = 0;
     _homeTableView.sectionFooterHeight = 0;
     _homeTableView.delegate = self;
@@ -215,8 +225,8 @@
            forCellReuseIdentifier:@"cellSeason"];
     [_homeTableView registerClass:[RecommendViewCell class] forCellReuseIdentifier:@"recommend"];
     [_homeTableView registerClass:[TravelTVCell class] forCellReuseIdentifier:@"travel"];
-    [_homeTableView registerNib:[UINib nibWithNibName:@"RegimenRTVCell" bundle:nil] forCellReuseIdentifier:@"regimen"];
-    [_homeTableView registerNib:[UINib nibWithNibName:@"PensionSRTVCell" bundle:nil] forCellReuseIdentifier:@"pension"];
+    [_homeTableView registerClass:[RegimenRTVCell class] forCellReuseIdentifier:@"regimen"];
+    [_homeTableView registerClass:[PensionSRTVCell class] forCellReuseIdentifier:@"pension"];
 
     
     [self.view addSubview:_homeTableView];
@@ -299,7 +309,7 @@ numberOfRowsInSection:(NSInteger)section
         if (section == 0) {
             return 3;
         }else{
-            return 15;
+            return m_groups.count;
         }
     }else{
         return 0;
@@ -316,7 +326,7 @@ numberOfRowsInSection:(NSInteger)section
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.type = indexPath.row;
             cell.delegate = self;
-            [cell configWithdata:tag_A[indexPath.row][@"tag_info"]];
+            [cell configWithdata:tag_A];
             return cell;
             
         }else if (indexPath.row == 1)
@@ -336,21 +346,56 @@ numberOfRowsInSection:(NSInteger)section
     }else{
         if (!_wave || _wave == 0) {
             TravelTVCell * cell = [_homeTableView dequeueReusableCellWithIdentifier:@"travel"];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            [cell configWithData:m_groups[indexPath.row]];
             return cell;
         }else if ( _wave == 1){
             PensionSRTVCell * cell = [_homeTableView dequeueReusableCellWithIdentifier:@"pension"];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            [cell configWithData:m_groups[indexPath.row]];
             return cell;
             
         }else{
             RegimenRTVCell * cell = [_homeTableView dequeueReusableCellWithIdentifier:@"regimen"];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            [cell configWithData:m_groups[indexPath.row]];
             return cell;
             
         }
     
    }
 }
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section == 1) {
+        if (_wave >0) {
+            GroupDetailViewController * resultDTVC = [[GroupDetailViewController alloc] init];
+            resultDTVC.vc_type = [NSString stringWithFormat:@"%d",_wave];
+            resultDTVC.group_id = m_groups[indexPath.row][@"group_id"];
+            [self.navigationController pushViewController:resultDTVC
+                                                 animated:NO];
+            
+        }else{
+            TravelDetailVController * resultDTVC = [[TravelDetailVController alloc] init];
+            resultDTVC.group_id = m_groups[indexPath.row][@"group_id"];
+            [self.navigationController pushViewController:resultDTVC animated:NO];
+            
+        }
+
+    }else{
+    }
+}
+
 -(void)updateDataWithWave:(int)wave{
     _wave = wave;
+    [m_groups removeAllObjects];
+    if (wave == 0) {
+        wave = 3;
+    }
+    for (NSDictionary  * dic in groups) {
+        if ([dic[@"cat_id"] intValue]== wave) {
+            [m_groups addObject:dic];
+        }
+    }
     NSIndexSet  * indexSet = [[NSIndexSet alloc] initWithIndex:1];
     [_homeTableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationRight];
 }
@@ -413,6 +458,10 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 #pragma mark - VTOF
 - (void)skipTOTravelList{
     //旅游路线
+    TravelResultVController * resultVC = [[TravelResultVController alloc] init];
+    resultVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:resultVC animated:YES];
+    
 }
 //两个跳转
 - (void)skipTOSecond:(UITapGestureRecognizer *)gesture
@@ -421,10 +470,10 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath
     searchVC.hidesBottomBarWhenPushed = YES;//隐藏tabBar
     if (gesture.view.frame.origin.y-screenHeight * 0.197==0)
     {
-        searchVC.vc_type = @"L";
+        searchVC.vc_type = @"1";
     }else
     {
-        searchVC.vc_type = @"S";
+        searchVC.vc_type = @"2";
     }
     [self.navigationController pushViewController:searchVC
                                          animated:YES];
@@ -473,10 +522,8 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 }
 
 -(void)pushToReginWithArea_id:(NSString *)area_id area:(NSString *)area{//代理方法
-    ResultListVController * ResultLVC = [[ResultListVController alloc] init];
-    ResultLVC.vc_type = @"S";
+    TravelResultVController * ResultLVC = [[TravelResultVController alloc] init];
     ResultLVC.area_id = area_id;
-    ResultLVC.title_l = area;
     ResultLVC.hidesBottomBarWhenPushed = YES;//隐藏tabBar
     [self.navigationController pushViewController:ResultLVC
                                              animated:YES];

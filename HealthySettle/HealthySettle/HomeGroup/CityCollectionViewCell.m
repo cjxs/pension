@@ -29,7 +29,9 @@
 -(void)configWithImage:(NSString *)imageStr name:(NSString *)name {
     if (self) {
         if (imageStr) {
-            [_image_view sd_setImageWithURL:[NSURL URLWithString:imageStr] placeholderImage:[UIImage imageNamed:@"city_p"]];
+            NSString *  str2 = [NSString stringWithFormat:@"%@/upload/group/%@",BASEURL,imageStr];
+            NSString * str3 = [str2 stringByReplacingOccurrencesOfString:@"," withString:@"/"];
+            [_image_view sd_setImageWithURL:[NSURL URLWithString:str3] placeholderImage:[UIImage imageNamed:@"city_p"]];
         }
         if (name) {
             _describ_label.text = name;

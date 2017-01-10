@@ -9,10 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface RegimenRTVCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UIImageView *organization_image;
-@property (weak, nonatomic) IBOutlet UILabel *organization_title;
-@property (weak, nonatomic) IBOutlet UILabel *price_label;
-@property (weak, nonatomic) IBOutlet UILabel *address_label;
+@property (strong, nonatomic)  UIImageView *organization_image;
+@property (strong, nonatomic)  UILabel *organization_title;
+@property (strong, nonatomic)  UILabel *price_label;
+@property (strong, nonatomic)  UILabel *address_label;
 - (void)configWithImage:(NSString *)image_u title:(NSString *)title address:(NSString *)address price:(NSString *)price supportArray:(NSArray *)array;
-
+-(void)configWithData:(NSDictionary *)data;
 @end

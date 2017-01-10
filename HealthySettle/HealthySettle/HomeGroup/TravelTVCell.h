@@ -13,5 +13,5 @@
 @property (strong, nonatomic)  UILabel *organization_title;
 @property (assign, nonatomic)  BOOL discount;
 @property (strong, nonatomic)  UILabel *price_label;
-
+-(void)configWithData:(NSDictionary *)data;
 @end
