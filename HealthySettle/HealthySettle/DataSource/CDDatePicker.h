@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 @protocol HYMDatePickerDelegate;
-@interface CDDatePicker : UIView
+@interface CDDatePicker : UIView<UIPickerViewDataSource,UIPickerViewDelegate>
 @property (weak, nonatomic) id<HYMDatePickerDelegate> delegateDiy;
 //已选择时间
 @property (strong, nonatomic) NSString     *day;

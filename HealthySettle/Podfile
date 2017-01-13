@@ -1,7 +1,8 @@
 platform :ios, ‘8.0’
+target ‘优悠乐’do
 inhibit_all_warnings!
 pod 'NJKWebViewProgress'      #网页加载进度条           https://github.com/ninjinkun/NJKWebViewProgress
-pod 'Masonry', '~> 0.6.4'     #自定义布局
+pod 'Masonry', '~> 1.0.2'     #自定义布局
 pod 'YTKNetwork', '~> 1.0.0'  #网络请求      Source:   https://github.com/yuantiku/YTKNetwork.git
 pod 'SDWebImage', '~> 3.7.5'  #网络图片异步加载
 pod 'MJExtension'             #model Vim库
@@ -9,3 +10,5 @@ pod 'ReactiveCocoa'           #关于OC的函数式编程库     https://github.
 pod 'MTMigration'             #版本更新处理            https://github.com/mysterioustrousers/MTMigration
 pod 'UMengSocial', '~> 5.0'
 pod 'SVProgressHUD'
+
+end

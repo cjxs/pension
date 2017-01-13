@@ -12,7 +12,7 @@
 -(void)cityPickerbtnDown;
 - (void)currentSelectedName:(NSString *)name code:(NSString *)code Array:(NSArray *)array;
 @end
-@interface CDCityPicker : UIView
+@interface CDCityPicker : UIView<UIPickerViewDataSource,UIPickerViewDelegate>
 @property (strong ,nonatomic) NSString     * type;
 @property (nonatomic, strong) UIView       * titleView;
 @property (strong,nonatomic ) UIPickerView * pick_view;

@@ -22,7 +22,7 @@ PODS:
   - AFNetworking/UIKit (2.6.3):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - Masonry (0.6.4)
+  - Masonry (1.0.2)
   - MJExtension (3.0.10)
   - MTMigration (0.0.5)
   - NJKWebViewProgress (0.2.3):
@@ -47,7 +47,7 @@ PODS:
     - AFNetworking (~> 2.0)
 
 DEPENDENCIES:
-  - Masonry (~> 0.6.4)
+  - Masonry (~> 1.0.2)
   - MJExtension
   - MTMigration
   - NJKWebViewProgress
@@ -60,7 +60,7 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   AFDownloadRequestOperation: 748a1643423e1ddb23f2178f778087d4f0ae8ac7
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
-  Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
+  Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
   MJExtension: d86aacb740c87519d20e3cca55b6fa4be6cc7548
   MTMigration: 725315e6469c8fd7d13966887f59e65eb8aecb2e
   NJKWebViewProgress: f481fd424cb5ecc27eacae11b5397db92fba9a4d
@@ -70,4 +70,6 @@ SPEC CHECKSUMS:
   UMengSocial: 48b67179c492a8cf7803fbb0438b8f55432e2fc1
   YTKNetwork: 28ef7a3c119f61e737a76abbe74ff2fe1afec913
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: a851d29aa7be153e93a11bc52db78bb8948e99a7
+
+COCOAPODS: 1.1.1

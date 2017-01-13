@@ -51,7 +51,6 @@
 }
 
 - (id)requestArgument {
-    
     return nil;
 }
 

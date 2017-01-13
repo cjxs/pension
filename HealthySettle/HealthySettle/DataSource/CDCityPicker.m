@@ -49,11 +49,10 @@
 }
 - (UIPickerView *)pick_view {
     if (!_pick_view) {
-        UIPickerView * pick_view = [[UIPickerView alloc] init];
+        UIPickerView * pick_view = [[UIPickerView alloc] initWithFrame:[self getMainViewFrame]];
         pick_view.backgroundColor = RGB(252, 252, 252);
         pick_view.clipsToBounds = YES;
         pick_view.layer.cornerRadius = kMargin;
-        pick_view.frame = [self getMainViewFrame];
         pick_view.clipsToBounds = YES;
         pick_view.dataSource = self;
         pick_view.delegate = self;
@@ -104,7 +103,7 @@
     quxiaobtn.titleLabel.font = [UIFont boldSystemFontOfSize:18];
     [quxiaobtn setTitle:@"取消" forState:UIControlStateNormal];
     [quxiaobtn addTarget:self action:@selector(cityPickerBtnDownCancel) forControlEvents:UIControlEventTouchUpInside];
-    [quxiaobtn setTitleColor:GRAYCOLOR forState:UIControlStateNormal];
+    [quxiaobtn setTitleColor:BROWNCOLOR forState:UIControlStateNormal];
     quxiaobtn.backgroundColor = [UIColor clearColor];
     quxiaobtn.layer.cornerRadius = 5;
     
@@ -116,12 +115,11 @@
     btn.titleLabel.font = [UIFont boldSystemFontOfSize:18];
     [btn setTitle:@"确定" forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(cityPickerbtnDown) forControlEvents:UIControlEventTouchUpInside];
-    [btn setTitleColor:DARKBROWNCOLOR forState:UIControlStateNormal];
+    [btn setTitleColor:BROWNCOLOR forState:UIControlStateNormal];
     btn.backgroundColor = [UIColor clearColor];
     btn.layer.cornerRadius = 5;
     [_titleView addSubview:btn];
 
-    
     return _titleView;
 }
 
@@ -160,14 +158,15 @@
 #pragma mark - UIPickerViewDataSource,UIPickerViewDelegate
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
-    if ([_type isEqualToString:@"S"]) {
+    if ([_type isEqualToString:@"2"]) {
         return 2;
     }else {
         return 1;
     }
 }
+
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
-    if ([_type isEqualToString:@"S"]) {
+    if ([_type isEqualToString:@"2"]) {
         if (component == 0) {
             return self.ProvinceArray.count; //省的个数
         }else {
@@ -190,9 +189,11 @@
     }
     
 }
+
+
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
     NSString *title = nil;
-    if ([_type isEqualToString:@"S"]) {
+    if ([_type isEqualToString:@"2"]) {
         if (component==0)
         {
             NSDictionary *ProvinceDict = self.ProvinceArray[row];
@@ -211,8 +212,9 @@
     }
     return title ?title : @"";
 }
+
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
-    if ([_type isEqualToString:@"S"]) {
+    if ([_type isEqualToString:@"2"]) {
         if (component==0)
         {
             [pickerView reloadComponent:1];
@@ -238,7 +240,7 @@
 }
 - (void)getSelectDistrictName
 {
-    if ([_type isEqualToString:@"S"]) {
+    if ([_type isEqualToString:@"2"]) {
         NSDictionary *ProvinceDict = self.ProvinceArray[[_pick_view selectedRowInComponent:0]];
         
             //*****

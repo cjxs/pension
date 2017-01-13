@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E0E6B8C426C85B7638FD03D /* libPods-优悠乐.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 087E2C9EC0A262329181EDAC /* libPods-优悠乐.a */; };
 		320108131DBB4A38007ACA6B /* DDMoneyList.m in Sources */ = {isa = PBXBuildFile; fileRef = 320108121DBB4A38007ACA6B /* DDMoneyList.m */; };
 		320108161DBB58F9007ACA6B /* DDScoreList.m in Sources */ = {isa = PBXBuildFile; fileRef = 320108151DBB58F9007ACA6B /* DDScoreList.m */; };
 		3205DEDD1DF64C6700AC5726 /* CashStatusTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3205DEDC1DF64C6700AC5726 /* CashStatusTVC.m */; };
@@ -39,6 +40,7 @@
 		320BE5E51CBCE46000A34FCB /* leftop_w@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 320BE5E11CBCE46000A34FCB /* leftop_w@2x.png */; };
 		320BE5E61CBCE46000A34FCB /* black_w@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 320BE5E21CBCE46000A34FCB /* black_w@3x.png */; };
 		320BE5E71CBCE46000A34FCB /* black_w@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 320BE5E31CBCE46000A34FCB /* black_w@2x.png */; };
+		320CACBA1E1CFE7D003C2206 /* TravelResultVController.m in Sources */ = {isa = PBXBuildFile; fileRef = 320CACB91E1CFE7D003C2206 /* TravelResultVController.m */; };
 		32146A811CC493400046F2BC /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 32146A801CC493400046F2BC /* libz.tbd */; };
 		32146A861CC4AE240046F2BC /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 32146A851CC4AE240046F2BC /* libiconv.tbd */; };
 		32146A881CC4AE500046F2BC /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 32146A871CC4AE500046F2BC /* libsqlite3.tbd */; };
@@ -57,15 +59,14 @@
 		3223F11B1DB8DCFE001F1DCC /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3223F11A1DB8DCFE001F1DCC /* Launch Screen.storyboard */; };
 		3223F11E1DB8E19F001F1DCC /* Loading1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3223F11C1DB8E19F001F1DCC /* Loading1.png */; };
 		3223F11F1DB8E19F001F1DCC /* Loading@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3223F11D1DB8E19F001F1DCC /* Loading@2x.png */; };
+		32299CCF1E28878900372A72 /* CDCityPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 32299CCE1E28878900372A72 /* CDCityPicker.m */; };
 		322C36851D338607005163C4 /* DDLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = 322C36841D338607005163C4 /* DDLogin.m */; };
 		323499AB1CE1782200CBA680 /* Member.m in Sources */ = {isa = PBXBuildFile; fileRef = 323499AA1CE1782200CBA680 /* Member.m */; };
 		32399A2F1E1C90ED0056295B /* TravelTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32399A2E1E1C90ED0056295B /* TravelTVCell.m */; };
 		32399A321E1C93120056295B /* list_p@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 32399A301E1C93120056295B /* list_p@2x.png */; };
 		32399A331E1C93120056295B /* list_p@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 32399A311E1C93120056295B /* list_p@3x.png */; };
 		324075CC1CAD213600BAF253 /* PensionSRTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 324075CA1CAD213600BAF253 /* PensionSRTVCell.m */; };
-		324075CD1CAD213600BAF253 /* PensionSRTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 324075CB1CAD213600BAF253 /* PensionSRTVCell.xib */; };
 		324075D11CAD218800BAF253 /* RegimenRTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 324075CF1CAD218800BAF253 /* RegimenRTVCell.m */; };
-		324075D21CAD218800BAF253 /* RegimenRTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 324075D01CAD218800BAF253 /* RegimenRTVCell.xib */; };
 		324075D41CAD2D9300BAF253 /* pension.png in Resources */ = {isa = PBXBuildFile; fileRef = 324075D31CAD2D9300BAF253 /* pension.png */; };
 		324075D61CAD2DB200BAF253 /* regimen.png in Resources */ = {isa = PBXBuildFile; fileRef = 324075D51CAD2DB200BAF253 /* regimen.png */; };
 		32467EBB1DC329440005B822 /* activity_p@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 32467EAD1DC329440005B822 /* activity_p@2x.png */; };
@@ -130,6 +131,9 @@
 		325C824C1CB122480004EA0C /* ShowTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 325C824A1CB122480004EA0C /* ShowTVCell.m */; };
 		325C824D1CB122480004EA0C /* ShowTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 325C824B1CB122480004EA0C /* ShowTVCell.xib */; };
 		325C82501CB12BB70004EA0C /* ShouldKnowTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 325C824F1CB12BB70004EA0C /* ShouldKnowTVCell.m */; };
+		3263DF4D1E2493480088E451 /* UIImage+DDImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 3263DF4C1E2493480088E451 /* UIImage+DDImage.m */; };
+		3263DF501E271FCB0088E451 /* FiltView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3263DF4F1E271FCB0088E451 /* FiltView.m */; };
+		3263DF531E2730870088E451 /* FiltViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3263DF521E2730870088E451 /* FiltViewCell.m */; };
 		3269BA951CC5DAA200C855FC /* choose_44_@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3269BA8A1CC5DAA200C855FC /* choose_44_@2x.png */; };
 		3269BA961CC5DAA200C855FC /* choose_46_@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3269BA8B1CC5DAA200C855FC /* choose_46_@2x.png */; };
 		3269BA971CC5DAA200C855FC /* choose_44_@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3269BA8C1CC5DAA200C855FC /* choose_44_@3x.png */; };
@@ -184,12 +188,13 @@
 		3285AF0B1D3760A20070618A /* YYLOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = 3285AF0A1D3760A20070618A /* YYLOrder.m */; };
 		3285AF0E1D376B3C0070618A /* GroupRoom.m in Sources */ = {isa = PBXBuildFile; fileRef = 3285AF0D1D376B3C0070618A /* GroupRoom.m */; };
 		3285AF111D3C72970070618A /* LoginOrRegisViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3285AF101D3C72970070618A /* LoginOrRegisViewController.m */; };
-		3292A74F1CA3D14E004FEB57 /* CDCityPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 3292A74E1CA3D14E004FEB57 /* CDCityPicker.m */; };
+		3297D3AE1E1F9B06007A0F94 /* MoveSelectTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3297D3AD1E1F9B06007A0F94 /* MoveSelectTVCell.m */; };
 		32A3BB771DBB16490009D50F /* DDCollectList.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A3BB761DBB16490009D50F /* DDCollectList.m */; };
 		32A7314E1E1B518E005D6FB2 /* 热门@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 32A7314A1E1B518E005D6FB2 /* 热门@2x.png */; };
 		32A7314F1E1B518E005D6FB2 /* 热门@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 32A7314B1E1B518E005D6FB2 /* 热门@3x.png */; };
 		32A731501E1B518E005D6FB2 /* like@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 32A7314C1E1B518E005D6FB2 /* like@2x.png */; };
 		32A731511E1B518E005D6FB2 /* like@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 32A7314D1E1B518E005D6FB2 /* like@3x.png */; };
+		32B5A16C1E1E5408003ECCA9 /* PPNumberButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 32B5A16B1E1E5408003ECCA9 /* PPNumberButton.m */; };
 		32CABD641CA373AA0068AE93 /* CityCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CABD571CA373AA0068AE93 /* CityCollectionViewCell.m */; };
 		32CABD651CA373AA0068AE93 /* CitySkipViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CABD591CA373AA0068AE93 /* CitySkipViewCell.m */; };
 		32CABD661CA373AA0068AE93 /* SearchVController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CABD5C1CA373AA0068AE93 /* SearchVController.m */; };
@@ -273,13 +278,19 @@
 		32DC71EA1DC9BB87000E0AAA /* RSAEncryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 32DC71E51DC9BB87000E0AAA /* RSAEncryptor.m */; };
 		32DD1DCC1CA5082B00E1C229 /* SetTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32DD1DCA1CA5082B00E1C229 /* SetTVCell.m */; };
 		32DD1DCD1CA5082B00E1C229 /* SetTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32DD1DCB1CA5082B00E1C229 /* SetTVCell.xib */; };
-		32DDD31C1CA1406A00EFACF9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 32DDD31B1CA1406A00EFACF9 /* libPods.a */; };
 		32DDD3611CA147BE00EFACF9 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32DDD3601CA147BE00EFACF9 /* CoreLocation.framework */; };
 		32DDD3631CA147CD00EFACF9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32DDD3621CA147CD00EFACF9 /* QuartzCore.framework */; };
 		32DDD3651CA147DA00EFACF9 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32DDD3641CA147DA00EFACF9 /* OpenGLES.framework */; };
 		32DDD3671CA147ED00EFACF9 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32DDD3661CA147ED00EFACF9 /* SystemConfiguration.framework */; };
 		32DDD3691CA147FB00EFACF9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32DDD3681CA147FB00EFACF9 /* CoreGraphics.framework */; };
 		32DDD36B1CA1480900EFACF9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32DDD36A1CA1480900EFACF9 /* Security.framework */; };
+		32E3F78F1E1E3304002C8E9E /* ChooseTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32E3F78E1E1E3304002C8E9E /* ChooseTVCell.m */; };
+		32E3F7961E1E4405002C8E9E /* date_choose@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 32E3F7901E1E4405002C8E9E /* date_choose@2x.png */; };
+		32E3F7971E1E4405002C8E9E /* date_choose@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 32E3F7911E1E4405002C8E9E /* date_choose@3x.png */; };
+		32E3F7981E1E4405002C8E9E /* number_choose@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 32E3F7921E1E4405002C8E9E /* number_choose@2x.png */; };
+		32E3F7991E1E4405002C8E9E /* number_choose@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 32E3F7931E1E4405002C8E9E /* number_choose@3x.png */; };
+		32E3F79A1E1E4405002C8E9E /* address_choose@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 32E3F7941E1E4405002C8E9E /* address_choose@2x.png */; };
+		32E3F79B1E1E4405002C8E9E /* address_choose@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 32E3F7951E1E4405002C8E9E /* address_choose@3x.png */; };
 		32E4E3471E1508AA008280F1 /* TravelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 32E4E3461E1508AA008280F1 /* TravelView.m */; };
 		32E4E34A1E150DCF008280F1 /* EntranceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 32E4E3491E150DCF008280F1 /* EntranceView.m */; };
 		32E4E34D1E1510F7008280F1 /* NewsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 32E4E34C1E1510F7008280F1 /* NewsView.m */; };
@@ -356,6 +367,8 @@
 		32E71CA01CB255D50079CD73 /* OrderLaeblTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32E71C9F1CB255D50079CD73 /* OrderLaeblTVCell.m */; };
 		32E71CA31CB256770079CD73 /* OrderTextFieldTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32E71CA21CB256770079CD73 /* OrderTextFieldTVCell.m */; };
 		32E71CA61CB256920079CD73 /* OrderBtnTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32E71CA51CB256920079CD73 /* OrderBtnTVCell.m */; };
+		32EC08ED1E1E186700E55900 /* TravelDetailVController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32EC08EC1E1E186700E55900 /* TravelDetailVController.m */; };
+		32EC08F11E1E205900E55900 /* TitleTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32EC08F01E1E205900E55900 /* TitleTVCell.m */; };
 		32EFA2611DB62F6000903D04 /* DDFindGet.m in Sources */ = {isa = PBXBuildFile; fileRef = 32EFA25E1DB62F6000903D04 /* DDFindGet.m */; };
 		32EFA2621DB62F6000903D04 /* DDListGet.m in Sources */ = {isa = PBXBuildFile; fileRef = 32EFA2601DB62F6000903D04 /* DDListGet.m */; };
 		32F5D1C81DAA3C0E000FC6B1 /* DDSeaGet.m in Sources */ = {isa = PBXBuildFile; fileRef = 32F5D1C71DAA3C0E000FC6B1 /* DDSeaGet.m */; };
@@ -377,7 +390,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		19C0DD8F63F6611305C1DF8C /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		087E2C9EC0A262329181EDAC /* libPods-优悠乐.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-优悠乐.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		320108111DBB4A38007ACA6B /* DDMoneyList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDMoneyList.h; sourceTree = "<group>"; };
 		320108121DBB4A38007ACA6B /* DDMoneyList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDMoneyList.m; sourceTree = "<group>"; };
 		320108141DBB58F9007ACA6B /* DDScoreList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDScoreList.h; sourceTree = "<group>"; };
@@ -423,6 +436,8 @@
 		320BE5E11CBCE46000A34FCB /* leftop_w@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "leftop_w@2x.png"; sourceTree = "<group>"; };
 		320BE5E21CBCE46000A34FCB /* black_w@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "black_w@3x.png"; sourceTree = "<group>"; };
 		320BE5E31CBCE46000A34FCB /* black_w@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "black_w@2x.png"; sourceTree = "<group>"; };
+		320CACB81E1CFE7D003C2206 /* TravelResultVController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TravelResultVController.h; sourceTree = "<group>"; };
+		320CACB91E1CFE7D003C2206 /* TravelResultVController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TravelResultVController.m; sourceTree = "<group>"; };
 		32146A801CC493400046F2BC /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		32146A851CC4AE240046F2BC /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		32146A871CC4AE500046F2BC /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
@@ -448,6 +463,8 @@
 		3223F11A1DB8DCFE001F1DCC /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		3223F11C1DB8E19F001F1DCC /* Loading1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Loading1.png; sourceTree = "<group>"; };
 		3223F11D1DB8E19F001F1DCC /* Loading@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Loading@2x.png"; sourceTree = "<group>"; };
+		32299CCD1E28878900372A72 /* CDCityPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDCityPicker.h; sourceTree = "<group>"; };
+		32299CCE1E28878900372A72 /* CDCityPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDCityPicker.m; sourceTree = "<group>"; };
 		322C36831D338607005163C4 /* DDLogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDLogin.h; sourceTree = "<group>"; };
 		322C36841D338607005163C4 /* DDLogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDLogin.m; sourceTree = "<group>"; };
 		323499A91CE1782200CBA680 /* Member.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Member.h; sourceTree = "<group>"; };
@@ -458,10 +475,8 @@
 		32399A311E1C93120056295B /* list_p@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list_p@3x.png"; sourceTree = "<group>"; };
 		324075C91CAD213600BAF253 /* PensionSRTVCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PensionSRTVCell.h; sourceTree = "<group>"; };
 		324075CA1CAD213600BAF253 /* PensionSRTVCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PensionSRTVCell.m; sourceTree = "<group>"; };
-		324075CB1CAD213600BAF253 /* PensionSRTVCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PensionSRTVCell.xib; sourceTree = "<group>"; };
 		324075CE1CAD218800BAF253 /* RegimenRTVCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegimenRTVCell.h; sourceTree = "<group>"; };
 		324075CF1CAD218800BAF253 /* RegimenRTVCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegimenRTVCell.m; sourceTree = "<group>"; };
-		324075D01CAD218800BAF253 /* RegimenRTVCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegimenRTVCell.xib; sourceTree = "<group>"; };
 		324075D31CAD2D9300BAF253 /* pension.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pension.png; sourceTree = "<group>"; };
 		324075D51CAD2DB200BAF253 /* regimen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = regimen.png; sourceTree = "<group>"; };
 		32467EAD1DC329440005B822 /* activity_p@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "activity_p@2x.png"; sourceTree = "<group>"; };
@@ -718,6 +733,12 @@
 		325C824F1CB12BB70004EA0C /* ShouldKnowTVCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShouldKnowTVCell.m; sourceTree = "<group>"; };
 		325F84C61C9F88E4009E9770 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		325F84C71C9F89D2009E9770 /* UtilsMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UtilsMacro.h; sourceTree = "<group>"; };
+		3263DF4B1E2493480088E451 /* UIImage+DDImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+DDImage.h"; sourceTree = "<group>"; };
+		3263DF4C1E2493480088E451 /* UIImage+DDImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+DDImage.m"; sourceTree = "<group>"; };
+		3263DF4E1E271FCB0088E451 /* FiltView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FiltView.h; sourceTree = "<group>"; };
+		3263DF4F1E271FCB0088E451 /* FiltView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FiltView.m; sourceTree = "<group>"; };
+		3263DF511E2730870088E451 /* FiltViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FiltViewCell.h; sourceTree = "<group>"; };
+		3263DF521E2730870088E451 /* FiltViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FiltViewCell.m; sourceTree = "<group>"; };
 		3269BA8A1CC5DAA200C855FC /* choose_44_@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "choose_44_@2x.png"; sourceTree = "<group>"; };
 		3269BA8B1CC5DAA200C855FC /* choose_46_@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "choose_46_@2x.png"; sourceTree = "<group>"; };
 		3269BA8C1CC5DAA200C855FC /* choose_44_@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "choose_44_@3x.png"; sourceTree = "<group>"; };
@@ -800,14 +821,16 @@
 		3285AF0F1D3C72970070618A /* LoginOrRegisViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginOrRegisViewController.h; sourceTree = "<group>"; };
 		3285AF101D3C72970070618A /* LoginOrRegisViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginOrRegisViewController.m; sourceTree = "<group>"; };
 		328A80771DC4A46B002FC09D /* 优悠乐.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = "优悠乐.entitlements"; path = "../优悠乐.entitlements"; sourceTree = "<group>"; };
-		3292A74D1CA3D14E004FEB57 /* CDCityPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDCityPicker.h; sourceTree = "<group>"; };
-		3292A74E1CA3D14E004FEB57 /* CDCityPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDCityPicker.m; sourceTree = "<group>"; };
+		3297D3AC1E1F9B06007A0F94 /* MoveSelectTVCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoveSelectTVCell.h; sourceTree = "<group>"; };
+		3297D3AD1E1F9B06007A0F94 /* MoveSelectTVCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoveSelectTVCell.m; sourceTree = "<group>"; };
 		32A3BB751DBB16490009D50F /* DDCollectList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDCollectList.h; sourceTree = "<group>"; };
 		32A3BB761DBB16490009D50F /* DDCollectList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDCollectList.m; sourceTree = "<group>"; };
 		32A7314A1E1B518E005D6FB2 /* 热门@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "热门@2x.png"; sourceTree = "<group>"; };
 		32A7314B1E1B518E005D6FB2 /* 热门@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "热门@3x.png"; sourceTree = "<group>"; };
 		32A7314C1E1B518E005D6FB2 /* like@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "like@2x.png"; sourceTree = "<group>"; };
 		32A7314D1E1B518E005D6FB2 /* like@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "like@3x.png"; sourceTree = "<group>"; };
+		32B5A16A1E1E5408003ECCA9 /* PPNumberButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPNumberButton.h; sourceTree = "<group>"; };
+		32B5A16B1E1E5408003ECCA9 /* PPNumberButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPNumberButton.m; sourceTree = "<group>"; };
 		32CABD561CA373AA0068AE93 /* CityCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityCollectionViewCell.h; sourceTree = "<group>"; };
 		32CABD571CA373AA0068AE93 /* CityCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityCollectionViewCell.m; sourceTree = "<group>"; };
 		32CABD581CA373AA0068AE93 /* CitySkipViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CitySkipViewCell.h; sourceTree = "<group>"; };
@@ -952,6 +975,14 @@
 		32DDD3661CA147ED00EFACF9 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		32DDD3681CA147FB00EFACF9 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		32DDD36A1CA1480900EFACF9 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		32E3F78D1E1E3304002C8E9E /* ChooseTVCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseTVCell.h; sourceTree = "<group>"; };
+		32E3F78E1E1E3304002C8E9E /* ChooseTVCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseTVCell.m; sourceTree = "<group>"; };
+		32E3F7901E1E4405002C8E9E /* date_choose@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "date_choose@2x.png"; sourceTree = "<group>"; };
+		32E3F7911E1E4405002C8E9E /* date_choose@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "date_choose@3x.png"; sourceTree = "<group>"; };
+		32E3F7921E1E4405002C8E9E /* number_choose@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "number_choose@2x.png"; sourceTree = "<group>"; };
+		32E3F7931E1E4405002C8E9E /* number_choose@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "number_choose@3x.png"; sourceTree = "<group>"; };
+		32E3F7941E1E4405002C8E9E /* address_choose@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "address_choose@2x.png"; sourceTree = "<group>"; };
+		32E3F7951E1E4405002C8E9E /* address_choose@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "address_choose@3x.png"; sourceTree = "<group>"; };
 		32E4E3451E1508AA008280F1 /* TravelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TravelView.h; sourceTree = "<group>"; };
 		32E4E3461E1508AA008280F1 /* TravelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TravelView.m; sourceTree = "<group>"; };
 		32E4E3481E150DCF008280F1 /* EntranceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntranceView.h; sourceTree = "<group>"; };
@@ -1038,6 +1069,10 @@
 		32E71CA21CB256770079CD73 /* OrderTextFieldTVCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderTextFieldTVCell.m; sourceTree = "<group>"; };
 		32E71CA41CB256920079CD73 /* OrderBtnTVCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderBtnTVCell.h; sourceTree = "<group>"; };
 		32E71CA51CB256920079CD73 /* OrderBtnTVCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderBtnTVCell.m; sourceTree = "<group>"; };
+		32EC08EB1E1E186700E55900 /* TravelDetailVController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TravelDetailVController.h; sourceTree = "<group>"; };
+		32EC08EC1E1E186700E55900 /* TravelDetailVController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TravelDetailVController.m; sourceTree = "<group>"; };
+		32EC08EF1E1E205900E55900 /* TitleTVCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleTVCell.h; sourceTree = "<group>"; };
+		32EC08F01E1E205900E55900 /* TitleTVCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitleTVCell.m; sourceTree = "<group>"; };
 		32EFA25D1DB62F6000903D04 /* DDFindGet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDFindGet.h; sourceTree = "<group>"; };
 		32EFA25E1DB62F6000903D04 /* DDFindGet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDFindGet.m; sourceTree = "<group>"; };
 		32EFA25F1DB62F6000903D04 /* DDListGet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDListGet.h; sourceTree = "<group>"; };
@@ -1073,8 +1108,8 @@
 		32FD72D91CAA94F0008CB917 /* PersonTVCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonTVCell.h; sourceTree = "<group>"; };
 		32FD72DA1CAA94F0008CB917 /* PersonTVCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonTVCell.m; sourceTree = "<group>"; };
 		32FD72DB1CAA94F0008CB917 /* PersonTVCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonTVCell.xib; sourceTree = "<group>"; };
-		3B3A723A9107D9206B488077 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		B13104AB7B8F04CDDC48D9DD /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		3E86078CAC65104B62849C97 /* Pods-优悠乐.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-优悠乐.debug.xcconfig"; path = "Pods/Target Support Files/Pods-优悠乐/Pods-优悠乐.debug.xcconfig"; sourceTree = "<group>"; };
+		C513126410A9127C0B94B5D1 /* Pods-优悠乐.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-优悠乐.release.xcconfig"; path = "Pods/Target Support Files/Pods-优悠乐/Pods-优悠乐.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1111,22 +1146,13 @@
 				32DDD3651CA147DA00EFACF9 /* OpenGLES.framework in Frameworks */,
 				32DDD3631CA147CD00EFACF9 /* QuartzCore.framework in Frameworks */,
 				32DDD3611CA147BE00EFACF9 /* CoreLocation.framework in Frameworks */,
-				32DDD31C1CA1406A00EFACF9 /* libPods.a in Frameworks */,
+				1E0E6B8C426C85B7638FD03D /* libPods-优悠乐.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		048C4F4641833A732DF3FBF5 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				B13104AB7B8F04CDDC48D9DD /* Pods.debug.xcconfig */,
-				3B3A723A9107D9206B488077 /* Pods.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		32146B041CC50AFC0046F2BC /* UMessage_Sdk_1.2.6 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1579,8 +1605,13 @@
 				32CABD5D1CA373AA0068AE93 /* SearchVController.xib */,
 				32D859371CB893E80074D5C3 /* ResultListVController.h */,
 				32D8593A1CB896530074D5C3 /* ResultListVController.m */,
+				320CACB81E1CFE7D003C2206 /* TravelResultVController.h */,
+				320CACB91E1CFE7D003C2206 /* TravelResultVController.m */,
 				32CEF8301DB71F0A00CB7584 /* GroupDetailViewController.h */,
 				32CEF8311DB71F0A00CB7584 /* GroupDetailViewController.m */,
+				32EC08EB1E1E186700E55900 /* TravelDetailVController.h */,
+				32EC08EC1E1E186700E55900 /* TravelDetailVController.m */,
+				32EC08EE1E1E201500E55900 /* TravelDVCells */,
 				32D859751CB90B100074D5C3 /* CommentViewController.h */,
 				32D859761CB90B100074D5C3 /* CommentViewController.m */,
 				32E71C9B1CB23DD00079CD73 /* OrderTVController.h */,
@@ -1604,10 +1635,8 @@
 				324CD4AC1CAE629300276B57 /* ResultCellGroup */,
 				324075C91CAD213600BAF253 /* PensionSRTVCell.h */,
 				324075CA1CAD213600BAF253 /* PensionSRTVCell.m */,
-				324075CB1CAD213600BAF253 /* PensionSRTVCell.xib */,
 				324075CE1CAD218800BAF253 /* RegimenRTVCell.h */,
 				324075CF1CAD218800BAF253 /* RegimenRTVCell.m */,
-				324075D01CAD218800BAF253 /* RegimenRTVCell.xib */,
 			);
 			path = ExactSearchGroup;
 			sourceTree = "<group>";
@@ -1636,18 +1665,26 @@
 				3205DEF01DFA500C00AC5726 /* ArrayLabelView.h */,
 				3205DEF11DFA500C00AC5726 /* ArrayLabelView.m */,
 				321C43081DBF5AE100192243 /* city_.plist */,
+				32299CCD1E28878900372A72 /* CDCityPicker.h */,
+				32299CCE1E28878900372A72 /* CDCityPicker.m */,
 				32CABD951CA39E2E0068AE93 /* CDDatePicker.h */,
 				32CABD961CA39E2E0068AE93 /* CDDatePicker.m */,
+				3263DF4E1E271FCB0088E451 /* FiltView.h */,
+				3263DF4F1E271FCB0088E451 /* FiltView.m */,
+				3263DF511E2730870088E451 /* FiltViewCell.h */,
+				3263DF521E2730870088E451 /* FiltViewCell.m */,
 				32D693F11DD5BBA5001D5C7F /* HMDatePickView.h */,
 				32D693F21DD5BBA5001D5C7F /* HMDatePickView.m */,
-				3292A74D1CA3D14E004FEB57 /* CDCityPicker.h */,
-				3292A74E1CA3D14E004FEB57 /* CDCityPicker.m */,
+				32B5A16A1E1E5408003ECCA9 /* PPNumberButton.h */,
+				32B5A16B1E1E5408003ECCA9 /* PPNumberButton.m */,
 				32D859481CB8B2420074D5C3 /* PriSeleView.h */,
 				32D859491CB8B2420074D5C3 /* PriSeleView.m */,
 				32D693E91DD4748F001D5C7F /* UIButton+DDButton.h */,
 				32D693EA1DD4748F001D5C7F /* UIButton+DDButton.m */,
 				3205DEE41DF9596100AC5726 /* UIColor+HexColor.h */,
 				3205DEE51DF9596100AC5726 /* UIColor+HexColor.m */,
+				3263DF4B1E2493480088E451 /* UIImage+DDImage.h */,
+				3263DF4C1E2493480088E451 /* UIImage+DDImage.m */,
 				32FB002C1D405D6F008A5497 /* DDToolKit.h */,
 				32FB002D1D405D6F008A5497 /* DDToolKit.m */,
 				32D8594B1CB8D4400074D5C3 /* NMRangeSlider */,
@@ -2008,6 +2045,12 @@
 		32E4E34E1E151974008280F1 /* home */ = {
 			isa = PBXGroup;
 			children = (
+				32E3F7901E1E4405002C8E9E /* date_choose@2x.png */,
+				32E3F7911E1E4405002C8E9E /* date_choose@3x.png */,
+				32E3F7921E1E4405002C8E9E /* number_choose@2x.png */,
+				32E3F7931E1E4405002C8E9E /* number_choose@3x.png */,
+				32E3F7941E1E4405002C8E9E /* address_choose@2x.png */,
+				32E3F7951E1E4405002C8E9E /* address_choose@3x.png */,
 				32A7314A1E1B518E005D6FB2 /* 热门@2x.png */,
 				32A7314B1E1B518E005D6FB2 /* 热门@3x.png */,
 				32A7314C1E1B518E005D6FB2 /* like@2x.png */,
@@ -2028,13 +2071,26 @@
 			path = home;
 			sourceTree = "<group>";
 		};
+		32EC08EE1E1E201500E55900 /* TravelDVCells */ = {
+			isa = PBXGroup;
+			children = (
+				32EC08EF1E1E205900E55900 /* TitleTVCell.h */,
+				32EC08F01E1E205900E55900 /* TitleTVCell.m */,
+				32E3F78D1E1E3304002C8E9E /* ChooseTVCell.h */,
+				32E3F78E1E1E3304002C8E9E /* ChooseTVCell.m */,
+				3297D3AC1E1F9B06007A0F94 /* MoveSelectTVCell.h */,
+				3297D3AD1E1F9B06007A0F94 /* MoveSelectTVCell.m */,
+			);
+			name = TravelDVCells;
+			sourceTree = "<group>";
+		};
 		32F6CCF71C9A734C00E97B65 = {
 			isa = PBXGroup;
 			children = (
 				32F6CD021C9A734C00E97B65 /* HealthySettle */,
 				32F6CD011C9A734C00E97B65 /* Products */,
-				048C4F4641833A732DF3FBF5 /* Pods */,
 				602BB8B7B42654E2E5CE3AF8 /* Frameworks */,
+				5710BE70A235DCF8BB2C1D5D /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -2143,6 +2199,15 @@
 			path = PersonalGroupn;
 			sourceTree = "<group>";
 		};
+		5710BE70A235DCF8BB2C1D5D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3E86078CAC65104B62849C97 /* Pods-优悠乐.debug.xcconfig */,
+				C513126410A9127C0B94B5D1 /* Pods-优悠乐.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		602BB8B7B42654E2E5CE3AF8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -2169,7 +2234,7 @@
 				32DDD31D1CA1408600EFACF9 /* libbaidumapapi.a */,
 				32DDD31B1CA1406A00EFACF9 /* libPods.a */,
 				32DDD3191CA13FD900EFACF9 /* libbaidumapapi.a */,
-				19C0DD8F63F6611305C1DF8C /* libPods.a */,
+				087E2C9EC0A262329181EDAC /* libPods-优悠乐.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -2181,12 +2246,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 32F6CD171C9A734C00E97B65 /* Build configuration list for PBXNativeTarget "优悠乐" */;
 			buildPhases = (
-				05FD7EADA56C41DDDAD904CD /* Check Pods Manifest.lock */,
+				82051115B23477C89643D6BA /* [CP] Check Pods Manifest.lock */,
 				32F6CCFC1C9A734C00E97B65 /* Sources */,
 				32F6CCFE1C9A734C00E97B65 /* Resources */,
 				32F6CCFD1C9A734C00E97B65 /* Frameworks */,
-				5D5163ED35BEF8629E93BCD1 /* Embed Pods Frameworks */,
-				AAA64B3CE574114645E92F6A /* Copy Pods Resources */,
+				B5DD6A9F542EC7E56E0C8A20 /* [CP] Embed Pods Frameworks */,
+				D0BE2EF6AC931590DD3EA21E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -2276,7 +2341,6 @@
 				325C824D1CB122480004EA0C /* ShowTVCell.xib in Resources */,
 				320BE5D81CBCDFC700A34FCB /* system_1_41@2x.png in Resources */,
 				32E4E3541E151974008280F1 /* regiment@2x.png in Resources */,
-				324075D21CAD218800BAF253 /* RegimenRTVCell.xib in Resources */,
 				32E4E3601E1522BA008280F1 /* healthassess@3x.png in Resources */,
 				32E5885D1CB741ED002AED1A /* back_@3x.png in Resources */,
 				32E5886F1CB74A87002AED1A /* system_1_@3x.png in Resources */,
@@ -2317,7 +2381,6 @@
 				32E5883A1CB73A47002AED1A /* found_g@2x.png in Resources */,
 				32E588651CB748A8002AED1A /* right_@2x.png in Resources */,
 				32E588421CB73A7F002AED1A /* my_g@2x.png in Resources */,
-				324075CD1CAD213600BAF253 /* PensionSRTVCell.xib in Resources */,
 				32467EBE1DC329440005B822 /* banner_p@3x.png in Resources */,
 				32A731511E1B518E005D6FB2 /* like@3x.png in Resources */,
 				32467EBF1DC329440005B822 /* city_p@2x.png in Resources */,
@@ -2330,6 +2393,7 @@
 				32D859431CB89E420074D5C3 /* list2_2_@3x.png in Resources */,
 				32518DB41CB34EFC00CEAE35 /* custom_number.png in Resources */,
 				32CEF82C1DB713E700CB7584 /* level_2@2x.png in Resources */,
+				32E3F7991E1E4405002C8E9E /* number_choose@3x.png in Resources */,
 				32E4E3531E151974008280F1 /* pension@2x.png in Resources */,
 				32E4E3611E1522BA008280F1 /* regimenstrategy@2x.png in Resources */,
 				32E588611CB74205002AED1A /* leftop_r@3x.png in Resources */,
@@ -2353,6 +2417,7 @@
 				3278CCE41CAFBB4500038B9D /* CommentTVCell.xib in Resources */,
 				32467EC31DC329440005B822 /* search_p@2x.png in Resources */,
 				327CA9731CBBA28A00FC4F8E /* add_btn.png in Resources */,
+				32E3F7971E1E4405002C8E9E /* date_choose@3x.png in Resources */,
 				32E5883E1CB73A72002AED1A /* call_g@2x.png in Resources */,
 				32D859631CB8D4400074D5C3 /* slider-default-handle@2x.png in Resources */,
 				324075D41CAD2D9300BAF253 /* pension.png in Resources */,
@@ -2361,6 +2426,8 @@
 				325051E81CB6371600D431F5 /* order_image.png in Resources */,
 				32399A331E1C93120056295B /* list_p@3x.png in Resources */,
 				32D859441CB89E420074D5C3 /* list2_3_@2x.png in Resources */,
+				32E3F79A1E1E4405002C8E9E /* address_choose@2x.png in Resources */,
+				32E3F79B1E1E4405002C8E9E /* address_choose@3x.png in Resources */,
 				32D859471CB89E420074D5C3 /* list2_4_@3x.png in Resources */,
 				327CA9701CBB79C100FC4F8E /* weishiyong_@3x.png in Resources */,
 				325C82421CB0E7530004EA0C /* OrgIntroTVCell.xib in Resources */,
@@ -2409,6 +2476,7 @@
 				3223F1151DB8D87D001F1DCC /* Main.storyboard in Resources */,
 				32E588D31CB7B8F8002AED1A /* MonthViewController.xib in Resources */,
 				32E588601CB74205002AED1A /* leftop_r@2x.png in Resources */,
+				32E3F7981E1E4405002C8E9E /* number_choose@2x.png in Resources */,
 				32E588531CB74029002AED1A /* fir_@3x.png in Resources */,
 				3273DF8B1DB9C4080094AD42 /* PersonNTVCell.xib in Resources */,
 				32D859641CB8D4400074D5C3 /* slider-default-track.png in Resources */,
@@ -2431,6 +2499,7 @@
 				32D693F01DD56380001D5C7F /* PersonDataSetVC.xib in Resources */,
 				3223F11F1DB8E19F001F1DCC /* Loading@2x.png in Resources */,
 				32D23E781DC33932009154F6 /* MJRefresh.bundle in Resources */,
+				32E3F7961E1E4405002C8E9E /* date_choose@2x.png in Resources */,
 				32CEF8281DB713E700CB7584 /* level_0@2x.png in Resources */,
 				32E5887C1CB74EA0002AED1A /* user_@2x.png in Resources */,
 			);
@@ -2439,49 +2508,49 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		05FD7EADA56C41DDDAD904CD /* Check Pods Manifest.lock */ = {
+		82051115B23477C89643D6BA /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		5D5163ED35BEF8629E93BCD1 /* Embed Pods Frameworks */ = {
+		B5DD6A9F542EC7E56E0C8A20 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-优悠乐/Pods-优悠乐-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		AAA64B3CE574114645E92F6A /* Copy Pods Resources */ = {
+		D0BE2EF6AC931590DD3EA21E /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-优悠乐/Pods-优悠乐-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -2496,6 +2565,8 @@
 				326F24801CCB0690002BCE0D /* WXUtil.mm in Sources */,
 				32CABD8D1CA374020068AE93 /* CustomerViewController.m in Sources */,
 				322C36851D338607005163C4 /* DDLogin.m in Sources */,
+				32EC08ED1E1E186700E55900 /* TravelDetailVController.m in Sources */,
+				320CACBA1E1CFE7D003C2206 /* TravelResultVController.m in Sources */,
 				32FB00311D40C163008A5497 /* DDFindTest.m in Sources */,
 				3252D6571CC752B5000FAFBC /* RSADataSigner.m in Sources */,
 				324CD4BA1CAE70F000276B57 /* HomeTVCell.m in Sources */,
@@ -2545,15 +2616,17 @@
 				32E4E34D1E1510F7008280F1 /* NewsView.m in Sources */,
 				324CD4B01CAE630700276B57 /* LivingTimeTVCell.m in Sources */,
 				32DB053A1DA8CDF40041C4F5 /* SDCollectionViewCell.m in Sources */,
+				32B5A16C1E1E5408003ECCA9 /* PPNumberButton.m in Sources */,
 				32DB05361DA8CDF40041C4F5 /* TAAbstractDotView.m in Sources */,
 				32DC71EA1DC9BB87000E0AAA /* RSAEncryptor.m in Sources */,
 				3278CCDF1CAF8E9800038B9D /* TestModel.m in Sources */,
 				326F247D1CCB0690002BCE0D /* getIPhoneIP.m in Sources */,
 				324075CC1CAD213600BAF253 /* PensionSRTVCell.m in Sources */,
 				3252D6561CC752B5000FAFBC /* openssl_wrapper.m in Sources */,
-				3292A74F1CA3D14E004FEB57 /* CDCityPicker.m in Sources */,
+				32299CCF1E28878900372A72 /* CDCityPicker.m in Sources */,
 				326F24831CCB0690002BCE0D /* XMLDictionary.m in Sources */,
 				32D23E7B1DC33932009154F6 /* MJRefreshFooterView.m in Sources */,
+				3263DF501E271FCB0088E451 /* FiltView.m in Sources */,
 				32DC71E61DC9BB87000E0AAA /* Base64.m in Sources */,
 				32518DAF1CB34AC700CEAE35 /* SearchOrganTVCell.m in Sources */,
 				32DC71E71DC9BB87000E0AAA /* Base64Data.m in Sources */,
@@ -2563,12 +2636,14 @@
 				324075D11CAD218800BAF253 /* RegimenRTVCell.m in Sources */,
 				32E4E34A1E150DCF008280F1 /* EntranceView.m in Sources */,
 				32E588B61CB78BE1002AED1A /* CommonTVCell.m in Sources */,
+				3263DF4D1E2493480088E451 /* UIImage+DDImage.m in Sources */,
 				325C82411CB0E7530004EA0C /* OrgIntroTVCell.m in Sources */,
 				32399A2F1E1C90ED0056295B /* TravelTVCell.m in Sources */,
 				320108131DBB4A38007ACA6B /* DDMoneyList.m in Sources */,
 				32D693D91DD1C00D001D5C7F /* INTURequestIDGenerator.m in Sources */,
 				32CABD901CA374020068AE93 /* TempView.m in Sources */,
 				3252D6511CC752B5000FAFBC /* base64.m in Sources */,
+				3297D3AE1E1F9B06007A0F94 /* MoveSelectTVCell.m in Sources */,
 				32CABD661CA373AA0068AE93 /* SearchVController.m in Sources */,
 				3285AF0E1D376B3C0070618A /* GroupRoom.m in Sources */,
 				32D8594A1CB8B2420074D5C3 /* PriSeleView.m in Sources */,
@@ -2589,6 +2664,7 @@
 				32FD72CE1CAA301E008CB917 /* WebViewController.m in Sources */,
 				32D693EB1DD4748F001D5C7F /* UIButton+DDButton.m in Sources */,
 				3252D6541CC752B5000FAFBC /* MD5DataSigner.m in Sources */,
+				32E3F78F1E1E3304002C8E9E /* ChooseTVCell.m in Sources */,
 				32CEF8351DB8B4ED00CB7584 /* DDUpdatePWD.m in Sources */,
 				32FB002B1D3F1BE4008A5497 /* GetPassWordViewController.m in Sources */,
 				32A3BB771DBB16490009D50F /* DDCollectList.m in Sources */,
@@ -2617,6 +2693,7 @@
 				321C430C1DC04A2300192243 /* DDArticleList.m in Sources */,
 				32E71CA61CB256920079CD73 /* OrderBtnTVCell.m in Sources */,
 				3273DF911DBA1CA50094AD42 /* Order_ed.m in Sources */,
+				32EC08F11E1E205900E55900 /* TitleTVCell.m in Sources */,
 				327CA9681CBB692000FC4F8E /* GraceVC.m in Sources */,
 				32FD72DC1CAA94F0008CB917 /* PersonTVCell.m in Sources */,
 				32CABD8E1CA374020068AE93 /* MineViewController.m in Sources */,
@@ -2632,6 +2709,7 @@
 				3273DF8A1DB9C4080094AD42 /* PersonNTVCell.m in Sources */,
 				32D693E21DD466E8001D5C7F /* PersonMSetVC.m in Sources */,
 				32CABD641CA373AA0068AE93 /* CityCollectionViewCell.m in Sources */,
+				3263DF531E2730870088E451 /* FiltViewCell.m in Sources */,
 				3278CCE91CAFDDC100038B9D /* SelectTVCell.m in Sources */,
 				3252D6531CC752B5000FAFBC /* DataVerifier.m in Sources */,
 				32D693D81DD1C00D001D5C7F /* INTULocationRequest.m in Sources */,
@@ -2755,7 +2833,7 @@
 		};
 		32F6CD181C9A734C00E97B65 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B13104AB7B8F04CDDC48D9DD /* Pods.debug.xcconfig */;
+			baseConfigurationReference = 3E86078CAC65104B62849C97 /* Pods-优悠乐.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_NULLABLE_TO_NONNULL_CONVERSION = NO;
@@ -2841,7 +2919,7 @@
 		};
 		32F6CD191C9A734C00E97B65 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3B3A723A9107D9206B488077 /* Pods.release.xcconfig */;
+			baseConfigurationReference = C513126410A9127C0B94B5D1 /* Pods-优悠乐.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_NULLABLE_TO_NONNULL_CONVERSION = NO;
