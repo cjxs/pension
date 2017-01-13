@@ -69,17 +69,7 @@
     if (number_btn != btn.tag - 500) {
         number_btn = btn.tag-500;
         
-            [self changeColorForAll];
-            [btn setTitleColor:[UIColor redColor]
-                      forState:UIControlStateNormal];
-            for (UIView *view in bg_view.subviews)
-            {
-                if (view.frame.size.height == 1&&
-                    view.frame.origin.x == btn.frame.origin.x)
-                {
-                    view.backgroundColor = [UIColor redColor];
-                }
-            }
+        [self changeColorsWithbtn:btn];
         if (self.delegate && [self.delegate respondsToSelector:@selector(updateDataWithWave:)]) {
             [self.delegate updateDataWithWave:number_btn];
         }
@@ -88,14 +78,24 @@
         
     }
 }
--(void)changeColorForAll{
+-(void)changeColorsWithbtn:(UIButton *)button{
     for (int i = 0;i < bg_view.subviews.count;i++) {
         if ([bg_view.subviews[i] isKindOfClass:[UIButton class]]) {
             UIButton * btn = bg_view.subviews[i];
-            [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            if (button == btn) {
+                [btn setTitleColor:[UIColor redColor]
+                          forState:UIControlStateNormal];
+            }else{
+                [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            }
         }else{
             UIView * view = bg_view.subviews[i];
-            view.backgroundColor = WHITECOLOR;
+            if (button.frame.origin.x == view.frame.origin.x) {
+                view.backgroundColor = [UIColor redColor];
+            }else{
+                view.backgroundColor = WHITECOLOR;
+            }
+
         }
     }
 }

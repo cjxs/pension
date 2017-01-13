@@ -12,7 +12,7 @@
 @implementation SearchOrganTVCell
 -(UILabel *)name_la {
     if (!_name_la) {
-        UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(20, screenHeight * 0.33-50, screenWide-40, 40)];
+        UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(20, screenHeight * 0.15-20, screenWide-40, 40)];
         label.font = [UIFont systemFontOfSize:30];
         label.textAlignment = NSTextAlignmentCenter;
         label.adjustsFontSizeToFitWidth = YES;
@@ -26,11 +26,12 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         
-        UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWide, screenHeight * 0.33)];
-        view.clipsToBounds = YES;
+        UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWide , screenHeight * 0.3057)];
         
         [self addSubview:view];
-        self.organ_imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, -screenHeight *0.025, screenWide, screenHeight * 0.38)];
+        self.organ_imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.032* screenWide, -screenHeight *0.025, screenWide* 0.936, screenHeight * 0.3557)];
+        _organ_imageView.backgroundColor = [UIColor redColor];
+        view.clipsToBounds = YES;
         [view addSubview:self.organ_imageView];
         [view addSubview:self.name_la];
         

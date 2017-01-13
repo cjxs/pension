@@ -50,6 +50,7 @@
     NSMutableArray * m_groups;
     int _wave;
     SDCycleScrollView *cycleScrollView3;
+    UIView * fbg_view;
 }
 /** 地理编码管理器 */
 @property (nonatomic, strong) CLGeocoder *geoC;
@@ -184,6 +185,10 @@
             }
         }
         [self reloadTableView];
+        if (fbg_view) {
+            [fbg_view removeFromSuperview];
+        }
+
         
     } failure:^(__kindof YTKBaseRequest *request){
         [SVProgressHUD showErrorWithStatus:@"网络错误"];
@@ -269,6 +274,13 @@
                                    forState:UIControlStateNormal
                                  barMetrics:UIBarMetricsDefault];
     self.navigationItem.backBarButtonItem = returnBarButtonItem;
+    
+    fbg_view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWide, screenHeight)];
+    fbg_view.backgroundColor = WHITECOLOR;
+    [self.view addSubview:fbg_view];
+    [self.view bringSubviewToFront:fbg_view];
+
+    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -377,6 +389,7 @@ numberOfRowsInSection:(NSInteger)section
         }else{
             TravelDetailVController * resultDTVC = [[TravelDetailVController alloc] init];
             resultDTVC.group_id = m_groups[indexPath.row][@"group_id"];
+            resultDTVC.hidesBottomBarWhenPushed = YES;//隐藏tabBar
             [self.navigationController pushViewController:resultDTVC animated:NO];
             
         }

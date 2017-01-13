@@ -104,7 +104,7 @@
         text_field.clearButtonMode = UITextFieldViewModeWhileEditing;
         [self.secondView addSubview:text_field];
         _position_label.text = @"价格";
-        _position_label.backgroundColor = [UIColor blackColor];
+//        _position_label.backgroundColor = [UIColor blackColor];
         _priceAndCity_label.alpha = 1.0;
         _priceAndCity_label.text = @"";
         

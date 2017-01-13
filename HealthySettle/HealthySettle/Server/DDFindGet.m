@@ -25,7 +25,7 @@
 -(id)requestArgument
 {
     return @{
-        @"controller":@"find"
+        @"controller":@"new_find"
     };
 }
 

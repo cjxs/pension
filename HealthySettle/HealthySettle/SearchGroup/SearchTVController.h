@@ -10,5 +10,5 @@
 
 @interface SearchTVController : UIViewController
 @property (nonatomic,strong)UITableView * tableView;
-
+@property (nonatomic,strong)UIView * tableHeadView;
 @end

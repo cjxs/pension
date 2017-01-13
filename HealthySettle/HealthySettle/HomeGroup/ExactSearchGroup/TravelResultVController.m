@@ -11,6 +11,7 @@
 #import "TravelDetailVController.h"
 #import "DDListGet.h"
 #import "MJRefresh.h"
+#import "FiltView.h"
 
 
 static NSInteger page = 1;
@@ -35,6 +36,7 @@ static NSInteger page = 1;
         tableView.delegate = self;
         tableView.dataSource = self;
         tableView.tableFooterView = [UIView new];
+        tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView = tableView;
         
     }
@@ -78,6 +80,7 @@ static NSInteger page = 1;
             UILabel * label = [[UILabel alloc]
                                initWithFrame:CGRectMake(screenWide/4 * i, CGRectGetMaxY(image_view.frame), screenWide /4,49 -  CGRectGetMaxY(image_view.frame))];
             label.text = title_array[i];
+            label.tag = 800+i;
             label.textColor = RGB(199, 199, 199);
             label.font = [UIFont systemFontOfSize:10];
             label.textAlignment = NSTextAlignmentCenter;
@@ -91,16 +94,78 @@ static NSInteger page = 1;
 {
     int number = btn.frame.origin.x / screenWide * 4;
     if ( number ==0) {
-        NSLog(@" 所在区域");
+        [self cityfileViewAppear];
     }else if (number == 1)
     {
-        NSLog(@" 价格区间");
+        [self timefileViewAppear];
     }else if (number == 2)
     {
         NSLog(@"筛选");
     }else {
-        NSLog(@"排序");
+        [self pricefileViewAppear];
     }
+}
+-(void)cityfileViewAppear{
+    FiltView * cityfilt_view = [[FiltView alloc] init];
+    cityfilt_view.data_arr1 = @[@"不限",@"华东",@"华南／华中",@"西南",@"华北／东北／西北"];
+    cityfilt_view.listType = DDListTYpeMulti;
+    cityfilt_view.selectType = DDSelectTYpeSingle;
+    cityfilt_view.selectFir = ^(int num){
+        NSLog(@"%d左",num);
+        return @[@"杭州",@"南京",@"苏州",@"大连",@"重庆",@"三亚",@"深圳"];
+    };
+    cityfilt_view.sureBtn = ^(NSString *str){
+        NSLog(@"%@结果city",str);
+        for (int i = 0; i < _filter_view.subviews.count; i++) {
+            if (_filter_view.subviews[i].tag ==800 &&[_filter_view.subviews[i] isKindOfClass:[UILabel class]]) {
+                UILabel *label = _filter_view.subviews[i];
+                label.text = str;
+            }
+        }
+    };
+    
+    [cityfilt_view addFirstView];
+    [UIView animateWithDuration:0.5f animations:^{
+        [self.view addSubview:cityfilt_view];
+        }];
+}
+-(void)timefileViewAppear{
+    FiltView * timefilt_view = [[FiltView alloc] init];
+    timefilt_view.listType = DDListTYpeSingle;
+    timefilt_view.selectType = DDSelectTYpeMulti;
+    timefilt_view.data_arr1 = @[@"不限",@"1-3天",@"4-7天",@"8-15天",@"15天以上"];
+    timefilt_view.sureBtn = ^(NSArray *arr){
+        for (NSString * str in arr) {
+            NSLog(@"%@结果time",str);
+        }
+    };
+
+    [timefilt_view addFirstView];
+
+    [UIView animateWithDuration:0.5f animations:^{
+        [self.view addSubview:timefilt_view];
+    }];
+
+}
+-(void)pricefileViewAppear{
+    FiltView * pricefilt_view = [[FiltView alloc] init];
+    pricefilt_view.listType = DDListTYpeSingle;
+    pricefilt_view.selectType = DDSelectTYpeSingle;
+    pricefilt_view.data_arr1 = @[@"综合排序",@"价格从高到低",@"价格从低到高"];
+    pricefilt_view.sureBtn = ^(NSString * str){
+        for (int i = 0; i < _filter_view.subviews.count; i++) {
+            if (_filter_view.subviews[i].tag ==803 &&[_filter_view.subviews[i] isKindOfClass:[UILabel class]]) {
+                UILabel *label = _filter_view.subviews[i];
+                label.text = str;
+            }
+        }
+
+    };
+    [pricefilt_view addFirstView];
+    [UIView animateWithDuration:0.5f animations:^{
+        [self.view addSubview:pricefilt_view];
+    }];
+
 }
 
 -(void)viewWillAppear:(BOOL)animated
