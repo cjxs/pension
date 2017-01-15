@@ -10,6 +10,7 @@
 #import "CDDatePicker.h"
 #import "CDCityPicker.h"
 #import "ResultListVController.h"
+#import "FiltView.h"
 @interface SearchVController ()<HYMDatePickerDelegate,CDCityPickerDelegate,UIGestureRecognizerDelegate> {
     NSDate * end_begain;
     NSDate * end_end;
@@ -107,7 +108,7 @@
         self.back_imageView.image = [UIImage imageNamed:@"leftop_w"];
         [self setBottomPicWithPic:
          [UIImage imageNamed:@"regimen_preview"]
-                         andTitle:@"养生·度假"];//
+                         andTitle:@"养生·度假"];
         _four_markPic.image = [UIImage imageNamed:@"search_4_"];
         _fivth_markPic.image = [UIImage imageNamed:@"search_5_"];
         _city_label.text = @"杭州市";
@@ -135,6 +136,11 @@
         
         
     }
+    _position_label.userInteractionEnabled = YES;
+    UITapGestureRecognizer * tap_pri = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(priceViewAppear)];
+    tap_pri.numberOfTapsRequired = 1;
+    [_position_label addGestureRecognizer:tap_pri];
+    
     _city_label.userInteractionEnabled = YES;
     _city_label.tag = 301;
     UITapGestureRecognizer * tap_City = [[UITapGestureRecognizer alloc]
@@ -144,6 +150,28 @@
     tap_City.numberOfTapsRequired = 1;
     self.serch_messagebtn.clipsToBounds = YES;
     self.serch_messagebtn.layer.cornerRadius = 5;
+    
+}
+-(void)priceViewAppear{
+    FiltView * timefilt_view = [[FiltView alloc] init];
+    if ([_vc_type intValue] == 1) {
+        timefilt_view.data_arr1 = @[@"5000元/月 以上",@"3000-5000元/月",@"2000-3000元/月",@"1000-2000元/月",@"1000元/月 以下"];
+    }else{
+        timefilt_view.data_arr1 = @[@"150元/天 以下",@"150－300元/天",@"300-450元/天",@"450-600元/天",@"600元/月 以上"];
+
+    }
+    timefilt_view.viewType = DDNormalView;
+    timefilt_view.listType = DDListTYpeSingle;
+    timefilt_view.selectType = DDSelectTYpeSingle;
+    timefilt_view.sureBtn = ^(NSString  *str){
+        NSLog(@"%@好啦",str);
+    };
+    
+    [timefilt_view addFirstView];
+    
+    [UIView animateWithDuration:0.5f animations:^{
+        [self.view addSubview:timefilt_view];
+    }];
     
 }
 -(void)skipToCityWithButton:(UIButton *)btn{

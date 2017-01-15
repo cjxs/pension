@@ -57,7 +57,7 @@
         _organization_address.text = @"养老回家规范化建设高房价的设计风格撒娇都会风格设计";
         _price_label.text = @"¥ 35467";
         [self.price_label mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(screenWide * 0.134, screenHeight * 0.0201));
+            make.size.mas_equalTo(CGSizeMake(screenWide * 0.154, screenHeight * 0.0201));
             make.bottom.equalTo(_organization_image);
             make.right.equalTo(_organization_title).offset(-15);
         }];

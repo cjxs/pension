@@ -44,7 +44,7 @@
         [self addSubview:self.organization_title];
         [self addSubview:self.price_label];
         [self.price_label mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(screenWide * 0.134, screenHeight * 0.0201));
+            make.size.mas_equalTo(CGSizeMake(screenWide * 0.184, screenHeight * 0.0201));
             make.bottom.equalTo(_organization_image);
             make.right.equalTo(_organization_title).offset(-15);
         }];

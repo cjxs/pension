@@ -17,6 +17,7 @@
     if (self) {
         self.selectType = DDSelectTYpeSingle;
         self.listType = DDListTYpeSingle;
+        _viewType = DDUnnormalView;
         self.frame = [UIScreen mainScreen].bounds;
         
         UIView * alpha_view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWide, screenHeight  * 57496)];
@@ -36,10 +37,14 @@
 {
 
     if (self.listType == 0) {
-        left_tab_view = [[UITableView alloc] initWithFrame:CGRectMake(0, screenHeight * 0.57496 , screenWide, screenHeight * 0.5 - screenHeight * 0.07496-64) style:UITableViewStylePlain];
+        UITableView * tabview_0 = [[UITableView alloc] initWithFrame:CGRectMake(0, screenHeight * 0.57496 , screenWide, screenHeight * 0.5 - screenHeight * 0.07496-64) style:UITableViewStylePlain];
+        UITableView * tabview_1 = [[UITableView alloc] initWithFrame:CGRectMake(0, screenHeight * 0.57496 , screenWide, screenHeight * 0.5 - screenHeight * 0.07496) style:UITableViewStylePlain];
+        left_tab_view = self.viewType ==1?tabview_0:tabview_1;
 
     }else{
-        left_tab_view = [[UITableView alloc] initWithFrame:CGRectMake(0, screenHeight * 0.57496 , screenWide * 0.353, screenHeight * 0.5 - screenHeight * 0.07496-64) style:UITableViewStylePlain];
+        UITableView * tabview_2 = [[UITableView alloc] initWithFrame:CGRectMake(0, screenHeight * 0.57496 , screenWide * 0.353, screenHeight * 0.5 - screenHeight * 0.07496-64) style:UITableViewStylePlain];
+        UITableView * tabview_3 = [[UITableView alloc] initWithFrame:CGRectMake(0, screenHeight * 0.57496 , screenWide * 0.353, screenHeight * 0.5 - screenHeight * 0.07496) style:UITableViewStylePlain];
+        left_tab_view = self.viewType ==1?tabview_2:tabview_3;
         UIView * white_view = [[UIView alloc] init];
         white_view.backgroundColor = WHITECOLOR;
         [self addSubview:white_view];
@@ -99,6 +104,11 @@
             make.top.equalTo(clear_btn);
             make.size.equalTo(cancle_btn);
         }];
+        if (IS_IPHONE5||IS_IPHONE5EARLY) {
+            cancle_btn.titleLabel.font = [UIFont systemFontOfSize:14];
+            sure_btn.titleLabel.font = [UIFont systemFontOfSize:14];
+            clear_btn.titleLabel.font = [UIFont systemFontOfSize:12];
+        }
     }
     
 }
@@ -115,9 +125,9 @@
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     FiltViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+
     if (tableView == left_tab_view) {
         cell.text_label.text = _data_arr1[indexPath.row];
-        cell.text_label.font = [UIFont systemFontOfSize:14];
         cell.backgroundColor = [UIColor colorWithHexString:@"#f6f6f6"];
         
     }else{
@@ -129,6 +139,12 @@
     }else{
         cell.text_label.textColor = [UIColor blackColor];
     }
+    if (IS_IPHONE5EARLY || IS_IPHONE5) {
+        cell.text_label.font = [UIFont systemFontOfSize:11];
+    }else{
+        cell.text_label.font = [UIFont systemFontOfSize:14];
+    }
+
     cell.selectionStyle =  UITableViewCellSelectionStyleNone;
     return cell;
 }
@@ -220,7 +236,18 @@
 }
 -(void)clearSelected{
     if (_sureBtn) {
-        _sureBtn(@"不限");
+        switch (self.selectType) {
+            case 0:
+                _sureBtn(@"");
+                break;
+            case 1:
+                
+                _sureBtn(@[]);
+                break;
+                
+            default:
+                break;
+        }
     }
     [self performSelector:@selector(dismiss) withObject:self afterDelay:0.2f];
 
@@ -230,7 +257,6 @@
         switch (self.selectType) {
             case 0:
                 _sureBtn(result);
-                [self dismiss];
                 break;
             case 1:
                 

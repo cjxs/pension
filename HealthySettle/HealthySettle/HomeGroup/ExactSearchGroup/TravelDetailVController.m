@@ -78,9 +78,9 @@
     self.view.backgroundColor = WHITECOLOR;
     [self.view addSubview:self.tableView];
     self.tableView.tableHeaderView = self.tableHeadView;
-    [_tableView registerClass:[TitleTVCell class] forCellReuseIdentifier:@"title"];
-    [_tableView registerClass:[ChooseTVCell class] forCellReuseIdentifier:@"choose"];
-    [_tableView registerClass:[MoveSelectTVCell class] forCellReuseIdentifier:@"move"];
+    [self.tableView registerClass:[TitleTVCell class] forCellReuseIdentifier:@"title"];
+    [self.tableView registerClass:[ChooseTVCell class] forCellReuseIdentifier:@"choose"];
+    [self.tableView registerClass:[MoveSelectTVCell class] forCellReuseIdentifier:@"move"];
     
     [self creatBackFootView];
 
@@ -144,7 +144,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            TitleTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"title"];
+            TitleTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"title" forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
         }else if (indexPath.row == 1){

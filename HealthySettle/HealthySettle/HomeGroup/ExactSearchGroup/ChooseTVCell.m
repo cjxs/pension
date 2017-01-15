@@ -41,6 +41,7 @@
         UILabel * address_label = [[UILabel alloc] initWithFrame:CGRectMake(screenWide * 0.12266, screenHeight * 0.03373, screenWide * 0.4, screenHeight * 0.02848)];
         address_label.text = @"杭州出发";
         [self addSubview:address_label];
+        
         UIView * line_view1 = [[UIView alloc] initWithFrame:CGRectMake(0, screenHeight*0.07946, screenWide, 1)];
         line_view1.backgroundColor = [UIColor colorWithHexString:@"#ebebeb"];
         [self addSubview:line_view1];

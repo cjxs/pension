@@ -37,7 +37,8 @@
             for (int i = 0;i < array.count; i++) {
                 UILabel * label1 = [[UILabel alloc] init];
                 label1.text = array[i];
-                label1.textColor =(__bridge UIColor * _Nullable)(label1.layer.borderColor = [[UIColor greenColor] CGColor]);
+                label1.layer.borderColor = [[UIColor greenColor] CGColor];
+                label1.textColor =[UIColor greenColor];
                 label1.layer.borderWidth = 0.5f;
                 label1.layer.cornerRadius = 2;
                 label1.layer.masksToBounds = YES;

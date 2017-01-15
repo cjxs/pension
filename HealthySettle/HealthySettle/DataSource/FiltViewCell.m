@@ -11,9 +11,11 @@
 @implementation FiltViewCell
 -(UILabel *)text_label{
     if (!_text_label) {
-        UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(screenWide * 0.032, 0, self.frame.size.width*0.8, self.frame.size.height)];
+        UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(screenWide * 0.05, 0, self.frame.size.width*0.8, self.frame.size.height)];
         label.textAlignment = NSTextAlignmentLeft;
         _text_label = label;
+
+
     }
     return _text_label;
 }

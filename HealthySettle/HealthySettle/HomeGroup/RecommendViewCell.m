@@ -19,10 +19,15 @@
         UIView * line_view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWide, screenHeight * 0.05547)];
         line_view.backgroundColor = GRAYCOLOR;
         [self addSubview:line_view];
-        UILabel * title_label = [[UILabel alloc] initWithFrame:CGRectMake(screenWide/4, screenHeight * 0.02488, screenWide/2, screenHeight * 0.01799)];
+        UILabel * title_label = [[UILabel alloc] initWithFrame:CGRectMake(screenWide/4, screenHeight * 0.02, screenWide/2, screenHeight * 0.01799)];
         title_label.text = @"——— 精品推荐 ———";
         title_label.textAlignment = NSTextAlignmentCenter;
         [line_view addSubview:title_label];
+        if (IS_IPHONE5EARLY || IS_IPHONE5) {
+            title_label.font = [UIFont systemFontOfSize:14];
+        }
+
+        
         bg_view = [[UIView alloc] initWithFrame:CGRectMake(0, screenHeight * 0.05547, screenWide, screenHeight * 0.05997 -1)];
         [self addSubview:bg_view];
         bg_view.backgroundColor = WHITECOLOR;
@@ -32,6 +37,7 @@
         {
             UIButton * btn = [UIButton buttonWithType:UIButtonTypeCustom];
             btn.frame = CGRectMake(i *screenWide /4 + screenWide /8, 0.005 * screenHeight, screenWide /4, screenHeight * 0.05);
+            btn.titleLabel.font = [UIFont systemFontOfSize:14];
             btn.tag = 500 + i;
             [btn setTitle:array[i]
                  forState:UIControlStateNormal];

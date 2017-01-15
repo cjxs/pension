@@ -15,6 +15,10 @@ typedef NS_ENUM(NSUInteger, ListType) {
     DDListTYpeSingle = 0,//一级
     DDListTYpeMulti = 1//二级
 };
+typedef NS_ENUM(NSUInteger,ViewType){
+    DDNormalView = 0,
+    DDUnnormalView = 1
+};
 @interface FiltView : UIView<UITableViewDelegate,UITableViewDataSource>{
     UITableView * left_tab_view;
     UITableView * right_tab_view;
@@ -31,6 +35,7 @@ typedef NS_ENUM(NSUInteger, ListType) {
 @property (nonatomic,copy) NSArray *(^selectFir)(int num);
 @property (nonatomic,assign)SelectType  selectType;
 @property (nonatomic,assign)ListType  listType;
+@property (nonatomic,assign)ViewType  viewType;
 
 - (void)addFirstView;
 @end

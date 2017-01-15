@@ -24,15 +24,24 @@
         CGFloat wide = frame.size.width;
         CGFloat height = frame.size.height;
         _title_label = [[UILabel alloc] initWithFrame:CGRectMake(0.072 * wide, 0.293*height, 0.490* wide, 0.286 * height)];
-        _title_label.font = [UIFont systemFontOfSize:18];
         _title_label.textColor = [UIColor colorWithHexString:@"#191919"];
         _text_label = [[UILabel alloc] initWithFrame:CGRectMake(0.072 * wide, 0.579 * height, 0.490*wide, 0.286 * height)];
-        _text_label.font = [UIFont systemFontOfSize:12];
         _text_label.textColor = DARKBROWNCOLOR;
         _image_view = [[UIImageView alloc] initWithFrame:CGRectMake(0.634 * wide, 0.133 * height, 0.293 * wide, 0.293 * wide)];
         [self addSubview:_title_label];
         [self addSubview:_text_label];
         [self addSubview:_image_view];
+        if (IS_IPHONE5EARLY || IS_IPHONE5) {
+            _title_label.font = [UIFont systemFontOfSize:16];
+            _text_label.font = [UIFont systemFontOfSize:10];
+            
+            
+        }else{
+            _title_label.font = [UIFont systemFontOfSize:18];
+            _text_label.font = [UIFont systemFontOfSize:12];
+            
+        }
+
     }
     return self;
 }
