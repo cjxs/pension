@@ -18,7 +18,6 @@
                 <outlet property="four_markPic" destination="pXz-y5-lC9" id="mlI-GF-T8h"/>
                 <outlet property="fourthView" destination="KbJ-D2-TOF" id="tUi-EV-uOA"/>
                 <outlet property="position_label" destination="GsZ-cF-RGV" id="6zT-Oz-o3B"/>
-                <outlet property="priceAndCity_label" destination="87B-jm-wH2" id="PPq-vC-Zdf"/>
                 <outlet property="secondView" destination="3Rl-dL-oeu" id="L3s-xA-Rzp"/>
                 <outlet property="second_markPic" destination="0J2-W3-2is" id="9cD-YI-dug"/>
                 <outlet property="seletOff_label" destination="Ytd-sp-7hj" id="ey4-Fc-r0D"/>
@@ -51,16 +50,9 @@
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="next_01.png" translatesAutoresizingMaskIntoConstraints="NO" id="9Re-bY-jbO">
-                            <constraints>
-                                <constraint firstAttribute="width" constant="20" id="c9u-4G-8G9"/>
-                            </constraints>
-                        </imageView>
                     </subviews>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="bottom" secondItem="9Re-bY-jbO" secondAttribute="bottom" constant="20" id="ExN-9t-EIt"/>
-                        <constraint firstItem="9Re-bY-jbO" firstAttribute="top" secondItem="NDZ-zT-Cdx" secondAttribute="top" constant="20" id="HX9-nd-US7"/>
                         <constraint firstItem="EHD-rK-DrS" firstAttribute="centerY" secondItem="ycP-qg-wad" secondAttribute="centerY" id="Igg-Nl-N2f"/>
                         <constraint firstItem="ycP-qg-wad" firstAttribute="top" secondItem="NDZ-zT-Cdx" secondAttribute="top" constant="24" id="SG2-Bw-mhf"/>
                         <constraint firstAttribute="bottom" secondItem="EHD-rK-DrS" secondAttribute="bottom" constant="10" id="SKw-P2-ZbW"/>
@@ -68,7 +60,6 @@
                         <constraint firstItem="ycP-qg-wad" firstAttribute="leading" secondItem="NDZ-zT-Cdx" secondAttribute="leading" constant="25" id="adC-N7-Bjm"/>
                         <constraint firstItem="EHD-rK-DrS" firstAttribute="leading" secondItem="ycP-qg-wad" secondAttribute="trailing" constant="30" id="fgu-DO-Abh"/>
                         <constraint firstItem="EHD-rK-DrS" firstAttribute="top" secondItem="NDZ-zT-Cdx" secondAttribute="top" constant="10" id="gab-pS-Lha"/>
-                        <constraint firstAttribute="trailing" secondItem="9Re-bY-jbO" secondAttribute="trailing" constant="30" id="kNN-83-kIk"/>
                     </constraints>
                     <variation key="default">
                         <mask key="constraints">
@@ -97,23 +88,15 @@
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="next_01.png" translatesAutoresizingMaskIntoConstraints="NO" id="B3z-TH-Kak">
-                            <constraints>
-                                <constraint firstAttribute="width" constant="20" id="9Vk-ff-4aj"/>
-                            </constraints>
-                        </imageView>
                     </subviews>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="GsZ-cF-RGV" firstAttribute="leading" secondItem="pXz-y5-lC9" secondAttribute="trailing" constant="30" id="0eT-9V-PEc"/>
-                        <constraint firstItem="B3z-TH-Kak" firstAttribute="top" secondItem="KbJ-D2-TOF" secondAttribute="top" constant="10" id="3hf-Ki-HHM"/>
                         <constraint firstItem="GsZ-cF-RGV" firstAttribute="top" secondItem="KbJ-D2-TOF" secondAttribute="top" constant="5" id="4f1-JX-wPF"/>
                         <constraint firstItem="pXz-y5-lC9" firstAttribute="leading" secondItem="KbJ-D2-TOF" secondAttribute="leading" constant="25" id="6Bl-65-Ant"/>
                         <constraint firstAttribute="bottom" secondItem="pXz-y5-lC9" secondAttribute="bottom" constant="12" id="C3S-Yw-ewG"/>
                         <constraint firstAttribute="bottom" secondItem="GsZ-cF-RGV" secondAttribute="bottom" constant="5" id="FHh-jP-MQW"/>
-                        <constraint firstAttribute="trailing" secondItem="B3z-TH-Kak" secondAttribute="trailing" constant="30" id="H6b-ET-QH3"/>
                         <constraint firstItem="pXz-y5-lC9" firstAttribute="top" secondItem="KbJ-D2-TOF" secondAttribute="top" constant="12" id="VKa-Ec-3Vq"/>
-                        <constraint firstAttribute="bottom" secondItem="B3z-TH-Kak" secondAttribute="bottom" constant="10" id="qy1-21-Itm"/>
                         <constraint firstAttribute="height" constant="40" id="tdl-TW-eqr"/>
                         <constraint firstItem="GsZ-cF-RGV" firstAttribute="leading" secondItem="KbJ-D2-TOF" secondAttribute="leading" constant="30" id="ydS-GL-wZz"/>
                     </constraints>
@@ -136,37 +119,12 @@
                                 </mask>
                             </variation>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="87B-jm-wH2">
-                            <constraints>
-                                <constraint firstAttribute="width" constant="80" id="J82-lU-SBY"/>
-                                <constraint firstAttribute="width" constant="42" id="TtR-4g-zsA"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <nil key="highlightedColor"/>
-                            <variation key="default">
-                                <mask key="constraints">
-                                    <exclude reference="TtR-4g-zsA"/>
-                                </mask>
-                            </variation>
-                        </label>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="next_01.png" translatesAutoresizingMaskIntoConstraints="NO" id="2E4-2g-E9G">
-                            <constraints>
-                                <constraint firstAttribute="width" constant="20" id="Ou2-kj-IzM"/>
-                            </constraints>
-                        </imageView>
                     </subviews>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstItem="2E4-2g-E9G" firstAttribute="top" secondItem="EKD-sd-Mgv" secondAttribute="top" constant="10" id="9BU-ne-YZv"/>
-                        <constraint firstAttribute="bottom" secondItem="87B-jm-wH2" secondAttribute="bottom" constant="5" id="FkN-zV-oI4"/>
                         <constraint firstAttribute="height" constant="40" id="HIr-UL-emo"/>
                         <constraint firstItem="Xnb-Yp-xdC" firstAttribute="leading" secondItem="EKD-sd-Mgv" secondAttribute="leading" constant="25" id="JtV-sq-Dzm"/>
                         <constraint firstAttribute="bottom" secondItem="Xnb-Yp-xdC" secondAttribute="bottom" constant="12" id="NCi-hq-Tzu"/>
-                        <constraint firstAttribute="trailing" secondItem="2E4-2g-E9G" secondAttribute="trailing" constant="30" id="PgR-f7-xgC"/>
-                        <constraint firstItem="87B-jm-wH2" firstAttribute="leading" secondItem="Xnb-Yp-xdC" secondAttribute="trailing" constant="30" id="Y8Q-xe-4Og"/>
-                        <constraint firstItem="87B-jm-wH2" firstAttribute="top" secondItem="EKD-sd-Mgv" secondAttribute="top" constant="5" id="aOM-6b-Nxn"/>
-                        <constraint firstAttribute="bottom" secondItem="2E4-2g-E9G" secondAttribute="bottom" constant="10" id="hGg-u4-Kgn"/>
                         <constraint firstItem="Xnb-Yp-xdC" firstAttribute="top" secondItem="EKD-sd-Mgv" secondAttribute="top" constant="12" id="smF-fF-lA0"/>
                     </constraints>
                 </view>
@@ -182,11 +140,6 @@
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Rl-dL-oeu">
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="next_01.png" translatesAutoresizingMaskIntoConstraints="NO" id="bFf-Ov-KKG">
-                            <constraints>
-                                <constraint firstAttribute="width" constant="20" id="vnG-3l-nTg"/>
-                            </constraints>
-                        </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GRe-7l-qr7">
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
@@ -233,15 +186,12 @@
                     <constraints>
                         <constraint firstItem="Ytd-sp-7hj" firstAttribute="top" secondItem="GRe-7l-qr7" secondAttribute="bottom" id="2bi-3O-uMS"/>
                         <constraint firstItem="Ytd-sp-7hj" firstAttribute="height" secondItem="GRe-7l-qr7" secondAttribute="height" id="4iy-dp-wcK"/>
-                        <constraint firstAttribute="trailing" secondItem="bFf-Ov-KKG" secondAttribute="trailing" constant="30" id="AtD-TC-oqd"/>
                         <constraint firstAttribute="bottom" secondItem="Ytd-sp-7hj" secondAttribute="bottom" constant="2" id="BiC-Zh-jhK"/>
                         <constraint firstItem="GRe-7l-qr7" firstAttribute="top" secondItem="3Rl-dL-oeu" secondAttribute="top" constant="2" id="CDf-4x-RjZ"/>
                         <constraint firstItem="Ytd-sp-7hj" firstAttribute="leading" secondItem="0J2-W3-2is" secondAttribute="trailing" constant="30" id="CpR-lm-j0f"/>
-                        <constraint firstAttribute="bottom" secondItem="bFf-Ov-KKG" secondAttribute="bottom" constant="25" id="HyL-Hp-E6F"/>
                         <constraint firstItem="0J2-W3-2is" firstAttribute="leading" secondItem="3Rl-dL-oeu" secondAttribute="leading" constant="25" id="Il0-U1-F2s"/>
                         <constraint firstAttribute="height" constant="70" id="JeQ-J8-Fyc"/>
                         <constraint firstItem="GRe-7l-qr7" firstAttribute="leading" secondItem="0J2-W3-2is" secondAttribute="trailing" constant="30" id="KiV-mC-TlZ"/>
-                        <constraint firstItem="bFf-Ov-KKG" firstAttribute="top" secondItem="3Rl-dL-oeu" secondAttribute="top" constant="25" id="SQV-Ed-WgF"/>
                         <constraint firstItem="0J2-W3-2is" firstAttribute="top" secondItem="3Rl-dL-oeu" secondAttribute="top" constant="27" id="T0h-0Z-Tdn"/>
                         <constraint firstAttribute="bottom" secondItem="0J2-W3-2is" secondAttribute="bottom" constant="27" id="Y3T-uN-hGJ"/>
                     </constraints>
@@ -282,7 +232,6 @@
             </subviews>
             <color key="backgroundColor" red="0.95294117647058818" green="0.95294117647058818" blue="0.95294117647058818" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="d1n-8H-bAR" firstAttribute="top" secondItem="EKD-sd-Mgv" secondAttribute="bottom" constant="50" id="2MF-fk-5K2"/>
                 <constraint firstItem="EKD-sd-Mgv" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="94h-6l-ncC"/>
                 <constraint firstAttribute="trailing" secondItem="XKC-8s-Fzt" secondAttribute="trailing" id="Am4-sh-qhD"/>
                 <constraint firstItem="3Rl-dL-oeu" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="CVU-AM-2RC"/>
@@ -293,6 +242,7 @@
                 <constraint firstAttribute="trailing" secondItem="NDZ-zT-Cdx" secondAttribute="trailing" id="TbD-cK-7JQ"/>
                 <constraint firstItem="KbJ-D2-TOF" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="aF5-yP-iB3"/>
                 <constraint firstAttribute="trailing" secondItem="KbJ-D2-TOF" secondAttribute="trailing" id="cTz-jA-Crr"/>
+                <constraint firstItem="d1n-8H-bAR" firstAttribute="top" secondItem="KbJ-D2-TOF" secondAttribute="bottom" constant="90" id="cjL-YU-taa"/>
                 <constraint firstAttribute="trailing" secondItem="3Rl-dL-oeu" secondAttribute="trailing" id="dvg-dI-E2C"/>
                 <constraint firstAttribute="trailing" secondItem="EKD-sd-Mgv" secondAttribute="trailing" id="eSu-mh-ugJ"/>
                 <constraint firstItem="XKC-8s-Fzt" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="fK9-FZ-4CQ"/>
@@ -332,7 +282,6 @@
         </view>
     </objects>
     <resources>
-        <image name="next_01.png" width="58" height="71"/>
         <image name="search_1_" width="960" height="174"/>
         <image name="search_2_" width="866" height="333"/>
     </resources>

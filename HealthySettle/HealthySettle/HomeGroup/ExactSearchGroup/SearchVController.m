@@ -24,15 +24,12 @@
 @property (weak, nonatomic) IBOutlet UIButton *serch_messagebtn;
 @property (weak, nonatomic) IBOutlet UIImageView *first_markPic;
 @property (weak, nonatomic) IBOutlet UIImageView *second_markPic;
-@property (weak, nonatomic) IBOutlet UIImageView *third_markPic;
 @property (weak, nonatomic) IBOutlet UIImageView *four_markPic;
 @property (weak, nonatomic) IBOutlet UIImageView *fivth_markPic;
 @property (weak, nonatomic) IBOutlet UILabel *city_label;
 @property (weak, nonatomic) IBOutlet UILabel *sellectOn_label;
 @property (weak, nonatomic) IBOutlet UILabel *seletOff_label;
-@property (weak, nonatomic) IBOutlet UILabel *nurseTrue_label;
 @property (weak, nonatomic) IBOutlet UILabel *position_label;
-@property (weak, nonatomic) IBOutlet UILabel *priceAndCity_label;
 @property (nonatomic, strong)CDDatePicker * datePicker;
 @property (nonatomic, strong)CDCityPicker * city_picker;
 @end
@@ -104,9 +101,7 @@
         text_field.clearButtonMode = UITextFieldViewModeWhileEditing;
         [self.secondView addSubview:text_field];
         _position_label.text = @"价格";
-//        _position_label.backgroundColor = [UIColor blackColor];
-        _priceAndCity_label.alpha = 1.0;
-        _priceAndCity_label.text = @"";
+        [self.fivthView removeFromSuperview];
         
     }else {
         self.back_imageView.image = [UIImage imageNamed:@"leftop_w"];
@@ -126,9 +121,19 @@
             make.height.mas_equalTo(35);
         }];
         
-        _nurseTrue_label.text = @"";
         _position_label.text = @"价格";
-        _priceAndCity_label.alpha = 0;
+        NSArray * array = @[@"三亚",@"厦门",@"青岛",@"海口",@"巴马",@"桂林"];
+        for (int i = 0; i < array.count; i++) {
+            UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
+            button.frame = CGRectMake(70 + 50*i, 8, 40, 25);
+            [button setTitle:array[i] forState:UIControlStateNormal];
+            [button setTitleColor:RGB(248, 69, 69) forState:UIControlStateNormal];
+            button.tag = 900+i;
+            [button addTarget:self action:@selector(skipToCityWithButton:) forControlEvents:UIControlEventTouchUpInside];
+            [self.fivthView addSubview:button];
+        }
+        
+        
     }
     _city_label.userInteractionEnabled = YES;
     _city_label.tag = 301;
@@ -141,7 +146,17 @@
     self.serch_messagebtn.layer.cornerRadius = 5;
     
 }
+-(void)skipToCityWithButton:(UIButton *)btn{
+    NSArray * array = @[@"807",@"303",@"2268",@"789",@"3515",@"617"];
+    ResultListVController * ResultLVC = [[ResultListVController alloc] init];
+    ResultLVC.vc_type = self.vc_type;
+    ResultLVC.area_id = array[btn.tag-900];
+    ResultLVC.title_l = btn.titleLabel.text;
+    [self.navigationController pushViewController:ResultLVC
+                                         animated:YES];
 
+    
+}
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
