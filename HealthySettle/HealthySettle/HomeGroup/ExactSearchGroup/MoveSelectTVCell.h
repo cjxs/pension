@@ -17,5 +17,6 @@
 
 }
 @property (nonatomic,weak)id<MoveSelDelegate>delegate;
-
+@property (nonatomic,strong)UIWebView * webView;
+-(void)configWithStr:(NSString *)str;
 @end

@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TitleTVCell : UITableViewCell
+@interface TitleTVCell : UITableViewCell{
+    UILabel * dis_label;
+}
 @property (strong, nonatomic)  UILabel *organization_title;
 @property (strong, nonatomic)  UILabel *price_label;
 @property (strong, nonatomic)  UILabel *introduce_label;
-
+-(void)configTitle:(NSString *)title recommend:(NSString *)recommend return:(NSString *)vochers price:(NSString *)price;
 @end

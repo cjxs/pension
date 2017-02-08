@@ -54,6 +54,8 @@
             UIView * line_view = [[UIView alloc] initWithFrame:CGRectMake(0, screenHeight * 0.08095 -1, screenWide, 1)];
             line_view.backgroundColor = GRAYCOLOR;
             [self addSubview:line_view];
+        _webView = [[UIWebView alloc] initWithFrame:CGRectMake(10, screenHeight * 0.08095, screenWide-20, screenHeight * 0.4)];
+        [self addSubview:_webView];
         
         
 
@@ -62,6 +64,9 @@
         
     }
     return self;
+}
+-(void)configWithStr:(NSString *)str{
+    [_webView loadHTMLString:str baseURL:nil];
 }
 - (void)changeDataOfbtn:(UIButton *)btn {
     

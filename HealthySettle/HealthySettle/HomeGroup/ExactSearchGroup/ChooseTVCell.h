@@ -9,7 +9,17 @@
 #import <UIKit/UIKit.h>
 @class PPNumberButton;
 
-@interface ChooseTVCell : UITableViewCell
+@protocol UpdatePriceDelegate <NSObject>
+
+-(void)updatePriceWithNumber:(NSInteger )number;
+@end
+
+@interface ChooseTVCell : UITableViewCell{
+    UILabel * date_label;
+}
 @property (nonatomic,strong)PPNumberButton * number_btn;
+@property (nonatomic,strong)UILabel * address_label;
+@property (nonatomic,weak) id<UpdatePriceDelegate> delegate;
+-(void)configWithArray:(NSArray *)arr area_city:(NSString *)area_city;
 
 @end

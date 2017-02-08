@@ -38,9 +38,12 @@
         UIImageView * address_iView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"address_choose"]];
         address_iView.frame = CGRectMake(screenWide * 0.032, screenHeight * 0.029985, screenWide * 0.05866, screenWide * 0.05866);
         [self addSubview:address_iView];
-        UILabel * address_label = [[UILabel alloc] initWithFrame:CGRectMake(screenWide * 0.12266, screenHeight * 0.03373, screenWide * 0.4, screenHeight * 0.02848)];
-        address_label.text = @"杭州出发";
-        [self addSubview:address_label];
+        UILabel * address_title = [[UILabel alloc] initWithFrame:CGRectMake(screenWide * 0.12266, screenHeight * 0.03373, screenWide * 0.4, screenHeight * 0.02848)];
+        address_title.text = @"目的地";
+        [self addSubview:address_title];
+        _address_label = [[UILabel alloc] initWithFrame:CGRectMake(screenWide * 0.5, screenHeight * 0.03373, screenWide * 0.4, screenHeight * 0.02848)];
+        [self addSubview:_address_label];
+        _address_label.textAlignment = NSTextAlignmentRight;
         
         UIView * line_view1 = [[UIView alloc] initWithFrame:CGRectMake(0, screenHeight*0.07946, screenWide, 1)];
         line_view1.backgroundColor = [UIColor colorWithHexString:@"#ebebeb"];
@@ -49,45 +52,10 @@
         UIImageView * date_iView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"date_choose"]];
         date_iView.frame = CGRectMake(screenWide * 0.032, screenHeight * 0.09595, screenWide * 0.05866, screenWide * 0.05866);
         [self addSubview:date_iView];
-        UILabel * date_label = [[UILabel alloc] initWithFrame:CGRectMake(screenWide * 0.12266, screenHeight * 0.09595, screenWide * 0.4, screenHeight * 0.02848)];
+        date_label = [[UILabel alloc] initWithFrame:CGRectMake(screenWide * 0.12266, screenHeight * 0.09595, screenWide * 0.4, screenHeight * 0.02848)];
         date_label.text = @"出发日期";
         [self addSubview:date_label];
-        NSArray * array = @[@"12/15",@"12/17",@"12/26",@"12/29",@"12/30"];
-        if (array) {
-            UIButton * btn0;
-            for (int i = 0;i < array.count; i++) {
-                UIButton * btn1 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-                [btn1 setTitle:array[i] forState:UIControlStateNormal];
-                [btn1.layer setBorderWidth:0.5f];
-                [btn1 addTarget:self action:@selector(touchThisButton:)forControlEvents:UIControlEventTouchUpInside];
-                btn1.layer.cornerRadius = 2;
-                btn1.layer.masksToBounds = YES;
-                [self addSubview:btn1];
-                if (!btn0) {
-                    [btn1 setTintColor:PINKCOLOR];
-                    [btn1.layer setBorderColor:[PINKCOLOR CGColor]];
-                    
-                    [btn1 mas_makeConstraints:^(MASConstraintMaker *make) {
-                        make.width.mas_equalTo(@(screenWide * 0.16));
-                        make.height.mas_equalTo(@(screenHeight * 0.04497));
-                        make.left.equalTo(date_label);
-                        make.top.mas_equalTo(date_label.mas_bottom).offset(screenHeight * 0.01499);
-                    }];
-                }else{
-                    [btn1 setTintColor:[UIColor blackColor]];
-                    [btn1.layer setBorderColor:[[UIColor grayColor] CGColor]];
-
-                    [btn1 mas_makeConstraints:^(MASConstraintMaker *make) {
-                        make.width.mas_equalTo(@(screenWide * 0.15));
-                        make.height.mas_equalTo(@(screenHeight * 0.04497));
-                        make.left.mas_equalTo(btn0.mas_right).offset(screenWide * 0.0266);
-                        make.top.mas_equalTo(date_label.mas_bottom).offset(screenHeight * 0.01499);
-                    }];
-                }
-                btn0 = btn1;
-            }
-        }
-
+        
         
         
         
@@ -104,19 +72,58 @@
         
         [self addSubview:self.number_btn];
         
-
-        
-
-        
-        
+ 
     }
     return self;
 }
-                                                          
+-(void)configWithArray:(NSArray *)arr area_city:(NSString *)area_city{
+    _address_label.text = area_city;
+    
+    if (arr) {
+        UIButton * btn0;
+        for (int i = 0;i < arr.count; i++) {
+            UIButton * btn1 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+            [btn1 setTitle:arr[i] forState:UIControlStateNormal];
+            [btn1.layer setBorderWidth:0.5f];
+            [btn1 addTarget:self action:@selector(touchThisButton:)forControlEvents:UIControlEventTouchUpInside];
+            btn1.layer.cornerRadius = 2;
+            btn1.tag = 500 + i;
+            btn1.layer.masksToBounds = YES;
+            [self addSubview:btn1];
+            if (!btn0) {
+                [btn1 setTintColor:PINKCOLOR];
+                [btn1.layer setBorderColor:[PINKCOLOR CGColor]];
+                
+                [btn1 mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.width.mas_equalTo(@(screenWide * 0.24));
+                    make.height.mas_equalTo(@(screenHeight * 0.04497));
+                    make.left.equalTo(date_label);
+                    make.top.mas_equalTo(date_label.mas_bottom).offset(screenHeight * 0.01499);
+                }];
+            }else{
+                [btn1 setTintColor:[UIColor blackColor]];
+                [btn1.layer setBorderColor:[[UIColor grayColor] CGColor]];
+                
+                [btn1 mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.width.mas_equalTo(@(screenWide * 0.24));
+                    make.height.mas_equalTo(@(screenHeight * 0.04497));
+                    make.left.mas_equalTo(btn0.mas_right).offset(screenWide * 0.0266);
+                    make.top.mas_equalTo(date_label.mas_bottom).offset(screenHeight * 0.01499);
+                }];
+            }
+            btn0 = btn1;
+        }
+    }
+
+}
 -(void)touchThisButton:(UIButton *)btn{
     if (btn.tintColor == PINKCOLOR) {
     //释放掉
     }else{
+        if (self.delegate && [self.delegate respondsToSelector:@selector(updatePriceWithNumber:)]) {
+            int x= (btn.frame.origin.x- screenWide * 0.12266)/screenWide/0.24;//第几个
+            [self.delegate updatePriceWithNumber:x];
+        }
         for (int i = 0; i < self.subviews.count; i++) {
             if ([self.subviews[i] isKindOfClass:[UIButton class]]) {
                 if (self.subviews[i] == btn) {

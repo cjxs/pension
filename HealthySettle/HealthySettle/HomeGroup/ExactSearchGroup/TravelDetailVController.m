@@ -15,11 +15,12 @@
 #import "LoginOrRegisViewController.h"
 #import "DDGroupData.h"
 
-@interface TravelDetailVController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,MoveSelDelegate>{
+@interface TravelDetailVController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,MoveSelDelegate,UpdatePriceDelegate>{
     UIImageView * organization_imageView;
     UITextField * current_field;
     UILabel * money_label;
     DDGroupData * group_data; //网络请求指针
+    UIView * begin_view;
 
 
     
@@ -28,9 +29,16 @@
 @end
 
 @implementation TravelDetailVController
+-(void)updatePriceWithNumber:(NSInteger )number{
+    TitleTVCell * cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    cell.price_label.text = _price_arr[number];
+    int price_sum = [_price_arr[number] integerValue]* person_num;
+    money_label.text = [NSString stringWithFormat:@" ¥ %d",price_sum];
+    order = number;
+}
 -(UITableView *)tableView{
     if (!_tableView) {
-        UITableView * tableView = [[UITableView alloc] initWithFrame:[[UIScreen mainScreen] bounds] style:UITableViewStylePlain];
+        UITableView * tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, screenWide, screenHeight-49) style:UITableViewStylePlain];
         tableView.showsVerticalScrollIndicator = NO;
         tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         tableView.delegate = self;
@@ -48,7 +56,9 @@
     if (!_tableHeadView) {
         organization_imageView = [[UIImageView alloc]
                                   initWithFrame:CGRectMake(0, -20, screenWide, screenHeight * 0.2811)];
-        organization_imageView.image = [UIImage imageNamed:@"banner_p"];
+        NSString *  str2 = [NSString stringWithFormat:@"%@/upload/group/%@",BASEURL,_data_dic[@"pic"]];
+        NSString * str3 = [str2 stringByReplacingOccurrencesOfString:@"," withString:@"/"];
+        [organization_imageView sd_setImageWithURL:[NSURL URLWithString:str3] placeholderImage:[UIImage imageNamed:@"banner_p"]];
         _tableHeadView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWide, screenHeight * 0.2811-20)];
         _tableHeadView.backgroundColor = GRAYCOLOR;
         [_tableHeadView addSubview:organization_imageView];
@@ -72,13 +82,38 @@
     group_data = [[DDGroupData alloc] initWithController:@"group" group_id:self.group_id];
     [group_data startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
         //NSString *str = [request.responseString stringByReplacingOccurrencesOfString:@":null" withString:@":\"\""];
-        NSDictionary * dic = [DDLogin dictionaryWithJsonString:request.responseString];
-        NSLog(@"%@",dic);
+        _data_dic= [DDLogin dictionaryWithJsonString:request.responseString];
+        [begin_view removeFromSuperview];
+        [self loadData];
     } failure:^(__kindof YTKBaseRequest *request) {
         NSLog(@"%ld",request.responseStatusCode);
     }];
 }
+-(void)loadData{
+    [self.view addSubview:self.tableView];
+    self.tableView.tableHeaderView = self.tableHeadView;
+    [self.tableView registerClass:[TitleTVCell class] forCellReuseIdentifier:@"title"];
+    [self.tableView registerClass:[ChooseTVCell class] forCellReuseIdentifier:@"choose"];
+    [self.tableView registerClass:[MoveSelectTVCell class] forCellReuseIdentifier:@"move"];
+    
+    NSArray * arr = _data_dic[@"date_price"];
+    _date_arr = [NSMutableArray array];
+    _price_arr = [NSMutableArray array];
+    _number_arr = [NSMutableArray array];
+    
+    int j = arr.count > 3? 3:arr.count;
+    for (int i= 0 ; i <j ; i++) {
+        NSDictionary * dic = arr[i];
+        [_date_arr addObject:dic[@"date"]];
+        [_price_arr addObject:dic[@"price"]];
+        [_number_arr addObject:dic[@"number"]];
+    }
+    person_num = 1;
+    order = 0;
+    [self creatBackFootView];
 
+
+}
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -89,14 +124,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = WHITECOLOR;
-    [self.view addSubview:self.tableView];
     [self setData];
-    self.tableView.tableHeaderView = self.tableHeadView;
-    [self.tableView registerClass:[TitleTVCell class] forCellReuseIdentifier:@"title"];
-    [self.tableView registerClass:[ChooseTVCell class] forCellReuseIdentifier:@"choose"];
-    [self.tableView registerClass:[MoveSelectTVCell class] forCellReuseIdentifier:@"move"];
+
+    begin_view = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    begin_view.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:begin_view];
+
     
-    [self creatBackFootView];
 
     
     
@@ -121,7 +155,7 @@
     
     money_label.textAlignment = NSTextAlignmentLeft;
     money_label.font = [UIFont systemFontOfSize:14];
-    money_label.text = @" ¥ 12534";
+    money_label.text = [NSString stringWithFormat:@" ¥ %@",_price_arr[0]];
     money_label.textColor = PINKCOLOR;
 
     [backFootView addSubview:money_label];
@@ -160,6 +194,11 @@
         if (indexPath.row == 0) {
             TitleTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"title" forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            UITapGestureRecognizer * gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pushToIntroduceView)];
+            gesture.numberOfTapsRequired = 1;
+            [cell.introduce_label addGestureRecognizer:gesture];
+            NSString * price = _data_dic[@"date_price"][0][@"price"];
+            [cell configTitle:_data_dic[@"name"] recommend:_data_dic[@"unique_recommend"] return:_data_dic[@"return_vochers"] price:price];
             return cell;
         }else if (indexPath.row == 1){
             ChooseTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"choose"];
@@ -168,18 +207,24 @@
             tapGestureRecognizer.cancelsTouchesInView = NO;
             //将触摸事件添加到当前view
             [cell addGestureRecognizer:tapGestureRecognizer];
+            [cell configWithArray:_date_arr area_city:_data_dic[@"area_name"]];
             cell.number_btn.textField.delegate = self;
             cell.number_btn.numberBlock = ^(NSString *num){
-                NSLog(@"%@--",num);
+                person_num = [num intValue];
+                int price_sum = [_price_arr[order] integerValue]* person_num;
+                money_label.text = [NSString stringWithFormat:@" ¥ %d",price_sum];
+
             };
 
 
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.delegate = self;
 
             return cell;
         }else{
             MoveSelectTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"move"];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            [cell configWithStr:_data_dic[@"content"]];
             cell.delegate = self;
 
             return cell;
@@ -188,8 +233,10 @@
         return nil;
     }
     
-   }
-
+}
+-(void)pushToIntroduceView{
+    NSLog(@"+++");
+}
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
@@ -197,15 +244,12 @@
         }else if (indexPath.row == 1){
             return screenHeight * 0.27136;
         }else{
-            return screenHeight * 0.08095;
+            return screenHeight * 0.48095;
         }
     }
     return screenHeight * 0.1574;
 }
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    
-}
 - (void)resignOrLoad
 {
     LoginOrRegisViewController *loginOrRegVC = [[LoginOrRegisViewController alloc] init];
@@ -236,11 +280,35 @@
     current_field = textField;
 }
 -(void)textFieldDidEndEditing:(UITextField *)textField{
-    NSLog(@"%@++",textField.text);
+    person_num = [textField.text intValue];
+    int price_sum = [_price_arr[order] integerValue]* person_num;
+    money_label.text = [NSString stringWithFormat:@" ¥ %d",price_sum];
+
 
 }
 -(void)updateDataWithWave:(int)wave{
-    NSLog(@"%d",wave);
+    MoveSelectTVCell * cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
+    switch (wave) {
+        case 0:
+            [cell.webView loadHTMLString:_data_dic[@"content"] baseURL:nil];
+            break;
+        case 1:
+            [cell.webView loadHTMLString:_data_dic[@"camp_desc"] baseURL:nil];
+            break;
+        case 2:
+            [cell.webView loadHTMLString:_data_dic[@"charge_standard"] baseURL:nil];
+
+            break;
+        case 3:
+            [cell.webView loadHTMLString:_data_dic[@"discount_info"] baseURL:nil];
+            break;
+        case 4:
+            [cell.webView loadHTMLString:_data_dic[@"cue"] baseURL:nil];
+            break;
+        default:
+            break;
+    }
+    
 }
 -(void)keyboardHide:(UITapGestureRecognizer*)tap{
     if (current_field) {

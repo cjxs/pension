@@ -304,7 +304,6 @@
     group_data = [[DDGroupData alloc] initWithController:@"group" group_id:self.group_id];
     [group_data startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
         _data_dic = [DDLogin dictionaryWithJsonString:request.responseString];
-        NSLog(@"%@",_data_dic);
         [begin_view removeFromSuperview];
         if (!self.vc_type) {
             switch ([_data_dic[@"cat_id"] integerValue]) {
