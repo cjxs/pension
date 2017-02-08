@@ -303,8 +303,8 @@
 -(void)setData{
     group_data = [[DDGroupData alloc] initWithController:@"group" group_id:self.group_id];
     [group_data startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
-        NSString *str = [request.responseString stringByReplacingOccurrencesOfString:@":null" withString:@":\"\""];
-        _data_dic = [DDLogin dictionaryWithJsonString:str];
+        _data_dic = [DDLogin dictionaryWithJsonString:request.responseString];
+        NSLog(@"%@",_data_dic);
         [begin_view removeFromSuperview];
         if (!self.vc_type) {
             switch ([_data_dic[@"cat_id"] integerValue]) {
@@ -624,7 +624,7 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath
             return 186;
         }else if (indexPath.row == 2)
         {
-            return 123;
+            return [self backheightWith:_data_dic[@"comm_content"]] - 80;
         }
         else if (indexPath.row == 3 || indexPath.row ==4)
         {

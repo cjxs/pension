@@ -31,7 +31,7 @@
     if (_price_label == nil) {
         _price_label = [[UILabel alloc] init];
         _price_label.textColor = PINKCOLOR;
-        _price_label.textAlignment = NSTextAlignmentRight;
+        _price_label.textAlignment = NSTextAlignmentLeft;
         _price_label.font = [UIFont systemFontOfSize:15];
     }
     return _price_label;
@@ -44,9 +44,9 @@
         [self addSubview:self.organization_title];
         [self addSubview:self.price_label];
         [self.price_label mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(screenWide * 0.184, screenHeight * 0.0201));
+            make.size.mas_equalTo(CGSizeMake(screenWide * 0.15, screenHeight * 0.0201));
             make.bottom.equalTo(_organization_image);
-            make.right.equalTo(_organization_title).offset(-15);
+            make.left.equalTo(_organization_title);
         }];
         UILabel * qi_label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 15, 15)];
         qi_label.text = @"起";
@@ -54,7 +54,7 @@
 
         [qi_label mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.bottom.equalTo(_organization_image);
-            make.right.equalTo(_organization_title);
+            make.left.equalTo(_organization_title).offset(screenWide * 0.154);
         }];
         qi_label.textColor = [UIColor colorWithHexString:@"#999999"];
         qi_label.font = [UIFont systemFontOfSize:10];
@@ -71,13 +71,13 @@
         dis_label.textColor = WHITECOLOR;
         
         dis_label.backgroundColor = [UIColor colorWithHexString:@"#73b8ff"];
-        dis_label.text = @"满减";
+        dis_label.text = @"返券";
         dis_label.textAlignment = NSTextAlignmentCenter;
         dis_label.font = [UIFont systemFontOfSize:11];
         [self addSubview:dis_label];
         [dis_label mas_updateConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(screenWide * 0.09066, screenHeight * 0.02099));
-            make.left.equalTo(self.organization_title);
+            make.right.equalTo(self.organization_title);
             make.bottom.equalTo(self.organization_image);
         }];
 

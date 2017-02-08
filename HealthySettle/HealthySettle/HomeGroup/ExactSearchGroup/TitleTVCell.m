@@ -26,6 +26,15 @@
     }
     return _price_label;
 }
+-(UILabel *)introduce_label{
+    if (!_introduce_label) {
+        _introduce_label = [[UILabel alloc] initWithFrame:CGRectMake(screenWide * 0.2, screenHeight * 0.17239, screenWide * 0.75, screenHeight * 0.02848)];
+        _introduce_label.textColor = [UIColor grayColor];
+        _introduce_label.textAlignment = NSTextAlignmentRight;
+        _introduce_label.text = @"简介 >";
+    }
+    return _introduce_label;
+}
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
@@ -61,6 +70,10 @@
                 label0 = label1;
             }
         }
+        UIView * line_view1 = [[UIView alloc] initWithFrame:CGRectMake(0, screenHeight*0.1574, screenWide, 1)];
+        line_view1.backgroundColor = [UIColor colorWithHexString:@"#ebebeb"];
+        [self addSubview:line_view1];
+        
         NSString * str = @"满$200,减10";
         if (str) {
             UILabel * dis_label = [[UILabel alloc] init];
@@ -73,7 +86,7 @@
             [dis_label mas_updateConstraints:^(MASConstraintMaker *make) {
                 make.size.mas_equalTo(CGSizeMake(screenWide * 0.09066, screenHeight * 0.02099));
                 make.left.equalTo(self.organization_title);
-                make.bottom.equalTo(self).offset(-screenHeight * 0.01499);
+                make.bottom.equalTo(line_view1).offset(-screenHeight * 0.01499);
             }];
             UILabel * man_label = [[UILabel alloc] init];
             man_label.text = str;
@@ -91,7 +104,7 @@
         [self addSubview:qi_label];
         
         [qi_label mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.bottom.equalTo(self).offset(-screenHeight * 0.01499);
+            make.bottom.equalTo(line_view1).offset(-screenHeight * 0.01499);
             make.right.equalTo(_organization_title);
         }];
         qi_label.textColor = [UIColor colorWithHexString:@"#999999"];
@@ -116,6 +129,16 @@
             make.bottom.equalTo(qi_label);
             make.right.mas_equalTo(ren_label.mas_left);
         }];
+        UIImageView * leader_iView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"address_choose"]];
+        leader_iView.frame = CGRectMake(screenWide * 0.032, screenHeight * 0.17239, screenWide * 0.05866, screenWide * 0.05866);
+        [self addSubview:leader_iView];
+        UILabel * leader_label = [[UILabel alloc] initWithFrame:CGRectMake(screenWide * 0.12266, screenHeight * 0.17239, screenWide * 0.4, screenHeight * 0.02848)];
+        leader_label.text = @"备案管家";
+        leader_label.textColor = [UIColor grayColor];
+        [self addSubview:leader_label];
+        [self addSubview:self.introduce_label];
+        
+        
 
         
         
@@ -124,6 +147,7 @@
     }
     return self;
 }
+
 //计算划掉的数字长度
 - (CGSize )sizeWithString:(NSString *)string
 {

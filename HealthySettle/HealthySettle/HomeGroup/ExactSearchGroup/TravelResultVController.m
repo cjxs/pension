@@ -46,15 +46,15 @@ static NSInteger page = 1;
 { //筛选页面
     if (!_filter_view)
     {
-        NSArray * image_array = @[@"list2_1_",@"list2_2_",@"list2_3_",@"list2_4_"];
-        NSArray * title_array = @[@"出发城市",@"行程周期",@"优惠满减",@"价格从高到低"];
+        NSArray * image_array = @[@"list2_1_",@"list2_2_",@"list2_4_"];
+        NSArray * title_array = @[@"出发城市",@"行程周期",@"价格从高到低"];
         UIView * view = [[UIView alloc]
                          initWithFrame:CGRectMake(0, screenHeight - 49-64, screenWide, 49)];
         view.backgroundColor = RGB(249, 249, 249);
-        for (int i = 0; i < 4 ;i++ )
+        for (int i = 0; i < 3 ;i++ )
         {
             UIButton * btn = [UIButton buttonWithType:UIButtonTypeCustom];
-            btn.frame = CGRectMake(screenWide /4 * i, 0, screenWide /4, 49);
+            btn.frame = CGRectMake(screenWide /3 * i, 0, screenWide /3, 49);
             [btn addTarget:self
                     action:@selector(showfilterWithButton:)
           forControlEvents:UIControlEventTouchUpInside];
@@ -63,22 +63,22 @@ static NSInteger page = 1;
             switch (i) {
                 case 0:
                     image_view  = [[UIImageView alloc]
-                                   initWithFrame:CGRectMake((screenWide/4 -screenWide * 0.05)/2 + screenWide /4 * i, screenHeight * 0.01, screenWide * 0.04, screenWide * 0.04 /3 * 4)];
+                                   initWithFrame:CGRectMake(screenWide/6 -screenWide * 0.02 + screenWide /3 * i, screenHeight * 0.01, screenWide * 0.04, screenWide * 0.04 /3 * 4)];
                     break;
                 case 1:
                     image_view  = [[UIImageView alloc]
-                                   initWithFrame:CGRectMake((screenWide/4 -screenWide * 0.05)/2 + screenWide /4 * i, screenHeight * 0.01, screenWide * 0.05, screenWide * 0.05 )];
+                                   initWithFrame:CGRectMake(screenWide/6 -screenWide * 0.02 + screenWide /3 * i, screenHeight * 0.01, screenWide * 0.05, screenWide * 0.05 )];
                     break;
                 default:
                     image_view  = [[UIImageView alloc]
-                                   initWithFrame:CGRectMake((screenWide/4 -screenWide * 0.05)/2 + screenWide /4 * i, screenHeight * 0.01, screenWide * 0.04, screenWide * 0.04 /15* 16)];
+                                   initWithFrame:CGRectMake(screenWide/6 -screenWide * 0.02 + screenWide /3 * i, screenHeight * 0.01, screenWide * 0.04, screenWide * 0.04 /15* 16)];
                     break;
             }
             
             image_view.image = [UIImage imageNamed:image_array[i]];
             [view addSubview:image_view];
             UILabel * label = [[UILabel alloc]
-                               initWithFrame:CGRectMake(screenWide/4 * i, CGRectGetMaxY(image_view.frame), screenWide /4,49 -  CGRectGetMaxY(image_view.frame))];
+                               initWithFrame:CGRectMake(screenWide/3 * i, CGRectGetMaxY(image_view.frame), screenWide /3,49 -  CGRectGetMaxY(image_view.frame))];
             label.text = title_array[i];
             label.tag = 800+i;
             label.textColor = RGB(199, 199, 199);
@@ -92,16 +92,14 @@ static NSInteger page = 1;
 }
 - (void)showfilterWithButton:(UIButton *)btn
 {
-    int number = btn.frame.origin.x / screenWide * 4;
+    int number = btn.frame.origin.x / screenWide * 3;
     if ( number ==0) {
         [self cityfileViewAppear];
     }else if (number == 1)
     {
         [self timefileViewAppear];
-    }else if (number == 2)
+    }else
     {
-        NSLog(@"筛选");
-    }else {
         [self pricefileViewAppear];
     }
 }
@@ -288,6 +286,8 @@ static NSInteger page = 1;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     TravelDetailVController * travelDVC = [[TravelDetailVController alloc] init];
+    travelDVC.group_id = _data_arr[indexPath.row][@"group_id"];
+    
     [self.navigationController pushViewController:travelDVC animated:YES];
     
 }

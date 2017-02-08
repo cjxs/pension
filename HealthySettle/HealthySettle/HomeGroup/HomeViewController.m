@@ -110,7 +110,7 @@
         [_tableHeadView addSubview:pensionFind_view];
         EntranceView *regimenFind_view = [[EntranceView alloc] initWithFrame:CGRectMake(screenWide/2+0.5, screenHeight * 0.309+0.5, screenWide/2, 0.1124 * screenHeight-0.5)];
         UITapGestureRecognizer * tap_regiment = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(skipTOSecond:)];
-        [regimenFind_view configWithtitle:@"养生基地" text:@"延年益寿的好去处" imageName:@"regiment" gesture: tap_regiment];
+        [regimenFind_view configWithtitle:@"候鸟基地" text:@"延年益寿的好去处" imageName:@"regiment" gesture: tap_regiment];
 
         [_tableHeadView addSubview:regimenFind_view];
         
@@ -508,7 +508,7 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath
         [self pushToArticleWithTitle:@"养老常识"type:@"pension"];
     }else
     {
-        NSURL * url = [NSURL URLWithString:@"http://n.5199yl.com/#/assess"];
+        NSURL * url = [NSURL URLWithString:@"http://www.5199yl.com/#/assess"];
         WebViewController * webVC = [[WebViewController alloc] init];
         webVC.urlLoad = url;
         [self.navigationController pushViewController:webVC

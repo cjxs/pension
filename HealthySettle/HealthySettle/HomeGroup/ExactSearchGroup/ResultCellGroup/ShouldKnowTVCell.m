@@ -44,10 +44,9 @@
                           CGSizeMake(screenWide - 20, CGFLOAT_MAX)
                                                   options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading
                                                attributes:[NSDictionary dictionaryWithObjectsAndKeys:label.font,NSFontAttributeName, nil] context:nil].size.height;
-        label.frame = CGRectMake(10, 50, screenWide - 20, height);
-        label.numberOfLines = 0;
-        label.textColor = RGB(158, 159, 159);
-        [self addSubview:label];
+        UIWebView * webView = [[UIWebView alloc] initWithFrame:CGRectMake(10, 50, screenWide-20, height)];
+        [webView loadHTMLString:text baseURL:nil];
+        [self addSubview:webView];
         return height;
     }
     return 0;

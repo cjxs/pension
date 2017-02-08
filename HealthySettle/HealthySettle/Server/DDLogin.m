@@ -82,7 +82,7 @@
     jsonString = [jsonString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
     
     jsonString = [jsonString stringByReplacingOccurrencesOfString:@"\t" withString:@""];
-    jsonString = [jsonString stringByReplacingOccurrencesOfString:@"\\" withString:@""];
+    //jsonString = [jsonString stringByReplacingOccurrencesOfString:@"\\" withString:@""];
     
     NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
     NSError *err;
@@ -91,6 +91,7 @@
                                                           error:&err];
     if(err) {
         NSLog(@"json解析失败：%@",err);
+        NSLog(@"%@",jsonString);
         return nil;
     }
     return dic;

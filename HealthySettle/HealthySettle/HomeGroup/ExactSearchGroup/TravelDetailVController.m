@@ -13,11 +13,13 @@
 #import "MoveSelectTVCell.h"
 #import "OrderTVController.h"
 #import "LoginOrRegisViewController.h"
+#import "DDGroupData.h"
 
 @interface TravelDetailVController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,MoveSelDelegate>{
     UIImageView * organization_imageView;
     UITextField * current_field;
     UILabel * money_label;
+    DDGroupData * group_data; //网络请求指针
 
 
     
@@ -66,6 +68,17 @@
     return _tableHeadView;
     
 }
+-(void)setData{
+    group_data = [[DDGroupData alloc] initWithController:@"group" group_id:self.group_id];
+    [group_data startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
+        //NSString *str = [request.responseString stringByReplacingOccurrencesOfString:@":null" withString:@":\"\""];
+        NSDictionary * dic = [DDLogin dictionaryWithJsonString:request.responseString];
+        NSLog(@"%@",dic);
+    } failure:^(__kindof YTKBaseRequest *request) {
+        NSLog(@"%ld",request.responseStatusCode);
+    }];
+}
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -77,6 +90,7 @@
     // Do any additional setup after loading the view.
     self.view.backgroundColor = WHITECOLOR;
     [self.view addSubview:self.tableView];
+    [self setData];
     self.tableView.tableHeaderView = self.tableHeadView;
     [self.tableView registerClass:[TitleTVCell class] forCellReuseIdentifier:@"title"];
     [self.tableView registerClass:[ChooseTVCell class] forCellReuseIdentifier:@"choose"];
@@ -179,7 +193,7 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            return screenHeight * 0.1574;
+            return screenHeight * 0.21737;
         }else if (indexPath.row == 1){
             return screenHeight * 0.27136;
         }else{

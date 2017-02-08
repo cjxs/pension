@@ -8,13 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ServeTVCell : UITableViewCell {
-    UILabel * common_label;
-    UILabel * charge_label;
+@interface ServeTVCell : UITableViewCell <UIWebViewDelegate>{
+    BOOL isLoadingFinished;
 }
-@property (nonatomic, strong) UIView * commonServe_view;
-@property (nonatomic,strong ) UIView * tollServe_view;
+@property (nonatomic, strong) UIWebView * commonServe_view;
+@property (nonatomic,strong ) UIWebView * tollServe_view;
 @property (nonatomic,strong)NSString * common_t;
 @property (nonatomic,strong)NSString * charge_t;
+
 -(void)configwithCommon:(NSString *)common charge:(NSString *)charge;
 @end

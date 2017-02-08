@@ -47,6 +47,7 @@
           forControlEvents:UIControlEventTouchUpInside];
             btn.titleLabel.font = [UIFont systemFontOfSize:14];
             [self addSubview:btn];
+            
         }
            }
     return self;
@@ -87,52 +88,84 @@
 {
     if (_tollServe_view)
     {
-        [charge_label removeFromSuperview];
-        charge_label = nil;
+
         [_tollServe_view removeFromSuperview];
         _tollServe_view = nil;
     }
     if (!_commonServe_view) {
-        _commonServe_view = [[UIView alloc]
-                             initWithFrame:CGRectMake(0, 43, screenWide, 80)];
+        _commonServe_view = [[UIWebView alloc]
+                             initWithFrame:CGRectMake(15, 43, screenWide-30, self.frame.size.height-80)];
+        isLoadingFinished = NO;
+        [_commonServe_view setScalesPageToFit:NO];
+
+        [_commonServe_view loadHTMLString:self.common_t baseURL:nil];
+        [_commonServe_view setHidden:YES];
+        _commonServe_view.delegate = self;
+
+
     }
-        if (!common_label) {
-        UILabel * text_label = [[UILabel alloc]
-                                initWithFrame:CGRectMake(15, 0, screenWide - 20, 70)];
-        text_label.numberOfLines = 0;
-        text_label.font = [UIFont systemFontOfSize:10];
-        text_label.textColor = RGB(205, 206, 207);
-        text_label.text = self.common_t;
-        common_label = text_label;
-    }
-    [_commonServe_view addSubview:common_label];
-    [self addSubview:_commonServe_view];
+        [self addSubview:_commonServe_view];
 }
 - (void)showTollServe
 {
     if (_commonServe_view)
     {
-        [common_label removeFromSuperview];
-        common_label = nil;
         [_commonServe_view removeFromSuperview];
         _commonServe_view = nil;
        
     }
     if (!_tollServe_view) {
-        _tollServe_view = [[UIView alloc]
-                           initWithFrame:CGRectMake(0, 43, screenWide, 80)];
+        _tollServe_view = [[UIWebView alloc]
+                           initWithFrame:CGRectMake(15, 43, screenWide-30 , self.frame.size.height-80)];
+        [_tollServe_view loadHTMLString:self.charge_t baseURL:nil];
     }
-    if (!charge_label) {
-        UILabel * text_label = [[UILabel alloc]
-                                initWithFrame:CGRectMake(15, 0, screenWide - 20, 70)];
-        text_label.numberOfLines = 0;
-        text_label.text = self.charge_t;
-        text_label.font = [UIFont systemFontOfSize:10];
-        text_label.textColor = RGB(205, 206, 207);
-        charge_label = text_label;
-    }
-        [_tollServe_view addSubview:charge_label];
+   
     [self addSubview:_tollServe_view];
+}
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    //若已经加载完成，则显示webView并return
+    if(isLoadingFinished)
+    {
+        [webView setHidden:NO];
+        return;
+    }
+    
+    //js获取body宽度
+    NSString *bodyWidth= [webView stringByEvaluatingJavaScriptFromString: @"document.body.scrollWidth "];
+    
+    int widthOfBody = [bodyWidth intValue];
+    
+    //获取实际要显示的html
+    
+    NSString *html;
+    html = webView == _commonServe_view? [self htmlAdjustWithPageWidth:widthOfBody
+                                                                  html:_common_t
+                                                               webView:webView]:[self htmlAdjustWithPageWidth:widthOfBody
+                                                                                                         html:_charge_t
+                                                                                                      webView:webView];
+    
+    //设置为已经加载完成
+    isLoadingFinished = YES;
+    //加载实际要现实的html
+    [webView loadHTMLString:html baseURL:nil];
+}
+
+//获取宽度已经适配于webView的html。这里的原始html也可以通过js从webView里获取
+- (NSString *)htmlAdjustWithPageWidth:(CGFloat )pageWidth
+                                 html:(NSString *)html
+                              webView:(UIWebView *)webView
+{
+    NSMutableString *str = [NSMutableString stringWithString:html];
+    //计算要缩放的比例
+    CGFloat initialScale = webView.frame.size.width/pageWidth;
+    //将</head>替换为meta+head
+    NSString *stringForReplace = [NSString stringWithFormat:@"<meta name=\"viewport\" content=\" initial-scale=%f, minimum-scale=0.1, maximum-scale=2.0, user-scalable=yes\"></head>",initialScale];
+    
+    NSRange range =  NSMakeRange(0, str.length);
+    //替换
+    [str replaceOccurrencesOfString:@"</head>" withString:stringForReplace options:NSLiteralSearch range:range];
+    return str;
 }
 - (void)awakeFromNib {
     [super awakeFromNib];

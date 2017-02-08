@@ -11,5 +11,6 @@
 @interface TitleTVCell : UITableViewCell
 @property (strong, nonatomic)  UILabel *organization_title;
 @property (strong, nonatomic)  UILabel *price_label;
+@property (strong, nonatomic)  UILabel *introduce_label;
 
 @end

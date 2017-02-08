@@ -108,7 +108,7 @@
         self.back_imageView.image = [UIImage imageNamed:@"leftop_w"];
         [self setBottomPicWithPic:
          [UIImage imageNamed:@"regimen_preview"]
-                         andTitle:@"养生·度假"];
+                         andTitle:@"候鸟基地"];
         _four_markPic.image = [UIImage imageNamed:@"search_4_"];
         _fivth_markPic.image = [UIImage imageNamed:@"search_5_"];
         _city_label.text = @"杭州市";
