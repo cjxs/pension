@@ -14,6 +14,7 @@
 #import "OrderTVController.h"
 #import "LoginOrRegisViewController.h"
 #import "DDGroupData.h"
+#import "LeaderViewController.h"
 
 @interface TravelDetailVController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,MoveSelDelegate,UpdatePriceDelegate>{
     UIImageView * organization_imageView;
@@ -235,7 +236,11 @@
     
 }
 -(void)pushToIntroduceView{
-    NSLog(@"+++");
+    LeaderViewController * leaderVC = [[LeaderViewController alloc] init];
+    leaderVC.title = @"管家";
+    [self.navigationController pushViewController:leaderVC animated:YES];
+    
+    
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {

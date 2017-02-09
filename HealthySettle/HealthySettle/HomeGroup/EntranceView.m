@@ -33,7 +33,7 @@
         [self addSubview:_image_view];
         if (IS_IPHONE5EARLY || IS_IPHONE5) {
             _title_label.font = [UIFont systemFontOfSize:16];
-            _text_label.font = [UIFont systemFontOfSize:10];
+            _text_label.adjustsFontSizeToFitWidth = YES;
             
             
         }else{
