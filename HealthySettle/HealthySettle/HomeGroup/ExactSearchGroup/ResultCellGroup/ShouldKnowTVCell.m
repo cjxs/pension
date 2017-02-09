@@ -45,7 +45,8 @@
                                                   options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading
                                                attributes:[NSDictionary dictionaryWithObjectsAndKeys:label.font,NSFontAttributeName, nil] context:nil].size.height;
         UIWebView * webView = [[UIWebView alloc] initWithFrame:CGRectMake(10, 50, screenWide-20, height)];
-        [webView loadHTMLString:text baseURL:nil];
+        [webView loadHTMLString:text baseURL:[NSURL URLWithString:BASEURL]];
+        webView.scrollView.bounces = NO;
         [self addSubview:webView];
         return height;
     }

@@ -12,7 +12,7 @@
 -(void)updateDataWithWave:(int)wave;
 
 @end
-@interface MoveSelectTVCell : UITableViewCell{
+@interface MoveSelectTVCell : UITableViewCell<UIWebViewDelegate>{
     int number_btn;
 
 }

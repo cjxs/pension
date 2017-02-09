@@ -87,6 +87,7 @@
             [btn1.layer setBorderWidth:0.5f];
             [btn1 addTarget:self action:@selector(touchThisButton:)forControlEvents:UIControlEventTouchUpInside];
             btn1.layer.cornerRadius = 2;
+            btn1.titleLabel.adjustsFontSizeToFitWidth = YES;
             btn1.tag = 500 + i;
             btn1.layer.masksToBounds = YES;
             [self addSubview:btn1];

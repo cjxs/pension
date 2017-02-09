@@ -43,6 +43,7 @@
         
         [self addSubview:self.organization_title];
         [self addSubview:self.price_label];
+        self.price_label.adjustsFontSizeToFitWidth = YES;
         [self.price_label mas_updateConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(screenWide * 0.15, screenHeight * 0.0201));
             make.bottom.equalTo(_organization_image);

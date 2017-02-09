@@ -94,13 +94,11 @@
     }
     if (!_commonServe_view) {
         _commonServe_view = [[UIWebView alloc]
-                             initWithFrame:CGRectMake(15, 43, screenWide-30, self.frame.size.height-80)];
-        isLoadingFinished = NO;
-        [_commonServe_view setScalesPageToFit:NO];
+                             initWithFrame:CGRectMake(10, 43, screenWide-20, self.frame.size.height-80)];
 
         [_commonServe_view loadHTMLString:self.common_t baseURL:nil];
-        [_commonServe_view setHidden:YES];
         _commonServe_view.delegate = self;
+        _commonServe_view.scrollView.bounces = NO;
 
 
     }
@@ -116,14 +114,21 @@
     }
     if (!_tollServe_view) {
         _tollServe_view = [[UIWebView alloc]
-                           initWithFrame:CGRectMake(15, 43, screenWide-30 , self.frame.size.height-80)];
+                           initWithFrame:CGRectMake(10, 43, screenWide-20 , self.frame.size.height-80)];
         [_tollServe_view loadHTMLString:self.charge_t baseURL:nil];
+        _tollServe_view.delegate = self;
+        _tollServe_view.scrollView.bounces = NO;
+
     }
    
     [self addSubview:_tollServe_view];
 }
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
+        [webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"var anchors = document.getElementsByTagName('p');for (var i = 0; i < anchors.length; i++) {anchors[i].style.width=%.0lf;};",screenWide-30]];
+    [webView stringByEvaluatingJavaScriptFromString:@"var anchors = document.getElementsByTagName('span');for (var i = 0; i < anchors.length; i++) {anchors[i].removeAttribute('style');};"];
+    
+    /*
     //若已经加载完成，则显示webView并return
     if(isLoadingFinished)
     {
@@ -149,6 +154,7 @@
     isLoadingFinished = YES;
     //加载实际要现实的html
     [webView loadHTMLString:html baseURL:nil];
+     */
 }
 
 //获取宽度已经适配于webView的html。这里的原始html也可以通过js从webView里获取

@@ -54,7 +54,7 @@
             UIView * line_view = [[UIView alloc] initWithFrame:CGRectMake(0, screenHeight * 0.08095 -1, screenWide, 1)];
             line_view.backgroundColor = GRAYCOLOR;
             [self addSubview:line_view];
-        _webView = [[UIWebView alloc] initWithFrame:CGRectMake(10, screenHeight * 0.08095, screenWide-20, screenHeight * 0.4)];
+        _webView = [[UIWebView alloc] initWithFrame:CGRectMake(10, screenHeight * 0.08095, screenWide-20, screenHeight * 0.6)];
         [self addSubview:_webView];
         
         
@@ -66,7 +66,14 @@
     return self;
 }
 -(void)configWithStr:(NSString *)str{
-    [_webView loadHTMLString:str baseURL:nil];
+    [_webView loadHTMLString:str baseURL:[NSURL URLWithString:BASEURL]];
+    _webView.delegate = self;
+    _webView.scrollView.bounces = NO;
+}
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    [webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"var anchors = document.getElementsByTagName('img');for (var i = 0; i < anchors.length; i++) {anchors[i].width=%.0lf;};",screenWide-30]];
+
 }
 - (void)changeDataOfbtn:(UIButton *)btn {
     

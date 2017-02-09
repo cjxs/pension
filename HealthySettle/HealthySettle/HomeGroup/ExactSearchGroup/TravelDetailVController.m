@@ -38,7 +38,7 @@
 }
 -(UITableView *)tableView{
     if (!_tableView) {
-        UITableView * tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, screenWide, screenHeight-49) style:UITableViewStylePlain];
+        UITableView * tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, screenWide, screenHeight*0.94) style:UITableViewStylePlain];
         tableView.showsVerticalScrollIndicator = NO;
         tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         tableView.delegate = self;
@@ -244,7 +244,7 @@
         }else if (indexPath.row == 1){
             return screenHeight * 0.27136;
         }else{
-            return screenHeight * 0.48095;
+            return screenHeight * 0.68095;
         }
     }
     return screenHeight * 0.1574;
@@ -290,20 +290,20 @@
     MoveSelectTVCell * cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
     switch (wave) {
         case 0:
-            [cell.webView loadHTMLString:_data_dic[@"content"] baseURL:nil];
+            [cell.webView loadHTMLString:_data_dic[@"content"] baseURL:[NSURL URLWithString:BASEURL]];
             break;
         case 1:
-            [cell.webView loadHTMLString:_data_dic[@"camp_desc"] baseURL:nil];
+            [cell.webView loadHTMLString:_data_dic[@"camp_desc"] baseURL:[NSURL URLWithString:BASEURL]];
             break;
         case 2:
-            [cell.webView loadHTMLString:_data_dic[@"charge_standard"] baseURL:nil];
+            [cell.webView loadHTMLString:_data_dic[@"charge_standard"] baseURL:[NSURL URLWithString:BASEURL]];
 
             break;
         case 3:
-            [cell.webView loadHTMLString:_data_dic[@"discount_info"] baseURL:nil];
+            [cell.webView loadHTMLString:_data_dic[@"discount_info"] baseURL:[NSURL URLWithString:BASEURL]];
             break;
         case 4:
-            [cell.webView loadHTMLString:_data_dic[@"cue"] baseURL:nil];
+            [cell.webView loadHTMLString:_data_dic[@"cue"] baseURL:[NSURL URLWithString:BASEURL]];
             break;
         default:
             break;
