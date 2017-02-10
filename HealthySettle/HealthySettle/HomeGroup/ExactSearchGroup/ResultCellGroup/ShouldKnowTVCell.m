@@ -31,10 +31,11 @@
     [super awakeFromNib];
     // Initialization code
 }
--(CGFloat)configWithStr:(NSString *)text
+-(void)configWithStr:(NSString *)text
 {
     if (text)
     {
+        /*
         UILabel * label = [[UILabel alloc] init];
         label.text = text;
         UIFont * fnt = [UIFont fontWithName:text size:8];
@@ -44,13 +45,12 @@
                           CGSizeMake(screenWide - 20, CGFLOAT_MAX)
                                                   options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading
                                                attributes:[NSDictionary dictionaryWithObjectsAndKeys:label.font,NSFontAttributeName, nil] context:nil].size.height;
-        UIWebView * webView = [[UIWebView alloc] initWithFrame:CGRectMake(10, 50, screenWide-20, height)];
+         */
+        UIWebView * webView = [[UIWebView alloc] initWithFrame:CGRectMake(10, 50, screenWide-20, self.frame.size.height-60)];
         [webView loadHTMLString:text baseURL:[NSURL URLWithString:BASEURL]];
         webView.scrollView.bounces = NO;
         [self addSubview:webView];
-        return height;
     }
-    return 0;
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

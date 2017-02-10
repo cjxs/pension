@@ -22,6 +22,7 @@
     UILabel * money_label;
     DDGroupData * group_data; //网络请求指针
     UIView * begin_view;
+    NSString * next_view;
 
 
     
@@ -178,7 +179,9 @@
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [self.navigationController setNavigationBarHidden:NO animated:animated];
+    if ([next_view isEqualToString:@"订单"]) {
+        [self.navigationController setNavigationBarHidden:NO animated:animated];
+    }
 }
 #pragma mark - UITableViewDataSource ,UITableViewDelegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -238,6 +241,7 @@
 -(void)pushToIntroduceView{
     LeaderViewController * leaderVC = [[LeaderViewController alloc] init];
     leaderVC.title = @"管家";
+    next_view = @"管家";
     [self.navigationController pushViewController:leaderVC animated:YES];
     
     
@@ -259,6 +263,7 @@
 {
     LoginOrRegisViewController *loginOrRegVC = [[LoginOrRegisViewController alloc] init];
     loginOrRegVC.delegate = self;
+    next_view = @"登录";
     [self.navigationController pushViewController:loginOrRegVC animated:YES];
 }
 -(void)submitOrder{
@@ -277,6 +282,7 @@
 //        }else{
 //            orderVC.charge_price = [NSString stringWithFormat:@"%ld",[_data_dic[@"price"] integerValue]];
 //        }
+        next_view = @"订单";
         [self.navigationController pushViewController:orderVC animated:YES];
     }
 

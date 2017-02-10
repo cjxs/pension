@@ -190,6 +190,10 @@
 		3285AF111D3C72970070618A /* LoginOrRegisViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3285AF101D3C72970070618A /* LoginOrRegisViewController.m */; };
 		3289E3861E4C653A00C57596 /* LeaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3289E3851E4C653A00C57596 /* LeaderViewController.m */; };
 		3289E3891E4C7B3B00C57596 /* TitleNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3289E3881E4C7B3B00C57596 /* TitleNumberView.m */; };
+		3289E38E1E4D6B8F00C57596 /* tel@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3289E38A1E4D6B8F00C57596 /* tel@3x.png */; };
+		3289E38F1E4D6B8F00C57596 /* tel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3289E38B1E4D6B8F00C57596 /* tel@2x.png */; };
+		3289E3901E4D6B8F00C57596 /* twocode@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3289E38C1E4D6B8F00C57596 /* twocode@2x.png */; };
+		3289E3911E4D6B8F00C57596 /* twocode@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3289E38D1E4D6B8F00C57596 /* twocode@3x.png */; };
 		3297D3AE1E1F9B06007A0F94 /* MoveSelectTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3297D3AD1E1F9B06007A0F94 /* MoveSelectTVCell.m */; };
 		32A3BB771DBB16490009D50F /* DDCollectList.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A3BB761DBB16490009D50F /* DDCollectList.m */; };
 		32A7314E1E1B518E005D6FB2 /* 热门@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 32A7314A1E1B518E005D6FB2 /* 热门@2x.png */; };
@@ -826,6 +830,10 @@
 		3289E3851E4C653A00C57596 /* LeaderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeaderViewController.m; sourceTree = "<group>"; };
 		3289E3871E4C7B3B00C57596 /* TitleNumberView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleNumberView.h; sourceTree = "<group>"; };
 		3289E3881E4C7B3B00C57596 /* TitleNumberView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitleNumberView.m; sourceTree = "<group>"; };
+		3289E38A1E4D6B8F00C57596 /* tel@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tel@3x.png"; sourceTree = "<group>"; };
+		3289E38B1E4D6B8F00C57596 /* tel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tel@2x.png"; sourceTree = "<group>"; };
+		3289E38C1E4D6B8F00C57596 /* twocode@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twocode@2x.png"; sourceTree = "<group>"; };
+		3289E38D1E4D6B8F00C57596 /* twocode@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twocode@3x.png"; sourceTree = "<group>"; };
 		328A80771DC4A46B002FC09D /* 优悠乐.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = "优悠乐.entitlements"; path = "../优悠乐.entitlements"; sourceTree = "<group>"; };
 		3297D3AC1E1F9B06007A0F94 /* MoveSelectTVCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoveSelectTVCell.h; sourceTree = "<group>"; };
 		3297D3AD1E1F9B06007A0F94 /* MoveSelectTVCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoveSelectTVCell.m; sourceTree = "<group>"; };
@@ -1905,6 +1913,10 @@
 		32CEF81F1DB713E700CB7584 /* level */ = {
 			isa = PBXGroup;
 			children = (
+				3289E38A1E4D6B8F00C57596 /* tel@3x.png */,
+				3289E38B1E4D6B8F00C57596 /* tel@2x.png */,
+				3289E38C1E4D6B8F00C57596 /* twocode@2x.png */,
+				3289E38D1E4D6B8F00C57596 /* twocode@3x.png */,
 				320768911DF18C6E00D5C827 /* ali_btn.png */,
 				320768921DF18C6E00D5C827 /* un_select@2x.png */,
 				320768931DF18C6E00D5C827 /* wx_btn.png */,
@@ -2325,6 +2337,7 @@
 				32FD72DD1CAA94F0008CB917 /* PersonTVCell.xib in Resources */,
 				32A7314E1E1B518E005D6FB2 /* 热门@2x.png in Resources */,
 				32E588521CB74029002AED1A /* fir_@2x.png in Resources */,
+				3289E3911E4D6B8F00C57596 /* twocode@3x.png in Resources */,
 				32467EC81DC329440005B822 /* season_p_2@3x.png in Resources */,
 				325051E61CB620C300D431F5 /* OrdAndRefundTVCell.xib in Resources */,
 				3259ACB71CCA03170070621F /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
@@ -2348,6 +2361,7 @@
 				32E5887D1CB74EA0002AED1A /* user_@3x.png in Resources */,
 				32E588A21CB75DE3002AED1A /* list1_show_1_@2x.png in Resources */,
 				320768971DF18C6E00D5C827 /* ali_btn.png in Resources */,
+				3289E38F1E4D6B8F00C57596 /* tel@2x.png in Resources */,
 				325C824D1CB122480004EA0C /* ShowTVCell.xib in Resources */,
 				320BE5D81CBCDFC700A34FCB /* system_1_41@2x.png in Resources */,
 				32E4E3541E151974008280F1 /* regiment@2x.png in Resources */,
@@ -2366,6 +2380,7 @@
 				327CA9711CBB79C100FC4F8E /* system_08.png in Resources */,
 				320BE5E61CBCE46000A34FCB /* black_w@3x.png in Resources */,
 				320768991DF18C6E00D5C827 /* wx_btn.png in Resources */,
+				3289E3901E4D6B8F00C57596 /* twocode@2x.png in Resources */,
 				32DB05441DA8D0830041C4F5 /* pageControlDot@3x.png in Resources */,
 				32518DE61CB3A2D500CEAE35 /* regimen_preview.png in Resources */,
 				324075D61CAD2DB200BAF253 /* regimen.png in Resources */,
@@ -2505,6 +2520,7 @@
 				32467EC51DC329440005B822 /* season_p_1@2x.png in Resources */,
 				32D859611CB8D4400074D5C3 /* slider-default-handle-highlighted@2x.png in Resources */,
 				32DB05411DA8D0830041C4F5 /* pageControlCurrentDot@2x.png in Resources */,
+				3289E38E1E4D6B8F00C57596 /* tel@3x.png in Resources */,
 				32E5883B1CB73A47002AED1A /* found_g@3x.png in Resources */,
 				32D693F01DD56380001D5C7F /* PersonDataSetVC.xib in Resources */,
 				3223F11F1DB8E19F001F1DCC /* Loading@2x.png in Resources */,

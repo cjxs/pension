@@ -88,7 +88,9 @@
     // Configure the view for the selected state
 }
 -(void)configWithData:(NSDictionary *)data{
-    [self.organization_image sd_setImageWithURL:[NSURL URLWithString:data[@"pic"]] placeholderImage:[UIImage imageNamed:@"list_p"]];
+    NSString *  str2 = [NSString stringWithFormat:@"%@/upload/group/%@",BASEURL,data[@"pic"]];
+    NSString * str3 = [str2 stringByReplacingOccurrencesOfString:@"," withString:@"/"];
+    [self.organization_image sd_setImageWithURL:[NSURL URLWithString:str3] placeholderImage:[UIImage imageNamed:@"list_p"]];
     self.organization_title.text = data[@"name"];
     self.organization_address.text = [NSString stringWithFormat:@"地址: %@",data[@"address"]];
     self.price_label.text = [NSString stringWithFormat:@"¥%@",data[@"price"]];

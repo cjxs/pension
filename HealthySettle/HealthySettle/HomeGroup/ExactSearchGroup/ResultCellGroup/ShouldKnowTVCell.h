@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface ShouldKnowTVCell : UITableViewCell
--(CGFloat)configWithStr:(NSString *)text;
+-(void)configWithStr:(NSString *)text;
 @end

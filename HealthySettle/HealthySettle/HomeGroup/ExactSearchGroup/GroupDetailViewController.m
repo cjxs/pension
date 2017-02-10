@@ -644,7 +644,7 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath
             return  [self backheightWith:string] + 13;
         }else if (indexPath.row == 5)
         {
-            return [self backheightWith:_data_dic[@"cue"]] - 80;
+            return [self backheightWith:_data_dic[@"cue"]] - 50;
         }else
         {
             return 301;
