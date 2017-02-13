@@ -10,7 +10,7 @@
 
 @interface TravelDetailVController : UIViewController{
     int person_num;
-    int order;
+    NSInteger  order;
 }
 @property (nonatomic,strong) UITableView * tableView;
 @property (nonatomic,strong) UIView * tableHeadView;

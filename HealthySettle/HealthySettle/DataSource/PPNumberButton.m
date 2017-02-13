@@ -80,6 +80,7 @@
     _textField = [[UITextField alloc] init];
     _textField.textAlignment = NSTextAlignmentCenter;
     _textField.keyboardType = UIKeyboardTypeNumberPad;
+    _textField.userInteractionEnabled = NO;
     _textField.font = [UIFont systemFontOfSize:_inputFieldFont];
     _textField.text = [NSString stringWithFormat:@"%ld",_minValue];
     

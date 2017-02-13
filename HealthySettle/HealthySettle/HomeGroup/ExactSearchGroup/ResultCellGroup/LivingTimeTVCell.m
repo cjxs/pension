@@ -78,8 +78,7 @@
         datePicker = [[CDDatePicker alloc] initWithOff_label:_checkIn_label];
         if (end_begain) {
             NSTimeInterval  oneDay = 24*60*60;  //1天的长度
-            end_begain = [NSDate dateWithTimeInterval:oneDay sinceDate:end_begain];
-            datePicker.date_start = end_begain;
+            datePicker.date_start = [NSDate dateWithTimeInterval:oneDay sinceDate:end_begain];
         }
         
     }

@@ -240,7 +240,6 @@
 }
 -(void)pushToIntroduceView{
     LeaderViewController * leaderVC = [[LeaderViewController alloc] init];
-    leaderVC.title = @"管家";
     next_view = @"管家";
     [self.navigationController pushViewController:leaderVC animated:YES];
     
@@ -273,15 +272,12 @@
     }else{
         OrderTVController * orderVC = [[OrderTVController alloc]
                                        initWithStyle:UITableViewStylePlain];
-//        orderVC.vc_type = _vc_type;
-//        orderVC.gid = self.group_id;
-//        orderVC.group_dic = _data_dic;
-//        orderVC.chargeArray = _spec_Arr;
-//      if (price_Now) {
-//        orderVC.charge_price = price_Now;
-//        }else{
-//            orderVC.charge_price = [NSString stringWithFormat:@"%ld",[_data_dic[@"price"] integerValue]];
-//        }
+        orderVC.vc_type = @"3";
+        orderVC.gid = self.group_id;
+        orderVC.group_dic = _data_dic;
+        orderVC.charge_price = _price_arr[order];
+        orderVC.person_num = (NSInteger)person_num;
+        orderVC.room_index = _date_arr[order];
         next_view = @"订单";
         [self.navigationController pushViewController:orderVC animated:YES];
     }

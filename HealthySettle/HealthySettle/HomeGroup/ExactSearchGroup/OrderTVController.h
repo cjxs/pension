@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-@class CDDatePicker;
+@class CDDatePicker,PPNumberButton;
 
 @interface Product : NSObject
 {
@@ -29,11 +29,18 @@
 @interface OrderTVController : UITableViewController
 @property (nonatomic,strong)UIView * tableHeadView;
 @property(nonatomic, strong)NSMutableArray *productList;
-@property (nonatomic,strong)NSDictionary * group_dic;
-@property (nonatomic,strong)NSString * gid;
-@property (nonatomic,strong)NSString * room_index;
-@property (nonatomic,strong)NSString * vc_type;
+@property (nonatomic,strong)NSDictionary * group_dic;//商家信息
+@property (nonatomic,strong)NSString * gid;//商家id
+@property (nonatomic,strong)NSString * room_index;//房间id
+@property (nonatomic,strong)NSString * vc_type;//类型
 @property (nonatomic,strong) CDDatePicker * datePicker;
-@property (nonatomic,strong)NSArray * chargeArray;
-@property (nonatomic,strong)NSString * charge_price;
+@property (nonatomic,strong)NSArray * chargeArray; //养老单价说明
+@property (nonatomic,strong)NSString * charge_price;//单价
+@property (nonatomic,assign)NSInteger  person_num;//人数
+@property (nonatomic,strong)PPNumberButton * number_btn;
+@property (nonatomic,strong)NSString *number_sum;
+@property (nonatomic,strong)NSString * balance_can;
+@property (nonatomic,strong)NSString * dis_count_can;
+@property (nonatomic,strong)NSString * unpaid_money;
+
 @end

@@ -36,6 +36,7 @@
         switchButton.clipsToBounds = YES;
         _cash_switch_btn = switchButton;
         [self addSubview:_cash_switch_btn];
+        
         UILabel * switch_btn_label = [[UILabel alloc] initWithFrame:CGRectMake(screenWide -120, 5, 45, 30)];
         switch_btn_label.text = @"去使用";
         switch_btn_label.adjustsFontSizeToFitWidth = YES;
