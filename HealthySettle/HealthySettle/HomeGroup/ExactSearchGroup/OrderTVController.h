@@ -42,5 +42,7 @@
 @property (nonatomic,strong)NSString * balance_can;
 @property (nonatomic,strong)NSString * dis_count_can;
 @property (nonatomic,strong)NSString * unpaid_money;
+@property (nonatomic,strong)UILabel * money_label;
+
 
 @end

@@ -17,6 +17,7 @@
 @property (nonatomic,strong)NSString * phone;
 @property (nonatomic,strong)NSString * avatar;
 @property (nonatomic,strong)NSString * now_money;
+@property (nonatomic,strong)NSString * vocher;
 @property (nonatomic,strong)NSString * score_count;
 @property (nonatomic,strong)NSString * pay_can;
 @property (nonatomic,strong)NSString * login;

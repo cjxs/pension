@@ -13,6 +13,8 @@
 #import "PPNumberButton.h"
 #import "ContentsTVCell.h"
 #import "TravelPersonTVCell.h"
+#import "UsecanTVCell.h"
+#import "SumAndPayTVCell.h"
 
 
 @interface OrderTVController ()<HYMDatePickerDelegate, UITextFieldDelegate>
@@ -23,8 +25,10 @@
     UILabel * leave_timelabel;
     UILabel * home_label;
     UITextField * current_field;
-    UILabel * money_label;
     YYLOrder * order;
+    NSString * cash_str,*dis_count_str;
+    BOOL cashUse,vocherUse;
+
 }
 
 @end
@@ -262,7 +266,7 @@
             _person_num = [num integerValue];
             text_label.text = [NSString stringWithFormat:@"共%@人    合计：",num];
             if ([_vc_type intValue] != 2) {
-                self.number_sum = [NSString stringWithFormat:@"¥ %ld",[_charge_price intValue]* _person_num];
+                self.number_sum = [NSString stringWithFormat:@"%ld",[_charge_price intValue]* _person_num];
             }
             [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationFade];
             
@@ -305,17 +309,14 @@
             NSTimeInterval oneDay = 24*60*60;
             NSTimeInterval time = [order.checkout_time timeIntervalSinceDate:order.checkin_time];
             int number = round(time/oneDay * 1.0);
-            self.number_sum = [NSString stringWithFormat:@"¥ %ld",[self.charge_price integerValue] * number];
+            self.number_sum = [NSString stringWithFormat:@"%ld",[self.charge_price integerValue] * number];
         }else{
-            self.number_sum = [NSString stringWithFormat:@"¥ %@",_charge_price];
+            self.number_sum = _charge_price;
         }
     }else{
-        self.number_sum = [NSString stringWithFormat:@"¥ %ld",[_charge_price intValue]* _person_num];
+        self.number_sum = [NSString stringWithFormat:@"%ld",[_charge_price intValue]* _person_num];
     }
-
-
-
-
+    
     self.tableView.showsVerticalScrollIndicator = NO;
     self.title = @"订单填写";
     order = [_vc_type intValue]==2 ? [YYLOrder YSOrder]:[YYLOrder YLOrder];
@@ -326,10 +327,11 @@
     
     [self.tableView registerClass:[ContentsTVCell class] forCellReuseIdentifier:@"content"];
     [self.tableView registerClass:[TravelPersonTVCell class] forCellReuseIdentifier:@"travel"];
+    [self.tableView registerClass:[UsecanTVCell class] forCellReuseIdentifier:@"use"];
+    [self.tableView registerClass:[SumAndPayTVCell class] forCellReuseIdentifier:@"pay"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     
-    self.tableView.tableFooterView = [UIView new];
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardHide:)];
     //设置成NO表示当前控件响应后会传播到其他控件上，默认为YES。
     tapGestureRecognizer.cancelsTouchesInView = NO;
@@ -350,16 +352,16 @@
     label.font = [UIFont systemFontOfSize:14];
     label.textAlignment = NSTextAlignmentRight;
     [backFootView addSubview:label];
-    money_label = [[UILabel alloc]
+    _money_label = [[UILabel alloc]
                              initWithFrame:CGRectMake(screenWide * 0.25, 1, screenWide * 0.2, screenHeight * 0.06 -1)];
     
-    money_label.textAlignment = NSTextAlignmentLeft;
-    money_label.font = [UIFont systemFontOfSize:14];
-    [RACObserve(self, number_sum) subscribeNext:^(NSString * x) {
-        money_label.text = x;
-    }];
+    
+    _money_label.textAlignment = NSTextAlignmentLeft;
+    _money_label.font = [UIFont systemFontOfSize:14];
+    
+    
 
-    [backFootView addSubview:money_label];
+    [backFootView addSubview:_money_label];
     UIButton * toPay_btn = [UIButton buttonWithType:UIButtonTypeCustom];
     toPay_btn.frame = CGRectMake(screenWide /2, 0, screenWide/2, screenHeight * 0.06);
     toPay_btn.backgroundColor = RGB(226, 11, 24);
@@ -371,7 +373,7 @@
     [toPay_btn setTitleColor:[UIColor whiteColor]
                     forState:UIControlStateNormal];
     [backFootView addSubview:toPay_btn];
-    [self.view addSubview:backFootView];
+    self.tableView.tableFooterView = backFootView;
 
 }
 -(void)didReceiveMemoryWarning
@@ -382,7 +384,7 @@
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return 4;
 }
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section
@@ -408,7 +410,7 @@
             }
         }
         return cell;
-    }else{
+    }else if (indexPath.section==1){
         TravelPersonTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"travel" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         for (int i = 0; i< cell.subviews.count; i++) {
@@ -420,18 +422,84 @@
 
         return cell;
 
+    }else if (indexPath.section==2){
+        UsecanTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"use" forIndexPath:indexPath];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        Member * user = [Member DefaultUser];
+        if ([user.now_money intValue] > [_number_sum intValue]) {
+            cash_str = _number_sum;
+        }else{
+            cash_str = user.now_money;
+        }
+        [[cell.cash_switch_btn rac_signalForControlEvents:UIControlEventValueChanged] subscribeNext:^(UISwitch * switch_btn) {
+            cashUse = switch_btn.on;
+            if (cashUse) {
+                self.balance_can = cash_str;
+            }else{
+                self.balance_can = @"0";
+            }
+        }];
+        
+        if ([user.vocher intValue] > [_group_dic[@"can_vochers"] intValue]) {
+            dis_count_str = _group_dic[@"can_vochers"];
+        }else{
+            dis_count_str = user.vocher;
+        }
+        
+        [[cell.dis_count_switch_btn rac_signalForControlEvents:UIControlEventValueChanged] subscribeNext:^(UISwitch * switch_btn){
+            vocherUse = switch_btn.on;
+            if (vocherUse) {
+                self.dis_count_can = @"10";
+            }else{
+                self.dis_count_can = @"0";
+            }
+        }];
+
+        [cell configWithCash:cash_str dis_count:@"10" cashUse:cashUse dis_countUse:vocherUse];
+        return cell;
+    }else{
+        SumAndPayTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"pay" forIndexPath:indexPath];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        [RACObserve(self, number_sum) subscribeNext:^(NSString * x) {
+            NSInteger paid = [_number_sum intValue]- [_balance_can intValue]-[_dis_count_can intValue];
+            self.unpaid_money = [NSString stringWithFormat:@"%ld",paid];
+            cell.num_sum_label.text = [NSString stringWithFormat:@"¥ %@",x];
+            
+        }];
+        
+        [RACObserve(self, balance_can) subscribeNext:^(NSString *x){
+            NSInteger paid = [_number_sum intValue]- [_balance_can intValue]-[_dis_count_can intValue];
+            self.unpaid_money = [NSString stringWithFormat:@"%ld",paid];
+            cell.balan_label.text = x? [NSString stringWithFormat:@"-¥ %@",x]:@"-¥ 0.00";
+        }];
+        [RACObserve(self, dis_count_can) subscribeNext:^(NSString *x) {
+            NSInteger paid = [_number_sum intValue]- [_balance_can intValue]-[_dis_count_can intValue];
+            self.unpaid_money = [NSString stringWithFormat:@"%ld",paid];
+            cell.vocher_label.text = x? [NSString stringWithFormat:@"-¥ %@",x]:@"-¥ 0.00";
+        }];
+        [RACObserve(self, unpaid_money) subscribeNext:^(NSString * x) {
+            cell.unpaid_label.text = [NSString stringWithFormat:@"¥ %@",x];
+            _money_label.text = x;
+        }];
+
+        return cell;
     }
     
     
 }
+
 -(CGFloat)tableView:(UITableView *)tableView
 heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section==0) {
         return screenHeight * 0.31;
-    }else{
+    }else if (indexPath.section==1){
         return screenHeight * 0.28;
 
+    }else if (indexPath.section==2){
+        return screenHeight * 0.17;
+    }else{
+        return screenHeight * 0.2;
     }
 }
 
@@ -487,7 +555,7 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath
                 NSTimeInterval oneDay = 24*60*60;
                 NSTimeInterval time = [order.checkout_time timeIntervalSinceDate:order.checkin_time];
                 int number = round(time/oneDay * 1.0);
-                self.number_sum = [NSString stringWithFormat:@"¥ %ld",[self.charge_price integerValue] * number];
+                self.number_sum = [NSString stringWithFormat:@"%ld",[self.charge_price integerValue] * number];
                 
             }
         }//日期选择器的代理方法

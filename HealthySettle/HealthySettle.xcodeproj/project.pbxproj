@@ -198,6 +198,7 @@
 		3289E3971E4DC32000C57596 /* TravelPersonTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3289E3961E4DC32000C57596 /* TravelPersonTVCell.m */; };
 		3289E39A1E4DC7F800C57596 /* SelectOneView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3289E3991E4DC7F800C57596 /* SelectOneView.m */; };
 		3289E39D1E51926200C57596 /* UsecanTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3289E39C1E51926100C57596 /* UsecanTVCell.m */; };
+		3289E3A31E51BFD300C57596 /* SumAndPayTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3289E3A21E51BFD300C57596 /* SumAndPayTVCell.m */; };
 		3297D3AE1E1F9B06007A0F94 /* MoveSelectTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3297D3AD1E1F9B06007A0F94 /* MoveSelectTVCell.m */; };
 		32A3BB771DBB16490009D50F /* DDCollectList.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A3BB761DBB16490009D50F /* DDCollectList.m */; };
 		32A7314E1E1B518E005D6FB2 /* 热门@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 32A7314A1E1B518E005D6FB2 /* 热门@2x.png */; };
@@ -843,6 +844,8 @@
 		3289E3991E4DC7F800C57596 /* SelectOneView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectOneView.m; sourceTree = "<group>"; };
 		3289E39B1E51926000C57596 /* UsecanTVCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UsecanTVCell.h; sourceTree = "<group>"; };
 		3289E39C1E51926100C57596 /* UsecanTVCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UsecanTVCell.m; sourceTree = "<group>"; };
+		3289E3A11E51BFD300C57596 /* SumAndPayTVCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SumAndPayTVCell.h; sourceTree = "<group>"; };
+		3289E3A21E51BFD300C57596 /* SumAndPayTVCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SumAndPayTVCell.m; sourceTree = "<group>"; };
 		328A80771DC4A46B002FC09D /* 优悠乐.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = "优悠乐.entitlements"; path = "../优悠乐.entitlements"; sourceTree = "<group>"; };
 		3297D3AC1E1F9B06007A0F94 /* MoveSelectTVCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoveSelectTVCell.h; sourceTree = "<group>"; };
 		3297D3AD1E1F9B06007A0F94 /* MoveSelectTVCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoveSelectTVCell.m; sourceTree = "<group>"; };
@@ -1647,6 +1650,8 @@
 				3289E3961E4DC32000C57596 /* TravelPersonTVCell.m */,
 				3289E39B1E51926000C57596 /* UsecanTVCell.h */,
 				3289E39C1E51926100C57596 /* UsecanTVCell.m */,
+				3289E3A11E51BFD300C57596 /* SumAndPayTVCell.h */,
+				3289E3A21E51BFD300C57596 /* SumAndPayTVCell.m */,
 				3278CCDD1CAF8E9800038B9D /* TestModel.h */,
 				3278CCDE1CAF8E9800038B9D /* TestModel.m */,
 				324CD4AC1CAE629300276B57 /* ResultCellGroup */,
@@ -2591,6 +2596,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3289E3A31E51BFD300C57596 /* SumAndPayTVCell.m in Sources */,
 				32D693DC1DD40E7E001D5C7F /* DDUpdate.m in Sources */,
 				325C824C1CB122480004EA0C /* ShowTVCell.m in Sources */,
 				326F24801CCB0690002BCE0D /* WXUtil.mm in Sources */,
