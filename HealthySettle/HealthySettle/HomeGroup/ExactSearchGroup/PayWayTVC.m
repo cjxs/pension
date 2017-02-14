@@ -37,21 +37,14 @@
     _pay_way_imageView.image = [UIImage imageNamed:image_name];
     _pay_way_label.text = title;
     
-    if ([image_name isEqualToString:@"ali_btn"]) {
-        if (ali_pay) {
-            _select_status_btn.image = [UIImage imageNamed:@"selected"];
-        }else{
-            _select_status_btn.image = [UIImage imageNamed:@"un_select"];
-        }
+    if (ali_pay) {
+        _select_status_btn.image = [UIImage imageNamed:@"selected"];
     }else{
-         if (ali_pay) {
-             _select_status_btn.image = [UIImage imageNamed:@"un_select"];
-         }else{
-             _select_status_btn.image = [UIImage imageNamed:@"selected"];
+        _select_status_btn.image = [UIImage imageNamed:@"un_select"];
 
-         }
-        
     }
+    
+    
 }
 
 @end

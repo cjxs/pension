@@ -9,7 +9,6 @@
 #import "OrderTVController.h"
 #import "CDDatePicker.h"
 #import "PayViewController.h"
-#import "SpecialLabelTVC.h"
 #import "PPNumberButton.h"
 #import "ContentsTVCell.h"
 #import "TravelPersonTVCell.h"
@@ -28,6 +27,7 @@
     YYLOrder * order;
     NSString * cash_str,*dis_count_str;
     BOOL cashUse,vocherUse;
+    UIView * backFootView;
 
 }
 
@@ -267,10 +267,28 @@
             text_label.text = [NSString stringWithFormat:@"共%@人    合计：",num];
             if ([_vc_type intValue] != 2) {
                 self.number_sum = [NSString stringWithFormat:@"%ld",[_charge_price intValue]* _person_num];
+
             }
             [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationFade];
             
         };
+        [RACObserve(self, number_sum) subscribeNext:^(NSString * x) {
+            NSInteger paid = [_number_sum intValue]- [_balance_can intValue]-[_dis_count_can intValue];
+            self.unpaid_money = [NSString stringWithFormat:@"%ld",paid];
+        }];
+        [RACObserve(self, balance_can) subscribeNext:^(NSString *x){
+            NSInteger paid = [_number_sum intValue]- [_balance_can intValue]-[_dis_count_can intValue];
+            self.unpaid_money = [NSString stringWithFormat:@"%ld",paid];
+        }];
+        [RACObserve(self, dis_count_can) subscribeNext:^(NSString *x) {
+            NSInteger paid = [_number_sum intValue]- [_balance_can intValue]-[_dis_count_can intValue];
+            self.unpaid_money = [NSString stringWithFormat:@"%ld",paid];
+        }];
+        [RACObserve(self, unpaid_money) subscribeNext:^(NSString * x) {
+            _money_label.text = x;
+        }];
+
+
 
     }
     return _tableHeadView;
@@ -319,9 +337,10 @@
     
     self.tableView.showsVerticalScrollIndicator = NO;
     self.title = @"订单填写";
+    [self creatBackFootView];
+
     order = [_vc_type intValue]==2 ? [YYLOrder YSOrder]:[YYLOrder YLOrder];
     self.tableView.tableHeaderView = self.tableHeadView;
-    [self creatBackFootView];
     
 
     
@@ -338,9 +357,35 @@
     //将触摸事件添加到当前view
     [self.tableView addGestureRecognizer:tapGestureRecognizer];
 }
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    if (self.navigationController.navigationBar.tintColor == [UIColor whiteColor]) {
+        self.navigationController.navigationBar.translucent = NO;
+        self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+        self.navigationController.navigationBar.tintColor = [UIColor redColor];
+        self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor blackColor]};
+        [self.navigationController setNavigationBarHidden:NO animated:animated];
+
+    }
+
+    
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    if (backFootView) {
+        for (UIView * view in backFootView.subviews) {
+            [view removeFromSuperview];
+        }
+        [backFootView removeFromSuperview];
+    }
+
+}
+
 -(void)creatBackFootView{
-    UIView * backFootView = [[UIView alloc]
-                             initWithFrame:CGRectMake(0, screenHeight * 0.94-64, screenWide, screenHeight * 0.06)];
+    backFootView = [[UIView alloc]
+                             initWithFrame:CGRectMake(0, screenHeight * 0.94, screenWide, screenHeight * 0.06)];
     backFootView.backgroundColor = [UIColor whiteColor];
     UIView * line_view =[[UIView alloc]
                          initWithFrame:CGRectMake(0, 0, screenWide, 1)];
@@ -373,7 +418,8 @@
     [toPay_btn setTitleColor:[UIColor whiteColor]
                     forState:UIControlStateNormal];
     [backFootView addSubview:toPay_btn];
-    self.tableView.tableFooterView = backFootView;
+    [[[UIApplication sharedApplication].delegate window] addSubview:backFootView];
+    self.tableView.tableFooterView = [UIView new];
 
 }
 -(void)didReceiveMemoryWarning
@@ -460,26 +506,19 @@
     }else{
         SumAndPayTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"pay" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
         [RACObserve(self, number_sum) subscribeNext:^(NSString * x) {
-            NSInteger paid = [_number_sum intValue]- [_balance_can intValue]-[_dis_count_can intValue];
-            self.unpaid_money = [NSString stringWithFormat:@"%ld",paid];
             cell.num_sum_label.text = [NSString stringWithFormat:@"¥ %@",x];
             
         }];
-        
         [RACObserve(self, balance_can) subscribeNext:^(NSString *x){
-            NSInteger paid = [_number_sum intValue]- [_balance_can intValue]-[_dis_count_can intValue];
-            self.unpaid_money = [NSString stringWithFormat:@"%ld",paid];
             cell.balan_label.text = x? [NSString stringWithFormat:@"-¥ %@",x]:@"-¥ 0.00";
         }];
         [RACObserve(self, dis_count_can) subscribeNext:^(NSString *x) {
-            NSInteger paid = [_number_sum intValue]- [_balance_can intValue]-[_dis_count_can intValue];
-            self.unpaid_money = [NSString stringWithFormat:@"%ld",paid];
             cell.vocher_label.text = x? [NSString stringWithFormat:@"-¥ %@",x]:@"-¥ 0.00";
         }];
         [RACObserve(self, unpaid_money) subscribeNext:^(NSString * x) {
-            cell.unpaid_label.text = [NSString stringWithFormat:@"¥ %@",x];
-            _money_label.text = x;
+            cell.unpaid_label.text = x;
         }];
 
         return cell;
@@ -499,7 +538,7 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath
     }else if (indexPath.section==2){
         return screenHeight * 0.17;
     }else{
-        return screenHeight * 0.2;
+        return screenHeight * 0.35;
     }
 }
 

@@ -55,6 +55,7 @@
         man_view = [[SelectOneView alloc] initWithFrame:CGRectMake(screenWide * 0.27, screenHeight * 0.225, screenWide * 0.15, screenWide * 0.075)];
         [self addSubview:man_view];
         man_view.lab.text = @"男";
+        man_view.img_view.image = [UIImage imageNamed:@"selected"];
         @weakify(self);
 
         man_view.lab.textColor = [UIColor redColor];
@@ -67,6 +68,7 @@
         woman_view = [[SelectOneView alloc] initWithFrame:CGRectMake(screenWide * 0.52, screenHeight * 0.225, screenWide * 0.15, screenWide * 0.075)];
         [self addSubview:woman_view];
         woman_view.lab.text = @"女";
+        woman_view.img_view.image = [UIImage imageNamed:@"un_select"];
         woman_view.selectBlock =  ^(CGFloat num){
             int a =  num/screenWide/0.27;
             @strongify(self);
@@ -85,13 +87,19 @@
         if (man != 1) {
             man = 1;
             man_view.lab.textColor = [UIColor redColor];
+            man_view.img_view.image = [UIImage imageNamed:@"selected"];
             woman_view.lab.textColor = [UIColor blackColor];
+            woman_view.img_view.image = [UIImage imageNamed:@"un_select"];
+
         }
         
     }else{
         man = 0;
         woman_view.lab.textColor = [UIColor redColor];
+        woman_view.img_view.image = [UIImage imageNamed:@"selected"];
         man_view.lab.textColor = [UIColor blackColor];
+        man_view.img_view.image = [UIImage imageNamed:@"un_select"];
+
 
     }
 }

@@ -10,7 +10,6 @@
 		1E0E6B8C426C85B7638FD03D /* libPods-优悠乐.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 087E2C9EC0A262329181EDAC /* libPods-优悠乐.a */; };
 		320108131DBB4A38007ACA6B /* DDMoneyList.m in Sources */ = {isa = PBXBuildFile; fileRef = 320108121DBB4A38007ACA6B /* DDMoneyList.m */; };
 		320108161DBB58F9007ACA6B /* DDScoreList.m in Sources */ = {isa = PBXBuildFile; fileRef = 320108151DBB58F9007ACA6B /* DDScoreList.m */; };
-		3205DEDD1DF64C6700AC5726 /* CashStatusTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3205DEDC1DF64C6700AC5726 /* CashStatusTVC.m */; };
 		3205DEE01DF954AF00AC5726 /* PerOrderDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3205DEDF1DF954AF00AC5726 /* PerOrderDetailVC.m */; };
 		3205DEE31DF955E000AC5726 /* OrderStatusTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3205DEE21DF955E000AC5726 /* OrderStatusTVCell.m */; };
 		3205DEE61DF9596100AC5726 /* UIColor+HexColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3205DEE51DF9596100AC5726 /* UIColor+HexColor.m */; };
@@ -18,7 +17,6 @@
 		3205DEEC1DFA3D9E00AC5726 /* OrderMassageTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3205DEEB1DFA3D9E00AC5726 /* OrderMassageTVCell.m */; };
 		3205DEEF1DFA3EEB00AC5726 /* OrderMasView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3205DEEE1DFA3EEB00AC5726 /* OrderMasView.m */; };
 		3205DEF21DFA500C00AC5726 /* ArrayLabelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3205DEF11DFA500C00AC5726 /* ArrayLabelView.m */; };
-		3207688D1DF1287800D5C827 /* SpecialLabelTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3207688C1DF1287800D5C827 /* SpecialLabelTVC.m */; };
 		320768901DF1861100D5C827 /* PayWayTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3207688F1DF1861100D5C827 /* PayWayTVC.m */; };
 		320768971DF18C6E00D5C827 /* ali_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 320768911DF18C6E00D5C827 /* ali_btn.png */; };
 		320768981DF18C6E00D5C827 /* un_select@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 320768921DF18C6E00D5C827 /* un_select@2x.png */; };
@@ -62,6 +60,7 @@
 		32299CCF1E28878900372A72 /* CDCityPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 32299CCE1E28878900372A72 /* CDCityPicker.m */; };
 		322C36851D338607005163C4 /* DDLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = 322C36841D338607005163C4 /* DDLogin.m */; };
 		323499AB1CE1782200CBA680 /* Member.m in Sources */ = {isa = PBXBuildFile; fileRef = 323499AA1CE1782200CBA680 /* Member.m */; };
+		323552361E52DD60003C5A8C /* under_line.png in Resources */ = {isa = PBXBuildFile; fileRef = 323552351E52DD60003C5A8C /* under_line.png */; };
 		32399A2F1E1C90ED0056295B /* TravelTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32399A2E1E1C90ED0056295B /* TravelTVCell.m */; };
 		32399A321E1C93120056295B /* list_p@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 32399A301E1C93120056295B /* list_p@2x.png */; };
 		32399A331E1C93120056295B /* list_p@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 32399A311E1C93120056295B /* list_p@3x.png */; };
@@ -403,8 +402,6 @@
 		320108121DBB4A38007ACA6B /* DDMoneyList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDMoneyList.m; sourceTree = "<group>"; };
 		320108141DBB58F9007ACA6B /* DDScoreList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDScoreList.h; sourceTree = "<group>"; };
 		320108151DBB58F9007ACA6B /* DDScoreList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDScoreList.m; sourceTree = "<group>"; };
-		3205DEDB1DF64C6700AC5726 /* CashStatusTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CashStatusTVC.h; sourceTree = "<group>"; };
-		3205DEDC1DF64C6700AC5726 /* CashStatusTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CashStatusTVC.m; sourceTree = "<group>"; };
 		3205DEDE1DF954AF00AC5726 /* PerOrderDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PerOrderDetailVC.h; path = PersonalGroupn/PerOrderDetailVC.h; sourceTree = "<group>"; };
 		3205DEDF1DF954AF00AC5726 /* PerOrderDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PerOrderDetailVC.m; sourceTree = "<group>"; };
 		3205DEE11DF955E000AC5726 /* OrderStatusTVCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderStatusTVCell.h; sourceTree = "<group>"; };
@@ -419,8 +416,6 @@
 		3205DEEE1DFA3EEB00AC5726 /* OrderMasView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderMasView.m; sourceTree = "<group>"; };
 		3205DEF01DFA500C00AC5726 /* ArrayLabelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArrayLabelView.h; sourceTree = "<group>"; };
 		3205DEF11DFA500C00AC5726 /* ArrayLabelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArrayLabelView.m; sourceTree = "<group>"; };
-		3207688B1DF1287800D5C827 /* SpecialLabelTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpecialLabelTVC.h; sourceTree = "<group>"; };
-		3207688C1DF1287800D5C827 /* SpecialLabelTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecialLabelTVC.m; sourceTree = "<group>"; };
 		3207688E1DF1861100D5C827 /* PayWayTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayWayTVC.h; sourceTree = "<group>"; };
 		3207688F1DF1861100D5C827 /* PayWayTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayWayTVC.m; sourceTree = "<group>"; };
 		320768911DF18C6E00D5C827 /* ali_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ali_btn.png; sourceTree = "<group>"; };
@@ -477,6 +472,7 @@
 		322C36841D338607005163C4 /* DDLogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDLogin.m; sourceTree = "<group>"; };
 		323499A91CE1782200CBA680 /* Member.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Member.h; sourceTree = "<group>"; };
 		323499AA1CE1782200CBA680 /* Member.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Member.m; sourceTree = "<group>"; };
+		323552351E52DD60003C5A8C /* under_line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = under_line.png; sourceTree = "<group>"; };
 		32399A2D1E1C90ED0056295B /* TravelTVCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TravelTVCell.h; sourceTree = "<group>"; };
 		32399A2E1E1C90ED0056295B /* TravelTVCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TravelTVCell.m; sourceTree = "<group>"; };
 		32399A301E1C93120056295B /* list_p@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list_p@2x.png"; sourceTree = "<group>"; };
@@ -1638,10 +1634,6 @@
 				32E71C9C1CB23DD00079CD73 /* OrderTVController.m */,
 				32D693F41DE28E43001D5C7F /* PayViewController.h */,
 				32D693F51DE28E43001D5C7F /* PayViewController.m */,
-				3205DEDB1DF64C6700AC5726 /* CashStatusTVC.h */,
-				3205DEDC1DF64C6700AC5726 /* CashStatusTVC.m */,
-				3207688B1DF1287800D5C827 /* SpecialLabelTVC.h */,
-				3207688C1DF1287800D5C827 /* SpecialLabelTVC.m */,
 				3207688E1DF1861100D5C827 /* PayWayTVC.h */,
 				3207688F1DF1861100D5C827 /* PayWayTVC.m */,
 				3289E3921E4DBD7900C57596 /* ContentsTVCell.h */,
@@ -1728,6 +1720,7 @@
 				32DB05401DA8D0830041C4F5 /* pageControlDot@3x.png */,
 				3269BAB31CC62E8400C855FC /* choose_72_@2x.png */,
 				3269BAB41CC62E8400C855FC /* choose_72_@3x.png */,
+				323552351E52DD60003C5A8C /* under_line.png */,
 				3269BA8A1CC5DAA200C855FC /* choose_44_@2x.png */,
 				3269BA8B1CC5DAA200C855FC /* choose_46_@2x.png */,
 				3269BA8C1CC5DAA200C855FC /* choose_44_@3x.png */,
@@ -2532,6 +2525,7 @@
 				32DB05411DA8D0830041C4F5 /* pageControlCurrentDot@2x.png in Resources */,
 				3289E38E1E4D6B8F00C57596 /* tel@3x.png in Resources */,
 				32E5883B1CB73A47002AED1A /* found_g@3x.png in Resources */,
+				323552361E52DD60003C5A8C /* under_line.png in Resources */,
 				32D693F01DD56380001D5C7F /* PersonDataSetVC.xib in Resources */,
 				3223F11F1DB8E19F001F1DCC /* Loading@2x.png in Resources */,
 				32D23E781DC33932009154F6 /* MJRefresh.bundle in Resources */,
@@ -2634,7 +2628,6 @@
 				32D693F31DD5BBA5001D5C7F /* HMDatePickView.m in Sources */,
 				3205DEE01DF954AF00AC5726 /* PerOrderDetailVC.m in Sources */,
 				321C43171DC0575600192243 /* ArticleListTViewCell.m in Sources */,
-				3205DEDD1DF64C6700AC5726 /* CashStatusTVC.m in Sources */,
 				32FB002E1D405D6F008A5497 /* DDToolKit.m in Sources */,
 				32F6CD081C9A734C00E97B65 /* AppDelegate.m in Sources */,
 				3285AF0B1D3760A20070618A /* YYLOrder.m in Sources */,
@@ -2645,7 +2638,6 @@
 				32FA73461CABE32500379855 /* RefundViewController.m in Sources */,
 				3252D6551CC752B5000FAFBC /* NSDataEx.m in Sources */,
 				32CABD651CA373AA0068AE93 /* CitySkipViewCell.m in Sources */,
-				3207688D1DF1287800D5C827 /* SpecialLabelTVC.m in Sources */,
 				3289E3861E4C653A00C57596 /* LeaderViewController.m in Sources */,
 				3285AF081D3742620070618A /* YYLGroup.m in Sources */,
 				326F24821CCB0690002BCE0D /* WXApiRequestHandler.m in Sources */,

@@ -16,7 +16,7 @@
         CGFloat height = frame.size.height;
         _lab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0,width/2 , height)];
         [self addSubview:_lab];
-        _img_view = [[UIImageView alloc] initWithFrame:CGRectMake(width/2, 0, width/2, height)];
+        _img_view = [[UIImageView alloc] initWithFrame:CGRectMake(width/2, height/6, width/3, height/3*2)];
         [self addSubview:_img_view];
         UITapGestureRecognizer * ges = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapviewges:)];
         [self addGestureRecognizer:ges];

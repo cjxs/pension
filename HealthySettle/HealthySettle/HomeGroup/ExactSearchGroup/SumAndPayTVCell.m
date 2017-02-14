@@ -58,6 +58,11 @@
         UIView * line_view = [[UIView alloc] initWithFrame:CGRectMake(0, screenHeight * 0.16, screenWide, 1)];
         line_view.backgroundColor = GRAYCOLOR;
         [self addSubview:line_view];
+        UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, screenHeight * 0.22, screenWide, screenHeight * 0.15)];
+        [self addSubview:view];
+        view.backgroundColor = GRAYCOLOR;
+        
+        
     }
     return self;
 }
