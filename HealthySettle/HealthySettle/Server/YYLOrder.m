@@ -9,7 +9,8 @@
 #import "YYLOrder.h"
 
 @implementation YYLOrder
-+(YYLOrder *)YLOrder{
+
++(YYLOrder *)YSOrder{
     static YYLOrder * ordering = nil;
     static dispatch_once_t predicate;
     dispatch_once(&predicate, ^{
@@ -17,7 +18,7 @@
     });
     return ordering;
 }
-+(YYLOrder *)YSOrder{
++(YYLOrder *)PreOrder{
     static YYLOrder * ordering = nil;
     static dispatch_once_t predicate;
     dispatch_once(&predicate, ^{

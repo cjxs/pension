@@ -73,8 +73,8 @@ static NSInteger page = 1;
             _checkIn_label = checkIn_label;
             _checkIn_label.textAlignment = NSTextAlignmentCenter;
             
-            if ([YYLOrder YLOrder].checkin_time) {
-                checkIn_label.text = [NSString stringWithFormat:@"入 %@",[CDDatePicker getStringFromDate:[YYLOrder YLOrder].checkin_time]];;
+            if ([YYLOrder YSOrder].checkin_time) {
+                checkIn_label.text = [NSString stringWithFormat:@"入 %@",[CDDatePicker getStringFromDate:[YYLOrder YSOrder].checkin_time]];;
             }else{
                 checkIn_label.text = [NSString stringWithFormat:@"入 %@",[CDDatePicker getStringFromDate:[NSDate date]]];
             }
@@ -453,10 +453,10 @@ static NSInteger page = 1;
     if (date) {
         if ([_datePicker.type isEqualToString:@"Z"]) {
             _checkIn_label.text = [NSString stringWithFormat:@" 入 %@",[CDDatePicker getStringFromDate:date]];
+            [YYLOrder YSOrder].checkin_time = date;
+
             if ([_vc_type isEqualToString:@"L"]) {
-                [YYLOrder YLOrder].checkin_time = date;
             }else{
-                [YYLOrder YSOrder].checkin_time = date;
                 end_begain = date;
             }
         }else{

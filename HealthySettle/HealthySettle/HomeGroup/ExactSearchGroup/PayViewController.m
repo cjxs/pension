@@ -88,13 +88,12 @@
 }
 
 -(void)creatBackFootView{
-    YYLOrder * order = [_vc_type isEqualToString:@"2"]? [YYLOrder YSOrder]:[YYLOrder YLOrder];
-        UIButton * toPay_btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIButton * toPay_btn = [UIButton buttonWithType:UIButtonTypeCustom];
     toPay_btn.frame = CGRectMake(screenWide * 0.075, screenHeight * 0.5, screenWide * 0.85, screenHeight * 0.07);
     toPay_btn.layer.masksToBounds = YES;
     toPay_btn.layer.cornerRadius = 10;
     toPay_btn.backgroundColor = RGB(226, 11, 24);
-    [RACObserve(order, balance_money) subscribeNext:^(id x) {
+    [RACObserve(_order, payment_money) subscribeNext:^(id x) {
         NSString *str = x;
         NSString * title_str = [NSString stringWithFormat:@"去支付：¥ %.2lf",[str floatValue]];
         [toPay_btn setTitle:title_str
@@ -168,7 +167,6 @@
 - (void)payToThird{
     if (pay_way==0){
         WXApiRequestHandler *wxapi = [[WXApiRequestHandler  alloc] init];
-        wxapi.type = _vc_type;
         [wxapi httpService:nil];
     }else if (pay_way==1) {
         [self payToAlipay];
@@ -184,7 +182,6 @@
 }
 -(void)payToAlipay
 {
-     YYLOrder * order_pay = [_vc_type isEqualToString:@"2"]? [YYLOrder YSOrder]:[YYLOrder YLOrder];
     /*=======================需要填写商户app申请的===================================*/
     NSString *partner = AliPID;
     NSString *seller = AliMID;
@@ -211,9 +208,9 @@
     order.partner = partner; // 合作商号
     order.seller = seller; // 支付宝账号
     order.tradeNO = [self generateTradeNO]; //订单ID（由商家自行制定）
-    order.productName = order_pay.group_id;//product.subject; //商品标题
-    order.productDescription = order_pay.order_name;//product.body; //商品描述
-    order.amount = @"0.01";//[NSString stringWithFormat:@"%f",product.price]; //商品价格
+    order.productName = _order.group_id;//product.subject; //商品标题
+    order.productDescription = _order.order_name;//product.body; //商品描述
+    order.amount = [NSString stringWithFormat:@"%.2lf",[_order.payment_money floatValue]]; //商品价格
     order.notifyURL =  @"http://www.xxx.com"; //回调URL
     order.service = @"mobile.securitypay.pay";
     order.paymentType = @"1";

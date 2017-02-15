@@ -11,5 +11,6 @@
 @interface PayViewController : UIViewController
 @property (nonatomic,strong)NSString * vc_type;
 @property (nonatomic,strong)UITableView * tableView;
+@property (nonatomic,strong)YYLOrder * order;
 
 @end

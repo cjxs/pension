@@ -66,10 +66,17 @@
 	<string>1</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
-		<string>mqq</string>
+		<string>mqqwpa</string>
+		<string>mqzone</string>
+		<string>mqqopensdkapiV2</string>
+		<string>sinaweibohd</string>
 		<string>sinaweibo</string>
 		<string>weixin</string>
+		<string>wtloginmqq2</string>
 		<string>wechat</string>
+		<string>mqqopensdkapiV3</string>
+		<string>alipay</string>
+		<string>safepay</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
@@ -88,7 +95,7 @@
 				<key>NSTemporaryExceptionMinimumTLSVersion</key>
 				<string>TLSv1.0</string>
 				<key>NSTemporaryExceptionRequiresForwardSecrecy</key>
-				<false/>
+				<true/>
 			</dict>
 			<key>alipayobjects.com</key>
 			<dict>
@@ -106,7 +113,7 @@
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
 	<key>UILaunchStoryboardName</key>
-	<string>Launch Screen</string>
+	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>

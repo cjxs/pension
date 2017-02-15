@@ -339,7 +339,7 @@
     self.title = @"订单填写";
     [self creatBackFootView];
 
-    order = [_vc_type intValue]==2 ? [YYLOrder YSOrder]:[YYLOrder YLOrder];
+    order = [YYLOrder YSOrder];
     self.tableView.tableHeaderView = self.tableHeadView;
     
 
@@ -635,30 +635,68 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath
 }
 - (void)submitOrder {
     if ([self testOrderMassage]) {
-        if ([_vc_type isEqualToString:@"2"]) {
-            order.subsidy_money_m = @"0";
-            order.subsidy_money_u = @"0";
-            NSTimeInterval oneDay = 24*60*60;
-            NSTimeInterval time = [order.checkout_time timeIntervalSinceDate:order.checkin_time];
-            int number = time/oneDay;
-
-            order.balance_money = [NSString stringWithFormat:@"%ld",[self.charge_price integerValue] * number];
-        }else{
-            order.subsidy_money_m = @"50";
-            order.subsidy_money_u = @"50";
-            CGFloat pay_money = [self.charge_price floatValue] - [order.subsidy_money_u floatValue];
-            order.balance_money = [NSString stringWithFormat:@"%.0f",pay_money];
-            if (!order.checkout_time) {
-                order.checkout_time = [self getPriousorLaterDateFromDate:[NSDate date] withMonth:1];
-            }
-        }
+        YYLOrder * order_pre = [YYLOrder PreOrder];
+        order_pre.cat_id = _vc_type;
         if (!order.checkin_time) {
-            order.checkin_time = [NSDate date];
+            order_pre.checkin_time = [NSDate date];
+        }else{
+            order_pre.checkin_time =order.checkin_time;
         }
-        order.cat_id = _vc_type;
-        order.price = self.charge_price;
-        order.order_name = _group_dic[@"name"];
-        order.group_id = self.gid;
+
+
+        if ([_vc_type intValue] == 2) {
+            
+            NSTimeInterval oneDay = 24*60*60;
+            if (!order.checkout_time) {
+                order_pre.checkout_time = [NSDate dateWithTimeInterval:oneDay sinceDate:order_pre.checkin_time];
+            }else{
+                order_pre.checkout_time = order.checkout_time;
+            }
+            
+            NSTimeInterval time = [order_pre.checkout_time timeIntervalSinceDate:order_pre.checkin_time];
+            int number = time/oneDay;
+            order_pre.lived_num = [NSString stringWithFormat:@"%d",number];
+            order_pre.num = @"1";
+            order_pre.total_money = [NSString stringWithFormat:@"%ld",[self.charge_price integerValue] * number];
+            order_pre.room_id = _room_index;
+            
+            
+        }else if ([_vc_type intValue] == 1){
+            order_pre.beds = [NSString stringWithFormat:@"%ld",_person_num];
+            
+            order_pre.total_money = [NSString stringWithFormat:@"%ld",[self.charge_price integerValue] * _person_num];
+            if (!order_pre.checkout_time) {
+                order_pre.checkout_time = [self getPriousorLaterDateFromDate:[NSDate date] withMonth:1];
+            }
+            order_pre.order_spec = _chargeArray;
+        }else{
+            order_pre.group_date = _room_index;
+            order_pre.total_money = [NSString stringWithFormat:@"%ld",[self.charge_price integerValue] * _person_num];
+
+            
+        }
+        order_pre.order_name = _group_dic[@"name"];
+
+        order_pre.group_id = self.gid;
+        order_pre.price = _charge_price;
+
+        order_pre.subsidy_money_m = @"0";
+        order_pre.subsidy_money_u = @"0";
+        order_pre.contact_name = @"ddd";
+        order_pre.contact_phone = @"123445";
+        order_pre.card_id = @"0";
+        order_pre.wx_cheap = @"0";
+        order_pre.balance_pay = _balance_can;
+        order_pre.coupon = _dis_count_can;
+        order_pre.payment_money = [NSString stringWithFormat:@"%@",_money_label.text];
+        order_pre.add_time = [NSString stringWithFormat:@"%ld",(long)[[NSDate date] timeIntervalSince1970]];
+        order_pre.paid = @"0";
+        order_pre.status = @"6";
+        order_pre.checkin_name = @[@"ddd",@"dfs"];
+        
+        
+
+
         /*
         OrderTextFieldTVCell * cell;
         cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
@@ -675,6 +713,7 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath
         
         if ([self creatOrderInterNet]) {
             PayViewController * payVC = [[PayViewController alloc] init];
+            payVC.order = order_pre;
             payVC.vc_type = self.vc_type;
             [SVProgressHUD showSuccessWithStatus:@"订单提交成功！"];
             [self.navigationController pushViewController:payVC animated:YES];

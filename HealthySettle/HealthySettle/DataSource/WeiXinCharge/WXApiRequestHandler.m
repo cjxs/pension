@@ -395,7 +395,7 @@
 
 
 - (void)httpService:(NSDictionary *)dictionary{
-    YYLOrder * order_pay = [_type isEqualToString:@"S"]? [YYLOrder YSOrder]:[YYLOrder YLOrder];
+    YYLOrder * pre_order = [YYLOrder PreOrder];
 
     NSString *appid,*mch_id,*nonce_str,*sign,*body,*out_trade_no,*total_fee,*spbill_create_ip,*notify_url,*trade_type,*partner;
     //应用APPID
@@ -409,7 +409,7 @@
     out_trade_no = [self getOrderNumber];// dictionary[@"orderno"];
     //交易价格1表示0.01元，10表示0.1元
     
-    total_fee = [NSString stringWithFormat:@"%d",[order_pay.balance_money intValue] * 100];//dictionary[@"total_price"];
+    total_fee = [NSString stringWithFormat:@"%d",[pre_order.payment_money intValue] * 100];//dictionary[@"total_price"];
     //获取本机IP地址，请再wifi环境下测试，否则获取的ip地址为error，正确格式应该是8.8.8.8
     spbill_create_ip = @"192.168.1.25";
 //    spbill_create_ip = @"192.168.0.111";

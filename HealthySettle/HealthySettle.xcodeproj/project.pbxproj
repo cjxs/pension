@@ -54,7 +54,6 @@
 		321C431A1DC0879E00192243 /* DDArticleDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 321C43191DC0879E00192243 /* DDArticleDetail.m */; };
 		3223F1151DB8D87D001F1DCC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3223F1121DB8D87D001F1DCC /* Main.storyboard */; };
 		3223F1191DB8DC17001F1DCC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3223F1181DB8DC17001F1DCC /* Assets.xcassets */; };
-		3223F11B1DB8DCFE001F1DCC /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3223F11A1DB8DCFE001F1DCC /* Launch Screen.storyboard */; };
 		3223F11E1DB8E19F001F1DCC /* Loading1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3223F11C1DB8E19F001F1DCC /* Loading1.png */; };
 		3223F11F1DB8E19F001F1DCC /* Loading@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3223F11D1DB8E19F001F1DCC /* Loading@2x.png */; };
 		32299CCF1E28878900372A72 /* CDCityPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 32299CCE1E28878900372A72 /* CDCityPicker.m */; };
@@ -68,6 +67,7 @@
 		3235524B1E543365003C5A8C /* OrderSuccessController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3235524A1E543365003C5A8C /* OrderSuccessController.m */; };
 		3235524E1E543956003C5A8C /* order_success@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3235524C1E543956003C5A8C /* order_success@3x.png */; };
 		3235524F1E543956003C5A8C /* order_success@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3235524D1E543956003C5A8C /* order_success@2x.png */; };
+		323552511E54720C003C5A8C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 323552501E54720C003C5A8C /* LaunchScreen.storyboard */; };
 		32399A2F1E1C90ED0056295B /* TravelTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32399A2E1E1C90ED0056295B /* TravelTVCell.m */; };
 		32399A321E1C93120056295B /* list_p@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 32399A301E1C93120056295B /* list_p@2x.png */; };
 		32399A331E1C93120056295B /* list_p@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 32399A311E1C93120056295B /* list_p@3x.png */; };
@@ -470,7 +470,6 @@
 		321C43191DC0879E00192243 /* DDArticleDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDArticleDetail.m; sourceTree = "<group>"; };
 		3223F1131DB8D87D001F1DCC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Main.storyboard; sourceTree = "<group>"; };
 		3223F1181DB8DC17001F1DCC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		3223F11A1DB8DCFE001F1DCC /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		3223F11C1DB8E19F001F1DCC /* Loading1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Loading1.png; sourceTree = "<group>"; };
 		3223F11D1DB8E19F001F1DCC /* Loading@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Loading@2x.png"; sourceTree = "<group>"; };
 		32299CCD1E28878900372A72 /* CDCityPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDCityPicker.h; sourceTree = "<group>"; };
@@ -492,6 +491,7 @@
 		3235524A1E543365003C5A8C /* OrderSuccessController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderSuccessController.m; sourceTree = "<group>"; };
 		3235524C1E543956003C5A8C /* order_success@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "order_success@3x.png"; sourceTree = "<group>"; };
 		3235524D1E543956003C5A8C /* order_success@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "order_success@2x.png"; sourceTree = "<group>"; };
+		323552501E54720C003C5A8C /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		32399A2D1E1C90ED0056295B /* TravelTVCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TravelTVCell.h; sourceTree = "<group>"; };
 		32399A2E1E1C90ED0056295B /* TravelTVCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TravelTVCell.m; sourceTree = "<group>"; };
 		32399A301E1C93120056295B /* list_p@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list_p@2x.png"; sourceTree = "<group>"; };
@@ -2181,7 +2181,7 @@
 			isa = PBXGroup;
 			children = (
 				3223F1181DB8DC17001F1DCC /* Assets.xcassets */,
-				3223F11A1DB8DCFE001F1DCC /* Launch Screen.storyboard */,
+				323552501E54720C003C5A8C /* LaunchScreen.storyboard */,
 				3223F10F1DB8D87D001F1DCC /* Base.lproj */,
 				325F84C61C9F88E4009E9770 /* PrefixHeader.pch */,
 				325F84C71C9F89D2009E9770 /* UtilsMacro.h */,
@@ -2408,7 +2408,6 @@
 				32CEF82D1DB713E700CB7584 /* level_2@3x.png in Resources */,
 				32CEF82B1DB713E700CB7584 /* level_1@3x.png in Resources */,
 				32DC71E81DC9BB87000E0AAA /* private_key.p12 in Resources */,
-				3223F11B1DB8DCFE001F1DCC /* Launch Screen.storyboard in Resources */,
 				32E5885C1CB741ED002AED1A /* back_@2x.png in Resources */,
 				320BE5DB1CBCDFC700A34FCB /* system_1_42@3x.png in Resources */,
 				327CA9711CBB79C100FC4F8E /* system_08.png in Resources */,
@@ -2539,6 +2538,7 @@
 				32E588601CB74205002AED1A /* leftop_r@2x.png in Resources */,
 				32E3F7981E1E4405002C8E9E /* number_choose@2x.png in Resources */,
 				32E588531CB74029002AED1A /* fir_@3x.png in Resources */,
+				323552511E54720C003C5A8C /* LaunchScreen.storyboard in Resources */,
 				3273DF8B1DB9C4080094AD42 /* PersonNTVCell.xib in Resources */,
 				32D859641CB8D4400074D5C3 /* slider-default-track.png in Resources */,
 				3269BA9F1CC5DAA200C855FC /* choose_76_@2x.png in Resources */,
@@ -2905,7 +2905,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3E86078CAC65104B62849C97 /* Pods-优悠乐.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_NULLABLE_TO_NONNULL_CONVERSION = NO;
 				CODE_SIGN_ENTITLEMENTS = "优悠乐.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer: chen dongdong (JXF5ZF9W67)";
@@ -2991,7 +2990,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C513126410A9127C0B94B5D1 /* Pods-优悠乐.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_NULLABLE_TO_NONNULL_CONVERSION = NO;
 				CODE_SIGN_ENTITLEMENTS = "优悠乐.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer: chen dongdong (JXF5ZF9W67)";
