@@ -61,6 +61,13 @@
 		322C36851D338607005163C4 /* DDLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = 322C36841D338607005163C4 /* DDLogin.m */; };
 		323499AB1CE1782200CBA680 /* Member.m in Sources */ = {isa = PBXBuildFile; fileRef = 323499AA1CE1782200CBA680 /* Member.m */; };
 		323552361E52DD60003C5A8C /* under_line.png in Resources */ = {isa = PBXBuildFile; fileRef = 323552351E52DD60003C5A8C /* under_line.png */; };
+		3235523F1E52EE53003C5A8C /* OrderStatusTVController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3235523E1E52EE53003C5A8C /* OrderStatusTVController.m */; };
+		323552421E52FF4E003C5A8C /* ConLabelTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 323552411E52FF4E003C5A8C /* ConLabelTVCell.m */; };
+		323552451E53003C003C5A8C /* TravelPLabelTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 323552441E53003C003C5A8C /* TravelPLabelTVCell.m */; };
+		323552481E5301EA003C5A8C /* SumAndPayLTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 323552471E5301EA003C5A8C /* SumAndPayLTVCell.m */; };
+		3235524B1E543365003C5A8C /* OrderSuccessController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3235524A1E543365003C5A8C /* OrderSuccessController.m */; };
+		3235524E1E543956003C5A8C /* order_success@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3235524C1E543956003C5A8C /* order_success@3x.png */; };
+		3235524F1E543956003C5A8C /* order_success@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3235524D1E543956003C5A8C /* order_success@2x.png */; };
 		32399A2F1E1C90ED0056295B /* TravelTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32399A2E1E1C90ED0056295B /* TravelTVCell.m */; };
 		32399A321E1C93120056295B /* list_p@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 32399A301E1C93120056295B /* list_p@2x.png */; };
 		32399A331E1C93120056295B /* list_p@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 32399A311E1C93120056295B /* list_p@3x.png */; };
@@ -473,6 +480,18 @@
 		323499A91CE1782200CBA680 /* Member.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Member.h; sourceTree = "<group>"; };
 		323499AA1CE1782200CBA680 /* Member.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Member.m; sourceTree = "<group>"; };
 		323552351E52DD60003C5A8C /* under_line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = under_line.png; sourceTree = "<group>"; };
+		3235523D1E52EE53003C5A8C /* OrderStatusTVController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderStatusTVController.h; sourceTree = "<group>"; };
+		3235523E1E52EE53003C5A8C /* OrderStatusTVController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderStatusTVController.m; sourceTree = "<group>"; };
+		323552401E52FF4E003C5A8C /* ConLabelTVCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConLabelTVCell.h; sourceTree = "<group>"; };
+		323552411E52FF4E003C5A8C /* ConLabelTVCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConLabelTVCell.m; sourceTree = "<group>"; };
+		323552431E53003C003C5A8C /* TravelPLabelTVCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TravelPLabelTVCell.h; sourceTree = "<group>"; };
+		323552441E53003C003C5A8C /* TravelPLabelTVCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TravelPLabelTVCell.m; sourceTree = "<group>"; };
+		323552461E5301EA003C5A8C /* SumAndPayLTVCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SumAndPayLTVCell.h; sourceTree = "<group>"; };
+		323552471E5301EA003C5A8C /* SumAndPayLTVCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SumAndPayLTVCell.m; sourceTree = "<group>"; };
+		323552491E543365003C5A8C /* OrderSuccessController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderSuccessController.h; sourceTree = "<group>"; };
+		3235524A1E543365003C5A8C /* OrderSuccessController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderSuccessController.m; sourceTree = "<group>"; };
+		3235524C1E543956003C5A8C /* order_success@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "order_success@3x.png"; sourceTree = "<group>"; };
+		3235524D1E543956003C5A8C /* order_success@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "order_success@2x.png"; sourceTree = "<group>"; };
 		32399A2D1E1C90ED0056295B /* TravelTVCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TravelTVCell.h; sourceTree = "<group>"; };
 		32399A2E1E1C90ED0056295B /* TravelTVCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TravelTVCell.m; sourceTree = "<group>"; };
 		32399A301E1C93120056295B /* list_p@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list_p@2x.png"; sourceTree = "<group>"; };
@@ -1634,16 +1653,26 @@
 				32E71C9C1CB23DD00079CD73 /* OrderTVController.m */,
 				32D693F41DE28E43001D5C7F /* PayViewController.h */,
 				32D693F51DE28E43001D5C7F /* PayViewController.m */,
+				323552491E543365003C5A8C /* OrderSuccessController.h */,
+				3235524A1E543365003C5A8C /* OrderSuccessController.m */,
+				3235523D1E52EE53003C5A8C /* OrderStatusTVController.h */,
+				3235523E1E52EE53003C5A8C /* OrderStatusTVController.m */,
 				3207688E1DF1861100D5C827 /* PayWayTVC.h */,
 				3207688F1DF1861100D5C827 /* PayWayTVC.m */,
 				3289E3921E4DBD7900C57596 /* ContentsTVCell.h */,
 				3289E3931E4DBD7900C57596 /* ContentsTVCell.m */,
+				323552401E52FF4E003C5A8C /* ConLabelTVCell.h */,
+				323552411E52FF4E003C5A8C /* ConLabelTVCell.m */,
 				3289E3951E4DC32000C57596 /* TravelPersonTVCell.h */,
 				3289E3961E4DC32000C57596 /* TravelPersonTVCell.m */,
+				323552431E53003C003C5A8C /* TravelPLabelTVCell.h */,
+				323552441E53003C003C5A8C /* TravelPLabelTVCell.m */,
 				3289E39B1E51926000C57596 /* UsecanTVCell.h */,
 				3289E39C1E51926100C57596 /* UsecanTVCell.m */,
 				3289E3A11E51BFD300C57596 /* SumAndPayTVCell.h */,
 				3289E3A21E51BFD300C57596 /* SumAndPayTVCell.m */,
+				323552461E5301EA003C5A8C /* SumAndPayLTVCell.h */,
+				323552471E5301EA003C5A8C /* SumAndPayLTVCell.m */,
 				3278CCDD1CAF8E9800038B9D /* TestModel.h */,
 				3278CCDE1CAF8E9800038B9D /* TestModel.m */,
 				324CD4AC1CAE629300276B57 /* ResultCellGroup */,
@@ -2088,6 +2117,8 @@
 				32E4E35C1E1522BA008280F1 /* newsdynamic@2x.png */,
 				32E4E35D1E1522BA008280F1 /* pensionCommon@3x.png */,
 				32E4E35E1E1522BA008280F1 /* pensionCommon@2x.png */,
+				3235524C1E543956003C5A8C /* order_success@3x.png */,
+				3235524D1E543956003C5A8C /* order_success@2x.png */,
 			);
 			path = home;
 			sourceTree = "<group>";
@@ -2419,6 +2450,8 @@
 				32D859421CB89E420074D5C3 /* list2_2_@2x.png in Resources */,
 				320BE5D91CBCDFC700A34FCB /* system_1_41@3x.png in Resources */,
 				32D859431CB89E420074D5C3 /* list2_2_@3x.png in Resources */,
+				3235524F1E543956003C5A8C /* order_success@2x.png in Resources */,
+				3235524E1E543956003C5A8C /* order_success@3x.png in Resources */,
 				32518DB41CB34EFC00CEAE35 /* custom_number.png in Resources */,
 				32CEF82C1DB713E700CB7584 /* level_2@2x.png in Resources */,
 				32E3F7991E1E4405002C8E9E /* number_choose@3x.png in Resources */,
@@ -2599,6 +2632,7 @@
 				32EC08ED1E1E186700E55900 /* TravelDetailVController.m in Sources */,
 				320CACBA1E1CFE7D003C2206 /* TravelResultVController.m in Sources */,
 				32FB00311D40C163008A5497 /* DDFindTest.m in Sources */,
+				323552421E52FF4E003C5A8C /* ConLabelTVCell.m in Sources */,
 				3252D6571CC752B5000FAFBC /* RSADataSigner.m in Sources */,
 				324CD4BA1CAE70F000276B57 /* HomeTVCell.m in Sources */,
 				3289E3891E4C7B3B00C57596 /* TitleNumberView.m in Sources */,
@@ -2608,6 +2642,7 @@
 				325051FC1CB66C0500D431F5 /* ComOrCollTVCell.m in Sources */,
 				32CABD691CA373AA0068AE93 /* SeasonCTViewCell.m in Sources */,
 				32D23E7C1DC33932009154F6 /* MJRefreshHeaderView.m in Sources */,
+				3235524B1E543365003C5A8C /* OrderSuccessController.m in Sources */,
 				320108161DBB58F9007ACA6B /* DDScoreList.m in Sources */,
 				32D23E7F1DC33932009154F6 /* UIView+MJExtension.m in Sources */,
 				32D693F61DE28E43001D5C7F /* PayViewController.m in Sources */,
@@ -2634,6 +2669,7 @@
 				3205DEE31DF955E000AC5726 /* OrderStatusTVCell.m in Sources */,
 				32D23E791DC33932009154F6 /* MJRefreshBaseView.m in Sources */,
 				327CA9761CBBB78E00FC4F8E /* AccountViewController.m in Sources */,
+				323552451E53003C003C5A8C /* TravelPLabelTVCell.m in Sources */,
 				32DB05371DA8CDF40041C4F5 /* TAAnimatedDotView.m in Sources */,
 				32FA73461CABE32500379855 /* RefundViewController.m in Sources */,
 				3252D6551CC752B5000FAFBC /* NSDataEx.m in Sources */,
@@ -2701,9 +2737,11 @@
 				32FB002B1D3F1BE4008A5497 /* GetPassWordViewController.m in Sources */,
 				32A3BB771DBB16490009D50F /* DDCollectList.m in Sources */,
 				32DB053B1DA8CDF40041C4F5 /* SDCycleScrollView.m in Sources */,
+				3235523F1E52EE53003C5A8C /* OrderStatusTVController.m in Sources */,
 				32CABD6A1CA373AA0068AE93 /* SeasonMCollectViewCell.m in Sources */,
 				32F6CD2F1C9ABDF200E97B65 /* TabbarController.m in Sources */,
 				32D859701CB8D4400074D5C3 /* NMRangeSlider.m in Sources */,
+				323552481E5301EA003C5A8C /* SumAndPayLTVCell.m in Sources */,
 				32DB05251D9E5B740041C4F5 /* DDHome_page.m in Sources */,
 				320BE5C81CBC900D00A34FCB /* AccountTVCell.m in Sources */,
 				32CABD941CA384F50068AE93 /* SearchTVController.m in Sources */,

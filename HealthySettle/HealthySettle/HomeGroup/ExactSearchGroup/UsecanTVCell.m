@@ -41,9 +41,10 @@
             }
             
             UISwitch *switchButton = [[UISwitch alloc]
-                                      initWithFrame:CGRectMake(screenWide * 0.81,screenHeight * 0.035 + screenHeight * 0.07 *i , screenWide * 0.15,screenHeight * 0.03)];
+                                      initWithFrame:CGRectMake(screenWide * 0.81,screenHeight * 0.028 + screenHeight * 0.07 *i , screenWide * 0.15,screenHeight * 0.03)];
             switchButton.onTintColor = RGB(241, 69, 62);
             switchButton.clipsToBounds = YES;
+            switchButton.layer.cornerRadius = screenHeight * 0.015;
             if (i==0) {
                 _cash_switch_btn = switchButton;
                 [self addSubview:_cash_switch_btn];
@@ -53,10 +54,10 @@
             }
            
             
-            UIView * line_view_0 = [[UIView alloc] initWithFrame:CGRectMake(0, screenHeight * 0.155 * i, screenWide, screenHeight * 0.015)];
-            line_view_0.backgroundColor = GRAYCOLOR;
-            [self addSubview:line_view_0];
         }
+        UIView * line_view_0 = [[UIView alloc] initWithFrame:CGRectMake(0, screenHeight * 0.155, screenWide, screenHeight * 0.015)];
+        line_view_0.backgroundColor = GRAYCOLOR;
+        [self addSubview:line_view_0];
         UIView * line_view = [[UIView alloc] initWithFrame:CGRectMake(0, screenHeight * 0.015 + screenHeight * 0.07, screenWide, 1)];
         line_view.backgroundColor = GRAYCOLOR;
         [self addSubview:line_view];

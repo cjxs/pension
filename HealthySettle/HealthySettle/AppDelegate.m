@@ -40,6 +40,7 @@
 #import "UMessage.h"
 #import <AlipaySDK/AlipaySDK.h>
 #import "WXApi.h"
+#import "OrderStatusTVController.h"
 
 
 
@@ -290,6 +291,10 @@ static NSString * const UMDEVICETOKEN      = @"UMDeviceToken";// 友盟推送的
         [[AlipaySDK defaultService] processOrderWithPaymentResult:url
                                                   standbyCallback:^(NSDictionary *resultDic) {
             NSLog(@"result = %@支付宝客户端返回",resultDic);
+          OrderStatusTVController * order_status_VC = [[OrderStatusTVController alloc] init];
+          [self.window.rootViewController.navigationController pushViewController:order_status_VC animated:YES];
+
+                                                      
         }];
     }
     if ([url.host isEqualToString:@"platformapi"]){//支付宝钱包快登授权返回authCode
@@ -298,6 +303,10 @@ static NSString * const UMDEVICETOKEN      = @"UMDeviceToken";// 友盟推送的
                                       standbyCallback:^(NSDictionary *resultDic) {
             //【由于在跳转支付宝客户端支付的过程中，商户app在后台很可能被系统kill了，所以pay接口的callback就会失效，请商户对standbyCallback返回的回调结果进行处理,就是在这个方法里面处理跟callback一样的逻辑】
             NSLog(@"result = %@",resultDic);
+          OrderStatusTVController * order_status_VC = [[OrderStatusTVController alloc] init];
+          [self.window.rootViewController.navigationController pushViewController:order_status_VC animated:YES];
+
+                                          
         }];
         return YES;
     }else{
@@ -336,6 +345,9 @@ static NSString * const UMDEVICETOKEN      = @"UMDeviceToken";// 友盟推送的
                                   cancelButtonTitle:@"OK"
                                   otherButtonTitles:nil, nil];
             [alert show];
+            OrderStatusTVController * order_status_VC = [[OrderStatusTVController alloc] init];
+            [self.window.rootViewController.navigationController pushViewController:order_status_VC animated:YES];
+
         }else {
             NSLog(@"%d",resp.errCode);
         }

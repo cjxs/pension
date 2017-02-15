@@ -16,18 +16,22 @@
                 reuseIdentifier:reuseIdentifier];
     if (self)
     {
+
+        UIView * line_v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWide, screenHeight * 0.015)];
+        [self addSubview:line_v];
+        line_v.backgroundColor = GRAYCOLOR;
         NSArray * arr = @[@"商品金额",@"现金账户",@"优悠券",@"",@"还需支付"];
         for (int i = 0; i < 5; i++) {
             if (i==3) {
                 continue;
             }else{
-                UILabel * lab = [[UILabel alloc] initWithFrame:CGRectMake(10, screenHeight * 0.015 + screenHeight * 0.04*i, screenWide * 0.25, screenHeight * 0.04)];
+                UILabel * lab = [[UILabel alloc] initWithFrame:CGRectMake(10, screenHeight * 0.03 + screenHeight * 0.04*i, screenWide * 0.25, screenHeight * 0.04)];
                 lab.text = arr[i];
                 if (IS_IPHONE6EARLY) {
                     lab.font = [UIFont systemFontOfSize:13];
                 }
                 [self addSubview:lab];
-                UILabel * title_lab_0 = [[UILabel alloc] initWithFrame:CGRectMake(screenWide * 0.7, screenHeight * 0.015 + screenHeight * 0.04*i, screenWide * 0.27, screenHeight * 0.04)];
+                UILabel * title_lab_0 = [[UILabel alloc] initWithFrame:CGRectMake(screenWide * 0.7, screenHeight * 0.03 + screenHeight * 0.04*i, screenWide * 0.27, screenHeight * 0.04)];
                 title_lab_0.textColor = [UIColor redColor];
                 title_lab_0.textAlignment = NSTextAlignmentRight;
                 switch (i) {
@@ -55,10 +59,10 @@
             
             
         }
-        UIView * line_view = [[UIView alloc] initWithFrame:CGRectMake(0, screenHeight * 0.16, screenWide, 1)];
+        UIView * line_view = [[UIView alloc] initWithFrame:CGRectMake(0, screenHeight * 0.175, screenWide, 1)];
         line_view.backgroundColor = GRAYCOLOR;
         [self addSubview:line_view];
-        UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, screenHeight * 0.22, screenWide, screenHeight * 0.15)];
+        UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, screenHeight * 0.235, screenWide, screenHeight * 0.15)];
         [self addSubview:view];
         view.backgroundColor = GRAYCOLOR;
         

@@ -13,12 +13,12 @@
 #import "DataSigner.h"
 #import "CDDatePicker.h"
 #import "PayWayTVC.h"
+#import "OrderStatusTVController.h"
 
 
 
 @interface PayViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 {
-    UIView * view_pay;
     int pay_way;
 
 
@@ -83,7 +83,8 @@
 
 }
 -(void)backBtnPressed{
-    NSLog(@"++++++");
+    OrderStatusTVController * order_status_VC = [[OrderStatusTVController alloc] init];
+    [self.navigationController pushViewController:order_status_VC animated:YES];
 }
 
 -(void)creatBackFootView{
@@ -178,6 +179,8 @@
 }
 -(void)under_linePay{
     NSLog(@"线下支付");
+    
+    
 }
 -(void)payToAlipay
 {
@@ -241,6 +244,7 @@
                                   fromScheme:appScheme
                                     callback:^(NSDictionary *resultDic)
          {
+             [self backBtnPressed];
              NSLog(@"reslut = %@,H5界面返回",resultDic);
          }];
     }

@@ -536,9 +536,9 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath
         return screenHeight * 0.28;
 
     }else if (indexPath.section==2){
-        return screenHeight * 0.17;
+        return screenHeight * 0.155;
     }else{
-        return screenHeight * 0.35;
+        return screenHeight * 0.365;
     }
 }
 
