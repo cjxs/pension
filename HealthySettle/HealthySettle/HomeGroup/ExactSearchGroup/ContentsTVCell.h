@@ -12,4 +12,5 @@
 @property (nonatomic,strong)UITextField * name_field;
 @property (nonatomic,strong)UITextField * phone_field;
 @property (nonatomic,strong)UIButton * add_person_btn;
+-(void)configWithname:(NSString *)name phone:(NSString *)phone;
 @end

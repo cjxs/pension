@@ -8,6 +8,7 @@
 
 #import "TravelPersonTVCell.h"
 #import "SelectOneView.h"
+#import "YYLUser.h"
 
 @implementation TravelPersonTVCell
 -(instancetype)initWithStyle:(UITableViewCellStyle)style
@@ -17,7 +18,7 @@
                 reuseIdentifier:reuseIdentifier];
     if (self)
     {
-        man = 1;
+        _man = _man?_man:0;
         NSArray * arr = @[@"出行人",@"手机号码",@"证件号码",@"性别"];
         for (int i = 0; i < 4; i++) {
             UILabel * lab = [[UILabel alloc] initWithFrame:CGRectMake(10, screenHeight * 0.015 + screenHeight * 0.07*i, screenWide * 0.25, screenHeight * 0.04)];
@@ -32,7 +33,6 @@
             [self addSubview:line_view];
             
         }
-        
         _name_field = [[UITextField alloc] initWithFrame:CGRectMake(screenWide * 0.27, screenHeight * 0.015, screenWide * 0.5, screenHeight * 0.04)];
         _name_field.placeholder = @"姓名";
         [self addSubview:_name_field];
@@ -54,38 +54,31 @@
         
         man_view = [[SelectOneView alloc] initWithFrame:CGRectMake(screenWide * 0.27, screenHeight * 0.225, screenWide * 0.15, screenWide * 0.075)];
         [self addSubview:man_view];
+        
         man_view.lab.text = @"男";
-        man_view.img_view.image = [UIImage imageNamed:@"selected"];
         @weakify(self);
-
-        man_view.lab.textColor = [UIColor redColor];
         man_view.selectBlock =  ^(CGFloat num){
             int a =  (num - screenWide *0.27)/screenWide/0.15;
             @strongify(self);
-
             [self selectOne:a];
         };
+        
         woman_view = [[SelectOneView alloc] initWithFrame:CGRectMake(screenWide * 0.52, screenHeight * 0.225, screenWide * 0.15, screenWide * 0.075)];
         [self addSubview:woman_view];
         woman_view.lab.text = @"女";
-        woman_view.img_view.image = [UIImage imageNamed:@"un_select"];
         woman_view.selectBlock =  ^(CGFloat num){
             int a =  num/screenWide/0.27;
             @strongify(self);
-
             [self selectOne:a];
         };
-        
-        
-        
-        
+        [self selectOne:_man];
     }
     return self;
 }
 -(void)selectOne:(int)num{
     if (num ==0 ) {
-        if (man != 1) {
-            man = 1;
+        if (_man != 1) {
+            _man = 1;
             man_view.lab.textColor = [UIColor redColor];
             man_view.img_view.image = [UIImage imageNamed:@"selected"];
             woman_view.lab.textColor = [UIColor blackColor];
@@ -94,16 +87,29 @@
         }
         
     }else{
-        man = 0;
+        _man = 0;
         woman_view.lab.textColor = [UIColor redColor];
         woman_view.img_view.image = [UIImage imageNamed:@"selected"];
         man_view.lab.textColor = [UIColor blackColor];
         man_view.img_view.image = [UIImage imageNamed:@"un_select"];
+    }
+    _selectSex ? _selectSex([NSString stringWithFormat:@"%d",num]) : nil;
 
-
+}
+-(void)configWithYYLuser:(YYLUser *)user{
+    if (user.travel_name) {
+        self.name_field.text = user.travel_name;
+    }
+    if (user.travel_phone ) {
+        self.phone_field.text = user.travel_phone;
+    }
+    if (user.travel_id) {
+        self.id_field.text = user.travel_id;
+    }
+    if (user.travel_sex) {
+        [self selectOne:[user.travel_sex intValue]];
     }
 }
-
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code

@@ -14,6 +14,7 @@
 #import "CDDatePicker.h"
 #import "PayWayTVC.h"
 #import "OrderStatusTVController.h"
+#import "YYLUser.h"
 
 
 
@@ -64,6 +65,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     pay_way = 0;
+    NSLog(@"%@,%@,%@",_order.group_id,_order.order_name,_order.total_money);
+    
+    for ( YYLUser* dic in _order.checkin_name) {
+        NSLog(@"%@",dic.travel_sex);
+    }
     [self.navigationItem setTitle:@"支付中心"];
     self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.tableView];

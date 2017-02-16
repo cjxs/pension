@@ -14,6 +14,7 @@
 #import "TravelPersonTVCell.h"
 #import "UsecanTVCell.h"
 #import "SumAndPayTVCell.h"
+#import "YYLUser.h"
 
 
 @interface OrderTVController ()<HYMDatePickerDelegate, UITextFieldDelegate>
@@ -28,7 +29,9 @@
     NSString * cash_str,*dis_count_str;
     BOOL cashUse,vocherUse;
     UIView * backFootView;
-
+    NSString * contact_name;
+    NSString * contact_phone;
+    NSMutableArray * _user_arr;
 }
 
 @end
@@ -173,6 +176,7 @@
                                initWithFrame:CGRectMake(screenWide * 0.27+ screenWide *0.1 + screenWide /3, screenHeight * 0.015, screenWide /3 - screenWide * 0.1, screenHeight * 0.04)];
             leave_timelabel.font = [UIFont systemFontOfSize:13];
             [title_view_1 addSubview:leave_timelabel];
+            
             checkIn_timelabel.userInteractionEnabled = YES;
             UITapGestureRecognizer * tapChoose_start = [[UITapGestureRecognizer alloc]
                                                         initWithTarget:self
@@ -455,6 +459,13 @@
                 textfield.delegate = self;
             }
         }
+        [[cell.name_field rac_signalForControlEvents:UIControlEventEditingChanged] subscribeNext:^(NSString * x) {
+            contact_name = x;
+        }];
+        [[cell.phone_field rac_signalForControlEvents:UIControlEventEditingChanged] subscribeNext:^(NSString * x) {
+            contact_phone = x;
+        }];
+        [cell configWithname:contact_name phone:contact_phone];
         return cell;
     }else if (indexPath.section==1){
         TravelPersonTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"travel" forIndexPath:indexPath];
@@ -465,7 +476,31 @@
                 textfield.delegate = self;
             }
         }
-
+        if (!_user_arr) {
+            _user_arr = [NSMutableArray array];
+        }
+        YYLUser * yyl_user;
+        if (_user_arr.count<indexPath.row+1 ) {
+            cell.user = [[YYLUser alloc] init];
+            [_user_arr addObject:cell.user];
+        }else{
+            yyl_user = _user_arr[indexPath.row];
+            [cell configWithYYLuser:yyl_user];
+        }
+        yyl_user = _user_arr[indexPath.row];
+        [[cell.name_field rac_signalForControlEvents:UIControlEventEditingChanged] subscribeNext:^(NSString * x) {
+            yyl_user.travel_name = x;
+            
+        }];
+        [[cell.phone_field rac_signalForControlEvents:UIControlEventEditingChanged] subscribeNext:^(NSString * x) {
+            yyl_user.travel_phone = x;
+        }];
+        [[cell.id_field rac_signalForControlEvents:UIControlEventEditingChanged] subscribeNext:^(NSString * x) {
+            yyl_user.travel_id = x;
+        }];
+        cell.selectSex = ^(NSString * num){
+            yyl_user.travel_sex = num;
+        };
         return cell;
 
     }else if (indexPath.section==2){
@@ -607,26 +642,24 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath
             return NO;
         }
     }
-    /*
-    OrderTextFieldTVCell * cell;
-    cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
-    ;
-    if ([[cell returnfromtextField].text length] == 0) {
+    if (!contact_name) {
         return NO;
     }
-    cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
-    if ([[cell returnfromtextField].text length] == 0) {
+    if (!contact_phone) {
         return NO;
     }
-    cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:5 inSection:0]];
-    if ([[cell returnfromtextField].text length] == 0) {
-        return NO;
+    for (int i = 0; i < _person_num; i++) {
+        YYLUser * user = _user_arr[i];
+        if (!user) {
+            return NO;
+        }
+        if (!user.travel_name) {
+            return NO;
+        }
+        if (!user.travel_id) {
+            return NO;
+        }
     }
-    cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:5 inSection:0]];
-    if ([[cell returnfromtextField].text length] == 0) {
-        return NO;
-    }
-    */
     return YES;
 
 }
@@ -668,7 +701,7 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath
             if (!order_pre.checkout_time) {
                 order_pre.checkout_time = [self getPriousorLaterDateFromDate:[NSDate date] withMonth:1];
             }
-            order_pre.order_spec = _chargeArray;
+            order_pre.order_spec = [NSArray arrayWithArray:_chargeArray];
         }else{
             order_pre.group_date = _room_index;
             order_pre.total_money = [NSString stringWithFormat:@"%ld",[self.charge_price integerValue] * _person_num];
@@ -692,24 +725,13 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath
         order_pre.add_time = [NSString stringWithFormat:@"%ld",(long)[[NSDate date] timeIntervalSince1970]];
         order_pre.paid = @"0";
         order_pre.status = @"6";
-        order_pre.checkin_name = @[@"ddd",@"dfs"];
-        
-        
+        for (YYLUser * user in _user_arr) {
+            if (!user.travel_sex) {
+                user.travel_sex = @"0";
+            }
+        }
+        order_pre.checkin_name = [NSArray arrayWithArray:_user_arr];
 
-
-        /*
-        OrderTextFieldTVCell * cell;
-        cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
-        order.contact_name = [cell returnfromtextField].text;
-        cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
-        order.contact_phone = [cell returnfromtextField].text;
-        cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
-        NSString *str = [cell returnfromtextField].text;
-        cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:5 inSection:0]];
-        order.checkin_name = [NSString stringWithFormat:@"%@,%@",str,[cell returnfromtextField]];
-        order.order_spec =  home_label.text;
-        order.beds = @"1";
-         */
         
         if ([self creatOrderInterNet]) {
             PayViewController * payVC = [[PayViewController alloc] init];

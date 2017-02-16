@@ -21,6 +21,10 @@
 @property (nonatomic,strong)NSString * score_count;
 @property (nonatomic,strong)NSString * pay_can;
 @property (nonatomic,strong)NSString * login;
+@property (nonatomic,strong)NSString * pwd;
+@property (nonatomic,strong)NSString * pay_pwd;
+@property (nonatomic,strong)NSString * province;
+@property (nonatomic,strong)NSString * city;
 
 +(Member *)DefaultUser;
 @end

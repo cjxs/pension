@@ -45,4 +45,5 @@
 @property (nonatomic,strong)UILabel * money_label;
 
 
+
 @end

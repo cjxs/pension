@@ -7,14 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
-@class SelectOneView;
+@class SelectOneView,YYLUser;
 
 @interface TravelPersonTVCell : UITableViewCell{
-    int man;
     SelectOneView * man_view,* woman_view;
 }
 @property (nonatomic,strong)UITextField * name_field;
 @property (nonatomic,strong)UITextField * phone_field;
 @property (nonatomic,strong)UITextField * id_field;
 @property (nonatomic,strong)UIButton * add_person_btn;
+@property (nonatomic,strong)YYLUser * user;
+@property (nonatomic,assign)NSInteger man;
+@property (nonatomic,copy) void(^selectSex)(NSString * num);
+-(void)configWithYYLuser:(YYLUser *)user;
 @end
