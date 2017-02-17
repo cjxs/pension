@@ -11,6 +11,8 @@
 @interface YYLOrder : NSObject
 @property (nonatomic,strong)NSString * order_id;
 @property (nonatomic,strong)NSString * order_sn;
+@property (nonatomic,strong)NSString * order_name;
+@property (nonatomic,strong)NSString * group_date;
 @property (nonatomic,strong)NSString * group_id;         //机构id
 @property (nonatomic,strong)NSString * cat_id;           //类别
 @property (nonatomic,strong)NSString * lived_num;       //数量
@@ -32,8 +34,8 @@
 @property (nonatomic,strong)NSString * is_mobile_pay;    //是否是移动端支付
 @property (nonatomic,strong)NSString * paid;           //是否支付
 @property (nonatomic,strong)NSString * status;       //订单状态
-@property (nonatomic,strong)NSDate * checkin_time;   //入住时间
-@property (nonatomic,strong)NSDate * checkout_time;  //退房时间
+@property (nonatomic,strong)NSString * checkin_time;   //入住时间
+@property (nonatomic,strong)NSString * checkout_time;  //退房时间
 @property (nonatomic,strong)NSString * beds;           //床位数 （养老专用）
 @property (nonatomic,strong)NSString * checkin_name;    //入住人信息
 @property (nonatomic,strong)NSString * room_id;         //房型ID （养生专用）

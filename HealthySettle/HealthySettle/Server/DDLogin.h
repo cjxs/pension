@@ -11,7 +11,9 @@
 -(id)initWithUsername:(NSString *)username password:(NSString *)password;
 + (NSDictionary *)dictionaryWithJsonString:(NSString *)jsonString;
 + (NSMutableArray *)arrayWithJsonString:(NSString *)jsonString;
-+ (NSString * )RSAsignWithdic:(NSDictionary *)dic;
 + (NSString*)dictionaryToJson:(id)dic;
 + (NSDictionary *) entityToDictionary:(id)entity;
++ (NSArray * )RSAsignWithdic:(NSDictionary *)dic;
++(NSString *)timeStrWithDate:(NSDate*)date;
++(NSDate *)dateWithString:(NSString *)str;
 @end

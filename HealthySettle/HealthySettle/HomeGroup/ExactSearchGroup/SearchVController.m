@@ -252,11 +252,11 @@
     if (date) {
         if ([_datePicker.type isEqualToString:@"Z"]) {
             _sellectOn_label.text = [NSString stringWithFormat:@"%@      入住",[CDDatePicker getStringFromDate:date]];
-            [YYLOrder YSOrder].checkin_time = date;
+            [YYLOrder YSOrder].checkin_time = [DDLogin timeStrWithDate:date];;
             end_begain = date;
         }else{
             _seletOff_label.text = [NSString stringWithFormat:@"%@      离店",[CDDatePicker getStringFromDate:date]];
-            [YYLOrder YSOrder].checkout_time = date;
+            [YYLOrder YSOrder].checkout_time = [DDLogin timeStrWithDate:date];;
             end_end = date;
         }
     }//日期选择器的代理方法

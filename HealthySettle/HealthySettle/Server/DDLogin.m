@@ -49,28 +49,41 @@
                                               @"pwd" : _password
                                               }]};
 }
-+ (NSString * )RSAsignWithdic:(NSDictionary *)dic {
++ (NSArray * )RSAsignWithdic:(NSDictionary *)dic {
+
     NSString * json_str = [self dictionaryToJson:dic];
-    NSLog(@"%ld",json_str.length);
+    NSInteger  num = json_str.length/100;
     //在Document文件夹下创建私钥文件
     NSString* publicKeyPath = [[NSBundle mainBundle] pathForResource:@"public_key" ofType:@".der"];
-
+    
     NSString * signedString = nil;
+    NSMutableArray * arr = [NSMutableArray array];
     
-    signedString = [RSAEncryptor encryptString:json_str publicKeyWithContentsOfFile:publicKeyPath];
-      if (!signedString) {
-        signedString = json_str;
+    if (num > 0) {
+        for (int i = 0; i < num; i++) {
+            NSRange  range = NSMakeRange(i*100, 100);
+            NSString * no_json_str = [json_str substringWithRange:range];
+            signedString = [RSAEncryptor encryptString:no_json_str publicKeyWithContentsOfFile:publicKeyPath];
+            [arr addObject:signedString];
+        }
+        if (json_str.length%100) {
+            NSRange range =NSMakeRange(num * 100,json_str.length%100);
+            NSString * no_json_str = [json_str substringWithRange:range];
+            signedString = [RSAEncryptor encryptString:no_json_str publicKeyWithContentsOfFile:publicKeyPath];
+            [arr addObject:signedString];
+        }
+    }else{
+        signedString = [RSAEncryptor encryptString:json_str publicKeyWithContentsOfFile:publicKeyPath];
+        [arr addObject:signedString];
     }
-    
-    return signedString;
+        
+    return [NSArray arrayWithArray:arr];
 }
 //词典转换为字符串
 + (NSString*)dictionaryToJson:(id)dic
 {
 
-    for (id x in dic) {
-        NSLog(@"%@",x);
-    }
+
     NSError *parseError = nil;
     
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:&parseError];
@@ -156,4 +169,16 @@
     
     return returnDic;
 }
++(NSDate *)dateWithString:(NSString *)str{
+    NSTimeInterval time_str = [str integerValue];
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:time_str];
+    return date;
+    
+}
++(NSString *)timeStrWithDate:(NSDate*)date{
+    return [NSString stringWithFormat:@"%ld",(long)[date timeIntervalSince1970]];
+}
 @end
+
+
+

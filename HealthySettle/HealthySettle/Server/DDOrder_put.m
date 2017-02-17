@@ -45,10 +45,10 @@
 -(id)requestArgument
 {
     return @{@"rsa":[DDLogin RSAsignWithdic:@{
-                                              @"controller":@"order_put",
-                                              @"uid" : _uid,
                                               @"login" : _login,
-                                              @"data":_data
+                                              @"controller":@"order_put",
+                                              @"data":_data,
+                                              @"uid" : _uid
                                               }]};
 }
 @end

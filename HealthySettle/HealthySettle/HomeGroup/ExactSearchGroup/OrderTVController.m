@@ -189,14 +189,16 @@
             
             if ([_vc_type intValue] == 2) {
                 if (order.checkin_time) {
-                    checkIn_timelabel.text = [CDDatePicker getStringFromDate:[YYLOrder YSOrder].checkin_time];
-                    end_begin = order.checkin_time;
+                    NSDate * checkindate = [DDLogin dateWithString:order.checkin_time];
+                    checkIn_timelabel.text = [CDDatePicker getStringFromDate:checkindate];
+                    end_begin = checkindate;
                 }else{
                     checkIn_timelabel.text = [CDDatePicker getStringFromDate:[NSDate date]];
                 }
                 if (order.checkout_time) {
-                    leave_timelabel.text = [CDDatePicker getStringFromDate:[YYLOrder YSOrder].checkout_time];
-                    end_end = order.checkout_time;
+                    NSDate * leave_date = [DDLogin dateWithString:order.checkout_time];
+                    leave_timelabel.text = [CDDatePicker getStringFromDate:leave_date];
+                    end_end = leave_date;
                 }else{
                     leave_timelabel.text = @"--------";
                 }
@@ -208,9 +210,10 @@
                 [leave_timelabel addGestureRecognizer:tapChoose_end];
             }else{
                 if (order.checkin_time) {
-                    checkIn_timelabel.text = [CDDatePicker getStringFromDate:order.checkin_time];
+                    NSDate * checkindate = [DDLogin dateWithString:order.checkin_time];
+                    checkIn_timelabel.text = [CDDatePicker getStringFromDate:checkindate];
                     
-                    NSDate * date = [self getPriousorLaterDateFromDate:order.checkin_time withMonth:1];
+                    NSDate * date = [self getPriousorLaterDateFromDate:checkindate withMonth:1];
                     leave_timelabel.text = [CDDatePicker getStringFromDate:date];
                 }else{
                     checkIn_timelabel.text = [CDDatePicker getStringFromDate:[NSDate date]];
@@ -330,10 +333,11 @@
         order = [YYLOrder YSOrder];
         if (order.checkout_time) {
             if (!order.checkin_time) {
-                order.checkin_time = [NSDate date];
+                order.checkin_time =  [NSString stringWithFormat:@"%ld",(long)[[NSDate date] timeIntervalSince1970]];
             }
             NSTimeInterval oneDay = 24*60*60;
-            NSTimeInterval time = [order.checkout_time timeIntervalSinceDate:order.checkin_time];
+            
+            NSInteger time = [order.checkout_time integerValue]-[order.checkin_time integerValue];
             int number = round(time/oneDay * 1.0);
             self.number_sum = [NSString stringWithFormat:@"%ld",[self.charge_price integerValue] * number];
         }else{
@@ -620,26 +624,27 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath
     if (date) {
         if ([_datePicker.type isEqualToString:@"Z"]) {
             checkIn_timelabel.text = [NSString stringWithFormat:@"   %@",[CDDatePicker getStringFromDate:date]];
-            order.checkin_time = date;
+            order.checkin_time = [DDLogin timeStrWithDate:date];
             end_begin = date;
         }else{
             leave_timelabel.text = [NSString stringWithFormat:@"   %@",[CDDatePicker getStringFromDate:date]];
-            order.checkout_time = date;
+            order.checkout_time = [DDLogin timeStrWithDate:date];
             end_end = date;
         }
         if (order.checkout_time) {
             if (!order.checkin_time) {
-                order.checkin_time = [NSDate date];
+                order.checkin_time = [DDLogin timeStrWithDate:[NSDate date]];
             }
             NSTimeInterval oneDay = 24*60*60;
-            NSTimeInterval time = [order.checkout_time timeIntervalSinceDate:order.checkin_time];
+            
+            NSTimeInterval time = [order.checkout_time integerValue]- [order.checkin_time integerValue];
             int number = round(time/oneDay * 1.0);
             self.number_sum = [NSString stringWithFormat:@"%ld",[self.charge_price integerValue] * number];
             
         }
     }//日期选择器的代理方法
     if ([_vc_type intValue] == 1) {
-        NSDate * date0 = [self getPriousorLaterDateFromDate:order.checkin_time withMonth:1];
+        NSDate * date0 = [self getPriousorLaterDateFromDate:[DDLogin dateWithString:order.checkin_time] withMonth:1];
         leave_timelabel.text = [CDDatePicker getStringFromDate:date0];
     }
     
@@ -676,24 +681,24 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath
     return YES;
 }
 - (void)submitOrder {
-    if (![self testOrderMassage]) {
+    if ([self testOrderMassage]) {
         YYLOrder * order_pre = [YYLOrder PreOrder];
         order_pre.cat_id = _vc_type;
         if ([_vc_type intValue] == 2) {
             
             NSTimeInterval oneDay = 24*60*60;
             if (!order.checkin_time) {
-                order_pre.checkin_time = [NSDate date];
+                order_pre.checkin_time = [DDLogin timeStrWithDate:[NSDate date]];
             }else{
                 order_pre.checkin_time = order.checkin_time;
             }
             if (!order.checkout_time) {
-                order_pre.checkout_time = [NSDate dateWithTimeInterval:oneDay sinceDate:order_pre.checkin_time];
+                order_pre.checkout_time = [NSString stringWithFormat:@"%ld",(long)oneDay + [order.checkin_time integerValue]];
             }else{
                 order_pre.checkout_time = order.checkout_time;
             }
             
-            NSTimeInterval time = [order_pre.checkout_time timeIntervalSinceDate:order_pre.checkin_time];
+            NSTimeInterval time =  [order.checkout_time integerValue]- [order.checkin_time integerValue];;
             int number = time/oneDay;
             order_pre.lived_num = [NSString stringWithFormat:@"%d",number];
             order_pre.total_money = [NSString stringWithFormat:@"%ld",[self.charge_price integerValue] * number];
@@ -705,12 +710,12 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath
             
             order_pre.total_money = [NSString stringWithFormat:@"%ld",[self.charge_price integerValue] * _person_num];
             if (!order.checkin_time) {
-                order_pre.checkin_time = [NSDate date];
+                order_pre.checkin_time = [DDLogin timeStrWithDate:[NSDate date]];
             }else{
                 order_pre.checkin_time = order.checkin_time;
             }
             if (!order_pre.checkout_time) {
-                order_pre.checkout_time = [self getPriousorLaterDateFromDate:[NSDate date] withMonth:1];
+                order_pre.checkout_time = [DDLogin timeStrWithDate:[self getPriousorLaterDateFromDate:[NSDate date] withMonth:1]];
             }
             NSMutableString * str = [NSMutableString string];
             for (int i = 0; i < _chargeArray.count; i++) {
@@ -720,18 +725,21 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath
             order_pre.order_spec = [NSString stringWithFormat:@"%@",str];
         }else{
             order_pre.total_money = [NSString stringWithFormat:@"%ld",[self.charge_price integerValue] * _person_num];
+            order_pre.group_date = self.room_index;
 
             
         }
+
         order_pre.group_id = [NSString stringWithFormat:@"%@",self.gid];
+        order_pre.order_name = _group_dic[@"name"];
         order_pre.subsidy_money_m = @"0";
         order_pre.subsidy_money_u = @"0";
         order_pre.contact_name = @"1";
         order_pre.contact_phone = @"0";
         order_pre.card_id = @"0";
         order_pre.wx_cheap = @"0";
-        order_pre.balance_pay = _balance_can;
-        order_pre.coupon = _dis_count_can;
+        order_pre.balance_pay = !_balance_can?@"0":_balance_can;
+        order_pre.coupon = !_dis_count_can?@"0":_dis_count_can;
         order_pre.payment_money = [NSString stringWithFormat:@"%@",_money_label.text];
         order_pre.add_time = [NSString stringWithFormat:@"%ld",(long)[[NSDate date] timeIntervalSince1970]];
         for (YYLUser * user in _user_arr) {
@@ -761,20 +769,22 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath
         
         DDOrder_put * put_or = [[DDOrder_put alloc] initWithUid:[Member DefaultUser].uid login:[Member DefaultUser].login data:order_pre];
         [put_or startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
-            
-            NSLog(@"%@++++++",request.responseString);
-            PayViewController * payVC = [[PayViewController alloc] init];
-            payVC.order = order_pre;
-            payVC.vc_type = self.vc_type;
-            [SVProgressHUD showSuccessWithStatus:@"订单提交成功！"];
-            [self.navigationController pushViewController:payVC animated:YES];
+            NSDictionary * dic = [DDLogin dictionaryWithJsonString:request.responseString];
+            if (dic[@"error_code"]) {
+                PayViewController * payVC = [[PayViewController alloc] init];
+                payVC.order = order_pre;
+                payVC.vc_type = self.vc_type;
+                payVC.order.order_id = dic[@"order_id"];
+                [SVProgressHUD showSuccessWithStatus:@"订单提交成功！"];
+                [self.navigationController pushViewController:payVC animated:YES];
 
+            }else{
+                NSLog(@"%@",request.responseString);
+                [SVProgressHUD showErrorWithStatus:@"订单提交失败！"];
+            }
         } failure:^(__kindof YTKBaseRequest *request) {
             [SVProgressHUD showErrorWithStatus:@"订单提交失败！"];
-
         }];
-
-        
        
     }else{
         [SVProgressHUD showErrorWithStatus:@"请补全订单信息！"];

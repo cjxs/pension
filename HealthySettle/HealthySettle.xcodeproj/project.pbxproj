@@ -54,7 +54,7 @@
 		321C431A1DC0879E00192243 /* DDArticleDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 321C43191DC0879E00192243 /* DDArticleDetail.m */; };
 		3223F1151DB8D87D001F1DCC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3223F1121DB8D87D001F1DCC /* Main.storyboard */; };
 		3223F1191DB8DC17001F1DCC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3223F1181DB8DC17001F1DCC /* Assets.xcassets */; };
-		3223F11E1DB8E19F001F1DCC /* Loading1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3223F11C1DB8E19F001F1DCC /* Loading1.png */; };
+		3223F11E1DB8E19F001F1DCC /* Loading.png in Resources */ = {isa = PBXBuildFile; fileRef = 3223F11C1DB8E19F001F1DCC /* Loading.png */; };
 		3223F11F1DB8E19F001F1DCC /* Loading@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3223F11D1DB8E19F001F1DCC /* Loading@2x.png */; };
 		32299CCF1E28878900372A72 /* CDCityPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 32299CCE1E28878900372A72 /* CDCityPicker.m */; };
 		322C36851D338607005163C4 /* DDLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = 322C36841D338607005163C4 /* DDLogin.m */; };
@@ -471,7 +471,7 @@
 		321C43191DC0879E00192243 /* DDArticleDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDArticleDetail.m; sourceTree = "<group>"; };
 		3223F1131DB8D87D001F1DCC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Main.storyboard; sourceTree = "<group>"; };
 		3223F1181DB8DC17001F1DCC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		3223F11C1DB8E19F001F1DCC /* Loading1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Loading1.png; sourceTree = "<group>"; };
+		3223F11C1DB8E19F001F1DCC /* Loading.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Loading.png; sourceTree = "<group>"; };
 		3223F11D1DB8E19F001F1DCC /* Loading@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Loading@2x.png"; sourceTree = "<group>"; };
 		32299CCD1E28878900372A72 /* CDCityPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDCityPicker.h; sourceTree = "<group>"; };
 		32299CCE1E28878900372A72 /* CDCityPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDCityPicker.m; sourceTree = "<group>"; };
@@ -1854,7 +1854,7 @@
 				324075D31CAD2D9300BAF253 /* pension.png */,
 				3278CCE51CAFC17400038B9D /* shareCompany.png */,
 				324CD4BC1CAE783800276B57 /* home_pic.png */,
-				3223F11C1DB8E19F001F1DCC /* Loading1.png */,
+				3223F11C1DB8E19F001F1DCC /* Loading.png */,
 				3223F11D1DB8E19F001F1DCC /* Loading@2x.png */,
 			);
 			path = Images;
@@ -2389,7 +2389,7 @@
 				320BE5DF1CBCDFC700A34FCB /* system_1_44@3x.png in Resources */,
 				32FA73431CABC7FC00379855 /* PasswordCVController.xib in Resources */,
 				320768981DF18C6E00D5C827 /* un_select@2x.png in Resources */,
-				3223F11E1DB8E19F001F1DCC /* Loading1.png in Resources */,
+				3223F11E1DB8E19F001F1DCC /* Loading.png in Resources */,
 				32E588A51CB75DE3002AED1A /* list1_show_2_@3x.png in Resources */,
 				3207689A1DF18C6E00D5C827 /* un_select@3x.png in Resources */,
 				32E5888A1CB7594A002AED1A /* search_1_@2x.png in Resources */,

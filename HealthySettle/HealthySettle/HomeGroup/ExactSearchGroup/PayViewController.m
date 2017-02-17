@@ -65,7 +65,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     pay_way = 0;
-    
+    NSLog(@"%@%@",_order.order_id,_order.order_name);
     [self.navigationItem setTitle:@"支付中心"];
     self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.tableView];
@@ -211,7 +211,7 @@
     order.seller = seller; // 支付宝账号
     order.tradeNO = [self generateTradeNO]; //订单ID（由商家自行制定）
     order.productName = _order.group_id;//product.subject; //商品标题
-    order.productDescription = @"优悠乐";//product.body; //商品描述
+    order.productDescription = [NSString stringWithFormat:@"优悠乐--%@",_order.order_name];//product.body; //商品描述
     order.amount = [NSString stringWithFormat:@"%.2lf",[_order.payment_money floatValue]]; //商品价格
     order.notifyURL =  @"http://www.xxx.com"; //回调URL
     order.service = @"mobile.securitypay.pay";

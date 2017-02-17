@@ -404,7 +404,7 @@
     mch_id = WXMID;
     ///产生随机字符串，这里最好使用和安卓端一致的生成逻辑
     nonce_str =[self generateTradeNO];
-    body = @"会员";//dictionary[@"goods_name"];
+    body = [NSString stringWithFormat:@"优悠乐－－%@",pre_order.order_name];
     //随机产生订单号用于测试，正式使用请换成你从自己服务器获取的订单号
     out_trade_no = [self getOrderNumber];// dictionary[@"orderno"];
     //交易价格1表示0.01元，10表示0.1元

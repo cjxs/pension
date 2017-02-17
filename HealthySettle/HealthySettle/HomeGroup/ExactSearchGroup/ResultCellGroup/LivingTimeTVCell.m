@@ -32,14 +32,16 @@
 }
 -(void)configTimes{
     if ([YYLOrder YSOrder].checkin_time) {
-        self.checkIn_label.text = [NSString stringWithFormat:@" %@",[CDDatePicker getStringFromDate:[YYLOrder YSOrder].checkin_time]];
-        end_begain = [YYLOrder YSOrder].checkin_time;
+        NSDate *checkin = [DDLogin dateWithString:[YYLOrder YSOrder].checkin_time];
+        self.checkIn_label.text = [NSString stringWithFormat:@" %@",[CDDatePicker getStringFromDate:checkin]];
+        end_begain = checkin;
     }else{
         self.checkIn_label.text = [NSString stringWithFormat:@" %@",[CDDatePicker getStringFromDate:[NSDate date]]];
     }
     if ([YYLOrder YSOrder].checkout_time) {
-        self.leave_label.text = [NSString stringWithFormat:@" %@",[CDDatePicker getStringFromDate:[YYLOrder YSOrder].checkout_time]];
-        end_end = [YYLOrder YSOrder].checkout_time;
+        NSDate * checkout = [DDLogin dateWithString:[YYLOrder YSOrder].checkout_time];
+        self.leave_label.text = [NSString stringWithFormat:@" %@",[CDDatePicker getStringFromDate:checkout]];
+        end_end = checkout;
     }else {
         self.leave_label.text = @"----------";
     }
@@ -91,11 +93,11 @@
     if (date) {
         if ([_datePicker.type isEqualToString:@"Z"]) {
             _checkIn_label.text = [NSString stringWithFormat:@" %@",[CDDatePicker getStringFromDate:date]];
-            [YYLOrder YSOrder].checkin_time = date;
+            [YYLOrder YSOrder].checkin_time = [DDLogin timeStrWithDate:date];
             end_begain = date;
         }else{
             _leave_label.text = [NSString stringWithFormat:@" %@",[CDDatePicker getStringFromDate:date]];
-            [YYLOrder YSOrder].checkout_time = date;
+            [YYLOrder YSOrder].checkout_time = [DDLogin timeStrWithDate:date];
             end_end = date;
         }
     }//日期选择器的代理方法

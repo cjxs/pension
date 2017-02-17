@@ -22,7 +22,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Loading1.png" translatesAutoresizingMaskIntoConstraints="NO" id="D2H-Cf-XPT">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Loading.png" translatesAutoresizingMaskIntoConstraints="NO" id="D2H-Cf-XPT">
                                 <rect key="frame" x="0.0" y="4" width="375" height="679"/>
                             </imageView>
                         </subviews>
@@ -41,6 +41,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Loading1.png" width="1242" height="2208"/>
+        <image name="Loading.png" width="375" height="667"/>
     </resources>
 </document>

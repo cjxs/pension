@@ -277,7 +277,7 @@
         orderVC.group_dic = _data_dic;
         orderVC.charge_price = _price_arr[order];
         orderVC.person_num = (NSInteger)person_num;
-        orderVC.room_index = _date_arr[order];
+        orderVC.room_index = [NSString stringWithFormat:@"%@",_date_arr[order]];
         next_view = @"订单";
         [self.navigationController pushViewController:orderVC animated:YES];
     }

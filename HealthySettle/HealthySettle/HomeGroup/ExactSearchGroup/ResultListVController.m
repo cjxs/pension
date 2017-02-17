@@ -74,7 +74,7 @@ static NSInteger page = 1;
             _checkIn_label.textAlignment = NSTextAlignmentCenter;
             
             if ([YYLOrder YSOrder].checkin_time) {
-                checkIn_label.text = [NSString stringWithFormat:@"入 %@",[CDDatePicker getStringFromDate:[YYLOrder YSOrder].checkin_time]];;
+                checkIn_label.text = [NSString stringWithFormat:@"入 %@",[CDDatePicker getStringFromDate:[DDLogin dateWithString:[YYLOrder YSOrder].checkin_time]]];;
             }else{
                 checkIn_label.text = [NSString stringWithFormat:@"入 %@",[CDDatePicker getStringFromDate:[NSDate date]]];
             }
@@ -99,8 +99,9 @@ static NSInteger page = 1;
             UILabel * checkIn_label = [[UILabel alloc]
                                        initWithFrame:CGRectMake(0, 0, screenWide * 0.26, screenHeight * 0.03)];
             if ([YYLOrder YSOrder].checkin_time) {
-                checkIn_label.text = [NSString stringWithFormat:@"入 %@",[CDDatePicker getStringFromDate:[YYLOrder YSOrder].checkin_time]];;
-                end_begain = [YYLOrder YSOrder].checkin_time;
+                NSDate * date = [DDLogin dateWithString:[YYLOrder YSOrder].checkin_time];
+                checkIn_label.text = [NSString stringWithFormat:@"入 %@",[CDDatePicker getStringFromDate:date]];;
+                end_begain = date;
             }else{
                  checkIn_label.text = [NSString stringWithFormat:@"入 %@",[CDDatePicker getStringFromDate:[NSDate date]]];
             }
@@ -119,8 +120,9 @@ static NSInteger page = 1;
                                      initWithFrame:CGRectMake(0, screenHeight * 0.03, screenWide * 0.26, screenHeight * 0.03)];
             
             if ([YYLOrder YSOrder].checkout_time) {
-                leave_label.text = [NSString stringWithFormat:@"离 %@",[CDDatePicker getStringFromDate:[YYLOrder YSOrder].checkout_time]];
-                end_end = [YYLOrder YSOrder].checkout_time;
+                NSDate * date = [DDLogin dateWithString:[YYLOrder YSOrder].checkout_time];
+                leave_label.text = [NSString stringWithFormat:@"离 %@",[CDDatePicker getStringFromDate:date]];
+                end_end = date;
             }else {
                 leave_label.text = @"离 ----------";
             }
@@ -453,7 +455,7 @@ static NSInteger page = 1;
     if (date) {
         if ([_datePicker.type isEqualToString:@"Z"]) {
             _checkIn_label.text = [NSString stringWithFormat:@" 入 %@",[CDDatePicker getStringFromDate:date]];
-            [YYLOrder YSOrder].checkin_time = date;
+            [YYLOrder YSOrder].checkin_time = [DDLogin timeStrWithDate:date];
 
             if ([_vc_type isEqualToString:@"L"]) {
             }else{
@@ -461,7 +463,7 @@ static NSInteger page = 1;
             }
         }else{
             _leave_label.text = [NSString stringWithFormat:@" 离 %@",[CDDatePicker getStringFromDate:date]];
-            [YYLOrder YSOrder].checkout_time = date;
+            [YYLOrder YSOrder].checkout_time = [DDLogin timeStrWithDate:date];
             end_end = date;
         }
     }//日期选择器的代理方法
