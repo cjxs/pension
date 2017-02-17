@@ -13,31 +13,5 @@
             stopOnStyle = "0">
          </BreakpointContent>
       </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.AddressBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            symbolName = "*0x100134ef8">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[OrderTVController tableView:cellForRowAtIndexPath:]"
-                  moduleName = "&#x4f18;&#x60a0;&#x4e50;"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/yrc/Desktop/GitTest/HealthySettle/HealthySettle/HomeGroup/ExactSearchGroup/OrderTVController.m"
-                  timestampString = "508919655.00013"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "481"
-                  endingLineNumber = "481"
-                  offsetFromSymbolStart = "1880">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

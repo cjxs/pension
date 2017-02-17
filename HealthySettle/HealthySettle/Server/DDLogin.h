@@ -12,6 +12,6 @@
 + (NSDictionary *)dictionaryWithJsonString:(NSString *)jsonString;
 + (NSMutableArray *)arrayWithJsonString:(NSString *)jsonString;
 + (NSString * )RSAsignWithdic:(NSDictionary *)dic;
-+ (NSString*)dictionaryToJson:(NSDictionary *)dic;
++ (NSString*)dictionaryToJson:(id)dic;
 + (NSDictionary *) entityToDictionary:(id)entity;
 @end

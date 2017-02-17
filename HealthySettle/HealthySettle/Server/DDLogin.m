@@ -8,6 +8,7 @@
 
 #import "DDLogin.h"
 #import "RSAEncryptor.h"
+#import "YYLUser.h"
 
 
 
@@ -49,11 +50,13 @@
                                               }]};
 }
 + (NSString * )RSAsignWithdic:(NSDictionary *)dic {
-    NSString * json_str = [DDLogin dictionaryToJson:dic];
+    NSString * json_str = [self dictionaryToJson:dic];
+    NSLog(@"%ld",json_str.length);
     //在Document文件夹下创建私钥文件
     NSString* publicKeyPath = [[NSBundle mainBundle] pathForResource:@"public_key" ofType:@".der"];
 
     NSString * signedString = nil;
+    
     signedString = [RSAEncryptor encryptString:json_str publicKeyWithContentsOfFile:publicKeyPath];
       if (!signedString) {
         signedString = json_str;
@@ -62,10 +65,12 @@
     return signedString;
 }
 //词典转换为字符串
-+ (NSString*)dictionaryToJson:(NSDictionary *)dic
-
++ (NSString*)dictionaryToJson:(id)dic
 {
-    
+
+    for (id x in dic) {
+        NSLog(@"%@",x);
+    }
     NSError *parseError = nil;
     
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:&parseError];
@@ -151,5 +156,4 @@
     
     return returnDic;
 }
-
 @end

@@ -15,6 +15,7 @@
 #import "UsecanTVCell.h"
 #import "SumAndPayTVCell.h"
 #import "YYLUser.h"
+#import "DDOrder_put.h"
 
 
 @interface OrderTVController ()<HYMDatePickerDelegate, UITextFieldDelegate>
@@ -462,13 +463,14 @@
                 textfield.delegate = self;
             }
         }
+        [cell configWithname:contact_name phone:contact_phone];
+
         [[cell.name_field rac_signalForControlEvents:UIControlEventEditingChanged] subscribeNext:^(NSString * x) {
-            contact_name = x;
+            contact_name = cell.name_field.text;
         }];
         [[cell.phone_field rac_signalForControlEvents:UIControlEventEditingChanged] subscribeNext:^(NSString * x) {
-            contact_phone = x;
+            contact_phone = cell.phone_field.text;
         }];
-        [cell configWithname:contact_name phone:contact_phone];
         return cell;
     }else if (indexPath.section==1){
         TravelPersonTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"travel" forIndexPath:indexPath];
@@ -484,22 +486,25 @@
         }
         YYLUser * yyl_user;
         if (_user_arr.count<indexPath.row+1 ) {
-            cell.user = [[YYLUser alloc] init];
-            [_user_arr addObject:cell.user];
+            
+            yyl_user = [[YYLUser alloc] init];
+            [_user_arr addObject:yyl_user];
         }else{
             yyl_user = _user_arr[indexPath.row];
             [cell configWithYYLuser:yyl_user];
         }
         yyl_user = _user_arr[indexPath.row];
+        [cell configWithYYLuser:yyl_user];
+
         [[cell.name_field rac_signalForControlEvents:UIControlEventEditingChanged] subscribeNext:^(NSString * x) {
-            yyl_user.travel_name = x;
+            yyl_user.travel_name = cell.name_field.text;
             
         }];
         [[cell.phone_field rac_signalForControlEvents:UIControlEventEditingChanged] subscribeNext:^(NSString * x) {
-            yyl_user.travel_phone = x;
+            yyl_user.travel_phone = cell.phone_field.text;
         }];
         [[cell.id_field rac_signalForControlEvents:UIControlEventEditingChanged] subscribeNext:^(NSString * x) {
-            yyl_user.travel_id = x;
+            yyl_user.travel_id = cell.id_field.text;
         }];
         cell.selectSex = ^(NSString * num){
             yyl_user.travel_sex = num;
@@ -667,22 +672,21 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath
 
 }
 -(BOOL)creatOrderInterNet{
+    
     return YES;
 }
 - (void)submitOrder {
-    if ([self testOrderMassage]) {
+    if (![self testOrderMassage]) {
         YYLOrder * order_pre = [YYLOrder PreOrder];
         order_pre.cat_id = _vc_type;
-        if (!order.checkin_time) {
-            order_pre.checkin_time = [NSDate date];
-        }else{
-            order_pre.checkin_time =order.checkin_time;
-        }
-
-
         if ([_vc_type intValue] == 2) {
             
             NSTimeInterval oneDay = 24*60*60;
+            if (!order.checkin_time) {
+                order_pre.checkin_time = [NSDate date];
+            }else{
+                order_pre.checkin_time = order.checkin_time;
+            }
             if (!order.checkout_time) {
                 order_pre.checkout_time = [NSDate dateWithTimeInterval:oneDay sinceDate:order_pre.checkin_time];
             }else{
@@ -692,7 +696,6 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath
             NSTimeInterval time = [order_pre.checkout_time timeIntervalSinceDate:order_pre.checkin_time];
             int number = time/oneDay;
             order_pre.lived_num = [NSString stringWithFormat:@"%d",number];
-            order_pre.num = @"1";
             order_pre.total_money = [NSString stringWithFormat:@"%ld",[self.charge_price integerValue] * number];
             order_pre.room_id = _room_index;
             
@@ -701,51 +704,77 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath
             order_pre.beds = [NSString stringWithFormat:@"%ld",_person_num];
             
             order_pre.total_money = [NSString stringWithFormat:@"%ld",[self.charge_price integerValue] * _person_num];
+            if (!order.checkin_time) {
+                order_pre.checkin_time = [NSDate date];
+            }else{
+                order_pre.checkin_time = order.checkin_time;
+            }
             if (!order_pre.checkout_time) {
                 order_pre.checkout_time = [self getPriousorLaterDateFromDate:[NSDate date] withMonth:1];
             }
-            order_pre.order_spec = [NSArray arrayWithArray:_chargeArray];
+            NSMutableString * str = [NSMutableString string];
+            for (int i = 0; i < _chargeArray.count; i++) {
+                str = [NSMutableString stringWithFormat:@"%@,%@",str,_chargeArray[i]];
+            }
+
+            order_pre.order_spec = [NSString stringWithFormat:@"%@",str];
         }else{
-            order_pre.group_date = _room_index;
             order_pre.total_money = [NSString stringWithFormat:@"%ld",[self.charge_price integerValue] * _person_num];
 
             
         }
-        order_pre.order_name = _group_dic[@"name"];
-
-        order_pre.group_id = self.gid;
-        order_pre.price = _charge_price;
-
+        order_pre.group_id = [NSString stringWithFormat:@"%@",self.gid];
         order_pre.subsidy_money_m = @"0";
         order_pre.subsidy_money_u = @"0";
-        order_pre.contact_name = @"ddd";
-        order_pre.contact_phone = @"123445";
+        order_pre.contact_name = @"1";
+        order_pre.contact_phone = @"0";
         order_pre.card_id = @"0";
         order_pre.wx_cheap = @"0";
         order_pre.balance_pay = _balance_can;
         order_pre.coupon = _dis_count_can;
         order_pre.payment_money = [NSString stringWithFormat:@"%@",_money_label.text];
         order_pre.add_time = [NSString stringWithFormat:@"%ld",(long)[[NSDate date] timeIntervalSince1970]];
-        order_pre.paid = @"0";
-        order_pre.status = @"6";
         for (YYLUser * user in _user_arr) {
             if (!user.travel_sex) {
                 user.travel_sex = @"0";
             }
         }
-        order_pre.checkin_name = [NSArray arrayWithArray:_user_arr];
+        NSMutableArray * arr = [NSMutableArray array];
+        for (int i = 0; i < _person_num; i++) {
+            YYLUser * user = _user_arr[i];
+            NSMutableString * str = [NSMutableString stringWithFormat:@"%@",user.travel_name];
+            str = [NSMutableString stringWithFormat:@"%@,%@",str,user.travel_phone];
+            str = [NSMutableString stringWithFormat:@"%@,%@",str,user.travel_id];
+            str = [NSMutableString stringWithFormat:@"%@,%@",str,user.travel_sex];
+            [arr addObject:str];
+        }
+        NSMutableString * str = [NSMutableString string];
+        for (int i = 0; i < arr.count; i++) {
+            if (str.length == 0) {
+                str = arr[i];
+            }else{
+                str = [NSMutableString stringWithFormat:@"%@;%@",str,arr[i]];
 
+            }
+        }
+        order_pre.checkin_name = [NSString stringWithFormat:@"%@",str];
         
-        if ([self creatOrderInterNet]) {
+        DDOrder_put * put_or = [[DDOrder_put alloc] initWithUid:[Member DefaultUser].uid login:[Member DefaultUser].login data:order_pre];
+        [put_or startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
+            
+            NSLog(@"%@++++++",request.responseString);
             PayViewController * payVC = [[PayViewController alloc] init];
             payVC.order = order_pre;
             payVC.vc_type = self.vc_type;
             [SVProgressHUD showSuccessWithStatus:@"订单提交成功！"];
             [self.navigationController pushViewController:payVC animated:YES];
-        }else{
+
+        } failure:^(__kindof YTKBaseRequest *request) {
             [SVProgressHUD showErrorWithStatus:@"订单提交失败！"];
 
-        }
+        }];
+
+        
        
     }else{
         [SVProgressHUD showErrorWithStatus:@"请补全订单信息！"];

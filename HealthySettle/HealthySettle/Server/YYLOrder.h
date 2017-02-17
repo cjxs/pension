@@ -11,12 +11,10 @@
 @interface YYLOrder : NSObject
 @property (nonatomic,strong)NSString * order_id;
 @property (nonatomic,strong)NSString * order_sn;
-@property (nonatomic,strong)NSString * order_name;
 @property (nonatomic,strong)NSString * group_id;         //机构id
 @property (nonatomic,strong)NSString * cat_id;           //类别
 @property (nonatomic,strong)NSString * lived_num;       //数量
 @property (nonatomic,strong)NSString * num;
-@property (nonatomic,strong)NSString * price;            //单价
 @property (nonatomic,strong)NSString * total_money;     //总金额
 @property (nonatomic,strong)NSString * subsidy_money_m;   //机构补贴
 @property (nonatomic,strong)NSString * subsidy_money_u;   //用户补贴
@@ -37,10 +35,9 @@
 @property (nonatomic,strong)NSDate * checkin_time;   //入住时间
 @property (nonatomic,strong)NSDate * checkout_time;  //退房时间
 @property (nonatomic,strong)NSString * beds;           //床位数 （养老专用）
-@property (nonatomic,strong)NSArray * checkin_name;    //入住人信息
+@property (nonatomic,strong)NSString * checkin_name;    //入住人信息
 @property (nonatomic,strong)NSString * room_id;         //房型ID （养生专用）
-@property (nonatomic,strong)NSArray * order_spec;       //订单信息
-@property (nonatomic,strong)NSString * group_date; //出团日期
+@property (nonatomic,strong)NSString * order_spec;       //订单信息
 @property (nonatomic,strong)NSString * coupon; //使用抵用券
 
 
