@@ -722,7 +722,8 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath
                 str = [NSMutableString stringWithFormat:@"%@,%@",str,_chargeArray[i]];
             }
 
-            order_pre.order_spec = [NSString stringWithFormat:@"%@",str];
+//            order_pre.order_spec = [NSString stringWithFormat:@"%@",str];
+            order_pre.order_spec = [NSArray arrayWithArray:_chargeArray];
         }else{
             order_pre.total_money = [NSString stringWithFormat:@"%ld",[self.charge_price integerValue] * _person_num];
             order_pre.group_date = self.room_index;
@@ -734,8 +735,8 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath
         order_pre.order_name = _group_dic[@"name"];
         order_pre.subsidy_money_m = @"0";
         order_pre.subsidy_money_u = @"0";
-        order_pre.contact_name = @"1";
-        order_pre.contact_phone = @"0";
+        order_pre.contact_name = @"0";
+        order_pre.contact_phone = @"1";
         order_pre.card_id = @"0";
         order_pre.wx_cheap = @"0";
         order_pre.balance_pay = !_balance_can?@"0":_balance_can;

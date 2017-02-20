@@ -39,7 +39,7 @@
 @property (nonatomic,strong)NSString * beds;           //床位数 （养老专用）
 @property (nonatomic,strong)NSString * checkin_name;    //入住人信息
 @property (nonatomic,strong)NSString * room_id;         //房型ID （养生专用）
-@property (nonatomic,strong)NSString * order_spec;       //订单信息
+@property (nonatomic,strong)NSArray * order_spec;       //订单信息
 @property (nonatomic,strong)NSString * coupon; //使用抵用券
 
 
