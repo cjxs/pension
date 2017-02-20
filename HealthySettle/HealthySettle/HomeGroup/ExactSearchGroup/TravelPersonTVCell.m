@@ -9,6 +9,7 @@
 #import "TravelPersonTVCell.h"
 #import "SelectOneView.h"
 #import "YYLUser.h"
+#import "ChooPersonView.h"
 
 @implementation TravelPersonTVCell
 -(instancetype)initWithStyle:(UITableViewCellStyle)style
@@ -36,14 +37,6 @@
         _name_field = [[UITextField alloc] initWithFrame:CGRectMake(screenWide * 0.27, screenHeight * 0.015, screenWide * 0.5, screenHeight * 0.04)];
         _name_field.placeholder = @"姓名";
         [self addSubview:_name_field];
-        
-        _add_person_btn  = [UIButton buttonWithType:UIButtonTypeCustom];
-        [self addSubview:_add_person_btn];
-        [_add_person_btn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(screenHeight *0.03, screenHeight * 0.03));
-            make.right.equalTo(self).offset(-10);
-            make.centerY.equalTo(_name_field);
-        }];
 
         _phone_field = [[UITextField alloc] initWithFrame:CGRectMake(screenWide * 0.27, screenHeight * 0.085, screenWide * 0.5, screenHeight * 0.04)];
         _phone_field.placeholder = @"";
@@ -96,6 +89,39 @@
     _selectSex ? _selectSex([NSString stringWithFormat:@"%d",num]) : nil;
 
 }
+-(void)configWithBtn{
+    
+    _add_person_btn  = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self addSubview:_add_person_btn];
+    [_add_person_btn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(screenHeight *0.03, screenHeight * 0.03));
+        make.right.equalTo(self).offset(-10);
+        make.centerY.equalTo(_name_field);
+    }];
+    [_add_person_btn setBackgroundImage:[UIImage imageNamed:@"add_p"] forState:UIControlStateNormal];
+    [_add_person_btn addTarget:self action:@selector(addPersonView) forControlEvents:UIControlEventTouchUpInside];
+
+}
+-(void)addPersonView{
+    ChooPersonView * choose_view = [[ChooPersonView alloc] init];
+    YYLUser * user = [[YYLUser alloc] init];
+    user.travel_name = @"陈冬";
+    user.travel_phone = @"123456789";
+    user.travel_id = @"437892798-00-279827";
+    user.travel_sex = @"0";
+    choose_view.data_arr = [NSArray arrayWithObject:user];
+    choose_view.selected = ^(YYLUser *user){
+        _name_field.text = user.travel_name;
+        _phone_field.text = user.travel_phone;
+        _id_field.text = user.travel_id;
+        [self selectOne:[user.travel_sex intValue]];
+    };
+    
+    [choose_view addFirstView];
+    UIWindow * window = [UIApplication sharedApplication].keyWindow;
+    [window addSubview:choose_view];
+}
+
 -(void)configWithYYLuser:(YYLUser *)user{
     if (user.travel_name) {
         self.name_field.text = user.travel_name;

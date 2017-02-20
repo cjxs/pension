@@ -468,17 +468,17 @@
             }
         }
         [cell configWithname:contact_name phone:contact_phone];
-
-        [[cell.name_field rac_signalForControlEvents:UIControlEventEditingChanged] subscribeNext:^(NSString * x) {
-            contact_name = cell.name_field.text;
+        [RACObserve(cell.name_field, text) subscribeNext:^(NSString * x) {
+            contact_name = x;
         }];
-        [[cell.phone_field rac_signalForControlEvents:UIControlEventEditingChanged] subscribeNext:^(NSString * x) {
-            contact_phone = cell.phone_field.text;
+        [RACObserve(cell.phone_field, text) subscribeNext:^(NSString * x) {
+            contact_phone = x;
         }];
         return cell;
     }else if (indexPath.section==1){
         TravelPersonTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"travel" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        [cell configWithBtn];
         for (int i = 0; i< cell.subviews.count; i++) {
             if ([cell.subviews[i] isKindOfClass:[UITextField class]] ) {
                 UITextField * textfield = cell.subviews[i];
@@ -499,16 +499,16 @@
         }
         yyl_user = _user_arr[indexPath.row];
         [cell configWithYYLuser:yyl_user];
+        [RACObserve(cell.name_field, text) subscribeNext:^(NSString * x) {
+            yyl_user.travel_name = x;
+        }];
 
-        [[cell.name_field rac_signalForControlEvents:UIControlEventEditingChanged] subscribeNext:^(NSString * x) {
-            yyl_user.travel_name = cell.name_field.text;
-            
+        [RACObserve(cell.phone_field, text) subscribeNext:^(NSString * x) {
+            yyl_user.travel_phone = x;
         }];
-        [[cell.phone_field rac_signalForControlEvents:UIControlEventEditingChanged] subscribeNext:^(NSString * x) {
-            yyl_user.travel_phone = cell.phone_field.text;
-        }];
-        [[cell.id_field rac_signalForControlEvents:UIControlEventEditingChanged] subscribeNext:^(NSString * x) {
-            yyl_user.travel_id = cell.id_field.text;
+
+        [RACObserve(cell.id_field, text) subscribeNext:^(NSString * x) {
+            yyl_user.travel_id = x;
         }];
         cell.selectSex = ^(NSString * num){
             yyl_user.travel_sex = num;

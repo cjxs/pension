@@ -7,6 +7,10 @@
 //
 
 #import "ContentsTVCell.h"
+#import "OrderTVController.h"
+#import "TabbarController.h"
+#import "ChooPersonView.h"
+#import "YYLUser.h"
 
 @implementation ContentsTVCell
 -(instancetype)initWithStyle:(UITableViewCellStyle)style
@@ -51,17 +55,36 @@
             make.right.equalTo(self).offset(-10);
             make.centerY.equalTo(_name_field);
         }];
+        [_add_person_btn setBackgroundImage:[UIImage imageNamed:@"add_p"] forState:UIControlStateNormal];
+        [_add_person_btn addTarget:self action:@selector(addPersonView) forControlEvents:UIControlEventTouchUpInside];
+        
 
     }
     return self;
 }
--(void)configWithname:(NSString *)name phone:(NSString *)phone{
+-(void)addPersonView{
+    ChooPersonView * choose_view = [[ChooPersonView alloc] init];
+    YYLUser * user = [[YYLUser alloc] init];
+    user.travel_name = @"陈冬";
+    user.travel_phone = @"123456789";
+    choose_view.data_arr = [NSArray arrayWithObject:user];
+    choose_view.selected = ^(YYLUser *user){
+        _name_field.text = user.travel_name;
+        _phone_field.text = user.travel_phone;
+    };
+    
+    [choose_view addFirstView];
+    UIWindow * window = [UIApplication sharedApplication].keyWindow;
+    [window addSubview:choose_view];
+}
+-(void)configWithname:(NSString *)name phone:(NSString *)phone {
     if (name) {
         _name_field.text = name;
     }
     if (phone) {
         _phone_field.text = phone;
     }
+    
 }
 - (void)awakeFromNib {
     [super awakeFromNib];

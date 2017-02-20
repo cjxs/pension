@@ -195,28 +195,28 @@ static NSString *setCellIdentifier = @"cellS";
         if (indexPath.row == 0)
         {
             if ([Member DefaultUser].login.length != 0) {
-                [cell setThingsWithName:@"现金账户" Image:[UIImage imageNamed:@"system_1_"] number:[NSString stringWithFormat:@"¥ %@",[Member DefaultUser].now_money]];
+                [cell setThingsWithName:@"现金账户" Image:[UIImage imageNamed:@"data"] number:[NSString stringWithFormat:@"¥ %@",[Member DefaultUser].now_money]];
             }else{
-                [cell setThingsWithName:@"现金账户" Image:[UIImage imageNamed:@"system_1_"] number:@""];
+                [cell setThingsWithName:@"现金账户" Image:[UIImage imageNamed:@"data"] number:@""];
             }
         }else if (indexPath.row == 1)
         {
             if ([Member DefaultUser].login.length != 0) {
-                [cell setThingsWithName:@"优悠券" Image:[UIImage imageNamed:@"system_2_"] number:[Member DefaultUser].score_count];
+                [cell setThingsWithName:@"优悠券" Image:[UIImage imageNamed:@"tag"] number:[Member DefaultUser].score_count];
             }else{
-                [cell setThingsWithName:@"优悠券" Image:[UIImage imageNamed:@"system_2_"] number:@""];
+                [cell setThingsWithName:@"优悠券" Image:[UIImage imageNamed:@"tag"] number:@""];
             }
         }else if (indexPath.row == 2 )
         {
             if ([Member DefaultUser].login.length != 0) {
-                [cell setThingsWithName:@"常用联系人" Image:[UIImage imageNamed:@"system_2_"] number:@"100"];
+                [cell setThingsWithName:@"常用联系人" Image:[UIImage imageNamed:@"user"] number:@"100"];
             }else{
-                [cell setThingsWithName:@"常用联系人" Image:[UIImage imageNamed:@"system_2_"] number:@""];
+                [cell setThingsWithName:@"常用联系人" Image:[UIImage imageNamed:@"user"] number:@""];
             }
         }
     }else
     {
-        [cell setThingsWithName:@"更多" Image:[UIImage imageNamed:@"system_5_"] number:nil];
+        [cell setThingsWithName:@"更多" Image:[UIImage imageNamed:@"settings"] number:nil];
     }
     return cell;
 }
