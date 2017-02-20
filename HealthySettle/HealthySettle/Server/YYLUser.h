@@ -13,5 +13,7 @@
 @property (nonatomic,strong)NSString * travel_phone;
 @property (nonatomic,strong)NSString * travel_id;
 @property (nonatomic,strong)NSString * travel_sex;
+@property (nonatomic,strong)NSString * travel_cid;
+
 
 @end

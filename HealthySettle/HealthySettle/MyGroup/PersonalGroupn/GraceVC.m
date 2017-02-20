@@ -7,40 +7,34 @@
 //
 
 #import "GraceVC.h"
-#import "GraceTVCell.h"
+#import "ConPersonTVCell.h"
+#import "ConPerAddVC.h"
 
 @interface GraceVC ()<UITableViewDelegate,UITableViewDataSource>
 
 @end
 
 @implementation GraceVC
+-(void)addContact{
+    ConPerAddVC * addVC = [[ConPerAddVC alloc] init];
+    addVC.title = @"新增联系人";
+    [self.navigationController pushViewController:addVC animated:YES];
+}
 -(UIView *)headView
 {
     if (!_headView)
     {
         UIView * view = [[UIView alloc]
                          initWithFrame:CGRectMake(0, 0, screenWide, screenHeight * 0.08)];
-        UILabel * label = [[UILabel alloc]
-                           initWithFrame:CGRectMake(screenWide * 0.03, screenHeight * 0.015, screenWide * 0.3, screenHeight * 0.05)];
-        label.text = @"请输入优惠券序列号:";
-        label.textColor = RGB(138, 138, 138);
-        label.font = [UIFont systemFontOfSize:14];
-        label.adjustsFontSizeToFitWidth = YES;
-        [view addSubview:label];
-        UITextField * textfield = [[UITextField alloc]
-                                   initWithFrame:CGRectMake(screenWide * 0.35, screenHeight * 0.02, screenWide * 0.42, screenHeight * 0.04)];
-        textfield.borderStyle = UITextBorderStyleLine;
-        textfield.font = [UIFont systemFontOfSize:10];
-        textfield.layer.borderColor = [RGB(252, 252, 252) CGColor];
-        textfield.layer.borderWidth = 1;
-        textfield.clearButtonMode = UITextFieldViewModeAlways;
-        [view addSubview:textfield];
+        view.backgroundColor = RGB(246, 246, 246);
+
         UIButton * btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        btn.frame = CGRectMake(screenWide * 0.8, screenHeight * 0.02, screenWide * 0.17, screenHeight * 0.04);
-        [btn setTitle:@"激活" forState:UIControlStateNormal];
-        btn.titleLabel.font = [UIFont systemFontOfSize:11];
+        btn.frame = CGRectMake(screenWide * 0.15, screenHeight * 0.02, screenWide * 0.7, screenHeight * 0.04);
+        [btn setTitle:@"新增常用联系人" forState:UIControlStateNormal];
+        btn.titleLabel.font = [UIFont systemFontOfSize:15];
+        [btn addTarget:self action:@selector(addContact) forControlEvents:UIControlEventTouchUpInside];
         btn.layer.masksToBounds = YES;
-        btn.layer.cornerRadius = 4;
+        btn.layer.cornerRadius = 5;
         [btn setTitleColor:[UIColor whiteColor]
                   forState:UIControlStateNormal];
         btn.backgroundColor = RGB(230, 11, 24);
@@ -61,8 +55,8 @@
         tableView.showsVerticalScrollIndicator = NO;
         tableView.bounces = NO;
         tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        [tableView registerClass:[GraceTVCell class]
-          forCellReuseIdentifier:@"cellGrace"];
+        [tableView registerClass:[ConPersonTVCell class]
+          forCellReuseIdentifier:@"cellCon"];
         _tableView = tableView;
     }
     return _tableView;
@@ -72,6 +66,11 @@
     [super viewDidLoad];
     [self.view addSubview:self.tableView];
     self.tableView.tableHeaderView = self.headView;
+    UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(screenWide * 0.2, screenHeight * 0.3, screenWide * 0.6, screenHeight * 0.03)];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.text = @"暂无常用联系人";
+    label.textColor = [UIColor grayColor];
+    [_tableView addSubview:label];
 }
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -93,35 +92,23 @@
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section
 {
-    return 7;
+    return 2;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    GraceTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cellGrace"
+    ConPersonTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cellCon"
                                                          forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    switch (indexPath.row)
-    {
-        case 0:
-            [cell configWithMoneystr:@"10" use:@"100" timeF:@"2016.05.07" timeT:@"2016.11.07"];
-            break;
-        case 2:
-            [cell configWithMoneystr:@"50" use:@"500" timeF:@"2016.03.11" timeT:@"2016.09.11"];
-            break;
-            
-        default:
-            [cell configWithMoneystr:@"30" use:@"300" timeF:@"2015.05.07" timeT:@"2016.11.07"];
-            break;
-    }
+    [cell configWithName:@"郭靖" card:@"410522199809082345"];
     return cell;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView
 heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return screenHeight * 0.21;
+    return screenHeight * 0.08;
 }
 /*
 #pragma mark - Navigation

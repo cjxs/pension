@@ -176,8 +176,9 @@
 		3278CCE41CAFBB4500038B9D /* CommentTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3278CCE21CAFBB4500038B9D /* CommentTVCell.xib */; };
 		3278CCE61CAFC17400038B9D /* shareCompany.png in Resources */ = {isa = PBXBuildFile; fileRef = 3278CCE51CAFC17400038B9D /* shareCompany.png */; };
 		3278CCE91CAFDDC100038B9D /* SelectTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3278CCE81CAFDDC100038B9D /* SelectTVCell.m */; };
+		327BEE7C1E5A8433002C1199 /* ConPersonTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 327BEE7B1E5A8433002C1199 /* ConPersonTVCell.m */; };
+		327BEE7F1E5A8E5D002C1199 /* ConPerAddVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 327BEE7E1E5A8E5D002C1199 /* ConPerAddVC.m */; };
 		327CA9681CBB692000FC4F8E /* GraceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 327CA9671CBB692000FC4F8E /* GraceVC.m */; };
-		327CA96B1CBB712000FC4F8E /* GraceTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 327CA96A1CBB712000FC4F8E /* GraceTVCell.m */; };
 		327CA96F1CBB79C100FC4F8E /* weishiyong_@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 327CA96C1CBB79C100FC4F8E /* weishiyong_@2x.png */; };
 		327CA9701CBB79C100FC4F8E /* weishiyong_@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 327CA96D1CBB79C100FC4F8E /* weishiyong_@3x.png */; };
 		327CA9711CBB79C100FC4F8E /* system_08.png in Resources */ = {isa = PBXBuildFile; fileRef = 327CA96E1CBB79C100FC4F8E /* system_08.png */; };
@@ -816,10 +817,12 @@
 		3278CCE51CAFC17400038B9D /* shareCompany.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shareCompany.png; sourceTree = "<group>"; };
 		3278CCE71CAFDDC100038B9D /* SelectTVCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectTVCell.h; sourceTree = "<group>"; };
 		3278CCE81CAFDDC100038B9D /* SelectTVCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectTVCell.m; sourceTree = "<group>"; };
+		327BEE7A1E5A8433002C1199 /* ConPersonTVCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConPersonTVCell.h; sourceTree = "<group>"; };
+		327BEE7B1E5A8433002C1199 /* ConPersonTVCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConPersonTVCell.m; sourceTree = "<group>"; };
+		327BEE7D1E5A8E5D002C1199 /* ConPerAddVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConPerAddVC.h; sourceTree = "<group>"; };
+		327BEE7E1E5A8E5D002C1199 /* ConPerAddVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConPerAddVC.m; sourceTree = "<group>"; };
 		327CA9661CBB692000FC4F8E /* GraceVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraceVC.h; sourceTree = "<group>"; };
 		327CA9671CBB692000FC4F8E /* GraceVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraceVC.m; sourceTree = "<group>"; };
-		327CA9691CBB712000FC4F8E /* GraceTVCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraceTVCell.h; sourceTree = "<group>"; };
-		327CA96A1CBB712000FC4F8E /* GraceTVCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraceTVCell.m; sourceTree = "<group>"; };
 		327CA96C1CBB79C100FC4F8E /* weishiyong_@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "weishiyong_@2x.png"; sourceTree = "<group>"; };
 		327CA96D1CBB79C100FC4F8E /* weishiyong_@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "weishiyong_@3x.png"; sourceTree = "<group>"; };
 		327CA96E1CBB79C100FC4F8E /* system_08.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = system_08.png; sourceTree = "<group>"; };
@@ -2237,13 +2240,15 @@
 				32D693E11DD466E8001D5C7F /* PersonMSetVC.m */,
 				327CA9661CBB692000FC4F8E /* GraceVC.h */,
 				327CA9671CBB692000FC4F8E /* GraceVC.m */,
+				327BEE7A1E5A8433002C1199 /* ConPersonTVCell.h */,
+				327BEE7B1E5A8433002C1199 /* ConPersonTVCell.m */,
+				327BEE7D1E5A8E5D002C1199 /* ConPerAddVC.h */,
+				327BEE7E1E5A8E5D002C1199 /* ConPerAddVC.m */,
 				327CA9741CBBB78E00FC4F8E /* AccountViewController.h */,
 				327CA9751CBBB78E00FC4F8E /* AccountViewController.m */,
 				320BE5C51CBC900D00A34FCB /* AccountTVCell.h */,
 				320BE5C61CBC900D00A34FCB /* AccountTVCell.m */,
 				320BE5C71CBC900D00A34FCB /* AccountTVCell.xib */,
-				327CA9691CBB712000FC4F8E /* GraceTVCell.h */,
-				327CA96A1CBB712000FC4F8E /* GraceTVCell.m */,
 				3273DF871DB9C4080094AD42 /* PersonNTVCell.h */,
 				3273DF881DB9C4080094AD42 /* PersonNTVCell.m */,
 				3273DF891DB9C4080094AD42 /* PersonNTVCell.xib */,
@@ -2668,6 +2673,7 @@
 				32D693F31DD5BBA5001D5C7F /* HMDatePickView.m in Sources */,
 				3205DEE01DF954AF00AC5726 /* PerOrderDetailVC.m in Sources */,
 				321C43171DC0575600192243 /* ArticleListTViewCell.m in Sources */,
+				327BEE7F1E5A8E5D002C1199 /* ConPerAddVC.m in Sources */,
 				32FB002E1D405D6F008A5497 /* DDToolKit.m in Sources */,
 				32F6CD081C9A734C00E97B65 /* AppDelegate.m in Sources */,
 				3285AF0B1D3760A20070618A /* YYLOrder.m in Sources */,
@@ -2727,7 +2733,6 @@
 				32FD72D51CAA8263008CB917 /* PersonVController.m in Sources */,
 				32F5D1C81DAA3C0E000FC6B1 /* DDSeaGet.m in Sources */,
 				3205DEE61DF9596100AC5726 /* UIColor+HexColor.m in Sources */,
-				327CA96B1CBB712000FC4F8E /* GraceTVCell.m in Sources */,
 				326F247F1CCB0690002BCE0D /* payRequsestHandler.mm in Sources */,
 				3205DEF21DFA500C00AC5726 /* ArrayLabelView.m in Sources */,
 				32E588B21CB78825002AED1A /* KnowledgeTVController.m in Sources */,
@@ -2782,6 +2787,7 @@
 				32D23E7A1DC33932009154F6 /* MJRefreshConst.m in Sources */,
 				32CABD681CA373AA0068AE93 /* HomeViewController.m in Sources */,
 				3273DF8A1DB9C4080094AD42 /* PersonNTVCell.m in Sources */,
+				327BEE7C1E5A8433002C1199 /* ConPersonTVCell.m in Sources */,
 				32D693E21DD466E8001D5C7F /* PersonMSetVC.m in Sources */,
 				3289E39D1E51926200C57596 /* UsecanTVCell.m in Sources */,
 				32CABD641CA373AA0068AE93 /* CityCollectionViewCell.m in Sources */,

@@ -202,13 +202,17 @@ static NSString *setCellIdentifier = @"cellS";
         }else if (indexPath.row == 1)
         {
             if ([Member DefaultUser].login.length != 0) {
-                [cell setThingsWithName:@"我的积分" Image:[UIImage imageNamed:@"system_2_"] number:[Member DefaultUser].score_count];
+                [cell setThingsWithName:@"优悠券" Image:[UIImage imageNamed:@"system_2_"] number:[Member DefaultUser].score_count];
             }else{
-                [cell setThingsWithName:@"我的积分" Image:[UIImage imageNamed:@"system_2_"] number:@""];
+                [cell setThingsWithName:@"优悠券" Image:[UIImage imageNamed:@"system_2_"] number:@""];
             }
         }else if (indexPath.row == 2 )
         {
-            [cell setThingsWithName:@"优惠券" Image:[UIImage imageNamed:@"system_3_"] number:@""];
+            if ([Member DefaultUser].login.length != 0) {
+                [cell setThingsWithName:@"常用联系人" Image:[UIImage imageNamed:@"system_2_"] number:@"100"];
+            }else{
+                [cell setThingsWithName:@"常用联系人" Image:[UIImage imageNamed:@"system_2_"] number:@""];
+            }
         }
     }else
     {
@@ -226,7 +230,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
                 [self changeToAccountWithstr:@"现金账户"];
                 break;
             case 1:
-                [self changeToAccountWithstr:@"我的积分"];
+                [self changeToAccountWithstr:@"优悠券"];
                 break;
             case 2:
                 [self changeToGraceVC];
@@ -316,7 +320,7 @@ heightForHeaderInSection:(NSInteger)section
 {
     if ([Member DefaultUser].login.length !=0) {
         GraceVC * graceVC = [[GraceVC alloc] init];
-        graceVC.titleName = @"我的优惠券";
+        graceVC.titleName = @"常用联系人";
         graceVC.hidesBottomBarWhenPushed = YES;//隐藏tabBar
         [self.navigationController pushViewController:graceVC
                                              animated:YES];
