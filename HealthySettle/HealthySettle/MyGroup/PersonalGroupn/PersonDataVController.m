@@ -237,23 +237,25 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
                                              initWithNibName:@"PasswordCVController"
                                              bundle:nil];
         passwordVC.titleName = @"登录密码修改";
-        passwordVC.type_from = @"D";
+        passwordVC.type_from = @"pwd";
         [self.navigationController pushViewController:passwordVC
                                              animated:YES];
         
     }else if (indexPath.section == 1&& indexPath.row == 1){
         
-        if ([[Member DefaultUser].pay_can isEqualToString:@"N"]) {
-            PasswordSetVC * passwordSet = [[PasswordSetVC alloc] init];
-            [self.navigationController pushViewController:passwordSet animated:YES];
-        }else{
+        if ([[Member DefaultUser].pay_can isEqualToString:@"Y"]) {
             PasswordCVController * passwordVC = [[PasswordCVController alloc]
                                                  initWithNibName:@"PasswordCVController"
                                                  bundle:nil];
             passwordVC.titleName = @"支付密码修改";
-            passwordVC.type_from = @"L";
+            passwordVC.type_from = @"pay_pwd";
             [self.navigationController pushViewController:passwordVC
                                                  animated:YES];
+        }else{
+
+            PasswordSetVC * passwordSet = [[PasswordSetVC alloc] init];
+            [self.navigationController pushViewController:passwordSet animated:YES];
+
 
         }
         

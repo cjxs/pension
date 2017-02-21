@@ -735,8 +735,8 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath
         order_pre.order_name = _group_dic[@"name"];
         order_pre.subsidy_money_m = @"0";
         order_pre.subsidy_money_u = @"0";
-        order_pre.contact_name = @"0";
-        order_pre.contact_phone = @"1";
+        order_pre.contact_name = contact_name;
+        order_pre.contact_phone = contact_phone;
         order_pre.card_id = @"0";
         order_pre.wx_cheap = @"0";
         order_pre.balance_pay = !_balance_can?@"0":_balance_can;

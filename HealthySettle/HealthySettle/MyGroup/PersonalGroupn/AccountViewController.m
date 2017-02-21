@@ -52,8 +52,8 @@
         {
             view.frame = CGRectMake(0, screenHeight * 0.01, screenWide, screenHeight * 0.18);
             //加限制条件判断有无积分
-            if ([[Member DefaultUser].score_count integerValue] != 0 ) {
-                self.money_label.text = [NSString stringWithFormat:@"我的积分:%@",[Member DefaultUser].score_count];
+            if ([[Member DefaultUser].vocher integerValue] != 0 ) {
+                self.money_label.text = [NSString stringWithFormat:@"我的积分:%@",[Member DefaultUser].vocher];
                 [view addSubview:self.money_label];
             }else{
                 self.nomoney_label.text = @"暂无积分";

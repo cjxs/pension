@@ -26,8 +26,6 @@
         [bg_view addGestureRecognizer:tap];
         [self addSubview:bg_view];
         
-
-
     }
     return self;
 }
@@ -71,8 +69,8 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     ChoosePTVCell * cell =  [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    YYLUser *user = _data_arr[indexPath.row];
-    [cell configWithname:user.travel_name];
+    NSDictionary *user = _data_arr[indexPath.row];
+    [cell configWithname:user[@"travel_name"]];
     return cell;
     
 }

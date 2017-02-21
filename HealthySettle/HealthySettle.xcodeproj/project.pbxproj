@@ -423,7 +423,7 @@
 		320108121DBB4A38007ACA6B /* DDMoneyList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDMoneyList.m; sourceTree = "<group>"; };
 		320108141DBB58F9007ACA6B /* DDScoreList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDScoreList.h; sourceTree = "<group>"; };
 		320108151DBB58F9007ACA6B /* DDScoreList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDScoreList.m; sourceTree = "<group>"; };
-		3205DEDE1DF954AF00AC5726 /* PerOrderDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PerOrderDetailVC.h; path = PersonalGroupn/PerOrderDetailVC.h; sourceTree = "<group>"; };
+		3205DEDE1DF954AF00AC5726 /* PerOrderDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PerOrderDetailVC.h; sourceTree = "<group>"; };
 		3205DEDF1DF954AF00AC5726 /* PerOrderDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PerOrderDetailVC.m; sourceTree = "<group>"; };
 		3205DEE11DF955E000AC5726 /* OrderStatusTVCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderStatusTVCell.h; sourceTree = "<group>"; };
 		3205DEE21DF955E000AC5726 /* OrderStatusTVCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderStatusTVCell.m; sourceTree = "<group>"; };
@@ -1962,7 +1962,6 @@
 			children = (
 				32CABD841CA374020068AE93 /* MineViewController.h */,
 				32CABD851CA374020068AE93 /* MineViewController.m */,
-				3205DEDE1DF954AF00AC5726 /* PerOrderDetailVC.h */,
 				32FD72CF1CAA731E008CB917 /* PersonalGroupn */,
 				32DD1DC91CA5082B00E1C229 /* SetTVCell.h */,
 				32DD1DCA1CA5082B00E1C229 /* SetTVCell.m */,
@@ -2255,6 +2254,7 @@
 			children = (
 				32FD72D31CAA8263008CB917 /* PersonVController.h */,
 				32FD72D41CAA8263008CB917 /* PersonVController.m */,
+				3205DEDE1DF954AF00AC5726 /* PerOrderDetailVC.h */,
 				3205DEDF1DF954AF00AC5726 /* PerOrderDetailVC.m */,
 				3205DEE11DF955E000AC5726 /* OrderStatusTVCell.h */,
 				3205DEE21DF955E000AC5726 /* OrderStatusTVCell.m */,

@@ -12,6 +12,6 @@
 @interface ChooPersonView : UIView<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic,strong)NSArray * data_arr;
 @property (nonatomic,strong)UITableView * select_view;
-@property (nonatomic,copy) void(^selected)(YYLUser * user);
+@property (nonatomic,copy) void(^selected)(NSDictionary * user);
 - (void)addFirstView;
 @end

@@ -14,6 +14,7 @@
 #import "DDToolKit.h"
 #import "DDRegist.h"
 #import "Member.h"
+#import "YYLUser.h"
 
 @interface LoginOrRegisViewController ()<UITextFieldDelegate,LoginDelegate>{
     UIView * backView;
@@ -490,17 +491,24 @@
         NSString *str = [request.responseString stringByReplacingOccurrencesOfString:@":null" withString:@":\"\""];
         dic = [DDLogin dictionaryWithJsonString: str];
         if ([dic[@"msg"]length] == 0) {
-            [Member DefaultUser].uid = dic[@"uid"];
-            [Member DefaultUser].nickname = dic[@"nickname"];
-            [Member DefaultUser].sex = dic[@"gender"];
-            [Member DefaultUser].birthday = dic[@"birthday"];
-            [Member DefaultUser].email = dic[@"email"];
-            [Member DefaultUser].phone = dic[@"phone"];
-            [Member DefaultUser].avatar = dic[@"avatar"];
-            [Member DefaultUser].now_money = dic[@"now_money"];
-            [Member DefaultUser].score_count = dic[@"score_count"];
-            [Member DefaultUser].login = @"online";
-            [Member DefaultUser].pay_can = dic[@"pay_can"];
+            Member* menber = [Member DefaultUser];
+            menber.uid = dic[@"uid"];
+            menber.nickname = dic[@"nickname"];
+            menber.sex = dic[@"gender"];
+            menber.birthday = dic[@"birthday"];
+            menber.email = dic[@"email"];
+            menber.phone = dic[@"phone"];
+            menber.avatar = dic[@"avatar"];
+            menber.now_money = dic[@"now_money"];
+            menber.vocher = dic[@"vocher"];
+            menber.cont_arr = [NSMutableArray array];
+            for (NSDictionary * m_dic in dic[@"cont_arr"]) {
+                YYLUser *user = m_dic.mj_JSONObject;
+                [menber.cont_arr addObject:user];
+            }
+            menber.role = dic[@"role"];
+            menber.login = @"online";
+            menber.pay_can = dic[@"pay_can"];
             [self.navigationController popViewControllerAnimated:YES];
             if ([_vc_type isEqualToString:@"login"]) {
                 [self.delegate updateUserData];

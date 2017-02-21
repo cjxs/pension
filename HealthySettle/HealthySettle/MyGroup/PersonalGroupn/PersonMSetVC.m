@@ -49,7 +49,7 @@
             }];
 }
 -(void)setPasswordRightNow{
-    DDUpdate * pay_set = [[DDUpdate alloc] initWithProject:_vc_type data:@{@"data_new":_text_Input.text}];
+    DDUpdate * pay_set = [[DDUpdate alloc] initWithProject:@"user_data" data:@{_vc_type:_text_Input.text}];
     [pay_set startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
         NSDictionary * dic = [DDLogin dictionaryWithJsonString:request.responseString];
         if ([dic[@"error_code"] intValue] == 0) {

@@ -20,4 +20,5 @@
 @property (nonatomic,copy) void(^selectSex)(NSString * num);
 -(void)configWithYYLuser:(YYLUser *)user;
 -(void)configWithBtn;
+-(void)selectOne:(int)num;
 @end

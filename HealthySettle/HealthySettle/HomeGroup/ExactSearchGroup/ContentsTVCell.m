@@ -48,6 +48,7 @@
         _phone_field = [[UITextField alloc] initWithFrame:CGRectMake(screenWide * 0.27, screenHeight * 0.17, screenWide * 0.5, screenHeight * 0.04)];
         _phone_field.placeholder = @"请填写真实号码";
         [self addSubview:_phone_field];
+        
         _add_person_btn  = [UIButton buttonWithType:UIButtonTypeCustom];
         [self addSubview:_add_person_btn];
         [_add_person_btn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -64,19 +65,19 @@
 }
 -(void)addPersonView{
     ChooPersonView * choose_view = [[ChooPersonView alloc] init];
-    YYLUser * user = [[YYLUser alloc] init];
-    user.travel_name = @"陈冬";
-    user.travel_phone = @"123456789";
-    choose_view.data_arr = [NSArray arrayWithObject:user];
-    choose_view.selected = ^(YYLUser *user){
-        _name_field.text = user.travel_name;
-        _phone_field.text = user.travel_phone;
+    
+    choose_view.data_arr = [Member DefaultUser].cont_arr;
+    
+    choose_view.selected = ^(NSDictionary *user){
+        _name_field.text = user[@"travel_name"];
+        _phone_field.text = user[@"travel_phone"];
     };
     
     [choose_view addFirstView];
     UIWindow * window = [UIApplication sharedApplication].keyWindow;
     [window addSubview:choose_view];
 }
+
 -(void)configWithname:(NSString *)name phone:(NSString *)phone {
     if (name) {
         _name_field.text = name;

@@ -41,15 +41,15 @@
 }
 - (void)changePasswordRightNow
 {
-    if ([self.type_from isEqualToString:@"D"]) {
-        DDUpdate * pwd_update = [[DDUpdate alloc] initWithProject:@"pwd" data:@{@"data_old":_used_passInput.text,@"data_new":_refresh_passInput.text}];
+    if ([self.type_from isEqualToString:@"pwd"]) {
+        DDUpdate * pwd_update = [[DDUpdate alloc] initWithProject:@"ver_user" data:@{@"pwd_o":_used_passInput.text,@"pwd_n":_refresh_passInput.text}];
         [pwd_update startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
             NSDictionary * dic = [DDLogin dictionaryWithJsonString:request.responseString];
-            if ([dic[@"error_code"] intValue] == 0) {
+            if (![dic[@"error_code"] integerValue] == 0) {
                 [SVProgressHUD showSuccessWithStatus:@"success！"];
                 [self.navigationController popViewControllerAnimated:YES];
             }else{
-                [SVProgressHUD showErrorWithStatus:@"failed！"];
+                [SVProgressHUD showErrorWithStatus:dic[@"msg"]];
 
             }
             
@@ -58,14 +58,14 @@
 
                     }];
     }else {
-        DDUpdate * pay_update = [[DDUpdate alloc] initWithProject:@"pay_pwd" data:@{@"data_old":_used_passInput.text,@"data_new":_refresh_passInput.text}];
+        DDUpdate * pay_update = [[DDUpdate alloc] initWithProject:@"ver_user" data:@{@"pay_pwd_o":_used_passInput.text,@"pay_pwd_n":_refresh_passInput.text}];
         [pay_update startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
             NSDictionary * dic = [DDLogin dictionaryWithJsonString:request.responseString];
-            if ([dic[@"error_code"] intValue] == 0) {
+            if (![dic[@"error_code"] integerValue] == 0) {
                 [SVProgressHUD showSuccessWithStatus:@"密码修改成功！"];
                 [self.navigationController popViewControllerAnimated:YES];
             }else{
-                [SVProgressHUD showErrorWithStatus:@"密码修改失败！"];
+                [SVProgressHUD showErrorWithStatus:dic[@"msg"]];
                 
             }
             

@@ -109,25 +109,34 @@
             textfield.delegate = self;
         }
     }
-    if (!_conPer) {
-        _conPer = [[YYLUser alloc] init];
-    }
-    [cell configWithYYLuser:_conPer];
+    [RACObserve(cell.name_field, text) subscribeNext:^(NSString * x) {
+        _conPer.travel_name = x;
+    }];
     
-    [[cell.name_field rac_signalForControlEvents:UIControlEventEditingChanged] subscribeNext:^(NSString * x) {
-        _conPer.travel_name = cell.name_field.text;
-        
+    [RACObserve(cell.phone_field, text) subscribeNext:^(NSString * x) {
+        _conPer.travel_phone = x;
     }];
-    [[cell.phone_field rac_signalForControlEvents:UIControlEventEditingChanged] subscribeNext:^(NSString * x) {
-        _conPer.travel_phone = cell.phone_field.text;
-    }];
-    [[cell.id_field rac_signalForControlEvents:UIControlEventEditingChanged] subscribeNext:^(NSString * x) {
-        _conPer.travel_id = cell.id_field.text;
+    
+    [RACObserve(cell.id_field, text) subscribeNext:^(NSString * x) {
+        _conPer.travel_id = x;
     }];
     cell.selectSex = ^(NSString * num){
         _conPer.travel_sex = num;
     };
 
+    if (_data_dic) {
+        cell.name_field.text = _data_dic[@"travel_name"];
+        cell.phone_field.text = _data_dic[@"travel_phone"];
+        cell.id_field.text = _data_dic[@"travel_id"];
+        [cell selectOne:[_data_dic[@"travel_sex"] intValue]];
+    }
+    if (!_conPer) {
+        _conPer = [[YYLUser alloc] init];
+    }else{
+        [cell configWithYYLuser:_conPer];
+
+    }
+    
     
     return cell;
 }

@@ -41,6 +41,7 @@
 #import <AlipaySDK/AlipaySDK.h>
 #import "WXApi.h"
 #import "OrderStatusTVController.h"
+#import "YYLUser.h"
 
 
 
@@ -192,17 +193,24 @@ static NSString * const UMDEVICETOKEN      = @"UMDeviceToken";// 友盟推送的
         NSString *str = [request.responseString stringByReplacingOccurrencesOfString:@":null" withString:@":\"\""];
         dic = [DDLogin dictionaryWithJsonString: str];
         if ([dic[@"error_code"] intValue] == 0) {
-            [Member DefaultUser].uid = dic[@"uid"];
-            [Member DefaultUser].nickname = dic[@"nickname"];
-            [Member DefaultUser].sex = dic[@"gender"];
-            [Member DefaultUser].birthday = dic[@"birthday"];
-            [Member DefaultUser].email = dic[@"email"];
-            [Member DefaultUser].phone = dic[@"phone"];
-            [Member DefaultUser].avatar = dic[@"avatar"];
-            [Member DefaultUser].now_money = dic[@"now_money"];
-            [Member DefaultUser].score_count = dic[@"score_count"];
-            [Member DefaultUser].login = @"online";
-            [Member DefaultUser].pay_can = dic[@"pay_can"];
+            Member* menber = [Member DefaultUser];
+            menber.uid = dic[@"uid"];
+            menber.nickname = dic[@"nickname"];
+            menber.sex = dic[@"gender"];
+            menber.birthday = dic[@"birthday"];
+            menber.email = dic[@"email"];
+            menber.phone = dic[@"phone"];
+            menber.avatar = dic[@"avatar"];
+            menber.now_money = dic[@"now_money"];
+            menber.vocher = dic[@"vocher"];
+            menber.cont_arr = [NSMutableArray array];
+            for (NSDictionary * m_dic in dic[@"cont_arr"]) {
+                YYLUser *user = m_dic.mj_JSONObject;
+                [menber.cont_arr addObject:user];
+            }
+            menber.role = dic[@"role"];
+            menber.login = @"online";
+            menber.pay_can = dic[@"pay_can"];
         }else{
             [Member DefaultUser].login = @"";
 

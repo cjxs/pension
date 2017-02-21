@@ -9,6 +9,7 @@
 #import "GraceVC.h"
 #import "ConPersonTVCell.h"
 #import "ConPerAddVC.h"
+#import "YYLUser.h"
 
 @interface GraceVC ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -66,11 +67,15 @@
     [super viewDidLoad];
     [self.view addSubview:self.tableView];
     self.tableView.tableHeaderView = self.headView;
-    UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(screenWide * 0.2, screenHeight * 0.3, screenWide * 0.6, screenHeight * 0.03)];
-    label.textAlignment = NSTextAlignmentCenter;
-    label.text = @"暂无常用联系人";
-    label.textColor = [UIColor grayColor];
-    [_tableView addSubview:label];
+    
+    if ([Member DefaultUser].cont_arr.count == 0) {
+        UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(screenWide * 0.2, screenHeight * 0.3, screenWide * 0.6, screenHeight * 0.03)];
+        label.textAlignment = NSTextAlignmentCenter;
+        label.text = @"暂无常用联系人";
+        label.textColor = [UIColor grayColor];
+        [_tableView addSubview:label];
+    }
+    
 }
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -92,7 +97,7 @@
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section
 {
-    return 2;
+    return [Member DefaultUser].cont_arr.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
@@ -101,8 +106,16 @@
     ConPersonTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cellCon"
                                                          forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    [cell configWithName:@"郭靖" card:@"410522199809082345"];
+    NSDictionary * dic = [Member DefaultUser].cont_arr[indexPath.row];
+    [cell configWithName:dic[@"travel_name"] card:dic[@"travel_id"]];
     return cell;
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    ConPerAddVC * addVC = [[ConPerAddVC alloc] init];
+    addVC.title = @"编辑联系人";
+    addVC.data_dic =  [Member DefaultUser].cont_arr[indexPath.row];
+    [self.navigationController pushViewController:addVC animated:YES];
 }
 
 -(CGFloat)tableView:(UITableView *)tableView

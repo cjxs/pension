@@ -16,6 +16,7 @@
     static dispatch_once_t predicate;
     dispatch_once(&predicate, ^{
         default_menber = [[self alloc] init];
+        
     });
     return default_menber;
 }

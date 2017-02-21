@@ -48,10 +48,7 @@
     [self.view addSubview:groud_view];
 
     
-    RAC(self.changePass_btn,enabled) = [RACSignal combineLatest:@[self.fresh_passInput.rac_textSignal,self.refresh_passInput.rac_textSignal] reduce:^id
-                                        {
-                                            return @(self.fresh_passInput.text.length >= 6 && [self.refresh_passInput.text isEqualToString:self.fresh_passInput.text]);
-                                        }];
+
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.frame = CGRectMake(30, 150, screenWide- 60, 40);
     [btn setTitle:@"立刻设置" forState:UIControlStateNormal];
@@ -61,6 +58,10 @@
     [btn setBackgroundColor:[UIColor grayColor] forState:UIControlStateDisabled];
 
     self.changePass_btn = btn;
+    RAC(self.changePass_btn,enabled) = [RACSignal combineLatest:@[self.fresh_passInput.rac_textSignal,self.refresh_passInput.rac_textSignal] reduce:^id
+                                        {
+                                            return @(self.fresh_passInput.text.length >= 6 && [self.refresh_passInput.text isEqualToString:self.fresh_passInput.text]);
+                                        }];
     [self.view addSubview:self.changePass_btn];
 
     [self.changePass_btn
@@ -75,10 +76,10 @@
     
 }
 -(void)setPasswordRightNow{
-    DDUpdate * pay_set = [[DDUpdate alloc] initWithProject:@"pay_pwd_set" data:@{@"data_new":_refresh_passInput.text}];
+    DDUpdate * pay_set = [[DDUpdate alloc] initWithProject:@"user_data" data:@{@"pay_pwd":_refresh_passInput.text}];
     [pay_set startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
         NSDictionary * dic = [DDLogin dictionaryWithJsonString:request.responseString];
-        if ([dic[@"error_code"] intValue] == 0) {
+        if (![dic[@"error_code"] intValue] == 0) {
             [SVProgressHUD showSuccessWithStatus:@"success！"];
             [Member DefaultUser].pay_can = @"Y";
             [self.navigationController popViewControllerAnimated:YES];

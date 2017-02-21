@@ -72,19 +72,17 @@
     if (num ==0 ) {
         if (_man != 1) {
             _man = 1;
-            man_view.lab.textColor = [UIColor redColor];
-            man_view.img_view.image = [UIImage imageNamed:@"selected"];
-            woman_view.lab.textColor = [UIColor blackColor];
-            woman_view.img_view.image = [UIImage imageNamed:@"un_select"];
-
+            woman_view.lab.textColor = [UIColor redColor];
+            woman_view.img_view.image = [UIImage imageNamed:@"selected"];
+            man_view.lab.textColor = [UIColor blackColor];
+            man_view.img_view.image = [UIImage imageNamed:@"un_select"];
         }
-        
     }else{
         _man = 0;
-        woman_view.lab.textColor = [UIColor redColor];
-        woman_view.img_view.image = [UIImage imageNamed:@"selected"];
-        man_view.lab.textColor = [UIColor blackColor];
-        man_view.img_view.image = [UIImage imageNamed:@"un_select"];
+        man_view.lab.textColor = [UIColor redColor];
+        man_view.img_view.image = [UIImage imageNamed:@"selected"];
+        woman_view.lab.textColor = [UIColor blackColor];
+        woman_view.img_view.image = [UIImage imageNamed:@"un_select"];
     }
     _selectSex ? _selectSex([NSString stringWithFormat:@"%d",num]) : nil;
 
@@ -104,17 +102,14 @@
 }
 -(void)addPersonView{
     ChooPersonView * choose_view = [[ChooPersonView alloc] init];
-    YYLUser * user = [[YYLUser alloc] init];
-    user.travel_name = @"陈冬";
-    user.travel_phone = @"123456789";
-    user.travel_id = @"437892798-00-279827";
-    user.travel_sex = @"0";
-    choose_view.data_arr = [NSArray arrayWithObject:user];
-    choose_view.selected = ^(YYLUser *user){
-        _name_field.text = user.travel_name;
-        _phone_field.text = user.travel_phone;
-        _id_field.text = user.travel_id;
-        [self selectOne:[user.travel_sex intValue]];
+
+    choose_view.data_arr = [Member DefaultUser].cont_arr;
+
+    choose_view.selected = ^(NSDictionary *user){
+        _name_field.text = user[@"travel_name"];
+        _phone_field.text = user[@"travel_phone"];
+        _id_field.text = user[@"travel_id"];
+        [self selectOne:[user[@"travel_sex"] intValue]];
     };
     
     [choose_view addFirstView];
