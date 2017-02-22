@@ -10,4 +10,5 @@
 @class TempView,ThingsView;
 @interface MineViewController : UIViewController
 @property (nonatomic, strong)UITableView * setTableView;
+@property (nonatomic,strong)UIImageView * vip_imgv;
 @end

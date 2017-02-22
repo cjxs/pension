@@ -64,8 +64,8 @@
     // Do any additional setup after loading the view.
     [self.view addSubview:self.tableView];
     self.tableView.tableHeaderView = self.headView;
-    UIView * foot_v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWide, screenHeight * 0.08)];
-    UILabel * foot_l = [[UILabel alloc] initWithFrame:CGRectMake(10, screenHeight * 0.005, screenWide * 0.5, screenHeight * 0.03)];
+    UIView * foot_v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWide, screenHeight * 0.12)];
+    UILabel * foot_l = [[UILabel alloc] initWithFrame:CGRectMake(10, screenHeight * 0.005, screenWide * 0.9, screenHeight * 0.03)];
     foot_l.text = @"为顺利出行，请确保姓名与证件一致。";
     foot_l.font = [UIFont systemFontOfSize:12];
     foot_l.textColor = [UIColor grayColor];
@@ -74,11 +74,11 @@
     if (_user_index != 99999) {
     UIButton * del_btn = [UIButton buttonWithType:UIButtonTypeCustom];
     [foot_v addSubview:del_btn];
-    del_btn.backgroundColor = [UIColor redColor];
+    [del_btn setBackgroundImage:[UIImage imageNamed:@"delete"] forState:UIControlStateNormal];
     [del_btn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(foot_v);
         make.bottom.equalTo(foot_v);
-        make.size.mas_equalTo(CGSizeMake(screenWide * 0.1, screenWide * 0.08));
+        make.size.mas_equalTo(CGSizeMake(screenWide * 0.08, screenWide * 0.11));
     }];
     [del_btn addTarget:self action:@selector(delContact) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -140,7 +140,7 @@
 }
 -(void)delContact{
     DDUpdate * update;
-    update = [[DDUpdate alloc] initWithProject:@"contect_del" data:@{@"cid":_data_dic[@"travel_cid"]}];
+    update = [[DDUpdate alloc] initWithProject:@"contact_del" data:@{@"cid":_data_dic[@"travel_cid"]}];
     [update startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
         NSLog(@"%@",request.responseString);
         NSDictionary * dic = [DDLogin dictionaryWithJsonString:request.responseString];

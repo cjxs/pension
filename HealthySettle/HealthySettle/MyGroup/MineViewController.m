@@ -31,13 +31,21 @@ static NSString *setCellIdentifier = @"cellS";
 
 @implementation MineViewController
 #pragma mark - LazyLoading
-
+-(UIImageView *)vip_imgv{
+    if (!_vip_imgv) {
+        UIImageView * image_v = [[UIImageView alloc] initWithFrame:CGRectMake(screenWide * 0.27, screenHeight * 0.14, screenWide*0.3, screenWide *0.12)];
+//        image_v.layer.cornerRadius = screenHeight * 0.12/2;
+        image_v.clipsToBounds = YES;
+        _vip_imgv = image_v;
+    }
+    return _vip_imgv;
+}
 - (UITableView *)setTableView
 {
     if (! _setTableView)
     {
         UITableView * setTableView = [[UITableView alloc]
-                                      initWithFrame:CGRectMake(0,screenHeight * 0.465 , screenWide, screenHeight * 0.064 * 5 + screenHeight * 0.015) style:UITableViewStylePlain];
+                                      initWithFrame:CGRectMake(0,screenHeight * 0.455 , screenWide, screenHeight * 0.064 * 5 + screenHeight * 0.015) style:UITableViewStylePlain];
         setTableView.delegate = self;
         setTableView.dataSource = self;
         setTableView.backgroundColor =  RGB(244,244, 244);
@@ -67,9 +75,7 @@ static NSString *setCellIdentifier = @"cellS";
         [self performSelector:@selector(updateUserData) withObject:self afterDelay:0.05];
     }
 }
--(void)viewWillDisappear:(BOOL)animated{
 
-}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -86,25 +92,22 @@ static NSString *setCellIdentifier = @"cellS";
     [self setBottomPicWithPic:[UIImage imageNamed:@"person_back"]
                      withPerP:[UIImage imageNamed:@"boy_head"]
                      andTitle:@"登录/注册"];
-    TempView *collectView = [[TempView alloc]
-                             initWithFrame:CGRectMake(screenWide /9, screenHeight * 0.255, screenWide/3, screenHeight * 0.05) withMark:[UIImage imageNamed:@"star_"]
-                             andTitle:@"我的收藏"];
-    UITapGestureRecognizer * tapC = [[UITapGestureRecognizer alloc]
-                                     initWithTarget:self
-                                     action:@selector(clickTwoViews:)];
-    tapC.numberOfTapsRequired = 1;
-    [collectView addGestureRecognizer:tapC];
+    
+    
+    
+    
     TempView * dataView = [[TempView alloc]
-                           initWithFrame:CGRectMake(screenWide/9 * 5, screenHeight * 0.255, screenWide / 3, screenHeight * 0.05)
-                           withMark:[UIImage imageNamed:@"user_"]
+                           initWithFrame:CGRectMake(screenWide/4*3-10, screenHeight * 0.15, screenWide / 4, screenHeight * 0.05)
+                           withMark:[UIImage imageNamed:@"btn_16.png"]
                            andTitle:@"个人资料"];
     UITapGestureRecognizer * tapD = [[UITapGestureRecognizer alloc]
                                      initWithTarget:self
                                      action:@selector(clickTwoViews:)];
     tapD.numberOfTapsRequired = 1;
     [dataView addGestureRecognizer:tapD];
-    [self.view addSubview:collectView];
     [self.view addSubview:dataView];
+    
+    
     [self setThingsView];
     [self.view addSubview:self.setTableView];
     self.automaticallyAdjustsScrollViewInsets = NO;
@@ -114,26 +117,28 @@ static NSString *setCellIdentifier = @"cellS";
                    andTitle:(NSString *)string
 {
     UIImageView * topImageV =[[UIImageView alloc]
-                              initWithFrame:CGRectMake(0, 0,screenWide , screenHeight * 0.33)];
-    topImageV.image = imageP;
-    topImageV.alpha = 0.85;
+                              initWithFrame:CGRectMake(0, 0,screenWide , screenHeight * 0.25)];
+    topImageV.image = [UIImage imageNamed:@"me-background.png"];
     [self.view addSubview:topImageV];
+    
     tapRL = [[UITapGestureRecognizer alloc]
                                       initWithTarget:self
                                       action:@selector(resignOrLoad)];
     tapRL.numberOfTapsRequired = 1;
+    
     imagePerson = [[UIImageView alloc]
-                                 initWithFrame:CGRectMake(screenWide/2 -30, screenHeight * 0.075, 60, 60)];
+                                 initWithFrame:CGRectMake(10, screenHeight * 0.08, screenWide * 0.22, screenWide *0.22)];
     imagePerson.image = personP;
     imagePerson.clipsToBounds = YES;
-    imagePerson.layer.cornerRadius = 30;
+    imagePerson.layer.cornerRadius = screenWide *0.11;
     imagePerson.userInteractionEnabled = YES;
     [topImageV addGestureRecognizer:tapRL];
     [topImageV addSubview:imagePerson];
+    
     textLabel = [[UILabel alloc]
-                           initWithFrame:CGRectMake((screenWide - 200)/2, CGRectGetMaxY(imagePerson.frame), 200, 40)];
-    textLabel.textAlignment = NSTextAlignmentCenter;
-    textLabel.font = [UIFont systemFontOfSize:16];
+                           initWithFrame:CGRectMake(screenWide * 0.28, screenHeight * 0.09, 200, screenWide *0.11)];
+    textLabel.textAlignment = NSTextAlignmentLeft;
+    textLabel.font = [UIFont systemFontOfSize:18];
     textLabel.text = string;
     textLabel.textColor = [UIColor whiteColor];
     textLabel.userInteractionEnabled = YES;
@@ -142,8 +147,36 @@ static NSString *setCellIdentifier = @"cellS";
 }
 - (void)setThingsView
 {
+    UIView * view_0 = [[UIView alloc] initWithFrame:CGRectMake(0, screenHeight * 0.25, screenWide, screenHeight * 0.07-1)];
+    UIImageView * order_imgView = [[UIImageView alloc] initWithFrame:CGRectMake(10, screenHeight *0.02, screenHeight *0.03, screenHeight * 0.03)];
+    order_imgView.image = [UIImage imageNamed:@"note.png"];
+    [view_0 addSubview:order_imgView];
+    UILabel * title_label = [[UILabel alloc] initWithFrame:CGRectMake(screenHeight *0.04+10,screenHeight *0.015 , screenWide *0.3, screenHeight * 0.04)];
+    title_label.text = @"我的订单";
+    [view_0 addSubview:title_label];
+    
+    TempView * dataView = [[TempView alloc]
+                           initWithFrame:CGRectMake(screenWide/3 * 2-10, screenHeight * 0.02, screenWide / 3, screenHeight * 0.03)
+                           withMark:[UIImage imageNamed:@"right_.png"]
+                           andTitle:@"查看全部订单"];
+    dataView.explainTitle.adjustsFontSizeToFitWidth = YES;
+    dataView.explainTitle.textColor = [UIColor grayColor];
+    dataView.explainTitle.textAlignment = NSTextAlignmentRight;
+    [dataView.markImageV mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(screenHeight * 0.016, screenHeight *0.02));
+        make.left.mas_equalTo(dataView.explainTitle.mas_right).offset(screenHeight * 0.002);
+        make.centerY.equalTo(dataView);
+    }];
+    UITapGestureRecognizer * tapD = [[UITapGestureRecognizer alloc]
+                                     initWithTarget:self
+                                     action:@selector(order_list)];
+    tapD.numberOfTapsRequired = 1;
+    [dataView addGestureRecognizer:tapD];
+    [view_0 addSubview:dataView];
+
+    [self.view addSubview:view_0];
     UIView * view = [[UIView alloc]
-                     initWithFrame:CGRectMake(0, screenHeight * 0.33, screenWide, screenHeight * 0.119)];
+                     initWithFrame:CGRectMake(0, screenHeight * 0.32, screenWide, screenHeight * 0.12)];
     view.backgroundColor = RGB(255, 255, 255);
     NSArray * dataArray = @[@"system_1_41",@"system_1_42",@"system_1_43",@"system_1_44"];
     for (int i = 0; i <dataArray.count; i++)
@@ -162,6 +195,9 @@ static NSString *setCellIdentifier = @"cellS";
     }
     [self.view addSubview:view];
 }
+-(void)order_list{
+    [self pushToViewPersonWithTitle:@"我的订单" type:@"order"];
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -178,7 +214,7 @@ static NSString *setCellIdentifier = @"cellS";
 {
     if (section == 0)
     {
-        return 3;
+        return 4;
     }else
     {
         return 1;
@@ -209,6 +245,9 @@ static NSString *setCellIdentifier = @"cellS";
         }else if (indexPath.row == 2 )
         {
              [cell setThingsWithName:@"常用联系人" Image:[UIImage imageNamed:@"user"] number:@""];
+        }else if (indexPath.row == 3 )
+        {
+            [cell setThingsWithName:@"我的收藏" Image:[UIImage imageNamed:@"star.png"] number:@""];
         }
     }else
     {
@@ -231,6 +270,11 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
             case 2:
                 [self changeToGraceVC];
                 break;
+            case 3:
+                [self pushToComAndCollVCWithTitle:@"我的收藏"
+                                             type:@"collect"];
+                break;
+
             default:
                 break;
         }
@@ -277,6 +321,9 @@ heightForHeaderInSection:(NSInteger)section
     if ([[Member DefaultUser].login length] == 0) {
         imagePerson.image = [UIImage imageNamed:@"boy_head"];
         [textLabel addGestureRecognizer:tapRL];
+        if (self.vip_imgv) {
+            [self.vip_imgv removeFromSuperview];
+        }
         textLabel.text = @"登录/注册";
         NSIndexPath *indexPath1=[NSIndexPath indexPathForRow:1 inSection:0];  //你需要更新的组数中的cell
         NSIndexPath *indexPath2=[NSIndexPath indexPathForRow:0 inSection:0];  //你需要更新的组数中的cell
@@ -292,6 +339,28 @@ heightForHeaderInSection:(NSInteger)section
          textLabel.text = x;
      }];
      [textLabel removeGestureRecognizer:tapRL];
+    switch ([[Member DefaultUser].role intValue]) {
+        case 0:
+            [self.view addSubview:self.vip_imgv];
+            self.vip_imgv.image = [UIImage imageNamed:@"member-注册会员"];
+            break;
+        case 1:
+            [self.view addSubview:self.vip_imgv];
+            self.vip_imgv.image = [UIImage imageNamed:@"member-优悠大使"];
+
+            break;
+        case 2:
+            [self.view addSubview:self.vip_imgv];
+            self.vip_imgv.image = [UIImage imageNamed:@"member认证会员"];
+            break;
+        case 3:
+            [self.view addSubview:self.vip_imgv];
+            self.vip_imgv.image = [UIImage imageNamed:@"member-注册会员"];
+            break;
+        default:
+            break;
+    }
+
     NSIndexPath *indexPath1=[NSIndexPath indexPathForRow:1 inSection:0];  //你需要更新的组数中的cell
     NSIndexPath *indexPath2=[NSIndexPath indexPathForRow:0 inSection:0];  //你需要更新的组数中的cell
 
@@ -331,8 +400,7 @@ heightForHeaderInSection:(NSInteger)section
     if ([Member DefaultUser].login.length !=0) {
         if (gesture.view.frame.origin.x < screenWide / 2)
         {
-            [self pushToComAndCollVCWithTitle:@"我的收藏"
-                                     type:@"collect"];
+
         }else
         {
             PersonDataVController * personDataVC = [[PersonDataVController alloc] init];
