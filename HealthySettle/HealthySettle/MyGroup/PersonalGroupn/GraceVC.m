@@ -19,6 +19,7 @@
 -(void)addContact{
     ConPerAddVC * addVC = [[ConPerAddVC alloc] init];
     addVC.title = @"新增联系人";
+    addVC.user_index = 99999;
     [self.navigationController pushViewController:addVC animated:YES];
 }
 -(UIView *)headView
@@ -82,6 +83,9 @@
     [super viewWillAppear:animated];
     self.navigationItem.title = self.titleName;
     self.navigationController.navigationBarHidden = NO;
+    if (_tableView) {
+        [_tableView reloadData];
+    }
 }
 -(void)viewWillDisappear:(BOOL)animated
 {
@@ -114,7 +118,7 @@
 {
     ConPerAddVC * addVC = [[ConPerAddVC alloc] init];
     addVC.title = @"编辑联系人";
-    addVC.data_dic =  [Member DefaultUser].cont_arr[indexPath.row];
+    addVC.user_index = indexPath.row;
     [self.navigationController pushViewController:addVC animated:YES];
 }
 

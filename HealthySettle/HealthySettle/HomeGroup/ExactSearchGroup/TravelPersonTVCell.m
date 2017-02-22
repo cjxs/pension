@@ -52,6 +52,7 @@
         @weakify(self);
         man_view.selectBlock =  ^(CGFloat num){
             int a =  (num - screenWide *0.27)/screenWide/0.15;
+            a = a == 0?1:0;
             @strongify(self);
             [self selectOne:a];
         };
@@ -61,6 +62,7 @@
         woman_view.lab.text = @"女";
         woman_view.selectBlock =  ^(CGFloat num){
             int a =  num/screenWide/0.27;
+            a = a == 0?1:0;
             @strongify(self);
             [self selectOne:a];
         };
@@ -69,16 +71,14 @@
     return self;
 }
 -(void)selectOne:(int)num{
-    if (num ==0 ) {
-        if (_man != 1) {
+    if (num == 0 ) {
             _man = 1;
             woman_view.lab.textColor = [UIColor redColor];
             woman_view.img_view.image = [UIImage imageNamed:@"selected"];
             man_view.lab.textColor = [UIColor blackColor];
             man_view.img_view.image = [UIImage imageNamed:@"un_select"];
-        }
     }else{
-        _man = 0;
+        _man = 1;
         man_view.lab.textColor = [UIColor redColor];
         man_view.img_view.image = [UIImage imageNamed:@"selected"];
         woman_view.lab.textColor = [UIColor blackColor];

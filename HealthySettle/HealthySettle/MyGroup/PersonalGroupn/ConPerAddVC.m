@@ -9,9 +9,11 @@
 #import "ConPerAddVC.h"
 #import "TravelPersonTVCell.h"
 #import "YYLUser.h"
+#import "DDUpdate.h"
 
 @interface ConPerAddVC ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>{
     UITextField * current_field;
+    NSDictionary * _data_dic;
 
 }
 
@@ -62,12 +64,25 @@
     // Do any additional setup after loading the view.
     [self.view addSubview:self.tableView];
     self.tableView.tableHeaderView = self.headView;
-    UIView * foot_v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWide, screenHeight * 0.04)];
+    UIView * foot_v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWide, screenHeight * 0.08)];
     UILabel * foot_l = [[UILabel alloc] initWithFrame:CGRectMake(10, screenHeight * 0.005, screenWide * 0.5, screenHeight * 0.03)];
     foot_l.text = @"为顺利出行，请确保姓名与证件一致。";
     foot_l.font = [UIFont systemFontOfSize:12];
     foot_l.textColor = [UIColor grayColor];
     [foot_v addSubview:foot_l];
+    
+    if (_user_index != 99999) {
+    UIButton * del_btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [foot_v addSubview:del_btn];
+    del_btn.backgroundColor = [UIColor redColor];
+    [del_btn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(foot_v);
+        make.bottom.equalTo(foot_v);
+        make.size.mas_equalTo(CGSizeMake(screenWide * 0.1, screenWide * 0.08));
+    }];
+    [del_btn addTarget:self action:@selector(delContact) forControlEvents:UIControlEventTouchUpInside];
+    }
+    
     _tableView.tableFooterView = foot_v;
     
     UIButton * save_btn =[UIButton buttonWithType:UIButtonTypeCustom];
@@ -89,7 +104,60 @@
 
 }
 -(void)saveContact{
-    NSLog(@"%@",_conPer);
+    DDUpdate * update;
+    update = [[DDUpdate alloc] initWithProject:@"contact" data:_conPer.mj_keyValues];
+    [update startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
+        NSDictionary * dic = [DDLogin dictionaryWithJsonString:request.responseString];
+        if (dic[@"error_code"]) {
+            NSMutableDictionary* m_dic;
+            if (_user_index == 99999) {
+                m_dic = [NSMutableDictionary dictionary];
+                [m_dic setValue:dic[@"travel_cid"] forKey:@"travel_cid"];
+
+            }else{
+                m_dic = [Member DefaultUser].cont_arr[_user_index];
+            }
+            [m_dic setValue:_conPer.travel_name forKey:@"travel_name"];
+            [m_dic setValue:_conPer.travel_phone forKey:@"travel_phone"];
+            [m_dic setValue:_conPer.travel_id forKey:@"travel_id"];
+            [m_dic setValue:_conPer.travel_sex forKey:@"travel_sex"];
+            if (_user_index == 99999) {
+                [[Member DefaultUser].cont_arr addObject:m_dic];
+            }
+
+            [SVProgressHUD showSuccessWithStatus:dic[@"msg"]];
+            [self.navigationController popViewControllerAnimated:YES];
+        }else{
+            [SVProgressHUD showErrorWithStatus:dic[@"msg"]];
+        }
+        
+    } failure:^(__kindof YTKBaseRequest *request) {
+        [SVProgressHUD showErrorWithStatus:@"failed！"];
+        
+    }];
+
+
+}
+-(void)delContact{
+    DDUpdate * update;
+    update = [[DDUpdate alloc] initWithProject:@"contect_del" data:@{@"cid":_data_dic[@"travel_cid"]}];
+    [update startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
+        NSLog(@"%@",request.responseString);
+        NSDictionary * dic = [DDLogin dictionaryWithJsonString:request.responseString];
+        if (dic[@"error_code"]) {
+            NSMutableArray * m_dic = [Member DefaultUser].cont_arr;
+            [m_dic removeObjectAtIndex:_user_index];
+            [SVProgressHUD showSuccessWithStatus:@"success！"];
+            [self.navigationController popViewControllerAnimated:YES];
+        }else{
+            [SVProgressHUD showErrorWithStatus:dic[@"msg"]];
+        }
+        
+    } failure:^(__kindof YTKBaseRequest *request) {
+        [SVProgressHUD showErrorWithStatus:@"failed！"];
+        
+    }];
+
 }
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section
@@ -109,34 +177,38 @@
             textfield.delegate = self;
         }
     }
-    [RACObserve(cell.name_field, text) subscribeNext:^(NSString * x) {
-        _conPer.travel_name = x;
-    }];
-    
-    [RACObserve(cell.phone_field, text) subscribeNext:^(NSString * x) {
-        _conPer.travel_phone = x;
-    }];
-    
-    [RACObserve(cell.id_field, text) subscribeNext:^(NSString * x) {
-        _conPer.travel_id = x;
-    }];
-    cell.selectSex = ^(NSString * num){
-        _conPer.travel_sex = num;
-    };
-
-    if (_data_dic) {
-        cell.name_field.text = _data_dic[@"travel_name"];
-        cell.phone_field.text = _data_dic[@"travel_phone"];
-        cell.id_field.text = _data_dic[@"travel_id"];
-        [cell selectOne:[_data_dic[@"travel_sex"] intValue]];
-    }
-    if (!_conPer) {
         _conPer = [[YYLUser alloc] init];
-    }else{
-        [cell configWithYYLuser:_conPer];
+    
+        [cell.name_field.rac_textSignal subscribeNext:^(id x) {
+            _conPer.travel_name = cell.name_field.text;
+
+        }];
+        [cell.phone_field.rac_textSignal subscribeNext:^(id x) {
+            _conPer.travel_phone = cell.phone_field.text;
+        }];
+        [cell.id_field.rac_textSignal subscribeNext:^(id x) {
+            _conPer.travel_id = cell.id_field.text;
+        }];
+
+        cell.selectSex = ^(NSString * num){
+            _conPer.travel_sex = num;
+        };
+    if (_user_index!= 99999) {
+        _data_dic = [Member DefaultUser].cont_arr[_user_index];
+        if (_data_dic) {
+            _conPer.travel_name = cell.name_field.text = _data_dic[@"travel_name"];
+            _conPer.travel_phone = cell.phone_field.text = _data_dic[@"travel_phone"];
+            _conPer.travel_id = cell.id_field.text = _data_dic[@"travel_id"];
+            [cell selectOne:[_data_dic[@"travel_sex"] intValue]];
+            _conPer.travel_sex =_data_dic[@"travel_sex"];
+            _conPer.travel_cid = _data_dic[@"travel_cid"];
+        }
 
     }
     
+
+
+
     
     return cell;
 }
@@ -154,6 +226,7 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath
         [current_field resignFirstResponder];
     }
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

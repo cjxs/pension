@@ -208,12 +208,7 @@ static NSString *setCellIdentifier = @"cellS";
             }
         }else if (indexPath.row == 2 )
         {
-            if ([Member DefaultUser].login.length != 0) {
-                
-                [cell setThingsWithName:@"常用联系人" Image:[UIImage imageNamed:@"user"] number:[NSString stringWithFormat:@"%ld",[Member DefaultUser].cont_arr.count]];
-            }else{
-                [cell setThingsWithName:@"常用联系人" Image:[UIImage imageNamed:@"user"] number:@""];
-            }
+             [cell setThingsWithName:@"常用联系人" Image:[UIImage imageNamed:@"user"] number:@""];
         }
     }else
     {

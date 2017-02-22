@@ -14,5 +14,5 @@
 @property (nonatomic,strong) UITableView * tableView;
 @property (nonatomic,strong) UIView      * headView;
 @property (nonatomic,strong)YYLUser * conPer;
-@property (nonatomic,strong)NSDictionary * data_dic;
+@property (nonatomic,assign)NSInteger user_index;
 @end
