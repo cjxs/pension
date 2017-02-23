@@ -178,6 +178,15 @@
 +(NSString *)timeStrWithDate:(NSDate*)date{
     return [NSString stringWithFormat:@"%ld",(long)[date timeIntervalSince1970]];
 }
++(NSString *)timeStrWithstr:(NSString *)str{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateStyle:NSDateFormatterMediumStyle];
+    [formatter setTimeStyle:NSDateFormatterShortStyle];
+    [formatter setDateFormat:@"YYYY-MM-dd"]; //
+    NSInteger timeIn = [str integerValue];
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:timeIn];
+    return [formatter stringFromDate:date];
+}
 @end
 
 

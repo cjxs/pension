@@ -10,8 +10,7 @@
 #import "OrdAndRefundTVCell.h"
 #import "DDOrderList.h"
 #import "Order_ed.h"
-#import "PerOrderDetailVC.h"
-
+#import "OrderStatusTVController.h"
 //我的订单
 @interface PersonVController ()<UITableViewDataSource, UITableViewDelegate>{
     NSMutableArray * dataSource;
@@ -27,7 +26,12 @@
     {
         _tableHeadView = [[UIView alloc]
                           initWithFrame:CGRectMake(0, 1, screenWide, 40)];
-        NSArray * array = @[@"全部", @"待付款", @"待使用", @"待评价"];
+        [_tableView registerNib:[UINib nibWithNibName:@"OrdAndRefundTVCell" bundle:nil]
+             forCellReuseIdentifier:@"cellOrder"];
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+
+        _tableView.backgroundColor = RGB(246, 246, 246);
+        NSArray * array = @[@"全部", @"待付款", @"使用中", @"已关闭"];
         for (int i = 0; i < 4; i++)
         {
             UIButton * btn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -38,6 +42,7 @@
             [btn addTarget:self
                     action:@selector(changeDataOfbtn:)
           forControlEvents:UIControlEventTouchUpInside];
+            btn.titleLabel.font = [UIFont systemFontOfSize:13];
             [_tableHeadView addSubview:btn];
             UILabel * label = [[UILabel alloc]
                                initWithFrame:CGRectMake(i *screenWide /4, 39, screenWide /4, 1)];
@@ -119,15 +124,14 @@
     }else if (wave == 2)
     {
         for (Order_ed * order in dataSource) {
-            if ([order.dd_status intValue] == 20) {
-                NSLog(@"^%@",order.dd_status);
+            if ([order.dd_status intValue] == 21) {
                 [current_arr addObject:order];
             }
         }
     }else
     {
         for (Order_ed * order in dataSource) {
-            if ([order.dd_status intValue] == 21) {
+            if ([order.dd_status intValue] == 20) {
                 [current_arr addObject:order];
             }
         }
@@ -145,27 +149,30 @@
     Member * user = [Member DefaultUser];
     DDOrderList * order_list = [[DDOrderList alloc] initWithUid:user.uid login:user.login];
     [order_list startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
-        NSArray * arr = [DDLogin arrayWithJsonString:request.responseString];
-        dataSource = [NSMutableArray arrayWithCapacity:0];
-        current_arr = [NSMutableArray arrayWithCapacity:0];
-        if (arr) {
-            Order_ed * order;
-            for (NSDictionary * dic_l in arr) {
-                order = [Order_ed mj_objectWithKeyValues:dic_l];
-                if ([order.status intValue] == 10||[order.status intValue] == 11) {
-                    order.dd_status = @"21";
+        NSDictionary * dic = [DDLogin dictionaryWithJsonString:request.responseString];
+        if ([dic[@"error_code"] intValue] == 0) {
+            NSArray * arr = dic[@"order"];
+            dataSource = [NSMutableArray arrayWithCapacity:0];
+            current_arr = [NSMutableArray arrayWithCapacity:0];
+            if (arr) {
+                Order_ed * order;
+                for (NSDictionary * dic_l in arr) {
+                    order = [Order_ed mj_objectWithKeyValues:dic_l];
+                                     if ([order.status intValue] == 6) {
+                        order.dd_status = @"19";
+                    }else if ([order.status intValue] == 4||[order.status intValue] == 5||[order.status intValue] == 11||[order.status intValue] == 12||[order.status intValue] == 13)
+                    {
+                        order.dd_status = @"20";
+                    }else{
+                        order.dd_status = @"21";
+                    }
+                    [dataSource addObject:order];
                 }
-                else if ([order.status intValue] == 3||[order.status intValue] == 7||[order.status intValue] == 1) {
-                    order.dd_status = @"20";
-                }else if ([order.status intValue] == 6) {
-                    order.dd_status = @"19";
-                }
-                [dataSource addObject:order];
+                current_arr = [NSMutableArray arrayWithArray:dataSource];
+                [self loadData];
             }
-            current_arr = [NSMutableArray arrayWithArray:dataSource];
-            [self loadData];
-        }
-        else{
+
+        }else{
              //其他途径获取数据
         }
     } failure:^(__kindof YTKBaseRequest *request) {
@@ -174,10 +181,10 @@
     
 }
 -(void)loadData{
+
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.tableHeadView];
-    [self.tableView registerNib:[UINib nibWithNibName:@"OrdAndRefundTVCell" bundle:nil]
-         forCellReuseIdentifier:@"cellOrder"];
+
 
 }
 -(void)viewWillAppear:(BOOL)animated
@@ -221,11 +228,14 @@
 -(CGFloat)tableView:(UITableView *)tableView
 heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return screenHeight * 0.2544;
+    return screenHeight * 0.27;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    PerOrderDetailVC * orderDetailVC = [[PerOrderDetailVC alloc] init];
-    orderDetailVC.order = [Order_ed mj_objectWithKeyValues:current_arr[indexPath.row]];
+    OrderStatusTVController * orderDetailVC = [[OrderStatusTVController alloc] init];
+    Order_ed * order = [Order_ed mj_objectWithKeyValues:current_arr[indexPath.row]];
+    orderDetailVC.order = order;
+    orderDetailVC.vc_type = order.cat_id;
+    
     [self.navigationController pushViewController:orderDetailVC animated:YES];
 }
 

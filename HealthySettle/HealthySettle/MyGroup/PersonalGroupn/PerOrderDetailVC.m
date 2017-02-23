@@ -69,8 +69,8 @@
         case 0:
             cell1 = [tableView dequeueReusableCellWithIdentifier:@"cellstatus" forIndexPath:indexPath];
             cell1.order_sn_label.text = [NSString stringWithFormat:@"订单号：%@",_order.order_sn];
-            CGFloat balance_money = _order.price.floatValue - _order.subsidy_money_u.floatValue;
-            cell1.order_balance_money_label.text = [NSString stringWithFormat:@"%.2lf",balance_money];
+//            CGFloat balance_money = _order.price.floatValue - _order.subsidy_money_u.floatValue;
+//            cell1.order_balance_money_label.text = [NSString stringWithFormat:@"%.2lf",balance_money];
             
             return cell1;
             break;

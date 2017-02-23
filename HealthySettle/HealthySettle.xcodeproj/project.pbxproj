@@ -103,6 +103,7 @@
 		325051F81CB667A700D431F5 /* ComAndCollVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 325051F71CB667A700D431F5 /* ComAndCollVC.m */; };
 		325051FC1CB66C0500D431F5 /* ComOrCollTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 325051FA1CB66C0500D431F5 /* ComOrCollTVCell.m */; };
 		325051FD1CB66C0500D431F5 /* ComOrCollTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 325051FB1CB66C0500D431F5 /* ComOrCollTVCell.xib */; };
+		3250C1D61E5ECF5600AA4B2E /* DDOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = 3250C1D51E5ECF5600AA4B2E /* DDOrder.m */; };
 		32518DAF1CB34AC700CEAE35 /* SearchOrganTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32518DAD1CB34AC700CEAE35 /* SearchOrganTVCell.m */; };
 		32518DB31CB34EFC00CEAE35 /* custom_online.png in Resources */ = {isa = PBXBuildFile; fileRef = 32518DB11CB34EFC00CEAE35 /* custom_online.png */; };
 		32518DB41CB34EFC00CEAE35 /* custom_number.png in Resources */ = {isa = PBXBuildFile; fileRef = 32518DB21CB34EFC00CEAE35 /* custom_number.png */; };
@@ -567,6 +568,8 @@
 		325051F91CB66C0500D431F5 /* ComOrCollTVCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComOrCollTVCell.h; sourceTree = "<group>"; };
 		325051FA1CB66C0500D431F5 /* ComOrCollTVCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComOrCollTVCell.m; sourceTree = "<group>"; };
 		325051FB1CB66C0500D431F5 /* ComOrCollTVCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ComOrCollTVCell.xib; sourceTree = "<group>"; };
+		3250C1D41E5ECF5600AA4B2E /* DDOrder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDOrder.h; sourceTree = "<group>"; };
+		3250C1D51E5ECF5600AA4B2E /* DDOrder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDOrder.m; sourceTree = "<group>"; };
 		32518DAC1CB34AC700CEAE35 /* SearchOrganTVCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchOrganTVCell.h; sourceTree = "<group>"; };
 		32518DAD1CB34AC700CEAE35 /* SearchOrganTVCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchOrganTVCell.m; sourceTree = "<group>"; };
 		32518DB11CB34EFC00CEAE35 /* custom_online.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = custom_online.png; sourceTree = "<group>"; };
@@ -1963,6 +1966,8 @@
 				32CEF81D1DB7027E00CB7584 /* DDGroupData.m */,
 				3273DF8C1DB9F2750094AD42 /* DDOrderList.h */,
 				3273DF8D1DB9F2750094AD42 /* DDOrderList.m */,
+				3250C1D41E5ECF5600AA4B2E /* DDOrder.h */,
+				3250C1D51E5ECF5600AA4B2E /* DDOrder.m */,
 				32A3BB751DBB16490009D50F /* DDCollectList.h */,
 				32A3BB761DBB16490009D50F /* DDCollectList.m */,
 				320108111DBB4A38007ACA6B /* DDMoneyList.h */,
@@ -2763,6 +2768,7 @@
 				32DB053C1DA8CDF40041C4F5 /* UIView+SDExtension.m in Sources */,
 				3285AF021D35DD8C0070618A /* DDGetTest.m in Sources */,
 				325051F81CB667A700D431F5 /* ComAndCollVC.m in Sources */,
+				3250C1D61E5ECF5600AA4B2E /* DDOrder.m in Sources */,
 				325051FC1CB66C0500D431F5 /* ComOrCollTVCell.m in Sources */,
 				32CABD691CA373AA0068AE93 /* SeasonCTViewCell.m in Sources */,
 				32D23E7C1DC33932009154F6 /* MJRefreshHeaderView.m in Sources */,

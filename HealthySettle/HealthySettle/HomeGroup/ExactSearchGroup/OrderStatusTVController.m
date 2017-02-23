@@ -11,11 +11,14 @@
 #import "TravelPLabelTVCell.h"
 #import "SumAndPayTVCell.h"
 #import "SumAndPayLTVCell.h"
-#import "Order.h"
+#import "Order_ed.h"
+#import "DDOrder.h"
+#import "PayViewController.h"
 
 @interface OrderStatusTVController ()<UITableViewDelegate,UITableViewDataSource>
 {
     UILabel * home_label;
+    NSArray * user_arr;
 
 }
 
@@ -34,12 +37,23 @@
         
         UILabel * status_label = [[UILabel alloc]
                                   initWithFrame:CGRectMake(10,screenHeight * 0.02 , screenWide-20 , 0.06 * screenHeight)];
-        status_label.text = @"待支付";
+
+        if ([_order.dd_status intValue] == 19 )
+        {
+            status_label.text = @"待付款";
+
+        }else if ([_order.dd_status intValue] == 20 ){
+            status_label.text = @"已关闭";
+            
+        }else{
+            status_label.text = @"使用中";
+        }
         status_label.textColor = [UIColor redColor];
         [view_0 addSubview:status_label];
         
         UILabel * order_sn_label = [[UILabel alloc] initWithFrame:CGRectMake(10, screenHeight * 0.1, screenWide*0.45, screenHeight * 0.04)];
-        order_sn_label.text = [NSString stringWithFormat:@"订单号：2436543563633"];
+        order_sn_label.text = [NSString stringWithFormat:@"订单号: %@",_order.order_sn];
+        
         order_sn_label.adjustsFontSizeToFitWidth = YES;
         order_sn_label.textColor = RGB(190, 190, 190);
         [view_0 addSubview:order_sn_label];
@@ -47,7 +61,7 @@
         UILabel * money_label = [[UILabel alloc] initWithFrame:CGRectMake(screenWide * 0.5, screenHeight * 0.1, screenWide * 0.5-10, screenHeight * 0.04)];
         money_label.textColor = [UIColor redColor];
         money_label.textAlignment = NSTextAlignmentRight;
-        money_label.text =  [NSString stringWithFormat:@"合计支付：2332.00"];
+        money_label.text =  [NSString stringWithFormat:@"合计支付：%@",_order.total_money];
         if (IS_IPHONE6EARLY) {
             money_label.font = [UIFont systemFontOfSize:14];
             order_sn_label.font = [UIFont systemFontOfSize:12];
@@ -66,20 +80,20 @@
 
         UILabel * organ_label = [[UILabel alloc]
                                  initWithFrame:CGRectMake(10,0 , screenWide-20 , 0.1 * screenHeight)];
-        organ_label.text = @"科技护肤";
+        organ_label.text = _order.order_name;
         organ_label.numberOfLines = 2;
         organ_label.font = [UIFont systemFontOfSize:18];
         [view_1 addSubview:organ_label];
         
         UILabel * price_label = [[UILabel alloc] initWithFrame:CGRectMake(screenWide * 0.7, screenHeight * 0.105, screenWide * 0.3-40, screenHeight * 0.04)];
-        price_label.text = @"1232";
+        price_label.text = [NSString stringWithFormat:@"¥ %@",_order.price];
         price_label.adjustsFontSizeToFitWidth = YES;
         [view_1 addSubview:price_label];
         
         price_label.textColor = [UIColor redColor];
         price_label.textAlignment = NSTextAlignmentRight;
         UILabel * unit_label = [[UILabel alloc] initWithFrame:CGRectMake(screenWide-40, screenHeight * 0.11, 30, screenHeight * 0.04)];
-        unit_label.text = [_vc_type intValue]==2? @"/间":@"/人";
+        unit_label.text = [_order.cat_id intValue]==2? @"/间":@"/人";
         unit_label.font = [UIFont systemFontOfSize:10];
         [view_1 addSubview:unit_label];
         
@@ -99,11 +113,11 @@
         if (IS_IPHONE6EARLY) {
             address_title.font = [UIFont systemFontOfSize:13];
         }
-        if ([_vc_type intValue] == 3) {
+        if ([_order.cat_id intValue] == 3) {
             address_title.text = @"目的地";
             UILabel * address_label = [[UILabel alloc] initWithFrame:CGRectMake(screenWide * 0.27, screenHeight * 0.015, screenWide * 0.4, screenHeight * 0.04)];
             [title_view_0 addSubview:address_label];
-            address_label.text = @"杭州";
+            address_label.text = _order.order_name;
             address_label.textAlignment = NSTextAlignmentLeft;
             
         }else{
@@ -114,31 +128,7 @@
             home_label.font = [UIFont systemFontOfSize:12];
             home_label.textAlignment = NSTextAlignmentLeft;
             [title_view_0 addSubview:home_label];
-            /*homeLabel上的显示
-            if ([_vc_type intValue]== 2) {
-                NSDictionary * dic = _group_dic[@"room"][_room_index intValue];
-                
-                NSString * is_catered;
-                switch ([dic[@"is_catered"] integerValue]) {
-                    case 0:
-                        is_catered = @"不包餐";
-                        break;
-                    case 1:
-                        is_catered = @"包早餐";
-                        break;
-                    case 2:
-                        is_catered = @"包三餐";
-                        break;
-                    default:
-                        break;
-                }
-                NSString * is_wifi = [dic[@"is_wifi"] isEqualToString:@"1"]?@"免费WiFi":@"";
-                
-                home_label.text = [NSString stringWithFormat:@"%@ | %@ | %@ | %@",dic[@"room_type"],dic[@"bed_type"],is_wifi,is_catered];
-            }else{
-                home_label.text = [NSString stringWithFormat:@"%@ | %@ | %@ | %@",_chargeArray[0],_chargeArray[1],_chargeArray[2],_chargeArray[3]];
-            }
-             */
+            home_label.text = _order.order_spec;
         }
         
         
@@ -152,11 +142,11 @@
         if (IS_IPHONE6EARLY) {
             title_label.font = [UIFont systemFontOfSize:13];
         }
-        if ([_vc_type intValue] == 3) {
+        if ([_order.cat_id intValue] == 3) {
             title_label.text = @"出发日期";
             title_label.textAlignment = NSTextAlignmentLeft;
             UILabel * date_label = [[UILabel alloc] initWithFrame:CGRectMake(screenWide * 0.27, screenHeight * 0.015, screenWide*0.65, screenHeight *0.04 )];
-            date_label.text = @"2017-04-23";
+            date_label.text = [DDLogin timeStrWithstr:_order.group_date];
             date_label.textAlignment = NSTextAlignmentLeft;
             [title_view_1 addSubview:date_label];
         }else{
@@ -175,10 +165,12 @@
             UILabel *checkIn_timelabel = [[UILabel alloc]
                                  initWithFrame:CGRectMake(screenWide * 0.27 + screenWide * 0.1, screenHeight * 0.015, screenWide /3 - screenWide * 0.1, screenHeight * 0.04)];
             checkIn_timelabel.font = [UIFont systemFontOfSize:13];
+            checkIn_timelabel.text = [DDLogin timeStrWithstr:_order.checkin_time];
             [title_view_1 addSubview:checkIn_timelabel];
             UILabel *leave_timelabel = [[UILabel alloc]
                                initWithFrame:CGRectMake(screenWide * 0.27+ screenWide *0.1 + screenWide /3, screenHeight * 0.015, screenWide /3 - screenWide * 0.1, screenHeight * 0.04)];
             leave_timelabel.font = [UIFont systemFontOfSize:13];
+            leave_timelabel.text = [DDLogin timeStrWithstr:_order.checkout_time];
             [title_view_1 addSubview:leave_timelabel];
         }
         
@@ -192,15 +184,29 @@
         if (IS_IPHONE6EARLY) {
             title_label_2.font = [UIFont systemFontOfSize:13];
         }
-        title_label_2.text = [_vc_type intValue] == 3?@"出行人数":@"入住人数";
         
         UILabel * number_label = [[UILabel alloc] initWithFrame:CGRectMake(screenWide * 0.27, screenHeight * 0.015, screenWide*0.65, screenHeight *0.04 )];
-        number_label.text = @"2";
         number_label.textAlignment = NSTextAlignmentLeft;
         [title_view_2 addSubview:number_label];
+        switch ([_order.cat_id intValue]) {
+            case 1:
+                title_label_2.text = @"入住人数:";
+                number_label.text = _order.beds;
+                break;
+            case 2:
+                title_label_2.text = @"预订房间:";
+                number_label.text = _order.lived_num;
 
-        
-        
+                break;
+            case 3:
+                title_label_2.text = @"参加人数:";
+                number_label.text = _order.num;
+                
+                break;
+            default:
+                break;
+        }
+
         UIView * line_view_3 = [[UIView alloc] initWithFrame:CGRectMake(0, screenHeight * 0.375-1, screenWide, 1)];
         line_view_3.backgroundColor = GRAYCOLOR;
         //[_tableHeadView addSubview:line_view_3];
@@ -216,9 +222,16 @@
         UITableView * tableView = [[UITableView alloc]
                                    initWithFrame:CGRectMake(0, 0, screenWide, screenHeight-64)
                                    style:UITableViewStylePlain];
+        [tableView registerClass:[ConLabelTVCell class] forCellReuseIdentifier:@"contact"];
+        [tableView registerClass:[TravelPLabelTVCell class] forCellReuseIdentifier:@"travel"];
+        [tableView registerClass:[SumAndPayTVCell class] forCellReuseIdentifier:@"pay_no"];
+        [tableView registerClass:[SumAndPayLTVCell class] forCellReuseIdentifier:@"paied"];
         tableView.showsVerticalScrollIndicator = NO;
         tableView.tableFooterView = [UIView new];
         _tableView = tableView;
+        _tableView.dataSource = self;
+        _tableView.delegate =self;
+
         
     }
     return _tableView;
@@ -240,13 +253,14 @@
     
     [self.navigationItem setTitle:@"订单详情"];
     self.view.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:self.tableView];
-    _tableView.tableHeaderView = self.tableHeadView;
-    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [self.tableView registerClass:[ConLabelTVCell class] forCellReuseIdentifier:@"contact"];
-    [self.tableView registerClass:[TravelPLabelTVCell class] forCellReuseIdentifier:@"travel"];
-    [self.tableView registerClass:[SumAndPayTVCell class] forCellReuseIdentifier:@"pay_no"];
-    [self.tableView registerClass:[SumAndPayLTVCell class] forCellReuseIdentifier:@"paied"];
+    if ([_vc_type isEqualToString:@"unnormal"]) {
+        [self setData];
+    }else{
+        user_arr = [_order.checkin_name componentsSeparatedByString:@";"];
+        [self loadData];
+    }
+
+
     UIButton * back_btn = [UIButton buttonWithType:UIButtonTypeCustom];
     [back_btn addTarget:self action:@selector(backBtnPressed) forControlEvents:UIControlEventTouchUpInside];
     back_btn.frame = CGRectMake(0, 0, 10, 18);
@@ -255,10 +269,80 @@
     self.navigationItem.leftBarButtonItem = back_item;
     
     
-    self.tableView.dataSource = self;
-    self.tableView.delegate =self;
+    
+}
+-(void)setData{
+    Member * user = [Member DefaultUser];
+    DDOrder * order_post = [[DDOrder alloc] initWithUid:user.uid login:user.login oid:_o_id];
+    [order_post startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
+        NSDictionary * dic = [DDLogin dictionaryWithJsonString:request.responseString];
+        if ([dic[@"error_code"] intValue] == 0) {
+            _order = [Order_ed mj_objectWithKeyValues:dic];
+            user_arr = [_order.checkin_name componentsSeparatedByString:@";"];
+            [self loadData];
+        
+        }else{
+            //其他途径获取数据
+        }
+    } failure:^(__kindof YTKBaseRequest *request) {
+        
+    }];
+    
+}
+-(void)loadData{
+    [self.view addSubview:self.tableView];
+    _tableView.tableHeaderView = self.tableHeadView;
+    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    if ([_order.paid intValue] == 0 && [_order.status intValue] == 6 && [_order.pay_type length] == 0) {
+        [self creatBackFootView];
+    }
+}
+-(void)creatBackFootView{
+    UIView * backFootView = [[UIView alloc]
+                    initWithFrame:CGRectMake(0, screenHeight * 0.94, screenWide, screenHeight * 0.08)];
+    backFootView.backgroundColor = [UIColor whiteColor];
+    UIView * line_view =[[UIView alloc]
+                         initWithFrame:CGRectMake(0, 0, screenWide, 1)];
+    line_view.backgroundColor = RGB(246, 246, 246);
+    [backFootView addSubview:line_view];
+
+    UILabel * _money_label = [[UILabel alloc]
+                    initWithFrame:CGRectMake(10, 1, screenWide * 0.5-20, screenHeight * 0.08 -8)];
+    
+    
+    _money_label.textAlignment = NSTextAlignmentLeft;
+    _money_label.font = [UIFont systemFontOfSize:14];
+    _money_label.text = [NSString stringWithFormat:@"待支付: ¥ %@",_order.payment_money];
+    
+    
+    
+    [backFootView addSubview:_money_label];
+    UIButton * toPay_btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    toPay_btn.frame = CGRectMake(screenWide /2, 0, screenWide/2, screenHeight * 0.08);
+    toPay_btn.backgroundColor = RGB(226, 11, 24);
+    [toPay_btn setTitle:@"马上支付"
+               forState:UIControlStateNormal];
+    [toPay_btn addTarget:self
+                  action:@selector(toPay)
+        forControlEvents:UIControlEventTouchUpInside];
+    [toPay_btn setTitleColor:[UIColor whiteColor]
+                    forState:UIControlStateNormal];
+    [backFootView addSubview:toPay_btn];
+    
+    self.tableView.tableFooterView = backFootView;
+    
+}
+-(void)toPay{
+    PayViewController * payVC = [[PayViewController alloc] init];
+    payVC.order_ed = _order;
+    payVC.vc_type = @"unnormal";
+    payVC.order.order_id = _order.order_id;
+    [self.navigationController pushViewController:payVC animated:YES];
 
 }
+
+
 -(void)backBtnPressed{
     if ([_vc_type isEqualToString:@"unnormal"]){
         //present到详情页
@@ -266,8 +350,7 @@
         [self.navigationController popToViewController:viewctl animated:YES];
     }else{
         //pop啊
-        UIViewController * viewctl = self.navigationController.viewControllers[2];
-        [self.navigationController popToViewController:viewctl animated:YES];
+        [self.navigationController popViewControllerAnimated:YES];
 
     }
 }
@@ -279,7 +362,7 @@
 {
     if (section == 1)
     {
-        return 2;
+        return user_arr.count;
     }else
     {
         return 1;
@@ -291,15 +374,17 @@
     if (indexPath.section == 0) {
         ConLabelTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"contact" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        [cell configWithname:_order.contact_name number:_order.contact_phone];
         return cell;
     }else if (indexPath.section==1){
         TravelPLabelTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"travel" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        [cell configWithStr:user_arr[indexPath.row]];
         
         return cell;
         
     }else{
-        if (!_order) {
+        if ([_order.paid intValue] != 0) {
             SumAndPayLTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"paied" forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
@@ -307,6 +392,10 @@
         }else{
             SumAndPayTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"pay_no" forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.num_sum_label.text = [NSString stringWithFormat:@"¥ %@",_order.total_money];
+            cell.balan_label.text = [NSString stringWithFormat:@"¥ %@",_order.balance_pay];
+            cell.vocher_label.text = [NSString stringWithFormat:@"¥ %@",_order.coupon];
+            cell.unpaid_label.text = [NSString stringWithFormat:@"¥ %@",_order.payment_money];
             return cell;
 
         }

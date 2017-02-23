@@ -51,6 +51,28 @@
     }
     return self;
 }
+-(void)configWithStr:(NSString *)str{
+    NSArray * arr = [str componentsSeparatedByString:@","];
+    if (arr&& arr.count == 4) {
+        _name_label.text = arr[0];
+        _phone_label.text = arr[1];
+        _id_label.text = arr[2];
+        if ([arr[3] intValue] == 0) {
+            woman_view.lab.textColor = [UIColor redColor];
+            woman_view.img_view.image = [UIImage imageNamed:@"selected"];
+            man_view.lab.textColor = [UIColor blackColor];
+            man_view.img_view.image = [UIImage imageNamed:@"un_select"];
+        }else{
+            man_view.lab.textColor = [UIColor redColor];
+            man_view.img_view.image = [UIImage imageNamed:@"selected"];
+            woman_view.lab.textColor = [UIColor blackColor];
+            woman_view.img_view.image = [UIImage imageNamed:@"un_select"];
+
+        }
+        
+    }
+    
+}
 
 - (void)awakeFromNib {
     [super awakeFromNib];

@@ -45,7 +45,14 @@
     }
     return self;
 }
-
+-(void)configWithname:(NSString *)name number:(NSString *)number{
+    if (name) {
+        _name_label.text = name;
+    }
+    if (number) {
+        _phone_label.text = number;
+    }
+}
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code

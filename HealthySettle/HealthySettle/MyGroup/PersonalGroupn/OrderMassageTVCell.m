@@ -59,7 +59,7 @@
         [order_oView.group_imageView sd_setImageWithURL:[NSURL URLWithString:str3] placeholderImage:[UIImage imageNamed:@"list_p"]];
     }
     order_oView.orderSpec_label.text = order.order_spec;
-    order_oView.orderPrice_label.text = [NSString stringWithFormat:@"¥%@",order.price];
+//    order_oView.orderPrice_label.text = [NSString stringWithFormat:@"¥%@",order.price];
     
     
 }

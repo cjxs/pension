@@ -16,4 +16,5 @@
 + (NSArray * )RSAsignWithdic:(NSDictionary *)dic;
 +(NSString *)timeStrWithDate:(NSDate*)date;
 +(NSDate *)dateWithString:(NSString *)str;
++(NSString *)timeStrWithstr:(NSString *)str;
 @end

@@ -102,7 +102,7 @@ static NSString *setCellIdentifier = @"cellS";
                            andTitle:@"个人资料"];
     UITapGestureRecognizer * tapD = [[UITapGestureRecognizer alloc]
                                      initWithTarget:self
-                                     action:@selector(clickTwoViews:)];
+                                     action:@selector(clickTodata)];
     tapD.numberOfTapsRequired = 1;
     [dataView addGestureRecognizer:tapD];
     [self.view addSubview:dataView];
@@ -395,21 +395,15 @@ heightForHeaderInSection:(NSInteger)section
 
     
 }
-- (void)clickTwoViews:(UITapGestureRecognizer *)gesture
+- (void)clickTodata
 {
     if ([Member DefaultUser].login.length !=0) {
-        if (gesture.view.frame.origin.x < screenWide / 2)
-        {
-
-        }else
-        {
-            PersonDataVController * personDataVC = [[PersonDataVController alloc] init];
-            personDataVC.titleName = @"个人资料";
-            personDataVC.delegate = self;
-            personDataVC.hidesBottomBarWhenPushed = YES;//隐藏tabBar
-            [self.navigationController pushViewController:personDataVC
-                                                 animated:YES];
-        }
+        PersonDataVController * personDataVC = [[PersonDataVController alloc] init];
+        personDataVC.titleName = @"个人资料";
+        personDataVC.delegate = self;
+        personDataVC.hidesBottomBarWhenPushed = YES;//隐藏tabBar
+        [self.navigationController pushViewController:personDataVC
+                                             animated:YES];
     }else{
         [self resignOrLoad];
     }

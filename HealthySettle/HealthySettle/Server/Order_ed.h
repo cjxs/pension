@@ -9,11 +9,10 @@
 #import <Foundation/Foundation.h>
 
 @interface Order_ed : NSObject
-@property(nonatomic,strong)NSString * order_sn;
-@property (nonatomic,strong)NSString * order_name;
-@property (nonatomic,strong)NSString * price;
-@property (nonatomic,strong)NSString * subsidy_money_u;
-@property (nonatomic,strong)NSString * cat_id,*pic,*add_time,*address,*group_id,*order_spec,*paid,*status;
+@property(nonatomic,strong)NSString * order_sn,*order_id,*cat_id;
+@property (nonatomic,strong)NSString * order_name,*total_money,*balance_pay,*coupon,*payment_money;
+@property (nonatomic,strong)NSString * pay_type,*paid,*status,*add_time,*price,*checkin_name,*contact_name,*contact_phone;
+@property (nonatomic,strong)NSString *lived_num,*num,*beds,*order_spec,*group_date,*area_name,*pic,*checkin_time,*checkout_time;
 @property (nonatomic,strong)NSString * dd_status;
 
 

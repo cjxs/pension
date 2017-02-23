@@ -71,8 +71,8 @@
     return self;
 }
 -(void)selectOne:(int)num{
-    if (num == 0 ) {
-            _man = 1;
+    if (num == 0 ){
+            _man = 0;
             woman_view.lab.textColor = [UIColor redColor];
             woman_view.img_view.image = [UIImage imageNamed:@"selected"];
             man_view.lab.textColor = [UIColor blackColor];

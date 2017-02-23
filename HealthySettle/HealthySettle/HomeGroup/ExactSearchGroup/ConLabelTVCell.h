@@ -11,4 +11,5 @@
 @interface ConLabelTVCell : UITableViewCell
 @property (nonatomic,strong)UILabel * name_label;
 @property (nonatomic,strong)UILabel * phone_label;
+-(void)configWithname:(NSString *)name number:(NSString *)number;
 @end

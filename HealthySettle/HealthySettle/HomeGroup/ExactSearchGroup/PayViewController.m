@@ -15,6 +15,7 @@
 #import "PayWayTVC.h"
 #import "OrderStatusTVController.h"
 #import "YYLUser.h"
+#import "Order_ed.h"
 
 
 
@@ -65,7 +66,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     pay_way = 0;
-    NSLog(@"%@%@",_order.order_id,_order.order_name);
     [self.navigationItem setTitle:@"支付中心"];
     self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.tableView];
@@ -85,8 +85,20 @@
 
 }
 -(void)backBtnPressed{
-    OrderStatusTVController * order_status_VC = [[OrderStatusTVController alloc] init];
-    [self.navigationController pushViewController:order_status_VC animated:YES];
+    if ([_vc_type isEqualToString:@"unnormal"]) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }else{
+        OrderStatusTVController * order_status_VC = [[OrderStatusTVController alloc] init];
+        order_status_VC.vc_type = @"unnormal";
+        if ([_vc_type isEqualToString:@"unnormal"]) {
+            order_status_VC.o_id = _order_ed.order_id;
+        }else{
+            order_status_VC.o_id = _order.order_id;
+        }
+        [self.navigationController pushViewController:order_status_VC animated:YES];
+    }
+
+
 }
 
 -(void)creatBackFootView{
@@ -95,12 +107,14 @@
     toPay_btn.layer.masksToBounds = YES;
     toPay_btn.layer.cornerRadius = 10;
     toPay_btn.backgroundColor = RGB(226, 11, 24);
-    [RACObserve(_order, payment_money) subscribeNext:^(id x) {
-        NSString *str = x;
-        NSString * title_str = [NSString stringWithFormat:@"去支付：¥ %.2lf",[str floatValue]];
-        [toPay_btn setTitle:title_str
-                   forState:UIControlStateNormal];
-    }];
+    NSString * title_str;
+    if ([_vc_type isEqualToString:@"unnormal"]) {
+        title_str = [NSString stringWithFormat:@"去支付：¥ %.2lf",[_order_ed.payment_money floatValue]];
+    }else{
+        title_str = [NSString stringWithFormat:@"去支付：¥ %.2lf",[_order.payment_money floatValue]];
+    }
+    [toPay_btn setTitle:title_str
+               forState:UIControlStateNormal];
     [toPay_btn addTarget:self
                   action:@selector(payToThird)
         forControlEvents:UIControlEventTouchUpInside];
@@ -167,9 +181,20 @@
 
 #pragma mark - PAY
 - (void)payToThird{
+    NSMutableDictionary * dic = [NSMutableDictionary dictionary];
+        if ([_vc_type isEqualToString:@"unnormal"]) {
+            [dic setValue:_order_ed.order_sn forKey:@"order_sn"];
+            [dic setValue:_order_ed.order_name forKey:@"order_name"];
+            [dic setValue:_order_ed.payment_money forKey:@"payment_money"];
+        }else{
+            [dic setValue:_order.order_sn forKey:@"order_sn"];
+            [dic setValue:_order.order_name forKey:@"order_name"];
+            [dic setValue:_order.payment_money forKey:@"payment_money"];
+        }
+    
     if (pay_way==0){
         WXApiRequestHandler *wxapi = [[WXApiRequestHandler  alloc] init];
-        [wxapi httpService:nil];
+        [wxapi httpService:dic];
     }else if (pay_way==1) {
         [self payToAlipay];
     }else{
@@ -179,7 +204,6 @@
 }
 -(void)under_linePay{
     NSLog(@"线下支付");
-    
     
 }
 -(void)payToAlipay
@@ -209,10 +233,18 @@
     Order *order = [[Order alloc] init];
     order.partner = partner; // 合作商号
     order.seller = seller; // 支付宝账号
-    order.tradeNO = [self generateTradeNO]; //订单ID（由商家自行制定）
-    order.productName = _order.group_id;//product.subject; //商品标题
-    order.productDescription = [NSString stringWithFormat:@"优悠乐--%@",_order.order_name];//product.body; //商品描述
-    order.amount = [NSString stringWithFormat:@"%.2lf",[_order.payment_money floatValue]]; //商品价格
+    if ([_vc_type isEqualToString:@"unnormal"]) {
+        order.tradeNO =  _order_ed.order_sn; //订单ID（由商家自行制定）
+        order.productName = [NSString stringWithFormat:@"优悠乐--%@",_order_ed.order_name];//product.subject; //商品标题
+        order.productDescription = [NSString stringWithFormat:@"优悠乐--%@",_order_ed.order_name];//product.body; //商品描述
+        order.amount = [NSString stringWithFormat:@"%.2lf",[_order_ed.payment_money floatValue]]; //商品价格
+    }else{
+        order.tradeNO =  _order.order_sn; //订单ID（由商家自行制定）
+        order.productName = [NSString stringWithFormat:@"优悠乐--%@",_order.order_name];//product.subject; //商品标题
+        order.productDescription = [NSString stringWithFormat:@"优悠乐--%@",_order.order_name];//product.body; //商品描述
+        order.amount = [NSString stringWithFormat:@"%.2lf",[_order.payment_money floatValue]]; //商品价格
+
+    }
     order.notifyURL =  @"http://www.xxx.com"; //回调URL
     order.service = @"mobile.securitypay.pay";
     order.paymentType = @"1";

@@ -703,6 +703,7 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath
             order_pre.lived_num = [NSString stringWithFormat:@"%d",number];
             order_pre.total_money = [NSString stringWithFormat:@"%ld",[self.charge_price integerValue] * number];
             order_pre.room_id = _room_index;
+            order_pre.order_spec = [home_label.text componentsSeparatedByString:@"|"];
             
             
         }else if ([_vc_type intValue] == 1){
@@ -727,8 +728,7 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath
         }else{
             order_pre.total_money = [NSString stringWithFormat:@"%ld",[self.charge_price integerValue] * _person_num];
             order_pre.group_date = self.room_index;
-
-            
+            order_pre.num = [NSString stringWithFormat:@"%ld",_person_num];
         }
 
         order_pre.group_id = [NSString stringWithFormat:@"%@",self.gid];

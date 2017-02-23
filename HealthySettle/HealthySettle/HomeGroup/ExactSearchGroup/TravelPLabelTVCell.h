@@ -2,7 +2,7 @@
 //  TravelPLabelTVCell.h
 //  HealthySettle
 //
-//  Created by yrc on 17/2/14.
+//  Created by ; on 17/2/14.
 //  Copyright © 2017年 yrc. All rights reserved.
 //
 
@@ -16,4 +16,5 @@
 @property (nonatomic,strong)UILabel  * name_label;
 @property (nonatomic,strong)UILabel * phone_label;
 @property (nonatomic,strong)UILabel * id_label;
+-(void)configWithStr:(NSString *)str;
 @end
