@@ -59,6 +59,13 @@
         if ([order.dd_status intValue] == 19 )
         {
             self.type_label.text = @"待付款";
+            if ([order.pay_type isEqualToString:@"线下支付"]) {
+                self.type_label.text = order.pay_type;
+                
+            }else{
+                self.type_label.text = @"待付款";
+            }
+
             [self.first_btn setTitle:@"去付款"
                             forState:UIControlStateNormal];
             self.first_btn.alpha = order.pay_type.length == 0?1:0;

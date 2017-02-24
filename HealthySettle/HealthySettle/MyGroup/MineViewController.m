@@ -368,7 +368,7 @@ heightForHeaderInSection:(NSInteger)section
     [self.setTableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath1,indexPath2,nil] withRowAnimation:UITableViewRowAnimationNone];
 }
 
--(void)changeToAccountWithstr:(NSString *)str
+-(void)changeToAccountWithstr:(NSString *)str //现金账户
 {
     if ([Member DefaultUser].login.length !=0) {
         AccountViewController * accountVC = [[AccountViewController alloc] init];
@@ -437,7 +437,7 @@ heightForHeaderInSection:(NSInteger)section
 
 }
 -(void)pushToComAndCollVCWithTitle:(NSString *)title
-                             type :(NSString *)type
+                             type :(NSString *)type// 点评和特权
 {
     ComAndCollVC * cVC = [[ComAndCollVC alloc] init];
     if (title)
@@ -454,7 +454,7 @@ heightForHeaderInSection:(NSInteger)section
 
 }
 -(void)pushToRefundVCWithTitle:(NSString *)title
-                         type :(NSString *)type
+                         type :(NSString *)type// 退款等
 {
      RefundViewController * refundVC = [[RefundViewController alloc] init];
     if (title)
@@ -470,7 +470,7 @@ heightForHeaderInSection:(NSInteger)section
                                          animated:YES];
 }
 - (void)pushToViewPersonWithTitle:(NSString *)title
-                            type :(NSString *)type
+                            type :(NSString *)type //订单
 {
     PersonVController * viewC = [[PersonVController alloc] init];
     if (title)

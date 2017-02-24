@@ -35,20 +35,32 @@
         UIView * view_0 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWide, screenHeight * 0.165)];
         [_tableHeadView addSubview:view_0];
         
+        UILabel * prompt_label = [[UILabel alloc] initWithFrame:CGRectMake(15, 1, screenWide - 30, screenHeight * 0.04)];
+        prompt_label.backgroundColor = UIColorFromHex(@"#fdfbc0");
+        prompt_label.text = @"  请及时付款，不然就被抢光啦!";
+        prompt_label.font = [UIFont systemFontOfSize:12];
+        prompt_label.textAlignment = NSTextAlignmentCenter;
+        [view_0 addSubview:prompt_label];
+
+        
         UILabel * status_label = [[UILabel alloc]
-                                  initWithFrame:CGRectMake(10,screenHeight * 0.02 , screenWide-20 , 0.06 * screenHeight)];
+                                  initWithFrame:CGRectMake(10,screenHeight * 0.03 , screenWide-20 , 0.06 * screenHeight)];
 
         if ([_order.dd_status intValue] == 19 )
         {
-            status_label.text = @"待付款";
+            if ([_order.pay_type isEqualToString:@"线下支付"]) {
+                status_label.text = _order.pay_type;
 
+            }else{
+                status_label.text = @"待付款";
+            }
         }else if ([_order.dd_status intValue] == 20 ){
             status_label.text = @"已关闭";
             
         }else{
             status_label.text = @"使用中";
         }
-        status_label.textColor = [UIColor redColor];
+        status_label.textColor = [UIColor greenColor];
         [view_0 addSubview:status_label];
         
         UILabel * order_sn_label = [[UILabel alloc] initWithFrame:CGRectMake(10, screenHeight * 0.1, screenWide*0.45, screenHeight * 0.04)];
@@ -115,9 +127,9 @@
         }
         if ([_order.cat_id intValue] == 3) {
             address_title.text = @"目的地";
-            UILabel * address_label = [[UILabel alloc] initWithFrame:CGRectMake(screenWide * 0.27, screenHeight * 0.015, screenWide * 0.4, screenHeight * 0.04)];
+            UILabel * address_label = [[UILabel alloc] initWithFrame:CGRectMake(screenWide * 0.27, screenHeight * 0.015, screenWide * 0.68, screenHeight * 0.04)];
             [title_view_0 addSubview:address_label];
-            address_label.text = _order.order_name;
+            address_label.text = _order.area_name;
             address_label.textAlignment = NSTextAlignmentLeft;
             
         }else{
@@ -267,9 +279,7 @@
     [back_btn setBackgroundImage:[UIImage imageNamed:@"leftop_w"] forState:UIControlStateNormal];
     UIBarButtonItem * back_item = [[UIBarButtonItem alloc] initWithCustomView:back_btn];
     self.navigationItem.leftBarButtonItem = back_item;
-    
-    
-    
+
 }
 -(void)setData{
     Member * user = [Member DefaultUser];
@@ -277,7 +287,18 @@
     [order_post startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
         NSDictionary * dic = [DDLogin dictionaryWithJsonString:request.responseString];
         if ([dic[@"error_code"] intValue] == 0) {
-            _order = [Order_ed mj_objectWithKeyValues:dic];
+            Order_ed * order;
+                order = [Order_ed mj_objectWithKeyValues:dic];
+                if ([order.status intValue] == 6) {
+                    order.dd_status = @"19";
+                }else if ([order.status intValue] == 4||[order.status intValue] == 5||[order.status intValue] == 11||[order.status intValue] == 12||[order.status intValue] == 13)
+                {
+                    order.dd_status = @"20";
+                }else{
+                    order.dd_status = @"21";
+                }
+
+            _order = order;
             user_arr = [_order.checkin_name componentsSeparatedByString:@";"];
             [self loadData];
         
@@ -384,12 +405,9 @@
         return cell;
         
     }else{
-        if ([_order.paid intValue] != 0) {
-            SumAndPayLTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"paied" forIndexPath:indexPath];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            return cell;
-
-        }else{
+        
+        if ([_order.dd_status intValue] == 19 )
+        {
             SumAndPayTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"pay_no" forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.num_sum_label.text = [NSString stringWithFormat:@"¥ %@",_order.total_money];
@@ -397,6 +415,23 @@
             cell.vocher_label.text = [NSString stringWithFormat:@"¥ %@",_order.coupon];
             cell.unpaid_label.text = [NSString stringWithFormat:@"¥ %@",_order.payment_money];
             return cell;
+
+        }else{
+            SumAndPayLTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"paied" forIndexPath:indexPath];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            
+
+            if ([_order.dd_status intValue] == 20 ){
+                NSString * str = [NSString stringWithFormat:@"= (现金账户¥%@ + 在线支付¥%@ + 优悠券%@)",_order.balance_pay,_order.payment_money,_order.coupon];
+                [cell configWithtype:@"" total:_order.total_money vocher:@"0.00" realize:str time:_order.add_time];
+                cell.title_label.text = @"未付款:";
+            }else{
+                NSString * str = [NSString stringWithFormat:@"= (现金账户¥%@ + 在线支付¥%@)",_order.balance_pay,_order.payment_money];
+                [cell configWithtype:_order.pay_type total:_order.total_money vocher:_order.coupon realize:str time:_order.add_time];
+                cell.title_label.text = @"实付款:";
+            }
+            return cell;
+
 
         }
         

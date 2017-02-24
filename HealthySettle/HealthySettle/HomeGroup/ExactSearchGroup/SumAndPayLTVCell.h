@@ -14,6 +14,8 @@
 }
 
 @property (nonatomic,strong)UIButton * contact_btn,*fill_message_btn;
+@property (nonatomic,strong)UILabel * title_label;
+-(void)configWithtype:(NSString *)pay_type total:(NSString *)total vocher:(NSString *)vocher realize:(NSString *)realize time:(NSString *)time;
 
 
 @end

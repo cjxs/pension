@@ -10,11 +10,7 @@
 		1E0E6B8C426C85B7638FD03D /* libPods-优悠乐.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 087E2C9EC0A262329181EDAC /* libPods-优悠乐.a */; };
 		320108131DBB4A38007ACA6B /* DDMoneyList.m in Sources */ = {isa = PBXBuildFile; fileRef = 320108121DBB4A38007ACA6B /* DDMoneyList.m */; };
 		320108161DBB58F9007ACA6B /* DDScoreList.m in Sources */ = {isa = PBXBuildFile; fileRef = 320108151DBB58F9007ACA6B /* DDScoreList.m */; };
-		3205DEE01DF954AF00AC5726 /* PerOrderDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3205DEDF1DF954AF00AC5726 /* PerOrderDetailVC.m */; };
-		3205DEE31DF955E000AC5726 /* OrderStatusTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3205DEE21DF955E000AC5726 /* OrderStatusTVCell.m */; };
 		3205DEE61DF9596100AC5726 /* UIColor+HexColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3205DEE51DF9596100AC5726 /* UIColor+HexColor.m */; };
-		3205DEE91DF962B600AC5726 /* MassageShowTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3205DEE81DF962B600AC5726 /* MassageShowTVCell.m */; };
-		3205DEEC1DFA3D9E00AC5726 /* OrderMassageTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3205DEEB1DFA3D9E00AC5726 /* OrderMassageTVCell.m */; };
 		3205DEEF1DFA3EEB00AC5726 /* OrderMasView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3205DEEE1DFA3EEB00AC5726 /* OrderMasView.m */; };
 		3205DEF21DFA500C00AC5726 /* ArrayLabelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3205DEF11DFA500C00AC5726 /* ArrayLabelView.m */; };
 		320768901DF1861100D5C827 /* PayWayTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3207688F1DF1861100D5C827 /* PayWayTVC.m */; };
@@ -440,16 +436,8 @@
 		320108121DBB4A38007ACA6B /* DDMoneyList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDMoneyList.m; sourceTree = "<group>"; };
 		320108141DBB58F9007ACA6B /* DDScoreList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDScoreList.h; sourceTree = "<group>"; };
 		320108151DBB58F9007ACA6B /* DDScoreList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDScoreList.m; sourceTree = "<group>"; };
-		3205DEDE1DF954AF00AC5726 /* PerOrderDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PerOrderDetailVC.h; sourceTree = "<group>"; };
-		3205DEDF1DF954AF00AC5726 /* PerOrderDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PerOrderDetailVC.m; sourceTree = "<group>"; };
-		3205DEE11DF955E000AC5726 /* OrderStatusTVCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderStatusTVCell.h; sourceTree = "<group>"; };
-		3205DEE21DF955E000AC5726 /* OrderStatusTVCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderStatusTVCell.m; sourceTree = "<group>"; };
 		3205DEE41DF9596100AC5726 /* UIColor+HexColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+HexColor.h"; sourceTree = "<group>"; };
 		3205DEE51DF9596100AC5726 /* UIColor+HexColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+HexColor.m"; sourceTree = "<group>"; };
-		3205DEE71DF962B600AC5726 /* MassageShowTVCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MassageShowTVCell.h; sourceTree = "<group>"; };
-		3205DEE81DF962B600AC5726 /* MassageShowTVCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MassageShowTVCell.m; sourceTree = "<group>"; };
-		3205DEEA1DFA3D9E00AC5726 /* OrderMassageTVCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderMassageTVCell.h; sourceTree = "<group>"; };
-		3205DEEB1DFA3D9E00AC5726 /* OrderMassageTVCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderMassageTVCell.m; sourceTree = "<group>"; };
 		3205DEED1DFA3EEB00AC5726 /* OrderMasView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderMasView.h; sourceTree = "<group>"; };
 		3205DEEE1DFA3EEB00AC5726 /* OrderMasView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderMasView.m; sourceTree = "<group>"; };
 		3205DEF01DFA500C00AC5726 /* ArrayLabelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArrayLabelView.h; sourceTree = "<group>"; };
@@ -2307,14 +2295,6 @@
 			children = (
 				32FD72D31CAA8263008CB917 /* PersonVController.h */,
 				32FD72D41CAA8263008CB917 /* PersonVController.m */,
-				3205DEDE1DF954AF00AC5726 /* PerOrderDetailVC.h */,
-				3205DEDF1DF954AF00AC5726 /* PerOrderDetailVC.m */,
-				3205DEE11DF955E000AC5726 /* OrderStatusTVCell.h */,
-				3205DEE21DF955E000AC5726 /* OrderStatusTVCell.m */,
-				3205DEE71DF962B600AC5726 /* MassageShowTVCell.h */,
-				3205DEE81DF962B600AC5726 /* MassageShowTVCell.m */,
-				3205DEEA1DFA3D9E00AC5726 /* OrderMassageTVCell.h */,
-				3205DEEB1DFA3D9E00AC5726 /* OrderMassageTVCell.m */,
 				32FA73441CABE32500379855 /* RefundViewController.h */,
 				32FA73451CABE32500379855 /* RefundViewController.m */,
 				325051F61CB667A700D431F5 /* ComAndCollVC.h */,
@@ -2791,13 +2771,11 @@
 				325051E51CB620C300D431F5 /* OrdAndRefundTVCell.m in Sources */,
 				3252D6581CC752B5000FAFBC /* RSADataVerifier.m in Sources */,
 				32D693F31DD5BBA5001D5C7F /* HMDatePickView.m in Sources */,
-				3205DEE01DF954AF00AC5726 /* PerOrderDetailVC.m in Sources */,
 				321C43171DC0575600192243 /* ArticleListTViewCell.m in Sources */,
 				327BEE7F1E5A8E5D002C1199 /* ConPerAddVC.m in Sources */,
 				32FB002E1D405D6F008A5497 /* DDToolKit.m in Sources */,
 				32F6CD081C9A734C00E97B65 /* AppDelegate.m in Sources */,
 				3285AF0B1D3760A20070618A /* YYLOrder.m in Sources */,
-				3205DEE31DF955E000AC5726 /* OrderStatusTVCell.m in Sources */,
 				32D23E791DC33932009154F6 /* MJRefreshBaseView.m in Sources */,
 				327CA9761CBBB78E00FC4F8E /* AccountViewController.m in Sources */,
 				323552451E53003C003C5A8C /* TravelPLabelTVCell.m in Sources */,
@@ -2847,7 +2825,6 @@
 				32CABD661CA373AA0068AE93 /* SearchVController.m in Sources */,
 				3285AF0E1D376B3C0070618A /* GroupRoom.m in Sources */,
 				32D8594A1CB8B2420074D5C3 /* PriSeleView.m in Sources */,
-				3205DEEC1DFA3D9E00AC5726 /* OrderMassageTVCell.m in Sources */,
 				32F6CD051C9A734C00E97B65 /* main.m in Sources */,
 				321C430F1DC04AF600192243 /* ArticleListTVC.m in Sources */,
 				3285AF111D3C72970070618A /* LoginOrRegisViewController.m in Sources */,
@@ -2878,7 +2855,6 @@
 				320BE5C81CBC900D00A34FCB /* AccountTVCell.m in Sources */,
 				32CABD941CA384F50068AE93 /* SearchTVController.m in Sources */,
 				32D23E7D1DC33932009154F6 /* UIScrollView+MJExtension.m in Sources */,
-				3205DEE91DF962B600AC5726 /* MassageShowTVCell.m in Sources */,
 				323499AB1CE1782200CBA680 /* Member.m in Sources */,
 				3285AEFC1D34D70C0070618A /* YYLUser.m in Sources */,
 				32CABD971CA39E2E0068AE93 /* CDDatePicker.m in Sources */,

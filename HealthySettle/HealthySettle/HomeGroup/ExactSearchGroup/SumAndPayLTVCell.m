@@ -54,21 +54,21 @@
                 [view_1 addSubview:_vocher_label];
             }
         }
-        _num_sum_label.text = @"1223";
-        _vocher_label.text = @"233";
         
-        UILabel * title_label = [[UILabel alloc] initWithFrame:CGRectMake(10, screenHeight * 0.015, screenWide * 0.25, screenHeight * 0.04)];
-        title_label.text = @"实付款:";
-        [view_2 addSubview:title_label];
+        _title_label = [[UILabel alloc] initWithFrame:CGRectMake(10, screenHeight * 0.015, screenWide * 0.25, screenHeight * 0.04)];
+        [view_2 addSubview:_title_label];
         _reality_label = [[UILabel alloc] initWithFrame:CGRectMake(10, screenHeight * 0.055, screenWide * 0.25, screenHeight * 0.05)];
         _reality_label.textAlignment = NSTextAlignmentRight;
         _reality_label.textColor = [UIColor redColor];
         [view_2 addSubview:_reality_label];
         _realize_label = [[UILabel alloc] initWithFrame:CGRectMake(screenWide * 0.25+20, screenHeight * 0.055, screenWide * 0.75-30, screenHeight * 0.05)];
         [view_2 addSubview:_realize_label];
+        _realize_label.textColor = [UIColor grayColor];
+        _realize_label.font = [UIFont systemFontOfSize:11];
         _add_time_label = [[UILabel alloc] initWithFrame:CGRectMake(10, screenHeight * 0.105, screenWide -20, screenHeight * 0.03)];
-        _add_time_label.textColor = GRAYCOLOR;
+        _add_time_label.textColor = [UIColor grayColor];
         _add_time_label.textAlignment = NSTextAlignmentRight;
+        _add_time_label.font = [UIFont systemFontOfSize:10];
         [view_2 addSubview:_add_time_label];
         _contact_btn = [UIButton buttonWithType:UIButtonTypeCustom];
         
@@ -86,11 +86,29 @@
         [_fill_message_btn setTitleColor:RGB(190, 190, 190) forState:UIControlStateNormal];
 
         [view_3 addSubview:_fill_message_btn];
-        _reality_label.text =@"2344";
-        _realize_label.text = @"=344+2323+3434";
+        
         
     }
     return self;
+}
+-(void)configWithtype:(NSString *)pay_type total:(NSString *)total vocher:(NSString *)vocher realize:(NSString *)realize time:(NSString *)time{
+    if (pay_type) {
+        _pay_way_label.text = pay_type;
+    }
+    if (total) {
+        _num_sum_label.text = [NSString stringWithFormat:@"¥ %@",total];
+    }
+    if (vocher) {
+        _vocher_label.text = [NSString stringWithFormat:@"-¥ %@",vocher];
+    }
+    if (realize) {
+        NSInteger  realizy = [total integerValue] - [vocher integerValue];
+        _reality_label.text = [NSString stringWithFormat:@"%ld.00",realizy];
+        _realize_label.text = realize;
+    }
+    if (time) {
+        _add_time_label.text = [NSString stringWithFormat:@"下单时间: %@",[DDLogin timeStrWithstr:time]];
+    }
 }
 
 - (void)awakeFromNib {
