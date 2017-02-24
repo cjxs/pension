@@ -231,16 +231,22 @@
 {
     if (!_tableView)
     {
-        UITableView * tableView = [[UITableView alloc]
-                                   initWithFrame:CGRectMake(0, 0, screenWide, screenHeight-64)
-                                   style:UITableViewStylePlain];
-        [tableView registerClass:[ConLabelTVCell class] forCellReuseIdentifier:@"contact"];
-        [tableView registerClass:[TravelPLabelTVCell class] forCellReuseIdentifier:@"travel"];
-        [tableView registerClass:[SumAndPayTVCell class] forCellReuseIdentifier:@"pay_no"];
-        [tableView registerClass:[SumAndPayLTVCell class] forCellReuseIdentifier:@"paied"];
-        tableView.showsVerticalScrollIndicator = NO;
-        tableView.tableFooterView = [UIView new];
-        _tableView = tableView;
+        if ([_order.paid intValue] == 0 && [_order.status intValue] == 6 && [_order.pay_type length] == 0) {
+            _tableView = [[UITableView alloc]
+                         initWithFrame:CGRectMake(0, 0, screenWide, screenHeight-64)
+                         style:UITableViewStylePlain];
+            [self creatBackFootView];
+        }else{
+            _tableView = [[UITableView alloc]
+                         initWithFrame:CGRectMake(0, 0, screenWide, screenHeight-64)
+                         style:UITableViewStylePlain];
+        }
+
+        [_tableView registerClass:[ConLabelTVCell class] forCellReuseIdentifier:@"contact"];
+        [_tableView registerClass:[TravelPLabelTVCell class] forCellReuseIdentifier:@"travel"];
+        [_tableView registerClass:[SumAndPayTVCell class] forCellReuseIdentifier:@"pay_no"];
+        [_tableView registerClass:[SumAndPayLTVCell class] forCellReuseIdentifier:@"paied"];
+        _tableView.showsVerticalScrollIndicator = NO;
         _tableView.dataSource = self;
         _tableView.delegate =self;
 
@@ -315,13 +321,10 @@
     _tableView.tableHeaderView = self.tableHeadView;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
-    if ([_order.paid intValue] == 0 && [_order.status intValue] == 6 && [_order.pay_type length] == 0) {
-        [self creatBackFootView];
-    }
 }
 -(void)creatBackFootView{
     UIView * backFootView = [[UIView alloc]
-                    initWithFrame:CGRectMake(0, screenHeight * 0.94, screenWide, screenHeight * 0.08)];
+                    initWithFrame:CGRectMake(0, screenHeight * 0.93, screenWide, screenHeight * 0.07)];
     backFootView.backgroundColor = [UIColor whiteColor];
     UIView * line_view =[[UIView alloc]
                          initWithFrame:CGRectMake(0, 0, screenWide, 1)];
@@ -329,7 +332,7 @@
     [backFootView addSubview:line_view];
 
     UILabel * _money_label = [[UILabel alloc]
-                    initWithFrame:CGRectMake(10, 1, screenWide * 0.5-20, screenHeight * 0.08 -8)];
+                    initWithFrame:CGRectMake(10, 1, screenWide * 0.5-20, screenHeight * 0.07 -8)];
     
     
     _money_label.textAlignment = NSTextAlignmentLeft;
@@ -340,7 +343,7 @@
     
     [backFootView addSubview:_money_label];
     UIButton * toPay_btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    toPay_btn.frame = CGRectMake(screenWide /2, 0, screenWide/2, screenHeight * 0.08);
+    toPay_btn.frame = CGRectMake(screenWide /2, 0, screenWide/2, screenHeight * 0.07);
     toPay_btn.backgroundColor = RGB(226, 11, 24);
     [toPay_btn setTitle:@"马上支付"
                forState:UIControlStateNormal];
@@ -351,7 +354,7 @@
                     forState:UIControlStateNormal];
     [backFootView addSubview:toPay_btn];
     
-    self.tableView.tableFooterView = backFootView;
+    _tableView.tableFooterView = backFootView;
     
 }
 -(void)toPay{
@@ -449,10 +452,11 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath
         return screenHeight * 0.28;
         
     }else{
-        if (!_order) {
-            return screenHeight * 0.425;
-        }else{
+    if ([_order.dd_status intValue] == 19 )
+            {
             return screenHeight * 0.35;
+        }else{
+            return screenHeight * 0.425;
 
         }
     }
