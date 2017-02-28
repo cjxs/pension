@@ -190,6 +190,7 @@ static NSString * const UMDEVICETOKEN      = @"UMDeviceToken";// 友盟推送的
     __block NSDictionary * dic;
     
     [loginApi startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
+        NSLog(@"%@",request.responseString);
         NSString *str = [request.responseString stringByReplacingOccurrencesOfString:@":null" withString:@":\"\""];
         dic = [DDLogin dictionaryWithJsonString: str];
         if ([dic[@"error_code"] intValue] == 0) {
@@ -209,6 +210,7 @@ static NSString * const UMDEVICETOKEN      = @"UMDeviceToken";// 友盟推送的
                 [menber.cont_arr addObject:user];
             }
             menber.role = dic[@"role"];
+            menber.refer_code = dic[@"refer_code"];
             menber.login = @"online";
             menber.pay_can = dic[@"pay_can"];
         }else{

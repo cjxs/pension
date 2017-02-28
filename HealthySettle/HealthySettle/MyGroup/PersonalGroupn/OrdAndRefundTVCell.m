@@ -24,7 +24,7 @@
 
     // Configure the view for the selected state
 }
--(void)configOrderWithOrder:(Order_ed *)order {
+-(void)configOrderWithOrder:(Order_ed *)order type:(NSString *)type{
     if (self)
     {
         if ([order.cat_id intValue] == 3) {
@@ -55,31 +55,44 @@
             NSString * str3 = [str2 stringByReplacingOccurrencesOfString:@"," withString:@"/"];
             [self.organImage_view sd_setImageWithURL:[NSURL URLWithString:str3] placeholderImage:[UIImage imageNamed:@"list_p"]];
         }
-        
-        if ([order.dd_status intValue] == 19 )
-        {
-            self.type_label.text = @"待付款";
-            if ([order.pay_type isEqualToString:@"线下支付"]) {
-                self.type_label.text = order.pay_type;
-                
-            }else{
-                self.type_label.text = @"待付款";
-            }
-
-            [self.first_btn setTitle:@"去付款"
-                            forState:UIControlStateNormal];
-            self.first_btn.alpha = order.pay_type.length == 0?1:0;
-            self.price_label.text = [NSString stringWithFormat:@"待付款:%@",order.payment_money];
-        }else if ([order.dd_status intValue] == 20 ){
-            self.type_label.text = @"已关闭";
-
+        if ([type isEqualToString:@"refund"]){
             self.first_btn.alpha = 0;
             self.price_label.text = [NSString stringWithFormat:@"总价钱:%@",order.total_money];
-        }else{
-            self.first_btn.alpha = 0;
-            self.type_label.text = @"使用中";
-            NSInteger money = [order.payment_money intValue] + [order.balance_pay intValue];
-            self.price_label.text = [NSString stringWithFormat:@"实付款:%ld",money];
+            
+            if ([order.status intValue] == 2) {
+                self.type_label.text = @"处理中";
+            }else if ([order.status intValue] == 4 ||[order.status intValue] == 5 ||[order.status intValue] == 8 ){
+                self.type_label.text = @" 退款成功";
+            }else if ([order.status intValue] == 9){
+                self.type_label.text = @" 退款失败";
+            }
+        }else {
+            if ([order.dd_status intValue] == 19 )
+            {
+                self.type_label.text = @"待付款";
+                if ([order.pay_type isEqualToString:@"线下支付"]) {
+                    self.type_label.text = order.pay_type;
+                    
+                }else{
+                    self.type_label.text = @"待付款";
+                }
+                
+                [self.first_btn setTitle:@"去付款"
+                                forState:UIControlStateNormal];
+                self.first_btn.alpha = order.pay_type.length == 0?1:0;
+                self.price_label.text = [NSString stringWithFormat:@"待付款:%@",order.payment_money];
+            }else if ([order.dd_status intValue] == 20 ){
+                self.type_label.text = @"已关闭";
+                
+                self.first_btn.alpha = 0;
+                self.price_label.text = [NSString stringWithFormat:@"总价钱:%@",order.total_money];
+            }else{
+                self.first_btn.alpha = 0;
+                self.type_label.text = @"使用中";
+                NSInteger money = [order.payment_money intValue] + [order.balance_pay intValue];
+                self.price_label.text = [NSString stringWithFormat:@"实付款:%ld",money];
+            }
+
         }
         self.price_label.textAlignment = NSTextAlignmentRight;
         self.type_label.textAlignment = NSTextAlignmentRight;

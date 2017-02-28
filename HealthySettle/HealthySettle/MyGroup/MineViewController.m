@@ -17,6 +17,8 @@
 #import "GraceVC.h"
 #import "AccountViewController.h"
 #import "LoginOrRegisViewController.h"
+#import "DDButtonView.h"
+#import "DataWebViewController.h"
 
 static NSString *setCellIdentifier = @"cellS";
 
@@ -34,9 +36,11 @@ static NSString *setCellIdentifier = @"cellS";
 -(UIImageView *)vip_imgv{
     if (!_vip_imgv) {
         UIImageView * image_v = [[UIImageView alloc] initWithFrame:CGRectMake(screenWide * 0.27, screenHeight * 0.14, screenWide*0.3, screenWide *0.12)];
-//        image_v.layer.cornerRadius = screenHeight * 0.12/2;
-        image_v.clipsToBounds = YES;
+        UITapGestureRecognizer * ges = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pushToShare)];
+        [image_v addGestureRecognizer:ges];
+        ges.numberOfTapsRequired = 1;
         _vip_imgv = image_v;
+        
     }
     return _vip_imgv;
 }
@@ -148,6 +152,14 @@ static NSString *setCellIdentifier = @"cellS";
 - (void)setThingsView
 {
     UIView * view_0 = [[UIView alloc] initWithFrame:CGRectMake(0, screenHeight * 0.25, screenWide, screenHeight * 0.07-1)];
+    UITapGestureRecognizer * tapD = [[UITapGestureRecognizer alloc]
+                                     initWithTarget:self
+                                     action:@selector(order_list)];
+    tapD.numberOfTapsRequired = 1;
+    [view_0 addGestureRecognizer:tapD];
+    [self.view addSubview:view_0];
+
+    
     UIImageView * order_imgView = [[UIImageView alloc] initWithFrame:CGRectMake(10, screenHeight *0.02, screenHeight *0.03, screenHeight * 0.03)];
     order_imgView.image = [UIImage imageNamed:@"note.png"];
     [view_0 addSubview:order_imgView];
@@ -167,37 +179,29 @@ static NSString *setCellIdentifier = @"cellS";
         make.left.mas_equalTo(dataView.explainTitle.mas_right).offset(screenHeight * 0.002);
         make.centerY.equalTo(dataView);
     }];
-    UITapGestureRecognizer * tapD = [[UITapGestureRecognizer alloc]
-                                     initWithTarget:self
-                                     action:@selector(order_list)];
-    tapD.numberOfTapsRequired = 1;
-    [dataView addGestureRecognizer:tapD];
-    [view_0 addSubview:dataView];
 
-    [self.view addSubview:view_0];
+    [view_0 addSubview:dataView];
     UIView * view = [[UIView alloc]
                      initWithFrame:CGRectMake(0, screenHeight * 0.32, screenWide, screenHeight * 0.12)];
     view.backgroundColor = RGB(255, 255, 255);
-    NSArray * dataArray = @[@"system_1_41",@"system_1_42",@"system_1_43",@"system_1_44"];
-    for (int i = 0; i <dataArray.count; i++)
+    NSArray * img_Array = @[@"待付款",@"待使用",@"邀请码",@"退款售后"];
+    NSArray * str_Array = @[@"待付款",@"待出行",@"我的邀请码",@"退款/售后"];
+    for (int i = 0; i <4; i++)
     {
-        UIButton * btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        btn.frame = CGRectMake(screenWide /4.0 * i,0, screenWide /4.0, screenHeight * 0.119);
-        [btn setBackgroundImage:[UIImage imageNamed:dataArray[i]]
-                       forState:UIControlStateNormal];
-        [btn setBackgroundImage:[UIImage imageNamed:dataArray[i]]
-                       forState:UIControlStateHighlighted];
-        [btn addTarget:self
-                action:@selector(clickFourViews:)
-      forControlEvents:UIControlEventTouchUpInside];
+        DDButtonView * btn = [[DDButtonView alloc] init];
+        btn.img_view_str = img_Array[i];
+        btn.label_str = str_Array[i];
         btn.tag = 401 + i;
-         [view addSubview:btn];
+        [btn setViews];
+        btn.frame = CGRectMake(screenWide /4.0 * i,0, screenWide /4.0, screenHeight * 0.119);
+        UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickFourViews:)];
+        [btn addGestureRecognizer:tap];
+        tap.numberOfTapsRequired = 1;
+        [view addSubview:btn];
     }
     [self.view addSubview:view];
 }
--(void)order_list{
-    [self pushToViewPersonWithTitle:@"我的订单" type:@"order"];
-}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -265,7 +269,6 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
                 [self changeToAccountWithstr:@"现金账户"];
                 break;
             case 1:
-                //[self changeToAccountWithstr:@"优悠券"];
                 break;
             case 2:
                 [self changeToGraceVC];
@@ -409,24 +412,25 @@ heightForHeaderInSection:(NSInteger)section
     }
 
 }
-- (void)clickFourViews:(UIButton *)btn
+- (void)clickFourViews:(UITapGestureRecognizer *)btn
 {
     if ([Member DefaultUser].login.length !=0) {
 
-        int number = (int)btn.tag;
+        int number = (int)btn.view.tag;
         switch (number)
         {
             case 401:
-                [self pushToViewPersonWithTitle:@"我的订单" type:@"order"];
+                [self pushToViewPersonWithTitle:@"待付款" type:@"un_paid"];
                 break;
             case 402:
-                [self pushToComAndCollVCWithTitle:@"会员特权" type:@"member"];
+                [self pushToViewPersonWithTitle:@"待出行" type:@"paid"];
                 break;
             case 403:
-                [self pushToRefundVCWithTitle:@"退款维权" type:@"refund"];
+                [self pushToShare];
                 break;
             case 404:
-                [self pushToComAndCollVCWithTitle:@"我的点评" type:@"comment"];
+                [self pushToRefundVCWithTitle:@"退款维权" type:@"refund"];
+
                 break;
             default:
                 break;
@@ -436,21 +440,63 @@ heightForHeaderInSection:(NSInteger)section
     }
 
 }
--(void)pushToComAndCollVCWithTitle:(NSString *)title
-                             type :(NSString *)type// 点评和特权
+-(void)order_list{
+    if ([Member DefaultUser].login.length !=0) {
+        [self pushToViewPersonWithTitle:@"我的订单" type:@"order"];
+    }else{
+        [self resignOrLoad];
+    }
+
+}
+
+- (void)pushToViewPersonWithTitle:(NSString *)title
+                            type :(NSString *)type //订单
 {
-    ComAndCollVC * cVC = [[ComAndCollVC alloc] init];
+    PersonVController * viewC = [[PersonVController alloc] init];
     if (title)
     {
-        cVC.titleName = title;
+        viewC.titleName = title;
     }
     if (type)
     {
-        cVC.type = type;
+        viewC.type = type;
     }
-    cVC.hidesBottomBarWhenPushed = YES;//隐藏tabBar
-    [self.navigationController pushViewController:cVC
+    viewC.hidesBottomBarWhenPushed = YES;//隐藏tabBar
+    [self.navigationController pushViewController:viewC
                                          animated:YES];
+}
+-(void)pushToShare{
+    [self pushToComAndCollVCWithTitle:@"我的邀请码" type:@"invite"];
+
+}
+
+
+-(void)pushToComAndCollVCWithTitle:(NSString *)title
+                             type :(NSString *)type// 收藏 邀请码
+{
+    if ([type isEqualToString:@"invite"] &&([[Member DefaultUser].role intValue] == 0 || [[Member DefaultUser].role intValue] == 3)) {
+        DataWebViewController * web_vc = [[DataWebViewController alloc] init];
+        web_vc.hidesBottomBarWhenPushed = YES;//隐藏tabBar
+
+        [self.navigationController pushViewController:web_vc animated:NO];
+
+    }else{
+        ComAndCollVC * cVC = [[ComAndCollVC alloc] init];
+        if (title)
+        {
+            cVC.titleName = title;
+        }
+        if (type)
+        {
+            cVC.type = type;
+        }
+        cVC.hidesBottomBarWhenPushed = YES;//隐藏tabBar
+        [self.navigationController pushViewController:cVC
+                                             animated:YES];
+
+    }
+
+    
 
 }
 -(void)pushToRefundVCWithTitle:(NSString *)title
@@ -467,22 +513,6 @@ heightForHeaderInSection:(NSInteger)section
     }
     refundVC.hidesBottomBarWhenPushed = YES;//隐藏tabBar
     [self.navigationController pushViewController:refundVC
-                                         animated:YES];
-}
-- (void)pushToViewPersonWithTitle:(NSString *)title
-                            type :(NSString *)type //订单
-{
-    PersonVController * viewC = [[PersonVController alloc] init];
-    if (title)
-    {
-        viewC.titleName = title;
-    }
-    if (type)
-    {
-        viewC.type = type;
-    }
-    viewC.hidesBottomBarWhenPushed = YES;//隐藏tabBar
-    [self.navigationController pushViewController:viewC
                                          animated:YES];
 }
 /*

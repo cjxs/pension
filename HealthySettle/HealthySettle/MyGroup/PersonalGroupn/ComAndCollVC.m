@@ -13,6 +13,8 @@
 //收藏和点评
 @interface ComAndCollVC ()<UITableViewDataSource, UITableViewDelegate>{
     NSMutableArray * collect_Arr;
+    NSArray * text_arr;
+    NSArray * title_arr;
 }
 
 @end
@@ -35,16 +37,77 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
-    if ([self.type isEqualToString:@"member"])
+    if ([self.type isEqualToString:@"invite"])
     {
+        /*
         UIImageView * imageView = [[UIImageView alloc]
                                    initWithImage:[UIImage imageNamed:@"content"]];
         imageView.frame = CGRectMake(0, 0, screenWide, screenHeight * 0.6727);
         [self.view addSubview:imageView];
+         */
+        [self setInviteView];
+        
     }else if ([self.type isEqualToString:@"collect"]){
+        self.view.backgroundColor = [UIColor whiteColor];
         [self setCollectData];
     }
+}
+-(void)setInviteView{
+    self.view.backgroundColor = GRAYCOLOR;
+    title_arr = @[@"邀请码",@"推广链接"];
+    NSString *str =  [Member DefaultUser].refer_code;
+    text_arr = @[str,[NSString stringWithFormat:@"%@/index.php?g=Index&c=Login&a=reg&refer_code=%@",BASEURL,str]];
+    for (int i = 0; i < 2; i++) {
+        UIView * view_0 = [[UIView alloc] initWithFrame:CGRectMake(0, screenHeight * 0.015 + screenHeight * 0.215 * i, screenWide, screenHeight * 0.2 + screenHeight * 0.1*i)];
+        view_0.backgroundColor = [UIColor whiteColor];
+        [self.view addSubview:view_0];
+        
+        UIButton * copy_btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        copy_btn.tag = 520+i;
+        [copy_btn addTarget:self action:@selector(copySomeThingWithButton:) forControlEvents:UIControlEventTouchUpInside];
+        copy_btn.backgroundColor = [UIColor redColor];
+        [view_0 addSubview:copy_btn];
+        [copy_btn setTitle:@"复制" forState:UIControlStateNormal];
+        [view_0 addSubview:copy_btn];
+        [copy_btn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(screenWide /5,screenHeight * 0.05));
+            make.bottom.equalTo(view_0).offset(-screenHeight * 0.02);
+            make.centerX.equalTo(view_0);
+        }];
+        
+        UILabel * title_label = [[UILabel alloc] initWithFrame:CGRectMake(10, screenHeight * 0.03, screenWide * 0.2, screenHeight * 0.05)];
+        title_label.font = [UIFont systemFontOfSize:12];
+        title_label.textColor = [UIColor grayColor];
+        [view_0 addSubview:title_label];
+        UILabel * text_label = [[UILabel alloc] init];
+        text_label.backgroundColor = GRAYCOLOR;
+        text_label.layer.masksToBounds  = YES;
+        text_label.numberOfLines = 0;
+        text_label.layer.cornerRadius = 5;
+        [view_0 addSubview:text_label];
+        [text_label mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(title_label);
+            make.bottom.mas_equalTo(copy_btn.mas_top).offset(-screenHeight * 0.02);
+            make.left.mas_equalTo(title_label.mas_right);
+            make.right.equalTo(view_0).offset(-10);
+        }];
+        
+        title_label.text = title_arr[i];
+        text_label.text = text_arr[i];
+
+
+
+    }
+    
+    
+}
+-(void)copySomeThingWithButton:(UIButton *)btn{
+    
+    int number = btn.tag - 520;
+    UIPasteboard * pasteboard = [UIPasteboard generalPasteboard];
+    pasteboard.string = text_arr[number];
+    [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"已成功复制 %@ 到粘贴板",title_arr[number]]];
+    
 }
 -(void)setCollectData{
     Member * user = [Member DefaultUser];

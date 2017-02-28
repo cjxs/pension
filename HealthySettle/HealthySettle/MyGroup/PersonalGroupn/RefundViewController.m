@@ -28,34 +28,32 @@
     {
         _tableHeadView = [[UIView alloc]
                           initWithFrame:CGRectMake(0, 1, screenWide, 30)];
-        NSArray * array = @[@"全部", @"未处理", @"已退款"];
-        for (int i = 0; i < 3; i++)
+        NSArray * array = @[@"全部", @"处理中", @"退款成功", @"退款失败"];
+        for (int i = 0; i < 4; i++)
         {
             UIButton * btn = [UIButton buttonWithType:UIButtonTypeCustom];
-            btn.frame = CGRectMake(i *screenWide /3, 0, screenWide /3, 29);
+            btn.frame = CGRectMake(i *screenWide /4, 0, screenWide /4, 39);
             btn.tag = 500 + i;
             [btn setTitle:array[i]
                  forState:UIControlStateNormal];
             [btn addTarget:self
                     action:@selector(changeDataOfbtn:)
           forControlEvents:UIControlEventTouchUpInside];
+            btn.titleLabel.font = [UIFont systemFontOfSize:13];
             [_tableHeadView addSubview:btn];
             UILabel * label = [[UILabel alloc]
-                               initWithFrame:CGRectMake(i *screenWide /3, 29, screenWide /3, 1)];
+                               initWithFrame:CGRectMake(i *screenWide /4, 39, screenWide /4, 1)];
             [_tableHeadView addSubview:label];
             if (i == 0)
             {
-                [btn setTitleColor:[UIColor redColor]
-                          forState:UIControlStateNormal];
+                [btn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
                 label.backgroundColor = [UIColor redColor];
             }else
             {
-                [btn setTitleColor:[UIColor grayColor]
-                          forState:UIControlStateNormal];
+                [btn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
                 label.backgroundColor = [UIColor grayColor];
             }
-        }
-    }
+        }    }
     return _tableHeadView;
 }
 - (void) changeColorForAll
@@ -84,6 +82,9 @@
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+        [_tableView registerNib:[UINib nibWithNibName:@"OrdAndRefundTVCell" bundle:nil]
+             forCellReuseIdentifier:@"cellRefund"];
+
         _tableView.tableFooterView = [UIView new];
     }
     return _tableView;
@@ -93,46 +94,68 @@
     if (btn.titleLabel.textColor == [UIColor redColor]) {
         //释放没用的事件
     }else{
-    [self changeColorForAll];
-    [btn setTitleColor:[UIColor redColor]
-              forState:UIControlStateNormal];
-    for (UIView *view in _tableHeadView.subviews)
-    {
-        if (view.frame.size.height == 1&&
-            view.frame.origin.x == btn.frame.origin.x)
+        [self changeColorForAll];
+        [btn setTitleColor:[UIColor redColor]
+                  forState:UIControlStateNormal];
+        for (UIView *view in _tableHeadView.subviews)
         {
-            view.backgroundColor = [UIColor redColor];
+            if (view.frame.size.height == 1 && view.frame.origin.x == btn.frame.origin.x)
+            {
+                view.backgroundColor = [UIColor redColor];
+            }
         }
-    }
-    int wave = (btn.frame.origin.x+5)  / (screenWide / 3);
-    [self changeDataWithWave:wave];
+        int wave = btn.frame.origin.x  / (screenWide / 4);
+        [self changeDataWithWave:wave];
     }
 }
 -(void)changeDataWithWave:(int)wave
 {
-     [current_arr removeAllObjects];
+    [current_arr removeAllObjects];
     if (wave == 0)
     {
-        for (Order_ed * order in dataSource) {
-            if ([order.dd_status intValue] == 31||[order.dd_status intValue] == 29) {
-                [current_arr addObject:order];
-            }
-        }
+        current_arr = [NSMutableArray arrayWithArray:dataSource];
+        
     }else if (wave == 1)
     {
         for (Order_ed * order in dataSource) {
-            if ([order.dd_status intValue] == 29) {
+            if ([order.status intValue] == 2) {
                 [current_arr addObject:order];
             }
         }
-    }else{
+    }else if (wave == 2)
+    {
         for (Order_ed * order in dataSource) {
-            if ([order.dd_status intValue] == 31) {
+            if ([order.status intValue] == 4||[order.status intValue] == 5||[order.status intValue] == 8) {
+                [current_arr addObject:order];
+            }
+        }
+    }else
+    {
+        for (Order_ed * order in dataSource) {
+            if ([order.status intValue] == 9) {
                 [current_arr addObject:order];
             }
         }
     }
     [self.tableView reloadData];
+    [self testNumber];
+
+    
+}
+-(void)testNumber{
+    UILabel * label;
+    if (current_arr.count == 0) {
+        label = [[UILabel alloc] initWithFrame:CGRectMake(screenWide * 0.2, screenHeight * 0.3, screenWide * 0.6, screenHeight * 0.03)];
+        label.textAlignment = NSTextAlignmentCenter;
+        label.text = @"暂无相关订单";
+        label.textColor = [UIColor grayColor];
+        [self.tableView addSubview:label];
+    }else{
+        if (label) {
+            [label removeFromSuperview];
+        }
+    }
+
 }
 - (void)viewDidLoad
 {
@@ -143,9 +166,9 @@
 }
 -(void)loadData{
     [self.view addSubview:self.tableView];
-    [self.tableView registerNib:[UINib nibWithNibName:@"OrdAndRefundTVCell" bundle:nil]
-         forCellReuseIdentifier:@"cellRefund"];
     [self.view addSubview:self.tableHeadView];
+    [self testNumber];
+
 }
 -(void)setData{
     Member * user = [Member DefaultUser];
@@ -158,17 +181,11 @@
             Order_ed * order;
             for (NSDictionary * dic_l in dic[@"order"]) {
                 order = [Order_ed mj_objectWithKeyValues:dic_l];
-                
-                if ([order.status intValue] == 2||[order.status intValue] == 9) {
-                    order.dd_status = @"29";
-                    [current_arr addObject:order];
+                if ([order.status intValue] == 2||[order.status intValue] == 9 ||[order.status intValue] == 4||[order.status intValue] == 5||[order.status intValue] == 8) {
+                    [dataSource addObject:order];
                 }
-                else if ([order.status intValue] == 4||[order.status intValue] == 5||[order.status intValue] == 8) {
-                    order.dd_status = @"31";
-                    [current_arr addObject:order];
-                }
-                [dataSource addObject:order];
             }
+            current_arr = [NSMutableArray arrayWithArray:dataSource];
             [self loadData];
         }
         else{
@@ -207,7 +224,7 @@
                                                                 forIndexPath:indexPath];
     Order_ed * order = [Order_ed mj_objectWithKeyValues:current_arr[indexPath.row]];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    [cell configOrderWithOrder:order];
+    [cell configOrderWithOrder:order type:_type];
 
     return cell;
     

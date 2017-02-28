@@ -507,6 +507,8 @@
                 [menber.cont_arr addObject:user];
             }
             menber.role = dic[@"role"];
+            menber.refer_code = dic[@"refer_code"];
+
             menber.login = @"online";
             menber.pay_can = dic[@"pay_can"];
             [self.navigationController popViewControllerAnimated:YES];

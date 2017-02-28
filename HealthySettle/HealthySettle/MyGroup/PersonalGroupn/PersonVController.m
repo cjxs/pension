@@ -15,6 +15,8 @@
 @interface PersonVController ()<UITableViewDataSource, UITableViewDelegate>{
     NSMutableArray * dataSource;
     NSMutableArray * current_arr;
+    UILabel * label;
+    
 }
 
 @end
@@ -26,11 +28,7 @@
     {
         _tableHeadView = [[UIView alloc]
                           initWithFrame:CGRectMake(0, 1, screenWide, 40)];
-        [_tableView registerNib:[UINib nibWithNibName:@"OrdAndRefundTVCell" bundle:nil]
-             forCellReuseIdentifier:@"cellOrder"];
-        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 
-        _tableView.backgroundColor = RGB(246, 246, 246);
         NSArray * array = @[@"全部", @"待付款", @"使用中", @"已关闭"];
         for (int i = 0; i < 4; i++)
         {
@@ -80,11 +78,16 @@
 - (UITableView *)tableView
 {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 41, screenWide, screenHeight - 64 - 40) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0,0, screenWide, screenHeight - 64 - 0) style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
         _tableView.tableFooterView = [UIView new];
+        [_tableView registerNib:[UINib nibWithNibName:@"OrdAndRefundTVCell" bundle:nil]
+         forCellReuseIdentifier:@"cellOrder"];
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        
+        _tableView.backgroundColor = RGB(246, 246, 246);
     }
     return _tableView;
 }
@@ -137,6 +140,17 @@
         }
     }
     [self.tableView reloadData];
+    if (current_arr.count == 0) {
+        label = [[UILabel alloc] initWithFrame:CGRectMake(screenWide * 0.2, screenHeight * 0.3, screenWide * 0.6, screenHeight * 0.03)];
+        label.textAlignment = NSTextAlignmentCenter;
+        label.text = @"暂无相关订单";
+        label.textColor = [UIColor grayColor];
+        [self.tableView addSubview:label];
+    }else{
+        if (label) {
+            [label removeFromSuperview];
+        }
+    }
 }
 - (void)viewDidLoad
 {
@@ -170,7 +184,6 @@
                     }
                     [dataSource addObject:order];
                 }
-                current_arr = [NSMutableArray arrayWithArray:dataSource];
                 [self loadData];
             }
 
@@ -184,8 +197,48 @@
 }
 -(void)loadData{
 
-    [self.view addSubview:self.tableView];
-    [self.view addSubview:self.tableHeadView];
+    if ([_type isEqualToString:@"order"]) {
+        current_arr = [NSMutableArray arrayWithArray:dataSource];
+
+    }else if ([_type isEqualToString:@"un_paid"]){
+        [current_arr removeAllObjects];
+        for (Order_ed * order in dataSource) {
+            if ([order.dd_status intValue] == 19) {
+                [current_arr addObject:order];
+            }
+        }
+
+        
+    }else if ([_type isEqualToString:@"paid"]){
+        [current_arr removeAllObjects];
+        for (Order_ed * order in dataSource) {
+            if ([order.dd_status intValue] == 21) {
+                [current_arr addObject:order];
+            }
+        }
+
+    }
+    if (current_arr.count != 0) {
+        [self.view addSubview:self.tableView];
+        if (label) {
+            [label removeFromSuperview];
+        }
+
+    }else{
+            label = [[UILabel alloc] initWithFrame:CGRectMake(screenWide * 0.2, screenHeight * 0.3, screenWide * 0.6, screenHeight * 0.03)];
+            label.textAlignment = NSTextAlignmentCenter;
+            label.text = @"暂无相关订单";
+            label.textColor = [UIColor grayColor];
+            [self.view addSubview:label];
+    }
+    
+    
+    if ([_type isEqualToString:@"order"]) {
+        self.tableView.tableHeaderView = self.tableHeadView;
+        
+    }
+
+
 
 
 }
@@ -207,7 +260,7 @@
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section
 {
-    if ([_type isEqualToString:@"order"])
+    if ([_type isEqualToString:@"order"] || [_type isEqualToString:@"paid"] ||[_type isEqualToString:@"un_paid"])
     {
         return current_arr.count;
     }else if ([_type isEqualToString:@"collect"])
@@ -219,14 +272,14 @@
     }
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView
-         cellForRowAtIndexPath:(NSIndexPath *)indexPath
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath 
 {
     OrdAndRefundTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cellOrder"
                                                                       forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     Order_ed * order = [Order_ed mj_objectWithKeyValues:current_arr[indexPath.row]];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    [cell configOrderWithOrder:order];
+    [cell configOrderWithOrder:order type:_type];
     
        
         return cell;

@@ -19,6 +19,6 @@
 @property (weak, nonatomic) IBOutlet UIButton    *first_btn;
 @property (weak, nonatomic) IBOutlet UILabel *number_label;
 @property (weak, nonatomic) IBOutlet UILabel *add_time_label;
--(void)configOrderWithOrder:(Order_ed *)order ;
+-(void)configOrderWithOrder:(Order_ed *)order type:(NSString *)type;
 -(void)configRefundWithtitle:(NSString *)title image:(UIImage *)image type:(NSInteger)type price:(NSString *)price ;
 @end
