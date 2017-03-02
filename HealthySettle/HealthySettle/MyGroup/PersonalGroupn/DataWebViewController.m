@@ -8,7 +8,9 @@
 
 #import "DataWebViewController.h"
 
-@interface DataWebViewController ()<UIWebViewDelegate>
+@interface DataWebViewController ()<UIWebViewDelegate>{
+    UIWebView * web_view;
+}
 
 @end
 
@@ -19,12 +21,11 @@
     self.tabBarController.tabBar.hidden = YES;
     
     // Do any additional setup after loading the view.
-    UIWebView * web_view = [[UIWebView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    web_view = [[UIWebView alloc] initWithFrame:[UIScreen mainScreen].bounds];
     NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/phone#/upgrade",BASEURL]];
     NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
     [self.view addSubview:web_view];
     web_view.delegate = self;
-
     [web_view loadRequest:request];
     
 
@@ -47,6 +48,17 @@
     return YES;
 }
 
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [web_view stopLoading];
+    [web_view removeFromSuperview];
+}
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+    web_view = nil;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

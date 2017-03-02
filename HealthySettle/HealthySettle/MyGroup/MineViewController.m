@@ -27,6 +27,7 @@ static NSString *setCellIdentifier = @"cellS";
     UIImageView * imagePerson;
     UILabel * textLabel;
     UITapGestureRecognizer * tapRL;
+    UITapGestureRecognizer * tap_refer;
 }
 
 @end
@@ -36,10 +37,8 @@ static NSString *setCellIdentifier = @"cellS";
 -(UIImageView *)vip_imgv{
     if (!_vip_imgv) {
         UIImageView * image_v = [[UIImageView alloc] initWithFrame:CGRectMake(screenWide * 0.27, screenHeight * 0.14, screenWide*0.3, screenWide *0.12)];
-        UITapGestureRecognizer * ges = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pushToShare)];
-        [image_v addGestureRecognizer:ges];
-        ges.numberOfTapsRequired = 1;
         _vip_imgv = image_v;
+
         
     }
     return _vip_imgv;
@@ -323,6 +322,7 @@ heightForHeaderInSection:(NSInteger)section
 -(void)exitLogin{//退出登录,代理协议方法
     if ([[Member DefaultUser].login length] == 0) {
         imagePerson.image = [UIImage imageNamed:@"boy_head"];
+        [textLabel removeGestureRecognizer:tap_refer];
         [textLabel addGestureRecognizer:tapRL];
         if (self.vip_imgv) {
             [self.vip_imgv removeFromSuperview];
@@ -342,22 +342,23 @@ heightForHeaderInSection:(NSInteger)section
          textLabel.text = x;
      }];
      [textLabel removeGestureRecognizer:tapRL];
+    tap_refer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pushToShare)];
+    tap_refer.numberOfTapsRequired = 1;
+    [textLabel addGestureRecognizer:tap_refer];
+    [self.view addSubview:self.vip_imgv];
+
     switch ([[Member DefaultUser].role intValue]) {
         case 0:
-            [self.view addSubview:self.vip_imgv];
             self.vip_imgv.image = [UIImage imageNamed:@"member-注册会员"];
             break;
         case 1:
-            [self.view addSubview:self.vip_imgv];
             self.vip_imgv.image = [UIImage imageNamed:@"member-优悠大使"];
 
             break;
         case 2:
-            [self.view addSubview:self.vip_imgv];
             self.vip_imgv.image = [UIImage imageNamed:@"member认证会员"];
             break;
         case 3:
-            [self.view addSubview:self.vip_imgv];
             self.vip_imgv.image = [UIImage imageNamed:@"member-注册会员"];
             break;
         default:
@@ -466,7 +467,12 @@ heightForHeaderInSection:(NSInteger)section
                                          animated:YES];
 }
 -(void)pushToShare{
-    [self pushToComAndCollVCWithTitle:@"我的邀请码" type:@"invite"];
+    if ([Member DefaultUser].login.length !=0) {
+        [self pushToComAndCollVCWithTitle:@"我的邀请码" type:@"invite"];
+    }else{
+        [self resignOrLoad];
+    }
+
 
 }
 

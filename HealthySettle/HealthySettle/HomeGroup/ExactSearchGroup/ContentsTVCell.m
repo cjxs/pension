@@ -64,18 +64,25 @@
     return self;
 }
 -(void)addPersonView{
-    ChooPersonView * choose_view = [[ChooPersonView alloc] init];
+    NSArray * arr = [Member DefaultUser].cont_arr;
+    if (arr.count != 0) {
+        ChooPersonView * choose_view = [[ChooPersonView alloc] init];
+        
+        choose_view.data_arr = arr;
+        
+        choose_view.selected = ^(NSDictionary *user){
+            _name_field.text = user[@"travel_name"];
+            _phone_field.text = user[@"travel_phone"];
+        };
+        
+        [choose_view addFirstView];
+        UIWindow * window = [UIApplication sharedApplication].keyWindow;
+        [window addSubview:choose_view];
+
+    }else{
+        [SVProgressHUD showErrorWithStatus:@"您目前暂无常用联系人"];
+    }
     
-    choose_view.data_arr = [Member DefaultUser].cont_arr;
-    
-    choose_view.selected = ^(NSDictionary *user){
-        _name_field.text = user[@"travel_name"];
-        _phone_field.text = user[@"travel_phone"];
-    };
-    
-    [choose_view addFirstView];
-    UIWindow * window = [UIApplication sharedApplication].keyWindow;
-    [window addSubview:choose_view];
 }
 
 -(void)configWithname:(NSString *)name phone:(NSString *)phone {

@@ -9,5 +9,5 @@
 #import <Foundation/Foundation.h>
 
 @interface DDListGet : YTKBaseRequest //列表数据
--(id)initWithcat_id:(NSString *)cat_id keyword:(NSString *)keyword  area_id:(NSString *)area_id sort:(NSString *)sort priceRange:(NSArray *)priceRange level:(NSString *)level page:(NSString *)page;
+-(id)initWithcat_id:(NSString *)cat_id keyword:(NSString *)keyword  area_id:(NSString *)area_id sort:(NSString *)sort priceRange:(NSString *)priceRange level:(NSString *)level page:(NSString *)page;
 @end

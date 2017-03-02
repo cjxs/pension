@@ -177,22 +177,22 @@
         }else{
             switch (self.selectType) {
                 case DDSelectTYpeSingle:
-                    result = _data_arr1[indexPath.row];
+                    result = [NSString stringWithFormat:@"%ld",indexPath.row];
                     cell.text_label.textColor = [UIColor colorWithHexString:@"f2774b"];
                     [self confirmSure];
                     break;
                 case DDSelectTYpeMulti:
                     if (result_arr) {
-                        if ([result_arr containsObject:_data_arr1[indexPath.row]]) {
-                            [result_arr removeObject:_data_arr1[indexPath.row]];
+                        if ([result_arr containsObject:[NSString stringWithFormat:@"%ld",indexPath.row]]) {
+                            [result_arr removeObject:[NSString stringWithFormat:@"%ld",indexPath.row]];
                             [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
                             
                         }else{
-                            [result_arr addObject:_data_arr1[indexPath.row]];
+                            [result_arr addObject:[NSString stringWithFormat:@"%ld",indexPath.row]];
                             cell.text_label.textColor = [UIColor colorWithHexString:@"f2774b"];
                         }
                     }else{
-                        result_arr = [NSMutableArray arrayWithObject:_data_arr1[indexPath.row]];
+                        result_arr = [NSMutableArray arrayWithObject:[NSString stringWithFormat:@"%ld",indexPath.row]];
                         cell.text_label.textColor = [UIColor colorWithHexString:@"f2774b"];
                         
                     }
@@ -207,22 +207,22 @@
     }else{
         switch (self.selectType) {
             case DDSelectTYpeSingle:
-                result = _data_arr2[indexPath.row];
+                result = [NSString stringWithFormat:@"%ld",indexPath.row];
                 cell.text_label.textColor = [UIColor colorWithHexString:@"f2774b"];
                 [self confirmSure];
                 break;
             case DDSelectTYpeMulti:
                 if (result_arr) {
-                    if ([result_arr containsObject:_data_arr2[indexPath.row]]) {
-                        [result_arr removeObject:_data_arr2[indexPath.row]];
+                    if ([result_arr containsObject:[NSString stringWithFormat:@"%ld",indexPath.row]]) {
+                        [result_arr removeObject:[NSString stringWithFormat:@"%ld",indexPath.row]];
                         [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
 
                     }else{
-                        [result_arr addObject:_data_arr2[indexPath.row]];
+                        [result_arr addObject:[NSString stringWithFormat:@"%ld",indexPath.row]];
                         cell.text_label.textColor = [UIColor colorWithHexString:@"f2774b"];
                     }
                 }else{
-                    result_arr = [NSMutableArray arrayWithObject:_data_arr2[indexPath.row]];
+                    result_arr = [NSMutableArray arrayWithObject:[NSString stringWithFormat:@"%ld",indexPath.row]];
                     cell.text_label.textColor = [UIColor colorWithHexString:@"f2774b"];
 
                 }

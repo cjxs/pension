@@ -508,9 +508,10 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath
         [self pushToArticleWithTitle:@"养老常识"type:@"pension"];
     }else
     {
-        NSURL * url = [NSURL URLWithString:@"http://www.5199yl.com/#/assess"];
+        NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/phone#/assess",BASEURL]];
         WebViewController * webVC = [[WebViewController alloc] init];
         webVC.urlLoad = url;
+        webVC.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:webVC
                                              animated:NO];
     }
@@ -561,7 +562,10 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 }
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
-    NSLog(@"%@",_searchWhere.text);
+    TravelResultVController * resultVC = [[TravelResultVController alloc] init];
+    resultVC.hidesBottomBarWhenPushed = YES;
+    resultVC.keyword = searchBar.text;
+    [self.navigationController pushViewController:resultVC animated:YES];
     _searchWhere.showsCancelButton = NO;
     [self searchBarClear];
 }

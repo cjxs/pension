@@ -52,7 +52,7 @@
 static NSString * const UMDEVICETOKEN      = @"UMDeviceToken";// 友盟推送的设备Tokenhttps://app.yinxihttps://app.yinxiang.com/shard/s65/nl/2147483647/8e6041d0-0d64-4416-af62-6e0009025806/ang.com/shard/s65/nl/2147483647/8e6041d0-0d64-4416-af62-6e0009025806/
 
 
-@interface AppDelegate ()<WXApiDelegate>
+@interface AppDelegate ()<WXApiDelegate,UIAlertViewDelegate>
 
 
 
@@ -190,7 +190,6 @@ static NSString * const UMDEVICETOKEN      = @"UMDeviceToken";// 友盟推送的
     __block NSDictionary * dic;
     
     [loginApi startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
-        NSLog(@"%@",request.responseString);
         NSString *str = [request.responseString stringByReplacingOccurrencesOfString:@":null" withString:@":\"\""];
         dic = [DDLogin dictionaryWithJsonString: str];
         if ([dic[@"error_code"] intValue] == 0) {
@@ -301,8 +300,7 @@ static NSString * const UMDEVICETOKEN      = @"UMDeviceToken";// 友盟推送的
         [[AlipaySDK defaultService] processOrderWithPaymentResult:url
                                                   standbyCallback:^(NSDictionary *resultDic) {
             NSLog(@"result = %@支付宝客户端返回",resultDic);
-          OrderStatusTVController * order_status_VC = [[OrderStatusTVController alloc] init];
-          [self.window.rootViewController.navigationController pushViewController:order_status_VC animated:YES];
+
 
                                                       
         }];
@@ -335,33 +333,34 @@ static NSString * const UMDEVICETOKEN      = @"UMDeviceToken";// 友盟推送的
 #pragma mark - 微信支付代理方法
 -(void) onResp:(BaseResp*)resp {
     NSString *strTitle = nil;
-    NSString *strMsg = nil;
+    NSInteger strCode;
     
     if([resp isKindOfClass:[PayResp class]]){
+        strTitle = resp.errStr;
+        strCode = resp.errCode;
         
-        if (resp.errCode == WXSuccess) {
+        if (strCode == WXSuccess) {
             //支付返回结果，实际支付结果需要去微信服务器端查询
-            NSString *result = nil;
-            NSString *hintInfo = nil;
-            result = @"Pay for results";
-            hintInfo = @"Pay result: success!";
             
-            strTitle = result;
-            strMsg = hintInfo;
-            
-            UIAlertView *alert = [[UIAlertView alloc]
-                                  initWithTitle:strTitle
-                                  message:strMsg delegate:self
-                                  cancelButtonTitle:@"OK"
-                                  otherButtonTitles:nil, nil];
-            [alert show];
-            OrderStatusTVController * order_status_VC = [[OrderStatusTVController alloc] init];
-            [self.window.rootViewController.navigationController pushViewController:order_status_VC animated:YES];
+            [SVProgressHUD showSuccessWithStatus:@"恭喜您，支付成功！"];
+            [self paySuccess];
 
-        }else {
-            NSLog(@"%d",resp.errCode);
+        }else if(strCode ==WXErrCodeUserCancel){
+            [SVProgressHUD showErrorWithStatus:@"用户取消支付"];
+        }else{
+            [SVProgressHUD showErrorWithStatus:@"支付失败"];
+
         }
     }
+}
+-(void)paySuccess{
+    UINavigationController * na_vc = self.tabbarController.viewControllers[0];
+    OrderStatusTVController * order_status_VC = [[OrderStatusTVController alloc] init];
+    order_status_VC.vc_type = @"unnormal";
+    order_status_VC.o_id = [[NSUserDefaults standardUserDefaults] objectForKey:@"pay_id"];
+    
+    [na_vc pushViewController:order_status_VC animated:YES];
+
 }
 
 @end

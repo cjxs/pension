@@ -237,12 +237,12 @@
         order.tradeNO =  _order_ed.order_sn; //订单ID（由商家自行制定）
         order.productName = [NSString stringWithFormat:@"优悠乐--%@",_order_ed.order_name];//product.subject; //商品标题
         order.productDescription = [NSString stringWithFormat:@"优悠乐--%@",_order_ed.order_name];//product.body; //商品描述
-        order.amount = [NSString stringWithFormat:@"%.2lf",[_order_ed.payment_money floatValue]]; //商品价格
+        order.amount = @"0.01";//[NSString stringWithFormat:@"%.2lf",[_order_ed.payment_money floatValue]]; //商品价格
     }else{
         order.tradeNO =  _order.order_sn; //订单ID（由商家自行制定）
         order.productName = [NSString stringWithFormat:@"优悠乐--%@",_order.order_name];//product.subject; //商品标题
         order.productDescription = [NSString stringWithFormat:@"优悠乐--%@",_order.order_name];//product.body; //商品描述
-        order.amount = [NSString stringWithFormat:@"%.2lf",[_order.payment_money floatValue]]; //商品价格
+        order.amount = @"0.01";//[NSString stringWithFormat:@"%.2lf",[_order.payment_money floatValue]]; //商品价格
 
     }
     order.notifyURL =  @"http://www.xxx.com"; //回调URL
@@ -256,7 +256,7 @@
     
     //将商品信息拼接成字符串
     NSString *orderSpec = [order description];
-    NSLog(@"%@",orderSpec);
+    //NSLog(@"%@",orderSpec);
 
     
     //获取私钥并将商户信息签名,外部商户可以根据情况存放私钥和签名,只需要遵循RSA签名规范,并将签名字符串base64编码和UrlEncode

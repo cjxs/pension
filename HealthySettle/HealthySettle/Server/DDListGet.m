@@ -14,12 +14,12 @@
     NSString * _keyword;
     NSString * _cat_id;
     NSString * _page;
-    NSArray * _price_range;
+    NSString * _price_range;
     NSString * _sort;
     NSString * _level;
 
 }
--(id)initWithcat_id:(NSString *)cat_id keyword:(NSString *)keyword  area_id:(NSString *)area_id sort:(NSString *)sort priceRange:(NSArray *)priceRange level:(NSString *)level page:(NSString *)page{
+-(id)initWithcat_id:(NSString *)cat_id keyword:(NSString *)keyword  area_id:(NSString *)area_id sort:(NSString *)sort priceRange:(NSString *)priceRange level:(NSString *)level page:(NSString *)page{
     self = [super init];
     if (self ) {
         _cat_id = cat_id;
@@ -39,9 +39,9 @@
             _sort = @"";
         }
         if (priceRange) {
-            _price_range = [NSArray arrayWithArray:priceRange];
+            _price_range = priceRange;
         }else{
-            _price_range = [NSArray array];
+            _price_range = @"";
         }
         if (level) {
             _level = level;

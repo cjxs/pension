@@ -14,16 +14,21 @@
 #import "DDListGet.h"
 #import "CDDatePicker.h"
 #import "MJRefresh.h"
+#import "FiltView.h"
 static NSInteger page = 1;
 
 
-@interface ResultListVController ()<UITableViewDataSource ,UITableViewDelegate,HYMDatePickerDelegate,UIGestureRecognizerDelegate> {
+@interface ResultListVController ()<UITableViewDataSource ,UITableViewDelegate,HYMDatePickerDelegate,UIGestureRecognizerDelegate,UITextFieldDelegate> {
     NSDate * end_begain;
     NSDate * end_end;
     BOOL hide;
     BOOL isScroll;
     DDListGet * ddlist;//网络请求的指针
-    
+    NSString * sort;
+    NSString * level;
+    BOOL grade_clear;
+    BOOL price_clear;
+    BOOL keyword_clear;
 }
 
 @end
@@ -46,6 +51,13 @@ static NSInteger page = 1;
     }
     return _tableView;
 }
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    keyword_clear = YES;
+    _keyword = textField.text;
+    [self headerRereshing];
+    [textField resignFirstResponder];
+    return YES;
+}
 -(UIView *)tableHeadView {
     if (!_tableHeadView)
     {
@@ -55,9 +67,15 @@ static NSInteger page = 1;
         UITextField * textField = [[UITextField alloc]
                                    initWithFrame:CGRectMake(screenWide * 0.3, screenHeight * 0.01, screenWide * 0.68, screenHeight * 0.06)];
         textField.backgroundColor = [UIColor whiteColor];
+        textField.returnKeyType = UIReturnKeyDone;
         textField.clipsToBounds = YES;
         textField.layer.cornerRadius = 5;
-        textField.placeholder = @"  机构名称／位置等";
+        textField.delegate = self;
+        if (_keyword) {
+            textField.text = _keyword;
+        }else{
+            textField.placeholder = @"  机构名称／位置等";
+        }
         textField.font = [UIFont systemFontOfSize:14];
         _textField = textField;
         [view addSubview:_textField];
@@ -147,19 +165,21 @@ static NSInteger page = 1;
 /**
  *  集成刷新控件
  */
+
 -(UIView *)filter_view
 { //筛选页面
     if (!_filter_view)
     {
-        NSArray * image_array = @[@"list2_1_",@"list2_2_",@"list2_3_",@"list2_4_"];
-        NSArray * title_array = @[@"所在区域",@"价格区间",@"筛选",@"排序"];
+        NSArray * image_array = @[@"list2_3_",@"list2_2_",@"list2_4_"];
+        NSArray * title_array = @[@"等级",@"价格区间",@"排序"];
+
         UIView * view = [[UIView alloc]
                          initWithFrame:CGRectMake(0, screenHeight - 49-64, screenWide, 49)];
         view.backgroundColor = RGB(249, 249, 249);
-        for (int i = 0; i < 4 ;i++ )
+        for (int i = 0; i < 3 ;i++ )
         {
             UIButton * btn = [UIButton buttonWithType:UIButtonTypeCustom];
-            btn.frame = CGRectMake(screenWide /4 * i, 0, screenWide /4, 49);
+            btn.frame = CGRectMake(screenWide /3 * i, 0, screenWide /3, 49);
             [btn addTarget:self
                     action:@selector(showfilterWithButton:)
           forControlEvents:UIControlEventTouchUpInside];
@@ -168,23 +188,24 @@ static NSInteger page = 1;
             switch (i) {
                 case 0:
                     image_view  = [[UIImageView alloc]
-                                   initWithFrame:CGRectMake((screenWide/4 -screenWide * 0.05)/2 + screenWide /4 * i, screenHeight * 0.01, screenWide * 0.04, screenWide * 0.04 /3 * 4)];
+                                   initWithFrame:CGRectMake(screenWide/6 -screenWide * 0.02 + screenWide /3 * i, screenHeight * 0.01, screenWide * 0.04, screenWide * 0.04 /3 * 4)];
                     break;
                 case 1:
                     image_view  = [[UIImageView alloc]
-                                   initWithFrame:CGRectMake((screenWide/4 -screenWide * 0.05)/2 + screenWide /4 * i, screenHeight * 0.01, screenWide * 0.05, screenWide * 0.05 )];
+                                   initWithFrame:CGRectMake(screenWide/6 -screenWide * 0.02 + screenWide /3 * i, screenHeight * 0.01, screenWide * 0.05, screenWide * 0.05 )];
                     break;
                 default:
                     image_view  = [[UIImageView alloc]
-                                   initWithFrame:CGRectMake((screenWide/4 -screenWide * 0.05)/2 + screenWide /4 * i, screenHeight * 0.01, screenWide * 0.04, screenWide * 0.04 /15* 16)];
+                                   initWithFrame:CGRectMake(screenWide/6 -screenWide * 0.02 + screenWide /3 * i, screenHeight * 0.01, screenWide * 0.04, screenWide * 0.04 /15* 16)];
                     break;
-                }
-         
+            }
+            
             image_view.image = [UIImage imageNamed:image_array[i]];
             [view addSubview:image_view];
             UILabel * label = [[UILabel alloc]
-                               initWithFrame:CGRectMake(screenWide/4 * i, CGRectGetMaxY(image_view.frame), screenWide /4,49 -  CGRectGetMaxY(image_view.frame))];
+                               initWithFrame:CGRectMake(screenWide/3 * i, CGRectGetMaxY(image_view.frame), screenWide /3,49 -  CGRectGetMaxY(image_view.frame))];
             label.text = title_array[i];
+            label.tag = 820+i;
             label.textColor = RGB(199, 199, 199);
             label.font = [UIFont systemFontOfSize:10];
             label.textAlignment = NSTextAlignmentCenter;
@@ -196,20 +217,149 @@ static NSInteger page = 1;
 }
 - (void)showfilterWithButton:(UIButton *)btn
 {
-    int number = btn.frame.origin.x / screenWide * 4;
+    int number = btn.frame.origin.x / screenWide * 3;
     if ( number ==0) {
-        NSLog(@" 所在区域");
+        [self gradefileViewAppear];
     }else if (number == 1)
     {
-        NSLog(@" 价格区间");
-        PriSeleView * pri_view = [[PriSeleView alloc] init];
-        [[UIApplication sharedApplication].keyWindow addSubview:pri_view];
-    }else if (number == 2)
+        [self pricefileViewAppear];
+    }else
     {
-        NSLog(@"筛选");
-    }else {
-  NSLog(@"排序");
+        [self orderfileViewAppear];
     }
+}
+-(void)gradefileViewAppear{
+    FiltView * gradefilt_view = [[FiltView alloc] init];
+    gradefilt_view.listType = DDListTYpeSingle;
+    gradefilt_view.selectType = DDSelectTYpeSingle;
+    gradefilt_view.data_arr1 = @[@"不限",@"金牌机构",@"银牌机构",@"铜牌机构",@"铁牌机构"];
+    @weakify(gradefilt_view);
+
+    gradefilt_view.sureBtn = ^(NSString *str){
+        @strongify(gradefilt_view);
+        for (int i = 0; i < _filter_view.subviews.count; i++) {
+            
+            if (_filter_view.subviews[i].tag ==820 &&[_filter_view.subviews[i] isKindOfClass:[UILabel class]]) {
+                UILabel *label = _filter_view.subviews[i];
+                label.text = str.length !=0? gradefilt_view.data_arr1[str.intValue]:@"不限";
+            }
+        }
+
+        int re = 4 - str.intValue;
+        
+        level = str.intValue == 0?@"":[NSString stringWithFormat:@"%d",re];
+        if (!grade_clear) {
+            grade_clear = YES;
+        }
+        [self headerRereshing];
+        
+    };
+    
+    [gradefilt_view addFirstView];
+    
+    [UIView animateWithDuration:0.5f animations:^{
+        [self.view addSubview:gradefilt_view];
+    }];
+
+}
+-(void)pricefileViewAppear{
+    FiltView * pricefilt_view = [[FiltView alloc] init];
+    pricefilt_view.listType = DDListTYpeSingle;
+    pricefilt_view.selectType = DDSelectTYpeSingle;
+    if ([_vc_type intValue] == 1) {
+        pricefilt_view.data_arr1 = @[@"5000元/月 以上",@"3000-5000元/月",@"2000-3000元/月",@"1000-2000元/月",@"1000元/月 以下"];
+    }else{
+        pricefilt_view.data_arr1 = @[@"150元/天 以下",@"150-300元/天",@"300-450元/天",@"450-600元/天",@"600元/天 以上"];
+        
+    }
+    @weakify(pricefilt_view);
+    pricefilt_view.sureBtn = ^(NSString * str){
+        @strongify(pricefilt_view);
+        
+        NSString *str_ = pricefilt_view.data_arr1[str.intValue];
+        for (int i = 0; i < _filter_view.subviews.count; i++) {
+            if (_filter_view.subviews[i].tag ==821 &&[_filter_view.subviews[i] isKindOfClass:[UILabel class]]) {
+                UILabel *label = _filter_view.subviews[i];
+                if (str.length == 0) {
+                    label.text =@"价格";
+                }else{
+                    label.text = str_;
+
+                }
+            }
+        }
+        if (str.length == 0) {
+            self.priceRange = @"";
+        }else{
+            NSArray * str_arr;
+            if ([_vc_type intValue] == 1) {
+                str_arr = [str_ componentsSeparatedByString:@"元/月"];
+            }else{
+                str_arr = [str_ componentsSeparatedByString:@"元/天"];
+            }
+            if ([str_arr.firstObject length] < 5) {
+                if ([str_arr.firstObject intValue] == 5000||[str_arr.firstObject intValue] == 600) {
+                    self.priceRange = [NSString stringWithFormat:@"%@-10000",str_arr.firstObject];
+                }else if ([str_arr.firstObject intValue] == 1000||[str_arr.firstObject intValue] ==150){
+                    self.priceRange = [NSString stringWithFormat:@"0-%@",str_arr.firstObject];
+                }
+            }else{
+                self.priceRange = str_arr.firstObject;
+            }
+
+        }
+        
+        if (!price_clear) {
+            price_clear = YES;
+        }
+        [self headerRereshing];
+
+        
+    };
+    [pricefilt_view addFirstView];
+    [UIView animateWithDuration:0.5f animations:^{
+        [self.view addSubview:pricefilt_view];
+    }];
+    
+}
+
+-(void)orderfileViewAppear{
+    FiltView * orderfilt_view = [[FiltView alloc] init];
+    orderfilt_view.listType = DDListTYpeSingle;
+    orderfilt_view.selectType = DDSelectTYpeSingle;
+    orderfilt_view.data_arr1 = @[@"综合排序",@"价格从高到低",@"价格从低到高"];
+    @weakify(orderfilt_view);
+    orderfilt_view.sureBtn = ^(NSString *str){
+        @strongify(orderfilt_view);
+        for (int i = 0; i < _filter_view.subviews.count; i++) {
+            if (_filter_view.subviews[i].tag ==822 &&[_filter_view.subviews[i] isKindOfClass:[UILabel class]]) {
+                UILabel *label = _filter_view.subviews[i];
+                label.text = str.length !=0?orderfilt_view.data_arr1[str.intValue]:@"不限";
+            }
+        }
+
+        
+        switch ([str intValue]) {
+            case 0:
+                sort = @"";
+                break;
+            case 1:
+                sort = @"desc";
+                break;
+            case 2:
+                sort = @"asc";
+                break;
+            default:
+                break;
+        }
+        [self headerRereshing];
+
+    };
+    [orderfilt_view addFirstView];
+    [UIView animateWithDuration:0.5f animations:^{
+        [self.view addSubview:orderfilt_view];
+    }];
+    
 }
 #pragma mark - auto_view
 -(void)viewWillAppear:(BOOL)animated
@@ -225,13 +375,63 @@ static NSInteger page = 1;
 
 
 -(void)setData{
+    if (grade_clear) {
+        _priceRange = @"";
+        sort = @"";
+        _keyword = @"";
+        for (int i = 0; i < _filter_view.subviews.count; i++) {
+            _textField.text = @"";
+            if (_filter_view.subviews[i].tag ==821 &&[_filter_view.subviews[i] isKindOfClass:[UILabel class]]) {
+                UILabel *label = _filter_view.subviews[i];
+                label.text = @"不限";
+            }else if (_filter_view.subviews[i].tag ==822 &&[_filter_view.subviews[i] isKindOfClass:[UILabel class]]) {
+                UILabel *label = _filter_view.subviews[i];
+                label.text = @"综合排序";
+            }
+        }
+
+    }
     
-    
-    ddlist = [[DDListGet alloc] initWithcat_id:_vc_type keyword:nil area_id:_area_id sort:nil priceRange:nil level:nil page:[NSString stringWithFormat:@"%ld",page]];
+    if (price_clear) {
+        level = @"";
+        _keyword = @"";
+        sort = @"";
+        for (int i = 0; i < _filter_view.subviews.count; i++) {
+            _textField.text = @"";
+            if (_filter_view.subviews[i].tag ==820 &&[_filter_view.subviews[i] isKindOfClass:[UILabel class]]) {
+                UILabel *label = _filter_view.subviews[i];
+                label.text = @"等级";
+            }else if (_filter_view.subviews[i].tag ==822 &&[_filter_view.subviews[i] isKindOfClass:[UILabel class]]) {
+                UILabel *label = _filter_view.subviews[i];
+                label.text = @"综合排序";
+            }
+        }
+
+    }
+    if (keyword_clear){
+        level = @"";
+        _priceRange = @"";
+        sort = @"";
+        for (int i = 0; i < _filter_view.subviews.count; i++) {
+            if (_filter_view.subviews[i].tag ==820 &&[_filter_view.subviews[i] isKindOfClass:[UILabel class]]) {
+                UILabel *label = _filter_view.subviews[i];
+                label.text = @"等级";
+            }else if (_filter_view.subviews[i].tag ==822 &&[_filter_view.subviews[i] isKindOfClass:[UILabel class]]) {
+                UILabel *label = _filter_view.subviews[i];
+                label.text = @"综合排序";
+            }else if (_filter_view.subviews[i].tag ==821 &&[_filter_view.subviews[i] isKindOfClass:[UILabel class]]) {
+                UILabel *label = _filter_view.subviews[i];
+                label.text = @"不限";
+            }
+        }
+
+    }
+
+    ddlist = [[DDListGet alloc] initWithcat_id:_vc_type keyword:_keyword area_id:_area_id sort:sort priceRange:_priceRange level:level page:[NSString stringWithFormat:@"%ld",page]];
     [ddlist startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
         NSDictionary * dic = [DDLogin dictionaryWithJsonString:request.responseString];
         if ([dic[@"error_code"] intValue] == 1) {
-            [SVProgressHUD showErrorWithStatus:@"暂时没有相应数据！"];
+            [SVProgressHUD showErrorWithStatus:@"暂时没有相应数据"];
             [self.tableView headerEndRefreshing];
         }else{
             NSArray * arr = dic[@"list"];
@@ -239,7 +439,11 @@ static NSInteger page = 1;
                 self.tableView.footerHidden = YES;
             }
             if (page == 1) {
-                _data_arr = [NSMutableArray arrayWithCapacity:0];
+                if (_data_arr) {
+                    [_data_arr removeAllObjects];
+                }else{
+                    _data_arr = [NSMutableArray arrayWithCapacity:0];
+                }
             }
             for (NSDictionary * dic in arr) {
                 [_data_arr addObject:dic];
@@ -249,11 +453,20 @@ static NSInteger page = 1;
     } failure:^(__kindof YTKBaseRequest *request) {
         NSLog(@"%ld",request.responseStatusCode);
     }];
+    grade_clear = NO;
+    price_clear = NO;
+    keyword_clear = NO;
+    
+    
+    
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    grade_clear = NO;
+    price_clear = NO;
+    keyword_clear = NO;
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.filter_view];
     _searchPlace_name = self.title_l;

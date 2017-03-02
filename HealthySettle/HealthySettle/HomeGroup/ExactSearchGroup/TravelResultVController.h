@@ -13,6 +13,7 @@
 @property (nonatomic,strong ) UITableView * tableView;
 @property (nonatomic,strong)NSMutableArray * data_arr;
 @property (nonatomic, strong) NSString    *area_id;
+@property (nonatomic,strong)NSString * keyword;
 
 
 @end

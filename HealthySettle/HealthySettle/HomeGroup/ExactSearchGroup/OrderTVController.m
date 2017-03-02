@@ -59,14 +59,8 @@
     {
         _tableHeadView = [[UIView alloc]
                           initWithFrame:CGRectMake(0, 0, screenWide, screenHeight *0.525)];
-        /*_tableHeadView.backgroundColor = RGB(252, 229, 229);
-        UIView * backHeadView = [[UIView alloc]
-                          initWithFrame:CGRectMake(8, 8, screenWide - 16, screenHeight * 0.203 - 16)];
-        backHeadView.backgroundColor = [UIColor whiteColor];
-        backHeadView.layer.masksToBounds = YES;
-        backHeadView.layer.cornerRadius = 5;
-        [_tableHeadView addSubview:backHeadView];
-         */
+
+        
         UILabel * organ_label = [[UILabel alloc]
                                  initWithFrame:CGRectMake(10,0 , screenWide-20 , 0.1 * screenHeight)];
         organ_label.text = _group_dic[@"name"];
@@ -723,7 +717,6 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath
                 str = [NSMutableString stringWithFormat:@"%@,%@",str,_chargeArray[i]];
             }
 
-//            order_pre.order_spec = [NSString stringWithFormat:@"%@",str];
             order_pre.order_spec = [NSArray arrayWithArray:_chargeArray];
         }else{
             order_pre.total_money = [NSString stringWithFormat:@"%ld",[self.charge_price integerValue] * _person_num];
@@ -776,6 +769,8 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath
                 payVC.order = order_pre;
                 payVC.vc_type = self.vc_type;
                 payVC.order.order_id = dic[@"order_id"];
+                [[NSUserDefaults standardUserDefaults] setObject:dic[@"order_id"] forKey:@"pay_id"];
+                payVC.order.order_sn = dic[@"order_sn"];
                 [SVProgressHUD showSuccessWithStatus:@"订单提交成功！"];
                 [self.navigationController pushViewController:payVC animated:YES];
 

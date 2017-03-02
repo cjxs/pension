@@ -295,7 +295,7 @@
         {
             
             NSString *responseString = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding] ;
-            NSLog(@"responseString is %@－－－",responseString);
+            //NSLog(@"responseString is %@－－－",responseString);
             //将返回的xml解析成字典
             NSDictionary *dic = [NSDictionary dictionaryWithXMLString:responseString];
             
@@ -324,9 +324,9 @@
                 
                 // 调用微信
                 BOOL flag=  [WXApi sendReq:request];
-                NSLog(@"%d",flag);
+                //NSLog(@"%d",flag);
                 
-                NSLog(@"\nappid=%@\npartid=%@\nprepayid=%@\nnoncestr=%@\ntimestamp=%ld\npackage=%@\nsign=%@\n",request.openID,request.partnerId,request.prepayId,request.nonceStr,(long)request.timeStamp,request.package,request.sign );
+                //NSLog(@"\nappid=%@\npartid=%@\nprepayid=%@\nnoncestr=%@\ntimestamp=%ld\npackage=%@\nsign=%@\n",request.openID,request.partnerId,request.prepayId,request.nonceStr,(long)request.timeStamp,request.package,request.sign );
                
             }else{
                 NSLog(@"参数不正确，请检查参数");
@@ -395,7 +395,6 @@
 
 
 - (void)httpService:(NSDictionary *)dictionary{
-    NSLog(@"%@",dictionary);
     NSString *appid,*mch_id,*nonce_str,*sign,*body,*out_trade_no,*total_fee,*spbill_create_ip,*notify_url,*trade_type,*partner;
     //应用APPID
     appid = WXAPPID;
@@ -408,7 +407,7 @@
     out_trade_no = [dictionary objectForKey:@"order_sn"];// dictionary[@"orderno"];
     //交易价格1表示0.01元，10表示0.1元
     
-    total_fee = [NSString stringWithFormat:@"%d",[[dictionary objectForKey:@"payment_money"] intValue] * 100];//dictionary[@"total_price"];
+    total_fee = @"1";//[NSString stringWithFormat:@"%d",[[dictionary objectForKey:@"payment_money"] intValue] * 100];//dictionary[@"total_price"];
     //获取本机IP地址，请再wifi环境下测试，否则获取的ip地址为error，正确格式应该是8.8.8.8
     spbill_create_ip = @"192.168.1.25";
 //    spbill_create_ip = @"192.168.0.111";
@@ -436,7 +435,7 @@
     [dic setValue:trade_type forKey:@"trade_type"];//交易类型
     
     NSString *string = [dic XMLString];
-    NSLog(@"%@----%@",dic,string);
+    //NSLog(@"%@----%@",dic,string);
     [self http:string onoce:nonce_str sign:sign xmlString:nil];
 }
 

@@ -179,7 +179,7 @@ static NSInteger page = 1;
 -(void)setData{
     
     
-    ddlist = [[DDListGet alloc] initWithcat_id:@"3" keyword:nil area_id:_area_id sort:nil priceRange:nil level:nil page:[NSString stringWithFormat:@"%ld",page]];
+    ddlist = [[DDListGet alloc] initWithcat_id:@"3" keyword:_keyword area_id:_area_id sort:nil priceRange:nil level:nil page:[NSString stringWithFormat:@"%ld",page]];
     [ddlist startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
         NSDictionary * dic = [DDLogin dictionaryWithJsonString:request.responseString];
         if ([dic[@"error_code"] intValue] == 1) {
@@ -203,6 +203,7 @@ static NSInteger page = 1;
     } failure:^(__kindof YTKBaseRequest *request) {
         NSLog(@"%ld",request.responseStatusCode);
     }];
+    _keyword = @"";
 }
 -(void)headerRereshing {
     page = 1;

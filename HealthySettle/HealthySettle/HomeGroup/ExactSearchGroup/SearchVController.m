@@ -11,10 +11,12 @@
 #import "CDCityPicker.h"
 #import "ResultListVController.h"
 #import "FiltView.h"
-@interface SearchVController ()<HYMDatePickerDelegate,CDCityPickerDelegate,UIGestureRecognizerDelegate> {
+@interface SearchVController ()<HYMDatePickerDelegate,CDCityPickerDelegate,UIGestureRecognizerDelegate,UITextFieldDelegate> {
     NSDate * end_begain;
     NSDate * end_end;
     UITextField * text_field;
+    NSString *price_range;
+    NSString * keyword;
 }
 @property (weak, nonatomic) IBOutlet UIImageView * topImageV;
 @property (weak, nonatomic) IBOutlet UILabel *textLabel;
@@ -99,6 +101,7 @@
         [_seletOff_label removeFromSuperview];
         [_sellectOn_label removeFromSuperview];
         text_field.placeholder = @"机构关键字";
+        text_field.delegate = self;
         text_field.clearButtonMode = UITextFieldViewModeWhileEditing;
         [self.secondView addSubview:text_field];
         _position_label.text = @"价格";
@@ -152,6 +155,10 @@
     self.serch_messagebtn.layer.cornerRadius = 5;
     
 }
+-(void)textFieldDidEndEditing:(UITextField *)textField{
+    keyword = text_field.text;
+}
+
 -(void)priceViewAppear{
     FiltView * timefilt_view = [[FiltView alloc] init];
     if ([_vc_type intValue] == 1) {
@@ -163,10 +170,35 @@
     timefilt_view.viewType = DDNormalView;
     timefilt_view.listType = DDListTYpeSingle;
     timefilt_view.selectType = DDSelectTYpeSingle;
-    timefilt_view.sureBtn = ^(NSString  *str){
-        NSLog(@"%@好啦",str);
+    @weakify(timefilt_view);
+    timefilt_view.sureBtn = ^(NSString * str){
+        @strongify(timefilt_view);
+        if (str.length ==0) {
+            price_range = @"";
+            _position_label.text = @"价格";
+        }else{
+            NSString *str_ = timefilt_view.data_arr1[str.intValue];
+            _position_label.text = str_;
+            
+            NSArray * str_arr;
+            if ([_vc_type intValue] == 1) {
+                str_arr = [str_ componentsSeparatedByString:@"元/月"];
+            }else{
+                str_arr = [str_ componentsSeparatedByString:@"元/天"];
+            }
+            if ([str_arr.firstObject length] < 5) {
+                if ([str_arr.firstObject intValue] == 5000||[str_arr.firstObject intValue] == 600) {
+                    price_range = [NSString stringWithFormat:@"%@-10000",str_arr.firstObject];
+                }else if ([str_arr.firstObject intValue] == 1000||[str_arr.firstObject intValue] ==150){
+                    price_range = [NSString stringWithFormat:@"0-%@",str_arr.firstObject];
+                }
+            }else{
+                price_range = str_arr.firstObject;
+            }
+
+        }
     };
-    
+
     [timefilt_view addFirstView];
     
     [UIView animateWithDuration:0.5f animations:^{
@@ -180,6 +212,9 @@
     ResultLVC.vc_type = self.vc_type;
     ResultLVC.area_id = array[btn.tag-900];
     ResultLVC.title_l = btn.titleLabel.text;
+    if (price_range) {
+        ResultLVC.priceRange = price_range;
+    }
     [self.navigationController pushViewController:ResultLVC
                                          animated:YES];
 
@@ -363,6 +398,12 @@
         ResultLVC.title_l = @"杭州";
     }else{
         ResultLVC.title_l = _chosedCity;
+    }
+    if (price_range) {
+        ResultLVC.priceRange = price_range;
+    }
+    if (keyword) {
+        ResultLVC.keyword = keyword;
     }
 
     [self.navigationController pushViewController:ResultLVC

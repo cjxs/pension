@@ -23,5 +23,7 @@
 @property (nonatomic,strong ) UITableView * tableView;
 @property (nonatomic,strong)NSMutableArray * data_arr;
 @property (nonatomic, strong)CDDatePicker * datePicker;
+@property(nonatomic,strong)NSString * keyword;
+@property (nonatomic,strong)NSString * priceRange;
 
 @end

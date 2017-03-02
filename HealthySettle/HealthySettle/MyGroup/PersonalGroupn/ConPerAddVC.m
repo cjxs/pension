@@ -139,10 +139,10 @@
 
 }
 -(void)delContact{
+    
     DDUpdate * update;
     update = [[DDUpdate alloc] initWithProject:@"contact_del" data:@{@"cid":_data_dic[@"travel_cid"]}];
     [update startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
-        NSLog(@"%@",request.responseString);
         NSDictionary * dic = [DDLogin dictionaryWithJsonString:request.responseString];
         if (dic[@"error_code"]) {
             NSMutableArray * m_dic = [Member DefaultUser].cont_arr;
