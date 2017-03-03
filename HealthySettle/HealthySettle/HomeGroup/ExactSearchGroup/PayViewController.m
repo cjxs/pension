@@ -252,7 +252,7 @@
     order.itBPay = @"30m";//允许的最晚付款时间
     order.showUrl = @"m.alipay.com";
     //应用注册scheme,在Info.plist定义URL types
-    NSString *appScheme = @"yyl_ali";
+    NSString *appScheme = @"yyl123";
     
     //将商品信息拼接成字符串
     NSString *orderSpec = [order description];
@@ -271,14 +271,22 @@
         orderString = [NSString stringWithFormat:@"%@&sign=\"%@\"&sign_type=\"%@\"",
                        orderSpec, signedString, @"RSA"];
         
-        [[AlipaySDK defaultService] payOrder:orderString
-                                  fromScheme:appScheme
-                                    callback:^(NSDictionary *resultDic)
-         {
-             [self backBtnPressed];
-             NSLog(@"reslut = %@,H5界面返回",resultDic);
-         }];
-    }
+        [[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic) {
+            if ([resultDic[@"resultStatus"] intValue] == 9000) {
+                [SVProgressHUD showSuccessWithStatus:@"恭喜您，订单支付成功！"];
+                [self backBtnPressed];
+
+            }else if ([resultDic[@"resultStatus"] intValue] == 6001) {
+                [SVProgressHUD showErrorWithStatus:@"用户取消支付"];
+            }else{
+                [SVProgressHUD showErrorWithStatus:@"支付失败!"];
+            }
+
+
+        }];
+
+        
+     }
     
 }
 

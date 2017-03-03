@@ -57,10 +57,10 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>ali</string>
+			<string></string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>yyl_ali</string>
+				<string>yyl123</string>
 			</array>
 		</dict>
 	</array>

@@ -52,7 +52,7 @@
 static NSString * const UMDEVICETOKEN      = @"UMDeviceToken";// 友盟推送的设备Tokenhttps://app.yinxihttps://app.yinxiang.com/shard/s65/nl/2147483647/8e6041d0-0d64-4416-af62-6e0009025806/ang.com/shard/s65/nl/2147483647/8e6041d0-0d64-4416-af62-6e0009025806/
 
 
-@interface AppDelegate ()<WXApiDelegate,UIAlertViewDelegate>
+@interface AppDelegate ()<WXApiDelegate,UIAlertViewDelegate,UIApplicationDelegate>
 
 
 
@@ -296,24 +296,32 @@ static NSString * const UMDEVICETOKEN      = @"UMDeviceToken";// 友盟推送的
 {
     
     if ([url.host isEqualToString:@"safepay"]) {
-        //跳转支付宝钱包进行支付，处理支付结果
-        [[AlipaySDK defaultService] processOrderWithPaymentResult:url
-                                                  standbyCallback:^(NSDictionary *resultDic) {
-            NSLog(@"result = %@支付宝客户端返回",resultDic);
-
-
-                                                      
+        //支付宝钱包跳转，处理支付结果
+        [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
+            if ([resultDic[@"resultStatus"] intValue] == 9000) {
+                [SVProgressHUD showSuccessWithStatus:@"恭喜您，订单支付成功！"];
+                [self paySuccess];
+            }else if ([resultDic[@"resultStatus"] intValue] == 6001) {
+                [SVProgressHUD showErrorWithStatus:@"用户取消支付"];
+            }else{
+                [SVProgressHUD showErrorWithStatus:@"支付失败!"];
+            }
+            
         }];
     }
-    if ([url.host isEqualToString:@"platformapi"]){//支付宝钱包快登授权返回authCode
+    
         
+    if ([url.host isEqualToString:@"platformapi"]){//支付宝钱包快登授权返回authCode
         [[AlipaySDK defaultService] processAuthResult:url
                                       standbyCallback:^(NSDictionary *resultDic) {
             //【由于在跳转支付宝客户端支付的过程中，商户app在后台很可能被系统kill了，所以pay接口的callback就会失效，请商户对standbyCallback返回的回调结果进行处理,就是在这个方法里面处理跟callback一样的逻辑】
-            NSLog(@"result = %@",resultDic);
-          OrderStatusTVController * order_status_VC = [[OrderStatusTVController alloc] init];
-          [self.window.rootViewController.navigationController pushViewController:order_status_VC animated:YES];
-
+          if ([resultDic[@"resultStatus"] intValue] == 9000) {
+              [SVProgressHUD showSuccessWithStatus:@"恭喜您，订单支付成功！"];
+          }else if ([resultDic[@"resultStatus"] intValue] == 6001) {
+              [SVProgressHUD showErrorWithStatus:@"用户取消支付"];
+          }else{
+              [SVProgressHUD showErrorWithStatus:@"支付失败!"];
+          }
                                           
         }];
         return YES;

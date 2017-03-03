@@ -42,7 +42,7 @@
 		321C431A1DC0879E00192243 /* DDArticleDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 321C43191DC0879E00192243 /* DDArticleDetail.m */; };
 		3223F1151DB8D87D001F1DCC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3223F1121DB8D87D001F1DCC /* Main.storyboard */; };
 		3223F1191DB8DC17001F1DCC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3223F1181DB8DC17001F1DCC /* Assets.xcassets */; };
-		3223F11F1DB8E19F001F1DCC /* Loadings.png in Resources */ = {isa = PBXBuildFile; fileRef = 3223F11D1DB8E19F001F1DCC /* Loadings.png */; };
+		3223F11F1DB8E19F001F1DCC /* Loads.png in Resources */ = {isa = PBXBuildFile; fileRef = 3223F11D1DB8E19F001F1DCC /* Loads.png */; };
 		32299CCF1E28878900372A72 /* CDCityPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 32299CCE1E28878900372A72 /* CDCityPicker.m */; };
 		322C36851D338607005163C4 /* DDLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = 322C36841D338607005163C4 /* DDLogin.m */; };
 		323499AB1CE1782200CBA680 /* Member.m in Sources */ = {isa = PBXBuildFile; fileRef = 323499AA1CE1782200CBA680 /* Member.m */; };
@@ -101,6 +101,7 @@
 		3250C1EC1E63D32800AA4B2E /* 待付款@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3250C1EA1E63D32800AA4B2E /* 待付款@2x.png */; };
 		3250C1ED1E63D32800AA4B2E /* 待付款@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3250C1EB1E63D32800AA4B2E /* 待付款@3x.png */; };
 		3250C1F01E642CAB00AA4B2E /* DataWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3250C1EF1E642CAB00AA4B2E /* DataWebViewController.m */; };
+		3250C1F31E695B9E00AA4B2E /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = 3250C1F21E695B9E00AA4B2E /* Order.m */; };
 		32518DAF1CB34AC700CEAE35 /* SearchOrganTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32518DAD1CB34AC700CEAE35 /* SearchOrganTVCell.m */; };
 		32518DB31CB34EFC00CEAE35 /* custom_online.png in Resources */ = {isa = PBXBuildFile; fileRef = 32518DB11CB34EFC00CEAE35 /* custom_online.png */; };
 		32518DB41CB34EFC00CEAE35 /* custom_number.png in Resources */ = {isa = PBXBuildFile; fileRef = 32518DB21CB34EFC00CEAE35 /* custom_number.png */; };
@@ -114,7 +115,6 @@
 		3252D6561CC752B5000FAFBC /* openssl_wrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3252D6471CC752B5000FAFBC /* openssl_wrapper.m */; };
 		3252D6571CC752B5000FAFBC /* RSADataSigner.m in Sources */ = {isa = PBXBuildFile; fileRef = 3252D6491CC752B5000FAFBC /* RSADataSigner.m */; };
 		3252D6581CC752B5000FAFBC /* RSADataVerifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 3252D64B1CC752B5000FAFBC /* RSADataVerifier.m */; };
-		3252D6621CC752F5000FAFBC /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = 3252D65C1CC752F5000FAFBC /* Order.m */; };
 		3252D6631CC752F5000FAFBC /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3252D65E1CC752F5000FAFBC /* AlipaySDK.bundle */; };
 		3252D6641CC752F5000FAFBC /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3252D65F1CC752F5000FAFBC /* AlipaySDK.framework */; };
 		3252D6651CC752F5000FAFBC /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3252D6601CC752F5000FAFBC /* libcrypto.a */; };
@@ -482,7 +482,7 @@
 		321C43191DC0879E00192243 /* DDArticleDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDArticleDetail.m; sourceTree = "<group>"; };
 		3223F1131DB8D87D001F1DCC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Main.storyboard; sourceTree = "<group>"; };
 		3223F1181DB8DC17001F1DCC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		3223F11D1DB8E19F001F1DCC /* Loadings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Loadings.png; sourceTree = "<group>"; };
+		3223F11D1DB8E19F001F1DCC /* Loads.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Loads.png; path = ../Loads.png; sourceTree = "<group>"; };
 		32299CCD1E28878900372A72 /* CDCityPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDCityPicker.h; sourceTree = "<group>"; };
 		32299CCE1E28878900372A72 /* CDCityPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDCityPicker.m; sourceTree = "<group>"; };
 		322C36831D338607005163C4 /* DDLogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDLogin.h; sourceTree = "<group>"; };
@@ -562,6 +562,8 @@
 		3250C1EB1E63D32800AA4B2E /* 待付款@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "待付款@3x.png"; sourceTree = "<group>"; };
 		3250C1EE1E642CAB00AA4B2E /* DataWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataWebViewController.h; sourceTree = "<group>"; };
 		3250C1EF1E642CAB00AA4B2E /* DataWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataWebViewController.m; sourceTree = "<group>"; };
+		3250C1F11E695B9000AA4B2E /* Order.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Order.h; sourceTree = "<group>"; };
+		3250C1F21E695B9E00AA4B2E /* Order.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Order.m; sourceTree = "<group>"; };
 		32518DAC1CB34AC700CEAE35 /* SearchOrganTVCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchOrganTVCell.h; sourceTree = "<group>"; };
 		32518DAD1CB34AC700CEAE35 /* SearchOrganTVCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchOrganTVCell.m; sourceTree = "<group>"; };
 		32518DB11CB34EFC00CEAE35 /* custom_online.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = custom_online.png; sourceTree = "<group>"; };
@@ -736,9 +738,6 @@
 		3252D6491CC752B5000FAFBC /* RSADataSigner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSADataSigner.m; sourceTree = "<group>"; };
 		3252D64A1CC752B5000FAFBC /* RSADataVerifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSADataVerifier.h; sourceTree = "<group>"; };
 		3252D64B1CC752B5000FAFBC /* RSADataVerifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSADataVerifier.m; sourceTree = "<group>"; };
-		3252D65A1CC752F5000FAFBC /* AlipayHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlipayHeader.h; sourceTree = "<group>"; };
-		3252D65B1CC752F5000FAFBC /* Order.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Order.h; sourceTree = "<group>"; };
-		3252D65C1CC752F5000FAFBC /* Order.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Order.m; sourceTree = "<group>"; };
 		3252D65E1CC752F5000FAFBC /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
 		3252D65F1CC752F5000FAFBC /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
 		3252D6601CC752F5000FAFBC /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
@@ -1516,21 +1515,13 @@
 			path = Util;
 			sourceTree = "<group>";
 		};
-		3252D6591CC752F5000FAFBC /* AlipayFiles */ = {
-			isa = PBXGroup;
-			children = (
-				3252D65A1CC752F5000FAFBC /* AlipayHeader.h */,
-				3252D65B1CC752F5000FAFBC /* Order.h */,
-				3252D65C1CC752F5000FAFBC /* Order.m */,
-			);
-			path = AlipayFiles;
-			sourceTree = "<group>";
-		};
 		3252D65D1CC752F5000FAFBC /* AlipaySDK */ = {
 			isa = PBXGroup;
 			children = (
 				3252D65E1CC752F5000FAFBC /* AlipaySDK.bundle */,
 				3252D65F1CC752F5000FAFBC /* AlipaySDK.framework */,
+				3250C1F11E695B9000AA4B2E /* Order.h */,
+				3250C1F21E695B9E00AA4B2E /* Order.m */,
 				3252D6601CC752F5000FAFBC /* libcrypto.a */,
 				3252D6611CC752F5000FAFBC /* libssl.a */,
 			);
@@ -1752,7 +1743,6 @@
 				3259AC971CCA03170070621F /* SinaSSO */,
 				3259ACA61CCA03170070621F /* TencentOpenAPI */,
 				3259ACAB1CCA03170070621F /* Wechat */,
-				3252D6591CC752F5000FAFBC /* AlipayFiles */,
 				3252D65D1CC752F5000FAFBC /* AlipaySDK */,
 				3252D5EE1CC752B5000FAFBC /* openssl */,
 				3252D63A1CC752B5000FAFBC /* Util */,
@@ -1918,7 +1908,6 @@
 				324075D31CAD2D9300BAF253 /* pension.png */,
 				3278CCE51CAFC17400038B9D /* shareCompany.png */,
 				324CD4BC1CAE783800276B57 /* home_pic.png */,
-				3223F11D1DB8E19F001F1DCC /* Loadings.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -2014,6 +2003,7 @@
 		32CEF81F1DB713E700CB7584 /* level */ = {
 			isa = PBXGroup;
 			children = (
+				3223F11D1DB8E19F001F1DCC /* Loads.png */,
 				3250C1DA1E63D2B300AA4B2E /* 待使用@2x.png */,
 				3250C1DB1E63D2B300AA4B2E /* 待使用@3x.png */,
 				3250C1DE1E63D2B300AA4B2E /* 退款售后@2x.png */,
@@ -2673,7 +2663,7 @@
 				32E5883B1CB73A47002AED1A /* found_g@3x.png in Resources */,
 				323552361E52DD60003C5A8C /* under_line.png in Resources */,
 				32D693F01DD56380001D5C7F /* PersonDataSetVC.xib in Resources */,
-				3223F11F1DB8E19F001F1DCC /* Loadings.png in Resources */,
+				3223F11F1DB8E19F001F1DCC /* Loads.png in Resources */,
 				32D23E781DC33932009154F6 /* MJRefresh.bundle in Resources */,
 				3250C1E21E63D2B300AA4B2E /* 待使用@2x.png in Resources */,
 				32E3F7961E1E4405002C8E9E /* date_choose@2x.png in Resources */,
@@ -2869,10 +2859,10 @@
 				32D693EF1DD56380001D5C7F /* PersonDataSetVC.m in Sources */,
 				32146B031CC4D6AF0046F2BC /* ShareView.m in Sources */,
 				3289E3971E4DC32000C57596 /* TravelPersonTVCell.m in Sources */,
-				3252D6621CC752F5000FAFBC /* Order.m in Sources */,
 				325C82451CB0EF7B0004EA0C /* ServeTVCell.m in Sources */,
 				32D693D61DD1C00D001D5C7F /* INTUHeadingRequest.m in Sources */,
 				325C82481CB1034C0004EA0C /* ChargeTVCell.m in Sources */,
+				3250C1F31E695B9E00AA4B2E /* Order.m in Sources */,
 				32D8593B1CB896530074D5C3 /* ResultListVController.m in Sources */,
 				32D859771CB90B100074D5C3 /* CommentViewController.m in Sources */,
 				3273DF8E1DB9F2750094AD42 /* DDOrderList.m in Sources */,
