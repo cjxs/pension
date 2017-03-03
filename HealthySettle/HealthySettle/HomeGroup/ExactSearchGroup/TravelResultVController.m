@@ -20,6 +20,10 @@ static NSInteger page = 1;
     BOOL hide;
     BOOL isScroll;
     DDListGet * ddlist;//网络请求的指针
+    NSString * time_range;
+    NSString *sort;
+    BOOL city_clear;
+    BOOL time_clear;
 }
 
 @end
@@ -100,7 +104,7 @@ static NSInteger page = 1;
         [self timefileViewAppear];
     }else
     {
-        [self pricefileViewAppear];
+        [self orderfileViewAppear];
     }
 }
 -(void)cityfileViewAppear{
@@ -120,6 +124,10 @@ static NSInteger page = 1;
                 label.text = str;
             }
         }
+        city_clear = YES;
+        [self.tableView headerBeginRefreshing];
+
+        
     };
     
     [cityfilt_view addFirstView];
@@ -130,12 +138,39 @@ static NSInteger page = 1;
 -(void)timefileViewAppear{
     FiltView * timefilt_view = [[FiltView alloc] init];
     timefilt_view.listType = DDListTYpeSingle;
-    timefilt_view.selectType = DDSelectTYpeMulti;
+    timefilt_view.selectType = DDSelectTYpeSingle;
     timefilt_view.data_arr1 = @[@"不限",@"1-3天",@"4-7天",@"8-15天",@"15天以上"];
-    timefilt_view.sureBtn = ^(NSArray *arr){
-        for (NSString * str in arr) {
-            NSLog(@"%@结果time",str);
+    @weakify(timefilt_view);
+    timefilt_view.sureBtn = ^(NSString *str){
+        @strongify(timefilt_view);
+        NSString * str_ = timefilt_view.data_arr1[str.intValue];
+        for (int i = 0; i < _filter_view.subviews.count; i++) {
+            if (_filter_view.subviews[i].tag ==801 &&[_filter_view.subviews[i] isKindOfClass:[UILabel class]]) {
+                UILabel *label = _filter_view.subviews[i];
+                if (str.intValue == 0) {
+                    label.text =@"不限";
+                }else{
+                    label.text = str_;
+                    
+                }
+            }
         }
+        if (str.intValue == 0) {
+            time_range = @"";
+            
+        }else{
+            NSArray * str_arr = [str_ componentsSeparatedByString:@"天"];
+            if ([str_arr.firstObject length] < 3) {
+               
+                time_range = [NSString stringWithFormat:@"%@-10000",str_arr.firstObject];
+            }else{
+                time_range = str_arr.firstObject;
+            }
+        }
+        time_clear = YES;
+        [self.tableView headerBeginRefreshing];
+
+        
     };
 
     [timefilt_view addFirstView];
@@ -145,25 +180,41 @@ static NSInteger page = 1;
     }];
 
 }
--(void)pricefileViewAppear{
-    FiltView * pricefilt_view = [[FiltView alloc] init];
-    pricefilt_view.listType = DDListTYpeSingle;
-    pricefilt_view.selectType = DDSelectTYpeSingle;
-    pricefilt_view.data_arr1 = @[@"综合排序",@"价格从高到低",@"价格从低到高"];
-    pricefilt_view.sureBtn = ^(NSString * str){
+-(void)orderfileViewAppear{
+    FiltView * orderfilt_view = [[FiltView alloc] init];
+    orderfilt_view.listType = DDListTYpeSingle;
+    orderfilt_view.selectType = DDSelectTYpeSingle;
+    orderfilt_view.data_arr1 = @[@"综合排序",@"价格从高到低",@"价格从低到高"];
+    @weakify(orderfilt_view);
+    orderfilt_view.sureBtn = ^(NSString *str){
+        @strongify(orderfilt_view);
         for (int i = 0; i < _filter_view.subviews.count; i++) {
-            if (_filter_view.subviews[i].tag ==803 &&[_filter_view.subviews[i] isKindOfClass:[UILabel class]]) {
+            if (_filter_view.subviews[i].tag ==802 &&[_filter_view.subviews[i] isKindOfClass:[UILabel class]]) {
                 UILabel *label = _filter_view.subviews[i];
-                label.text = str;
+                label.text = str.length !=0?orderfilt_view.data_arr1[str.intValue]:@"不限";
             }
         }
-
+        switch ([str intValue]) {
+            case 0:
+                sort = @"";
+                break;
+            case 1:
+                sort = @"desc";
+                break;
+            case 2:
+                sort = @"asc";
+                break;
+            default:
+                break;
+        }
+        [self.tableView headerBeginRefreshing];
+        
     };
-    [pricefilt_view addFirstView];
+    [orderfilt_view addFirstView];
     [UIView animateWithDuration:0.5f animations:^{
-        [self.view addSubview:pricefilt_view];
+        [self.view addSubview:orderfilt_view];
     }];
-
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -177,14 +228,26 @@ static NSInteger page = 1;
     
 }
 -(void)setData{
+    if (city_clear) {
+        time_range = @"";
+        sort = @"";
+    }
+    if (time_clear) {
+        city_clear = @"";
+        sort = @"";
+    }
     
     
-    ddlist = [[DDListGet alloc] initWithcat_id:@"3" keyword:_keyword area_id:_area_id sort:nil priceRange:nil level:nil page:[NSString stringWithFormat:@"%ld",page]];
+    ddlist = [[DDListGet alloc] initWithcat_id:@"3" keyword:_keyword area_id:_area_id sort:sort priceRange:time_range level:nil page:[NSString stringWithFormat:@"%ld",page]];
     [ddlist startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
         NSDictionary * dic = [DDLogin dictionaryWithJsonString:request.responseString];
         if ([dic[@"error_code"] intValue] == 1) {
-            [SVProgressHUD showErrorWithStatus:@"暂时没有相应数据！"];
+            [SVProgressHUD showErrorWithStatus:@"暂时没有相应数据!"];
             [self.tableView headerEndRefreshing];
+            if (_keyword) {
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+
 
         }else{
             NSMutableArray * arr = dic[@"list"];
@@ -203,7 +266,8 @@ static NSInteger page = 1;
     } failure:^(__kindof YTKBaseRequest *request) {
         NSLog(@"%ld",request.responseStatusCode);
     }];
-    _keyword = @"";
+    city_clear = NO;
+    time_clear = NO;
 }
 -(void)headerRereshing {
     page = 1;
