@@ -513,11 +513,18 @@
         UsecanTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"use" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         Member * user = [Member DefaultUser];
+        if ([user.vocher intValue] > [_group_dic[@"can_vochers"] intValue]) {
+            dis_count_str = _group_dic[@"can_vochers"];
+        }else{
+            dis_count_str = user.vocher;
+        }
+
         if ([user.now_money intValue] > [_number_sum intValue]) {
-            cash_str = _number_sum;
+            cash_str = [NSString stringWithFormat:@"%d",[_number_sum intValue]-[dis_count_str intValue]];
         }else{
             cash_str = user.now_money;
         }
+        
         [[cell.cash_switch_btn rac_signalForControlEvents:UIControlEventValueChanged] subscribeNext:^(UISwitch * switch_btn) {
             cashUse = switch_btn.on;
             if (cashUse) {
@@ -527,22 +534,17 @@
             }
         }];
         
-        if ([user.vocher intValue] > [_group_dic[@"can_vochers"] intValue]) {
-            dis_count_str = _group_dic[@"can_vochers"];
-        }else{
-            dis_count_str = user.vocher;
-        }
         
         [[cell.dis_count_switch_btn rac_signalForControlEvents:UIControlEventValueChanged] subscribeNext:^(UISwitch * switch_btn){
             vocherUse = switch_btn.on;
             if (vocherUse) {
-                self.dis_count_can = @"10";
+                self.dis_count_can = dis_count_str;
             }else{
                 self.dis_count_can = @"0";
             }
         }];
 
-        [cell configWithCash:cash_str dis_count:@"10" cashUse:cashUse dis_countUse:vocherUse];
+        [cell configWithCash:cash_str dis_count:dis_count_str cashUse:cashUse dis_countUse:vocherUse];
         return cell;
     }else{
         SumAndPayTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"pay" forIndexPath:indexPath];
