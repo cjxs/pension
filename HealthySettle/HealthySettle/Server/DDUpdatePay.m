@@ -30,7 +30,7 @@
             _pay_type = @"";
         }
         _pay_time = [DDLogin timeStrWithDate:[NSDate date]];
-        _order_id = [[NSUserDefaults standardUserDefaults] objectForKey:@"pay_id"];
+        _order_id = [Member DefaultUser].pay_id;
     }
     return self;
 }

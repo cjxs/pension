@@ -33,6 +33,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.view.backgroundColor = [UIColor whiteColor];
     self.title = @"订单预订成功";
     UIImageView * status_imgView = [[UIImageView alloc] initWithFrame:CGRectMake(screenWide/2-35,screenHeight * 0.1, 70, 70)];
 //    NSString * img_str = __data_dic[@"status"]==0?@"order_success":@"order_faild";
@@ -40,7 +41,7 @@
     [self.view addSubview:status_imgView];
     UILabel *text_label = [[UILabel alloc] initWithFrame:CGRectMake(10, screenHeight * 0.3, screenWide-20, screenHeight * 0.2)];
     text_label.numberOfLines = 0;
-     text_label.text = @"您在悠悠了平台的订单号（12162542365）尚未支付，为确保您的顺利出行，请在48小时内完成支付。开户行：杭州钱江支行，帐号：1213232232132221。　如有疑问请致电329729827928，祝您生活愉快！";
+     text_label.text = [NSString stringWithFormat:@"您在悠悠了平台的订单号（%@）尚未支付，为确保您的顺利出行，请在48小时内完成支付。开户行：杭州钱江支行，帐号：1213232232132221。　如有疑问请致电329729827928，祝您生活愉快！",_order_sn];
     [self.view addSubview:text_label];
     for (int i = 0; i < 2; i++) {
         UIButton * two_btn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -68,13 +69,19 @@
     [back_btn setBackgroundImage:[UIImage imageNamed:@"leftop_w"] forState:UIControlStateNormal];
     UIBarButtonItem * back_item = [[UIBarButtonItem alloc] initWithCustomView:back_btn];
     self.navigationItem.leftBarButtonItem = back_item;
+    
+    [self performSelector:@selector(backBtnPressed) withObject:self afterDelay:1.5f];
 
     
     
 }
 -(void)backBtnPressed{
+    [SVProgressHUD dismiss];
     OrderStatusTVController * order_status_VC = [[OrderStatusTVController alloc] init];
+    order_status_VC.vc_type = @"unnormal";
+    order_status_VC.o_id = [Member DefaultUser].pay_id;
     [self.navigationController pushViewController:order_status_VC animated:YES];
+
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

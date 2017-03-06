@@ -140,7 +140,7 @@
         }
     }
     [self.tableView reloadData];
-    if (current_arr.count == 0) {
+    if (current_arr.count == 0 && !label) {
         label = [[UILabel alloc] initWithFrame:CGRectMake(screenWide * 0.2, screenHeight * 0.3, screenWide * 0.6, screenHeight * 0.03)];
         label.textAlignment = NSTextAlignmentCenter;
         label.text = @"暂无相关订单";
@@ -174,13 +174,15 @@
                 Order_ed * order;
                 for (NSDictionary * dic_l in arr) {
                     order = [Order_ed mj_objectWithKeyValues:dic_l];
-                                     if ([order.status intValue] == 6) {
+                    if ([order.status intValue] == 6) {
                         order.dd_status = @"19";
                     }else if ([order.status intValue] == 4||[order.status intValue] == 5||[order.status intValue] == 11||[order.status intValue] == 12||[order.status intValue] == 13)
                     {
                         order.dd_status = @"20";
+                    }else if([order.status intValue] == 1){
                     }else{
                         order.dd_status = @"21";
+
                     }
                     [dataSource addObject:order];
                 }
@@ -212,7 +214,7 @@
     }else if ([_type isEqualToString:@"paid"]){
         [current_arr removeAllObjects];
         for (Order_ed * order in dataSource) {
-            if ([order.dd_status intValue] == 21) {
+            if ([order.status intValue] == 1) {
                 [current_arr addObject:order];
             }
         }
@@ -290,6 +292,7 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath
     return screenHeight * 0.27;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [Member DefaultUser].o_from = 3;
     OrderStatusTVController * orderDetailVC = [[OrderStatusTVController alloc] init];
     Order_ed * order = [Order_ed mj_objectWithKeyValues:current_arr[indexPath.row]];
     orderDetailVC.order = order;

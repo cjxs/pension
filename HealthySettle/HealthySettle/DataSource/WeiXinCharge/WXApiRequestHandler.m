@@ -407,7 +407,7 @@
     out_trade_no = [dictionary objectForKey:@"order_sn"];// dictionary[@"orderno"];
     //交易价格1表示0.01元，10表示0.1元
     
-    total_fee = @"1";//[NSString stringWithFormat:@"%d",[[dictionary objectForKey:@"payment_money"] intValue] * 100];//dictionary[@"total_price"];
+    total_fee = [NSString stringWithFormat:@"%d",[[dictionary objectForKey:@"payment_money"] intValue] * 100];//dictionary[@"total_price"];
     //获取本机IP地址，请再wifi环境下测试，否则获取的ip地址为error，正确格式应该是8.8.8.8
     spbill_create_ip = @"192.168.1.25";
 //    spbill_create_ip = @"192.168.0.111";

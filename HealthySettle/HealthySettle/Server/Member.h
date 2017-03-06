@@ -27,6 +27,8 @@
 @property (nonatomic,strong)NSString * province;
 @property (nonatomic,strong)NSString * city;
 @property (nonatomic,strong)NSString * refer_code;
+@property (nonatomic,assign)NSInteger o_from;
+@property (nonatomic,strong)NSString * pay_id;
 
 +(Member *)DefaultUser;
 @end

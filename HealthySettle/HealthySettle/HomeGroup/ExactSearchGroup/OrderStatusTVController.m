@@ -58,7 +58,14 @@
             status_label.text = @"已关闭";
             
         }else{
-            status_label.text = @"使用中";
+            if ([_order.status integerValue] == 1) {
+                status_label.text = @"已付款";
+
+            }else{
+                status_label.text = @"使用中";
+
+            }
+            
         }
         status_label.textColor = [UIColor greenColor];
         [view_0 addSubview:status_label];
@@ -231,17 +238,9 @@
 {
     if (!_tableView)
     {
-        if ([_order.paid intValue] == 0 && [_order.status intValue] == 6 && [_order.pay_type length] == 0) {
             _tableView = [[UITableView alloc]
                          initWithFrame:CGRectMake(0, 0, screenWide, screenHeight-64)
                          style:UITableViewStylePlain];
-            [self creatBackFootView];
-        }else{
-            _tableView = [[UITableView alloc]
-                         initWithFrame:CGRectMake(0, 0, screenWide, screenHeight-64)
-                         style:UITableViewStylePlain];
-        }
-
         [_tableView registerClass:[ConLabelTVCell class] forCellReuseIdentifier:@"contact"];
         [_tableView registerClass:[TravelPLabelTVCell class] forCellReuseIdentifier:@"travel"];
         [_tableView registerClass:[SumAndPayTVCell class] forCellReuseIdentifier:@"pay_no"];
@@ -273,9 +272,13 @@
     self.view.backgroundColor = [UIColor whiteColor];
     if ([_vc_type isEqualToString:@"unnormal"]) {
         [self setData];
+
     }else{
         user_arr = [_order.checkin_name componentsSeparatedByString:@";"];
         [self loadData];
+        if ([_order.paid intValue] == 0 && [_order.status intValue] == 6 && [_order.pay_type length] == 0) {
+            [self creatBackFootView];
+        }
     }
 
 
@@ -372,7 +375,7 @@
 -(void)backBtnPressed{
     if ([_vc_type isEqualToString:@"unnormal"]){
         //present到详情页
-        UIViewController * viewctl = self.navigationController.viewControllers[2];
+        UIViewController * viewctl = self.navigationController.viewControllers[0];
         [self.navigationController popToViewController:viewctl animated:YES];
     }else{
         //pop啊

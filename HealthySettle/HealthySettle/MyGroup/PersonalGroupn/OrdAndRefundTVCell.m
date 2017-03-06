@@ -86,9 +86,14 @@
                 
                 self.first_btn.alpha = 0;
                 self.price_label.text = [NSString stringWithFormat:@"总价钱:%@",order.total_money];
-            }else{
+            }else if ([order.dd_status intValue] == 21 ){
                 self.first_btn.alpha = 0;
                 self.type_label.text = @"使用中";
+                NSInteger money = [order.payment_money intValue] + [order.balance_pay intValue];
+                self.price_label.text = [NSString stringWithFormat:@"实付款:%ld",money];
+            }else{
+                self.first_btn.alpha = 0;
+                self.type_label.text = @"已付款";
                 NSInteger money = [order.payment_money intValue] + [order.balance_pay intValue];
                 self.price_label.text = [NSString stringWithFormat:@"实付款:%ld",money];
             }

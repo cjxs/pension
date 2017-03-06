@@ -16,6 +16,8 @@
 #import "OrderStatusTVController.h"
 #import "YYLUser.h"
 #import "Order_ed.h"
+#import "DDUpdatePay.h"
+#import "OrderSuccessController.h"
 
 
 
@@ -66,7 +68,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     pay_way = 0;
-    [[NSUserDefaults standardUserDefaults] setObject:_order_id forKey:@"pay_id"];
+
+    [Member DefaultUser].pay_id = _order_id;
 
     [self.navigationItem setTitle:@"支付中心"];
     self.view.backgroundColor = [UIColor whiteColor];
@@ -92,11 +95,7 @@
     }else{
         OrderStatusTVController * order_status_VC = [[OrderStatusTVController alloc] init];
         order_status_VC.vc_type = @"unnormal";
-        if ([_vc_type isEqualToString:@"unnormal"]) {
-            order_status_VC.o_id = _order_ed.order_id;
-        }else{
-            order_status_VC.o_id = _order.order_id;
-        }
+        order_status_VC.o_id = _order_id;
         [self.navigationController pushViewController:order_status_VC animated:YES];
     }
 
@@ -200,12 +199,33 @@
     }else if (pay_way==1) {
         [self payToAlipay];
     }else{
-        [self under_linePay];
+        [self under_linePayWithdic:dic];
     }
     
 }
--(void)under_linePay{
-    NSLog(@"线下支付");
+-(void)under_linePayWithdic:(NSDictionary *)dictionary{
+    
+    Member * menber = [Member DefaultUser];
+    DDUpdatePay * pay_update = [[DDUpdatePay alloc] initWithUid:menber.uid login:menber.login type:@"线下支付"];
+    
+    [pay_update startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
+        NSDictionary * dic = [DDLogin dictionaryWithJsonString:request.responseString];
+        if ([dic[@"error_code"] length] == 0) {
+            [SVProgressHUD showSuccessWithStatus:@"恭喜您，订单预订成功！"];
+            OrderSuccessController * order_SVC = [[OrderSuccessController alloc] init];
+            order_SVC.order_sn = dictionary[@"order_sn"];
+            order_SVC.money = dictionary[@"payment_money"];
+            [self.navigationController pushViewController:order_SVC animated:YES];
+            
+        }else{
+            [SVProgressHUD showSuccessWithStatus:@"请联系客服人员"];
+        }
+    } failure:^(__kindof YTKBaseRequest *request) {
+        NSLog(@"---");
+        [SVProgressHUD showSuccessWithStatus:@"请联系客服人员！"];
+        
+    }];
+
     
 }
 -(void)payToAlipay
@@ -239,7 +259,7 @@
         order.tradeNO =  _order_ed.order_sn; //订单ID（由商家自行制定）
         order.productName = [NSString stringWithFormat:@"优悠乐--%@",_order_ed.order_name];//product.subject; //商品标题
         order.productDescription = [NSString stringWithFormat:@"优悠乐--%@",_order_ed.order_name];//product.body; //商品描述
-        order.amount = @"0.01";//[NSString stringWithFormat:@"%.2lf",[_order_ed.payment_money floatValue]]; //商品价格
+        order.amount = [NSString stringWithFormat:@"%.2lf",[_order_ed.payment_money floatValue]]; //商品价格
     }else{
         order.tradeNO =  _order.order_sn; //订单ID（由商家自行制定）
         order.productName = [NSString stringWithFormat:@"优悠乐--%@",_order.order_name];//product.subject; //商品标题
@@ -275,8 +295,28 @@
         
         [[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic) {
             if ([resultDic[@"resultStatus"] intValue] == 9000) {
-                [SVProgressHUD showSuccessWithStatus:@"恭喜您，订单支付成功！"];
-                [self backBtnPressed];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    Member * menber = [Member DefaultUser];
+                    
+                    DDUpdatePay * pay_update = [[DDUpdatePay alloc] initWithUid:menber.uid login:menber.login type:@"wx"];
+                    
+                    [pay_update startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
+                        NSDictionary * dic = [DDLogin dictionaryWithJsonString:request.responseString];
+                        
+                        if (!dic[@"error_code"]) {
+                            [SVProgressHUD showSuccessWithStatus:@"恭喜您，支付成功！"];
+                        }else{
+                            [SVProgressHUD showSuccessWithStatus:@"付款成功，请联系客服人员"];
+                        }
+                    } failure:^(__kindof YTKBaseRequest *request) {
+                        [SVProgressHUD showSuccessWithStatus:@"付款成功，请联系客服人员！"];
+                        
+                    }];
+                    
+                    [self backBtnPressed];
+                });
+
 
             }else if ([resultDic[@"resultStatus"] intValue] == 6001) {
                 [SVProgressHUD showErrorWithStatus:@"用户取消支付"];

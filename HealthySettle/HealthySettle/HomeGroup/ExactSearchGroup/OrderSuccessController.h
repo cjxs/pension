@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface OrderSuccessController : UIViewController
-@property (nonatomic,strong)NSDictionary *_data_dic;
+@property (nonatomic,strong)NSString * order_sn;
+@property(nonatomic,strong)NSString * order_id;
+@property (nonatomic,strong)NSString * money;
 @end
