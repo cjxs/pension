@@ -361,7 +361,9 @@
     PayViewController * payVC = [[PayViewController alloc] init];
     payVC.order_ed = _order;
     payVC.vc_type = @"unnormal";
+    payVC.order_id = _order.order_id;
     payVC.order.order_id = _order.order_id;
+
     [self.navigationController pushViewController:payVC animated:YES];
 
 }

@@ -2,7 +2,7 @@
 //  DDLogin.h
 //  HealthySettle
 //
-//  Created by yrc on 16/7/11.
+//  Created by ; on 16/7/11.
 //  Copyright © 2016年 yrc. All rights reserved.
 //
 
@@ -17,4 +17,8 @@
 +(NSString *)timeStrWithDate:(NSDate*)date;
 +(NSDate *)dateWithString:(NSString *)str;
 +(NSString *)timeStrWithstr:(NSString *)str;
++ (BOOL)checkTelNumber:(NSString *) telNumber;
++ (BOOL)checkUserEmail:(NSString *)email;
++ (BOOL)checkUserIdCard: (NSString *) idCard;
++ (BOOL)checkUserName : (NSString *) userName;
 @end

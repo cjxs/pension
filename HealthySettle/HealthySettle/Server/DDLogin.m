@@ -76,7 +76,8 @@
         signedString = [RSAEncryptor encryptString:json_str publicKeyWithContentsOfFile:publicKeyPath];
         [arr addObject:signedString];
     }
-        
+    
+    
     return [NSArray arrayWithArray:arr];
 }
 //词典转换为字符串
@@ -186,6 +187,33 @@
     NSInteger timeIn = [str integerValue];
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:timeIn];
     return [formatter stringFromDate:date];
+}
++ (BOOL)checkTelNumber:(NSString *) telNumber
+{
+    NSString *pattern = @"^1+[3578]+\\d{9}";
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", pattern];
+    BOOL isMatch = [pred evaluateWithObject:telNumber];
+    return isMatch;
+}
++ (BOOL)checkUserName : (NSString *) userName
+{
+    NSString *pattern = @"^[a-zA-Z一-龥]{1,20}";
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", pattern];
+    BOOL isMatch = [pred evaluateWithObject:userName];
+    return isMatch;
+}
++ (BOOL)checkUserIdCard: (NSString *) idCard
+{
+    NSString *pattern = @"(^[0-9]{15}$)|([0-9]{17}([0-9]|X)$)";
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", pattern];
+    BOOL isMatch = [pred evaluateWithObject:idCard];
+    return isMatch;
+}
++ (BOOL)checkUserEmail:(NSString *)email{
+    NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+    BOOL isMatch = [emailTest evaluateWithObject:email];
+    return isMatch;
 }
 @end
 

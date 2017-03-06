@@ -514,7 +514,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         Member * user = [Member DefaultUser];
         if ([user.vocher intValue] > [_group_dic[@"can_vochers"] intValue]) {
-            dis_count_str = _group_dic[@"can_vochers"];
+            dis_count_str = _group_dic[@"can_vochers"];     
         }else{
             dis_count_str = user.vocher;
         }
@@ -528,7 +528,9 @@
         [[cell.cash_switch_btn rac_signalForControlEvents:UIControlEventValueChanged] subscribeNext:^(UISwitch * switch_btn) {
             cashUse = switch_btn.on;
             if (cashUse) {
-                self.balance_can = cash_str;
+                [SVProgressHUD showInfoWithStatus:@"对不起,移动端余额功能暂未开放！"];
+                switch_btn.on = NO;
+                //self.balance_can = cash_str;
             }else{
                 self.balance_can = @"0";
             }
@@ -648,13 +650,17 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath
 -(BOOL)testOrderMassage{
     if ([_vc_type isEqualToString:@"2"]) {
         if (!order.checkout_time) {
+            [SVProgressHUD showErrorWithStatus:@"请选择离店日期！"];
             return NO;
         }
     }
-    if (!contact_name) {
+    if (![DDLogin checkUserName:contact_name]) {
+        [SVProgressHUD showErrorWithStatus:@"联系人姓名错误！"];
         return NO;
     }
-    if (!contact_phone) {
+    if (![DDLogin checkTelNumber:contact_phone]) {
+        [SVProgressHUD showErrorWithStatus:@"联系人手机号码错误！"];
+
         return NO;
     }
     for (int i = 0; i < _person_num; i++) {
@@ -662,10 +668,13 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath
         if (!user) {
             return NO;
         }
-        if (!user.travel_name) {
+        if (![DDLogin checkUserName:user.travel_name]) {
+            [SVProgressHUD showErrorWithStatus:@"出行人姓名错误！"];
             return NO;
         }
-        if (!user.travel_id) {
+        if (![DDLogin checkUserIdCard:user.travel_id]) {
+            [SVProgressHUD showErrorWithStatus:@"出行人身份证号码错误！"];
+
             return NO;
         }
     }
@@ -766,12 +775,12 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath
         DDOrder_put * put_or = [[DDOrder_put alloc] initWithUid:[Member DefaultUser].uid login:[Member DefaultUser].login data:order_pre];
         [put_or startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
             NSDictionary * dic = [DDLogin dictionaryWithJsonString:request.responseString];
-            if (dic[@"error_code"]) {
+            if (!dic[@"error_code"]) {
                 PayViewController * payVC = [[PayViewController alloc] init];
                 payVC.order = order_pre;
                 payVC.vc_type = self.vc_type;
+                payVC.order_id = dic[@"order_id"];
                 payVC.order.order_id = dic[@"order_id"];
-                [[NSUserDefaults standardUserDefaults] setObject:dic[@"order_id"] forKey:@"pay_id"];
                 payVC.order.order_sn = dic[@"order_sn"];
                 [SVProgressHUD showSuccessWithStatus:@"订单提交成功！"];
                 [self.navigationController pushViewController:payVC animated:YES];
@@ -784,9 +793,6 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath
             [SVProgressHUD showErrorWithStatus:@"订单提交失败！"];
         }];
        
-    }else{
-        [SVProgressHUD showErrorWithStatus:@"请补全订单信息！"];
-
     }
 }
 -(void)textFieldDidBeginEditing:(UITextField *)textField{

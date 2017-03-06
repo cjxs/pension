@@ -14,5 +14,6 @@
 @property (nonatomic,strong)UITableView * tableView;
 @property (nonatomic,strong)YYLOrder * order;
 @property (nonatomic,strong)Order_ed * order_ed;
+@property (nonatomic,strong)NSString * order_id;
 
 @end

@@ -102,6 +102,7 @@
 		3250C1ED1E63D32800AA4B2E /* 待付款@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3250C1EB1E63D32800AA4B2E /* 待付款@3x.png */; };
 		3250C1F01E642CAB00AA4B2E /* DataWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3250C1EF1E642CAB00AA4B2E /* DataWebViewController.m */; };
 		3250C1F31E695B9E00AA4B2E /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = 3250C1F21E695B9E00AA4B2E /* Order.m */; };
+		3250C1F61E6ABBE000AA4B2E /* DDUpdatePay.m in Sources */ = {isa = PBXBuildFile; fileRef = 3250C1F51E6ABBE000AA4B2E /* DDUpdatePay.m */; };
 		32518DAF1CB34AC700CEAE35 /* SearchOrganTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32518DAD1CB34AC700CEAE35 /* SearchOrganTVCell.m */; };
 		32518DB31CB34EFC00CEAE35 /* custom_online.png in Resources */ = {isa = PBXBuildFile; fileRef = 32518DB11CB34EFC00CEAE35 /* custom_online.png */; };
 		32518DB41CB34EFC00CEAE35 /* custom_number.png in Resources */ = {isa = PBXBuildFile; fileRef = 32518DB21CB34EFC00CEAE35 /* custom_number.png */; };
@@ -564,6 +565,8 @@
 		3250C1EF1E642CAB00AA4B2E /* DataWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataWebViewController.m; sourceTree = "<group>"; };
 		3250C1F11E695B9000AA4B2E /* Order.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Order.h; sourceTree = "<group>"; };
 		3250C1F21E695B9E00AA4B2E /* Order.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Order.m; sourceTree = "<group>"; };
+		3250C1F41E6ABBE000AA4B2E /* DDUpdatePay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDUpdatePay.h; sourceTree = "<group>"; };
+		3250C1F51E6ABBE000AA4B2E /* DDUpdatePay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDUpdatePay.m; sourceTree = "<group>"; };
 		32518DAC1CB34AC700CEAE35 /* SearchOrganTVCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchOrganTVCell.h; sourceTree = "<group>"; };
 		32518DAD1CB34AC700CEAE35 /* SearchOrganTVCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchOrganTVCell.m; sourceTree = "<group>"; };
 		32518DB11CB34EFC00CEAE35 /* custom_online.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = custom_online.png; sourceTree = "<group>"; };
@@ -1954,6 +1957,8 @@
 				32FB00301D40C163008A5497 /* DDFindTest.m */,
 				32CEF8331DB8B4ED00CB7584 /* DDUpdatePWD.h */,
 				32CEF8341DB8B4ED00CB7584 /* DDUpdatePWD.m */,
+				3250C1F41E6ABBE000AA4B2E /* DDUpdatePay.h */,
+				3250C1F51E6ABBE000AA4B2E /* DDUpdatePay.m */,
 			);
 			path = Server;
 			sourceTree = "<group>";
@@ -2745,6 +2750,7 @@
 				3285AF021D35DD8C0070618A /* DDGetTest.m in Sources */,
 				325051F81CB667A700D431F5 /* ComAndCollVC.m in Sources */,
 				3250C1D61E5ECF5600AA4B2E /* DDOrder.m in Sources */,
+				3250C1F61E6ABBE000AA4B2E /* DDUpdatePay.m in Sources */,
 				325051FC1CB66C0500D431F5 /* ComOrCollTVCell.m in Sources */,
 				32CABD691CA373AA0068AE93 /* SeasonCTViewCell.m in Sources */,
 				32D23E7C1DC33932009154F6 /* MJRefreshHeaderView.m in Sources */,

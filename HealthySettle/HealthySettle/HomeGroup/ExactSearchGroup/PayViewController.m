@@ -66,6 +66,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     pay_way = 0;
+    [[NSUserDefaults standardUserDefaults] setObject:_order_id forKey:@"pay_id"];
+
     [self.navigationItem setTitle:@"支付中心"];
     self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.tableView];

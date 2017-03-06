@@ -42,6 +42,7 @@
 #import "WXApi.h"
 #import "OrderStatusTVController.h"
 #import "YYLUser.h"
+#import "DDUpdatePay.h"
 
 
 
@@ -352,8 +353,22 @@ static NSString * const UMDEVICETOKEN      = @"UMDeviceToken";// 友盟推送的
         if (strCode == WXSuccess) {
             //支付返回结果，实际支付结果需要去微信服务器端查询
             
-            [SVProgressHUD showSuccessWithStatus:@"恭喜您，支付成功！"];
-            NSLog(@"%@",resp);
+            Member * menber = [Member DefaultUser];
+
+            DDUpdatePay * pay_update = [[DDUpdatePay alloc] initWithUid:menber.uid login:menber.login type:@"wx"];
+            
+            [pay_update startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
+                NSDictionary * dic = [DDLogin dictionaryWithJsonString:request.responseString];
+                if (!dic[@"error_code"]) {
+                    [SVProgressHUD showSuccessWithStatus:@"恭喜您，支付成功！"];
+                }else{
+                    [SVProgressHUD showSuccessWithStatus:@"付款成功，请联系客服人员"];
+                }
+            } failure:^(__kindof YTKBaseRequest *request) {
+                [SVProgressHUD showSuccessWithStatus:@"付款成功，请联系客服人员！"];
+
+            }];
+            
             [self paySuccess];
 
         }else if(strCode ==WXErrCodeUserCancel){
