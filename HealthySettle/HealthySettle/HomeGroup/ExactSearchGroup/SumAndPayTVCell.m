@@ -34,6 +34,9 @@
                 UILabel * title_lab_0 = [[UILabel alloc] initWithFrame:CGRectMake(screenWide * 0.7, screenHeight * 0.03 + screenHeight * 0.04*i, screenWide * 0.27, screenHeight * 0.04)];
                 title_lab_0.textColor = [UIColor redColor];
                 title_lab_0.textAlignment = NSTextAlignmentRight;
+                if (IS_IPHONE6EARLY) {
+                    title_lab_0.font = [UIFont systemFontOfSize:13];
+                }
                 switch (i) {
                     case 0:
                         _num_sum_label = title_lab_0;

@@ -40,6 +40,12 @@
         
         _id_label = [[UILabel alloc] initWithFrame:CGRectMake(screenWide * 0.27, screenHeight * 0.155, screenWide * 0.5, screenHeight * 0.04)];
         [self addSubview:_id_label];
+        if (IS_IPHONE6EARLY) {
+            _name_label.font = [UIFont systemFontOfSize:13];
+            _phone_label.font = [UIFont systemFontOfSize:13];
+            _id_label.font = [UIFont systemFontOfSize:13];
+        }
+        
         
         man_view = [[SelectOneView alloc] initWithFrame:CGRectMake(screenWide * 0.27, screenHeight * 0.225, screenWide * 0.15, screenWide * 0.075)];
         [self addSubview:man_view];

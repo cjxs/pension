@@ -41,7 +41,12 @@
         _name_label = [[UILabel alloc] initWithFrame:CGRectMake(screenWide * 0.27, screenHeight * 0.1, screenWide * 0.5, screenHeight * 0.04)];
         [self addSubview:_name_label];
         _phone_label = [[UILabel alloc] initWithFrame:CGRectMake(screenWide * 0.27, screenHeight * 0.17, screenWide * 0.5, screenHeight * 0.04)];
-        [self addSubview:_phone_label];        
+        [self addSubview:_phone_label];
+        if (IS_IPHONE6EARLY) {
+            _name_label.font = [UIFont systemFontOfSize:13];
+            _phone_label.font = [UIFont systemFontOfSize:13];
+        }
+        
     }
     return self;
 }

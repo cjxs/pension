@@ -47,7 +47,7 @@
         numberButton.increaseImage = [UIImage imageNamed:@"increase_taobao"];
         numberButton.decreaseImage = [UIImage imageNamed:@"decrease_taobao"];
         numberButton.backgroundColor = [UIColor colorWithHexString:@"#ebebeb"];
-        numberButton.textField.text = [NSString stringWithFormat:@"%ld",_person_num];
+        numberButton.textField.text = [NSString stringWithFormat:@"%ld",(long)_person_num];
         
         _number_btn = numberButton;
     }
@@ -258,7 +258,7 @@
             make.right.mas_equalTo(money_sum_label.mas_left);
         }];
         text_label.textAlignment = NSTextAlignmentRight;
-        text_label.text = [NSString stringWithFormat:@"共%ld人    合计：",_person_num];
+        text_label.text = [NSString stringWithFormat:@"共%ld人    合计：",(long)_person_num];
         
         [RACObserve(self, number_sum) subscribeNext:^(NSString * x) {
             money_sum_label.text = x ;
@@ -271,7 +271,7 @@
             _person_num = [num integerValue];
             text_label.text = [NSString stringWithFormat:@"共%@人    合计：",num];
             if ([_vc_type intValue] != 2) {
-                self.number_sum = [NSString stringWithFormat:@"%ld",[_charge_price intValue]* _person_num];
+                self.number_sum = [NSString stringWithFormat:@"%ld",(long)[_charge_price intValue]* _person_num];
 
             }
             [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationFade];
@@ -279,15 +279,15 @@
         };
         [RACObserve(self, number_sum) subscribeNext:^(NSString * x) {
             NSInteger paid = [_number_sum intValue]- [_balance_can intValue]-[_dis_count_can intValue];
-            self.unpaid_money = [NSString stringWithFormat:@"%ld",paid];
+            self.unpaid_money = [NSString stringWithFormat:@"%ld",(long)paid];
         }];
         [RACObserve(self, balance_can) subscribeNext:^(NSString *x){
             NSInteger paid = [_number_sum intValue]- [_balance_can intValue]-[_dis_count_can intValue];
-            self.unpaid_money = [NSString stringWithFormat:@"%ld",paid];
+            self.unpaid_money = [NSString stringWithFormat:@"%ld",(long)paid];
         }];
         [RACObserve(self, dis_count_can) subscribeNext:^(NSString *x) {
             NSInteger paid = [_number_sum intValue]- [_balance_can intValue]-[_dis_count_can intValue];
-            self.unpaid_money = [NSString stringWithFormat:@"%ld",paid];
+            self.unpaid_money = [NSString stringWithFormat:@"%ld",(long)paid];
         }];
         [RACObserve(self, unpaid_money) subscribeNext:^(NSString * x) {
             _money_label.text = x;
@@ -333,12 +333,12 @@
             
             NSInteger time = [order.checkout_time integerValue]-[order.checkin_time integerValue];
             int number = round(time/oneDay * 1.0);
-            self.number_sum = [NSString stringWithFormat:@"%ld",[self.charge_price integerValue] * number];
+            self.number_sum = [NSString stringWithFormat:@"%ld",(long)[self.charge_price integerValue] * number];
         }else{
             self.number_sum = _charge_price;
         }
     }else{
-        self.number_sum = [NSString stringWithFormat:@"%ld",[_charge_price intValue]* _person_num];
+        self.number_sum = [NSString stringWithFormat:@"%ld",(long)[_charge_price intValue]* _person_num];
     }
     
     self.tableView.showsVerticalScrollIndicator = NO;
@@ -637,7 +637,7 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath
             
             NSTimeInterval time = [order.checkout_time integerValue]- [order.checkin_time integerValue];
             int number = round(time/oneDay * 1.0);
-            self.number_sum = [NSString stringWithFormat:@"%ld",[self.charge_price integerValue] * number];
+            self.number_sum = [NSString stringWithFormat:@"%ld",(long)[self.charge_price integerValue] * number];
             
         }
     }//日期选择器的代理方法
@@ -706,15 +706,15 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath
             NSTimeInterval time =  [order.checkout_time integerValue]- [order.checkin_time integerValue];;
             int number = round(time/oneDay);
             order_pre.lived_num = [NSString stringWithFormat:@"%d",number];
-            order_pre.total_money = [NSString stringWithFormat:@"%ld",[self.charge_price integerValue] * number];
+            order_pre.total_money = [NSString stringWithFormat:@"%ld",(long)[self.charge_price integerValue] * number];
             order_pre.room_id = _room_index;
             order_pre.order_spec = [home_label.text componentsSeparatedByString:@"|"];
             
             
         }else if ([_vc_type intValue] == 1){
-            order_pre.beds = [NSString stringWithFormat:@"%ld",_person_num];
+            order_pre.beds = [NSString stringWithFormat:@"%ld",(long)_person_num];
             
-            order_pre.total_money = [NSString stringWithFormat:@"%ld",[self.charge_price integerValue] * _person_num];
+            order_pre.total_money = [NSString stringWithFormat:@"%ld",(long)[self.charge_price integerValue] * _person_num];
             if (!order.checkin_time) {
                 order_pre.checkin_time = [DDLogin timeStrWithDate:[NSDate date]];
             }else{
@@ -730,9 +730,9 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath
 
             order_pre.order_spec = [NSArray arrayWithArray:_chargeArray];
         }else{
-            order_pre.total_money = [NSString stringWithFormat:@"%ld",[self.charge_price integerValue] * _person_num];
+            order_pre.total_money = [NSString stringWithFormat:@"%ld",(long)[self.charge_price integerValue] * _person_num];
             order_pre.group_date = self.room_index;
-            order_pre.num = [NSString stringWithFormat:@"%ld",_person_num];
+            order_pre.num = [NSString stringWithFormat:@"%ld",(long)_person_num];
         }
 
         order_pre.group_id = [NSString stringWithFormat:@"%@",self.gid];

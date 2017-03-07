@@ -46,6 +46,9 @@
             UILabel * label_1 = [[UILabel alloc] initWithFrame:CGRectMake(screenWide * 0.75, screenHeight * 0.015 +screenHeight * 0.04*i, screenWide * 0.25-10, screenHeight * 0.04)];
             label_1.textColor = [UIColor redColor];
             label_1.textAlignment = NSTextAlignmentRight;
+            if (IS_IPHONE6EARLY) {
+                label_1.font = [UIFont systemFontOfSize:13];
+            }
             if (i==0) {
                 _num_sum_label = label_1;
                 [view_1 addSubview:_num_sum_label];

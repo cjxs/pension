@@ -48,6 +48,11 @@
         _phone_field = [[UITextField alloc] initWithFrame:CGRectMake(screenWide * 0.27, screenHeight * 0.17, screenWide * 0.5, screenHeight * 0.04)];
         _phone_field.placeholder = @"请填写真实号码";
         [self addSubview:_phone_field];
+        if (IS_IPHONE6EARLY) {
+            _name_field.font = [UIFont systemFontOfSize:13];
+            _phone_field.font = [UIFont systemFontOfSize:13];
+        }
+
         
         _add_person_btn  = [UIButton buttonWithType:UIButtonTypeCustom];
         [self addSubview:_add_person_btn];

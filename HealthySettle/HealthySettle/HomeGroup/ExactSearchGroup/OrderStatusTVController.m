@@ -37,7 +37,6 @@
         
         UILabel * prompt_label = [[UILabel alloc] initWithFrame:CGRectMake(15, 1, screenWide - 30, screenHeight * 0.04)];
         prompt_label.backgroundColor = UIColorFromHex(@"#fdfbc0");
-        prompt_label.text = @"  请及时付款，不然就被抢光啦!";
         prompt_label.font = [UIFont systemFontOfSize:12];
         prompt_label.textAlignment = NSTextAlignmentCenter;
         [view_0 addSubview:prompt_label];
@@ -54,15 +53,23 @@
             }else{
                 status_label.text = @"待付款";
             }
+            prompt_label.text = @"  请及时付款，不然就被抢光啦!";
+
         }else if ([_order.dd_status intValue] == 20 ){
             status_label.text = @"已关闭";
+            prompt_label.text = @" 希望下次合作愉快!";
+
             
         }else{
             if ([_order.status integerValue] == 1) {
                 status_label.text = @"已付款";
+                prompt_label.text = @"  您已付款成功，祝您万事如意!";
+
+                
 
             }else{
                 status_label.text = @"使用中";
+                prompt_label.text = @"预祝您万事如意！";
 
             }
             
@@ -137,6 +144,7 @@
             UILabel * address_label = [[UILabel alloc] initWithFrame:CGRectMake(screenWide * 0.27, screenHeight * 0.015, screenWide * 0.68, screenHeight * 0.04)];
             [title_view_0 addSubview:address_label];
             address_label.text = _order.area_name;
+            address_label.font = [UIFont systemFontOfSize:12];
             address_label.textAlignment = NSTextAlignmentLeft;
             
         }else{
@@ -161,12 +169,15 @@
         if (IS_IPHONE6EARLY) {
             title_label.font = [UIFont systemFontOfSize:13];
         }
+
+
         if ([_order.cat_id intValue] == 3) {
             title_label.text = @"出发日期";
             title_label.textAlignment = NSTextAlignmentLeft;
             UILabel * date_label = [[UILabel alloc] initWithFrame:CGRectMake(screenWide * 0.27, screenHeight * 0.015, screenWide*0.65, screenHeight *0.04 )];
             date_label.text = [DDLogin timeStrWithstr:_order.group_date];
             date_label.textAlignment = NSTextAlignmentLeft;
+            date_label.font = [UIFont systemFontOfSize:12];
             [title_view_1 addSubview:date_label];
         }else{
             title_label.text = @"住离日期";
@@ -183,12 +194,12 @@
             
             UILabel *checkIn_timelabel = [[UILabel alloc]
                                  initWithFrame:CGRectMake(screenWide * 0.27 + screenWide * 0.1, screenHeight * 0.015, screenWide /3 - screenWide * 0.1, screenHeight * 0.04)];
-            checkIn_timelabel.font = [UIFont systemFontOfSize:13];
+            checkIn_timelabel.font = [UIFont systemFontOfSize:12];
             checkIn_timelabel.text = [DDLogin timeStrWithstr:_order.checkin_time];
             [title_view_1 addSubview:checkIn_timelabel];
             UILabel *leave_timelabel = [[UILabel alloc]
                                initWithFrame:CGRectMake(screenWide * 0.27+ screenWide *0.1 + screenWide /3, screenHeight * 0.015, screenWide /3 - screenWide * 0.1, screenHeight * 0.04)];
-            leave_timelabel.font = [UIFont systemFontOfSize:13];
+            leave_timelabel.font = [UIFont systemFontOfSize:12];
             leave_timelabel.text = [DDLogin timeStrWithstr:_order.checkout_time];
             [title_view_1 addSubview:leave_timelabel];
         }
@@ -206,6 +217,7 @@
         
         UILabel * number_label = [[UILabel alloc] initWithFrame:CGRectMake(screenWide * 0.27, screenHeight * 0.015, screenWide*0.65, screenHeight *0.04 )];
         number_label.textAlignment = NSTextAlignmentLeft;
+        number_label.font = [UIFont systemFontOfSize:12];
         [title_view_2 addSubview:number_label];
         switch ([_order.cat_id intValue]) {
             case 1:
