@@ -16,6 +16,8 @@
 @interface RefundViewController ()<UITableViewDelegate,UITableViewDataSource>{
     NSMutableArray * dataSource;
     NSMutableArray * current_arr;
+    UILabel * label_num;
+
 }
 
 
@@ -143,16 +145,18 @@
     
 }
 -(void)testNumber{
-    UILabel * label;
     if (current_arr.count == 0) {
-        label = [[UILabel alloc] initWithFrame:CGRectMake(screenWide * 0.2, screenHeight * 0.3, screenWide * 0.6, screenHeight * 0.03)];
-        label.textAlignment = NSTextAlignmentCenter;
-        label.text = @"暂无相关订单";
-        label.textColor = [UIColor grayColor];
-        [self.tableView addSubview:label];
+         if (!label_num) {
+            label_num = [[UILabel alloc] initWithFrame:CGRectMake(screenWide * 0.2, screenHeight * 0.3, screenWide * 0.6, screenHeight * 0.03)];
+            label_num.textAlignment = NSTextAlignmentCenter;
+            label_num.text = @"暂无相关订单";
+            label_num.textColor = [UIColor grayColor];
+         }
+        [self.tableView addSubview:label_num];
+
     }else{
-        if (label) {
-            [label removeFromSuperview];
+        if (label_num) {
+            [label_num removeFromSuperview];
         }
     }
 
