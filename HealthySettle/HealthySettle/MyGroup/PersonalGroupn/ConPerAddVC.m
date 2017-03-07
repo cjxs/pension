@@ -108,7 +108,7 @@
     update = [[DDUpdate alloc] initWithProject:@"contact" data:_conPer.mj_keyValues];
     [update startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
         NSDictionary * dic = [DDLogin dictionaryWithJsonString:request.responseString];
-        if (dic[@"error_code"]) {
+        if ([dic[@"error_code"] intValue] == 6) {
             NSMutableDictionary* m_dic;
             if (_user_index == 99999) {
                 m_dic = [NSMutableDictionary dictionary];
@@ -144,7 +144,7 @@
     update = [[DDUpdate alloc] initWithProject:@"contact_del" data:@{@"cid":_data_dic[@"travel_cid"]}];
     [update startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
         NSDictionary * dic = [DDLogin dictionaryWithJsonString:request.responseString];
-        if (dic[@"error_code"]) {
+        if ([dic[@"error_code"] intValue] == 6) {
             NSMutableArray * m_dic = [Member DefaultUser].cont_arr;
             [m_dic removeObjectAtIndex:_user_index];
             [SVProgressHUD showSuccessWithStatus:@"success！"];

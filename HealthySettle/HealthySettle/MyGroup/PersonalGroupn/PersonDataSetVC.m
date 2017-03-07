@@ -153,7 +153,7 @@
         update = [[DDUpdate alloc] initWithProject:@"user_data" data:@{@"sex":@(gender),@"nickname":nick_name,@"birthday":birth_day}];
       [update startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
         NSDictionary * dic = [DDLogin dictionaryWithJsonString:request.responseString];
-        if (![dic[@"error_code"] intValue] == 0) {
+        if ([dic[@"error_code"] intValue] == 6) {
             [SVProgressHUD showSuccessWithStatus:@"success！"];
             [Member DefaultUser].nickname = nick_name;
             [Member DefaultUser].sex = [NSString stringWithFormat:@"%ld",gender];

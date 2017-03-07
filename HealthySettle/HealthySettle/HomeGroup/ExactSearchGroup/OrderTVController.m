@@ -704,7 +704,7 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath
             }
             
             NSTimeInterval time =  [order.checkout_time integerValue]- [order.checkin_time integerValue];;
-            int number = time/oneDay;
+            int number = round(time/oneDay);
             order_pre.lived_num = [NSString stringWithFormat:@"%d",number];
             order_pre.total_money = [NSString stringWithFormat:@"%ld",[self.charge_price integerValue] * number];
             order_pre.room_id = _room_index;
@@ -775,7 +775,7 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath
         DDOrder_put * put_or = [[DDOrder_put alloc] initWithUid:[Member DefaultUser].uid login:[Member DefaultUser].login data:order_pre];
         [put_or startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
             NSDictionary * dic = [DDLogin dictionaryWithJsonString:request.responseString];
-            if ( dic[@"error_code"]) {
+            if ([dic[@"error_code"] intValue] == 6) {
                 PayViewController * payVC = [[PayViewController alloc] init];
                 payVC.order = order_pre;
                 payVC.vc_type = self.vc_type;
@@ -783,16 +783,14 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath
                 payVC.order.order_id = dic[@"order_id"];
                 payVC.order.order_sn = dic[@"order_sn"];
                 [SVProgressHUD showSuccessWithStatus:@"订单提交成功！"];
-                
                 [Member DefaultUser].o_from = 0;
                 [self.navigationController pushViewController:payVC animated:YES];
 
             }else{
-                NSLog(@"%@",request.responseString);
                 [SVProgressHUD showErrorWithStatus:@"订单提交失败！"];
             }
         } failure:^(__kindof YTKBaseRequest *request) {
-            [SVProgressHUD showErrorWithStatus:@"订单提交失败！"];
+            [SVProgressHUD showErrorWithStatus:@"网络错误，订单提交失败！"];
         }];
        
     }

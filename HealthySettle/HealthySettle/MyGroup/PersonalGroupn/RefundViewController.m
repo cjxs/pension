@@ -177,7 +177,9 @@
         NSDictionary * dic = [DDLogin dictionaryWithJsonString:request.responseString];
         dataSource = [NSMutableArray arrayWithCapacity:0];
         current_arr = [NSMutableArray arrayWithCapacity:0];
-        if ([dic[@"error_code"] intValue] == 0) {
+        if ([dic[@"error_code"] intValue] == 4) {
+            [SVProgressHUD showErrorWithStatus:dic[@"msg"]];
+        }else{
             Order_ed * order;
             for (NSDictionary * dic_l in dic[@"order"]) {
                 order = [Order_ed mj_objectWithKeyValues:dic_l];
@@ -187,12 +189,10 @@
             }
             current_arr = [NSMutableArray arrayWithArray:dataSource];
             [self loadData];
-        }
-        else{
-            //其他途径获取数据
+
         }
     } failure:^(__kindof YTKBaseRequest *request) {
-        
+        [SVProgressHUD showErrorWithStatus:@"网络错误"];
     }];
     
 }

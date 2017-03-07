@@ -225,7 +225,7 @@
             [self.delegate loginCurrentuser:number];
         }
     } failure:^(__kindof YTKBaseRequest *request) {
-        NSLog(@"%@++++++%ld",request.responseString,request.responseStatusCode);
+        [SVProgressHUD showErrorWithStatus:@"网络错误"];
     }];
 }
 - (void)getTestNumber:(UIButton *)button {
@@ -249,7 +249,7 @@
             [alertView show];
         }
     } failure:^(__kindof YTKBaseRequest *request) {
-        NSLog(@"%@++++++%ld",request.responseString,request.responseStatusCode);
+        [SVProgressHUD showErrorWithStatus:@"网络错误"];
         
     }];
 }

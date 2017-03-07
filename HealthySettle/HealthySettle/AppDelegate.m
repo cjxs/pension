@@ -300,29 +300,8 @@ static NSString * const UMDEVICETOKEN      = @"UMDeviceToken";// 友盟推送的
         [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
 
             if ([resultDic[@"resultStatus"] intValue] == 9000) {
+                [self successPay];
                 
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    
-                    Member * menber = [Member DefaultUser];
-                    
-                    DDUpdatePay * pay_update = [[DDUpdatePay alloc] initWithUid:menber.uid login:menber.login type:@"wx"];
-                    
-                    [pay_update startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
-                        NSDictionary * dic = [DDLogin dictionaryWithJsonString:request.responseString];
-                        
-                        if (!dic[@"error_code"]) {
-                            [SVProgressHUD showSuccessWithStatus:@"恭喜您，支付成功！"];
-                        }else{
-                            [SVProgressHUD showSuccessWithStatus:@"付款成功，请联系客服人员"];
-                        }
-                    } failure:^(__kindof YTKBaseRequest *request) {
-                        [SVProgressHUD showSuccessWithStatus:@"付款成功，请联系客服人员！"];
-                        
-                    }];
-                    
-                    [self paySuccess];
-                    
-                });
             }else if ([resultDic[@"resultStatus"] intValue] == 6001) {
                 [SVProgressHUD showErrorWithStatus:@"用户取消支付"];
             }else{
@@ -339,29 +318,7 @@ static NSString * const UMDEVICETOKEN      = @"UMDeviceToken";// 友盟推送的
             //【由于在跳转支付宝客户端支付的过程中，商户app在后台很可能被系统kill了，所以pay接口的callback就会失效，请商户对standbyCallback返回的回调结果进行处理,就是在这个方法里面处理跟callback一样的逻辑】
                         
           if ([resultDic[@"resultStatus"] intValue] == 9000) {
-              dispatch_async(dispatch_get_main_queue(), ^{
-                  
-                  Member * menber = [Member DefaultUser];
-                  
-                  DDUpdatePay * pay_update = [[DDUpdatePay alloc] initWithUid:menber.uid login:menber.login type:@"wx"];
-                  
-                  [pay_update startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
-                      NSDictionary * dic = [DDLogin dictionaryWithJsonString:request.responseString];
-                      
-                      if (!dic[@"error_code"]) {
-                          [SVProgressHUD showSuccessWithStatus:@"恭喜您，支付成功！"];
-                      }else{
-                          [SVProgressHUD showSuccessWithStatus:@"付款成功，请联系客服人员"];
-                      }
-                  } failure:^(__kindof YTKBaseRequest *request) {
-                      [SVProgressHUD showSuccessWithStatus:@"付款成功，请联系客服人员！"];
-                      
-                  }];
-                  
-                  [self paySuccess];
-                  
-              });
-
+              [self successPay];
           }else if ([resultDic[@"resultStatus"] intValue] == 6001) {
               [SVProgressHUD showErrorWithStatus:@"用户取消支付"];
           }else{
@@ -394,33 +351,8 @@ static NSString * const UMDEVICETOKEN      = @"UMDeviceToken";// 友盟推送的
         
         if (strCode == WXSuccess) {
             //支付返回结果，实际支付结果需要去微信服务器端查询
+            [self successPay];
             
-
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                
-                Member * menber = [Member DefaultUser];
-                
-                DDUpdatePay * pay_update = [[DDUpdatePay alloc] initWithUid:menber.uid login:menber.login type:@"wx"];
-                
-                [pay_update startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
-                    NSDictionary * dic = [DDLogin dictionaryWithJsonString:request.responseString];
-                    
-                    if (!dic[@"error_code"]) {
-                        [SVProgressHUD showSuccessWithStatus:@"恭喜您，支付成功！"];
-                    }else{
-                        [SVProgressHUD showSuccessWithStatus:@"付款成功，请联系客服人员"];
-                    }
-                } failure:^(__kindof YTKBaseRequest *request) {
-                    [SVProgressHUD showSuccessWithStatus:@"付款成功，请联系客服人员！"];
-                    
-                }];
-                
-                [self paySuccess];
-
-            });
-            
-
         }else if(strCode ==WXErrCodeUserCancel){
             [SVProgressHUD showErrorWithStatus:@"用户取消支付"];
         }else{
@@ -429,14 +361,34 @@ static NSString * const UMDEVICETOKEN      = @"UMDeviceToken";// 友盟推送的
         }
     }
 }
--(void)paySuccess{
+-(void)successPay{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        Member * menber = [Member DefaultUser];
+        
+        DDUpdatePay * pay_update = [[DDUpdatePay alloc] initWithUid:menber.uid login:menber.login type:@"wx"];
+        
+        [pay_update startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
+            NSDictionary * dic = [DDLogin dictionaryWithJsonString:request.responseString];
+            
+            if ([dic[@"error_code"] intValue] == 6) {
+                [SVProgressHUD showSuccessWithStatus:@"恭喜您，支付成功！"];
+            }else{
+                [SVProgressHUD showSuccessWithStatus:@"付款成功，稍后在订单中查询结果！"];
+            }
+        } failure:^(__kindof YTKBaseRequest *request) {
+            [SVProgressHUD showSuccessWithStatus:@"网络错误，请稍后在订单中查询！"];
+            
+        }];
+        
         NSInteger o_from = [Member DefaultUser].o_from;
         UINavigationController * na_vc = self.tabbarController.viewControllers[o_from];
         OrderStatusTVController * order_status_VC = [[OrderStatusTVController alloc] init];
         order_status_VC.vc_type = @"unnormal";
         order_status_VC.o_id = [Member DefaultUser].pay_id;
         [na_vc pushViewController:order_status_VC animated:YES];
-
+        
+    });
 }
 
 @end

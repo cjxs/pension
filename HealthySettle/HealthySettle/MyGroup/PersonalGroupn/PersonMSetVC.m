@@ -52,7 +52,7 @@
     DDUpdate * pay_set = [[DDUpdate alloc] initWithProject:@"user_data" data:@{_vc_type:_text_Input.text}];
     [pay_set startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
         NSDictionary * dic = [DDLogin dictionaryWithJsonString:request.responseString];
-        if ([dic[@"error_code"] intValue] == 0) {
+        if ([dic[@"error_code"] intValue] == 6) {
             [SVProgressHUD showSuccessWithStatus:@"success！"];
             if ([_vc_type isEqualToString:@"phone"]) {
                 [Member DefaultUser].phone = _text_Input.text;

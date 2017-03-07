@@ -144,13 +144,16 @@
     DDMoneyList * money_list = [[DDMoneyList alloc] initWithUid:user.uid login:user.login];
     [money_list startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
         NSDictionary * dic = [DDLogin dictionaryWithJsonString:request.responseString];
-        if ([dic[@"error_code"] intValue] == 0) {
+        if ([dic[@"error_code"] intValue] == 4) {
+            [SVProgressHUD showErrorWithStatus:dic[@"msg"]];
+        }else{
             data_Arr = [NSMutableArray arrayWithCapacity:0];
             for (NSDictionary *dic_l  in dic[@"money_list"]) {
                 [data_Arr addObject:dic_l];
-                }
-            [self loadData];
             }
+            [self loadData];
+        }
+        
            } failure:^(__kindof YTKBaseRequest *request) {
         NSLog(@"%@",request.requestOperation);
     }];
@@ -160,7 +163,9 @@
     DDScoreList * score_list = [[DDScoreList alloc] initWithUid:user.uid login:user.login];
     [score_list startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
         NSDictionary * dic = [DDLogin dictionaryWithJsonString:request.responseString];
-        if ([dic[@"error_code"] intValue] == 0) {
+        if ([dic[@"error_code"] intValue] == 4) {
+            [SVProgressHUD showErrorWithStatus:dic[@"msg"]];
+        }else{
             data_Arr = [NSMutableArray arrayWithCapacity:0];
             for (NSDictionary *dic_l  in dic[@"score_list"]) {
                 [data_Arr addObject:dic_l];

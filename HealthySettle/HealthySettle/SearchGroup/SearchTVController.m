@@ -156,7 +156,7 @@
     DDFindGet * find = [[DDFindGet alloc] init];
     [find startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
         dic = [DDLogin dictionaryWithJsonString:request.responseString];
-        if ([dic[@"error_code"] intValue] == 1) {
+        if ([dic[@"error_code"] intValue] == 4) {
             [SVProgressHUD showErrorWithStatus:@"暂时没有相应数据！"];
         }else{
             [self.tableView reloadData];

@@ -79,7 +79,7 @@
     DDUpdate * pay_set = [[DDUpdate alloc] initWithProject:@"user_data" data:@{@"pay_pwd":_refresh_passInput.text}];
     [pay_set startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
         NSDictionary * dic = [DDLogin dictionaryWithJsonString:request.responseString];
-        if (![dic[@"error_code"] intValue] == 0) {
+        if ([dic[@"error_code"] intValue] == 6) {
             [SVProgressHUD showSuccessWithStatus:@"success！"];
             [Member DefaultUser].pay_can = @"Y";
             [self.navigationController popViewControllerAnimated:YES];

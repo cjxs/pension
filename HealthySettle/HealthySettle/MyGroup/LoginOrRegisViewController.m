@@ -490,7 +490,9 @@
     [loginApi startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
         NSString *str = [request.responseString stringByReplacingOccurrencesOfString:@":null" withString:@":\"\""];
         dic = [DDLogin dictionaryWithJsonString: str];
-        if ([dic[@"msg"]length] == 0) {
+        if ([dic[@"error_code"]intValue] == 4) {
+            [SVProgressHUD showErrorWithStatus:dic[@"msg"]];
+        }else {
             Member* menber = [Member DefaultUser];
             menber.uid = dic[@"uid"];
             menber.nickname = dic[@"nickname"];
@@ -508,7 +510,7 @@
             }
             menber.role = dic[@"role"];
             menber.refer_code = dic[@"refer_code"];
-
+            
             menber.login = @"online";
             menber.pay_can = dic[@"pay_can"];
             [self.navigationController popViewControllerAnimated:YES];
@@ -517,12 +519,10 @@
             }
             [[NSUserDefaults standardUserDefaults] setObject:pwd forKey:@"password"];
             [[NSUserDefaults standardUserDefaults] setObject:username forKey:@"username"];
-        }else {
-            UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:dic[@"msg"] message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
-            [self touchesBegan:nil withEvent:nil];
-            [alertView show];
         }
     } failure:^(__kindof YTKBaseRequest *request) {
+        [SVProgressHUD showErrorWithStatus:@"网络错误"];
+
     }];
     
     return nil;
@@ -534,15 +534,13 @@
     [regisApi startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
         dic = [DDLogin dictionaryWithJsonString:request.responseString];
         if (![dic[@"msg"] isEqualToString:@"OK"]) {
-            UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"注册成功！" message:nil delegate:nil cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
-             [self touchesBegan:nil withEvent:nil];
-            [alertView show];
+            [SVProgressHUD showSuccessWithStatus:@"注册成功！"];
         }else {
             [self loginViewAppear];
         }
         
     } failure:^(__kindof YTKBaseRequest *request) {
-        NSLog(@"%@",request.responseString);
+        [SVProgressHUD showErrorWithStatus:@"网络错误"];
 
     }];
 }
@@ -613,7 +611,7 @@
         
         
     } failure:^(__kindof YTKBaseRequest *request) {
-        NSLog(@"%@++++++%ld",request.responseString,request.responseStatusCode);
+        [SVProgressHUD showErrorWithStatus:@"网络错误"];
         
     }];
 }

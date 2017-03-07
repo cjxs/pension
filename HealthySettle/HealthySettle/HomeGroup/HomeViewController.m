@@ -167,33 +167,38 @@
     DDHome_page * ddHome_page = [[DDHome_page alloc] initWithUid:@"13732212641" login:@"1"];
     [ddHome_page startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
         NSDictionary * dic = [DDLogin dictionaryWithJsonString:request.responseString];
-        NSArray * temp_arr = dic[@"banner"][@"img"];
-        imagesA = [NSMutableArray arrayWithCapacity:0];
-        for (NSString * str in temp_arr) {
-            NSString *  str2 = [NSString stringWithFormat:@"%@/upload/group/%@",BASEURL,str];
-            NSString * str3 = [str2 stringByReplacingOccurrencesOfString:@"," withString:@"/"];
-            [imagesA addObject:str3];
-        }
-        urlA = dic[@"banner"][@"url"];
-        seasonsA = dic[@"seasons"];
-        tag_A = dic[@"tag"];
-        groups = dic[@"group"];
-        m_groups = [NSMutableArray array];
-        for (NSDictionary  * dic in groups) {
-            if ([dic[@"cat_id"] intValue]== 3) {
-                [m_groups addObject:dic];
+        if ([dic[@"error_code"] intValue]== 4) {
+            [SVProgressHUD showErrorWithStatus:@"网络错误"];
+            [_homeTableView headerEndRefreshing];
+            [self performSelector:@selector(dismiss:) withObject:nil afterDelay:1.5];
+        }else{
+            NSArray * temp_arr = dic[@"banner"][@"img"];
+            imagesA = [NSMutableArray arrayWithCapacity:0];
+            for (NSString * str in temp_arr) {
+                NSString *  str2 = [NSString stringWithFormat:@"%@/upload/group/%@",BASEURL,str];
+                NSString * str3 = [str2 stringByReplacingOccurrencesOfString:@"," withString:@"/"];
+                [imagesA addObject:str3];
+            }
+            urlA = dic[@"banner"][@"url"];
+            seasonsA = dic[@"seasons"];
+            tag_A = dic[@"tag"];
+            groups = dic[@"group"];
+            m_groups = [NSMutableArray array];
+            for (NSDictionary  * dic in groups) {
+                if ([dic[@"cat_id"] intValue]== 3) {
+                    [m_groups addObject:dic];
+                }
+            }
+            [self reloadTableView];
+            if (fbg_view) {
+                [fbg_view removeFromSuperview];
             }
         }
-        [self reloadTableView];
-        if (fbg_view) {
-            [fbg_view removeFromSuperview];
-        }
-
         
     } failure:^(__kindof YTKBaseRequest *request){
         [SVProgressHUD showErrorWithStatus:@"网络错误"];
         [_homeTableView headerEndRefreshing];
-        [self performSelector:@selector(dismiss:) withObject:nil afterDelay:3];
+        [self performSelector:@selector(dismiss:) withObject:nil afterDelay:1.5];
     }];
 
 }

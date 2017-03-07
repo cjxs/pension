@@ -166,7 +166,11 @@
     DDOrderList * order_list = [[DDOrderList alloc] initWithUid:user.uid login:user.login];
     [order_list startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
         NSDictionary * dic = [DDLogin dictionaryWithJsonString:request.responseString];
-        if ([dic[@"error_code"] intValue] == 0) {
+        if ([dic[@"error_code"] intValue] == 4) {
+            //其他途径获取数据
+            [SVProgressHUD showErrorWithStatus:dic[@"msg"]];
+
+        }else{
             NSArray * arr = dic[@"order"];
             dataSource = [NSMutableArray arrayWithCapacity:0];
             current_arr = [NSMutableArray arrayWithCapacity:0];
@@ -182,18 +186,16 @@
                     }else if([order.status intValue] == 1){
                     }else{
                         order.dd_status = @"21";
-
+                        
                     }
                     [dataSource addObject:order];
                 }
                 [self loadData];
             }
 
-        }else{
-             //其他途径获取数据
         }
     } failure:^(__kindof YTKBaseRequest *request) {
-        
+        [SVProgressHUD showErrorWithStatus:@"网络错误"];
     }];
     
 }

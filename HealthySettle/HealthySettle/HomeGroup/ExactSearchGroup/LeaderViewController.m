@@ -42,6 +42,7 @@
     
     CGRect back_frame = CGRectMake(5, 20 , screenWide * 0.04, screenWide * 0.04/10 *18 );
     UIImageView * back_imageView = [[UIImageView alloc] initWithFrame:back_frame];
+
     back_imageView.image = [UIImage imageNamed:@"leftop_w"];
     [back_btn addSubview:back_imageView];
  
@@ -50,7 +51,9 @@
     [self.view addSubview:back_view];
     
     UIImageView * head_img_view = [[UIImageView alloc] init];
-    head_img_view.image = [UIImage imageNamed:@"boy_head.png"];
+    NSString *  str2 = [NSString stringWithFormat:@"%@/upload/group/%@",BASEURL,_data_dic[@"pic"]];
+    NSString * str3 = [str2 stringByReplacingOccurrencesOfString:@"," withString:@"/"];
+    [head_img_view sd_setImageWithURL:[NSURL URLWithString:str3] placeholderImage:[UIImage imageNamed:@"boy_head.png"]];
     head_img_view.clipsToBounds = YES;
     head_img_view.layer.cornerRadius = screenWide/8;
     [back_view addSubview:head_img_view];
@@ -77,6 +80,8 @@
     twocode_btn.layer.cornerRadius = screenWide/12;
     twocode_btn.layer.masksToBounds = YES;
     [back_view addSubview:twocode_btn];
+    
+    
     [twocode_btn setBackgroundImage:[UIImage imageNamed:@"twocode.png"] forState:UIControlStateNormal];
     [twocode_btn addTarget:self action:@selector(showTwoCode) forControlEvents:UIControlEventTouchUpInside];
     [twocode_btn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -94,24 +99,24 @@
         make.centerX.equalTo(back_view);
         make.size.mas_equalTo(CGSizeMake(200, 40));
     }];
-    name_label.text = @"娟娟细流";
+    name_label.text = _data_dic[@"name"];
     TitleNumberView * lead_times_view = [[TitleNumberView alloc] initWithFrame:CGRectMake(0, screenHeight* 0.35, screenWide/2, screenHeight * 0.08)];
     [self.view addSubview:lead_times_view];
     lead_times_view.backgroundColor = [UIColor colorWithHexString:@"#f75741"];
     lead_times_view.title_label.text = @"带队次数";
-    lead_times_view.number_label.text = @"56,231";
+    lead_times_view.number_label.text = _data_dic[@"num_leader"];
     
     TitleNumberView * lead_numbers_view = [[TitleNumberView alloc] initWithFrame:CGRectMake(screenWide/2, screenHeight* 0.35, screenWide/2, screenHeight * 0.08)];
     [self.view addSubview:lead_numbers_view];
     lead_numbers_view.backgroundColor = [UIColor colorWithHexString:@"#ef3731"];
     lead_numbers_view.title_label.text = @"带队人数";
-    lead_numbers_view.number_label.text = @"32,341";
+    lead_numbers_view.number_label.text = _data_dic[@"peo_leader"];
     
 
 
 }
 -(void)telPhone{
-    NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"4006405199"];
+    NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",_data_dic[@"phone"]];
     UIWebView * callWebview = [[UIWebView alloc] init];
     [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
     [self.view addSubview:callWebview];
@@ -131,7 +136,9 @@
     [self.view addSubview:white_view];
     code_imageview = [[UIImageView alloc] init];
     [white_view addSubview:code_imageview];
-    code_imageview.image = [UIImage imageNamed:@"boy_head.png"];
+    NSString *  str2 = [NSString stringWithFormat:@"%@/upload/group/%@",BASEURL,_data_dic[@"two_code"]];
+    NSString * str3 = [str2 stringByReplacingOccurrencesOfString:@"," withString:@"/"];
+    [code_imageview sd_setImageWithURL:[NSURL URLWithString:str3] placeholderImage:[UIImage imageNamed:@"boy_head.png"]];
     code_imageview.userInteractionEnabled = YES;
     [code_imageview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(screenWide-140, screenWide-140));

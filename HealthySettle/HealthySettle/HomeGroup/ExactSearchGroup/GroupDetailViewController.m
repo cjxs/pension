@@ -303,24 +303,30 @@
 -(void)setData{
     group_data = [[DDGroupData alloc] initWithController:@"group" group_id:self.group_id];
     [group_data startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
-        _data_dic = [DDLogin dictionaryWithJsonString:request.responseString];
+        NSDictionary * dic = [DDLogin dictionaryWithJsonString:request.responseString];
         [begin_view removeFromSuperview];
-        if (!self.vc_type) {
-            switch ([_data_dic[@"cat_id"] integerValue]) {
-                case 1:
-                    self.vc_type = @"1";
-                    break;
-                    
-                default:
-                    self.vc_type = @"2";
 
-                    break;
+        if ([dic[@"error_code"] intValue] == 4) {
+            [SVProgressHUD showErrorWithStatus:dic[@"msg"]];
+        }else{
+            _data_dic = dic;
+            if (!self.vc_type) {
+                switch ([_data_dic[@"cat_id"] integerValue]) {
+                    case 1:
+                        self.vc_type = @"1";
+                        break;
+                        
+                    default:
+                        self.vc_type = @"2";
+                        
+                        break;
+                }
             }
+            [self loadData];
         }
-        [self loadData];
         
     } failure:^(__kindof YTKBaseRequest *request) {
-        NSLog(@"%ld",request.responseStatusCode);
+        [SVProgressHUD showErrorWithStatus:@"网络错误！"];
     }];
 }
 -(UITableView *)tableView {

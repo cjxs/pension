@@ -241,7 +241,7 @@ static NSInteger page = 1;
     ddlist = [[DDListGet alloc] initWithcat_id:@"3" keyword:_keyword area_id:_area_id sort:sort priceRange:time_range level:nil page:[NSString stringWithFormat:@"%ld",page]];
     [ddlist startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
         NSDictionary * dic = [DDLogin dictionaryWithJsonString:request.responseString];
-        if ([dic[@"error_code"] intValue] == 1) {
+        if ([dic[@"error_code"] intValue] == 4) {
             [SVProgressHUD showErrorWithStatus:@"暂时没有相应数据!"];
             [self.tableView headerEndRefreshing];
             if (_keyword) {
@@ -264,7 +264,8 @@ static NSInteger page = 1;
         }
 
     } failure:^(__kindof YTKBaseRequest *request) {
-        NSLog(@"%ld",request.responseStatusCode);
+        [SVProgressHUD showErrorWithStatus:@"网络错误"];
+        [self.tableView headerEndRefreshing];
     }];
     city_clear = NO;
     time_clear = NO;

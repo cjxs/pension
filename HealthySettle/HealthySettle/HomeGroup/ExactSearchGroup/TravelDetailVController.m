@@ -83,12 +83,16 @@
 -(void)setData{
     group_data = [[DDGroupData alloc] initWithController:@"group" group_id:self.group_id];
     [group_data startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
-        //NSString *str = [request.responseString stringByReplacingOccurrencesOfString:@":null" withString:@":\"\""];
-        _data_dic= [DDLogin dictionaryWithJsonString:request.responseString];
         [begin_view removeFromSuperview];
-        [self loadData];
+        NSDictionary * dic = [DDLogin dictionaryWithJsonString:request.responseString];
+        if ([dic[@"error_code"] intValue] == 4) {
+            [SVProgressHUD showErrorWithStatus:dic[@"msg"]];
+        }else{
+            _data_dic = dic;
+            [self loadData];
+        }
     } failure:^(__kindof YTKBaseRequest *request) {
-        NSLog(@"%ld",request.responseStatusCode);
+        [SVProgressHUD showErrorWithStatus:@"网络错误！"];
     }];
 }
 -(void)loadData{
@@ -240,6 +244,7 @@
 }
 -(void)pushToIntroduceView{
     LeaderViewController * leaderVC = [[LeaderViewController alloc] init];
+    leaderVC.data_dic = _data_dic[@"lead"];
     next_view = @"管家";
     [self.navigationController pushViewController:leaderVC animated:YES];
     
@@ -266,7 +271,6 @@
     [self.navigationController pushViewController:loginOrRegVC animated:YES];
 }
 -(void)submitOrder{
-    NSLog(@"提交");
     if (![Member DefaultUser].login) {
         [self resignOrLoad];
     }else{

@@ -45,7 +45,7 @@
         DDUpdate * pwd_update = [[DDUpdate alloc] initWithProject:@"ver_user" data:@{@"pwd_o":_used_passInput.text,@"pwd_n":_refresh_passInput.text}];
         [pwd_update startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
             NSDictionary * dic = [DDLogin dictionaryWithJsonString:request.responseString];
-            if (![dic[@"error_code"] integerValue] == 0) {
+            if ([dic[@"error_code"] integerValue] == 6) {
                 [SVProgressHUD showSuccessWithStatus:@"success！"];
                 [self.navigationController popViewControllerAnimated:YES];
             }else{
@@ -61,7 +61,7 @@
         DDUpdate * pay_update = [[DDUpdate alloc] initWithProject:@"ver_user" data:@{@"pay_pwd_o":_used_passInput.text,@"pay_pwd_n":_refresh_passInput.text}];
         [pay_update startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
             NSDictionary * dic = [DDLogin dictionaryWithJsonString:request.responseString];
-            if (![dic[@"error_code"] integerValue] == 0) {
+            if ([dic[@"error_code"] integerValue] == 6) {
                 [SVProgressHUD showSuccessWithStatus:@"密码修改成功！"];
                 [self.navigationController popViewControllerAnimated:YES];
             }else{

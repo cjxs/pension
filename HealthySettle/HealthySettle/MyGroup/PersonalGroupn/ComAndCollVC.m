@@ -115,14 +115,14 @@
     DDCollectList * collect_list = [[DDCollectList alloc] initWithUid:user.uid login:user.login];
     [collect_list startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
         NSDictionary * dic = [DDLogin dictionaryWithJsonString:request.responseString];
-        if ([dic[@"error_code"] intValue]== 0) {
+        if ([dic[@"error_code"] intValue]== 6) {
             collect_Arr = dic[@"collect"];
             [self loadCollectData];
         }else{
-            NSLog(@"出错啦%@",dic);
+            [SVProgressHUD showErrorWithStatus:dic[@"msg"]];
         }
     } failure:^(__kindof YTKBaseRequest *request) {
-        
+        [SVProgressHUD showErrorWithStatus:@"网络错误"];
     }];
     
 }

@@ -430,7 +430,7 @@ static NSInteger page = 1;
     ddlist = [[DDListGet alloc] initWithcat_id:_vc_type keyword:_keyword area_id:_area_id sort:sort priceRange:_priceRange level:level page:[NSString stringWithFormat:@"%ld",page]];
     [ddlist startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
         NSDictionary * dic = [DDLogin dictionaryWithJsonString:request.responseString];
-        if ([dic[@"error_code"] intValue] == 1) {
+        if ([dic[@"error_code"] intValue] == 4) {
             [SVProgressHUD showErrorWithStatus:@"暂时没有相应数据"];
             [self.tableView headerEndRefreshing];
         }else{
@@ -451,13 +451,12 @@ static NSInteger page = 1;
             [self.tableView reloadData];
         }
     } failure:^(__kindof YTKBaseRequest *request) {
-        NSLog(@"%ld",request.responseStatusCode);
+        [SVProgressHUD showErrorWithStatus:@"网络错误"];
+        [self.tableView headerEndRefreshing];
     }];
     grade_clear = NO;
     price_clear = NO;
     keyword_clear = NO;
-    
-    
     
 }
 

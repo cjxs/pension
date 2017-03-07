@@ -210,7 +210,7 @@
     
     [pay_update startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
         NSDictionary * dic = [DDLogin dictionaryWithJsonString:request.responseString];
-        if ([dic[@"error_code"] length] == 0) {
+        if ([dic[@"error_code"] intValue] == 6) {
             [SVProgressHUD showSuccessWithStatus:@"恭喜您，订单预订成功！"];
             OrderSuccessController * order_SVC = [[OrderSuccessController alloc] init];
             order_SVC.order_sn = dictionary[@"order_sn"];
@@ -218,11 +218,10 @@
             [self.navigationController pushViewController:order_SVC animated:YES];
             
         }else{
-            [SVProgressHUD showSuccessWithStatus:@"请联系客服人员"];
+            [SVProgressHUD showSuccessWithStatus:dic[@"msg"]];
         }
     } failure:^(__kindof YTKBaseRequest *request) {
-        NSLog(@"---");
-        [SVProgressHUD showSuccessWithStatus:@"请联系客服人员！"];
+        [SVProgressHUD showSuccessWithStatus:@"网络错误"];
         
     }];
 
@@ -264,7 +263,7 @@
         order.tradeNO =  _order.order_sn; //订单ID（由商家自行制定）
         order.productName = [NSString stringWithFormat:@"优悠乐--%@",_order.order_name];//product.subject; //商品标题
         order.productDescription = [NSString stringWithFormat:@"优悠乐--%@",_order.order_name];//product.body; //商品描述
-        order.amount = @"0.01";//[NSString stringWithFormat:@"%.2lf",[_order.payment_money floatValue]]; //商品价格
+        order.amount = [NSString stringWithFormat:@"%.2lf",[_order.payment_money floatValue]]; //商品价格
 
     }
     order.notifyURL =  @"http://www.xxx.com"; //回调URL
@@ -304,13 +303,13 @@
                     [pay_update startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
                         NSDictionary * dic = [DDLogin dictionaryWithJsonString:request.responseString];
                         
-                        if (!dic[@"error_code"]) {
+                        if ([dic[@"error_code"] intValue] == 6) {
                             [SVProgressHUD showSuccessWithStatus:@"恭喜您，支付成功！"];
                         }else{
-                            [SVProgressHUD showSuccessWithStatus:@"付款成功，请联系客服人员"];
+                            [SVProgressHUD showSuccessWithStatus:@"付款成功，稍后在订单中查询结果！"];
                         }
                     } failure:^(__kindof YTKBaseRequest *request) {
-                        [SVProgressHUD showSuccessWithStatus:@"付款成功，请联系客服人员！"];
+                        [SVProgressHUD showSuccessWithStatus:@"网络错误，请稍后在订单中查询！"];
                         
                     }];
                     

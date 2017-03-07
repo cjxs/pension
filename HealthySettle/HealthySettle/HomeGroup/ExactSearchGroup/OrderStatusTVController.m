@@ -295,7 +295,7 @@
     DDOrder * order_post = [[DDOrder alloc] initWithUid:user.uid login:user.login oid:_o_id];
     [order_post startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
         NSDictionary * dic = [DDLogin dictionaryWithJsonString:request.responseString];
-        if ([dic[@"error_code"] intValue] == 0) {
+        if ([dic[@"error_code"] intValue] == 6) {
             Order_ed * order;
                 order = [Order_ed mj_objectWithKeyValues:dic];
                 if ([order.status intValue] == 6) {
@@ -313,9 +313,10 @@
         
         }else{
             //其他途径获取数据
+            [SVProgressHUD showErrorWithStatus:dic[@"msg"]];
         }
     } failure:^(__kindof YTKBaseRequest *request) {
-        
+        [SVProgressHUD showErrorWithStatus:@"网络错误"];
     }];
     
 }

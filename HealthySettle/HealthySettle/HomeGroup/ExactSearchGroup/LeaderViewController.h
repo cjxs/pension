@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface LeaderViewController : UIViewController
+@property (nonatomic,strong)NSDictionary * data_dic;
 
 @end
