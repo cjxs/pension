@@ -183,7 +183,7 @@ static NSString *setCellIdentifier = @"cellS";
     UIView * view = [[UIView alloc]
                      initWithFrame:CGRectMake(0, screenHeight * 0.32, screenWide, screenHeight * 0.12)];
     view.backgroundColor = RGB(255, 255, 255);
-    NSArray * img_Array = @[@"待付款",@"待使用",@"邀请码",@"退款售后"];
+    NSArray * img_Array = @[@"wait_pay",@"wait_use",@"invite_code",@"sale_refund"];
     NSArray * str_Array = @[@"待付款",@"待出行",@"我的邀请码",@"退款/售后"];
     for (int i = 0; i <4; i++)
     {
@@ -349,17 +349,17 @@ heightForHeaderInSection:(NSInteger)section
 
     switch ([[Member DefaultUser].role intValue]) {
         case 0:
-            self.vip_imgv.image = [UIImage imageNamed:@"member-注册会员"];
+            self.vip_imgv.image = [UIImage imageNamed:@"member_regis"];
             break;
         case 1:
-            self.vip_imgv.image = [UIImage imageNamed:@"member-优悠大使"];
+            self.vip_imgv.image = [UIImage imageNamed:@"member_envoy"];
 
             break;
         case 2:
-            self.vip_imgv.image = [UIImage imageNamed:@"member认证会员"];
+            self.vip_imgv.image = [UIImage imageNamed:@"member_authen"];
             break;
         case 3:
-            self.vip_imgv.image = [UIImage imageNamed:@"member-注册会员"];
+            self.vip_imgv.image = [UIImage imageNamed:@"member_regis"];
             break;
         default:
             break;

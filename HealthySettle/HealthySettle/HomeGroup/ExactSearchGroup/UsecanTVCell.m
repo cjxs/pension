@@ -26,7 +26,7 @@
             
             [self addSubview:lab];
             
-            UILabel * title_lab_0 = [[UILabel alloc] initWithFrame:CGRectMake(screenWide * 0.4, screenHeight * 0.03 + screenHeight * 0.07*i, screenWide * 0.45, screenHeight * 0.04)];
+            UILabel * title_lab_0 = [[UILabel alloc] initWithFrame:CGRectMake(screenWide * 0.35, screenHeight * 0.03 + screenHeight * 0.07*i, screenWide * 0.45, screenHeight * 0.04)];
             title_lab_0.textColor = [UIColor redColor];
             
             if (IS_IPHONE6EARLY) {
@@ -66,10 +66,10 @@
 }
 -(void)configWithCash:(NSString *)cash dis_count:(NSString *)dis_count cashUse:(BOOL )cashuse dis_countUse:(BOOL)dis_countUse {
     if (cash) {
-        _cash_use_label.text = [NSString stringWithFormat:@"可使用余额：¥ %@",cash];
+        _cash_use_label.text = [NSString stringWithFormat:@"可用余额：¥ %@",cash];
     }
     if (dis_count) {
-        _dis_count_label.text = [NSString stringWithFormat:@"可使用优悠券：¥ %@",dis_count];
+        _dis_count_label.text = [NSString stringWithFormat:@"可用优悠券：¥ %@",dis_count];
 
     }
     _cash_switch_btn.on = cashuse;

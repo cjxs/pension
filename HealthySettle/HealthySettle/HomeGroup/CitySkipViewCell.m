@@ -27,7 +27,7 @@
     if (_title_icon == nil) {
         _title_icon = [[UIImageView alloc]
                        initWithFrame:CGRectMake(screenWide * 0.016, screenHeight * 0.03728, screenWide * 0.048, screenWide * 0.048)];
-        _title_icon.image = [UIImage imageNamed:@"热门"];
+        _title_icon.image = [UIImage imageNamed:@"hot_"];
     }
     return _title_icon;
 }

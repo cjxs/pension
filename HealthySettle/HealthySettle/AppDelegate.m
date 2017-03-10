@@ -135,7 +135,6 @@ static NSString * const UMDEVICETOKEN      = @"UMDeviceToken";// 友盟推送的
     [UMessage startWithAppkey:UMAppkey
                 launchOptions:launchOptions];
     
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= _IPHONE80_
     if(UMSYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0"))
     {
         //register remoteNotification types
@@ -163,18 +162,21 @@ static NSString * const UMDEVICETOKEN      = @"UMDeviceToken";// 友盟推送的
                                                                                      categories:[NSSet setWithObject:categorys]];
         [UMessage registerRemoteNotificationAndUserNotificationSettings:userSettings];
         
-    } 
-#else
+    }else{
+        //register remoteNotification types
+        [UMessage registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge|
+         UIRemoteNotificationTypeSound|
+         UIRemoteNotificationTypeAlert];
+        
+        
+        //for log
+        [UMessage setLogEnabled:NO];
+
+        
+    }
     
-    //register remoteNotification types
-    [UMessage registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge
-     |UIRemoteNotificationTypeSound
-     |UIRemoteNotificationTypeAlert];
     
-#endif
     
-    //for log
-    [UMessage setLogEnabled:NO];
     //注册微信
     [WXApi registerApp:WXAPPID withDescription:@"weixin"];
     NSUserDefaults * user = [NSUserDefaults standardUserDefaults];

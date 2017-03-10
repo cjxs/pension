@@ -25,7 +25,7 @@ static NSString * const carouselID = @"TempCarouseView";
         line_view.backgroundColor = GRAYCOLOR;
         [self addSubview:line_view];
         
-        UIImageView * title_image_view = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"热门"]];
+        UIImageView * title_image_view = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"hot_"]];
         title_image_view.frame = CGRectMake(screenWide * 0.016, screenHeight * 0.03728, screenWide * 0.048, screenWide * 0.048);
         [self addSubview:title_image_view];
         UILabel * title_label = [[UILabel alloc] initWithFrame:CGRectMake(screenWide * 0.08, screenHeight * 0.03728, screenWide * 0.25, screenWide * 0.048)];

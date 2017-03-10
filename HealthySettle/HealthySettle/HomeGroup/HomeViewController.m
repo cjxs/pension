@@ -121,19 +121,19 @@
 
         
         NewsView * regimenstrategy_view = [[NewsView alloc] initWithFrame:CGRectMake(0, 0.4218 * screenHeight+0.5, screenWide/2-0.5, 0.0824 * screenHeight)];
-        [regimenstrategy_view configWithtitle:@"养生攻略" text:@"文字动态" imageName:@"regimenstrategy" gesture:tap0];
+        [regimenstrategy_view configWithtitle:@"养生攻略" text:@"分享健康 延年益寿" imageName:@"regimenstrategy" gesture:tap0];
         [_tableHeadView addSubview:regimenstrategy_view];
         
         NewsView * newsdynamic_view = [[NewsView alloc] initWithFrame:CGRectMake(screenWide/2+0.5, 0.4218 * screenHeight+0.5, screenWide/2-0.5, 0.0824 * screenHeight)];
-        [newsdynamic_view configWithtitle:@"新闻动态" text:@"文字动态" imageName:@"newsdynamic" gesture:tap1];
+        [newsdynamic_view configWithtitle:@"新闻动态" text:@"用心呵护 颐养生息" imageName:@"newsdynamic" gesture:tap1];
         [_tableHeadView addSubview:newsdynamic_view];
         
         NewsView * pensionCommon_view = [[NewsView alloc] initWithFrame:CGRectMake(0, 0.505 * screenHeight+0.5, screenWide/2-0.5, 0.0824 * screenHeight)];
-        [pensionCommon_view configWithtitle:@"养老常识" text:@"文字动态" imageName:@"pensionCommon" gesture:tap2];
+        [pensionCommon_view configWithtitle:@"养老常识" text:@"养生养老 你我共享" imageName:@"pensionCommon" gesture:tap2];
         [_tableHeadView addSubview:pensionCommon_view];
         
         NewsView * healthassess_view = [[NewsView alloc] initWithFrame:CGRectMake(screenWide/2+0.5, 0.505 * screenHeight+0.5, screenWide/2-0.5, 0.0824 * screenHeight)];
-        [healthassess_view configWithtitle:@"健康评估" text:@"文字动态" imageName:@"healthassess" gesture:tap3];
+        [healthassess_view configWithtitle:@"健康评估" text:@"你的健康 我来评估" imageName:@"healthassess" gesture:tap3];
         [_tableHeadView addSubview:healthassess_view];
         
 
