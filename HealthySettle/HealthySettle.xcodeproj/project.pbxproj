@@ -423,7 +423,6 @@
 		32FA73431CABC7FC00379855 /* PasswordCVController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32FA73411CABC7FC00379855 /* PasswordCVController.xib */; };
 		32FA73461CABE32500379855 /* RefundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32FA73451CABE32500379855 /* RefundViewController.m */; };
 		32FB002B1D3F1BE4008A5497 /* GetPassWordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32FB002A1D3F1BE4008A5497 /* GetPassWordViewController.m */; };
-		32FB002E1D405D6F008A5497 /* DDToolKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 32FB002D1D405D6F008A5497 /* DDToolKit.m */; };
 		32FB00311D40C163008A5497 /* DDFindTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 32FB00301D40C163008A5497 /* DDFindTest.m */; };
 		32FD72CB1CAA26E4008CB917 /* ProductTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 32FD72CA1CAA26E4008CB917 /* ProductTipView.m */; };
 		32FD72CE1CAA301E008CB917 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32FD72CD1CAA301E008CB917 /* WebViewController.m */; };
@@ -1176,7 +1175,7 @@
 		32EFA2601DB62F6000903D04 /* DDListGet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDListGet.m; sourceTree = "<group>"; };
 		32F5D1C61DAA3C0E000FC6B1 /* DDSeaGet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDSeaGet.h; sourceTree = "<group>"; };
 		32F5D1C71DAA3C0E000FC6B1 /* DDSeaGet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDSeaGet.m; sourceTree = "<group>"; };
-		32F6CD001C9A734C00E97B65 /* yyl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = yyl.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		32F6CD001C9A734C00E97B65 /* yyl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = yyl.app; path = "优悠乐.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		32F6CD041C9A734C00E97B65 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32F6CD061C9A734C00E97B65 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		32F6CD071C9A734C00E97B65 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -1192,8 +1191,6 @@
 		32FA73451CABE32500379855 /* RefundViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefundViewController.m; sourceTree = "<group>"; };
 		32FB00291D3F1BE4008A5497 /* GetPassWordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetPassWordViewController.h; sourceTree = "<group>"; };
 		32FB002A1D3F1BE4008A5497 /* GetPassWordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetPassWordViewController.m; sourceTree = "<group>"; };
-		32FB002C1D405D6F008A5497 /* DDToolKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDToolKit.h; sourceTree = "<group>"; };
-		32FB002D1D405D6F008A5497 /* DDToolKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDToolKit.m; sourceTree = "<group>"; };
 		32FB002F1D40C163008A5497 /* DDFindTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDFindTest.h; sourceTree = "<group>"; };
 		32FB00301D40C163008A5497 /* DDFindTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDFindTest.m; sourceTree = "<group>"; };
 		32FD72C91CAA26E4008CB917 /* ProductTipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductTipView.h; sourceTree = "<group>"; };
@@ -1789,8 +1786,6 @@
 				3205DEE51DF9596100AC5726 /* UIColor+HexColor.m */,
 				3263DF4B1E2493480088E451 /* UIImage+DDImage.h */,
 				3263DF4C1E2493480088E451 /* UIImage+DDImage.m */,
-				32FB002C1D405D6F008A5497 /* DDToolKit.h */,
-				32FB002D1D405D6F008A5497 /* DDToolKit.m */,
 				32D8594B1CB8D4400074D5C3 /* NMRangeSlider */,
 			);
 			path = DataSource;
@@ -2385,9 +2380,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		32F6CCFF1C9A734C00E97B65 /* yyl */ = {
+		32F6CCFF1C9A734C00E97B65 /* 优悠乐 */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 32F6CD171C9A734C00E97B65 /* Build configuration list for PBXNativeTarget "yyl" */;
+			buildConfigurationList = 32F6CD171C9A734C00E97B65 /* Build configuration list for PBXNativeTarget "优悠乐" */;
 			buildPhases = (
 				82051115B23477C89643D6BA /* [CP] Check Pods Manifest.lock */,
 				32F6CCFC1C9A734C00E97B65 /* Sources */,
@@ -2400,7 +2395,7 @@
 			);
 			dependencies = (
 			);
-			name = yyl;
+			name = "优悠乐";
 			productName = HealthySettle;
 			productReference = 32F6CD001C9A734C00E97B65 /* yyl.app */;
 			productType = "com.apple.product-type.application";
@@ -2439,7 +2434,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				32F6CCFF1C9A734C00E97B65 /* yyl */,
+				32F6CCFF1C9A734C00E97B65 /* 优悠乐 */,
 			);
 		};
 /* End PBXProject section */
@@ -2777,7 +2772,6 @@
 				32D693F31DD5BBA5001D5C7F /* HMDatePickView.m in Sources */,
 				321C43171DC0575600192243 /* ArticleListTViewCell.m in Sources */,
 				327BEE7F1E5A8E5D002C1199 /* ConPerAddVC.m in Sources */,
-				32FB002E1D405D6F008A5497 /* DDToolKit.m in Sources */,
 				32F6CD081C9A734C00E97B65 /* AppDelegate.m in Sources */,
 				3285AF0B1D3760A20070618A /* YYLOrder.m in Sources */,
 				32D23E791DC33932009154F6 /* MJRefreshBaseView.m in Sources */,
@@ -3030,8 +3024,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_NULLABLE_TO_NONNULL_CONVERSION = NO;
 				CODE_SIGN_ENTITLEMENTS = "优悠乐.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Hangzhou create network technology co., LTD (B975V4FU64)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Hangzhou create network technology co., LTD (B975V4FU64)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: chen dongdong (JXF5ZF9W67)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: chen dongdong (JXF5ZF9W67)";
 				DEVELOPMENT_TEAM = B975V4FU64;
 				ENABLE_BITCODE = NO;
 				EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "*.nib *.lproj *.framework *.gch *.xcode* *.xcassets (*) CVS .git .hg *.pbproj *.pbxproj";
@@ -3102,8 +3096,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = www.HealthySettle.yrc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "77bb8c5b-99a3-4bd3-9471-7fc3ba5ca93f";
-				PROVISIONING_PROFILE_SPECIFIER = yyl;
+				PROVISIONING_PROFILE = "f868cd19-a3b9-4f57-b93c-60bf522c310c";
+				PROVISIONING_PROFILE_SPECIFIER = developcdd;
 				SKIP_INSTALL = NO;
 				USER_HEADER_SEARCH_PATHS = "";
 			};
@@ -3116,8 +3110,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_NULLABLE_TO_NONNULL_CONVERSION = NO;
 				CODE_SIGN_ENTITLEMENTS = "优悠乐.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Hangzhou create network technology co., LTD (B975V4FU64)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Hangzhou create network technology co., LTD (B975V4FU64)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: chen dongdong (JXF5ZF9W67)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: chen dongdong (JXF5ZF9W67)";
 				DEVELOPMENT_TEAM = B975V4FU64;
 				ENABLE_BITCODE = NO;
 				EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "*.nib *.lproj *.framework *.gch *.xcode* *.xcassets (*) CVS .git .hg *.pbproj *.pbxproj";
@@ -3188,8 +3182,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = www.HealthySettle.yrc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "77bb8c5b-99a3-4bd3-9471-7fc3ba5ca93f";
-				PROVISIONING_PROFILE_SPECIFIER = yyl;
+				PROVISIONING_PROFILE = "f868cd19-a3b9-4f57-b93c-60bf522c310c";
+				PROVISIONING_PROFILE_SPECIFIER = developcdd;
 				SKIP_INSTALL = NO;
 				USER_HEADER_SEARCH_PATHS = "";
 			};
@@ -3207,7 +3201,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		32F6CD171C9A734C00E97B65 /* Build configuration list for PBXNativeTarget "yyl" */ = {
+		32F6CD171C9A734C00E97B65 /* Build configuration list for PBXNativeTarget "优悠乐" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				32F6CD181C9A734C00E97B65 /* Debug */,

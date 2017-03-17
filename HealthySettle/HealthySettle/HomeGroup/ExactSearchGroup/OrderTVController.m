@@ -513,8 +513,9 @@
         UsecanTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"use" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         Member * user = [Member DefaultUser];
+        
         if ([user.vocher intValue] > [_group_dic[@"can_vochers"] intValue]) {
-            dis_count_str = _group_dic[@"can_vochers"];     
+            dis_count_str = _group_dic[@"can_vochers"];
         }else{
             dis_count_str = user.vocher;
         }
@@ -542,7 +543,7 @@
             if (vocherUse) {
                 self.dis_count_can = dis_count_str;
             }else{
-                self.dis_count_can = @"0";
+                self.dis_count_can = @"0.00";
             }
         }];
 

@@ -680,9 +680,12 @@ static NSInteger page = 1;
         }
     }//日期选择器的代理方法
 }
--(void)dealloc{
+- (void)viewWillDisappear:(BOOL)animated{
     [ddlist clearCompletionBlock];
+    [SVProgressHUD dismiss];
+    
 }
+
 /*
 #pragma mark - Navigation
 

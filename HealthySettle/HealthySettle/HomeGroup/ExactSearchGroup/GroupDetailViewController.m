@@ -57,8 +57,8 @@
 
 #pragma mark - LazyLoading
 -(void)updatePriceWithNumber:(NSInteger )number{
-    priceNow_label.text = [NSString stringWithFormat:@"%d",(int)number-50];
-    [self dealLinesWithString:[NSString stringWithFormat:@"门市价 ¥%ld",number]];
+    priceNow_label.text = [NSString stringWithFormat:@"%ld",number];
+//    [self dealLinesWithString:[NSString stringWithFormat:@"门市价 ¥%d",(int)number+50]];
     price_Now = [NSString stringWithFormat:@"%ld",number];
 
 }
@@ -190,7 +190,7 @@
             priceNow_label.font = [UIFont systemFontOfSize:18];
             priceNow_label.textColor = [UIColor redColor];
             [_tableHeadView addSubview:priceNow_label];
-            priceNow_label.text = [NSString stringWithFormat:@"%ld",[_data_dic[@"price"] integerValue]-50];
+            priceNow_label.text = _data_dic[@"price"];
             UILabel * label_q = [[UILabel alloc]
                                  initWithFrame:CGRectMake(CGRectGetMaxX(priceNow_label.frame),CGRectGetMaxY(organization_imageView.frame) + screenHeight * 0.017, screenWide * 0.05, screenHeight *0.0285 )];
             label_q.text = @"起";
@@ -202,10 +202,10 @@
             label_gg.textColor = [UIColor whiteColor];
             label_gg.backgroundColor = RGB(230, 11, 24);
             label_gg.adjustsFontSizeToFitWidth = YES;
-            label_gg.text = @"去哪养老网 保证全网最低价";
+            label_gg.text = @"优悠乐老网 保证全网最低价";
             label_gg.font = [UIFont systemFontOfSize:9];
             [_tableHeadView addSubview:label_gg];
-            [self dealLinesWithString:[NSString stringWithFormat:@"门市价 ¥%@",_data_dic[@"price"]]];
+//            [self dealLinesWithString:[NSString stringWithFormat:@"门市价 ¥%ld",[_data_dic[@"price"]integerValue]+50]];
             NSArray * icon_array = @[@"list1_show_1_",@"list1_show_3_"];
             for (int i = 0; i < 2; i++)
             {

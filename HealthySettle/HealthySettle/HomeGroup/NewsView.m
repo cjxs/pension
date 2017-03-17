@@ -31,15 +31,18 @@
         [self addSubview:_title_label];
         [self addSubview:_text_label];
         [self addSubview:_image_view];
-        if (IS_IPHONE5EARLY || IS_IPHONE5) {
+        if (IS_IPHONE6EARLY) {
             _title_label.font = [UIFont systemFontOfSize:16];
-            _text_label.font = [UIFont systemFontOfSize:12];
-
+            _text_label.font = [UIFont systemFontOfSize:9];
+            
+        }else if(IS_IPHONE6){
+            _title_label.font = [UIFont systemFontOfSize:16];
+            _text_label.font = [UIFont systemFontOfSize:11];
             
         }else{
             _title_label.font = [UIFont systemFontOfSize:18];
             _text_label.font = [UIFont systemFontOfSize:12];
-
+            
         }
 
     }

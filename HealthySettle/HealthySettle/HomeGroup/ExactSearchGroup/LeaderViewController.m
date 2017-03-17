@@ -33,7 +33,7 @@
     title_lebel.text = @"管家";
     title_lebel.textAlignment = NSTextAlignmentCenter;
     title_lebel.textColor = [UIColor whiteColor];
-    title_lebel.font = [UIFont systemFontOfSize:26];
+    title_lebel.font = [UIFont systemFontOfSize:18];
     [back_view addSubview:title_lebel];
     UIButton * back_btn = [UIButton buttonWithType:UIButtonTypeCustom];
     back_btn.frame = CGRectMake(screenWide * 0.01, screenHeight * 0.005 , screenWide * 0.2, screenHeight * 0.1 );
@@ -111,6 +111,12 @@
     lead_numbers_view.backgroundColor = [UIColor colorWithHexString:@"#ef3731"];
     lead_numbers_view.title_label.text = @"带队人数";
     lead_numbers_view.number_label.text = _data_dic[@"peo_leader"];
+    
+    UILabel * title_label = [[UILabel alloc] initWithFrame:CGRectMake(10, screenHeight * 0.45, screenWide-20, screenHeight * 0.3)];
+    title_label.text = [NSString stringWithFormat:@"    %@",_data_dic[@"content"]];
+    [self.view addSubview:title_label];
+    title_label.font = [UIFont systemFontOfSize:12];
+    
     
 
 

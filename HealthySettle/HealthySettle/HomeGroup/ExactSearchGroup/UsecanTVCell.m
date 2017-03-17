@@ -71,6 +71,8 @@
     if (dis_count) {
         _dis_count_label.text = [NSString stringWithFormat:@"可用优悠券：¥ %@",dis_count];
 
+    }else{
+        _dis_count_label.text = [NSString stringWithFormat:@"可用优悠券：¥ 0.00"];
     }
     _cash_switch_btn.on = cashuse;
     _dis_count_switch_btn.on = dis_countUse;

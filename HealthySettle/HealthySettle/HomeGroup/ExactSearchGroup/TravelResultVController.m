@@ -405,6 +405,12 @@ static NSInteger page = 1;
     }
 
 }
+- (void)viewWillDisappear:(BOOL)animated{
+    [ddlist clearCompletionBlock];
+    [SVProgressHUD dismiss];
+
+}
+
 
 
 /*

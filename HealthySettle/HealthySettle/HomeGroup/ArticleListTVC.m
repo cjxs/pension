@@ -99,7 +99,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString * article_id = data_Arr[indexPath.row][@"id"];//时机不成熟
     WebViewController * web_vc = [[WebViewController alloc] init];
-    NSString * str= [NSString stringWithFormat:@"http://n.5199yl.com/#/article/%@?id=%@",_type,article_id];
+    NSString * str= [NSString stringWithFormat:@"%@/phone#/article/%@?id=%@",BASEURL,_type,article_id];
     web_vc.urlLoad = [NSURL URLWithString:str];
     [self.navigationController pushViewController:web_vc animated:YES];
 }

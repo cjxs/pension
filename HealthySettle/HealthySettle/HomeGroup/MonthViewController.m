@@ -70,7 +70,7 @@
 }
 -(void)pushToReginWithArea_id:(NSString *)area_id area:(NSString *)area{//代理方法
     ResultListVController * ResultLVC = [[ResultListVController alloc] init];
-    ResultLVC.vc_type = @"S";
+    ResultLVC.vc_type = @"2";
     ResultLVC.area_id = area_id;
     ResultLVC.title_l = area;
     [self.navigationController pushViewController:ResultLVC

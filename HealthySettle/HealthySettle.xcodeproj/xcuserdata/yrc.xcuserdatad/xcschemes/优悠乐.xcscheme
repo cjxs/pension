@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "32F6CCFF1C9A734C00E97B65"
-               BuildableName = "yyl.app"
-               BlueprintName = "yyl"
+               BuildableName = "&#x4f18;&#x60a0;&#x4e50;.app"
+               BlueprintName = "&#x4f18;&#x60a0;&#x4e50;"
                ReferencedContainer = "container:HealthySettle.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -33,8 +33,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "32F6CCFF1C9A734C00E97B65"
-            BuildableName = "yyl.app"
-            BlueprintName = "yyl"
+            BuildableName = "&#x4f18;&#x60a0;&#x4e50;.app"
+            BlueprintName = "&#x4f18;&#x60a0;&#x4e50;"
             ReferencedContainer = "container:HealthySettle.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -56,8 +56,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "32F6CCFF1C9A734C00E97B65"
-            BuildableName = "yyl.app"
-            BlueprintName = "yyl"
+            BuildableName = "&#x4f18;&#x60a0;&#x4e50;.app"
+            BlueprintName = "&#x4f18;&#x60a0;&#x4e50;"
             ReferencedContainer = "container:HealthySettle.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -75,8 +75,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "32F6CCFF1C9A734C00E97B65"
-            BuildableName = "yyl.app"
-            BlueprintName = "yyl"
+            BuildableName = "&#x4f18;&#x60a0;&#x4e50;.app"
+            BlueprintName = "&#x4f18;&#x60a0;&#x4e50;"
             ReferencedContainer = "container:HealthySettle.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

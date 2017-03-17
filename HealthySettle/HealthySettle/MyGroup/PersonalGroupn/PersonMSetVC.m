@@ -8,7 +8,6 @@
 
 #import "PersonMSetVC.h"
 #import "DDUpdate.h"
-#import "DDToolKit.h"
 
 @interface PersonMSetVC ()
 
@@ -42,9 +41,9 @@
     RAC(self.change_btn,enabled) = [RACSignal combineLatest:@[self.text_Input.rac_textSignal] reduce:^id
             {
                 if ([self.vc_type isEqualToString:@"phone"]) {
-                     return @(self.text_Input.text.length > 0 && [DDToolKit checkPhoneNumberWithText:_text_Input.text]);
+                     return @(self.text_Input.text.length > 0 && [DDLogin checkTelNumber:_text_Input.text]);
                 }else{
-                    return @(self.text_Input.text.length > 0 && [DDToolKit checkEmailWithText:_text_Input.text]);
+                    return @(self.text_Input.text.length > 0 && [DDLogin checkTelNumber:_text_Input.text]);
                 }
             }];
 }

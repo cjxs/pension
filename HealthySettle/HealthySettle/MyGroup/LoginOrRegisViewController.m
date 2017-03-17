@@ -11,7 +11,6 @@
 #import "NSString+MJExtension.h"
 #import "DDGetTest.h"
 #import "GetPassWordViewController.h"
-#import "DDToolKit.h"
 #import "DDRegist.h"
 #import "Member.h"
 #import "YYLUser.h"
@@ -547,7 +546,7 @@
 -(void)textFieldDidEndEditing:(UITextField *)textField {
     if (textField.text.length != 0) {
         if (_number_field == textField) {
-            if (![DDToolKit checkPhoneNumberWithText:textField.text]) {
+            if (![DDLogin checkTelNumber:textField.text]) {
                 textField.text = @"";
                 [SVProgressHUD showErrorWithStatus:@"手机号码错误"];
             };
