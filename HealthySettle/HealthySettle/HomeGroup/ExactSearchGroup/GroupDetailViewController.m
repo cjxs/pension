@@ -26,7 +26,7 @@
 #import "LoginOrRegisViewController.h"
 #import "CDDatePicker.h"
 
-@interface GroupDetailViewController ()<UMSocialUIDelegate,UITableViewDelegate,UITableViewDataSource,UpdatePriceDelegate>
+@interface GroupDetailViewController ()<UMSocialUIDelegate,UITableViewDelegate,UITableViewDataSource,UpdatePriceDelegate,HomeCellDelegate>
 {
     UIImageView * organization_imageView;
     UILabel *     organization_titleLabel;
@@ -60,6 +60,14 @@
     priceNow_label.text = [NSString stringWithFormat:@"%ld",number];
 //    [self dealLinesWithString:[NSString stringWithFormat:@"门市价 ¥%d",(int)number+50]];
     price_Now = [NSString stringWithFormat:@"%ld",number];
+    if (number == 0) {
+        [predeter_btn setEnabled:NO];
+        predeter_btn.backgroundColor = [UIColor colorWithHexString:@"#A9A9A9"];
+    }else{
+        [predeter_btn setEnabled:YES];
+        predeter_btn.backgroundColor = RGB(242, 79, 11);
+
+    }
 
 }
 -(UIView *)tableHeadView
@@ -350,14 +358,16 @@
              forCellReuseIdentifier:@"cellLiving"];
         [self.tableView registerNib:[UINib nibWithNibName:@"ManageTimeTVCell" bundle:nil]
              forCellReuseIdentifier:@"cellManager"];
-        [self.tableView registerNib:[UINib nibWithNibName:@"HomeTVCell" bundle:nil]
-             forCellReuseIdentifier:@"cellHome"];
+
         [self.tableView registerNib:[UINib nibWithNibName:@"CommentTVCell" bundle:nil]
              forCellReuseIdentifier:@"cellComment"];
-        TestModel * model1 = [[TestModel alloc] init];
-        TestModel * model2 = [[TestModel alloc] init];
-        TestModel * model3 = [[TestModel alloc] init];
-        showArray = @[model1,model2,model3,model1,model1,model1,model1,model1,model1,model1,model1,model1];
+        NSMutableArray *m_array = [NSMutableArray array];
+        for (int i = 0; i< 8; i++) {
+            TestModel * model = [[TestModel alloc] init];
+            [m_array addObject:model];
+        }
+        
+        showArray = [NSArray arrayWithArray:m_array];
     }else {
         [self.tableView registerClass:[SelectTVCell class]
                forCellReuseIdentifier:@"cellSelect"];
@@ -382,7 +392,13 @@
         [predeter_btn addTarget:self
                          action:@selector(fillInOrderController:)
                forControlEvents:UIControlEventTouchUpInside];
-        predeter_btn.backgroundColor = RGB(242, 79, 11);
+        if ([_data_dic[@"price"] intValue] == 0) {
+            [predeter_btn setEnabled:NO];
+            predeter_btn.backgroundColor = [UIColor colorWithHexString:@"#A9A9A9"];
+        }else{
+            predeter_btn.backgroundColor = RGB(242, 79, 11);
+
+        }
 
         [self.view addSubview:predeter_btn];
     }
@@ -477,16 +493,16 @@
 
 - (void)cellShowPriceDetail:(UIButton *)btn
 {
-    NSInteger number = btn.tag - 500;
+    NSInteger number = btn.tag - 100000;
     TestModel * model = showArray[number];
     NSIndexPath * indexPath = [NSIndexPath indexPathForRow:number inSection:0];
     if ([model.show isEqualToString:@"y"])
     {
-        model.show = @"n";
+        model.show = [NSMutableString stringWithFormat:@"n"];
         [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
        }else
     {
-        model.show = @"y";
+        model.show = [NSMutableString stringWithFormat:@"y"];
         [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     }
 }
@@ -505,17 +521,17 @@
         }else if (indexPath.row <= [_data_dic[@"room"] count])
         {
             NSDictionary * dic = _data_dic[@"room"][indexPath.row - 1];
-            HomeTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cellHome"
-                                                                forIndexPath:indexPath];
+            NSString * indentifier = [NSString stringWithFormat:@"cellHome%ld",indexPath.row];
+            [self.tableView registerNib:[UINib nibWithNibName:@"HomeTVCell" bundle:nil]
+                 forCellReuseIdentifier:indentifier];
+            
+            
+            
+            HomeTVCell * cell = [tableView dequeueReusableCellWithIdentifier:indentifier];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.priceDetail_btn.tag = 500 + indexPath.row;
-            [cell.priceDetail_btn addTarget:self
-                                     action:@selector(cellShowPriceDetail:)
-                           forControlEvents:UIControlEventTouchUpInside];
+            cell.delegate = self;
+            cell.priceDetail_btn.tag = 100000 + indexPath.row;
             cell.reserve_btn.tag = 500 + indexPath.row;
-            [cell.reserve_btn addTarget:self
-                                 action:@selector(fillInOrderController:)
-                       forControlEvents:UIControlEventTouchUpInside];
             TestModel * model = showArray[indexPath.row];
             [cell configWithdic:dic
                              show:model.show];
@@ -535,7 +551,7 @@
     {
         if (indexPath.row == 0)
         {
-            SelectTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cellSelect"
+            SelectTVCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cellSelect" 
                                                                   forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.delegate = self;

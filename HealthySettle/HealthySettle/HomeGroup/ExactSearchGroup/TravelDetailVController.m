@@ -23,6 +23,7 @@
     DDGroupData * group_data; //网络请求指针
     UIView * begin_view;
     NSString * next_view;
+    UIButton * toPay_btn;
 
 
     
@@ -37,6 +38,15 @@
     int price_sum = [_price_arr[number] integerValue]* person_num;
     money_label.text = [NSString stringWithFormat:@" ¥ %d",price_sum];
     order = number;
+    NSDate * date = [DDLogin timeInFromStr:_date_arr[order]];
+    int i = [self compareOneDay:date withAnotherDay:[NSDate date]];
+    if (i <=0) {
+        [toPay_btn setEnabled:NO];
+        toPay_btn.backgroundColor = [UIColor colorWithHexString:@"#A9A9A9"];
+    }else{
+        [toPay_btn setEnabled:YES];
+        toPay_btn.backgroundColor = [UIColor colorWithHexString:@"#fc6120"];
+    }
 }
 -(UITableView *)tableView{
     if (!_tableView) {
@@ -117,6 +127,15 @@
     person_num = 1;
     order = 0;
     [self creatBackFootView];
+    NSDate * date = [DDLogin timeInFromStr:_date_arr[order]];
+    int i = [self compareOneDay:date withAnotherDay:[NSDate date]];
+    if (i <=0) {
+        [toPay_btn setEnabled:NO];
+        toPay_btn.backgroundColor = [UIColor colorWithHexString:@"#A9A9A9"];
+    }else{
+        [toPay_btn setEnabled:YES];
+        toPay_btn.backgroundColor = [UIColor colorWithHexString:@"#fc6120"];
+    }
 
 
 }
@@ -165,7 +184,7 @@
     money_label.textColor = PINKCOLOR;
 
     [backFootView addSubview:money_label];
-    UIButton * toPay_btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    toPay_btn = [UIButton buttonWithType:UIButtonTypeCustom];
     toPay_btn.frame = CGRectMake(screenWide /2, 0, screenWide/2, screenHeight * 0.06);
     toPay_btn.backgroundColor = [UIColor colorWithHexString:@"#fc6120"];
     [toPay_btn setTitle:@"立即预订"
@@ -274,6 +293,7 @@
     if (![Member DefaultUser].login) {
         [self resignOrLoad];
     }else{
+
         OrderTVController * orderVC = [[OrderTVController alloc]
                                        initWithStyle:UITableViewStylePlain];
         orderVC.vc_type = @"3";
@@ -282,10 +302,32 @@
         orderVC.charge_price = _price_arr[order];
         orderVC.person_num = (NSInteger)person_num;
         orderVC.room_index = [NSString stringWithFormat:@"%@",_date_arr[order]];
+        
         next_view = @"订单";
         [self.navigationController pushViewController:orderVC animated:YES];
     }
 
+}
+- (int)compareOneDay:(NSDate *)oneDay withAnotherDay:(NSDate *)anotherDay
+{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"dd-MM-yyyy"];
+    NSString *oneDayStr = [dateFormatter stringFromDate:oneDay];
+    NSString *anotherDayStr = [dateFormatter stringFromDate:anotherDay];
+    NSDate *dateA = [dateFormatter dateFromString:oneDayStr];
+    NSDate *dateB = [dateFormatter dateFromString:anotherDayStr];
+    NSComparisonResult result = [dateA compare:dateB];
+    NSLog(@"oneDay : %@, anotherDay : %@", oneDay, anotherDay);
+    if (result == NSOrderedDescending) {
+        //oneDay > anotherDay
+        return 1;
+    }
+    else if (result == NSOrderedAscending){
+        //oneDay < anotherDay
+        return -1;
+    }
+    //oneDay = anotherDay
+    return 0;
 }
 -(void)textFieldDidBeginEditing:(UITextField *)textField{
     current_field = textField;

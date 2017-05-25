@@ -11,7 +11,6 @@
 @implementation DDGroupData{
     NSString * _controller;
     NSString * _group_id;
-    NSString * _page;
 }
 -(id)initWithController:(NSString *)controller group_id:(NSString *)group_id{
     self = [super init];

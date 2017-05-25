@@ -188,6 +188,14 @@
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:timeIn];
     return [formatter stringFromDate:date];
 }
++(NSDate * )timeInFromStr:(NSString *)str{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"YYY-MM-dd"]; //
+
+    NSDate * date = [formatter dateFromString:str];
+    return date;
+    
+}
 + (BOOL)checkTelNumber:(NSString *) telNumber
 {
     NSString *pattern = @"^1+[3578]+\\d{9}";

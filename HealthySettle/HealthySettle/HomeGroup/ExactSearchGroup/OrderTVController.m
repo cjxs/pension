@@ -543,7 +543,7 @@
             if (vocherUse) {
                 self.dis_count_can = dis_count_str;
             }else{
-                self.dis_count_can = @"0.00";
+                self.dis_count_can = @"0";
             }
         }];
 

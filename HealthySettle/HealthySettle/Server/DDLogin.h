@@ -16,6 +16,7 @@
 + (NSArray * )RSAsignWithdic:(NSDictionary *)dic;
 +(NSString *)timeStrWithDate:(NSDate*)date;
 +(NSDate *)dateWithString:(NSString *)str;
++(NSDate * )timeInFromStr:(NSString *)str;
 +(NSString *)timeStrWithstr:(NSString *)str;
 + (BOOL)checkTelNumber:(NSString *) telNumber;
 + (BOOL)checkUserEmail:(NSString *)email;

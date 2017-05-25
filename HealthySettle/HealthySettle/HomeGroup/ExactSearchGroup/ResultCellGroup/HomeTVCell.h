@@ -7,6 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+@protocol HomeCellDelegate
+-(void)cellShowPriceDetail:(UIButton *)btn;//1.1定义协议与方法
+- (void)fillInOrderController:(UIButton *)btn;
+@end
 
 @interface HomeTVCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *organ_imageView;
@@ -18,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *bed_type;
 @property (weak, nonatomic) IBOutlet UILabel *size_l;
 @property (weak, nonatomic) IBOutlet UILabel *live_num;
+@property (weak,nonatomic)id<HomeCellDelegate>delegate;
 
 -(void)configWithdic:(NSDictionary*)dic show:(NSString *)show;
 @end

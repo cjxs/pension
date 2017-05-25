@@ -9,7 +9,9 @@
 #import "HomeTVCell.h"
 
 
-@implementation HomeTVCell
+@implementation HomeTVCell{
+    UIView * view;
+}
 
 - (void)awakeFromNib
 {
@@ -21,6 +23,23 @@
 
     self.reserve_btn.clipsToBounds = YES;
     self.reserve_btn.layer.cornerRadius = 5;
+    [self.priceDetail_btn addTarget:self
+                             action:@selector(showPriceDetail:)
+                   forControlEvents:UIControlEventTouchUpInside];
+    [self.reserve_btn addTarget:self
+                         action:@selector(fillInOrder:)
+               forControlEvents:UIControlEventTouchUpInside];
+
+}
+-(void)showPriceDetail:(UIButton *)btn{
+    if (self.delegate) {
+        [self.delegate cellShowPriceDetail:btn];
+    }
+}
+- (void)fillInOrder:(UIButton *)btn{
+    if (self.delegate) {
+        [self.delegate fillInOrderController:btn];
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -61,7 +80,7 @@
     
     if ([show isEqualToString:@"y"])
     {
-        UIView * view = [[UIView alloc]
+        view = [[UIView alloc]
                          initWithFrame:CGRectMake(0, 156, screenWide, 60)];
         for (int i = 0; i < 2; i++)
         {
@@ -101,6 +120,23 @@
         }
         
         [self addSubview:view];
+    }else{
+        if (view) {
+            if (view.subviews) {
+                for (UIView * v in view.subviews) {
+                    if (v.subviews) {
+                        for (UIView * vi in v.subviews) {
+                            [vi removeFromSuperview];
+                        }
+                    }
+
+                    [v removeFromSuperview];
+                }
+            }
+            
+            [view removeFromSuperview];
+        }
+        
     }
 }
 @end

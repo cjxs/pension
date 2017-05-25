@@ -14,7 +14,7 @@
   self =  [super init];
     if (self)
     {
-        self.show = @"n";
+        self.show = [NSMutableString stringWithFormat:@"n"];
     }
     return self;
 }
