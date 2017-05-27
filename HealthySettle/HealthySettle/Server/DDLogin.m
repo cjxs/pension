@@ -166,7 +166,7 @@
     free(properties);
     
     NSDictionary* returnDic = [NSDictionary dictionaryWithObjects:valueArray forKeys:propertyArray];
-    NSLog(@"%@", returnDic);
+    //NSLog(@"%@", returnDic);
     
     return returnDic;
 }

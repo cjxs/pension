@@ -777,6 +777,7 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath
         [put_or startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
             NSDictionary * dic = [DDLogin dictionaryWithJsonString:request.responseString];
             if ([dic[@"error_code"] intValue] == 6) {
+                NSLog(@"%@",request.requestArgument);
                 PayViewController * payVC = [[PayViewController alloc] init];
                 payVC.order = order_pre;
                 payVC.vc_type = self.vc_type;
@@ -788,7 +789,7 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath
                 [self.navigationController pushViewController:payVC animated:YES];
 
             }else{
-                [SVProgressHUD showErrorWithStatus:@"订单提交失败！"];
+                [SVProgressHUD showErrorWithStatus:[NSString stringWithFormat:@"订单提交失败!%@",dic[@"error_code"]]];
             }
         } failure:^(__kindof YTKBaseRequest *request) {
             [SVProgressHUD showErrorWithStatus:@"网络错误，订单提交失败！"];

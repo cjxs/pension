@@ -3024,8 +3024,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_NULLABLE_TO_NONNULL_CONVERSION = NO;
 				CODE_SIGN_ENTITLEMENTS = "优悠乐.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer: chen dongdong (JXF5ZF9W67)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: chen dongdong (JXF5ZF9W67)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Hangzhou create network technology co., LTD (B975V4FU64)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Hangzhou create network technology co., LTD (B975V4FU64)";
 				DEVELOPMENT_TEAM = B975V4FU64;
 				ENABLE_BITCODE = NO;
 				EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "*.nib *.lproj *.framework *.gch *.xcode* *.xcassets (*) CVS .git .hg *.pbproj *.pbxproj";
@@ -3096,8 +3096,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = www.HealthySettle.yrc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f868cd19-a3b9-4f57-b93c-60bf522c310c";
-				PROVISIONING_PROFILE_SPECIFIER = developcdd;
+				PROVISIONING_PROFILE = "77bb8c5b-99a3-4bd3-9471-7fc3ba5ca93f";
+				PROVISIONING_PROFILE_SPECIFIER = yyl;
 				SKIP_INSTALL = NO;
 				USER_HEADER_SEARCH_PATHS = "";
 			};
@@ -3110,8 +3110,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_NULLABLE_TO_NONNULL_CONVERSION = NO;
 				CODE_SIGN_ENTITLEMENTS = "优悠乐.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer: chen dongdong (JXF5ZF9W67)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: chen dongdong (JXF5ZF9W67)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Hangzhou create network technology co., LTD (B975V4FU64)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Hangzhou create network technology co., LTD (B975V4FU64)";
 				DEVELOPMENT_TEAM = B975V4FU64;
 				ENABLE_BITCODE = NO;
 				EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "*.nib *.lproj *.framework *.gch *.xcode* *.xcassets (*) CVS .git .hg *.pbproj *.pbxproj";
@@ -3182,8 +3182,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = www.HealthySettle.yrc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f868cd19-a3b9-4f57-b93c-60bf522c310c";
-				PROVISIONING_PROFILE_SPECIFIER = developcdd;
+				PROVISIONING_PROFILE = "77bb8c5b-99a3-4bd3-9471-7fc3ba5ca93f";
+				PROVISIONING_PROFILE_SPECIFIER = yyl;
 				SKIP_INSTALL = NO;
 				USER_HEADER_SEARCH_PATHS = "";
 			};

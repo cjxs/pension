@@ -317,7 +317,7 @@
     NSDate *dateA = [dateFormatter dateFromString:oneDayStr];
     NSDate *dateB = [dateFormatter dateFromString:anotherDayStr];
     NSComparisonResult result = [dateA compare:dateB];
-    NSLog(@"oneDay : %@, anotherDay : %@", oneDay, anotherDay);
+    //NSLog(@"oneDay : %@, anotherDay : %@", oneDay, anotherDay);
     if (result == NSOrderedDescending) {
         //oneDay > anotherDay
         return 1;

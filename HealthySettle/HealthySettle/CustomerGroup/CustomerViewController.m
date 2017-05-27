@@ -9,6 +9,8 @@
 #import "CustomerViewController.h"
 #import "YTKBatchRequest.h"
 #import "DDFindGet.h"
+#import "RSAEncryptor.h"
+
 @interface CustomerViewController ()<UIWebViewDelegate,UIGestureRecognizerDelegate>
 @end
 @implementation CustomerViewController
@@ -32,6 +34,8 @@
         [image_view addGestureRecognizer:tap1];
         [self.view addSubview:image_view];
     }
+    
+
 //    DDGetCity * getcity = [[DDGetCity alloc] init];
 //    [getcity startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
 //        NSArray * arr = [DDLogin arrayWithJsonString:request.responseString];

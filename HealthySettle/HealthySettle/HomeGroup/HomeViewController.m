@@ -153,6 +153,8 @@
     self.navigationController.navigationBar.barTintColor = RGB(205, 8, 20);
     self.navigationController.navigationBar.translucent = NO;
     self.navigationController.tabBarController.tabBar.translucent = NO;//不透明 0 开始的位置
+    
+    
 }
 
 - (void)reloadTableView {
